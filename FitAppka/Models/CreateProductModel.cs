@@ -6,7 +6,7 @@ namespace FitAppka.Models
     public class CreateProductModel
     {
         [Required(ErrorMessage = "Podaj nazwę produktu")]
-        [MaxLength(25, ErrorMessage = "Maksymalna długość nazwy to 30 znaków")]
+        [MaxLength(25, ErrorMessage = "Maksymalna długość nazwy to 25 znaków")]
         public string NazwaProduktu { get; set; }
         public IFormFile Zdjecie { get; set; }
         [Required(ErrorMessage = "Podaj kaloryczność w 100g")]

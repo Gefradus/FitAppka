@@ -50,6 +50,7 @@ function removeNonNumericChars(string){
     var newString = '';
     var commaCount = 0;
     var numbersCount = 0;
+    var zerosCount = 0;
 
     for(var i = 0; i < string.length; i++){
         let char = string[i];
@@ -60,9 +61,12 @@ function removeNonNumericChars(string){
                     newString += char;
                 }
             }
-            else {
+            else if(!(zerosCount == numbersCount && zerosCount > 0 && char == 0 && commaCount == 0)) {
                 newString += char;
                 numbersCount++;
+                if(char == 0) {
+                    zerosCount++;
+                }
             }
         }
     }
