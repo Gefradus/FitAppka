@@ -1,0 +1,28 @@
+﻿<html>
+<head>
+    <link href="~/css/AllViews.css" rel="stylesheet" />
+    <link href="~/css/Home.css" rel="stylesheet" />
+    <link href="~/css/AdminHome.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div style="display: flex">
+            <a asp-action="Start" asp-controller="Posilek" style="width: inherit;">
+                <img id="btnBackImg" src="~/img/back.png"/>
+            </a>
+        </div>
+        <div class="row no-gutters mt-4">
+            <a class="btn btn-dark mla" asp-action="AdminClient">Użytkownicy</a>
+            <a class="btn btn-dark mrla" asp-action="AdminProduct">Produkty</a>
+        </div>
+        <div class="row no-gutters my-5">
+            <a class="btn btn-dark mla" asp-action="AdminTraining">Ćwiczenia</a>
+            <a class="btn btn-dark mrla" asp-action="AdminDiet">Diety</a>
+        </div>
+        <div class="row no-gutters">
+            <a class="btn btn-dark mla" asp-action="AdminSettings">Ustawienia</a>
+            <a class="btn btn-dark mrla" asp-action="Logout" asp-controller="Login">Wyloguj się</a>
+        </div>
+    </div>
+</body>
+</html>

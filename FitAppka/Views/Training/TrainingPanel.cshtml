@@ -1,0 +1,208 @@
+﻿@model IEnumerable<FitAppka.Models.Trening>
+<html>
+
+<head>
+    <link rel="stylesheet" href="~/css/Home.css" type="text/css">
+    <link href="~/css/AllViews.css" rel="stylesheet" />
+    <link href="~/css/TrainingPanel.css" rel="stylesheet" />
+    <link href="~/css/Datepicker.css" rel="stylesheet" />
+    <link href="~/lib/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body onload="kolorujCoDrugiWiersz();">
+    <header>
+        <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav" style="text-align: center">
+
+            <div id="lewa">
+                <div class="mr-auto mt-3">
+                    <a class="nav-link ml-sm-3 ml-md-4 ml-lg-5 mt-2 mt-md-0" asp-controller="Posilek" asp-action="Start"><img style="height: 50px; width:185px; margin-top: -15px" src="~/img/logorozowe.png" /></a>
+                </div>
+            </div>
+            <div>
+                <div id="prawa" class="navbar-nav ml-auto">
+                    <button class="navbar-toggler mr-2 mr-sm-3" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Przełącznik nawigacji" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="d-none d-md-inline-block mr-md-5">
+                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Training" asp-action="TrainingPanel" asp-route-dzienID="@ViewData["dzienID"]">Treningi </a></div>
+                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="FindDay" asp-action="FindDay">Szukaj dni <img style="height: 15px; width:15px" src="~/img/search.png" /></a></div>
+                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Settings" asp-action="Settings">Ustawienia <img style="height: 15px; width:15px" src="~/img/settings.png" /></a></div>
+                        <div class="fl"><a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img style="height: 15px; width:15px" src="~/img/logout.png" /></a></div>
+                        <div class="cb"></div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="collapse navbar-collapse in d-md-none" id="navMenu">
+
+            <ul class="navbar-nav">
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Training" asp-action="TrainingPanel" asp-route-dzienID="@ViewData["dzienID"]">Treningi</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" asp-controller="FindDay" asp-action="FindDay">Szukaj dni</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Settings" asp-action="Settings">Ustawienia</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Wyloguj się</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="kontener" class="container" style="margin-top: 2.5rem !important">
+
+        <div class="modal fade" tabindex="-1" id="deleteModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
+            <div class="modal-dialog" style="display: flex; justify-content: center;">
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 20px">
+                        <button type="button" class="close" onclick="hideModal()" style="margin-top: -30px">×</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div style="margin-top: -10px;">
+                            <label>Czy na pewno chcesz usunąć ten trening?</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <form method="post">
+                            <div style="display:flex; justify-content: center">
+                                <button type="button" onclick="hideModal()" style="margin-right: 15px; border-radius:10%; background-color: #4d62d7; height: 32px; width: 100px; color: white">Anuluj</button>
+                                <button type="button" id="usun" style="border-radius:10%; background-color: #ce1a22; height: 32px; width: 100px; color: white">Tak, usuń</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex;">
+            <div id="dziennik">Dziennik treningowy dla: </div>
+            <input id="datepicker" onchange="changeDay('@Url.Action("ChangeDay", "Training")');" type="text" style="margin-left: 10px; margin-right: 15px; margin-top: 2px; text-align: center" value="@ViewData["dzien"]" readonly="readonly" />
+            <a class="btn btn-link acent" id="btnAdd" asp-controller="Training" asp-action="Search" asp-route-dzienID="@ViewData["dzienID"]">Dodaj nowy trening</a>
+        </div>
+
+        <div id="all" style="margin-top: 2.5rem !important; border-bottom: 1px solid darkgray">
+            <div class="row no-gutters headCol" style="height: 41px; color:white;">
+                <div class="col-5 cent" style="border-left: 0">Nazwa treningu:</div>
+                <div class="col-7 container">
+                    <div class="row no-gutters" style="height: 100%">
+                        <div class="column headCol cent">Czas w minutach:</div>
+                        <div class="column headCol cent">Spalone kcal:</div>
+                        <div class="btnArea borl" style="background: #3f3f3f"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        @{
+            int ileTreningow = 0;
+            foreach (var trening in Model)
+            {
+                if (trening.Dzien.DzienId.Equals(ViewData["dzienID"]))
+                {
+                    <div class="row no-gutters wierszTreningu">
+                        <div class="col-5 cent">@trening.TreningRodzaj.NazwaTreningu</div>
+                        <div class="col-7 container">
+                            <div class="row no-gutters">
+                                <div class="cent column borl">@trening.CzasWMinutach</div>
+                                <div class="cent column borl">@trening.SpaloneKalorie</div>
+                                <div class="cent btnArea borl">
+                                    <button id="btnUsun" type="button" onclick="potwierdzUsuniecie(@trening.TreningId);"><img class="cancel" src="~/img/cancel.png"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    ileTreningow++;
+                }
+            }
+
+            if (ileTreningow == 0)
+            {
+                <div class="col-12 cent py-5" style="font-size: 18px; background: #f7f7f796">
+                    Aktualnie brak treningów w tym dniu
+                </div>
+                <script>
+                    $("#all").css('border', '0px');
+                </script>
+
+            }
+        }
+
+
+
+        <div class="row no-gutters pt-4">
+            <div class="col-12" style="border-top: 1px dotted #656565"></div>
+        </div>
+
+        <div class="row no-gutters pt-4 celRow" style="border-top:0; font-weight: 600">
+            <div class="col-5 cent kolumna py-2" style="border-left: 0">Łącznie:</div>
+            <div class="col-7 container">
+                <div class="row no-gutters">
+                    <div class="kolumna py-2 column">
+                        @ViewData["czasTreningow"]
+                    </div>
+                    <div class="kolumna py-2 column">
+                        @ViewData["spaloneKcal"]
+                    </div>
+                    <div class="kolumna btnArea">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row no-gutters celRow" style="border-top:0; font-weight: 600">
+            <div class="col-5 cent kolumna py-2" style="border-left: 0">Cel dnia:</div>
+            <div class="col-7 container">
+                <div class="row no-gutters" style="height: 100%">
+                    <div class="kolumna py-2 column">
+                        @ViewData["celMinut"]
+                    </div>
+                    <div class="kolumna py-2 column">
+                        @ViewData["celKcal"]
+                    </div>
+                    <div class="kolumna btnArea">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script>
+        var $j = jQuery.noConflict();
+        $j("#datepicker").datepicker({
+            minDate: new Date(1900, 0, 0),
+            dateFormat: 'dd.mm.yy',
+            monthNames: ["Styczeń", "Luty", "Marzec", "Kwiecień",
+                "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
+                "Październik", "Listopad", "Grudzień"],
+            monthNamesShort: ["Sty", "Lut", "Mar", "Kwi",
+                "Maj", "Cze", "Lip", "Sie", "Wrz",
+                "Paź", "Lis", "Gru"],
+            dayNames: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
+            dayNamesShort: ['Ndz', 'Pon', 'Wto', 'Śro', 'Czw', 'Pt', 'Sob'],
+            dayNamesMin: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb'],
+            changeYear: true,
+            changeMonth: true
+        });
+    </script>
+    <script>
+        function potwierdzUsuniecie(id) {
+            $("#deleteModal").modal('show');
+            $("#usun").click(function () {
+                usunTrening(id, '@Url.Action("UsunTrening", "Training")')
+            });
+        }
+    </script>
+    <script src="~/js/TrainingPanel.js"></script>
+
+</body>
+</html>

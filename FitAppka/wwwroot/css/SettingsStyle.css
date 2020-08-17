@@ -1,0 +1,51 @@
+﻿body {
+    background: linear-gradient(0deg, rgba(146,223,242,1) 0%, rgba(251,171,96,1) 100%);
+    line-height: 1.4;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#tempo {
+    text-align: center;
+    width: 75px;
+    padding-right: 15px;
+    pointer-events: none
+}
+
+#dolnyPrzycisk {
+    margin-left: 10%;
+    width: 80%;
+    height: 50px;
+    margin-bottom: 35px;
+    margin-top: 25px;
+}
+
+.przycisk {
+    background-color: transparent;
+    border: none;
+    margin-top: 2px;
+}
+
+.srodkowanie {
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: center
+}
+
+.img-fluid {
+    height: 31px;
+    width: 31px;
+    margin-top: -8px
+}
+
+
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

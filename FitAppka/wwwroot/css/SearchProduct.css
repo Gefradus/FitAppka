@@ -1,0 +1,121 @@
+﻿body {
+    background-color: #ecf8ba;
+}
+
+#panelPrzyciskow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kolumna {
+    width: 200px;
+    float: left;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+#srcPan {
+    position: fixed;
+    width: 100%;
+    height: 160px;
+    top: 80px;
+    left: 0;
+    z-index: 2;
+    background-color: #dbbb8c
+}
+
+#wierszeTabeli {
+    text-align: center;
+    background-color: #fcfbfc;
+    border-bottom: 1px solid #b4cfb2;
+    height: 110px;
+    font-size: 14px;
+}
+
+#naproHeader {
+    display: flex;
+    justify-content: center;
+}
+
+#nazwaProduktu {
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    text-align: left;
+    margin: auto;
+}
+
+#obrazek {
+    height: 100px;
+    width: 100px;
+    margin-top: 0px;
+    border: 1px solid #dddddd;
+    position: absolute;
+    top: -40px;
+    left: 15px
+}
+
+.marauto {
+    margin: auto;
+}
+
+#wierszNaglowkow {
+    text-align: center;
+    height: 60px;
+    padding-top: 4px;
+    background-color: #f7f7f7;
+    border-bottom: 2px solid #e0e0e0;
+    font-weight: 600;
+    font-size: 16px
+}
+
+.kolumnaHead {
+    width: 200px;
+    float: left;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+
+
+
+@media(max-width: 991px) {
+    #wierszeTabeli {
+        height: 100px
+    }
+}
+
+
+@media(max-width: 500px) {
+    #nazwaProduktu {
+        justify-content: left;
+        padding-left: 15px
+    }
+
+    #naproHeader {
+        justify-content: left
+    }
+
+    #wierszeTabeli {
+        font-size: 12px;
+    }
+
+    #wierszNaglowkow {
+        font-size: 14px;
+    }
+}
+
+@media(max-width: 450px) {
+    #wierszeTabeli {
+        font-size: 10px;
+    }
+
+    #wierszNaglowkow {
+        font-size: 12px;
+    }
+}

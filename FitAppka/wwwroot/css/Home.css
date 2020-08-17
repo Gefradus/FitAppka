@@ -1,0 +1,466 @@
+﻿body {
+    background: linear-gradient(0deg, rgba(146,223,242,1) 0%, rgba(251,171,96,1) 100%);
+}
+
+#glowna{
+    margin-left: -1px;
+    margin-right: 1px;
+}
+
+.parametry {
+    font-size: 14px;
+}
+
+.posilek {
+    background-color: white;
+}
+
+.przycisk {
+    float: right;
+    padding-right: 15px;
+}
+
+.data {
+    font-weight: 600;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+.button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.produkt {
+    padding-left: 7px;
+    background-color: #fbf9fb00;
+    border-bottom: 0.5px solid #edc589;
+}
+
+.panelBezPrzycisku {
+    float: left;
+    width: calc(100% - 60px);
+    border-right: 1px dotted #9cb06c;
+}
+
+.panelPrzycisku {
+    padding-left: 15px
+}
+
+.napro {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.nazwapos {
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.panel {
+    width: 100%;
+    padding-left: 7px;
+    background-color: #f5f5f5;
+    margin-bottom: 0.2mm;
+}
+
+
+.chowanko {
+    width: auto
+}
+
+.kcal {
+    clear: both;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.dzien {
+    background-color: #828282;
+    display: inline-block
+}
+
+.btnUsuEdy {
+    margin-right: 17px;
+    border: none;
+    background: none;
+}
+
+.produktBezBtn {
+    float: left;
+    margin-top: 2px;
+    width: calc(100% - 64px);
+}
+
+.btnDiv {
+    float: right;
+    display: flex;
+    height: 68px;
+    align-items: center;
+}
+
+#cel {
+    font-size: 15px;
+    padding-bottom: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+#dziennik {
+    padding-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#prawa {
+    position: absolute;
+    right: 0;
+    margin-top: -20px;
+}
+
+#srodek {
+    width: calc(100% + 241px);
+    margin-top: 5px;
+    height: 1px;
+    margin-top: -25px
+}
+
+#lewa {
+    margin-right: -226px;
+    margin-left: -15px
+}
+
+#navbarDzien
+{
+    width:100%; 
+    height:60px; 
+    z-index: 9000; 
+    background-color: #f5f5f5; 
+    border-bottom: 1px solid #d6d6d6; 
+    margin-top: 15px; 
+    display:flex; 
+    align-items: center
+}
+
+#woda {
+    font-size: 20px;
+    font-weight: 600;
+    display: block;
+    position: relative;
+    margin-left: calc(50% - 27px)
+}
+
+#navMenu {
+    margin-right: -15px;
+    margin-top: -5px;
+    position: fixed;
+    right: 15px;
+    z-index: 9999;
+    background-color: white;
+    padding: 5px 100px 5px 120px;
+    border: 1px #828282 solid;
+}
+
+#szklanka {
+    height: 100px;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#piechart {
+    width: auto;
+    height: 250px;
+    margin: 0 auto !important;
+    display: block;
+    text-align: center !important;
+}
+
+#boczny {
+    text-align: center !important;
+}
+
+#dodawanie {
+    margin-right: 5px;
+    margin-left: auto;
+    display: block
+}
+
+#adminBtn {
+    background-color: #d20f6d !important;
+}
+
+
+
+.ui-datepicker-trigger {
+    border: 0 !important;
+    margin-top: 7px !important;
+    width: 30px !important;
+}
+
+.ui-datepicker-trigger:hover{
+    cursor: pointer
+}
+
+#edytowanie {
+    display: block;
+    position: relative;
+    margin-left: calc(50% - 27px)
+}
+
+#ml {
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 15px;
+}
+
+#wykresik {
+    display: none;
+    background: #f5f5f5;
+    margin-bottom: 1.5px;
+}
+
+#pasekDnia {
+    background-color: #efefef;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 18px;
+}
+
+#DodanaWoda {
+    width: 60px;
+    height: 37px;
+    text-align: center
+}
+
+#EdytowanaWoda {
+    width: 60px;
+    height: 30px;
+    text-align: center
+}
+
+#dodajWode {
+    background-color: #4CAF50;
+    color: white;
+    height: 37px;
+}
+
+
+#spozycie {
+    font-weight: 600;
+    padding-top: 5px;
+}
+
+#divWyswietlWode {
+    display: block;
+    margin-top: 2px
+}
+
+#name {
+    margin-top: -10px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.divDodEdyWode {
+    margin-right: auto;
+    display: block
+}
+
+
+.img-fluid {
+    margin-top: 11px;
+    height: 30px;
+    width: 30px;
+}
+
+.prev-next {
+    height: 30px;
+    width: 30px;
+}
+
+.naglowek {
+    font-weight: 600;
+}
+
+.cancel {
+    height: 15px;
+    width: 15px;
+}
+
+.pen {
+    height: 15px;
+    width: 15px;
+}
+
+
+@media(max-height: 500px) {
+    .parametry {
+        font-size: 12px;
+    }
+
+    .nazwapos {
+        font-size: 18px;
+    }
+
+    .kcal {
+        font-size: 15px;
+    }
+
+    .napro {
+        font-size: 13px;
+    }
+
+    #cel {
+        font-size: 13px;
+    }
+
+    #woda {
+        font-size: 18px;
+    }
+
+    #ml {
+        padding-top: 2px;
+        font-size: 18px;
+    }
+
+    #szklanka {
+        height: 75px;
+    }
+
+    #pasekDnia {
+        font-size: 16px;
+    }
+}
+
+@media(max-height: 450px) {
+    .parametry {
+        font-size: 10px;
+    }
+
+    .nazwapos {
+        font-size: 16px;
+    }
+
+    .kcal {
+        font-size: 13px;
+    }
+
+    .napro {
+        font-size: 11px;
+    }
+
+    #cel {
+        font-size: 11px;
+    }
+
+    #woda {
+        font-size: 16px;
+    }
+
+    #ml {
+        padding-top: 5px;
+        font-size: 16px;
+    }
+
+    #szklanka {
+        height: 65px;
+    }
+
+    #pasekDnia {
+        font-size: 14px;
+    }
+}
+
+
+@media(max-width: 300px) {
+    .parametry {
+        font-size: 10px;
+    }
+
+    .nazwapos {
+        font-size: 16px;
+    }
+
+    .kcal {
+        font-size: 13px;
+    }
+
+    .napro {
+        font-size: 11px;
+    }
+
+    #cel {
+        font-size: 11px;
+    }
+
+    #woda {
+        font-size: 16px;
+    }
+
+    #ml {
+        padding-top: 5px;
+        font-size: 16px;
+    }
+
+    #szklanka {
+        height: 65px;
+    }
+}
+
+@media(max-width: 350px) {
+    #pasekDnia {
+        font-size: 14px;
+    }
+}
+
+#adminBtn:hover {
+    background-color: #343a40 !important;
+}
+
+.panel:hover {
+    color: #1c2e97 
+}
+
+.produkt:hover{
+    color: orangered;
+}
+
+.panelBezPrzycisku:hover {
+    cursor: pointer;
+}
+
+.produktBezBtn:hover {
+    cursor: pointer;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+button:focus {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}
+
+a::-moz-focus-inner {
+    border: 0;
+}

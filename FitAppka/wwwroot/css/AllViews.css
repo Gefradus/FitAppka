@@ -1,0 +1,78 @@
+﻿body {
+}
+
+.fl{
+    float:left
+}
+
+.cb{
+    clear:both
+}
+
+#btnBackImg {
+    height: 67px;
+    width: 68px;
+    margin-top: 1px;
+}
+
+.czarnyNav {
+    background-color: #202020;
+    position: fixed;
+    width: 100%;
+    height: 80px;
+    top: 0;
+    left: 0;
+    z-index: 9999
+}
+
+#zdjecie {
+    height: 100px;
+    width: 100px;
+    margin-top: -10px;
+    margin-left: -15px;
+    border: 1px solid #dddddd
+}
+
+.cent {
+    justify-content: center;
+    display: flex;
+}
+
+.acent{
+    align-items: center;
+    display: flex;
+}
+
+#validatMsg{
+    align-items: center;
+}
+
+#valDialog{
+    height: 225px;
+    margin-top: 180px;
+    font-size: 17px;
+    text-align: center;
+}
+
+#closeVal{
+    border: 1px solid darkgray;
+    width: 100px;
+}
+
+#name {
+    text-align: center;
+    margin-top: -10px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.chosen-container{
+    width: auto !important;
+    max-width: 400px;
+}
+
+.custom-file-input ~ .custom-file-label::after {
+    content: "Przeglądaj";
+}
+

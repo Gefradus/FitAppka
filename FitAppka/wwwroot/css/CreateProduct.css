@@ -1,0 +1,117 @@
+﻿html{
+    height: unset
+}
+
+body {
+    height: 100%;
+    background-color: #dddddd
+}
+
+main {
+    height: 100%;
+}
+
+.naglowek {
+    display: flex;
+    font-weight: 600;
+    margin-top: -7px;
+    margin-bottom: 15px;
+}
+
+#moreInfoBtn{
+    display: flex;
+    border: 1px solid #cacaca;
+    border-left: 0;
+    border-right: 0;
+    cursor: pointer;
+    margin-top: 2rem !important;
+}
+
+#moreInfoDiv {
+    border-bottom: 1px solid #cacaca;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+}
+
+
+#imgDown{
+    height: 15px;
+    width: 27px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+
+.form-group {
+  /*  margin-bottom: 0 !important;*/
+}
+
+.container{
+    height: 100%
+}
+
+form{
+    height: 100%
+}
+
+#photoLoad{
+    overflow: hidden;
+}
+
+.jednostka {
+    margin-left: 5px;
+    margin-top: 6px;
+}
+
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+    content: "Przeglądaj";
+}
+
+.custom-file-input:hover {
+    cursor: pointer
+}
+
+.pb-3{
+    padding-bottom: 0 !important
+}
+
+#tluInDiv{
+    margin-right: 13px
+}
+
+@media(max-width: 472px) {
+    html{
+        font-size: 14px !important;
+    }
+
+    #imgDown{
+        margin-top: 4px;
+    }
+}
+
+@media(max-width: 412px)
+{
+    html{
+        font-size: 13px !important;
+    }
+
+    .lewaKol
+    {
+        margin-right: 25px !important
+    }
+}
+
+@media(max-width: 375px){
+    #moreInfoBtn{
+        font-size: 12px;
+    }
+}
+
+.lewaKol {
+    width: calc(50% - 10px);
+    margin-right: 45px
+}
+
+.prawaKol {
+    width: calc(50% - 20px)
+}

@@ -1,0 +1,75 @@
+﻿@model FitAppka.Models.RegisterModel;
+
+@{
+    ViewData["Title"] = "Register";
+}
+<head>
+    <link href="~/css/AllViews.css" rel="stylesheet" />
+    <link href="~/css/Home.css" rel="stylesheet" />
+    <link href="~/css/Register.css" rel="stylesheet" />
+</head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav">
+
+                <div>
+                    <div class="mr-auto">
+                        <a class="text-dark ml-md-4 ml-lg-5 d-none d-md-block" asp-controller="Login" asp-action="Logowanie"><img class="mt-md-1" style="height: 50px; width:185px; margin-top: -10px" src="~/img/logorozowe.png" /></a>
+                        <a class="text-dark ml-sm-1 d-md-none" asp-controller="Login" asp-action="Logowanie"><img class="mt-md-1" style="height: 47px; width:56px; margin-top: 1px" src="~/img/back.png" /></a>
+                    </div>
+                </div>
+
+                <div id="srod">
+                    <h4 style="margin-top:4px; font-weight: 600"></h4>
+                </div>
+
+            </nav>
+           
+        </header>
+
+        <div class="row register">
+            <div class="col-lg-2"></div>
+            <div class="col-12 col-lg-8" id="panelRejestracji">
+
+                <form method="post" style="margin-left: 20px; margin-right: 20px" class="px-1 px-sm-3 px-md-4 px-lg-5">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <h2 style="margin-top:-15px; padding-bottom: 15px">Załóż konto w FitnessApp</h2>
+                    <div class="form-group kolumna" style="margin-right: 15px;">
+                        <label asp-for="FirstName"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group kolumna">
+                        <label asp-for="SecondName"></label>
+                        <input asp-for="SecondName" class="form-control" />
+                        <span asp-validation-for="SecondName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group kolumna" style="margin-right: 15px;">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group kolumna">
+                        <label asp-for="Login"></label>
+                        <input asp-for="Login" class="form-control" />
+                        <span asp-validation-for="Login" class="text-danger"></span>
+                    </div>
+                    <div class="form-group kolumna " style="margin-right: 15px;">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group kolumna" style="margin-bottom: 50px">
+                        <label asp-for="ConfirmPassword"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="cb">
+                        <button type="submit" class="btn btn-primary" style="width: 200px; height: 42px; margin-left: calc(100% - 200px)">Zarejestruj się</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </body>

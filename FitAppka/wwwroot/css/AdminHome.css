@@ -1,0 +1,44 @@
+﻿body {
+    background: linear-gradient(0deg, rgb(29 88 175) 0%, rgb(227 177 115) 100%);
+}
+
+main{
+    padding-top: 25px !important
+}
+
+
+a{
+    height: 75px;
+    width: 250px;
+    align-items: center;
+    justify-content: center;
+    display: flex !important;
+    color: white !important;
+
+}
+
+#logout {
+    background-color: #754343 !important;
+}
+
+#logout:hover {
+    background-color: #9e5454 !important;
+}
+
+.mrla {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mla {
+    margin-left: auto;
+}
+
+.btn-dark {
+    background-color: #343a40 !important
+}
+
+.btn-dark:hover {
+    cursor: pointer;
+    background-color: #4b4d50 !important
+}

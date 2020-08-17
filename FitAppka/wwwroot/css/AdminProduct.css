@@ -1,0 +1,38 @@
+﻿body {
+    background: #ededed;
+}
+
+main{
+    padding-top: 25px !important;
+}
+
+
+.photo{
+    height: 60px;
+    width: 60px;
+}
+
+.editBtnImg {
+    height: 18px;
+    width: 18px;
+}
+
+.img-fluid{
+    margin-top: 0 !important;
+}
+
+#wierszeTabeli{
+    height: 80px !important;
+}
+
+.btn-outline-dark {
+   width: 275px; 
+   background: #5fb259 !important; 
+   color: white;
+   margin-bottom: 15px;
+   margin-left: auto;
+   justify-content: center;
+   align-items: center;
+   display: flex;
+   height: 45px;
+}

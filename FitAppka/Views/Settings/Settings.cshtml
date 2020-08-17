@@ -1,0 +1,173 @@
+﻿@model FitAppka.Models.FirstAppRunModel;
+<html lang="en">
+    <head>
+        <link href="~/css/SettingsStyle.css" rel="stylesheet" />
+        <link href="~/css/AllViews.css" rel="stylesheet" />
+        <link href="~/lib/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+        <link href="~/css/Datepicker.css" rel="stylesheet" />
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/js/Settings.js"></script>
+        <script type="text/javascript">
+            function onload() {
+                if (@ViewData["czyPierwsze"] == 0) {
+                    przywrocUstawienia();
+                }
+
+                document.getElementById("datepicker").value = '@ViewData["dataUrodzenia"]';
+            }
+
+            function przywrocUstawienia() {
+               if (ustawFlage('@ViewData["plec"]')) {
+                   document.getElementById("mezczyzna").checked = true;
+               }
+               else {
+                   document.getElementById("kobieta").checked = true;
+               }
+
+                document.getElementById("waga").value = parseInt('@ViewData["waga"]');
+                document.getElementById("wzrost").value = parseInt('@ViewData["wzrost"]');
+
+
+                if ('@ViewData["celZmian"]' == 2) {
+                    document.getElementById("utrzymanie").checked = true;
+                }
+                if ('@ViewData["celZmian"]' == 3) {
+                    document.getElementById("przytycie").checked = true;
+                }
+
+                var listaAktywnosci = document.getElementsByName("aktywnosc");
+                for (let i = 0; i < listaAktywnosci.length; i++) {
+                    if (listaAktywnosci[i].value == '@ViewData["aktywnosc"]') {
+                        listaAktywnosci[i].checked = true;
+                    }
+                }
+
+                document.getElementById("Sniadanie").checked = ustawFlage('@ViewData["sniadanie"]');
+                document.getElementById("Iisniadanie").checked = ustawFlage('@ViewData["2sniadanie"]');
+                document.getElementById("Obiad").checked = ustawFlage('@ViewData["obiad"]');
+                document.getElementById("Deser").checked = ustawFlage('@ViewData["deser"]');
+                document.getElementById("Przekaska").checked = ustawFlage('@ViewData["przekaska"]');
+                document.getElementById("Kolacja").checked = ustawFlage('@ViewData["kolacja"]');
+
+                document.getElementById("tempo").value = parseFloat('@ViewData["tempo"]').toFixed(1);
+            }
+        </script>
+    </head>
+
+
+    <body onload="onload()">
+        <header>
+            <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav">
+                <div>
+                    <div class="mr-auto mt-3">
+                        <a class="ml-2 ml-sm-3 ml-md-4 ml-lg-5" asp-controller="Posilek" asp-action="Start"><img style="height: 50px; width:185px; margin-top: -10px" src="~/img/logorozowe.png" /></a>
+                    </div>
+                </div>
+                <div>
+                    <div class="navbar-nav ml-auto" style="position: absolute; right: 0; margin-top: -20px">
+                        <div class="mr-2 mr-xs-3 mr-sm-4 mr-md-5">
+                            <a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img style="height: 15px; width:15px" src="~/img/logout.png" /></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="row cent">
+            <div class="col-sm-10 col-md-8 col-lg-6 cent" style="background-color: white; margin-top: -5px">
+                <form id="form" method="post" onsubmit="return checkForm()" style="font-size: 18px">
+                    <label style="font-weight: 600; margin-top: 15px; padding-bottom: 5px">Płeć</label>
+                    <div class="form-group">
+                        <label><input type="radio" id="kobieta" name="plec" checked value=false style="margin-right: 10px" />Kobieta</label>
+                        <label><input type="radio" id="mezczyzna" name="plec" value=true style="margin-left: 15px; margin-right: 10px" />Mężczyzna</label>
+                    </div>
+                    <div style="padding-bottom: 10px">
+                        <div style="margin-bottom: 15px">
+                            <label asp-for="DataUrodzenia" style="font-size: 16px; color: gray"></label>
+                            <input id="datepicker" asp-for="DataUrodzenia" onchange="" type="text" style="margin-top: -10px; width: calc(100% - 25px); margin-left: -1px; padding-left: 11px" readonly="readonly" />
+                            <span asp-validation-for="DataUrodzenia" class="text-danger" style="font-size: 16px"></span>
+                        </div>
+                        <div>
+                            <label id="invalidDate" class="text-danger" hidden style="margin-top: -15px; margin-bottom: 15px; display: block">Podaj datę urodzenia</label>
+                        </div>
+                    </div>
+                    <div style="padding-bottom: 25px; border-bottom: 1px solid darkgray">
+                        <div class="cent">
+                            <div style="width: calc(50% - 10px);">
+                                <input id="waga" asp-for="Waga" class="form-control" type="number" min="10" max="600" placeholder="Waga [kg]" onkeypress="return tylkoLiczbyCalkowite(event)" />
+                                <span asp-validation-for="Waga" class="text-danger" style="font-size: 16px"></span>
+                            </div>
+                            <label style="margin-right: 10px; margin-top: 5px; margin-left: 2px">kg</label>
+                            <div style="width: calc(50% - 10px)">
+                                <input id="wzrost" asp-for="Wzrost" class="form-control" min="50" max="300" placeholder="Wzrost [cm]" onkeypress="return tylkoLiczbyCalkowite(event)">
+                                <span asp-validation-for="Wzrost" class="text-danger" style="font-size: 16px"></span>
+                            </div>
+                            <label style="margin-top: 5px; margin-left: 2px">cm</label>
+                        </div>
+                        <div>
+                            <label id="invalidWaga" class="text-danger" hidden style="width: 50%">Podaj wagę [kg]</label>
+                            <label id="invalidWzrost" class="text-danger" hidden style="position: absolute; left: calc(50% + 5px)">Podaj wzrost [cm]</label>
+                        </div>
+                    </div>
+                    <label asp-for="Cel" style="font-weight: 600; padding-top: 15px"></label>
+                    <div><label><input id="schudniecie" type="radio" name="Cel" value="1" checked onclick="zablokujTempo()" style="margin-right: 10px" />Chcę schudnąć</label></div>
+                    <div><label><input id="utrzymanie" type="radio" name="Cel" value="2" onclick="zablokujTempo()" style="margin-right: 10px" />Chcę utrzymać wagę</label></div>
+                    <div style="border-bottom: 1px solid darkgray; padding-bottom: 15px;"><label><input id="przytycie" type="radio" name="Cel" value="3" onclick="zablokujTempo()" style="margin-right: 10px" />Chcę przytyć</label></div>
+
+
+                    <label style="font-weight: 600; padding-top: 15px">Aktywność w ciągu doby</label>
+                    <div style="padding-top: 5px"><label><input type="radio" name="aktywnosc" value=1 style="margin-right: 10px" />Brak aktywności, praca siedząca</label></div>
+                    <div><label><input type="radio" name="aktywnosc" value=2 style="margin-right: 10px" />Niska (praca siedząca, 1-2 treningi/tydz.)</label></div>
+                    <div><label><input type="radio" name="aktywnosc" value=3 checked style="margin-right: 10px" />Średnia (praca siedząca, 3-4 treningi/tydz.)</label></div>
+                    <div><label><input type="radio" name="aktywnosc" value=4 style="margin-right: 10px" />Wysoka (praca fizyczna, 3-4 treningi/tydz.)</label></div>
+                    <div style="padding-bottom: 1rem; border-bottom: 1px solid darkgray;"><label><input type="radio" name="aktywnosc" value=5 style="margin-right: 10px" />B. wysoka (zawodowi sportowcy, osoby codziennie trenujące)</label></div>
+
+                    <label style="font-weight: 600; padding-top: 15px">Posiłki dnia</label>
+                    <div>
+                        <div><label><input id="Sniadanie" type="checkbox" checked name="Sniadanie" value="true" style="margin-right: 10px" />Śniadanie</label></div>
+                        <div><label><input id="Iisniadanie" type="checkbox" checked name="Iisniadanie" value="true" style="margin-right: 10px" />II śniadanie</label></div>
+                        <div><label><input id="Obiad" type="checkbox" checked name="Obiad" value="true" style="margin-right: 10px" />Obiad</label></div>
+                    </div>
+                    <div style="border-bottom: 1px solid darkgray">
+                        <div><label><input id="Deser" type="checkbox" checked name="Deser" value="true" style="margin-right: 10px" />Deser</label></div>
+                        <div><label><input id="Przekaska" type="checkbox" checked name="Przekaska" value="true" style="margin-right: 10px" />Przekąska</label></div>
+                        <div style="padding-bottom: 15px"><label><input id="Kolacja" type="checkbox" checked name="Kolacja" value="true" style="margin-right: 10px" />Kolacja</label></div>
+                    </div>
+
+
+                    <label asp-for="TempoZmian" class="srodkowanie" style="padding-top: 15px"></label>
+                    <div class="form-group srodkowanie">
+                        <button type="button" class="przycisk" value="Odejmij" onclick="dekrementuj()"><img class="img-fluid" src="~/img/minus.png"></button>
+                        <input id="tempo" asp-for="TempoZmian" type="number" step="0.1" value="0.4" /><span style="margin-left: -33px; float:right; margin-top: 2.5px; z-index: 99">kg</span>
+                        <button type="button" class="przycisk" value="Dodaj" onclick="inkrementuj()" style="margin-left: 13px"><img class="img-fluid" src="~/img/add.png"></button>
+                    </div>
+
+
+                    <input id="dolnyPrzycisk" type="submit" value="Zapisz i kontynuuj" asp-route-czyPierwsze="@ViewData["czyPierwsze"]" class="btn btn-primary" />
+                    <div style="width: 100%; height: 1px"></div>
+                </form>
+            </div>
+        </div>
+
+        <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+        <script>
+            var $j = jQuery.noConflict();
+            $j("#datepicker").datepicker({
+                minDate: new Date(1850, 0, 0),
+                maxDate: Date.now(),
+                dateFormat: 'yy-mm-dd',
+                monthNames: ["Styczeń", "Luty", "Marzec", "Kwiecień",
+                    "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
+                    "Październik", "Listopad", "Grudzień"],
+                monthNamesShort: ["Sty", "Lut", "Mar", "Kwi",
+                    "Maj", "Cze", "Lip", "Sie", "Wrz",
+                    "Paź", "Lis", "Gru"],
+                dayNames: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
+                dayNamesShort: ['Ndz', 'Pon', 'Wto', 'Śro', 'Czw', 'Pt', 'Sob'],
+                dayNamesMin: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb'],
+                changeYear: true,
+                changeMonth: true
+            });
+        </script>
+    </body>
+</html>

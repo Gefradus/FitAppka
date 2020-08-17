@@ -1,0 +1,632 @@
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.exe
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.deps.json
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.runtimeconfig.json
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.runtimeconfig.dev.json
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.pdb
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.Views.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.Views.pdb
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csprojAssemblyReference.cache
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.AssemblyInfoInputs.cache
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.AssemblyInfo.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorAssemblyInfo.cache
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorAssemblyInfo.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.TagHelpers.input.cache
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.TagHelpers.output.cache
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorCoreGenerate.cache
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorTargetAssemblyInfo.cache
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorTargetAssemblyInfo.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.Views.pdb
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\staticwebassets\FitAppka.StaticWebAssets.Manifest.cache
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\staticwebassets\FitAppka.StaticWebAssets.xml
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.pdb
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.genruntimeconfig.cache
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csproj.CopyComplete
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\DeleteProduct.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditProduct.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\FindDay\FindDay.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Logowanie.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Register.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Posilek\OknoGlowne.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Search\Create.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Search\Index.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.Design.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\dotnet-aspnet-codegenerator-design.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.AttributedModel.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.Convention.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.Hosting.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.Runtime.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.TypedParts.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\TrainingPanel.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Settings\Settings.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\Search.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csproj.CoreCompileInputs.cache
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\web.config
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\web.config
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.exe
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.deps.json
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.runtimeconfig.json
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.runtimeconfig.dev.json
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.pdb
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.Views.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.Views.pdb
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.Design.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\dotnet-aspnet-codegenerator-design.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.AttributedModel.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.Convention.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.Hosting.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.Runtime.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.TypedParts.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csprojAssemblyReference.cache
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.AssemblyInfoInputs.cache
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.AssemblyInfo.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csproj.CoreCompileInputs.cache
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorAssemblyInfo.cache
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorAssemblyInfo.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.TagHelpers.input.cache
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.TagHelpers.output.cache
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorCoreGenerate.cache
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\DeleteProduct.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditProduct.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\FindDay\FindDay.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Logowanie.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Register.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Posilek\OknoGlowne.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Search\Create.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Search\Index.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Settings\Settings.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\Search.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\TrainingPanel.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorTargetAssemblyInfo.cache
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorTargetAssemblyInfo.cs
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.Views.pdb
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csproj.CopyComplete
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\staticwebassets\FitAppka.StaticWebAssets.Manifest.cache
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\staticwebassets\FitAppka.StaticWebAssets.xml
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.dll
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.pdb
+C:\Users\dratwak\Documents\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.genruntimeconfig.cache
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\web.config
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.exe
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.deps.json
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.runtimeconfig.json
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.runtimeconfig.dev.json
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.pdb
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.Views.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.Views.pdb
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.Design.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\dotnet-aspnet-codegenerator-design.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.AttributedModel.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.Convention.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.Hosting.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.Runtime.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.TypedParts.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csprojAssemblyReference.cache
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.AssemblyInfoInputs.cache
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.AssemblyInfo.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csproj.CoreCompileInputs.cache
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorAssemblyInfo.cache
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorAssemblyInfo.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.TagHelpers.input.cache
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.TagHelpers.output.cache
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorCoreGenerate.cache
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\DeleteProduct.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditProduct.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\FindDay\FindDay.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Logowanie.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Register.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Posilek\OknoGlowne.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Search\Create.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Search\Index.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Settings\Settings.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\Search.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\TrainingPanel.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorTargetAssemblyInfo.cache
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorTargetAssemblyInfo.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.Views.pdb
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csproj.CopyComplete
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\staticwebassets\FitAppka.StaticWebAssets.Manifest.cache
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\staticwebassets\FitAppka.StaticWebAssets.xml
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.dll
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.pdb
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.genruntimeconfig.cache
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminHome.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminProduct.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminClient.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminTraining.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminSettings.cshtml.g.cs
+C:\Users\fader\source\repos\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminEditProduct.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\web.config
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.exe
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.deps.json
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.runtimeconfig.json
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.runtimeconfig.dev.json
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.pdb
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.Views.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\FitAppka.Views.pdb
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.Design.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\dotnet-aspnet-codegenerator-design.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.AttributedModel.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.Convention.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.Hosting.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.Runtime.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Composition.TypedParts.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csprojAssemblyReference.cache
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.AssemblyInfoInputs.cache
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.AssemblyInfo.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csproj.CoreCompileInputs.cache
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorAssemblyInfo.cache
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorAssemblyInfo.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.TagHelpers.input.cache
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.TagHelpers.output.cache
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorCoreGenerate.cache
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminClient.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminEditProduct.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminHome.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminProduct.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminSettings.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminTraining.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\DeleteProduct.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditProduct.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\FindDay\FindDay.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Logowanie.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Register.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Posilek\OknoGlowne.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Search\Create.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Search\Index.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Settings\Settings.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\Search.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\TrainingPanel.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorTargetAssemblyInfo.cache
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.RazorTargetAssemblyInfo.cs
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.Views.pdb
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csproj.CopyComplete
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\staticwebassets\FitAppka.StaticWebAssets.Manifest.cache
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\staticwebassets\FitAppka.StaticWebAssets.xml
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.dll
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.pdb
+C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.genruntimeconfig.cache

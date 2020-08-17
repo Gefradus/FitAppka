@@ -1,0 +1,132 @@
+body{
+    background-color: #ecf8ba;
+}
+
+#searchHeader
+{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+#panelTreningow
+{
+    border: 1px solid dimgray;
+    overflow: auto; 
+    height: 300px; 
+    background-color: white; 
+    align-items: center;
+}
+
+#nazwacwiczenia
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+#czas{
+    margin-top: 25px;
+    margin-bottom: 15px;
+    margin-left: calc(50% - 57.5px);
+}
+
+#szukaj
+{
+    height: 38px; 
+    border-radius: 10%; 
+    background-color:rgb(46, 44, 44); 
+    color: white; 
+    width: 100px
+}
+
+#dodajTrening
+{
+    width: 115px; 
+    margin-top: 35px; 
+    height: 35px; 
+    font-size: 14px
+}
+
+#spalonekalorie
+{
+    margin-left: calc(50% - 57.5px);
+}
+
+#panelParametrow
+{
+    background-color: #f3f3f3;
+    border-radius: .15rem;
+    height: 300px;
+}
+
+#czasWMinutach, #spaloneKcal
+{
+    width: 115px; 
+    float:left;
+    margin-right: 5px
+}
+
+
+#textboxDIV
+{
+    width: 250px;
+    float:left; 
+    top:30px; 
+    padding-top:15px
+}
+
+.form-control
+{
+    border-radius: .15rem;
+}
+
+.trening
+{
+    display: flex;
+    height: 40px; 
+    border-bottom: 1px solid darkgray; 
+    align-items: center; 
+    padding-left: 15px;
+    color: blue;
+}
+
+#stworzTreningDiv {
+    justify-content: center;
+    display: flex;
+    width: 50%
+}
+
+#stworzTrening {
+    align-items: center;
+    display: flex;
+    font-size: 18px;
+    width: 350px;
+    justify-content: center;
+    color: #fbff00;
+    border: 1px solid #eee5e58f
+}
+
+#panelek {
+    display: block;
+    background: #44444430;
+    padding-top: 7px;
+    border-bottom: 1px solid #f7f7f7;
+}
+
+#stworzTrening:hover {
+    background: #425a9085;
+}
+
+
+#nazwatreningu:hover
+{
+    margin-left: 10px;
+    color: orange;
+}
+
+.trening:hover{
+    background-color: lightgray;
+    cursor: pointer;
+    color: orange;
+}

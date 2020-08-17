@@ -1,0 +1,161 @@
+﻿body {
+    background-color: #ecf8ba
+}
+
+.szukajBtn {
+    width: 225px;
+    margin-left: -10px;
+    height: 32px;
+    margin-top: -8px;
+    background-color: #202020;
+    color: white
+}
+
+.oddo {
+    float: left;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 50px;
+    text-align: center;
+}
+
+.oddodiv {
+    margin-top: 2px;
+    float: left;
+}
+
+.g1 {
+    margin-right: 15px;
+    margin-top: 2px;
+    font-weight: 600;
+    float: left;
+}
+
+.g2 {
+    margin-top: 2px;
+    font-weight: 600;
+    float: left;
+}
+
+
+.chosen-single {
+    height: 28px;
+    border-radius: 3px;
+    background: linear-gradient(#fff 20%,#f6f6f6 50%,#dbd3d33b 52%,#fff 100%);
+    width: 250px;
+    text-align: center;
+    padding-left: 30px;
+}
+
+#chosenPanel {
+    float: left;
+    margin-right: 15px;
+}
+
+#ctxProd {
+    margin-top: 100px
+}
+
+#navGlowny {
+    height: 70px;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    margin-top: -5px;
+    z-index: 99;
+    background-color: #f4f4f4
+}
+
+#nieZnalProd {
+    margin-top: 125px;
+    width: 100%
+}
+
+
+#panelek {
+    margin-bottom: 20px;
+    padding-top: 15px
+}
+
+#panelGramatury {
+    float: left;
+    margin-right: 15px;
+    margin-left: 15px
+}
+
+.navSzukaj {
+    height: 107px;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    margin-top: -35px;
+    z-index: 99;
+    background-color: #f4f4f4
+}
+
+.naglowekDni {
+    background-color: #202020;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: white;
+    margin-left: -15px;
+    margin-right: -15px;
+    font-size: 18px;
+    font-weight: 600
+}
+
+.dzienWiersz {
+    align-items: center;
+    padding-top: 9px;
+    padding-bottom: 10px;
+    margin-left: -15px;
+    margin-right: -15px;
+    background-color: #f4f4f4;
+    border-top: 1px solid darkgray;
+    border-left: 1px solid darkgray;
+    border-right: 1px solid darkgray;
+}
+
+#wybor {
+    border-radius: .25rem;
+    text-align-last: center;
+}
+
+@media(max-width: 767px) {
+    #panelek {
+        padding-top: 0
+    }
+}
+
+@media(max-width: 560px) {
+    #panelGramatury {
+        margin: 0 !important;
+        padding-left: calc(50% - 108px);
+        padding-top: 7px;
+    }
+
+    #chosenPanel {
+        margin-left: calc(50% - 125px)
+    }
+
+    #navProdukt {
+        height: 160px
+    }
+
+    #ctxProd {
+        margin-top: 130px
+    }
+
+    .naglowekDni {
+        font-size: 14px;
+    }
+
+    .iloscPro {
+        margin-left: -15px;
+        margin-right: 5px
+    }
+
+    #nieZnalProd {
+        margin-top: 175px
+    }
+}

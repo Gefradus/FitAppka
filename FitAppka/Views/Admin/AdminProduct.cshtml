@@ -1,0 +1,153 @@
+﻿@model IEnumerable<FitAppka.Models.Produkt>
+
+<html lang="en">
+<head>
+    <link href="~/css/SearchProduct.css" rel="stylesheet" />
+    <link href="~/css/Home.css" rel="stylesheet" />
+    <link href="~/css/AllViews.css" rel="stylesheet" />
+    <link href="~/css/AdminProduct.css" rel="stylesheet" />
+    <script src="~/js/AllViews.js"></script>
+</head>
+<body onload="kolorujCoDrugiWiersz()">
+    <div class="container">
+        <div class="row no-gutters">
+            <a asp-action="AdminHome" style="width: inherit;">
+                <img id="btnBackImg" src="~/img/back.png" />
+            </a>
+        </div>
+        <div class="row no-gutters">
+            <a class="btn btn-outline-dark" asp-action="CreateProduct">
+                Dodaj nowy produkt
+            </a>
+        </div>
+
+        @if (Model.Count() != 0)
+        {
+            <div id="wierszNaglowkow" class="row no-gutters mb-3">
+                <div class="col-4" style="text-align:left">
+                    <div class="container">
+                        <div class="row no-gutters">
+                            <div class="d-none d-md-inline-block col-md-5 col-lg-6">
+                                Zdjęcie<br />
+                                produktu
+                            </div>
+                            <div id="naproHeader" class="col-12 col-md-7 col-lg-6">
+                                Nazwa<br />
+                                produktu
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-7">
+                    <div class="container">
+                        <div class="row no-gutters">
+                            <div class="col-3">
+                                <div>
+                                    Kcal<br />
+                                    /100g
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div>
+                                    Białko<br />
+                                    /100g
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div>
+                                    Tł.<br />
+                                    /100g
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div>
+                                    Węgl.<br />
+                                    /100g
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <div>&#8203;</div>
+                </div>
+            </div>
+
+            <div style="margin-top: -15px">
+                @foreach (var item in Model)
+                {
+                    <div id="wierszeTabeli" class="row no-gutters wieeersz">
+                        <div class="col-4" style="display: flex; align-items: center">
+                            <div class="container" style="padding-left: 0px">
+                                <div class="row no-gutters">
+                                    <div class="d-none d-md-inline-block col-md-5 col-lg-6">
+                                        @{
+                                            string photoPath;
+                                            if (item.ZdjecieSciezka != null)
+                                            {
+                                                photoPath = "~/photos/" + (item.ZdjecieSciezka);
+                                                <script>
+                                                    pathArray.push('@item.ZdjecieSciezka');
+                                                </script>
+                                            }
+                                            else
+                                            {
+                                                photoPath = "~/img/miss.png";
+                                                <script>
+                                                    pathArray.push('null');
+                                                </script>
+                                            }
+
+                                            <script>
+                                                IDarray.push('@item.ProduktId');
+                                                nameArray.push('@item.NazwaProduktu');
+                                                kcalArray.push('@item.Kalorie');
+                                                bialkoArray.push('@item.Bialko');
+                                                tluszczeArray.push('@item.Tluszcze');
+                                                wegleArray.push('@item.Weglowodany');
+                                            </script>
+
+                                        }
+                                        <img src="@photoPath" class="img-fluid photo" asp-append-version="true" />
+                                    </div>
+                                    <div class="col-12 col-md-7 col-lg-6" id="nazwaProduktu">
+                                        @Html.DisplayFor(i => item.NazwaProduktu)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-7 marauto">
+                            <div class="container">
+                                <div class="row no-gutters">
+                                    <div class="col-3">
+                                        @Html.DisplayFor(i => item.Kalorie)kcal
+                                    </div>
+                                    <div class="col-3">
+                                        @Html.DisplayFor(i => item.Bialko)g
+                                    </div>
+                                    <div class="col-3">
+                                        @Html.DisplayFor(i => item.Tluszcze)g
+                                    </div>
+                                    <div class="col-3">
+                                        @Html.DisplayFor(i => item.Weglowodany)g
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="panelPrzyciskow" class="col-1">
+                            <div>
+                                <button class="przycisk" style="background: none; border: none;" onclick="edit(@item.ProduktId)"><img class="editBtnImg" src="~/img/pen.png"></button>
+
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</body>
+</html>
