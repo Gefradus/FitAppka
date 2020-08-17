@@ -86,7 +86,7 @@ function removeNonNumericChars(string){
     var newString = '';
 
     for(var i = 0; i < string.length; i++){
-        if(isNumeric(string[i]) || string[i] == ','){
+        if(isNumeric(string[i]) || string[i] == ',' || string[i] == '.'){
             newString += string[i];
         }
     }
