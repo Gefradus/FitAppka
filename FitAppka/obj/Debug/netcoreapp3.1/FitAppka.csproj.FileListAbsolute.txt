@@ -630,3 +630,9 @@ C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Deb
 C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.dll
 C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.pdb
 C:\Users\dratwak\Documents\repos\no to jeszcze raz\FitnessAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.genruntimeconfig.cache
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminClient.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminEditProduct.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminHome.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminProduct.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminSettings.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminTraining.cshtml.g.cs

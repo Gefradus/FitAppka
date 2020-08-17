@@ -5,7 +5,7 @@
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/CreateProduct.css" rel="stylesheet" />
     <script src="~/js/CreateProduct.js"></script>
-
+    <script src="~/js/Validation.js"></script>
 </head>
 
 <body>
@@ -63,7 +63,7 @@
                         <div class="lewaKol">
                             <label class="control-label">Kalorie</label>
                             <div style="display: flex;">
-                                <input asp-for="Kalorie" class="form-control" type="number" min="0" max="99999" onkeypress="onlyInt(event)" oninput="return checkValidity(validity.valid, event)" onchange="this.value = changeToInteger(this.value)"/>
+                                <input asp-for="Kalorie" class="form-control" type="number" min="0" max="99999" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)"/>
                                 <div class="jednostka" style="margin-right: -5px;">kcal</div>
                             </div>
                             <span asp-validation-for="Kalorie" class="text-danger"></span>
@@ -71,7 +71,7 @@
                         <div class="prawaKol">
                             <label class="control-label">Białko</label>
                             <div style="display: flex;">
-                                <input asp-for="Bialko" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)"  />
+                                <input asp-for="Bialko" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 3), 100)"   />
                                 <div class="jednostka">g</div>
                             </div>
                             <span asp-validation-for="Bialko" class="text-danger"></span>
@@ -81,7 +81,7 @@
                         <div class="lewaKol">
                             <label class="control-label">Tłuszcze</label>
                             <div id="tluInDiv" style="display: flex">
-                                <input asp-for="Tluszcze" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" />
+                                <input asp-for="Tluszcze" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 3), 100)"  />
                                 <div class="jednostka">g</div>
                             </div>
                             <span asp-validation-for="Tluszcze" class="text-danger"></span>
@@ -89,7 +89,7 @@
                         <div class="prawaKol">
                             <label class="control-label">Węglowodany</label>
                             <div style="display: flex">
-                                <input asp-for="Weglowodany" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" />
+                                <input asp-for="Weglowodany" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 3), 100)"  />
                                 <div class="jednostka">g</div>
                             </div>
                             <span asp-validation-for="Weglowodany" class="text-danger" ></span>
@@ -105,7 +105,7 @@
                             <div class="lewaKol">
                                 <label class="control-label">Witamina A</label>
                                 <div style="display: flex">
-                                    <input asp-for="WitaminaA" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="WitaminaA" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="WitaminaA" class="text-danger"></span>
@@ -113,7 +113,7 @@
                             <div class="prawaKol">
                                 <label class="control-label">Witamina B1</label>
                                 <div style="display: flex">
-                                    <input asp-for="WitaminaB1" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="WitaminaB1" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="WitaminaB1" class="text-danger"></span>
@@ -123,7 +123,7 @@
                             <div class="lewaKol">
                                 <label class="control-label">Witamina B2</label>
                                 <div style="display: flex">
-                                    <input asp-for="WitaminaB2" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="WitaminaB2" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="WitaminaB2" class="text-danger"></span>
@@ -131,7 +131,7 @@
                             <div class="prawaKol">
                                 <label class="control-label">Witamina B5</label>
                                 <div style="display: flex">
-                                    <input asp-for="WitaminaB5" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="WitaminaB5" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="WitaminaB5" class="text-danger"></span>
@@ -141,7 +141,7 @@
                             <div class="lewaKol">
                                 <label class="control-label">Witamina B6</label>
                                 <div style="display: flex">
-                                    <input asp-for="WitaminaB6" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="WitaminaB6" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="WitaminaB6" class="text-danger"></span>
@@ -149,7 +149,7 @@
                             <div class="prawaKol">
                                 <label class="control-label">Biotyna</label>
                                 <div style="display: flex">
-                                    <input asp-for="Biotyna" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="Biotyna" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="Biotyna" class="text-danger"></span>
@@ -159,7 +159,7 @@
                             <div class="lewaKol">
                                 <label class="control-label">Kwas foliowy</label>
                                 <div style="display: flex">
-                                    <input asp-for="KwasFoliowy" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="KwasFoliowy" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="KwasFoliowy" class="text-danger"></span>
@@ -167,7 +167,7 @@
                             <div class="prawaKol">
                                 <label class="control-label">Witamina B12</label>
                                 <div style="display: flex">
-                                    <input asp-for="WitaminaB12" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="WitaminaB12" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="WitaminaB12" class="text-danger"></span>
@@ -177,7 +177,7 @@
                             <div class="lewaKol">
                                 <label class="control-label">Witamina C</label>
                                 <div style="display: flex">
-                                    <input asp-for="WitaminaC" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="WitaminaC" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="WitaminaC" class="text-danger"></span>
@@ -185,7 +185,7 @@
                             <div class="prawaKol">
                                 <label class="control-label">Witamina D</label>
                                 <div style="display: flex">
-                                    <input asp-for="WitaminaD" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="WitaminaD" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="WitaminaD" class="text-danger"></span>
@@ -195,7 +195,7 @@
                             <div class="lewaKol">
                                 <label class="control-label">Witamina E</label>
                                 <div style="display: flex">
-                                    <input asp-for="WitaminaE" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="WitaminaE" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="WitaminaE" class="text-danger"></span>
@@ -203,7 +203,7 @@
                             <div class="prawaKol">
                                 <label class="control-label">Witamina PP</label>
                                 <div style="display: flex">
-                                    <input asp-for="WitaminaPp" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="WitaminaPp" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="WitaminaPp" class="text-danger"></span>
@@ -213,7 +213,7 @@
                             <div class="lewaKol" style="margin-right: 0 !important">
                                 <label class="control-label">Witamina K</label>
                                 <div style="display: flex">
-                                    <input asp-for="WitaminaK" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="WitaminaK" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="WitaminaK" class="text-danger"></span>
@@ -226,7 +226,7 @@
                             <div class="lewaKol">
                                 <label class="control-label">Cynk</label>
                                 <div style="display: flex">
-                                    <input asp-for="Cynk" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="Cynk" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Cynk" class="text-danger"></span>
@@ -234,7 +234,7 @@
                             <div class="prawaKol">
                                 <label class="control-label">Fosfor</label>
                                 <div style="display: flex">
-                                    <input asp-for="Fosfor" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="Fosfor" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Fosfor" class="text-danger"></span>
@@ -245,7 +245,7 @@
                             <div class="lewaKol">
                                 <label class="control-label">Jod</label>
                                 <div style="display: flex">
-                                    <input asp-for="Jod" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="Jod" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="Jod" class="text-danger"></span>
@@ -253,7 +253,7 @@
                             <div class="prawaKol">
                                 <label class="control-label">Magnez</label>
                                 <div style="display: flex">
-                                    <input asp-for="Magnez" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="Magnez" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Magnez" class="text-danger"></span>
@@ -264,7 +264,7 @@
                             <div class="lewaKol">
                                 <label class="control-label">Miedź</label>
                                 <div style="display: flex">
-                                    <input asp-for="Miedz" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="Miedz" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Miedz" class="text-danger"></span>
@@ -272,7 +272,7 @@
                             <div class="prawaKol">
                                 <label class="control-label">Potas</label>
                                 <div style="display: flex">
-                                    <input asp-for="Potas" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="Potas" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Potas" class="text-danger"></span>
@@ -282,7 +282,7 @@
                             <div class="lewaKol">
                                 <label class="control-label">Selen</label>
                                 <div style="display: flex">
-                                    <input asp-for="Selen" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="Selen" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="Selen" class="text-danger"></span>
@@ -290,7 +290,7 @@
                             <div class="prawaKol">
                                 <label class="control-label">Sód</label>
                                 <div style="display: flex">
-                                    <input asp-for="Sod" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="Sod" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Sod" class="text-danger"></span>
@@ -300,7 +300,7 @@
                             <div class="lewaKol">
                                 <label class="control-label">Wapń</label>
                                 <div style="display: flex">
-                                    <input asp-for="Wapn" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="Wapn" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Wapn" class="text-danger"></span>
@@ -308,7 +308,7 @@
                             <div class="prawaKol">
                                 <label class="control-label">Żelazo</label>
                                 <div style="display: flex">
-                                    <input asp-for="Zelazo" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value)" oninput="return maxLenght(this.value)" >
+                                    <input asp-for="Zelazo" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToNumeric(this.value, 5)"  >
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Zelazo" class="text-danger"></span>

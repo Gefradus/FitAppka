@@ -1,11 +1,6 @@
-﻿function isNumeric(s) {
-    return !isNaN(s - parseFloat(s));
-}
-
-function isDate(date) {
+﻿function isDate(date) {
     return (new Date(date) !== "Invalid Date" && !isNaN(new Date(date))) ? true : false;
 }  
-
 
 function checkForm() {
     let waga = document.getElementById("waga").value;
@@ -60,19 +55,6 @@ function ustawDefault() {
     }
 }
 
-function tylkoLiczbyCalkowite(evt) {
-    var ASCIICode = (evt.which) ? evt.which : evt.keyCode
-    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
-        return false;
-    return true;
-}
-
-function tylkoData(evt) {
-    var ASCIICode = (evt.which) ? evt.which : evt.keyCode
-    if (ASCIICode > 31 && (ASCIICode < 44 || ASCIICode > 57))
-        return false;
-    return true;
-}
 
 function dekrementuj() {
     if (!document.getElementById("utrzymanie").checked) {
