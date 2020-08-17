@@ -13,7 +13,7 @@ function onlyNumbers(evt) {
     return true;
 }
 
-function contains(string, substring){
+function contains(string, substring) {
     return string.indexOf(substring) !== -1
 }
 
