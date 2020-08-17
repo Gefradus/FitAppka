@@ -57,17 +57,43 @@ function contains(string, substring){
 }
 
 function changeToInteger(value){
-    return parseInt(value.replace('e','').replace('E',''));
+    var convertedInteger = parseInt(value.replace('e','').replace('E',''));
+
+    if (convertedInteger.length > 5){
+        return convertedInteger.slice(0, -(convertedInteger.length - 5))
+    }
+    else 
+    {
+        return convertedInteger;
+    }
 }
 
-function changeToNumeric(value){
-    var convertedNumeric = value.replace('.', ',').replace('e','').replace('E','').replace(/[^0-9$.,]/g, '');
+function changeToNumeric(value)
+{
+    var convertedNumeric = value.replace(/[^0-9$.,]/g, '').replace('/./g', ',');
 
     if (convertedNumeric.length > 9){
-        return convertedNumeric.slice(0, -(convertedNumeric.length - 9))
+        return removeNonNumericChars(convertedNumeric.slice(0, -(convertedNumeric.length - 9)));
     }
-    else {
-        return convertedNumeric;
+    else 
+    {
+        return removeNonNumericChars(convertedNumeric);
     }
     
+}
+
+function removeNonNumericChars(string){
+    var newString = '';
+
+    for(var i = 0; i < string.length; i++){
+        if(isNumeric(string[i]) || string[i] == ','){
+            newString += string[i];
+        }
+    }
+
+    return newString;
+}
+
+function isNumeric(s) {
+    return !isNaN(s - parseFloat(s));
 }
