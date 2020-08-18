@@ -33,11 +33,11 @@ function changeToNumeric(value, intMaxLength)
 {
     var convertedNumeric = value.replace(/[^0-9$.,]/g, '').replace('.', ',');
 
-    if (countCommaInString(convertedNumeric) > 0 && convertedNumeric.length > (intMaxLength+2)) 
+    if (countCommaInString(convertedNumeric) > 0 && convertedNumeric.length > (intMaxLength+2)) //przecinek
     {
         return removeNonNumericChars(convertedNumeric.slice(0, -(convertedNumeric.length - (intMaxLength+2))));
     }
-    else if (countCommaInString(convertedNumeric) == 0 && convertedNumeric.length > intMaxLength)
+    else if (countCommaInString(convertedNumeric) == 0 && convertedNumeric.length > intMaxLength) //bez przecinka
     {
         return removeNonNumericChars(convertedNumeric.slice(0, -(convertedNumeric.length - intMaxLength)));
     }
@@ -69,6 +69,10 @@ function removeNonNumericChars(string){
                 }
             }
         }
+    }
+
+    if(newString[0] == 0 && newString.length > 1) {
+        newString = newString.substring(1);
     }
 
     return newString;
