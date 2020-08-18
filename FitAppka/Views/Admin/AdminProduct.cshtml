@@ -138,8 +138,7 @@
                         </div>
                         <div id="panelPrzyciskow" class="col-1">
                             <div>
-                                <button class="przycisk" style="background: none; border: none;" onclick="edit(@item.ProduktId)"><img class="editBtnImg" src="~/img/pen.png"></button>
-
+                                <a class="przycisk" style="background: none; border: none;" asp-action="AdminEditProduct" asp-route-id="@item.ProduktId"><img class="editBtnImg" src="~/img/pen.png"></a>
                             </div>
                             <div style="clear:both"></div>
                         </div>

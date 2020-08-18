@@ -24,7 +24,8 @@
     top: 80px;
     left: 0;
     z-index: 2;
-    background-color: #dbbb8c
+    background-color: #dbbb8c;
+    border-bottom: 1px solid #ebe7e7;
 }
 
 #wierszeTabeli {

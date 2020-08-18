@@ -71,7 +71,7 @@ function removeNonNumericChars(string){
         }
     }
 
-    if(newString[0] == 0 && newString.length > 1) {
+    if (newString[0] == 0 && !(isCommaOrDot(newString[1])) && newString.length > 1) {
         newString = newString.substring(1);
     }
 

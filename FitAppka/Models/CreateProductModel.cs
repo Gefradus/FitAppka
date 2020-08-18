@@ -1,5 +1,9 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace FitAppka.Models
 {

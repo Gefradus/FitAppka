@@ -1,0 +1,170 @@
+﻿@model FitAppka.Models.Produkt
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Produkt</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NazwaProduktu" class="control-label"></label>
+                <input asp-for="NazwaProduktu" class="form-control" />
+                <span asp-validation-for="NazwaProduktu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZdjecieSciezka" class="control-label"></label>
+                <input asp-for="ZdjecieSciezka" class="form-control" />
+                <span asp-validation-for="ZdjecieSciezka" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kalorie" class="control-label"></label>
+                <input asp-for="Kalorie" class="form-control" />
+                <span asp-validation-for="Kalorie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bialko" class="control-label"></label>
+                <input asp-for="Bialko" class="form-control" />
+                <span asp-validation-for="Bialko" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tluszcze" class="control-label"></label>
+                <input asp-for="Tluszcze" class="form-control" />
+                <span asp-validation-for="Tluszcze" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weglowodany" class="control-label"></label>
+                <input asp-for="Weglowodany" class="form-control" />
+                <span asp-validation-for="Weglowodany" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WitaminaA" class="control-label"></label>
+                <input asp-for="WitaminaA" class="form-control" />
+                <span asp-validation-for="WitaminaA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WitaminaC" class="control-label"></label>
+                <input asp-for="WitaminaC" class="form-control" />
+                <span asp-validation-for="WitaminaC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WitaminaD" class="control-label"></label>
+                <input asp-for="WitaminaD" class="form-control" />
+                <span asp-validation-for="WitaminaD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WitaminaK" class="control-label"></label>
+                <input asp-for="WitaminaK" class="form-control" />
+                <span asp-validation-for="WitaminaK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WitaminaE" class="control-label"></label>
+                <input asp-for="WitaminaE" class="form-control" />
+                <span asp-validation-for="WitaminaE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WitaminaB1" class="control-label"></label>
+                <input asp-for="WitaminaB1" class="form-control" />
+                <span asp-validation-for="WitaminaB1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WitaminaB2" class="control-label"></label>
+                <input asp-for="WitaminaB2" class="form-control" />
+                <span asp-validation-for="WitaminaB2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WitaminaB5" class="control-label"></label>
+                <input asp-for="WitaminaB5" class="form-control" />
+                <span asp-validation-for="WitaminaB5" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WitaminaB6" class="control-label"></label>
+                <input asp-for="WitaminaB6" class="form-control" />
+                <span asp-validation-for="WitaminaB6" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Biotyna" class="control-label"></label>
+                <input asp-for="Biotyna" class="form-control" />
+                <span asp-validation-for="Biotyna" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KwasFoliowy" class="control-label"></label>
+                <input asp-for="KwasFoliowy" class="form-control" />
+                <span asp-validation-for="KwasFoliowy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WitaminaB12" class="control-label"></label>
+                <input asp-for="WitaminaB12" class="form-control" />
+                <span asp-validation-for="WitaminaB12" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WitaminaPp" class="control-label"></label>
+                <input asp-for="WitaminaPp" class="form-control" />
+                <span asp-validation-for="WitaminaPp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cynk" class="control-label"></label>
+                <input asp-for="Cynk" class="form-control" />
+                <span asp-validation-for="Cynk" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fosfor" class="control-label"></label>
+                <input asp-for="Fosfor" class="form-control" />
+                <span asp-validation-for="Fosfor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Jod" class="control-label"></label>
+                <input asp-for="Jod" class="form-control" />
+                <span asp-validation-for="Jod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Magnez" class="control-label"></label>
+                <input asp-for="Magnez" class="form-control" />
+                <span asp-validation-for="Magnez" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Miedz" class="control-label"></label>
+                <input asp-for="Miedz" class="form-control" />
+                <span asp-validation-for="Miedz" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Potas" class="control-label"></label>
+                <input asp-for="Potas" class="form-control" />
+                <span asp-validation-for="Potas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Selen" class="control-label"></label>
+                <input asp-for="Selen" class="form-control" />
+                <span asp-validation-for="Selen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sod" class="control-label"></label>
+                <input asp-for="Sod" class="form-control" />
+                <span asp-validation-for="Sod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wapn" class="control-label"></label>
+                <input asp-for="Wapn" class="form-control" />
+                <span asp-validation-for="Wapn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Zelazo" class="control-label"></label>
+                <input asp-for="Zelazo" class="form-control" />
+                <span asp-validation-for="Zelazo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

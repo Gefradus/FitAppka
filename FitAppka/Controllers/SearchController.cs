@@ -115,7 +115,7 @@ namespace FitAppka.Controllers
             if (ModelState.IsValid)
             {
                 string uniqueFileName = null;
-                if (model.Zdjecie != null){
+                if (model.Zdjecie != null) {
                     string folder = Path.Combine(hostingEnvironment.WebRootPath, "photos");
                     uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Zdjecie.FileName;
                     string filePath = Path.Combine(folder, uniqueFileName);

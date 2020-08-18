@@ -1,0 +1,195 @@
+﻿@model FitAppka.Models.Produkt
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Produkt</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NazwaProduktu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NazwaProduktu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ZdjecieSciezka)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ZdjecieSciezka)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kalorie)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kalorie)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Bialko)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Bialko)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tluszcze)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tluszcze)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Weglowodany)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Weglowodany)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WitaminaA)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WitaminaA)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WitaminaC)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WitaminaC)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WitaminaD)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WitaminaD)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WitaminaK)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WitaminaK)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WitaminaE)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WitaminaE)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WitaminaB1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WitaminaB1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WitaminaB2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WitaminaB2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WitaminaB5)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WitaminaB5)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WitaminaB6)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WitaminaB6)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Biotyna)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Biotyna)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KwasFoliowy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KwasFoliowy)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WitaminaB12)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WitaminaB12)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WitaminaPp)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WitaminaPp)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cynk)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cynk)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fosfor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fosfor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Jod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Jod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Magnez)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Magnez)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Miedz)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Miedz)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Potas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Potas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Selen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Selen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Wapn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Wapn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Zelazo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Zelazo)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ProduktId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
