@@ -12,9 +12,18 @@ main{
     width: 60px;
 }
 
+.button{
+    background: none; border: none
+}
+
 .editBtnImg {
     height: 18px;
     width: 18px;
+}
+
+.addBtnImg{
+    height: 20px;
+    width: 20px;
 }
 
 .img-fluid{

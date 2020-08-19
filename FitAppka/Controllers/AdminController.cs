@@ -190,6 +190,21 @@ namespace FitAppka.Controllers
 
         }
 
+        
+        [HttpPost]
+        public IActionResult Delete(int productID)
+        {
+            Produkt product = _context.Produkt.Where(p => p.ProduktId == productID).FirstOrDefault();
+            var posilki = _context.Posilek.Where(p => p.ProduktId == productID).ToListAsync();
+
+            if (product != null)
+            {
+                _context.Produkt.Remove(product);
+                _context.SaveChangesAsync();
+            }
+            return Json(false);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> AdminClient()

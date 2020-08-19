@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\FitAppka.csproj",
+  "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\FitAppka.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -14186,113 +14186,133 @@
   "RootNamespace": "FitAppka",
   "Documents": [
     {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminTraining.cshtml",
-      "TargetPath": "Views\\Admin\\AdminTraining.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Login\\Register.cshtml",
-      "TargetPath": "Views\\Login\\Register.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\_ViewImports.cshtml",
-      "TargetPath": "Views\\_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Posilek\\OknoGlowne.cshtml",
-      "TargetPath": "Views\\Posilek\\OknoGlowne.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Shared\\_LoginPartial.cshtml",
-      "TargetPath": "Views\\Shared\\_LoginPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminEditProduct.cshtml",
-      "TargetPath": "Views\\Admin\\AdminEditProduct.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Login\\Logowanie.cshtml",
-      "TargetPath": "Views\\Login\\Logowanie.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Search\\Create.cshtml",
-      "TargetPath": "Views\\Search\\Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminSettings.cshtml",
-      "TargetPath": "Views\\Admin\\AdminSettings.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminClient.cshtml",
-      "TargetPath": "Views\\Admin\\AdminClient.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Admin\\DeleteProduct.cshtml",
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Admin\\DeleteProduct.cshtml",
       "TargetPath": "Views\\Admin\\DeleteProduct.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\FindDay\\FindDay.cshtml",
-      "TargetPath": "Views\\FindDay\\FindDay.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminProduct.cshtml",
-      "TargetPath": "Views\\Admin\\AdminProduct.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Search\\Index.cshtml",
-      "TargetPath": "Views\\Search\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Training\\TrainingPanel.cshtml",
-      "TargetPath": "Views\\Training\\TrainingPanel.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Admin\\EditProduct.cshtml",
-      "TargetPath": "Views\\Admin\\EditProduct.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminHome.cshtml",
-      "TargetPath": "Views\\Admin\\AdminHome.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Settings\\Settings.cshtml",
-      "TargetPath": "Views\\Settings\\Settings.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Training\\Search.cshtml",
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Training\\Search.cshtml",
       "TargetPath": "Views\\Training\\Search.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\_ViewStart.cshtml",
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Training\\TrainingPanel.cshtml",
+      "TargetPath": "Views\\Training\\TrainingPanel.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Shared\\_Layout.cshtml",
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\FindDay\\FindDay.cshtml",
+      "TargetPath": "Views\\FindDay\\FindDay.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminTraining.cshtml",
+      "TargetPath": "Views\\Admin\\AdminTraining.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\_ViewImports.cshtml",
+      "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Admin\\EditProduct.cshtml",
+      "TargetPath": "Views\\Admin\\EditProduct.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminProduct.cshtml",
+      "TargetPath": "Views\\Admin\\AdminProduct.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Product\\Details.cshtml",
+      "TargetPath": "Views\\Product\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminEditProduct.cshtml",
+      "TargetPath": "Views\\Admin\\AdminEditProduct.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Product\\Delete.cshtml",
+      "TargetPath": "Views\\Product\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Login\\Register.cshtml",
+      "TargetPath": "Views\\Login\\Register.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Posilek\\OknoGlowne.cshtml",
+      "TargetPath": "Views\\Posilek\\OknoGlowne.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminClient.cshtml",
+      "TargetPath": "Views\\Admin\\AdminClient.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Search\\Index.cshtml",
+      "TargetPath": "Views\\Search\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Product\\Index.cshtml",
+      "TargetPath": "Views\\Product\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Search\\Create.cshtml",
+      "TargetPath": "Views\\Search\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Product\\Edit.cshtml",
+      "TargetPath": "Views\\Product\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Login\\Logowanie.cshtml",
+      "TargetPath": "Views\\Login\\Logowanie.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Shared\\_LoginPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_LoginPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminSettings.cshtml",
+      "TargetPath": "Views\\Admin\\AdminSettings.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Settings\\Settings.cshtml",
+      "TargetPath": "Views\\Settings\\Settings.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminHome.cshtml",
+      "TargetPath": "Views\\Admin\\AdminHome.cshtml",
       "FileKind": "mvc"
     }
   ],

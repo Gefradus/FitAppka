@@ -7,6 +7,7 @@
     <link href="~/css/AllViews.css" rel="stylesheet" />
     <link href="~/css/AdminProduct.css" rel="stylesheet" />
     <script src="~/js/AllViews.js"></script>
+
 </head>
 <body onload="kolorujCoDrugiWiersz()">
     <div class="container">
@@ -20,6 +21,31 @@
                 Dodaj nowy produkt
             </a>
         </div>
+
+        <div class="modal fade" tabindex="-1" id="deleteModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
+            <div class="modal-dialog" style="display: flex; justify-content: center;">
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 20px">
+                        <button type="button" class="close" onclick="hideModal()" style="margin-top: -30px">×</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div style="margin-top: -10px;">
+                            <label>Czy na pewno chcesz usunąć ten produkt z bazy?</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <form method="post">
+                            <div style="display:flex; justify-content: center">
+                                <button type="button" onclick="hideModal()" style="margin-right: 15px; border-radius:10%; background-color: #4d62d7; height: 32px; width: 100px; color: white">Anuluj</button>
+                                <button type="button" id="usun" style="border-radius:10%; background-color: #ce1a22; height: 32px; width: 100px; color: white">Tak, usuń</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         @if (Model.Count() != 0)
         {
@@ -138,7 +164,8 @@
                         </div>
                         <div id="panelPrzyciskow" class="col-1">
                             <div>
-                                <a class="przycisk" style="background: none; border: none;" asp-action="AdminEditProduct" asp-route-id="@item.ProduktId"><img class="editBtnImg" src="~/img/pen.png"></a>
+                                <a class="button" style="padding-right: 15px" asp-action="AdminEditProduct" asp-route-id="@item.ProduktId"><img class="editBtnImg" src="~/img/pen.png"></a>
+                                <button class="button" onclick="showDeleteModal(@item.ProduktId);"><img class="addBtnImg" src="https://i.dlpng.com/static/png/6566431_preview.png"/></button>
                             </div>
                             <div style="clear:both"></div>
                         </div>
@@ -148,5 +175,22 @@
             </div>
         }
     </div>
+
+    <script>
+        function showDeleteModal(id, url) {
+            $("#deleteModal").modal('show');
+            $("#usun").click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Delete","Admin")',
+                    data: { productID: id },
+                    success: function () {
+                        location.reload();
+                    }
+                });
+            });
+        }
+    </script>
+
 </body>
 </html>

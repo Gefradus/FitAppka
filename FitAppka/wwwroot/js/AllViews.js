@@ -6,3 +6,7 @@
         }
     }
 }
+
+function hideModal() {
+    location.reload();
+}
