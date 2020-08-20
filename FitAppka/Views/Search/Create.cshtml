@@ -6,10 +6,18 @@
     <link href="~/css/CreateProduct.css" rel="stylesheet" />
     <script src="~/js/CreateProduct.js"></script>
     <script src="~/js/Validation.js"></script>
+    <script>
+        if('@ViewData["czyAdmin"]' == 0) {
+            document.getElementsByTagName("header").hidden = false;
+        } 
+        else {
+            
+        }
+    </script>
 </head>
 
 <body>
-    <header>
+    <header hidden>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav">
 
             <div>
@@ -340,9 +348,17 @@
                     </div>
 
                     <div class="form-group cent" style="margin-top: 35px; margin-bottom: 2rem">
-                        <a asp-action="Index" asp-route-klientID="@ViewData["klientID"]" asp-route-wKtorym="@ViewData["wKtorym"]" asp-route-dzienID="@ViewData["dzienID"]">
-                            Powrót do wyszukiwania
-                        </a>
+                        @if((int)ViewData["czyAdmin"] == 0) {
+                            <a asp-controller="Search" asp-action="Index" asp-route-klientID="@ViewData["klientID"]" asp-route-wKtorym="@ViewData["wKtorym"]" asp-route-dzienID="@ViewData["dzienID"]">
+                                Powrót do wyszukiwania
+                            </a>
+                        }
+
+                        @if((int)ViewData["czyAdmin"] == 1) {
+                            <a asp-controller="Admin" asp-action="AdminProduct">
+                                Powrót do przeglądania produktów
+                            </a>
+                        }
                     </div>
                 </form>
             </div>

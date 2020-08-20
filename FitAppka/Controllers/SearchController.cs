@@ -101,16 +101,17 @@ namespace FitAppka.Controllers
             return klient.Select(k => k.Imie).FirstOrDefault() + " " + klient.Select(k => k.Nazwisko).FirstOrDefault();
         }
 
-        public IActionResult Create(int klientID, int wKtorym, int dzienID)
+        public IActionResult Create(int klientID, int wKtorym, int dzienID, int czyAdmin)
         {
             ViewData["dzienID"] = dzienID;
             ViewData["wKtorym"] = wKtorym;
             ViewData["klientID"] = klientID;
+            ViewData["czyAdmin"] = czyAdmin;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(CreateProductModel model, int dzienID, int wKtorym, int klientID)
+        public IActionResult Create(CreateProductModel model, int dzienID, int wKtorym, int klientID, int czyAdmin)
         {
             if (ModelState.IsValid)
             {
@@ -122,7 +123,7 @@ namespace FitAppka.Controllers
                     model.Zdjecie.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
 
-                Produkt produktTyp = new Produkt(){
+                Produkt produktTyp = new Produkt() {
                        NazwaProduktu = model.NazwaProduktu,
                        ZdjecieSciezka = uniqueFileName,
                         Kalorie = model.Kalorie,
@@ -155,7 +156,15 @@ namespace FitAppka.Controllers
                 _context.Add(produktTyp);
                 _context.SaveChanges();
 
-                return RedirectToAction(nameof(Index), new { dzienID, wKtorym, klientID });
+                if(czyAdmin == 1) {
+                    return RedirectToAction("AdminProduct", "Admin");
+                } 
+                else 
+                {
+                    return RedirectToAction(nameof(Index), new { dzienID, wKtorym, klientID });
+                }
+                
+
             }
             return View(model);
         }

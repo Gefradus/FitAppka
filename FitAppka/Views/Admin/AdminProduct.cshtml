@@ -17,7 +17,7 @@
             </a>
         </div>
         <div class="row no-gutters">
-            <a class="btn btn-outline-dark" asp-action="CreateProduct">
+            <a class="btn btn-outline-dark" asp-action="Create" asp-controller="Search" asp-route-czyAdmin="1">
                 Dodaj nowy produkt
             </a>
         </div>
@@ -31,7 +31,7 @@
 
                     <div class="modal-body">
                         <div style="margin-top: -10px;">
-                            <label>Czy na pewno chcesz usunąć ten produkt z bazy?</label>
+                            <label><h6>Czy na pewno chcesz usunąć ten produkt?</h6> Spowoduje to usunięcie wszystkich przypisanych do niego posiłków.</label>
                         </div>
                     </div>
                     <div class="modal-footer">

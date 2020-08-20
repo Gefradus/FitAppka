@@ -195,12 +195,12 @@ namespace FitAppka.Controllers
         public IActionResult Delete(int productID)
         {
             Produkt product = _context.Produkt.Where(p => p.ProduktId == productID).FirstOrDefault();
-            var posilki = _context.Posilek.Where(p => p.ProduktId == productID).ToListAsync();
-
+            UsunPrzypisanePosilki(productID);
+            
             if (product != null)
             {
                 _context.Produkt.Remove(product);
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             return Json(false);
         }
@@ -237,6 +237,16 @@ namespace FitAppka.Controllers
         {
             return _context.Klient.Where(k => k.Login.ToLower().Equals(User.Identity.Name.ToLower())).FirstOrDefault();
         }
+
+        private void UsunPrzypisanePosilki(int productID){
+            List<Posilek> przypisanePosilki = _context.Posilek.Where(p => p.ProduktId == productID).ToList();
+
+            foreach(var posilek in przypisanePosilki){
+                _context.Posilek.Remove(posilek);
+            }
+            _context.SaveChanges();
+        }
+
 
         
     }
