@@ -113,27 +113,11 @@
                                             if (item.ZdjecieSciezka != null)
                                             {
                                                 photoPath = "~/photos/" + (item.ZdjecieSciezka);
-                                                <script>
-                                                    pathArray.push('@item.ZdjecieSciezka');
-                                                </script>
                                             }
                                             else
                                             {
                                                 photoPath = "~/img/miss.png";
-                                                <script>
-                                                    pathArray.push('null');
-                                                </script>
                                             }
-
-                                            <script>
-                                                IDarray.push('@item.ProduktId');
-                                                nameArray.push('@item.NazwaProduktu');
-                                                kcalArray.push('@item.Kalorie');
-                                                bialkoArray.push('@item.Bialko');
-                                                tluszczeArray.push('@item.Tluszcze');
-                                                wegleArray.push('@item.Weglowodany');
-                                            </script>
-
                                         }
                                         <img src="@photoPath" class="img-fluid photo" asp-append-version="true" />
                                     </div>
@@ -165,7 +149,7 @@
                         <div id="panelPrzyciskow" class="col-1">
                             <div>
                                 <a class="button" style="padding-right: 15px" asp-action="AdminEditProduct" asp-route-id="@item.ProduktId"><img class="editBtnImg" src="~/img/pen.png"></a>
-                                <button class="button" onclick="showDeleteModal(@item.ProduktId);"><img class="addBtnImg" src="https://i.dlpng.com/static/png/6566431_preview.png"/></button>
+                                <button class="button" onclick="showDeleteModal(@item.ProduktId);"><img class="addBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"/></button>
                             </div>
                             <div style="clear:both"></div>
                         </div>
