@@ -26,11 +26,11 @@
             }
 
             function usunPosilek(id) {
-                usunPosilekUrl(id, '@Url.Action("Delete","Posilek")');
+                usunPosilekUrl(id, '@Url.Action("Delete","Home")');
             }
 
             function showEditModal(id) {
-                showEditModalUrl(id, '@Url.Action("Edit","Posilek")');
+                showEditModalUrl(id, '@Url.Action("Edit","Home")');
             }
 
     </script>
@@ -125,7 +125,7 @@
 
                     <div style="display: inline-block;">
                         <div class="data">
-                            @ViewData["dzienNapis"]
+                            @ViewData["date"]
                         </div>
                     </div>
 
@@ -496,7 +496,7 @@
                             <div class="container">
                                 <div class="row" style="margin-bottom: 10px">
                                     <div id="edytowanie"><input id="EdytowanaWoda" name="EdytowanaWoda" type="number" min="0" max="10000" value="@ViewData["water"]" /></div>
-                                    <div class="divDodEdyWode"><button class="button" asp-action="EdytujWode" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img style="height:20px; width:20px; padding-top:2px;" src="~/img/save.png"></button></div>
+                                    <div class="divDodEdyWode"><button class="button" asp-action="EditWater" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img style="height:20px; width:20px; padding-top:2px;" src="~/img/save.png"></button></div>
                                 </div>
                             </div>
                         </form>
@@ -508,7 +508,7 @@
                             <div style="padding-bottom: 30px" class="row">
                                 <div id="dodawanie"><input id="DodanaWoda" name="DodanaWoda" type="number" min="1" max="10000" value="@ViewData["AddedWater"]" /></div>
                                 <div id="ml">ml</div>
-                                <div class="divDodEdyWode"><button id="dodajWode" class="btn" asp-action="DodajWode" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]" value="dodajWode">Dodaj</button></div>
+                                <div class="divDodEdyWode"><button id="dodajWode" class="btn" asp-action="AddWater" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]" value="dodajWode">Dodaj</button></div>
                             </div>
                         </div>
                     </form>
@@ -603,7 +603,7 @@
 
             $j("#dateBtn").change(function () {
                 var date = $j("#dateBtn").datepicker("getDate").toISOString();
-                window.location.href = '@Url.Action("ChangeDay", "Posilek")' + "?day=" + date;
+                window.location.href = '@Url.Action("ChangeDay", "Home")' + "?day=" + date;
             });
 
             if ('@ViewData["admin"]' == 1) {

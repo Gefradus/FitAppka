@@ -153,7 +153,7 @@ function showEditModalUrl(id, url) {
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: { posilekID: id, gramatura: gram },
+                data: { mealID: id, grammage: gram },
                 success: function () {
                     location.reload();
                 }

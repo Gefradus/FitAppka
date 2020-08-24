@@ -41,7 +41,7 @@ namespace NowyDotnecik.Controllers
             int daySelectedID = _dayRepository.GetClientDayByDate(daySelected, clientID).DayId;
 
             ViewData["day"] = daySelected;
-            ViewData["dzienNapis"] = DateFormat(daySelected);
+            ViewData["date"] = DateFormat(daySelected);
             ViewData["datepick"] = daySelected.ToString("yyyy-MM-dd");
             ViewData["path"] = _env.WebRootPath.ToString();
             SendDataToView(clientID, daySelectedID, 0, 0);
@@ -344,9 +344,9 @@ namespace NowyDotnecik.Controllers
             meal.DayId = _dayRepository.GetClientDayByDate(daySelected, clientID).DayId;
         }
 
-        public IActionResult Add(int klientID, int dzienID, int wKtorym)
+        public IActionResult Add(int clientID, int dayID, int inWhich)
         {
-            SendDataToView(klientID, dzienID, wKtorym, 0);
+            SendDataToView(clientID, dayID, inWhich, 0);
             return View();
         }
 
@@ -387,9 +387,9 @@ namespace NowyDotnecik.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int posilekID)
+        public IActionResult Delete(int mealID)
         {
-            _mealRepository.Delete(posilekID);
+            _mealRepository.Delete(mealID);
             return Json(false);
         }
 
