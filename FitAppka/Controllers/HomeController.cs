@@ -13,7 +13,7 @@ namespace NowyDotnecik.Controllers
 {
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     [Authorize]
-    public class PosilekController : Controller
+    public class HomeController : Controller
     {
         private readonly FitAppContext _context;
         private readonly IWebHostEnvironment _env;
@@ -22,7 +22,7 @@ namespace NowyDotnecik.Controllers
         private readonly IClientRepository _clientRepository;
         private readonly IProductRepository _productRepository;
 
-        public PosilekController(FitAppContext context, IWebHostEnvironment env, IMealRepository mealRepository, IDayRepository dayRepository, IClientRepository clientRepository, IProductRepository productRepository)
+        public HomeController(FitAppContext context, IWebHostEnvironment env, IMealRepository mealRepository, IDayRepository dayRepository, IClientRepository clientRepository, IProductRepository productRepository)
         {
             _mealRepository = mealRepository;
             _dayRepository = dayRepository;

@@ -22,7 +22,7 @@ namespace FitAppka.Controllers
 
 
         [HttpGet]
-        public IActionResult Logowanie()
+        public IActionResult Login()
         {
             return View();
         }
@@ -36,11 +36,11 @@ namespace FitAppka.Controllers
                 await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             }
             
-            return RedirectToAction(nameof(Logowanie));
+            return RedirectToAction(nameof(Login));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Logowanie(Client model)
+        public async Task<IActionResult> Login(Client model)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace FitAppka.Controllers
                     ClaimsPrincipal principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "login"));
                     await HttpContext.SignInAsync(principal);
 
-                    return RedirectToAction("Start", "Posilek");
+                    return RedirectToAction("Start", "Home");
                 }
                 else
                 {
@@ -109,7 +109,7 @@ namespace FitAppka.Controllers
                         await HttpContext.SignInAsync(principal);
                         int id = _context.Client.Where(k => k.Login.ToLower() == model.Login.ToLower()).Select(k => k.ClientId).FirstOrDefault();
 
-                        return RedirectToAction("Start", "Posilek", new { id });
+                        return RedirectToAction("Start", "Home", new { id });
                     }
                 }
                 else

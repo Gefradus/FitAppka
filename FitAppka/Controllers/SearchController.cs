@@ -33,7 +33,7 @@ namespace FitAppka.Controllers
             if (clientID == 0 || inWhich == 0 || dayID == 0)
             {
                 clientID = _context.Client.Where(c => c.Login.ToLower() == User.Identity.Name.ToLower()).Select(c => c.ClientId).FirstOrDefault();
-                return RedirectToAction("OknoGlowne", "Posilek", new { clientID, daySelected = DateTime.Now.Date });
+                return RedirectToAction("Home", "Home", new { clientID, daySelected = DateTime.Now.Date });
             }
 
             if (User.Identity.Name.ToLower() != _context.Client.Where(c => c.ClientId == clientID).Select(c => c.Login.ToLower()).FirstOrDefault())
@@ -51,7 +51,7 @@ namespace FitAppka.Controllers
             ViewData["dayID"] = dayID;
             ViewData["inWhich"] = inWhich;
             ViewData["search"] = search;
-            ViewData["dayID"] = NapisDnia(dayID);
+            ViewData["day"] = NapisDnia(dayID);
             ViewData["meal"] = MealName(inWhich);
 
             return View(await _context.Product.Where(p => p.ProductName.Contains(search)).ToListAsync());
@@ -94,7 +94,7 @@ namespace FitAppka.Controllers
             else if (daySelected == DateTime.Now.Date.AddDays(1)){
                 return "Jutro";
             }
-            else{
+            else {
                 return daySelected.Day + " " + month;
             }
         }

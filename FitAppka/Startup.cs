@@ -27,7 +27,7 @@ namespace FitAppka
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));            
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
-                options.LoginPath = "/Login/Logowanie";
+                options.LoginPath = "/Login/Login";
             });
 
             services.AddScoped<IProductRepository, SQLProductRepository>();
@@ -59,7 +59,7 @@ namespace FitAppka
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Logowanie}/{id?}");
+                    pattern: "{controller=Login}/{action=Login}/{id?}");
             });
         }
     }
