@@ -1,3 +1,7 @@
 ﻿main {
     padding-top: 0 !important
 }
+
+body{
+    background: linear-gradient(0deg, rgb(29 88 175) 0%, rgb(227 177 115) 100%)
+}

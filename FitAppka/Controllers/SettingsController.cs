@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FitAppka.Models;
+using FitAppka.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace FitAppka.Controllers
 {
@@ -14,201 +14,122 @@ namespace FitAppka.Controllers
     public class SettingsController : Controller
     {
         private readonly FitAppContext _context;
+        private readonly IClientRepository _clientRepository;
+        private readonly IDayRepository _dayRepository;
         private readonly SettingsServices service;
 
-        public SettingsController(FitAppContext context)
+        public SettingsController(FitAppContext context, IDayRepository dayRepository, IClientRepository clientRepository)
         {
+            _clientRepository = clientRepository;
             service = new SettingsServices();
             _context = context;
+            _dayRepository = dayRepository;
         }
 
         [HttpGet]
         public IActionResult Settings()
         {
-            var klientID = _context.Klient.Where(k => k.Login == User.Identity.Name).Select(k => k.KlientId).FirstOrDefault();
-            FirstAppRun(klientID);
-
-            ViewData["klientID"] = klientID;
+            var clientID = _context.Client.Where(c => c.Login == User.Identity.Name).Select(c => c.ClientId).FirstOrDefault();
+            FirstAppLaunch(clientID);
+            ViewData["clientID"] = clientID;
             return View();
         }
 
-        private void FirstAppRun(int klientID)
+        private void FirstAppLaunch(int clientID)
         {
             try     //jeśli try się powiedzie znaczy to że użytkownik już podał dane
             {
-                Klient klient = _context.Klient.Where(k => k.KlientId == klientID).FirstOrDefault();
-                IQueryable<PomiarWagi> listaPomiarow = _context.PomiarWagi.Where(p => p.KlientId == klientID);
+                Client client = _clientRepository.GetClient(clientID);
+                List<WeightMeasurement> measurementList = _context.WeightMeasurement.Where(w => w.ClientId == clientID).ToList();
 
-                var data = klient.DataUrodzenia.Value;
-                ViewData["dataUrodzenia"] = data.ToString("yyyy-MM-dd");
-                ViewData["waga"] = UstawOstatniPomiarWagi(listaPomiarow, ZabezpieczeniePrzedMinimum(listaPomiarow, klientID));
-                ViewData["wzrost"] = klient.Wzrost;
-                ViewData["celZmian"] = (int)klient.CelZmianWagi;
-                ViewData["aktywnosc"] = (int)klient.PoziomAktywnosci;
-                ViewData["tempo"] = klient.TempoZmian.ToString().Replace(',', '.');
-                ViewData["czyPierwsze"] = 0;
+                ViewData["dateOfBirth"] = client.DateOfBirth.Value.ToString("yyyy-MM-dd");
+                ViewData["weight"] = SetLastWeightMeasurement(measurementList);
+                ViewData["growth"] = client.Growth;
+                ViewData["changeGoal"] = (int)client.WeightChangeGoal;
+                ViewData["activity"] = (int)client.ActivityLevel;
+                ViewData["pace"] = client.PaceOfChanges.ToString().Replace(',', '.');
+                ViewData["isFirstLaunch"] = 0;
 
-                UstawBoolean(klient.Plec, "plec");
-                UstawBoolean(klient.Sniadanie, "sniadanie");
-                UstawBoolean(klient.Iisniadanie, "2sniadanie");
-                UstawBoolean(klient.Obiad, "obiad");
-                UstawBoolean(klient.Deser, "deser");
-                UstawBoolean(klient.Przekaska, "przekaska");
-                UstawBoolean(klient.Kolacja, "kolacja");
+                SetBoolean(client.Sex, "sex");
+                SetBoolean(client.Breakfast, "breakfast");
+                SetBoolean(client.Lunch, "lunch");
+                SetBoolean(client.Dinner, "dinner");
+                SetBoolean(client.Dessert, "dessert");
+                SetBoolean(client.Snack, "snack");
+                SetBoolean(client.Supper, "supper");
             }
             catch   //użytkownik nie podał danych (pierwsze uruchomienie)
             {
-                ViewData["dataUrodzenia"] = DateTime.Now.ToString("yyyy-MM-dd");
-                ViewData["czyPierwsze"] = 1;
+                ViewData["dateOfBirth"] = DateTime.Now.ToString("yyyy-MM-dd");
+                ViewData["isFirstLaunch"] = 1;
             }
         }
 
-        private double UstawOstatniPomiarWagi(IQueryable<PomiarWagi> listaPomiarow, DateTime? dataPomiaru)
+        private double SetLastWeightMeasurement(List<WeightMeasurement> measurementList)
         {
-                double ostatniPomiarWagi = 0;
-                foreach (var item in listaPomiarow)
-                {
-                    if (dataPomiaru == item.DataPomiaru)
-                    {
-                        ostatniPomiarWagi = item.Waga;
-                    }
-                }
 
-                return ostatniPomiarWagi;
-        }
-
-
-        private DateTime? ZabezpieczeniePrzedMinimum(IQueryable<PomiarWagi> listaPomiarow, int klientID)
-        {
-                
-                DateTime? dataPomiaru = DateTime.MinValue;
-
-                foreach (PomiarWagi pomiarWagi in listaPomiarow)
-                {
-                    if (dataPomiaru < pomiarWagi.DataPomiaru)
-                    {
-                        dataPomiaru = pomiarWagi.DataPomiaru;
-                    }
-                }
-
-                return dataPomiaru;
-        }
-
-
-        private void UstawBoolean(bool? flaga, string nazwaViewDaty)
-        {
-            if ((bool)flaga)
+            double lastWeightMeasurement = 0;
+            foreach (var item in measurementList)
             {
-                ViewData[nazwaViewDaty] = 1;
+                if (ProtectionAgainstTheMinimum(measurementList) == item.DateOfMeasurement)
+                {
+                    lastWeightMeasurement = item.Weight;
+                }
+            }
+
+            return lastWeightMeasurement;
+        }
+
+
+        private DateTime? ProtectionAgainstTheMinimum(List<WeightMeasurement> measurementList)
+        {
+            DateTime? dateOfMeasurement = DateTime.MinValue;
+
+            foreach (WeightMeasurement measurement in measurementList)
+            {
+                if (dateOfMeasurement < measurement.DateOfMeasurement)
+                {
+                    dateOfMeasurement = measurement.DateOfMeasurement;
+                }
+            }
+
+            return dateOfMeasurement;
+        }
+
+
+        private void SetBoolean(bool? flag, string viewDataName)
+        {
+            if ((bool)flag)
+            {
+                ViewData[viewDataName] = 1;
             }
             else
             {
-                ViewData[nazwaViewDaty] = 0;
+                ViewData[viewDataName] = 0;
             }
         }
 
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Settings(FirstAppRunModel m, int czyPierwsze)
+        public async Task<IActionResult> Settings(SettingsModel m, int isFirstLaunch)
         {
             if (ModelState.IsValid)
             {
-                var klient = _context.Klient.Where(k => k.Login == User.Identity.Name).FirstOrDefault();
-                int zapotrzebowanie = service.ObliczZapotrzebowanie((bool)m.Plec, m.DataUrodzenia, m.Wzrost, (double)m.Waga, service.PoziomAktywnosci(m.Aktywnosc));
+                var client = SetClientGoals(m, _context.Client.Where(k => k.Login == User.Identity.Name).FirstOrDefault());
 
-                double tempo = 0.4;
-                try
+                if (isFirstLaunch == 1)
                 {
-                    tempo = double.Parse(m.TempoZmian.Replace('.', ',').Replace(" ", ""));
+                    client.DateOfJoining = DateTime.Now.Date;
                 }
-                catch { }
-
-                int celKalorii = service.ObliczCelKalorii(zapotrzebowanie, m.Cel, tempo);
-                int celBialko = service.ObliczCelBialko(m.Waga, celKalorii, m.Aktywnosc);
-                int celTluszcze = service.ObliczCelTluszcze(celKalorii);
-                int celWegle = service.ObliczCelWegle(celKalorii, celBialko, celTluszcze);
-
-                klient.CelKalorii = celKalorii;
-                klient.ZapotrzebowanieKcal = zapotrzebowanie;
-                klient.CelBialko = celBialko;
-                klient.CelTluszcze = celTluszcze;
-                klient.CelWegl = celWegle;
-                klient.TempoZmian = tempo;
-                if (czyPierwsze == 1) //sprawdzamy czy to pierwsze uruchomienie
-                {
-                    klient.DataDolaczenia = DateTime.Now.Date;
-                }
-                else
-                {
-                    List<int> listaDniOdDzisID = new List<int>();
-                    foreach (var item in _context.Dzien.Where(d => d.KlientId == klient.KlientId))
-                    {
-                        if (item.Dzien1 >= DateTime.Now.Date)
-                        {
-                            listaDniOdDzisID.Add(item.DzienId);
-                        }
-                    }
-
-                    foreach (var dzienOdDzisID in listaDniOdDzisID)
-                    {
-                        foreach (var dzienOdDzis in _context.Dzien)
-                        {
-                            if (dzienOdDzis.DzienId == dzienOdDzisID)
-                            {
-                                dzienOdDzis.CelKalorii = celKalorii;
-                                dzienOdDzis.CelBialko = celBialko;
-                                dzienOdDzis.CelTluszcze = celTluszcze;
-                                dzienOdDzis.CelWegl = celWegle;
-                                dzienOdDzis.Sniadanie = m.Sniadanie;
-                                dzienOdDzis.Iisniadanie = m.Iisniadanie;
-                                dzienOdDzis.Obiad = m.Obiad;
-                                dzienOdDzis.Deser = m.Deser;
-                                dzienOdDzis.Przekaska = m.Przekaska;
-                                dzienOdDzis.Kolacja = m.Kolacja;
-                                if (m.Sniadanie == null) { dzienOdDzis.Sniadanie = false; }
-                                if (m.Iisniadanie == null) { dzienOdDzis.Iisniadanie = false; }
-                                if (m.Obiad == null) { dzienOdDzis.Obiad = false; }
-                                if (m.Deser == null) { dzienOdDzis.Deser = false; }
-                                if (m.Przekaska == null) { dzienOdDzis.Przekaska = false; }
-                                if (m.Kolacja == null) { dzienOdDzis.Kolacja = false; }
-                            }
-                        }
-                    }
-                }
-
-                klient.DataUrodzenia = m.DataUrodzenia;
-                klient.Plec = m.Plec;
-                klient.Wzrost = m.Wzrost;
-                klient.Sniadanie = m.Sniadanie;
-                klient.Iisniadanie = m.Iisniadanie;
-                klient.Obiad = m.Obiad;
-                klient.Deser = m.Deser;
-                klient.Przekaska = m.Przekaska;
-                klient.Kolacja = m.Kolacja;
-                klient.CelZmianWagi = m.Cel;
-                klient.PoziomAktywnosci = m.Aktywnosc;
-
-                if (m.Sniadanie == null) { klient.Sniadanie = false; }
-                if (m.Iisniadanie == null) { klient.Iisniadanie = false; }
-                if (m.Obiad == null) { klient.Obiad = false; }
-                if (m.Deser == null) { klient.Deser = false; }
-                if (m.Przekaska == null) { klient.Przekaska = false; }
-                if (m.Kolacja == null) { klient.Kolacja = false; }
-
-                klient.PomiarWagi.Add(new PomiarWagi()
-                {
-                    DataPomiaru = DateTime.Now,
-                    Waga = (double)m.Waga,
-
-                });
-
-                _context.Update(klient);
-
+                
+                SetDataForDaysFromToday(m, client);
+                SetClientWeightMeasurement(m, SetClientData(m, client));
+                
                 try
                 {
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Start", "Posilek", new { id = klient.KlientId });
+                    return RedirectToAction("Start", "Posilek", new { id = client.ClientId });
                 }
                 catch
                 {
@@ -220,7 +141,112 @@ namespace FitAppka.Controllers
 
             return View(m);
         }
-    }
 
+        private Client SetClientGoals(SettingsModel m, Client client)
+        {
+            double pace = 0.4;
+            try { pace = double.Parse(m.PaceOfChange.Replace('.', ',').Replace(" ", "")); } catch { }
+
+            int caloricDemand = service.ObliczZapotrzebowanie((bool)m.Sex, m.Date_of_birth, m.Growth, (double)m.Weight, service.PoziomAktywnosci(m.LevelOfActivity));
+            int calorieGoal = service.ObliczCelKalorii(caloricDemand, m.WeightChange_Goal, pace);
+            int proteinTarget = service.ObliczCelBialko(m.Weight, calorieGoal, m.LevelOfActivity);
+            int fatTarget = service.ObliczCelTluszcze(calorieGoal);
+            int carbsTarget = service.ObliczCelWegle(calorieGoal, proteinTarget, fatTarget);
+
+            client.CalorieGoal = calorieGoal;
+            client.CaloricDemand = caloricDemand;
+            client.ProteinTarget = proteinTarget;
+            client.FatTarget = fatTarget;
+            client.CarbsTarget = carbsTarget;
+            client.PaceOfChanges = pace;
+
+            return client;
+        }
+
+        private List<int> GetListOfDaysIDFromToday(Client client)
+        {
+            List<int> listOfIDDaysFromToday = new List<int>();
+            foreach (var item in _context.Day.Where(d => d.ClientId == client.ClientId))
+            {
+                if (item.Date >= DateTime.Now.Date)
+                {
+                    listOfIDDaysFromToday.Add(item.DayId);
+                }
+            }
+
+            return listOfIDDaysFromToday;
+        }
+
+        private void SetDataForDaysFromToday(SettingsModel m, Client client)
+        {
+            foreach (var dayID in GetListOfDaysIDFromToday(client))
+            {
+                foreach (var day in _dayRepository.GetAllDays())
+                {
+                    if (day.DayId == dayID)
+                    {
+
+                        day.CalorieTarget = client.CalorieGoal;
+                        day.ProteinTarget = client.ProteinTarget;
+                        day.FatTarget = client.FatTarget;
+                        day.CarbsTarget = client.CarbsTarget;
+
+                        day.Breakfast = m.Breakfast;
+                        day.Lunch = m.Lunch;
+                        day.Dinner = m.Dinner;
+                        day.Dessert = m.Dessert;
+                        day.Snack = m.Snack;
+                        day.Supper = m.Supper;
+
+                        if (m.Breakfast == null) { day.Breakfast = false; }
+                        if (m.Lunch == null) { day.Lunch = false; }
+                        if (m.Dinner == null) { day.Dinner = false; }
+                        if (m.Dessert == null) { day.Dessert = false; }
+                        if (m.Snack == null) { day.Snack = false; }
+                        if (m.Supper == null) { day.Supper = false; }
+                    } 
+                }
+            }
+        }
+
+
+        private Client SetClientData(SettingsModel m, Client client)
+        {
+            client.DateOfBirth = m.Date_of_birth;
+            client.Sex = m.Sex;
+            client.Growth = m.Growth;
+            client.Breakfast = m.Breakfast;
+            client.Lunch = m.Lunch;
+            client.Dinner = m.Dinner;
+            client.Dessert = m.Dessert;
+            client.Snack = m.Snack;
+            client.Supper = m.Supper;
+            client.WeightChangeGoal = m.WeightChange_Goal;
+            client.ActivityLevel = m.LevelOfActivity;
+ 
+            if (m.Breakfast == null) { client.Breakfast = false; }
+            if (m.Lunch == null) { client.Lunch = false; }
+            if (m.Dinner == null) { client.Dinner = false; }
+            if (m.Dessert == null) { client.Dessert = false; }
+            if (m.Snack == null) { client.Snack = false; }
+            if (m.Supper == null) { client.Supper = false; }
+
+            return client;
+        }
+
+        private void SetClientWeightMeasurement(SettingsModel m, Client client)
+        {
+            client.WeightMeasurement.Add(new WeightMeasurement()
+            {
+                DateOfMeasurement = DateTime.Now,
+                Weight = (double)m.Weight,
+
+            });
+
+            _context.Update(client);
+        }
+
+
+    }
 }
 

@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models;
+using FitAppka.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +14,14 @@ namespace FitAppka.Controllers
     [Authorize]
     public class TrainingController : Controller
     {
-
+        private readonly IDayRepository _dayRepository;
+        private readonly IClientRepository _clientRepository;
         private readonly FitAppContext _context;
 
-        public TrainingController(FitAppContext context)
+        public TrainingController(FitAppContext context, IDayRepository dayRepository, IClientRepository clientRepository)
         {
+            _clientRepository = clientRepository;
+            _dayRepository = dayRepository;
             _context = context;
         }
 
@@ -28,11 +32,11 @@ namespace FitAppka.Controllers
             ViewData["dzien"] = DajDzienPoID(dzienID);
             ViewData["dzienID"] = dzienID;
             ViewData["klientID"] = DajZalogowanegoKlientaID();
-            ViewData["spaloneKcal"] = KcalSpaloneWDniu(dzienID);
+            ViewData["spaloneKcal"] = CaloriesBurnedInDay(dzienID);
             ViewData["czasTreningow"] = CzasTreningowWDniu(dzienID);
-            ViewData["celKcal"] = DajCelKcalWDniu(dzienID);
-            ViewData["celMinut"] = DajCelMinutTreningowWDniu(dzienID);
-            return View(await _context.Trening.Include(t => t.TreningRodzaj).Include(t => t.Dzien).ToListAsync());
+            ViewData["celKcal"] = GetKcalBurnedGoalInDay(dzienID);
+            ViewData["celMinut"] = GetTrainingTimeGoalInDay(dzienID);
+            return View(await _context.CardioTraining.Include(t => t.CardioTrainingType).Include(t => t.DayId).ToListAsync());
         }
 
         [HttpGet]
@@ -41,12 +45,12 @@ namespace FitAppka.Controllers
             return RedirectToAction(nameof(TrainingPanel), new { dzienID = DajObecnyDzienID(Convert.ToDateTime(day)) });
         }
 
-        private int DajCelKcalWDniu(int dzienID)
+        private int GetKcalBurnedGoalInDay(int dayID)
         {
-            int? celKcal = DajDzien(dzienID).CelSpalonychKcal;
-            if(celKcal != null)
+            int? kcalBurnedGoal = _dayRepository.GetDay(dayID).KcalBurnedGoal;
+            if(kcalBurnedGoal != null)
             {
-                return (int) celKcal;
+                return (int) kcalBurnedGoal;
             }
             else
             {
@@ -55,9 +59,9 @@ namespace FitAppka.Controllers
 
         }
 
-        private int DajCelMinutTreningowWDniu(int dzienID)
+        private int GetTrainingTimeGoalInDay(int dayID)
         {
-            int? celMinut = DajDzien(dzienID).CelMinTreningow;
+            int? celMinut = _dayRepository.GetDay(dayID).TrainingTimeGoal;
             if (celMinut != null)
             {
                 return (int)celMinut;
@@ -68,17 +72,14 @@ namespace FitAppka.Controllers
             }
         }
 
-        private Dzien DajDzien(int dzienID)
-        {
-            return _context.Dzien.Where(d => d.DzienId.Equals(dzienID)).FirstOrDefault();
-        }
 
-        private int KcalSpaloneWDniu(int dzienID)
+
+        private int CaloriesBurnedInDay(int dayID)
         {
-            List<Trening> treningi = _context.Trening.Where(t => t.DzienId.Equals(dzienID)).ToList();
+            List<CardioTraining> trainings = _context.CardioTraining.Where(t => t.DayId.Equals(dayID)).ToList();
             int? kcal = 0;
-            foreach (Trening trening in treningi) {
-                kcal += trening.SpaloneKalorie;
+            foreach (CardioTraining cardio in trainings) {
+                kcal += cardio.CaloriesBurned;
             }
 
             return (int) kcal;
@@ -96,16 +97,16 @@ namespace FitAppka.Controllers
             }
         }
 
-        private int CzasTreningowWDniu(int dzienID)
+        private int CzasTreningowWDniu(int dayID)
         {
-            List<Trening> treningi = _context.Trening.Where(t => t.DzienId.Equals(dzienID)).ToList();
-            int? czas = 0;
-            foreach (Trening trening in treningi)
+            List<CardioTraining> trainings = _context.CardioTraining.Where(t => t.DayId.Equals(dayID)).ToList();
+            int? time = 0;
+            foreach (CardioTraining cardio in trainings)
             {
-                czas += trening.CzasWMinutach;
+                time += cardio.TimeInMinutes;
             }
 
-            return (int)czas;
+            return (int)time;
         }
 
         [HttpGet]
@@ -113,18 +114,18 @@ namespace FitAppka.Controllers
         {
             ViewData["dzienID"] = dzienID;
             SprawdzCzySzukano(search);
-            return View(await _context.TreningRodzaj.Where(t => t.NazwaTreningu.Contains(search)).ToListAsync());
+            return View(await _context.CardioTrainingType.Where(c => c.TrainingName.Contains(search)).ToListAsync());
         }
 
         [HttpPost]
         public IActionResult Search(int dzienID, int treningTypId, int czasWMinutach, int spaloneKcal)
         {
-            _context.Add(new Trening()
+            _context.Add(new CardioTraining()
             {
-                DzienId = dzienID,
-                CzasWMinutach = czasWMinutach,
-                TreningRodzajId = treningTypId,
-                SpaloneKalorie = spaloneKcal
+                DayId = dzienID,
+                TimeInMinutes = czasWMinutach,
+                CardioTrainingTypeId = treningTypId,
+                CaloriesBurned = spaloneKcal
             });
 
             try
@@ -138,11 +139,11 @@ namespace FitAppka.Controllers
         [HttpPost]
         public async Task<IActionResult> UsunTrening(int treningID)
         {
-            var trening = _context.Trening.Where(t => t.TreningId == treningID).FirstOrDefault();
+            var trening = _context.CardioTraining.Where(t => t.CardioTrainingId == treningID).FirstOrDefault();
            
             if (trening != null)
             {
-                _context.Trening.Remove(trening);
+                _context.CardioTraining.Remove(trening);
                 await _context.SaveChangesAsync();
             }
             return Json(false);
@@ -151,10 +152,10 @@ namespace FitAppka.Controllers
         [HttpPost]
         public IActionResult AddTraining(int dzienID, string nazwa, int wydatek)
         {
-            _context.Add(new TreningRodzaj
+            _context.Add(new CardioTrainingType
             {
-                NazwaTreningu = nazwa,
-                KcalNaMin = wydatek
+                TrainingName = nazwa,
+                KcalPerMin = wydatek
             });
 
             _context.SaveChanges();
@@ -163,14 +164,9 @@ namespace FitAppka.Controllers
         }
 
 
-        private bool TrainingExists(int id)
-        {
-            return _context.Trening.Any(t => t.TreningId == id);
-        }
-
         private int DajObecnyDzienID(DateTime dzien)
         {
-            int id = DajDzienPoDacie(dzien);
+            int id = GetClientDayIDByDate(dzien);
             if (id != 0)
             {
                 return id;
@@ -178,38 +174,36 @@ namespace FitAppka.Controllers
             else
             {
                 DodajNowyDzien(dzien);
-                return DajDzienPoDacie(dzien);
+                return GetClientDayIDByDate(dzien);
             }
 
         }
 
-        private void DodajNowyDzien(DateTime dzien)
+        private void DodajNowyDzien(DateTime day)
         {
-            var klient = _context.Klient.Where(k => k.KlientId == DajZalogowanegoKlientaID());
+            var client = _clientRepository.GetClient(DajZalogowanegoKlientaID());
 
-            _context.Add(new Dzien(){
-                Dzien1 = dzien,
-                KlientId = DajZalogowanegoKlientaID(),
-                Sniadanie = klient.Select(k => k.Sniadanie).FirstOrDefault(),
-                Iisniadanie = klient.Select(k => k.Iisniadanie).FirstOrDefault(),
-                Obiad = klient.Select(k => k.Obiad).FirstOrDefault(),
-                Deser = klient.Select(k => k.Deser).FirstOrDefault(),
-                Przekaska = klient.Select(k => k.Przekaska).FirstOrDefault(),
-                Kolacja = klient.Select(k => k.Kolacja).FirstOrDefault(),
-                CelBialko = klient.Select(k => k.CelBialko).FirstOrDefault(),
-                CelTluszcze = klient.Select(k => k.CelTluszcze).FirstOrDefault(),
-                CelWegl = klient.Select(k => k.CelWegl).FirstOrDefault(),
-                CelKalorii = klient.Select(k => k.CelKalorii).FirstOrDefault(),
-                WypitaWoda = 0,
-            });
-
-            _context.SaveChanges();
+            _dayRepository.Add(new Day() {
+                Date = day,
+                ClientId = DajZalogowanegoKlientaID(),
+                Breakfast = client.Breakfast,
+                Lunch = client.Lunch,
+                Dinner = client.Dinner,
+                Dessert = client.Dessert,
+                Snack = client.Snack,
+                Supper = client.Supper,
+                ProteinTarget = client.ProteinTarget,
+                FatTarget = client.FatTarget,
+                CarbsTarget = client.CarbsTarget,
+                CalorieTarget = client.CarbsTarget,
+                WaterDrunk = 0,
+            }); ;
         }
 
 
-        private int DajDzienPoDacie(DateTime dzien)
+        private int GetClientDayIDByDate(DateTime day)
         {
-            return _context.Dzien.Where(d => d.KlientId == DajZalogowanegoKlientaID() && d.Dzien1 == dzien.Date).Select(d => d.DzienId).FirstOrDefault();
+            return _dayRepository.GetClientDayByDate(day, DajZalogowanegoKlientaID()).DayId;
         }
 
 
@@ -220,7 +214,7 @@ namespace FitAppka.Controllers
 
         private string DajDzienPoID(int dzienID)
         {
-            DateTime dateTime = (DateTime) _context.Dzien.Where(d => d.DzienId == dzienID && d.KlientId == DajZalogowanegoKlientaID()).Select(d => d.Dzien1).FirstOrDefault();
+            DateTime dateTime = (DateTime) _context.Day.Where(d => d.DayId == dzienID && d.ClientId == DajZalogowanegoKlientaID()).Select(d => d.Date).FirstOrDefault();
             return dateTime.Date.ToString("dd.MM.yyyy");
         }
 
@@ -234,7 +228,7 @@ namespace FitAppka.Controllers
         }
 
         private int DajZalogowanegoKlientaID(){
-            return _context.Klient.Where(k => k.Login.ToLower() == User.Identity.Name.ToLower()).Select(k => k.KlientId).FirstOrDefault();
+            return _context.Client.Where(k => k.Login.ToLower() == User.Identity.Name.ToLower()).Select(k => k.ClientId).FirstOrDefault();
         }
 
 

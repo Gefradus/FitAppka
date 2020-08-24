@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FitAppka.Models.Trening>
+﻿@model IEnumerable<FitAppka.Models.CardioTraining>
 <html>
 
 <head>
@@ -82,7 +82,7 @@
         <div style="display: flex;">
             <div id="dziennik">Dziennik treningowy dla: </div>
             <input id="datepicker" onchange="changeDay('@Url.Action("ChangeDay", "Training")');" type="text" style="margin-left: 10px; margin-right: 15px; margin-top: 2px; text-align: center" value="@ViewData["dzien"]" readonly="readonly" />
-            <a class="btn btn-link acent" id="btnAdd" asp-controller="Training" asp-action="Search" asp-route-dzienID="@ViewData["dzienID"]">Dodaj nowy trening</a>
+            <a class="btn acent" id="btnAdd" asp-controller="Training" asp-action="Search" asp-route-dzienID="@ViewData["dzienID"]">Dodaj nowy trening</a>
         </div>
 
         <div id="all" style="margin-top: 2.5rem !important; border-bottom: 1px solid darkgray">
@@ -100,28 +100,28 @@
         </div>
 
         @{
-            int ileTreningow = 0;
-            foreach (var trening in Model)
+            int trainingCount = 0;
+            foreach (var training in Model)
             {
-                if (trening.Dzien.DzienId.Equals(ViewData["dzienID"]))
+                if (training.Day.DayId.Equals(ViewData["dayID"]))
                 {
                     <div class="row no-gutters wierszTreningu">
-                        <div class="col-5 cent">@trening.TreningRodzaj.NazwaTreningu</div>
+                        <div class="col-5 cent">@training.CardioTrainingType.TrainingName</div>
                         <div class="col-7 container">
                             <div class="row no-gutters">
-                                <div class="cent column borl">@trening.CzasWMinutach</div>
-                                <div class="cent column borl">@trening.SpaloneKalorie</div>
+                                <div class="cent column borl">@training.TimeInMinutes</div>
+                                <div class="cent column borl">@training.CaloriesBurned</div>
                                 <div class="cent btnArea borl">
-                                    <button id="btnUsun" type="button" onclick="potwierdzUsuniecie(@trening.TreningId);"><img class="cancel" src="~/img/cancel.png"></button>
+                                    <button id="btnUsun" type="button" onclick="potwierdzUsuniecie(@training.CardioTrainingId);"><img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    ileTreningow++;
+                    trainingCount++;
                 }
             }
 
-            if (ileTreningow == 0)
+            if (trainingCount == 0)
             {
                 <div class="col-12 cent py-5" style="font-size: 18px; background: #f7f7f796">
                     Aktualnie brak treningów w tym dniu

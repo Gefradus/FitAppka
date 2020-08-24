@@ -1,4 +1,5 @@
 using FitAppka.Models;
+using FitAppka.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,11 @@ namespace FitAppka
             {
                 options.LoginPath = "/Login/Logowanie";
             });
+
+            services.AddScoped<IProductRepository, SQLProductRepository>();
+            services.AddScoped<IMealRepository, SQLMealRepository>();
+            services.AddScoped<IDayRepository, SQLDayRepository>();
+            services.AddScoped<IClientRepository, SQLClientRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

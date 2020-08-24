@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FitAppka.Models.TreningRodzaj>
+﻿@*@model IEnumerable<FitAppka.Models.Tr>*@
 
 <html>
 <head>
@@ -7,7 +7,22 @@
 </head>
 <body>
     <div class="container">
+        <div class="row no-gutters">
+            <div class="col-2">ID</div>
+            <div class="col-4">Nazwa</div>
+            <div class="col-3">Typ</div>
+            <div class="col-3">Autor</div>
+        </div>
 
+       @* @foreach(var item in Model)
+        {
+            <div class="row no-gutters">
+                <div class="col-2">@item.TreningRodzajId</div>
+                <div class="col-4">@item.NazwaTreningu</div>
+                <div class="col-3">@ite</div>
+                <div class="col-3"></div>
+            </div>
+        }*@
     </div>
 </body>
 </html>

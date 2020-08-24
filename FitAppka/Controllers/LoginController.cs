@@ -40,18 +40,18 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Logowanie(Klient model)
+        public async Task<IActionResult> Logowanie(Client model)
         {
             if (ModelState.IsValid)
             {
-                int klientID = model.KlientId;
+                int clientID = model.ClientId;
                 string loginOrEmail = model.Login.ToLower();
-                string haslo = model.Haslo;
+                string pass = model.Password;
 
-                Klient klient = _context.Klient.Where(k => k.Login.ToLower().Equals(loginOrEmail) || k.Email.ToLower().Equals(loginOrEmail)).FirstOrDefault();
-                if (klient != null && klient.Haslo.Equals(haslo))
+                Client client = _context.Client.Where(c => c.Login.ToLower().Equals(loginOrEmail) || c.Email.ToLower().Equals(loginOrEmail)).FirstOrDefault();
+                if (client != null && client.Password.Equals(pass))
                 {
-                    var claims = new List<Claim> { new Claim(ClaimTypes.Name, klient.Login) };
+                    var claims = new List<Claim> { new Claim(ClaimTypes.Name, client.Login) };
 
                     ClaimsPrincipal principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "login"));
                     await HttpContext.SignInAsync(principal);
@@ -80,21 +80,21 @@ namespace FitAppka.Controllers
         {
             if (ModelState.IsValid)
             {
-                var klientPoEmail = _context.Klient.Where(k => k.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
-                var klientPoLogin = _context.Klient.Where(k => k.Login.ToLower() == model.Login.ToLower()).FirstOrDefault();
+                var klientPoEmail = _context.Client.Where(k => k.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
+                var klientPoLogin = _context.Client.Where(k => k.Login.ToLower() == model.Login.ToLower()).FirstOrDefault();
 
                 if (klientPoEmail == null && klientPoLogin == null)
                 {
                     if (model.ConfirmPassword == model.Password)
                     {
 
-                        var nowyKlient = new Klient()
+                        var nowyKlient = new Client()
                         {
                             Login = model.Login,
                             Email = model.Email,
-                            Haslo = model.Password,
-                            Imie = model.FirstName,
-                            Nazwisko = model.SecondName
+                            Password = model.Password,
+                            FirstName = model.FirstName,
+                            SecondName = model.SecondName
                         };
 
                         _context.Add(nowyKlient);
@@ -107,7 +107,7 @@ namespace FitAppka.Controllers
 
                         ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
                         await HttpContext.SignInAsync(principal);
-                        int id = _context.Klient.Where(k => k.Login.ToLower() == model.Login.ToLower()).Select(k => k.KlientId).FirstOrDefault();
+                        int id = _context.Client.Where(k => k.Login.ToLower() == model.Login.ToLower()).Select(k => k.ClientId).FirstOrDefault();
 
                         return RedirectToAction("Start", "Posilek", new { id });
                     }

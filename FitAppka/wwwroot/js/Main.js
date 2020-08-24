@@ -126,35 +126,19 @@ function usunPosilekUrl(id, url) {
     });
 }
 
-function showEditModalUrl(id, url) {
+function giveIterFromID(id){
     var iter = 0;
     for (var i = 0; i < IDarray.length; i++) {
         if (IDarray[i] == id) {
             iter = i;
         }
     }
+    return iter;
+}
 
-    var photoPath = pathArray[iter];
-    var name = nameArray[iter];
-    var kcal = kcalArray[iter];
-    var bialko = bialkoArray[iter];
-    var tluszcze = tluszczeArray[iter];
-    var wegle = wegleArray[iter];
-    var gram = gramArray[iter];
 
-    if (photoPath == 'null') {
-        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="/FitAppka/img/miss.png" class="img-fluid" asp-append-version="true" />';
-    }
-    else {
-        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + "/FitAppka/photos/" + photoPath + '" class="img-fluid" asp-append-version="true" />';
-    }
-
-    document.getElementById("gramatura").value = gram;
-    document.getElementById("name").innerHTML = name + ", " + gram + "g";
-    document.getElementById("kcalNapis").innerHTML = kcal + ' kcal';
-    document.getElementById("bialkoNapis").innerHTML = 'Białko: ' + bialko + ' g,';
-    document.getElementById("tluszczeNapis").innerHTML = 'Tł.: ' + tluszcze + ' g,';
-    document.getElementById("wegleNapis").innerHTML = 'Węgl.: ' + wegle + ' g';
+function showEditModalUrl(id, url) {
+    prepareModalData(id);
 
     $("#editModal").modal('show');
     $("#editPosilek").click(function () {
@@ -180,6 +164,27 @@ function showEditModalUrl(id, url) {
         }
     });
 }
+
+function prepareModalData(id) {
+    var iter = giveIterFromID(id);
+    var photoPath = pathArray[iter];
+    var gram = gramArray[iter];
+
+    if (photoPath == 'null') {
+        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="/FitAppka/img/miss.png" class="img-fluid" asp-append-version="true" />';
+    }
+    else {
+        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + "/FitAppka/photos/" + photoPath + '" class="img-fluid" asp-append-version="true" />';
+    }
+
+    document.getElementById("gramatura").value = gram;
+    document.getElementById("name").innerHTML = nameArray[iter] + ", " + gram + "g";
+    document.getElementById("kcalNapis").innerHTML = kcalArray[iter] + ' kcal';
+    document.getElementById("bialkoNapis").innerHTML = 'Białko: ' + bialkoArray[iter] + ' g,';
+    document.getElementById("tluszczeNapis").innerHTML = 'Tł.: ' + tluszczeArray[iter] + ' g,';
+    document.getElementById("wegleNapis").innerHTML = 'Węgl.: ' + wegleArray[iter] + ' g';
+}
+
 
 
 $("#editModal").on('hide.bs.modal', function () {

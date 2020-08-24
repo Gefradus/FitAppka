@@ -1,0 +1,65 @@
+﻿using FitAppka.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace FitAppka.Repository
+{
+    public class SQLDayRepository : IDayRepository
+    {
+        private readonly FitAppContext _context;
+
+        public SQLDayRepository(FitAppContext context)
+        {
+            _context = context;
+        }
+
+        public Day Add(Day day)
+        {
+            _context.Add(day);
+            _context.SaveChanges();
+            return day;
+        }
+
+        public Day Delete(int id)
+        {
+            Day dzien = GetDay(id);
+
+            if (dzien != null)
+            {
+                _context.Day.Remove(dzien);
+                _context.SaveChanges();
+            }
+
+            return dzien;
+        }
+
+        public IEnumerable<Day> GetAllDays()
+        {
+            return _context.Day.ToList();
+        }
+
+        public Day GetClientDayByDate(DateTime date, int clientID)
+        {
+            return _context.Day.FirstOrDefault(d => d.Date == date && d.ClientId == clientID);
+        }
+
+        public Day GetDay(int id)
+        {
+            return _context.Day.Find(id);
+        }
+
+        public DateTime GetDayDateTime(int id)
+        {
+            return (DateTime) GetDay(id).Date;
+        }
+
+        public Day Update(Day day)
+        {
+            _context.Update(day);
+            _context.SaveChanges();
+            return day;
+        }
+
+    }
+}

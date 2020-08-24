@@ -6,8 +6,9 @@ main{
 
 
 .photo{
-    height: 60px;
-    width: 60px;
+    height: 78px;
+    width: 78px;
+    border: 1px solid #d1cfcf;
 }
 
 .button{
@@ -42,4 +43,8 @@ main{
    align-items: center;
    display: flex;
    height: 45px;
+}
+
+.btn-outline-dark:hover{
+    background: #4ab542 !important
 }

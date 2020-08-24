@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FitAppka.Models;
+using FitAppka.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +17,13 @@ namespace FitAppka.Controllers
     [Authorize]
     public class AdminController : Controller
     {
+        private readonly IProductRepository _productRepository;
         private readonly FitAppContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public AdminController(FitAppContext context, IWebHostEnvironment env)
+        public AdminController(FitAppContext context, IWebHostEnvironment env, IProductRepository productRepository)
         {
+            _productRepository = productRepository;
             _context = context;
             _env = env;
         }
@@ -28,7 +31,7 @@ namespace FitAppka.Controllers
         [HttpGet]
         public IActionResult AdminHome()
         {
-            if (GetLoggedInClient().CzyAdministrator)
+            if (GetLoggedInClient().IsAdmin)
             {
                 return View();
             }
@@ -41,7 +44,7 @@ namespace FitAppka.Controllers
         [HttpGet]
         public IActionResult AdminSettings()
         {
-            if (GetLoggedInClient().CzyAdministrator)
+            if (GetLoggedInClient().IsAdmin)
             {
                 return View();
             }
@@ -53,11 +56,16 @@ namespace FitAppka.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> AdminProduct()
+        public async Task<IActionResult> AdminProduct(string search)
         {
-            if (GetLoggedInClient().CzyAdministrator)
+            if (GetLoggedInClient().IsAdmin)
             {
-                return View(await _context.Produkt.ToListAsync());
+                if(search != null) {
+                    return View(await _context.Product.Where(p => p.ProductName.Contains(search)).ToListAsync());
+                } 
+                else {
+                    return View(await _context.Product.ToListAsync());
+                }
             }
             else
             {
@@ -68,7 +76,7 @@ namespace FitAppka.Controllers
         [HttpGet]
         public IActionResult AdminEditProduct(int id)
         {
-            if (GetLoggedInClient().CzyAdministrator)
+            if (GetLoggedInClient().IsAdmin)
             {
                 SendDataAboutProductToView(id);
                 return View();
@@ -96,90 +104,89 @@ namespace FitAppka.Controllers
             if (ModelState.IsValid)
             {
                 string uniqueFileName = null;
-                if (model.Zdjecie != null)
+                if (model.Photo != null)
                 {
                     string folder = Path.Combine(_env.WebRootPath, "photos");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Zdjecie.FileName;
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
                     string filePath = Path.Combine(folder, uniqueFileName);
-                    model.Zdjecie.CopyTo(new FileStream(filePath, FileMode.Create));
+                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
 
-                Produkt produktTyp = _context.Produkt.Where(p => p.ProduktId == id).FirstOrDefault();
+                Product product = _productRepository.GetProduct(id);
 
-                produktTyp.NazwaProduktu = model.NazwaProduktu;
-                produktTyp.Kalorie = model.Kalorie;
-                produktTyp.Bialko = model.Bialko;
-                produktTyp.Tluszcze = model.Tluszcze;
-                produktTyp.Weglowodany = model.Weglowodany;
-                produktTyp.WitaminaA = model.WitaminaA;
-                produktTyp.WitaminaC = model.WitaminaC;
-                produktTyp.WitaminaD = model.WitaminaD;
-                produktTyp.WitaminaK = model.WitaminaK;
-                produktTyp.WitaminaE = model.WitaminaE;
-                produktTyp.WitaminaB1 = model.WitaminaB1;
-                produktTyp.WitaminaB2 = model.WitaminaB2;
-                produktTyp.WitaminaB5 = model.WitaminaB5;
-                produktTyp.WitaminaB6 = model.WitaminaB6;
-                produktTyp.Biotyna = model.Biotyna;
-                produktTyp.WitaminaB12 = model.WitaminaB12;
-                produktTyp.WitaminaPp = model.WitaminaPp;
-                produktTyp.Cynk = model.Cynk;
-                produktTyp.Fosfor = model.Fosfor;
-                produktTyp.Jod = model.Jod;
-                produktTyp.KwasFoliowy = model.KwasFoliowy;
-                produktTyp.Magnez = model.Magnez;
-                produktTyp.Miedz = model.Miedz;
-                produktTyp.Potas = model.Potas;
-                produktTyp.Selen = model.Selen;
-                produktTyp.Sod = model.Sod;
-                produktTyp.Wapn = model.Wapn;
-                produktTyp.Zelazo = model.Zelazo;
+                product.ProductName = model.ProductName;
+                product.Calories = (double) model.Calories;
+                product.Proteins = (double) model.Proteins;
+                product.Fats = (double) model.Fats;
+                product.Carbohydrates = (double) model.Carbohydrates;
+                product.VitaminA = model.VitaminA;
+                product.VitaminC = model.VitaminC;
+                product.VitaminD = model.VitaminD;
+                product.VitaminK = model.VitaminK;
+                product.VitaminE = model.VitaminE;
+                product.VitaminB1 = model.VitaminB1;
+                product.VitaminB2 = model.VitaminB2;
+                product.VitaminB5 = model.VitaminB5;
+                product.VitaminB6 = model.VitaminB6;
+                product.Biotin = model.Biotin;
+                product.VitaminB12 = model.VitaminB12;
+                product.VitaminPp = model.VitaminPp;
+                product.Zinc = model.Zinc;
+                product.Phosphorus = model.Phosphorus;
+                product.Iodine = model.Iodine;
+                product.FolicAcid = model.FolicAcid;
+                product.Magnesium = model.Magnesium;
+                product.Copper = model.Copper;
+                product.Potassium = model.Potassium;
+                product.Selenium = model.Selenium;
+                product.Sodium = model.Sodium;
+                product.Calcium = model.Calcium;
+                product.Iron = model.Iron;
 
                 if(addOrEditPhoto == 0 || uniqueFileName != null)
                 {
-                    produktTyp.ZdjecieSciezka = uniqueFileName;
+                    product.PhotoPath = uniqueFileName;
                 }
- 
-                _context.Update(produktTyp);
-                _context.SaveChanges();
+
+                _productRepository.Update(product);
             }
         }
 
         private void SendDataAboutProductToView(int id)
         {
-            Produkt produktTyp = _context.Produkt.Where(p => p.ProduktId == id).FirstOrDefault();
+            Product product = _productRepository.GetProduct(id);
             ViewData["produktID"] = id;
-            ViewData["nazwa"] = produktTyp.NazwaProduktu;
-            ViewData["sciezka"] = produktTyp.ZdjecieSciezka;
-            ViewData["kalorie"] = produktTyp.Kalorie;
-            ViewData["bialko"] = produktTyp.Bialko;
-            ViewData["tluszcze"] = produktTyp.Tluszcze;
-            ViewData["wegle"] = produktTyp.Weglowodany;
-            ViewData["witA"] = produktTyp.WitaminaA;
-            ViewData["witC"] = produktTyp.WitaminaC;
-            ViewData["witD"] = produktTyp.WitaminaD;
-            ViewData["witK"] = produktTyp.WitaminaK;
-            ViewData["witE"] = produktTyp.WitaminaE;
-            ViewData["witB1"] = produktTyp.WitaminaB1;
-            ViewData["witB2"] = produktTyp.WitaminaB2;
-            ViewData["witB5"] = produktTyp.WitaminaB5;
-            ViewData["witB6"] = produktTyp.WitaminaB6;
-            ViewData["biotyna"] = produktTyp.Biotyna;
-            ViewData["witB12"] = produktTyp.WitaminaB12;
-            ViewData["witPP"] = produktTyp.WitaminaPp;
-            ViewData["cynk"] = produktTyp.Cynk;
-            ViewData["fosfor"] = produktTyp.Fosfor;
-            ViewData["jod"] = produktTyp.Jod;
-            ViewData["kwasFoliowy"] = produktTyp.KwasFoliowy;
-            ViewData["magnez"] = produktTyp.Magnez;
-            ViewData["miedz"] = produktTyp.Miedz;
-            ViewData["potas"] = produktTyp.Potas;
-            ViewData["selen"] = produktTyp.Selen;
-            ViewData["sod"] = produktTyp.Sod;
-            ViewData["wapn"] = produktTyp.Wapn;
-            ViewData["zelazo"] = produktTyp.Zelazo;
+            ViewData["name"] = product.ProductName;
+            ViewData["path"] = product.PhotoPath;
+            ViewData["calories"] = product.Calories;
+            ViewData["proteins"] = product.Proteins;
+            ViewData["fats"] = product.Fats;
+            ViewData["carbs"] = product.Carbohydrates;
+            ViewData["vitA"] = product.VitaminA;
+            ViewData["vitC"] = product.VitaminC;
+            ViewData["vitD"] = product.VitaminD;
+            ViewData["vitK"] = product.VitaminK;
+            ViewData["vitE"] = product.VitaminE;
+            ViewData["vitB1"] = product.VitaminB1;
+            ViewData["vitB2"] = product.VitaminB2;
+            ViewData["vitB5"] = product.VitaminB5;
+            ViewData["vitB6"] = product.VitaminB6;
+            ViewData["biotin"] = product.Biotin;
+            ViewData["vitB12"] = product.VitaminB12;
+            ViewData["vitPP"] = product.VitaminPp;
+            ViewData["zinc"] = product.Zinc;
+            ViewData["phosphorus"] = product.Phosphorus;
+            ViewData["iodine"] = product.Iodine;
+            ViewData["folicAcid"] = product.FolicAcid;
+            ViewData["magnesium"] = product.Magnesium;
+            ViewData["copper"] = product.Copper;
+            ViewData["potassium"] = product.Potassium;
+            ViewData["selenium"] = product.Selenium;
+            ViewData["sodium"] = product.Sodium;
+            ViewData["calcium"] = product.Calcium;
+            ViewData["iron"] = product.Iron;
 
-            if(produktTyp.ZdjecieSciezka == null)
+            if(product.PhotoPath == null)
             {
                 ViewData["addOrEdit"] = 0;
             }
@@ -194,14 +201,7 @@ namespace FitAppka.Controllers
         [HttpPost]
         public IActionResult Delete(int productID)
         {
-            Produkt product = _context.Produkt.Where(p => p.ProduktId == productID).FirstOrDefault();
-            UsunPrzypisanePosilki(productID);
-            
-            if (product != null)
-            {
-                _context.Produkt.Remove(product);
-                _context.SaveChanges();
-            }
+            _productRepository.Delete(productID);
             return Json(false);
         }
 
@@ -209,9 +209,9 @@ namespace FitAppka.Controllers
         [HttpGet]
         public async Task<IActionResult> AdminClient()
         {
-            if (GetLoggedInClient().CzyAdministrator)
+            if (GetLoggedInClient().IsAdmin)
             {
-                return View(await _context.Klient.ToListAsync());
+                return View(await _context.Client.ToListAsync());
             }
             else
             {
@@ -219,33 +219,26 @@ namespace FitAppka.Controllers
             }
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public async Task<IActionResult> AdminTraining()
         {
-            if (GetLoggedInClient().CzyAdministrator)
+            if (GetLoggedInClient().IsAdmin)
             {
-                return View(await _context.TreningRodzaj.ToListAsync());
+                return View(await _context.Card.ToListAsync());
             }
             else
             {
                 return RedirectToAction("Logout", "Login");
             }
-        }
+        }*/
 
 
-        private Klient GetLoggedInClient()
+        private Client GetLoggedInClient()
         {
-            return _context.Klient.Where(k => k.Login.ToLower().Equals(User.Identity.Name.ToLower())).FirstOrDefault();
+            return _context.Client.Where(k => k.Login.ToLower().Equals(User.Identity.Name.ToLower())).FirstOrDefault();
         }
 
-        private void UsunPrzypisanePosilki(int productID){
-            List<Posilek> przypisanePosilki = _context.Posilek.Where(p => p.ProduktId == productID).ToList();
 
-            foreach(var posilek in przypisanePosilki){
-                _context.Posilek.Remove(posilek);
-            }
-            _context.SaveChanges();
-        }
 
 
         

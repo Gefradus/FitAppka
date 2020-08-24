@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using FitAppka.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using FitAppka.Repository;
 
 namespace FitAppka.Controllers
 {
@@ -15,241 +16,174 @@ namespace FitAppka.Controllers
     public class SearchController : Controller
     {
         private readonly FitAppContext _context;
+        private readonly IDayRepository _dayRepository;
+        private readonly IProductRepository _productRepository;
         private readonly IWebHostEnvironment hostingEnvironment;
 
-        public SearchController(FitAppContext context, IWebHostEnvironment hostingEnvironment)
+        public SearchController(FitAppContext context, IWebHostEnvironment hostingEnvironment, IDayRepository dayRepository, IProductRepository productRepository)
         {
+            _dayRepository = dayRepository;
+            _productRepository = productRepository;
             _context = context;
             this.hostingEnvironment = hostingEnvironment;
         }
 
-        public async Task<IActionResult> Index(string search, int klientID, int wKtorym, int dzienID)
+        public async Task<IActionResult> Index(string search, int clientID, int inWhich, int dayID)
         {
-            if (klientID == 0 || wKtorym == 0 || dzienID == 0)
+            if (clientID == 0 || inWhich == 0 || dayID == 0)
             {
-                klientID = _context.Klient.Where(k => k.Login.ToLower() == User.Identity.Name.ToLower()).Select(k => k.KlientId).FirstOrDefault();
-                return RedirectToAction("OknoGlowne", "Posilek", new { klientID, dzienWybrany = DateTime.Now.Date });
+                clientID = _context.Client.Where(c => c.Login.ToLower() == User.Identity.Name.ToLower()).Select(c => c.ClientId).FirstOrDefault();
+                return RedirectToAction("OknoGlowne", "Posilek", new { clientID, daySelected = DateTime.Now.Date });
             }
 
-            if (User.Identity.Name.ToLower() != _context.Klient.Where(k => k.KlientId == klientID).Select(k => k.Login.ToLower()).FirstOrDefault())
+            if (User.Identity.Name.ToLower() != _context.Client.Where(c => c.ClientId == clientID).Select(c => c.Login.ToLower()).FirstOrDefault())
             {
                 return RedirectToAction("Logout", "Login");  //zabezpieczenie przed wchodzeniem na obce konto
             }
-            ViewData["czySzukano"] = false;
+            ViewData["wereSearched"] = false;
 
             if (search != null)
             {
-                ViewData["czySzukano"] = true;
+                ViewData["wereSearched"] = true;
             }
        
-            ViewData["klientID"] = klientID;
-            ViewData["dzienID"] = dzienID;
-            ViewData["wKtorym"] = wKtorym;
+            ViewData["clientID"] = clientID;
+            ViewData["dayID"] = dayID;
+            ViewData["inWhich"] = inWhich;
             ViewData["search"] = search;
-            ViewData["klientImie"] = ImieINaziwsko(klientID);
-            ViewData["dzien"] = NapisDnia(dzienID);
-            ViewData["posilek"] = NazwaPosilku(wKtorym);
+            ViewData["dayID"] = NapisDnia(dayID);
+            ViewData["meal"] = MealName(inWhich);
 
-            return View(await _context.Produkt.Where(p => p.NazwaProduktu.Contains(search)).ToListAsync());
+            return View(await _context.Product.Where(p => p.ProductName.Contains(search)).ToListAsync());
         }
 
-        private string NazwaPosilku(int wKtorym)
+        private string MealName(int inWhichMeal)
         {
-            if (wKtorym == 1) { return "Śniadanie"; }
-            if (wKtorym == 2) { return "II śniadanie"; }
-            if (wKtorym == 3) { return "Obiad"; }
-            if (wKtorym == 4) { return "Deser"; }
-            if (wKtorym == 5) { return "Przekąska"; }
+            if (inWhichMeal == 1) { return "Śniadanie"; }
+            if (inWhichMeal == 2) { return "II śniadanie"; }
+            if (inWhichMeal == 3) { return "Obiad"; }
+            if (inWhichMeal == 4) { return "Deser"; }
+            if (inWhichMeal == 5) { return "Przekąska"; }
             return "Kolacja";
         }
 
-        private string NapisDnia(int dzienID)
+        private string NapisDnia(int dayID)
         {
-            DateTime dzienWybrany = (DateTime) _context.Dzien.Where(d => d.DzienId == dzienID).Select(d => d.Dzien1).FirstOrDefault();
-            string miesiac = "";
+            DateTime daySelected = _dayRepository.GetDayDateTime(dayID);
+            string month = "";
 
-            if (dzienWybrany.Month == 1) { miesiac = "sty"; }
-            if (dzienWybrany.Month == 2) { miesiac = "lut"; }
-            if (dzienWybrany.Month == 3) { miesiac = "mar"; }
-            if (dzienWybrany.Month == 4) { miesiac = "kwi"; }
-            if (dzienWybrany.Month == 5) { miesiac = "maj"; }
-            if (dzienWybrany.Month == 6) { miesiac = "czer"; }
-            if (dzienWybrany.Month == 7) { miesiac = "lip"; }
-            if (dzienWybrany.Month == 8) { miesiac = "sie"; }
-            if (dzienWybrany.Month == 9) { miesiac = "wrz"; }
-            if (dzienWybrany.Month == 10) { miesiac = "paź"; }
-            if (dzienWybrany.Month == 11) { miesiac = "lis"; }
-            if (dzienWybrany.Month == 12) { miesiac = "gru"; }
+            if (daySelected.Month == 1) { month = "sty"; }
+            if (daySelected.Month == 2) { month = "lut"; }
+            if (daySelected.Month == 3) { month = "mar"; }
+            if (daySelected.Month == 4) { month = "kwi"; }
+            if (daySelected.Month == 5) { month = "maj"; }
+            if (daySelected.Month == 6) { month = "czer"; }
+            if (daySelected.Month == 7) { month = "lip"; }
+            if (daySelected.Month == 8) { month = "sie"; }
+            if (daySelected.Month == 9) { month = "wrz"; }
+            if (daySelected.Month == 10) { month = "paź"; }
+            if (daySelected.Month == 11) { month = "lis"; }
+            if (daySelected.Month == 12) { month = "gru"; }
 
-            if (dzienWybrany == DateTime.Now.Date){
+            if (daySelected == DateTime.Now.Date){
                 return "Dzisiaj";
             }
-            else if (dzienWybrany == DateTime.Now.Date.AddDays(-1)){
+            else if (daySelected == DateTime.Now.Date.AddDays(-1)){
                 return "Wczoraj";
             }
-            else if (dzienWybrany == DateTime.Now.Date.AddDays(1)){
+            else if (daySelected == DateTime.Now.Date.AddDays(1)){
                 return "Jutro";
             }
             else{
-                return dzienWybrany.Day + " " + miesiac;
+                return daySelected.Day + " " + month;
             }
         }
 
-        private string ImieINaziwsko(int klientID)
+      
+        [HttpGet]
+        public IActionResult Create(int clientID, int inWhich, int dayID, int isAdmin)
         {
-            var klient = _context.Klient.Where(k => k.KlientId == klientID);
-            return klient.Select(k => k.Imie).FirstOrDefault() + " " + klient.Select(k => k.Nazwisko).FirstOrDefault();
-        }
-
-        public IActionResult Create(int klientID, int wKtorym, int dzienID, int czyAdmin)
-        {
-            ViewData["dzienID"] = dzienID;
-            ViewData["wKtorym"] = wKtorym;
-            ViewData["klientID"] = klientID;
-            ViewData["czyAdmin"] = czyAdmin;
+            CreateProductViewData(clientID, inWhich, dayID, isAdmin);
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(CreateProductModel model, int dzienID, int wKtorym, int klientID, int czyAdmin)
+        public IActionResult Create(CreateProductModel model, int dayID, int inWhich, int clientID, int isAdmin)
         {
             if (ModelState.IsValid)
-            {
-                string uniqueFileName = null;
-                if (model.Zdjecie != null) {
-                    string folder = Path.Combine(hostingEnvironment.WebRootPath, "photos");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Zdjecie.FileName;
-                    string filePath = Path.Combine(folder, uniqueFileName);
-                    model.Zdjecie.CopyTo(new FileStream(filePath, FileMode.Create));
-                }
-
-                Produkt produktTyp = new Produkt() {
-                       NazwaProduktu = model.NazwaProduktu,
-                       ZdjecieSciezka = uniqueFileName,
-                        Kalorie = model.Kalorie,
-                        Bialko = model.Bialko,
-                        Tluszcze = model.Tluszcze,
-                        Weglowodany = model.Weglowodany,
-                        WitaminaA = model.WitaminaA,
-                        WitaminaC = model.WitaminaC,
-                        WitaminaD = model.WitaminaD,
-                        WitaminaK = model.WitaminaK,
-                        WitaminaE = model.WitaminaE,
-                        WitaminaB1 = model.WitaminaB1,
-                        WitaminaB2 = model.WitaminaB2,
-                        WitaminaB6 = model.WitaminaB6,
-                        Biotyna = model.Biotyna,
-                        WitaminaB12 = model.WitaminaB12,
-                        WitaminaPp = model.WitaminaPp,
-                        Cynk = model.Cynk,
-                        Fosfor = model.Fosfor,
-                        Jod = model.Jod,
-                        Magnez = model.Magnez,
-                        Miedz = model.Miedz,
-                        Potas = model.Potas,
-                        Selen = model.Selen,
-                        Sod = model.Sod,
-                        Wapn = model.Wapn,
-                        Zelazo = model.Zelazo
-                };
-
-                _context.Add(produktTyp);
+            {     
+                _context.Add(CreateProductFromModel(model, CreatePathToPhoto(model)));
                 _context.SaveChanges();
 
-                if(czyAdmin == 1) {
+                if(isAdmin == 1) {
                     return RedirectToAction("AdminProduct", "Admin");
                 } 
                 else 
                 {
-                    return RedirectToAction(nameof(Index), new { dzienID, wKtorym, klientID });
+                    return RedirectToAction(nameof(Index), new { dayID, inWhich, clientID });
                 }
-                
 
             }
-            return View(model);
+
+            CreateProductViewData(clientID, inWhich, dayID, isAdmin);
+            return View(model); 
         }
 
-        // GET: Search/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        private void CreateProductViewData(int clientID, int inWhich, int dayID, int isAdmin) 
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var produktTyp = await _context.Produkt.FindAsync(id);
-            if (produktTyp == null)
-            {
-                return NotFound();
-            }
-            return View(produktTyp);
+            ViewData["dayID"] = dayID;
+            ViewData["inWhich"] = inWhich;
+            ViewData["clientID"] = clientID;
+            ViewData["isAdmin"] = isAdmin;
         }
 
-        // POST: Search/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Produkt produkt)
-        {
-            if (id != produkt.ProduktId)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
+        private string CreatePathToPhoto(CreateProductModel model)
+        {
+            string uniqueFileName = null;
+            if (model.Photo != null)
             {
-                try
-                {
-                    _context.Update(produkt);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProduktTypExists(produkt.ProduktId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                string folder = Path.Combine(hostingEnvironment.WebRootPath, "photos");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                string filePath = Path.Combine(folder, uniqueFileName);
+                model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
             }
-            return View(produkt);
+            return uniqueFileName;
         }
 
-        // GET: Search/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+        private Product CreateProductFromModel(CreateProductModel model, string uniqueFileName)
         {
-            if (id == null)
+            return new Product()
             {
-                return NotFound();
-            }
-
-            var produktTyp = await _context.Produkt
-                .FirstOrDefaultAsync(m => m.ProduktId == id);
-            if (produktTyp == null)
-            {
-                return NotFound();
-            }
-
-            return View(produktTyp);
-        }
-
-        // POST: Search/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var produktTyp = await _context.Produkt.FindAsync(id);
-            _context.Produkt.Remove(produktTyp);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ProduktTypExists(int id)
-        {
-            return _context.Produkt.Any(e => e.ProduktId == id);
+                ProductName = model.ProductName,
+                PhotoPath = uniqueFileName,
+                Calories = (double)model.Calories,
+                Proteins = (double)model.Proteins,
+                Fats = (double)model.Fats,
+                Carbohydrates = (double)model.Carbohydrates,
+                VitaminA = model.VitaminA,
+                VitaminC = model.VitaminC,
+                VitaminD = model.VitaminD,
+                VitaminK = model.VitaminK,
+                VitaminE = model.VitaminE,
+                VitaminB1 = model.VitaminB1,
+                VitaminB2 = model.VitaminB2,
+                VitaminB6 = model.VitaminB6,
+                Biotin = model.Biotin,
+                VitaminB12 = model.VitaminB12,
+                VitaminPp = model.VitaminPp,
+                Zinc = model.Zinc,
+                Phosphorus = model.Phosphorus,
+                Iodine = model.Iodine,
+                Magnesium = model.Magnesium,
+                Copper = model.Copper,
+                Potassium = model.Potassium,
+                Selenium = model.Selenium,
+                Sodium = model.Sodium,
+                Calcium = model.Calcium,
+                Iron = model.Iron
+            };
         }
     }
 }

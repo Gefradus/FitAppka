@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using FitAppka.Models;
+﻿using FitAppka.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FitAppka.Controllers
 {
@@ -18,218 +18,217 @@ namespace FitAppka.Controllers
             _context = context;
         }
 
-        public IActionResult FindDay(int produktID, int od, int dO, int typSzukania)
+        public IActionResult FindDay(int productID, int from, int to, int searchType)
         {
-            var klientID = _context.Klient.Where(k => k.Login.ToLower() == User.Identity.Name.ToLower()).Select(k => k.KlientId).FirstOrDefault();
+            var clientID = _context.Client.Where(k => k.Login.ToLower() == User.Identity.Name.ToLower()).Select(c => c.ClientId).FirstOrDefault();
             
-            var listaDni = ZnajdzDni(od, dO, produktID, typSzukania, klientID);
+            var listOfDays = FindDays(from, to, productID, searchType, clientID);
 
-            UtworzListeProduktow(produktID);
+            CreateProductsList(productID);
 
-            ViewData["typSzukania"] = typSzukania;
-            ViewData["do"] = dO;
-            ViewData["od"] = od;  
-            ViewData["dniID"] = listaDni;
-            ViewData["czyZnaleziono"] = CzyZnalezionoDzien(listaDni);
-            ViewData["klientID"] = klientID;
+            ViewData["searchType"] = searchType;
+            ViewData["from"] = to;
+            ViewData["to"] = from;  
+            ViewData["daysID"] = listOfDays;
+            ViewData["wheterFound"] = WheterDayFound(listOfDays);
+            ViewData["clientID"] = clientID;
 
-            ViewData["listaMl"] = WodaWDniach(listaDni);                        //gdy wyszukujemy po wodzie
-            ViewData["listaKcal"] = KalorieWDniach(listaDni);                   //gdy wyszukujemy po kaloriach
-            ViewData["produktID"] = produktID;                                  //gdy wyszukujemy po produktach
-            ViewData["listaGramatur"] = GramaturaWDniach(listaDni, produktID);  //gdy wyszukujemy po produktach
+            ViewData["listByWater"] = WaterInDays(listOfDays);                        //gdy wyszukujemy po wodzie
+            ViewData["listByKcal"] = CaloriesInDays(listOfDays);                   //gdy wyszukujemy po kaloriach
+            ViewData["productID"] = productID;                                  //gdy wyszukujemy po produktach
+            ViewData["listByGrammages"] = GrammageInDays(listOfDays, productID);  //gdy wyszukujemy po produktach
 
-            return View(_context.Dzien.ToList());
+            return View(_context.Day.ToList());
         }
 
-        private void UtworzListeProduktow(int produktID)
+        private void CreateProductsList(int productID)
         {
-            List<SelectListItem> listaProduktow = new List<SelectListItem>();
-            foreach (var item in _context.Produkt)
+            List<SelectListItem> productsList = new List<SelectListItem>();
+            foreach (var item in _context.Product)
             {
-                if (item.ProduktId == produktID)
+                if (item.ProductId == productID)
                 {
-                    listaProduktow.Add(new SelectListItem() { Text = item.NazwaProduktu + ", " + (int)item.Kalorie + "kcal", Value = item.ProduktId + "", Selected = true });
+                    productsList.Add(new SelectListItem() { Text = item.ProductName + ", " + (int)item.Calories + "kcal", Value = item.ProductId + "", Selected = true });
                 }
                 else
                 {
-                    listaProduktow.Add(new SelectListItem() { Text = item.NazwaProduktu + ", " + (int)item.Kalorie + "kcal", Value = item.ProduktId + "" });
+                    productsList.Add(new SelectListItem() { Text = item.ProductName + ", " + (int)item.Calories + "kcal", Value = item.ProductId + "" });
                 }
             }
 
-            ViewData["allProducts"] = listaProduktow; 
+            ViewData["allProducts"] = productsList; 
         }
 
 
-        private List<int?> WodaWDniach(List<int> listaDni)
+        private List<int?> WaterInDays(List<int> daysList)
         {
-            List<int?> listaWody = new List<int?>();
+            List<int?> waterList = new List<int?>();
 
-            foreach (var dzienID in listaDni)
+            foreach (var dayID in daysList)
             {
-                int? wypitaWodaSuma = 0;
-                foreach (var dzien in _context.Dzien.ToList())
+                int? sumOfDrunkWater = 0;
+                foreach (var day in _context.Day.ToList())
                 {
-                    if (dzienID == dzien.DzienId)
+                    if (dayID == day.DayId)
                     {
-                        wypitaWodaSuma += dzien.WypitaWoda;
+                        sumOfDrunkWater += day.WaterDrunk;
                     }
                 }
-                listaWody.Add(wypitaWodaSuma);             
+                waterList.Add(sumOfDrunkWater);             
             }
 
-            return listaWody;
+            return waterList;
         }
 
-        private List<int> GramaturaWDniach(List<int> listaDni, int produktID)
+        private List<int> GrammageInDays(List<int> daysList, int productID)
         {
-            List<int> listaGramatur = new List<int>();
+            List<int> grammagesList = new List<int>();
 
-            foreach (var dzienID in listaDni)
+            foreach (var dayID in daysList)
             {
-                int gramaturaLaczna = 0;
-                foreach (var dzien in _context.Dzien.ToList())
+                int sumOfGrammages = 0;
+                foreach (var day in _context.Day.ToList())
                 {
-                    if (dzienID == dzien.DzienId)
+                    if (dayID == day.DayId)
                     { 
-                        foreach (var posilek in _context.Posilek.ToList())
+                        foreach (var meal in _context.Meal.ToList())
                         {
-                            if (posilek.DzienId == dzienID)
+                            if (meal.DayId == dayID)
                             {          
-                                if (posilek.ProduktId == produktID)
+                                if (meal.ProductId == productID)
                                 {
-                                    gramaturaLaczna += (int)posilek.Gramatura;
+                                    sumOfGrammages += (int)meal.Grammage;
                                 }
                             }
                         }
                     }
                 }
-                listaGramatur.Add(gramaturaLaczna);
+                grammagesList.Add(sumOfGrammages);
             }
-            return listaGramatur;
+            return grammagesList;
         }
 
-        private List<decimal> KalorieWDniach(List<int> listaDni)
+        private List<decimal> CaloriesInDays(List<int> daysList)
         {
-            List<decimal> listaKalorii = new List<decimal>();
-            foreach (var dzienID in listaDni)
+            List<decimal> caloriesList = new List<decimal>();
+            foreach (var dayID in daysList)
             {
-                double? sumaKalorii = 0;
-                foreach (var dzien in _context.Dzien.ToList())
+                double? sumOfCalories = 0;
+                foreach (var day in _context.Day.ToList())
                 {
-                    if (dzienID == dzien.DzienId)
+                    if (dayID == day.DayId)
                     {
-                        foreach (var posilek in _context.Posilek.ToList())
+                        foreach (var meal in _context.Meal.ToList())
                         {
-                            if (posilek.DzienId == dzienID)
+                            if (meal.DayId == dayID)
                             {
-                                sumaKalorii += posilek.Kalorie;
+                                sumOfCalories += meal.Calories;
                             }
                         }
                     }
                 }
-                listaKalorii.Add(Math.Round((decimal)sumaKalorii, 0, MidpointRounding.AwayFromZero));
+                caloriesList.Add(Math.Round((decimal)sumOfCalories, 0, MidpointRounding.AwayFromZero));
             }
-            return listaKalorii;
+            return caloriesList;
         }
 
-        private bool CzyZnalezionoDzien(List<int> listaDni)
+        private bool WheterDayFound(List<int> listaDni)
         {
             return listaDni.Count > 0;
         }
 
 
-        private List<int> ZnajdzDni(int od, int dO, int produktID, int typSzukania, int klientID){
+        private List<int> FindDays(int od, int dO, int produktID, int typSzukania, int klientID){
             if (typSzukania == 1)
             {
-                return ZnajdzDniPoProdukcie(od, dO, produktID, klientID);
+                return FindDayByProduct(od, dO, produktID, klientID);
             }
             if (typSzukania == 2)
             {
-                return ZnajdzDniPoKaloriach(od, dO, klientID);
+                return FindDaysByCalories(od, dO, klientID);
             }
             if (typSzukania == 3)
             {
-                return ZnajdzDniPoWodzie(od, dO, klientID);
+                return FindDaysByWater(od, dO, klientID);
             }
             
             return new List<int>();  
         }
 
 
-        private List<int> ZnajdzDniPoWodzie(int od, int dO, int klientID)
+        private List<int> FindDaysByWater(int from, int to, int clientID)
         {
-            List<int> listaDni = new List<int>();
+            List<int> daysList = new List<int>();
 
-            foreach (var item in _context.Dzien.Where(d => d.KlientId == klientID).ToList())
+            foreach (var item in _context.Day.Where(d => d.ClientId == clientID).ToList())
             {
-                if(item.WypitaWoda >= od && (item.WypitaWoda <= dO || dO == 0))
+                if(item.WaterDrunk >= from && (item.WaterDrunk <= to || to == 0))
                 {
-                    listaDni.Add(item.DzienId);
+                    daysList.Add(item.DayId);
                 }
             }
 
-            return listaDni;
+            return daysList;
         }
 
 
-        private List<int> ZnajdzDniPoKaloriach(int od, int dO, int klientID)
+        private List<int> FindDaysByCalories(int from, int to, int clientID)
         {
-            List<Posilek> posilki = _context.Posilek.ToList();  //wszystkie posilki
-            List<int> listaKaloriiWDniach = new List<int>();
-            List<int> listaIDDni = new List<int>();
-            List<int> listaDni = new List<int>();
+            List<Meal> meals = _context.Meal.ToList(); 
+            List<int> listOfCaloriesInDays = new List<int>();
+            List<int> listOfDaysID = new List<int>();
+            List<int> listOfDays = new List<int>();
 
-            foreach (var item in _context.Dzien.Where(d => d.KlientId == klientID).ToList())
+            foreach (var item in _context.Day.Where(d => d.ClientId == clientID).ToList())
             {
-                double? kalorieZDnia = 0;
-                foreach (var posilek in posilki)
+                double? whichDayMeals = 0;
+                foreach (var meal in meals)
                 {
-                    if (posilek.DzienId == item.DzienId)
+                    if (meal.DayId == item.DayId)
                     {
-                        kalorieZDnia += posilek.Kalorie;
+                        whichDayMeals += meal.Calories;
                     }
                 }
-                listaKaloriiWDniach.Add((int)kalorieZDnia);
-                listaIDDni.Add(item.DzienId);
+                listOfCaloriesInDays.Add((int)whichDayMeals);
+                listOfDaysID.Add(item.DayId);
             }
 
-            int ktoryDzien = 0;
-            foreach(var kalorie in listaKaloriiWDniach)
+            int whichDay = 0;
+            foreach(var calories in listOfCaloriesInDays)
             {
-                if (kalorie >= od && (kalorie <= dO || dO == 0))
+                if (calories >= from && (calories <= to || to == 0))
                 {
-                    listaDni.Add(listaIDDni[ktoryDzien]);
+                    listOfDays.Add(listOfDaysID[whichDay]);
                 }
 
-                ktoryDzien++;
+                whichDay++;
             }
 
-            return listaDni;
+            return listOfDays;
         }
 
-        private List<int> ZnajdzDniPoProdukcie(int od, int dO, int produktID, int klientID)
+        private List<int> FindDayByProduct(int from, int to, int productID, int clientID)
         {
-            List<Posilek> posilki = _context.Posilek.Where(p => p.ProduktId == produktID).ToList();
-            List<int> listaDni = new List<int>();
+            List<Meal> meals = _context.Meal.Where(p => p.ProductId == productID).ToList();
+            List<int> daysList = new List<int>();
 
-            foreach(var item in _context.Dzien.Where(d => d.KlientId == klientID).ToList())
+            foreach(var item in _context.Day.Where(d => d.ClientId == clientID).ToList())
             {
-                //stworzenie listy posilkow w danym dniu
-                List<Posilek> listaPosilkow = posilki.Where(p => p.DzienId == item.DzienId).ToList();
+                List<Meal> mealsList = meals.Where(p => p.DayId == item.DayId).ToList();
                 
-                int gramaturaLaczna = 0;
-                foreach (var posilek in listaPosilkow)
+                int sumOfGrammages = 0;
+                foreach (var meal in mealsList)
                 {
-                    gramaturaLaczna += (int)posilek.Gramatura;
+                    sumOfGrammages += (int)meal.Grammage;
                 }
 
-                if (gramaturaLaczna >= od && (gramaturaLaczna <= dO || dO == 0) && gramaturaLaczna != 0)
+                if (sumOfGrammages >= from && (sumOfGrammages <= to || to == 0) && sumOfGrammages != 0)
                 {
-                    listaDni.Add(item.DzienId);
+                    daysList.Add(item.DayId);
                 }
             }
 
-            return listaDni;
+            return daysList;
         }
     }
 }

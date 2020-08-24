@@ -24,9 +24,9 @@
 
 #btnAdd {
     margin-left: auto;
-    background: #4444;
+    background: #ff000047;
     font-size: 18px;
-    color: #fbff00
+    color: white
 }
 
 #btnAdd:hover {
@@ -36,6 +36,8 @@
 #btnUsun{
     height: 20px;
     width: 20px;
+    border: none;
+    background: none
 }
 
 .kolumna {
@@ -47,10 +49,10 @@
 }
 
 .cancel{
-    height: 10px;
-    width: 10px;
-    margin-top: -13px;
-    margin-left: -3px
+    height: 20px;
+    width: 20px;
+    margin-top: -8px;
+    margin-left: -6px
 
 }
 

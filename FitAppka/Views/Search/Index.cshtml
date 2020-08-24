@@ -1,9 +1,4 @@
-﻿@model IEnumerable<FitAppka.Models.Produkt>
-
-@{
-    ViewData["Title"] = "Index";
-}
-
+﻿@model IEnumerable<FitAppka.Models.Product>
 
 <head>
     <link href="~/css/SearchProduct.css" rel="stylesheet" />
@@ -64,7 +59,7 @@
                     $.ajax({
                         type: 'POST',
                         url: '@Url.Action("Add","Posilek")',
-                        data: { produktID:id, gramatura:gram, dzienID:@ViewData["dzienID"], wKtorym:@ViewData["wKtorym"], klientID:@ViewData["klientID"] },
+                        data: { produktID: id, grammage: gram, dayID:@ViewData["dayID"], inWhich:@ViewData["inWhich"], clientID:@ViewData["clientID"] },
                         success: function() {
                             var url = $("#RedirectTo").val();
                             location.href = url;
@@ -109,14 +104,14 @@
 
             <div>
                 <div class="mr-auto">
-                    <a class="text-dark ml-md-4 ml-lg-5 d-none d-md-block" asp-controller="Posilek" asp-action="Powrot" asp-route-klientID="@ViewData["klientID"]" asp-route-dzienID="@ViewData["dzienID"]"><img class="mt-md-1" style="height: 50px; width:185px; margin-top: -10px" src="~/img/logorozowe.png" /></a>
-                    <a class="text-dark ml-sm-1 d-md-none" asp-controller="Posilek" asp-action="Powrot" asp-route-klientID="@ViewData["klientID"]" asp-route-dzienID="@ViewData["dzienID"]"><img class="mt-md-1" style="height: 47px; width:56px; margin-top: 1px" src="~/img/back.png" /></a>
+                    <a class="text-dark ml-md-4 ml-lg-5 d-none d-md-block" asp-controller="Posilek" asp-action="Powrot" asp-route-clientID="@ViewData["clientID"]" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" style="height: 50px; width:185px; margin-top: -10px" src="~/img/logorozowe.png" /></a>
+                    <a class="text-dark ml-sm-1 d-md-none" asp-controller="Posilek" asp-action="Powrot" asp-route-clientID="@ViewData["clientID"]" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" style="height: 47px; width:56px; margin-top: 1px" src="~/img/back.png" /></a>
                 </div>
             </div>
 
-            <a asp-action="Index" asp-route-klientID="@ViewData["klientID"]" asp-route-dzienID="@ViewData["dzienID"]" asp-route-wKtorym="@ViewData["wKtorym"]" class="mx-auto" style="text-align:center; color:white; position: absolute; top:5px; width: 124px; left: calc(50% - 62px)">
-                <h4 class="cent" style="margin-top:4px; font-weight: 600">@ViewData["posilek"]</h4>
-                <h5 class="cent" style="margin-top:4px">@ViewData["dzien"]</h5>
+            <a asp-action="Index" asp-route-clientID="@ViewData["clientID"]" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" class="mx-auto" style="text-align:center; color:white; position: absolute; top:5px; width: 124px; left: calc(50% - 62px)">
+                <h4 class="cent" style="margin-top:4px; font-weight: 600">@ViewData["meal"]</h4>
+                <h5 class="cent" style="margin-top:4px">@ViewData["day"]</h5>
             </a>
 
             <div>
@@ -158,15 +153,15 @@
                                 <div style="clear:both"></div>
                             </div>
 
-                            @Html.Hidden("klientID", ViewData["klientID"])
-                            @Html.Hidden("wKtorym", ViewData["wKtorym"])
-                            @Html.Hidden("dzienID", ViewData["dzienID"])
+                            @Html.Hidden("clientID", ViewData["clientID"])
+                            @Html.Hidden("inWhich", ViewData["inWhich"])
+                            @Html.Hidden("dayID", ViewData["dayID"])
                         }
                     </div>
                 </div>
                 <div class="col-12 cent" style="margin-top:20px; width:100%;">
                     <div style="border-top: 1px dotted black; padding-top: 20px">
-                        <a class="btn btn-outline-dark" style="width: 275px; background: #5fb259 !important; color: white" asp-action="Create" asp-route-klientID="@ViewData["klientID"]" asp-route-dzienID="@ViewData["dzienID"]" asp-route-wKtorym="@ViewData["wKtorym"]" asp-route-czyAdmin="0">
+                        <a class="btn btn-outline-dark" style="width: 275px; background: #5fb259 !important; color: white" asp-action="Create" asp-route-clientID="@ViewData["clientID"]" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-isAdmin="0">
                             Dodaj nowy produkt
                         </a>
                     </div>
@@ -206,7 +201,7 @@
                             <div class="row no-gutters cent" style="margin-top: 10px;">
                                 <input id="gramatura" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center" /><div style="font-weight: 600; margin-top: 2px">g</div>
                                 <button id="addProduct" style="margin-left: 5px; background: none; border:none"><img style="height:30px; width: 30px" src="~/img/add.png"></button>
-                                @Html.Hidden("RedirectTo", Url.Action("Powrot", "Posilek", new { klientID = ViewData["klientID"], dzienID = ViewData["dzienID"] }))
+                                @Html.Hidden("RedirectTo", Url.Action("Powrot", "Posilek", new { clientID = ViewData["clientID"], dayID = ViewData["dayID"] }))
                             </div>
                         </div>
                     </div>
@@ -248,38 +243,23 @@
                     <div class="container">
                         <div class="row no-gutters">
                             <div class="col-3">
-                                <div>
-                                    Kcal<br />
-                                    /100g
-                                </div>
+                                <div>Kcal<br />/100g</div>
                             </div>
                             <div class="col-3">
-                                <div>
-                                    Białko<br />
-                                    /100g
-                                </div>
+                                <div>Białko<br />/100g</div>
                             </div>
                             <div class="col-3">
-                                <div>
-                                    Tł.<br />
-                                    /100g
-                                </div>
+                                <div>Tł.<br />/100g</div>
                             </div>
                             <div class="col-3">
-                                <div>
-                                    Węgl.<br />
-                                    /100g
-                                </div>
+                                <div>Węgl.<br />/100g</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-1">
-                    <div>&#8203;</div>
-                </div>
             </div>
 
-            <div style="margin-top: -15px">
+            <div style="margin-top: -16px">
                 @foreach (var item in Model)
                 {
                     <div id="wierszeTabeli" class="row no-gutters wieeersz">
@@ -289,11 +269,11 @@
                                     <div class="d-none d-md-inline-block col-md-5 col-lg-6">
                                         @{
                                             string photoPath;
-                                            if (item.ZdjecieSciezka != null)
+                                            if (item.PhotoPath != null)
                                             {
-                                                photoPath = "~/photos/" + (item.ZdjecieSciezka);
+                                                photoPath = "~/photos/" + (item.PhotoPath);
                                                 <script>
-                                                    pathArray.push('@item.ZdjecieSciezka');
+                                                    pathArray.push('@item.PhotoPath');
                                                 </script>
                                             }
                                             else
@@ -305,19 +285,19 @@
                                             }
 
                                             <script>
-                                                IDarray.push('@item.ProduktId');
-                                                nameArray.push('@item.NazwaProduktu');
-                                                kcalArray.push('@item.Kalorie');
-                                                bialkoArray.push('@item.Bialko');
-                                                tluszczeArray.push('@item.Tluszcze');
-                                                wegleArray.push('@item.Weglowodany');
+                                                IDarray.push('@item.ProductId');
+                                                nameArray.push('@item.ProductName');
+                                                kcalArray.push('@item.Calories');
+                                                bialkoArray.push('@item.Proteins');
+                                                tluszczeArray.push('@item.Fats');
+                                                wegleArray.push('@item.Carbohydrates');
                                             </script>
 
                                         }
                                         <img src="@photoPath" class="img-fluid" id="obrazek" asp-append-version="true" />
                                     </div>
                                     <div class="col-12 col-md-7 col-lg-6" id="nazwaProduktu">
-                                        @Html.DisplayFor(i => item.NazwaProduktu)
+                                        @Html.DisplayFor(i => item.ProductName)
                                     </div>
                                 </div>
                             </div>
@@ -327,23 +307,23 @@
                             <div class="container">
                                 <div class="row no-gutters">
                                     <div class="col-3">
-                                        @Html.DisplayFor(i => item.Kalorie)kcal
+                                        @Html.DisplayFor(i => item.Calories)kcal
                                     </div>
                                     <div class="col-3">
-                                        @Html.DisplayFor(i => item.Bialko)g
+                                        @Html.DisplayFor(i => item.Proteins)g
                                     </div>
                                     <div class="col-3">
-                                        @Html.DisplayFor(i => item.Tluszcze)g
+                                        @Html.DisplayFor(i => item.Fats)g
                                     </div>
                                     <div class="col-3">
-                                        @Html.DisplayFor(i => item.Weglowodany)g
+                                        @Html.DisplayFor(i => item.Carbohydrates)g
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="panelPrzyciskow" class="col-1">
                             <div>
-                                <button class="przycisk" style="background: none; border: none;" onclick="addProduct(@item.ProduktId)"><img style="height:30px; width: 30px" src="~/img/add.png"></button>
+                                <button class="przycisk" style="background: none; border: none;" onclick="addProduct(@item.ProductId)"><img style="height:30px; width: 30px" src="~/img/add.png"></button>
 
                             </div>
                             <div style="clear:both"></div>
@@ -355,7 +335,7 @@
         }
         else
         {
-            if ((bool)ViewData["czySzukano"])
+            if ((bool)ViewData["wereSearched"])
             {
                 <div style="display: flex; justify-content: center; margin-top: 25px">
                     Nie znaleziono produktów o podanej nazwie

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FitAppka.Models.Dzien>
+﻿@model IEnumerable<FitAppka.Models.Day>
 
     <head>
         <link rel="stylesheet" href="~/css/Home.css" type="text/css">
@@ -149,18 +149,18 @@
                                 {
                                     foreach (var item in Model)
                                     {
-                                        if (item.DzienId == dzienID)
+                                        if (item.DayId == dzienID)
                                         {
                                             <div class="row no-gutters dzienWiersz">
                                                 <div class="col-4 cent">
-                                                    @{ var dayOfYear = item.Dzien1.Value; }
+                                                    @{ var dayOfYear = item.Date.Value; }
                                                     @dayOfYear.ToString("dd/MM/yyyy")
                                                 </div>
                                                 <div class="col-4 cent">
                                                     @listaGramatur[ileDniWypisano] g
                                                 </div>
                                                 <div class="col-4 cent">
-                                                    <button type="button" onclick="przejdz('@item.DzienId', '@item.KlientId')" style="background-color: #636363"><img src="~/img/logout.png" width="30" height="30"></button>
+                                                    <button type="button" onclick="przejdz('@item.DayId', '@item.ClientId')" style="background-color: #636363"><img src="~/img/logout.png" width="30" height="30"></button>
                                                 </div>
                                             </div>
                                             ileDniWypisano++;
@@ -230,18 +230,18 @@
                                 {
                                     foreach (var item in Model)
                                     {
-                                        if (item.DzienId == dzienID)
+                                        if (item.DayId == dzienID)
                                         {
                                             <div class="row no-gutters dzienWiersz">
                                                 <div class="col-4 cent">
-                                                    @{ var dayOfYear = item.Dzien1.Value; }
+                                                    @{ var dayOfYear = item.Date.Value; }
                                                     @dayOfYear.ToString("dd/MM/yyyy")
                                                 </div>
                                                 <div class="col-4 cent">
                                                     @listaKcal[ileDniWypisano] kcal
                                                 </div>
                                                 <div class="col-4 cent">
-                                                    <button type="button" onclick="przejdz('@item.DzienId', '@item.KlientId')" style="background-color: #636363"><img src="~/img/logout.png" width="30" height="30"></button>
+                                                    <button type="button" onclick="przejdz('@item.DayId', '@item.ClientId')" style="background-color: #636363"><img src="~/img/logout.png" width="30" height="30"></button>
                                                 </div>
                                             </div>
                                             ileDniWypisano++;
@@ -309,18 +309,18 @@
                                 {
                                     foreach (var item in Model)
                                     {
-                                        if (item.DzienId == dzienID)
+                                        if (item.DayId == dzienID)
                                         {
                                             <div class="row no-gutters dzienWiersz">
                                                 <div class="col-4 cent">
-                                                    @{ var dayOfYear = item.Dzien1.Value; }
+                                                    @{ var dayOfYear = item.Date.Value; }
                                                     @dayOfYear.ToString("dd/MM/yyyy")
                                                 </div>
                                                 <div class="col-4 cent">
                                                     @listaMl[ileDniWypisano] ml
                                                 </div>
                                                 <div class="col-4 cent">
-                                                    <button type="button" onclick="przejdz('@item.DzienId', '@item.KlientId')" style="background-color: #636363"><img src="~/img/logout.png" width="30" height="30"></button>
+                                                    <button type="button" onclick="przejdz('@item.DayId', '@item.ClientId')" style="background-color: #636363"><img src="~/img/logout.png" width="30" height="30"></button>
                                                 </div>
                                             </div>
                                             ileDniWypisano++;

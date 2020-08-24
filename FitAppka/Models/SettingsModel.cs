@@ -3,40 +3,40 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FitAppka.Models
 {
-    public class FirstAppRunModel
+    public class SettingsModel
     {
         [Required]
-        public bool? Plec { get; set; }
+        public bool? Sex { get; set; }
 
         [Display(Name = "Data urodzenia")]
         [Required(ErrorMessage = "Proszę podać datę urodzenia")]
         [DataType(DataType.Date)]
-        public DateTime? DataUrodzenia { get; set; }
+        public DateTime? Date_of_birth { get; set; }
 
         [Display(Name = "Masa ciała [kg]")]
         [DataType(DataType.Currency, ErrorMessage = "Waga została podana nieprawidłowo")]
         [Required(ErrorMessage = "Prosze podać wagę (w kg)")]
-        public double? Waga { get; set; }
+        public double? Weight { get; set; }
 
         [Display(Name = "Wzrost [cm]")]
         [Required(ErrorMessage = "Proszę podać wzrost [w cm]")]
-        public int? Wzrost { get; set; }
+        public int? Growth { get; set; }
 
         [Display(Name = "Obecny cel")]
         [Required]
-        public short Cel { get; set; }
+        public short WeightChange_Goal { get; set; }
 
         [Display(Name = "Tempo zmian wagi na tydzień")]
-        public string TempoZmian { get; set; }
+        public string PaceOfChange { get; set; }
 
         [Display(Name = "Wybierz swój poziom aktywności")]
-        public short? Aktywnosc { get; set; }
+        public short? LevelOfActivity { get; set; }
 
-        public bool? Sniadanie { get; set; }
-        public bool? Iisniadanie { get; set; }
-        public bool? Obiad { get; set; }
-        public bool? Deser { get; set; }
-        public bool? Przekaska { get; set; }
-        public bool? Kolacja { get; set; }
+        public bool? Breakfast { get; set; }
+        public bool? Lunch { get; set; }
+        public bool? Dinner { get; set; }
+        public bool? Dessert { get; set; }
+        public bool? Snack { get; set; }
+        public bool? Supper { get; set; }
     }
 }

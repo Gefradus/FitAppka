@@ -15,146 +15,196 @@ namespace FitAppka.Models
         {
         }
 
-        public virtual DbSet<Dzien> Dzien { get; set; }
-        public virtual DbSet<Klient> Klient { get; set; }
-        public virtual DbSet<PomiarTluszczu> PomiarTluszczu { get; set; }
-        public virtual DbSet<PomiarWagi> PomiarWagi { get; set; }
-        public virtual DbSet<Posilek> Posilek { get; set; }
-        public virtual DbSet<Produkt> Produkt { get; set; }
-        public virtual DbSet<Trening> Trening { get; set; }
-        public virtual DbSet<TreningRodzaj> TreningRodzaj { get; set; }
+        public virtual DbSet<CardioTraining> CardioTraining { get; set; }
+        public virtual DbSet<CardioTrainingType> CardioTrainingType { get; set; }
+        public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<Day> Day { get; set; }
+        public virtual DbSet<FatMeasurement> FatMeasurement { get; set; }
+        public virtual DbSet<Meal> Meal { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<StrengthTraining> StrengthTraining { get; set; }
+        public virtual DbSet<StrengthTrainingType> StrengthTrainingType { get; set; }
+        public virtual DbSet<WeightMeasurement> WeightMeasurement { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#pragma warning disable CS1030 // Dyrektywa #warning
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-P22JPL7\\SQLEXPRESS;Initial Catalog=FitApp;Integrated Security=True");
-#pragma warning restore CS1030 // Dyrektywa #warning
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-P22JPL7\\SQLEXPRESS;Initial Catalog=FitApp;Integrated Security=True;Trusted_Connection=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Dzien>(entity =>
+            modelBuilder.Entity<CardioTraining>(entity =>
             {
-                entity.HasIndex(e => e.KlientId)
-                    .HasName("r1_FK");
+                entity.HasIndex(e => e.CardioTrainingTypeId)
+                    .HasName("r10_FK");
 
-                entity.HasOne(d => d.Klient)
-                    .WithMany(p => p.Dzien)
-                    .HasForeignKey(d => d.KlientId)
+                entity.HasIndex(e => e.DayId)
+                    .HasName("r9_FK");
+
+                entity.HasOne(d => d.CardioTrainingType)
+                    .WithMany(p => p.CardioTraining)
+                    .HasForeignKey(d => d.CardioTrainingTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_DZIEN_R1_KLIENT");
+                    .HasConstraintName("FK_CARDIOTR_R10_CARDIOTR");
+
+                entity.HasOne(d => d.Day)
+                    .WithMany(p => p.CardioTraining)
+                    .HasForeignKey(d => d.DayId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CARDIOTR_R9_DAY");
             });
 
-            modelBuilder.Entity<Klient>(entity =>
+            modelBuilder.Entity<CardioTrainingType>(entity =>
+            {
+                entity.HasIndex(e => e.ClientId)
+                    .HasName("Cardio_author_FK");
+
+                entity.Property(e => e.TrainingName).IsUnicode(false);
+
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.CardioTrainingType)
+                    .HasForeignKey(d => d.ClientId)
+                    .HasConstraintName("FK_CARDIOTR_CARDIO_AU_CLIENT");
+            });
+
+            modelBuilder.Entity<Client>(entity =>
             {
                 entity.Property(e => e.Email).IsUnicode(false);
 
-                entity.Property(e => e.Haslo).IsUnicode(false);
-
-                entity.Property(e => e.Imie).IsUnicode(false);
+                entity.Property(e => e.FirstName).IsUnicode(false);
 
                 entity.Property(e => e.Login).IsUnicode(false);
 
-                entity.Property(e => e.Nazwisko).IsUnicode(false);
+                entity.Property(e => e.Password).IsUnicode(false);
+
+                entity.Property(e => e.SecondName).IsUnicode(false);
             });
 
-            modelBuilder.Entity<PomiarTluszczu>(entity =>
+            modelBuilder.Entity<Day>(entity =>
             {
-                entity.HasIndex(e => e.KlientId)
+                entity.HasIndex(e => e.ClientId)
+                    .HasName("r1_FK");
+
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.Day)
+                    .HasForeignKey(d => d.ClientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DAY_R1_CLIENT");
+            });
+
+            modelBuilder.Entity<FatMeasurement>(entity =>
+            {
+                entity.HasIndex(e => e.ClientId)
                     .HasName("r4_FK");
 
-                entity.HasIndex(e => e.PomiarWagiId)
+                entity.HasIndex(e => e.WeightMeasurementId)
                     .HasName("r6_FK");
 
-                entity.HasOne(d => d.Klient)
-                    .WithMany(p => p.PomiarTluszczu)
-                    .HasForeignKey(d => d.KlientId)
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.FatMeasurement)
+                    .HasForeignKey(d => d.ClientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_POMIAR_T_R4_KLIENT");
+                    .HasConstraintName("FK_FAT_MEAS_R4_CLIENT");
 
-                entity.HasOne(d => d.PomiarWagi)
-                    .WithMany(p => p.PomiarTluszczu)
-                    .HasForeignKey(d => d.PomiarWagiId)
+                entity.HasOne(d => d.WeightMeasurement)
+                    .WithMany(p => p.FatMeasurement)
+                    .HasForeignKey(d => d.WeightMeasurementId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_POMIAR_T_R6_POMIAR_W");
+                    .HasConstraintName("FK_FAT_MEAS_R6_WEIGHT_M");
             });
 
-            modelBuilder.Entity<PomiarWagi>(entity =>
+            modelBuilder.Entity<Meal>(entity =>
             {
-                entity.HasIndex(e => e.KlientId)
-                    .HasName("r3_FK");
-
-                entity.HasIndex(e => e.PomiarTluszczuId)
-                    .HasName("r5_FK");
-
-                entity.HasOne(d => d.Klient)
-                    .WithMany(p => p.PomiarWagi)
-                    .HasForeignKey(d => d.KlientId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_POMIAR_W_R3_KLIENT");
-
-                entity.HasOne(d => d.PomiarTluszczuNavigation)
-                    .WithMany(p => p.PomiarWagiNavigation)
-                    .HasForeignKey(d => d.PomiarTluszczuId)
-                    .HasConstraintName("FK_POMIAR_W_R5_POMIAR_T");
-            });
-
-            modelBuilder.Entity<Posilek>(entity =>
-            {
-                entity.HasIndex(e => e.DzienId)
+                entity.HasIndex(e => e.DayId)
                     .HasName("r2_FK");
 
-                entity.HasIndex(e => e.ProduktId)
+                entity.HasIndex(e => e.ProductId)
                     .HasName("r8_FK");
 
-                entity.HasOne(d => d.Dzien)
-                    .WithMany(p => p.Posilek)
-                    .HasForeignKey(d => d.DzienId)
+                entity.HasOne(d => d.Day)
+                    .WithMany(p => p.Meal)
+                    .HasForeignKey(d => d.DayId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_POSILEK_R2_DZIEN");
+                    .HasConstraintName("FK_MEAL_R2_DAY");
 
-                entity.HasOne(d => d.Produkt)
-                    .WithMany(p => p.Posilek)
-                    .HasForeignKey(d => d.ProduktId)
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Meal)
+                    .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_POSILEK_R8_PRODUKT");
+                    .HasConstraintName("FK_MEAL_R8_PRODUCT");
             });
 
-            modelBuilder.Entity<Produkt>(entity =>
+            modelBuilder.Entity<Product>(entity =>
             {
-                entity.Property(e => e.NazwaProduktu).IsUnicode(false);
+                entity.HasIndex(e => e.ClientId)
+                    .HasName("Product_author_FK");
 
-                entity.Property(e => e.ZdjecieSciezka).IsUnicode(false);
+                entity.Property(e => e.PhotoPath).IsUnicode(false);
+
+                entity.Property(e => e.ProductName).IsUnicode(false);
+
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.Product)
+                    .HasForeignKey(d => d.ClientId)
+                    .HasConstraintName("FK_PRODUCT_PRODUCT_A_CLIENT");
             });
 
-            modelBuilder.Entity<Trening>(entity =>
+            modelBuilder.Entity<StrengthTraining>(entity =>
             {
-                entity.HasIndex(e => e.DzienId)
-                    .HasName("r9_FK");
+                entity.HasIndex(e => e.DayId)
+                    .HasName("Relationship_12_FK");
 
-                entity.HasIndex(e => e.TreningRodzajId)
-                    .HasName("r10_FK");
+                entity.HasIndex(e => e.StrengthTrainingTypeId)
+                    .HasName("Relationship_11_FK");
 
-                entity.HasOne(d => d.Dzien)
-                    .WithMany(p => p.Trening)
-                    .HasForeignKey(d => d.DzienId)
+                entity.HasOne(d => d.Day)
+                    .WithMany(p => p.StrengthTraining)
+                    .HasForeignKey(d => d.DayId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TRENING_R9_DZIEN");
+                    .HasConstraintName("FK_STRENGTH_RELATIONS_DAY");
 
-                entity.HasOne(d => d.TreningRodzaj)
-                    .WithMany(p => p.Trening)
-                    .HasForeignKey(d => d.TreningRodzajId)
+                entity.HasOne(d => d.StrengthTrainingType)
+                    .WithMany(p => p.StrengthTraining)
+                    .HasForeignKey(d => d.StrengthTrainingTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TRENING_R10_TRENINGR");
+                    .HasConstraintName("FK_STRENGTH_RELATIONS_STRENGTH");
             });
 
-            modelBuilder.Entity<TreningRodzaj>(entity =>
+            modelBuilder.Entity<StrengthTrainingType>(entity =>
             {
-                entity.Property(e => e.NazwaTreningu).IsUnicode(false);
+                entity.HasIndex(e => e.ClientId)
+                    .HasName("Strength_training_author_FK");
+
+                entity.Property(e => e.TrainingName).IsUnicode(false);
+
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.StrengthTrainingType)
+                    .HasForeignKey(d => d.ClientId)
+                    .HasConstraintName("FK_STRENGTH_STRENGTH__CLIENT");
+            });
+
+            modelBuilder.Entity<WeightMeasurement>(entity =>
+            {
+                entity.HasIndex(e => e.ClientId)
+                    .HasName("r3_FK");
+
+                entity.HasIndex(e => e.FatMeasurementId)
+                    .HasName("r5_FK");
+
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.WeightMeasurement)
+                    .HasForeignKey(d => d.ClientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_WEIGHT_M_R3_CLIENT");
+
+                entity.HasOne(d => d.FatMeasurementNavigation)
+                    .WithMany(p => p.WeightMeasurementNavigation)
+                    .HasForeignKey(d => d.FatMeasurementId)
+                    .HasConstraintName("FK_WEIGHT_M_R5_FAT_MEAS");
             });
 
             OnModelCreatingPartial(modelBuilder);

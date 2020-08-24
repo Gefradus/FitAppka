@@ -1,4 +1,4 @@
-@model IEnumerable<FitAppka.Models.TreningRodzaj>
+@model IEnumerable<FitAppka.Models.CardioTrainingType>
 <html>
 
 <head>
@@ -22,7 +22,7 @@
                     </button>
 
                     <div class="d-none d-md-inline-block mr-md-5">
-                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Training" asp-action="TrainingPanel" asp-route-dzienID="@ViewData["dzienID"]">Treningi </a></div>
+                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi </a></div>
                         <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="FindDay" asp-action="FindDay">Szukaj dni <img style="height: 15px; width:15px" src="~/img/search.png" /></a></div>
                         <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Settings" asp-action="Settings">Ustawienia <img style="height: 15px; width:15px" src="~/img/settings.png" /></a></div>
                         <div class="fl"><a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img style="height: 15px; width:15px" src="~/img/logout.png" /></a></div>
@@ -36,7 +36,7 @@
 
             <ul class="navbar-nav">
                 <li>
-                    <a class="nav-link text-dark" asp-controller="Training" asp-action="TrainingPanel" asp-route-dzienID="@ViewData["dzienID"]">Treningi</a>
+                    <a class="nav-link text-dark" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi</a>
                 </li>
                 <li>
                     <a class="nav-link text-dark" asp-controller="FindDay" asp-action="FindDay">Szukaj dni</a>
@@ -78,7 +78,7 @@
                                 <input id="wydatek" type="number" max="99999" onkeypress="return tylkoLiczbyCalkowite(event)" oninput="validity.valid || (value = '')" />
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
-                                <button type="button" onclick="addTraining(@ViewData["dzienID"], '@Url.Action("AddTraining", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
+                                <button type="button" onclick="addTraining(@ViewData["dayID"], '@Url.Action("AddTraining", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
                             </div>
                         </div>
                     </div>
@@ -125,8 +125,8 @@
                 @{
                     foreach (var item in Model)
                     {
-                        <div class="trening row no-gutters" onclick="setParams('@item.NazwaTreningu', '@item.KcalNaMin', '@item.TreningRodzajId', '@ViewData["dzienID"]')">
-                            @item.NazwaTreningu
+                        <div class="trening row no-gutters" onclick="setParams('@item.TrainingName', '@item.KcalPerMin', '@item.CardioTrainingTypeId', '@ViewData["dayID"]')">
+                            @item.TrainingName
                         </div>
                     }
                     if (Model.Count() == 0 && (bool)ViewData["czySzukano"])

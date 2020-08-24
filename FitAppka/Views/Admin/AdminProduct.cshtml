@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FitAppka.Models.Produkt>
+﻿@model IEnumerable<FitAppka.Models.Product>
 
 <html lang="en">
 <head>
@@ -31,7 +31,7 @@
 
                     <div class="modal-body">
                         <div style="margin-top: -10px;">
-                            <label><h6>Czy na pewno chcesz usunąć ten produkt?</h6> Spowoduje to usunięcie wszystkich przypisanych do niego posiłków.</label>
+                            <div><h6>Czy na pewno chcesz usunąć ten produkt?</h6> Spowoduje to usunięcie wszystkich przypisanych do niego posiłków.</div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -57,50 +57,36 @@
                                 Zdjęcie<br />
                                 produktu
                             </div>
-                            <div id="naproHeader" class="col-12 col-md-7 col-lg-6">
-                                Nazwa<br />
-                                produktu
+                            <div id="naproHeader" class="col-12 col-md-7 col-lg-6" style="margin-top:5px;">
+                                @using (Html.BeginForm("AdminProduct", "Admin", FormMethod.Get))
+                                {
+                                   @Html.TextBox("search", "", new { placeholder = "Nazwa produktu", @class = "form-control valid" })
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-7">
                     <div class="container">
                         <div class="row no-gutters">
                             <div class="col-3">
-                                <div>
-                                    Kcal<br />
-                                    /100g
-                                </div>
+                                <div>Kcal<br/>/100g</div>
                             </div>
                             <div class="col-3">
-                                <div>
-                                    Białko<br />
-                                    /100g
-                                </div>
+                                <div>Białko<br/>/100g</div>
                             </div>
                             <div class="col-3">
-                                <div>
-                                    Tł.<br />
-                                    /100g
-                                </div>
+                                <div>Tł.<br/>/100g</div>
                             </div>
                             <div class="col-3">
-                                <div>
-                                    Węgl.<br />
-                                    /100g
-                                </div>
+                                <div>Węgl.<br/>/100g</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-1">
-                    <div>&#8203;</div>
-                </div>
             </div>
 
-            <div style="margin-top: -15px">
+            <div style="margin-top: -16px">
                 @foreach (var item in Model)
                 {
                     <div id="wierszeTabeli" class="row no-gutters wieeersz">
@@ -110,9 +96,9 @@
                                     <div class="d-none d-md-inline-block col-md-5 col-lg-6">
                                         @{
                                             string photoPath;
-                                            if (item.ZdjecieSciezka != null)
+                                            if (item.PhotoPath != null)
                                             {
-                                                photoPath = "~/photos/" + (item.ZdjecieSciezka);
+                                                photoPath = "~/photos/" + (item.PhotoPath);
                                             }
                                             else
                                             {
@@ -122,7 +108,7 @@
                                         <img src="@photoPath" class="img-fluid photo" asp-append-version="true" />
                                     </div>
                                     <div class="col-12 col-md-7 col-lg-6" id="nazwaProduktu">
-                                        @Html.DisplayFor(i => item.NazwaProduktu)
+                                        @Html.DisplayFor(i => item.ProductName)
                                     </div>
                                 </div>
                             </div>
@@ -132,30 +118,36 @@
                             <div class="container">
                                 <div class="row no-gutters">
                                     <div class="col-3">
-                                        @Html.DisplayFor(i => item.Kalorie)kcal
+                                        @Html.DisplayFor(i => item.Calories)kcal
                                     </div>
                                     <div class="col-3">
-                                        @Html.DisplayFor(i => item.Bialko)g
+                                        @Html.DisplayFor(i => item.Proteins)g
                                     </div>
                                     <div class="col-3">
-                                        @Html.DisplayFor(i => item.Tluszcze)g
+                                        @Html.DisplayFor(i => item.Fats)g
                                     </div>
                                     <div class="col-3">
-                                        @Html.DisplayFor(i => item.Weglowodany)g
+                                        @Html.DisplayFor(i => item.Carbohydrates)g
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="panelPrzyciskow" class="col-1">
                             <div>
-                                <a class="button" style="padding-right: 15px" asp-action="AdminEditProduct" asp-route-id="@item.ProduktId"><img class="editBtnImg" src="~/img/pen.png"></a>
-                                <button class="button" onclick="showDeleteModal(@item.ProduktId);"><img class="addBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"/></button>
+                                <a class="button" style="padding-right: 15px" asp-action="AdminEditProduct" asp-route-id="@item.ProductId"><img class="editBtnImg" src="~/img/pen.png"></a>
+                                <button class="button" onclick="showDeleteModal(@item.ProductId);"><img class="addBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>
                             </div>
                             <div style="clear:both"></div>
                         </div>
 
                     </div>
                 }
+            </div>
+        }
+        else
+        {
+            <div>
+                Nie znaleziono produktów
             </div>
         }
     </div>
