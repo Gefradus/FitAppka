@@ -16,7 +16,7 @@ public class SettingsServices
 
 
 
-    public int ObliczCelKalorii(int zapotrzebowanie, short? celZmian, double tempo)
+    public int CountCalorieTarget(int zapotrzebowanie, short? celZmian, double tempo)
         {
             //-----------------------------schudnięcie--------------------------
             if (celZmian == 1)
@@ -60,7 +60,7 @@ public class SettingsServices
         }
 
 
-        public int ObliczZapotrzebowanie(bool plec, DateTime? dataUrodzenia, int? wzrost, double waga, double aktywnosc)
+        public int CountCaloricDemand(bool plec, DateTime? dataUrodzenia, int? wzrost, double waga, double aktywnosc)
         {
             int BMR;
             int wiek = ObliczWiek((DateTime)dataUrodzenia);
@@ -78,7 +78,7 @@ public class SettingsServices
 
         }
 
-        public int ObliczCelBialko(double? waga, int celKalorii, short? aktywnosc)
+        public int CountProteinTarget(double? waga, int celKalorii, short? aktywnosc)
         {
             int bialko;
             if (aktywnosc < 3)
@@ -119,12 +119,12 @@ public class SettingsServices
             }
         }
 
-        public int ObliczCelTluszcze(int celKalorii)
+        public int CountFatTarget(int celKalorii)
         {
             return celKalorii / 36;    //25% zapotrzebowania z tłuszczu (każdy gram tłuszczu ma 9kcal)
         }
 
-        public int ObliczCelWegle(int celKalorie, int celBialko, int celTluszcze)
+        public int CountCarbsTarget(int celKalorie, int celBialko, int celTluszcze)
         {
             return (celKalorie - ((celBialko * 4) + (celTluszcze * 9))) / 4;
         }

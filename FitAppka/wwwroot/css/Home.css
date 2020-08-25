@@ -7,15 +7,15 @@
     margin-right: 1px;
 }
 
-.parametry {
+.params {
     font-size: 14px;
 }
 
-.posilek {
+.meal {
     background-color: white;
 }
 
-.przycisk {
+.addButton {
     float: right;
     padding-right: 15px;
 }
@@ -34,19 +34,19 @@
     outline: none;
 }
 
-.produkt {
+.product {
     padding-left: 7px;
     background-color: #fbf9fb00;
     border-bottom: 0.5px solid #edc589;
 }
 
-.panelBezPrzycisku {
+.panelWithoutBtn {
     float: left;
     width: calc(100% - 60px);
     border-right: 1px dotted #9cb06c;
 }
 
-.panelPrzycisku {
+.buttonPanel {
     padding-left: 15px
 }
 
@@ -90,7 +90,7 @@
     background: none;
 }
 
-.produktBezBtn {
+.productWithoutBtn {
     float: left;
     margin-top: 2px;
     width: calc(100% - 64px);
@@ -103,7 +103,7 @@
     align-items: center;
 }
 
-#cel {
+#target {
     font-size: 15px;
     padding-bottom: 10px;
     padding-left: 7px;
@@ -117,20 +117,13 @@
     justify-content: center;
 }
 
-#prawa {
+#right {
     position: absolute;
     right: 0;
     margin-top: -20px;
 }
 
-#srodek {
-    width: calc(100% + 241px);
-    margin-top: 5px;
-    height: 1px;
-    margin-top: -25px
-}
-
-#lewa {
+#left {
     margin-right: -226px;
     margin-left: -15px
 }
@@ -147,7 +140,7 @@
     align-items: center
 }
 
-#woda {
+#water {
     font-size: 20px;
     font-weight: 600;
     display: block;
@@ -166,7 +159,7 @@
     border: 1px #828282 solid;
 }
 
-#szklanka {
+#glass {
     height: 100px;
     width: auto;
     display: block;
@@ -186,7 +179,7 @@
     text-align: center !important;
 }
 
-#dodawanie {
+#addingWater {
     margin-right: 5px;
     margin-left: auto;
     display: block
@@ -208,7 +201,7 @@
     cursor: pointer
 }
 
-#edytowanie {
+#editingWater {
     display: block;
     position: relative;
     margin-left: calc(50% - 27px)
@@ -220,7 +213,7 @@
     margin-right: 15px;
 }
 
-#wykresik {
+#chartArea {
     display: none;
     background: #f5f5f5;
     margin-bottom: 1.5px;
@@ -233,13 +226,13 @@
     font-size: 18px;
 }
 
-#DodanaWoda {
+#AddedWater {
     width: 60px;
     height: 37px;
     text-align: center
 }
 
-#EdytowanaWoda {
+#EditedWater {
     width: 60px;
     height: 30px;
     text-align: center
@@ -252,7 +245,7 @@
 }
 
 
-#spozycie {
+#waterHeader {
     font-weight: 600;
     padding-top: 5px;
 }
@@ -303,7 +296,7 @@
 
 
 @media(max-height: 500px) {
-    .parametry {
+    .params {
         font-size: 12px;
     }
 
@@ -319,11 +312,11 @@
         font-size: 13px;
     }
 
-    #cel {
+    #target {
         font-size: 13px;
     }
 
-    #woda {
+    #water {
         font-size: 18px;
     }
 
@@ -332,7 +325,7 @@
         font-size: 18px;
     }
 
-    #szklanka {
+    #glass {
         height: 75px;
     }
 
@@ -342,7 +335,7 @@
 }
 
 @media(max-height: 450px) {
-    .parametry {
+    .params {
         font-size: 10px;
     }
 
@@ -358,11 +351,11 @@
         font-size: 11px;
     }
 
-    #cel {
+    #target {
         font-size: 11px;
     }
 
-    #woda {
+    #water {
         font-size: 16px;
     }
 
@@ -371,7 +364,7 @@
         font-size: 16px;
     }
 
-    #szklanka {
+    #glass {
         height: 65px;
     }
 
@@ -382,7 +375,7 @@
 
 
 @media(max-width: 300px) {
-    .parametry {
+    .params {
         font-size: 10px;
     }
 
@@ -398,11 +391,11 @@
         font-size: 11px;
     }
 
-    #cel {
+    #target {
         font-size: 11px;
     }
 
-    #woda {
+    #water {
         font-size: 16px;
     }
 
@@ -411,7 +404,7 @@
         font-size: 16px;
     }
 
-    #szklanka {
+    #glass {
         height: 65px;
     }
 }
@@ -430,15 +423,15 @@
     color: #1c2e97 
 }
 
-.produkt:hover{
+.product:hover{
     color: orangered;
 }
 
-.panelBezPrzycisku:hover {
+.panelWithoutBtn:hover {
     cursor: pointer;
 }
 
-.produktBezBtn:hover {
+.productWithoutBtn:hover {
     cursor: pointer;
 }
 

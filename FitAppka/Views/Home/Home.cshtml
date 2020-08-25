@@ -8,36 +8,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        function rysujWykres() { drawChart(@ViewData["proteins0"], @ViewData["carbs0"], @ViewData["fats0"]) }
-
-        function pokazWode() { szklanka(@ViewData["water"], @ViewData["calorieTarget"]); }
-
-            function schowaj() {
-                if (!(@ViewData["proteins0"] == 0 && @ViewData["carbs0"] == 0 && @ViewData["fats0"] == 0)) {
-                    document.getElementById("wykresik").style.display = "block";
-                }
-                else {
-                    document.getElementById("spozycie").style.borderTopWidth = 0;
-                }
+        function createChart() { drawChart(@ViewData["proteins0"], @ViewData["carbs0"], @ViewData["fats0"]); }
+        function showWater() { glass(@ViewData["water"], @ViewData["calorieTarget"]); }
+        function overflow() { colorItRed(@ViewData["%proteins"], @ViewData["%carbs"], @ViewData["%fats"], @ViewData["%calories"]); }
+        function deleteMeal(id) { deleteMealUrl(id, '@Url.Action("Delete","Home")'); }
+        function showEditModal(id) { showEditModalUrl(id, '@Url.Action("Edit","Home")'); }
+        function hide() {
+            if (!(@ViewData["proteins0"] == 0 && @ViewData["carbs0"] == 0 && @ViewData["fats0"] == 0)) {
+                document.getElementById("chartArea").style.display = "block";
             }
-
-            function przepelnienie() {
-                kolorujNaCzerwono(@ViewData["%proteins"], @ViewData["%carbs"], @ViewData["%fats"], @ViewData["%calories"])
+            else {
+                document.getElementById("waterHeader").style.borderTopWidth = 0;
             }
-
-            function usunPosilek(id) {
-                usunPosilekUrl(id, '@Url.Action("Delete","Home")');
-            }
-
-            function showEditModal(id) {
-                showEditModalUrl(id, '@Url.Action("Edit","Home")');
-            }
-
+        }
     </script>
     <script src="~/js/Main.js"></script>
 </head>
 
-<body onload="zaladuj()">
+<body onload="onload()">
 
     @foreach (var item in Model)
     {
@@ -57,9 +45,9 @@
             IDarray.push('@item.MealId');
             nameArray.push('@item.Product.ProductName');
             kcalArray.push('@item.Calories');
-            bialkoArray.push('@item.Proteins');
-            tluszczeArray.push('@item.Fats');
-            wegleArray.push('@item.Carbohydrates');
+            proteinsArray.push('@item.Proteins');
+            fatsArray.push('@item.Fats');
+            carbsArray.push('@item.Carbohydrates');
             gramArray.push('@item.Grammage');
         </script>
     }
@@ -68,13 +56,13 @@
     <header>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav" style="text-align: center">
 
-            <div id="lewa">
+            <div id="left">
                 <div class="mr-auto mt-3">
                     <a class="nav-link ml-sm-3 ml-md-4 ml-lg-5 mt-2 mt-md-0" asp-action="Start" asp-route-id="@ViewData["clientID"]"><img style="height: 50px; width:185px; margin-top: -15px" src="~/img/logorozowe.png" /></a>
                 </div>
             </div>
             <div>
-                <div id="prawa" class="navbar-nav ml-auto">
+                <div id="right" class="navbar-nav ml-auto">
                     <button class="navbar-toggler mr-2 mr-sm-3" style="margin-top: -35px" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Przełącznik nawigacji" type="button">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -158,7 +146,7 @@
                         <form method="post">
                             <div style="display:flex; justify-content: center">
                                 <button type="button" onclick="hideModal()" style="margin-right: 15px; border-radius:10%; background-color: #4d62d7; height: 32px; width: 100px; color: white">Anuluj</button>
-                                <button type="button" id="usun" style="border-radius:10%; background-color: #ce1a22; height: 32px; width: 100px; color: white">Tak, usuń</button>
+                                <button type="button" id="delete" style="border-radius:10%; background-color: #ce1a22; height: 32px; width: 100px; color: white">Tak, usuń</button>
                             </div>
                         </form>
                     </div>
@@ -180,19 +168,19 @@
                                 <div class="col-6">
                                     <div class="container" style="margin-left: -50px; margin-top: -14px; width: 215px">
                                         <div id="name" class="row no-gutters cent"></div>
-                                        <div id="kcalNapis" class="row no-gutters cent"></div>
+                                        <div id="kcalHeader" class="row no-gutters cent"></div>
                                         <div class="row no-gutters cent" style="width: 170px; font-size: 13px; margin-left: 7px">
-                                            <div id="bialkoNapis"></div>
-                                            <div id="tluszczeNapis"></div>
-                                            <div id="wegleNapis"></div>
+                                            <div id="proteinsHeader"></div>
+                                            <div id="fatsHeader"></div>
+                                            <div id="carbsHeader"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row no-gutters cent" style="margin-top: 10px;">
-                                <input id="gramatura" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center;" /><div style="font-weight: 600; margin-top: 2px">g</div>
-                                <button id="editPosilek" style="margin-left: 5px; background:none; border:none"><img style="width:30px; height:30px" src="~/img/save.png" /></button>
+                                <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center;" /><div style="font-weight: 600; margin-top: 2px">g</div>
+                                <button id="editMeal" style="margin-left: 5px; background:none; border:none"><img style="width:30px; height:30px" src="~/img/save.png" /></button>
                             </div>
                         </div>
                     </div>
@@ -216,30 +204,30 @@
                 @if ((bool)ViewData["breakfast"])
                 {
                     <div class="panel">
-                        <div onclick="ukryj('sniadanie')" class="panelBezPrzycisku">
+                        <div onclick="hidePanel('breakfast')" class="panelWithoutBtn">
                             <div class="nazwapos">Śniadanie</div>
                             <div class="kcal">
                                 @ViewData["breakfastKcal"]kcal
                             </div>
                         </div>
 
-                        <div style="float:right; width: 60px" class="przycisk"><a class="panelPrzycisku" asp-controller="Search" asp-action="Index" asp-route-inWhich="1" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
+                        <div style="float:right; width: 60px" class="addButton"><a class="buttonPanel" asp-controller="Search" asp-action="Index" asp-route-inWhich="1" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
                         <div class="cb"></div>
                     </div>
                 }
 
-                <div id="sniadanie" class="posilek">
+                <div id="breakfast" class="meal">
                     @foreach (var item in Model)
                     {
                         @if (item.InWhichMealOfTheDay == 1 && item.Day.Breakfast == true)
                         {
 
-                            <div class="produkt">
-                                <div class="produktBezBtn" onclick="showEditModal(@item.MealId)">
+                            <div class="product">
+                                <div class="productWithoutBtn" onclick="showEditModal(@item.MealId)">
                                     <div class="napro">
                                         @Html.DisplayFor(modelItem => item.Product.ProductName), @Html.DisplayFor(modelItem => item.Grammage)g
                                     </div>
-                                    <div class="parametry">
+                                    <div class="params">
                                         Kalorie: @Html.DisplayFor(modelItem => item.Calories)kcal<br />
                                         Białko: @Html.DisplayFor(modelItem => item.Proteins)g
                                         Węgl.: @Html.DisplayFor(modelItem => item.Carbohydrates)g
@@ -247,7 +235,7 @@
                                     </div>
                                 </div>
                                 <div class="btnDiv">
-                                    <button class="btnUsuEdy" type="button" onclick="usunPosilek(@item.MealId)"><img class="cancel" src="~/img/cancel.png"></button>
+                                    <button class="btnUsuEdy" type="button" onclick="deleteMeal(@item.MealId)"><img class="cancel" src="~/img/cancel.png"></button>
                                 </div>
                                 <div style="clear:both"></div>
                             </div>
@@ -258,7 +246,7 @@
                 @if ((bool)ViewData["lunch"])
                 {
                     <div class="panel">
-                        <div onclick="ukryj('sniadanie2')" class="panelBezPrzycisku">
+                        <div onclick="hidePanel('lunch')" class="panelWithoutBtn">
                             <div>
                                 <div class="nazwapos">II śniadanie</div>
                             </div>
@@ -266,23 +254,23 @@
                                 @ViewData["lunchKcal"]kcal
                             </div>
                         </div>
-                        <div style="float:right; width: 60px" class="przycisk"><a class="panelPrzycisku" asp-controller="Search" asp-action="Index" asp-route-inWhich="2" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
+                        <div style="float:right; width: 60px" class="addButton"><a class="buttonPanel" asp-controller="Search" asp-action="Index" asp-route-inWhich="2" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
                         <div class="cb"></div>
                     </div>
                 }
 
-                <div id="sniadanie2" class="posilek">
+                <div id="lunch" class="meal">
                     @foreach (var item in Model)
                     {
                         @if (item.Day.Lunch == true && item.InWhichMealOfTheDay == 2)
                         {
 
-                            <div class="produkt">
-                                <div class="produktBezBtn" onclick="showEditModal(@item.MealId)">
+                            <div class="product">
+                                <div class="productWithoutBtn" onclick="showEditModal(@item.MealId)">
                                     <div class="napro">
                                         @Html.DisplayFor(modelItem => item.Product.ProductName), @Html.DisplayFor(modelItem => item.Grammage)g
                                     </div>
-                                    <div class="parametry">
+                                    <div class="params">
                                         Kalorie: @Html.DisplayFor(modelItem => item.Calories)kcal<br />
                                         Białko: @Html.DisplayFor(modelItem => item.Proteins)g
                                         Węgl.: @Html.DisplayFor(modelItem => item.Carbohydrates)g
@@ -290,7 +278,7 @@
                                     </div>
                                 </div>
                                 <div class="btnDiv">
-                                    <button class="btnUsuEdy" type="button" onclick="usunPosilek(@item.MealId)"><img class="cancel" src="~/img/cancel.png"></button>
+                                    <button class="btnUsuEdy" type="button" onclick="deleteMeal(@item.MealId)"><img class="cancel" src="~/img/cancel.png"></button>
                                 </div>
                                 <div class="cb"></div>
                             </div>
@@ -302,7 +290,7 @@
                 @if ((bool)ViewData["dinner"])
                 {
                     <div class="panel">
-                        <div onclick="ukryj('obiad')" class="panelBezPrzycisku">
+                        <div onclick="hidePanel('dinner')" class="panelWithoutBtn">
                             <div>
                                 <div class="nazwapos">Obiad</div>
                             </div>
@@ -310,22 +298,22 @@
                                 @ViewData["dinnerKcal"]kcal
                             </div>
                         </div>
-                        <div style="float:right; width: 60px" class="przycisk"><a class="panelPrzycisku" asp-controller="Search" asp-action="Index" asp-route-inWhich="3" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
+                        <div style="float:right; width: 60px" class="addButton"><a class="buttonPanel" asp-controller="Search" asp-action="Index" asp-route-inWhich="3" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
                         <div style="clear:both"></div>
                     </div>
                 }
 
-                <div id="obiad" class="posilek">
+                <div id="dinner" class="meal">
                     @foreach (var item in Model)
                     {
                         @if (item.Day.Dinner == true && item.InWhichMealOfTheDay == 3)
                         {
-                            <div class="produkt">
-                                <div class="produktBezBtn" onclick="showEditModal(@item.MealId)">
+                            <div class="product">
+                                <div class="productWithoutBtn" onclick="showEditModal(@item.MealId)">
                                     <div class="napro">
                                         @Html.DisplayFor(modelItem => item.Product.ProductName), @Html.DisplayFor(modelItem => item.Grammage)g
                                     </div>
-                                    <div class="parametry">
+                                    <div class="params">
                                         Kalorie: @Html.DisplayFor(modelItem => item.Calories)kcal<br />
                                         Białko: @Html.DisplayFor(modelItem => item.Proteins)g
                                         Węgl.: @Html.DisplayFor(modelItem => item.Carbohydrates)g
@@ -333,7 +321,7 @@
                                     </div>
                                 </div>
                                 <div class="btnDiv">
-                                    <button class="btnUsuEdy" type="button" onclick="usunPosilek(@item.MealId)"><img class="cancel" src="~/img/cancel.png"></button>
+                                    <button class="btnUsuEdy" type="button" onclick="deleteMeal(@item.MealId)"><img class="cancel" src="~/img/cancel.png"></button>
                                 </div>
                                 <div class="cb"></div>
                             </div>
@@ -345,30 +333,30 @@
                 @if ((bool)ViewData["dessert"])
                 {
                     <div class="panel">
-                        <div onclick="ukryj('deser')" class="panelBezPrzycisku">
+                        <div onclick="hidePanel('dessert')" class="panelWithoutBtn">
                             <div class="nazwapos">Deser</div>
 
                             <div class="kcal">
                                 @ViewData["dessertKcal"]kcal
                             </div>
                         </div>
-                        <div style="float:right; width: 60px" class="przycisk"><a class="panelPrzycisku" asp-controller="Search" asp-action="Index" asp-route-inWhich="4" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
+                        <div style="float:right; width: 60px" class="addButton"><a class="buttonPanel" asp-controller="Search" asp-action="Index" asp-route-inWhich="4" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
                         <div class="cb"></div>
                     </div>
                 }
 
-                <div id="deser" class="posilek">
+                <div id="dessert" class="meal">
                     @foreach (var item in Model)
                     {
                         @if (item.Day.Dessert == true && item.InWhichMealOfTheDay == 4)
                         {
 
-                            <div class="produkt">
-                                <div class="produktBezBtn" onclick="showEditModal(@item.MealId)">
+                            <div class="product">
+                                <div class="productWithoutBtn" onclick="showEditModal(@item.MealId)">
                                     <div class="napro">
                                         @Html.DisplayFor(modelItem => item.Product.ProductName), @Html.DisplayFor(modelItem => item.Grammage)g
                                     </div>
-                                    <div class="parametry">
+                                    <div class="params">
                                         Kalorie: @Html.DisplayFor(modelItem => item.Calories)kcal<br />
                                         Białko: @Html.DisplayFor(modelItem => item.Proteins)g
                                         Węgl.: @Html.DisplayFor(modelItem => item.Carbohydrates)g
@@ -376,7 +364,7 @@
                                     </div>
                                 </div>
                                 <div class="btnDiv">
-                                    <button class="btnUsuEdy" type="button" onclick="usunPosilek(@item.MealId)"><img class="cancel" src="~/img/cancel.png"></button>
+                                    <button class="btnUsuEdy" type="button" onclick="deleteMeal(@item.MealId)"><img class="cancel" src="~/img/cancel.png"></button>
                                 </div>
                                 <div class="cb"></div>
                             </div>
@@ -389,30 +377,30 @@
                 @if ((bool)ViewData["snack"])
                 {
                     <div class="panel">
-                        <div onclick="ukryj('przekaska')" class="panelBezPrzycisku">
+                        <div onclick="hidePanel('snack')" class="panelWithoutBtn">
                             <div class="nazwapos">Przekąska</div>
 
                             <div class="kcal">
                                 @ViewData["snackKcal"]kcal
                             </div>
                         </div>
-                        <div style="float:right; width: 60px" class="przycisk"><a class="panelPrzycisku" asp-controller="Search" asp-action="Index" asp-route-inWhich="5" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
+                        <div style="float:right; width: 60px" class="addButton"><a class="buttonPanel" asp-controller="Search" asp-action="Index" asp-route-inWhich="5" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
                         <div class="cb"></div>
                     </div>
                 }
 
-                <div id="przekaska" class="posilek">
+                <div id="snack" class="meal">
                     @foreach (var item in Model)
                     {
                         @if (item.Day.Snack == true && item.InWhichMealOfTheDay == 5)
                         {
 
-                            <div class="produkt">
-                                <div class="produktBezBtn" onclick="showEditModal(@item.MealId)">
+                            <div class="product">
+                                <div class="productWithoutBtn" onclick="showEditModal(@item.MealId)">
                                     <div class="napro">
                                         @Html.DisplayFor(modelItem => item.Product.ProductName), @Html.DisplayFor(modelItem => item.Grammage)g
                                     </div>
-                                    <div class="parametry">
+                                    <div class="params">
                                         Kalorie: @Html.DisplayFor(modelItem => item.Calories)kcal<br />
                                         Białko: @Html.DisplayFor(modelItem => item.Proteins)g
                                         Węgl.: @Html.DisplayFor(modelItem => item.Carbohydrates)g
@@ -420,7 +408,7 @@
                                     </div>
                                 </div>
                                 <div class="btnDiv">
-                                    <button class="btnUsuEdy" type="button" onclick="usunPosilek(@item.MealId)"><img class="cancel" src="~/img/cancel.png"></button>
+                                    <button class="btnUsuEdy" type="button" onclick="deleteMeal(@item.MealId)"><img class="cancel" src="~/img/cancel.png"></button>
                                 </div>
                                 <div class="cb"></div>
                             </div>
@@ -432,30 +420,30 @@
                 @if ((bool)ViewData["supper"])
                 {
                     <div class="panel">
-                        <div onclick="ukryj('kolacja')" class="panelBezPrzycisku">
+                        <div onclick="hidePanel('supper')" class="panelWithoutBtn">
                             <div class="nazwapos">Kolacja</div>
 
                             <div class="kcal">
                                 @ViewData["supperKcal"]kcal
                             </div>
                         </div>
-                        <div style="float:right; width: 60px" class="przycisk"><a class="panelPrzycisku" asp-controller="Search" asp-action="Index" asp-route-inWhich="6" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
+                        <div style="float:right; width: 60px" class="addButton"><a class="buttonPanel" asp-controller="Search" asp-action="Index" asp-route-inWhich="6" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
                         <div class="cb"></div>
                     </div>
                 }
 
-                <div id="kolacja" class="posilek">
+                <div id="supper" class="meal">
                     @foreach (var item in Model)
                     {
                         @if (item.Day.Supper == true && item.InWhichMealOfTheDay == 6)
                         {
 
-                            <div class="produkt">
-                                <div class="produktBezBtn" onclick="showEditModal(@item.MealId)">
+                            <div class="product">
+                                <div class="productWithoutBtn" onclick="showEditModal(@item.MealId)">
                                     <div class="napro">
                                         @Html.DisplayFor(modelItem => item.Product.ProductName), @Html.DisplayFor(modelItem => item.Grammage)g
                                     </div>
-                                    <div class="parametry">
+                                    <div class="params">
                                         Kalorie: @Html.DisplayFor(modelItem => item.Calories)kcal<br />
                                         Białko: @Html.DisplayFor(modelItem => item.Proteins)g
                                         Węgl.: @Html.DisplayFor(modelItem => item.Carbohydrates)g
@@ -463,7 +451,7 @@
                                     </div>
                                 </div>
                                 <div class="btnDiv">
-                                    <button class="btnUsuEdy" type="button" onclick="usunPosilek(@item.MealId)"><img class="cancel" src="~/img/cancel.png"></button>
+                                    <button class="btnUsuEdy" type="button" onclick="deleteMeal(@item.MealId)"><img class="cancel" src="~/img/cancel.png"></button>
                                 </div>
                                 <div class="cb"></div>
                             </div>
@@ -476,37 +464,37 @@
 
 
             <div id="boczny" class="col-lg-4 ml-lg-0 my-1 my-lg-0">
-                <div id="wykresik">
+                <div id="chartArea">
                     <h6 style="padding-top: 5px; font-weight:600">Proporcje makroskładników</h6>
                     <div id="piechart" style="padding-bottom: 10px"></div>
                 </div>
                 <div style="background: #f5f5f5">
-                    <h6 id="spozycie">Spożycie płynów</h6>
+                    <h6 id="waterHeader">Spożycie płynów</h6>
                     <input type="hidden" id="div_position" name="div_position" />
-                    <img id="szklanka" class="my-3 my-sm-4 my-lg-5" src="~/img/00.png">
-                    <div id="pokazWode" class="container">
+                    <img id="glass" class="my-3 my-sm-4 my-lg-5" src="~/img/00.png">
+                    <div id="showWater" class="container">
                         <div class="row" style="margin-bottom: 10px">
-                            <div id="woda">@ViewData["water"] ml</div>
-                            <div id="divWyswietlWode"><button class="button" onclick="edytujWode()"><img style="height:15px; width:15px;" src="~/img/pen.png"></button></div>
+                            <div id="water">@ViewData["water"] ml</div>
+                            <div id="divWyswietlWode"><button class="button" onclick="editWater()"><img style="height:15px; width:15px;" src="~/img/pen.png"></button></div>
                         </div>
                     </div>
 
-                    <div id="edycja" style="display:none">
+                    <div id="waterEdit" style="display:none">
                         <form method="post">
                             <div class="container">
                                 <div class="row" style="margin-bottom: 10px">
-                                    <div id="edytowanie"><input id="EdytowanaWoda" name="EdytowanaWoda" type="number" min="0" max="10000" value="@ViewData["water"]" /></div>
+                                    <div id="editingWater"><input id="EditedWater" name="EditedWater" type="number" min="0" max="10000" value="@ViewData["water"]" /></div>
                                     <div class="divDodEdyWode"><button class="button" asp-action="EditWater" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]"><img style="height:20px; width:20px; padding-top:2px;" src="~/img/save.png"></button></div>
                                 </div>
                             </div>
                         </form>
                     </div>
 
-                    <div style="clear:both" id="cel">Celuj dziś w wypicie przynajmniej @ViewData["calorieTarget"] mililitrów wody.</div>
+                    <div style="clear:both" id="target">Celuj dziś w wypicie przynajmniej @ViewData["calorieTarget"] mililitrów wody.</div>
                     <form method="post">
                         <div class="container">
                             <div style="padding-bottom: 30px" class="row">
-                                <div id="dodawanie"><input id="DodanaWoda" name="DodanaWoda" type="number" min="1" max="10000" value="@ViewData["AddedWater"]" /></div>
+                                <div id="addingWater"><input id="AddedWater" name="AddedWater" type="number" min="1" max="10000" value="@ViewData["AddedWater"]" /></div>
                                 <div id="ml">ml</div>
                                 <div class="divDodEdyWode"><button id="dodajWode" class="btn" asp-action="AddWater" asp-route-dayID="@ViewData["dayID"]" asp-route-clientID="@ViewData["clientID"]" value="dodajWode">Dodaj</button></div>
                             </div>
@@ -531,7 +519,7 @@
                         </h1>
                     </div>
                     <div style="background-color: lightgray; width:100%" class="mb-2">
-                        <div id="kalorie" style="height:12px; max-width:100%; width:@ViewData["%calories"]%; background-color: green"></div>
+                        <div id="calories" style="height:12px; max-width:100%; width:@ViewData["%calories"]%; background-color: green"></div>
                     </div>
                 </div>
 
@@ -543,7 +531,7 @@
                         </h1>
                     </div>
                     <div style="background-color: lightgray;" class="mb-2">
-                        <div id="bialko" style="height:12px; max-width:100%; width:@ViewData["%proteins"]%; background-color: #3936dc"></div>
+                        <div id="proteins" style="height:12px; max-width:100%; width:@ViewData["%proteins"]%; background-color: #3936dc"></div>
                     </div>
                 </div>
 
@@ -555,7 +543,7 @@
                         </h1>
                     </div>
                     <div style="background-color: lightgray;" class="mb-2">
-                        <div id="wegle" style="height:12px; max-width:100%; width:@ViewData["%carbs"]%; background-color: #b017c2"></div>
+                        <div id="carbs" style="height:12px; max-width:100%; width:@ViewData["%carbs"]%; background-color: #b017c2"></div>
                     </div>
                 </div>
 
@@ -567,7 +555,7 @@
                         </h1>
                     </div>
                     <div style="background-color: lightgray;" class="mb-2">
-                        <div id="tluszcze" style="height:12px; max-width:100%; width:@ViewData["%fats"]%; background-color: orange"></div>
+                        <div id="fats" style="height:12px; max-width:100%; width:@ViewData["%fats"]%; background-color: orange"></div>
                     </div>
                 </div>
             </div>
@@ -586,16 +574,7 @@
                 monthNames: ["Styczeń", "Luty", "Marzec", "Kwiecień",
                     "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
                     "Październik", "Listopad", "Grudzień"],
-                monthNamesShort: ["Sty", "Lut", "Mar", "Kwi",
-                    "Maj", "Cze", "Lip", "Sie", "Wrz",
-                    "Paź", "Lis", "Gru"],
-                dayNames: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
-                dayNamesShort: ['Ndz', 'Pon', 'Wto', 'Śro', 'Czw', 'Pt', 'Sob'],
-                dayNamesMin: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb'],
-                changeYear: true,
-                changeMonth: true,
-                yearRange: '-3:+3'
-
+                dayNamesMin: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb']
             });
             document.getElementsByClassName("ui-datepicker-trigger")[0].setAttribute("title", "");
 
@@ -610,9 +589,7 @@
                 document.getElementById("admin").innerHTML = '<button id="adminBtn" class="btn btn-dark">PANEL ADMINISTRATORA</button>';
             }
 
-            $j("#adminBtn").click(function () {
-                window.location.href = '@Url.Action("AdminHome", "Admin")';
-            });
+            $j("#adminBtn").click(function () { window.location.href = '@Url.Action("AdminHome", "Admin")'; });
     </script>
 </body>
 

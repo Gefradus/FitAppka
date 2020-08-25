@@ -1,9 +1,9 @@
-﻿function drawChart(bialko, wegle, tluszcze) {
+﻿function drawChart(proteins, carbs, fats) {
     var data = google.visualization.arrayToDataTable([
         ['Task', 'Gramy'],
-        ['Białko', bialko],
-        ['Węglowodany', wegle],
-        ['Tłuszcze', tluszcze]
+        ['Białko', proteins],
+        ['Węglowodany', carbs],
+        ['Tłuszcze', fats]
     ]);
 
     var options = {
@@ -14,13 +14,12 @@
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
     chart.draw(data, options);
 }
 
 
 $(window).resize(function () {
-    rysujWykres();
+    createChart();
 })
 
 $(document).scroll(function () {
@@ -35,48 +34,44 @@ $(document).ready(function () {
     }
 });
 
-/*$(document).ready(function () {
-    document.getElementById("body").style.display = "block";
-});
-*/
 
-function kolorujNaCzerwono(bialko, wegle, tluszcze, kalorie) {
-    if (bialko > 100) {
-        document.getElementById("bialko").style.backgroundColor = "red";
+function colorItRed(proteins, carbs, fats, calories) {
+    if (proteins > 100) {
+        document.getElementById("proteins").style.backgroundColor = "red";
     }
-    if (wegle > 100) {
-        document.getElementById("wegle").style.backgroundColor = "red";
+    if (carbs > 100) {
+        document.getElementById("carbs").style.backgroundColor = "red";
     }
-    if (tluszcze > 100) {
-        document.getElementById("tluszcze").style.backgroundColor = "red";
+    if (fats > 100) {
+        document.getElementById("fats").style.backgroundColor = "red";
     }
-    if (kalorie > 100) {
-        document.getElementById("kalorie").style.backgroundColor = "red";
+    if (calories > 100) {
+        document.getElementById("calories").style.backgroundColor = "red";
     }
 }
 
-function szklanka(woda, celkalorie) {
-    var procent = (woda) / (celkalorie);
+function glass(water, caloriesTarget) {
+    var percentage = (water) / (caloriesTarget);
 
-    if (procent > 0.005 && procent < 0.20) {
-        document.getElementById("szklanka").src = "/FitAppka/img/10.png";
+    if (percentage > 0.005 && percentage < 0.20) {
+        document.getElementById("glass").src = "/FitAppka/img/10.png";
     }
-    if (procent >= 0.20 && procent < 0.5) {
-        document.getElementById("szklanka").src = "/FitAppka/img/35.png";
+    if (percentage >= 0.20 && percentage < 0.5) {
+        document.getElementById("glass").src = "/FitAppka/img/35.png";
     }
-    if (procent >= 0.5 && procent < 0.75) {
-        document.getElementById("szklanka").src = "/FitAppka/img/50.png";
+    if (percentage >= 0.5 && percentage < 0.75) {
+        document.getElementById("glass").src = "/FitAppka/img/50.png";
     }
-    if (procent >= 0.75 && procent < 0.97) {
-        document.getElementById("szklanka").src = "/FitAppka/img/75.png";
+    if (percentage >= 0.75 && percentage < 0.97) {
+        document.getElementById("glass").src = "/FitAppka/img/75.png";
     }
-    if (procent >= 0.97) {
-        document.getElementById("szklanka").src = "/FitAppka/img/100.png";
+    if (percentage >= 0.97) {
+        document.getElementById("glass").src = "/FitAppka/img/100.png";
     }
 }
 
 
-function ukryj(id) {
+function hidePanel(id) {
     if (document.getElementById(id).hidden == false) {
         document.getElementById(id).hidden = true;
     }
@@ -85,9 +80,9 @@ function ukryj(id) {
     }
 }
 
-function edytujWode() {
-    document.getElementById("pokazWode").hidden = true;
-    document.getElementById("edycja").style.display = "block";
+function editWater() {
+    document.getElementById("showWater").hidden = true;
+    document.getElementById("waterEdit").style.display = "block";
 }
 
 function hideModal() {
@@ -95,12 +90,12 @@ function hideModal() {
 }
 
 
-function zaladuj() {
-    pokazWode();
-    schowaj();
-    przepelnienie();
+function onload() {
+    showWater();
+    hide();
+    overflow();
     google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(rysujWykres);
+    google.charts.setOnLoadCallback(createChart);
 
 }
 
@@ -112,13 +107,13 @@ function validation(validMsg) {
     })
 }
 
-function usunPosilekUrl(id, url) {
+function deleteMealUrl(id, url) {
     $("#deleteModal").modal('show');
-    $("#usun").click(function () {
+    $("#delete").click(function () {
         $.ajax({
             type: 'POST',
             url: url,
-            data: { posilekID: id },
+            data: { mealID: id },
             success: function () {
                 location.reload();
             }
@@ -141,8 +136,8 @@ function showEditModalUrl(id, url) {
     prepareModalData(id);
 
     $("#editModal").modal('show');
-    $("#editPosilek").click(function () {
-        var gram = parseInt(document.getElementById("gramatura").value, 10);
+    $("#editMeal").click(function () {
+        var gram = parseInt(document.getElementById("grammage").value, 10);
         if (gram < 1) {
             validation("Gramatura posiłku musi wynosić przynajmniej 1 gram.");
         }
@@ -177,28 +172,24 @@ function prepareModalData(id) {
         document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + "/FitAppka/photos/" + photoPath + '" class="img-fluid" asp-append-version="true" />';
     }
 
-    document.getElementById("gramatura").value = gram;
+    document.getElementById("grammage").value = gram;
     document.getElementById("name").innerHTML = nameArray[iter] + ", " + gram + "g";
-    document.getElementById("kcalNapis").innerHTML = kcalArray[iter] + ' kcal';
-    document.getElementById("bialkoNapis").innerHTML = 'Białko: ' + bialkoArray[iter] + ' g,';
-    document.getElementById("tluszczeNapis").innerHTML = 'Tł.: ' + tluszczeArray[iter] + ' g,';
-    document.getElementById("wegleNapis").innerHTML = 'Węgl.: ' + wegleArray[iter] + ' g';
+    document.getElementById("kcalHeader").innerHTML = kcalArray[iter] + ' kcal';
+    document.getElementById("proteinsHeader").innerHTML = 'Białko: ' + proteinsArray[iter] + ' g,';
+    document.getElementById("fatsHeader").innerHTML = 'Tł.: ' + fatsArray[iter] + ' g,';
+    document.getElementById("carbsHeader").innerHTML = 'Węgl.: ' + carbsArray[iter] + ' g';
 }
-
-
 
 $("#editModal").on('hide.bs.modal', function () {
     location.reload();
 });
 
 
-
-var pathArray = [];
 var IDarray = [];
 var nameArray = [];
 var gramArray = [];
 var pathArray = [];
 var kcalArray = [];
-var bialkoArray = [];
-var tluszczeArray = [];
-var wegleArray = []; 
+var proteinsArray = [];
+var fatsArray = [];
+var carbsArray = []; 

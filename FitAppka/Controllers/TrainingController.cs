@@ -173,13 +173,13 @@ namespace FitAppka.Controllers
             }
             else
             {
-                DodajNowyDzien(dzien);
+                AddNewDay(dzien);
                 return GetClientDayIDByDate(dzien);
             }
 
         }
 
-        private void DodajNowyDzien(DateTime day)
+        private void AddNewDay(DateTime day)
         {
             var client = _clientRepository.GetClient(DajZalogowanegoKlientaID());
 
@@ -197,13 +197,22 @@ namespace FitAppka.Controllers
                 CarbsTarget = client.CarbsTarget,
                 CalorieTarget = client.CarbsTarget,
                 WaterDrunk = 0,
-            }); ;
+            });
         }
 
 
         private int GetClientDayIDByDate(DateTime day)
         {
-            return _dayRepository.GetClientDayByDate(day, DajZalogowanegoKlientaID()).DayId;
+            try
+            {
+                return _dayRepository.GetClientDayByDate(day, DajZalogowanegoKlientaID()).DayId;
+            }
+            catch
+            {
+                AddNewDay(day);
+                return _dayRepository.GetClientDayByDate(day, DajZalogowanegoKlientaID()).DayId;
+            }
+            
         }
 
 

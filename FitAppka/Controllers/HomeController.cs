@@ -215,7 +215,7 @@ namespace NowyDotnecik.Controllers
         [HttpGet]
         public IActionResult ChangeDay(string day) 
         { 
-            return RedirectToAction(nameof(Home), new { dzienWybrany = Convert.ToDateTime(day) });
+            return RedirectToAction(nameof(Home), new { daySelected = Convert.ToDateTime(day) });
         }
 
 

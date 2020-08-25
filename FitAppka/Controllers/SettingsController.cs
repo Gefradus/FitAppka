@@ -129,7 +129,7 @@ namespace FitAppka.Controllers
                 try
                 {
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Start", "Posilek", new { id = client.ClientId });
+                    return RedirectToAction("Start", "Home", new { id = client.ClientId });
                 }
                 catch
                 {
@@ -147,13 +147,13 @@ namespace FitAppka.Controllers
             double pace = 0.4;
             try { pace = double.Parse(m.PaceOfChange.Replace('.', ',').Replace(" ", "")); } catch { }
 
-            int caloricDemand = service.ObliczZapotrzebowanie((bool)m.Sex, m.Date_of_birth, m.Growth, (double)m.Weight, service.PoziomAktywnosci(m.LevelOfActivity));
-            int calorieGoal = service.ObliczCelKalorii(caloricDemand, m.WeightChange_Goal, pace);
-            int proteinTarget = service.ObliczCelBialko(m.Weight, calorieGoal, m.LevelOfActivity);
-            int fatTarget = service.ObliczCelTluszcze(calorieGoal);
-            int carbsTarget = service.ObliczCelWegle(calorieGoal, proteinTarget, fatTarget);
+            int caloricDemand = service.CountCaloricDemand((bool)m.Sex, m.Date_of_birth, m.Growth, (double)m.Weight, service.PoziomAktywnosci(m.LevelOfActivity));
+            int calorieTarget = service.CountCalorieTarget(caloricDemand, m.WeightChange_Goal, pace);
+            int proteinTarget = service.CountProteinTarget(m.Weight, calorieTarget, m.LevelOfActivity);
+            int fatTarget = service.CountFatTarget(calorieTarget);
+            int carbsTarget = service.CountCarbsTarget(calorieTarget, proteinTarget, fatTarget);
 
-            client.CalorieGoal = calorieGoal;
+            client.CalorieGoal = calorieTarget;
             client.CaloricDemand = caloricDemand;
             client.ProteinTarget = proteinTarget;
             client.FatTarget = fatTarget;
