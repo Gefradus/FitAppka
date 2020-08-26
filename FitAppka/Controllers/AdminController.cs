@@ -18,11 +18,13 @@ namespace FitAppka.Controllers
     public class AdminController : Controller
     {
         private readonly IProductRepository _productRepository;
+        private readonly IClientRepository _clientRepository;
         private readonly FitAppContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public AdminController(FitAppContext context, IWebHostEnvironment env, IProductRepository productRepository)
+        public AdminController(FitAppContext context, IWebHostEnvironment env, IProductRepository productRepository, IClientRepository clientRepository)
         {
+            _clientRepository = clientRepository;
             _productRepository = productRepository;
             _context = context;
             _env = env;
@@ -219,28 +221,10 @@ namespace FitAppka.Controllers
             }
         }
 
-        /*[HttpGet]
-        public async Task<IActionResult> AdminTraining()
-        {
-            if (GetLoggedInClient().IsAdmin)
-            {
-                return View(await _context.Card.ToListAsync());
-            }
-            else
-            {
-                return RedirectToAction("Logout", "Login");
-            }
-        }*/
-
-
         private Client GetLoggedInClient()
         {
-            return _context.Client.Where(k => k.Login.ToLower().Equals(User.Identity.Name.ToLower())).FirstOrDefault();
+            return _clientRepository.GetClientByLogin(User.Identity.Name);
         }
-
-
-
-
         
     }
 }

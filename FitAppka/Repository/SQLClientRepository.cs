@@ -1,5 +1,4 @@
 ﻿using FitAppka.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,9 +21,16 @@ namespace FitAppka.Repository
             return client;
         }
 
+        public async Task<Client> AddAsync(Client client)
+        {
+            _context.Add(client);
+            await _context.SaveChangesAsync();
+            return client;
+        }
+
         public Client Delete(int id)
         {
-            Client client = GetClient(id);
+            Client client = GetClientById(id);
 
             if (client != null)
             {
@@ -40,9 +46,19 @@ namespace FitAppka.Repository
             return _context.Client.ToList();
         }
 
-        public Client GetClient(int id)
+        public Client GetClientByEmail(string email)
+        {
+            return _context.Client.Where(k => k.Email.ToLower().Equals(email.ToLower())).FirstOrDefault();
+        }
+
+        public Client GetClientById(int id)
         {
             return _context.Client.Find(id);
+        }
+
+        public Client GetClientByLogin(string login)
+        {
+            return _context.Client.Where(k => k.Login.ToLower().Equals(login.ToLower())).FirstOrDefault();
         }
 
         public Client Update(Client client)

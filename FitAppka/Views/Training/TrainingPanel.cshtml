@@ -14,18 +14,18 @@
     <header>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav" style="text-align: center">
 
-            <div id="lewa">
+            <div id="left">
                 <div class="mr-auto mt-3">
-                    <a class="nav-link ml-sm-3 ml-md-4 ml-lg-5 mt-2 mt-md-0" asp-controller="Posilek" asp-action="Start"><img style="height: 50px; width:185px; margin-top: -15px" src="~/img/logorozowe.png" /></a>
+                    <a class="nav-link ml-sm-3 ml-md-4 ml-lg-5 mt-2 mt-md-0" asp-controller="Home" asp-action="Start"><img style="height: 50px; width:185px; margin-top: -15px" src="~/img/logorozowe.png" /></a>
                 </div>
             </div>
             <div>
-                <div id="prawa" class="navbar-nav ml-auto">
+                <div id="right" class="navbar-nav ml-auto">
                     <button class="navbar-toggler mr-2 mr-sm-3" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Przełącznik nawigacji" type="button">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="d-none d-md-inline-block mr-md-5">
-                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Training" asp-action="TrainingPanel" asp-route-dzienID="@ViewData["dzienID"]">Treningi </a></div>
+                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi </a></div>
                         <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="FindDay" asp-action="FindDay">Szukaj dni <img style="height: 15px; width:15px" src="~/img/search.png" /></a></div>
                         <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Settings" asp-action="Settings">Ustawienia <img style="height: 15px; width:15px" src="~/img/settings.png" /></a></div>
                         <div class="fl"><a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img style="height: 15px; width:15px" src="~/img/logout.png" /></a></div>
@@ -38,7 +38,7 @@
 
             <ul class="navbar-nav">
                 <li>
-                    <a class="nav-link text-dark" asp-controller="Training" asp-action="TrainingPanel" asp-route-dzienID="@ViewData["dzienID"]">Treningi</a>
+                    <a class="nav-link text-dark" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi</a>
                 </li>
                 <li>
                     <a class="nav-link text-dark" asp-controller="FindDay" asp-action="FindDay">Szukaj dni</a>
@@ -81,8 +81,8 @@
 
         <div style="display: flex;">
             <div id="dziennik">Dziennik treningowy dla: </div>
-            <input id="datepicker" onchange="changeDay('@Url.Action("ChangeDay", "Training")');" type="text" style="margin-left: 10px; margin-right: 15px; margin-top: 2px; text-align: center" value="@ViewData["dzien"]" readonly="readonly" />
-            <a class="btn acent" id="btnAdd" asp-controller="Training" asp-action="Search" asp-route-dzienID="@ViewData["dzienID"]">Dodaj nowy trening</a>
+            <input id="datepicker" onchange="changeDay('@Url.Action("ChangeDay", "Training")');" type="text" style="margin-left: 10px; margin-right: 15px; margin-top: 2px; text-align: center" value="@ViewData["day"]" readonly="readonly" />
+            <a class="btn acent" id="btnAdd" asp-controller="Training" asp-action="Search" asp-route-dayID="@ViewData["dayID"]">Dodaj nowy trening</a>
         </div>
 
         <div id="all" style="margin-top: 2.5rem !important; border-bottom: 1px solid darkgray">
@@ -144,10 +144,10 @@
             <div class="col-7 container">
                 <div class="row no-gutters">
                     <div class="kolumna py-2 column">
-                        @ViewData["czasTreningow"]
+                        @ViewData["cardioTime"]
                     </div>
                     <div class="kolumna py-2 column">
-                        @ViewData["spaloneKcal"]
+                        @ViewData["burnedKcal"]
                     </div>
                     <div class="kolumna btnArea">
 
@@ -161,10 +161,10 @@
             <div class="col-7 container">
                 <div class="row no-gutters" style="height: 100%">
                     <div class="kolumna py-2 column">
-                        @ViewData["celMinut"]
+                        @ViewData["timeTarget"]
                     </div>
                     <div class="kolumna py-2 column">
-                        @ViewData["celKcal"]
+                        @ViewData["kcalTarget"]
                     </div>
                     <div class="kolumna btnArea">
 
@@ -198,7 +198,7 @@
         function potwierdzUsuniecie(id) {
             $("#deleteModal").modal('show');
             $("#usun").click(function () {
-                usunTrening(id, '@Url.Action("UsunTrening", "Training")')
+                usunTrening(id, '@Url.Action("DeleteCardio", "Training")')
             });
         }
     </script>

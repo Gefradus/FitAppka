@@ -39,7 +39,7 @@ namespace FitAppka.Controllers
         {
             try     //jeśli try się powiedzie znaczy to że użytkownik już podał dane
             {
-                Client client = _clientRepository.GetClient(clientID);
+                Client client = _clientRepository.GetClientById(clientID);
                 List<WeightMeasurement> measurementList = _context.WeightMeasurement.Where(w => w.ClientId == clientID).ToList();
 
                 ViewData["dateOfBirth"] = client.DateOfBirth.Value.ToString("yyyy-MM-dd");

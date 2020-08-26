@@ -68,7 +68,7 @@ namespace NowyDotnecik.Controllers
 
         private void CheckIfAdmin(int clientID)
         {
-            Client client = _clientRepository.GetClient(clientID);
+            Client client = _clientRepository.GetClientById(clientID);
             if (client.IsAdmin)
             {
                 ViewData["admin"] = 1;
@@ -81,7 +81,7 @@ namespace NowyDotnecik.Controllers
 
         private int GetLoggedInClientID()
         {
-            return _context.Client.Where(c => c.Login.ToLower().Equals(User.Identity.Name.ToLower())).Select(c => c.ClientId).FirstOrDefault();
+            return _clientRepository.GetClientByLogin(User.Identity.Name).ClientId;
         }
 
         public IActionResult Start()
@@ -96,7 +96,7 @@ namespace NowyDotnecik.Controllers
 
         private bool IsItFirstLaunch(int clientID)
         {
-            return _clientRepository.GetClient(clientID).CarbsTarget == null;
+            return _clientRepository.GetClientById(clientID).CarbsTarget == null;
         }
 
         public IActionResult Return(int clientID, int dayID)
@@ -132,9 +132,6 @@ namespace NowyDotnecik.Controllers
                 return RedirectToAction(nameof(Home), new { daySelected });
             }
         }
-
-        
-
 
         private string DateFormat(DateTime daySelected)
         {
@@ -175,7 +172,7 @@ namespace NowyDotnecik.Controllers
         {
             if (_context.Day.Count(dz => dz.Date == daySelected && dz.ClientId == clientID) == 0)
             {
-                var client = _clientRepository.GetClient(clientID);
+                var client = _clientRepository.GetClientById(clientID);
 
                 _dayRepository.Add(new Day()
                 {
@@ -249,10 +246,10 @@ namespace NowyDotnecik.Controllers
             ViewData["proteins"] = proteins;
             ViewData["carbs"] = carbs;
             ViewData["fats"] = fats;
-            ViewData["calories0"] = Math.Round((decimal)kcal, 0, MidpointRounding.AwayFromZero);
-            ViewData["proteins0"] = Math.Round((decimal)proteins, 0, MidpointRounding.AwayFromZero);
-            ViewData["carbs0"] = Math.Round((decimal)carbs, 0, MidpointRounding.AwayFromZero);
-            ViewData["fats0"] = Math.Round((decimal)fats, 0, MidpointRounding.AwayFromZero);
+            ViewData["calories0"] = Round(kcal);
+            ViewData["proteins0"] = Round(proteins);
+            ViewData["carbs0"] = Round(carbs);
+            ViewData["fats0"] = Round(fats);
             ViewData["calorieTarget"] = calorieTarget;
             ViewData["proteinTarget"] = proteinTarget;
             ViewData["fatTarget"] = fatTarget;
@@ -261,6 +258,11 @@ namespace NowyDotnecik.Controllers
             ViewData["%carbs"] = (int)(carbs / carbsTarget * 100);
             ViewData["%fats"] = (int)(fats / fatTarget * 100);
             ViewData["%proteins"] = (int)(proteins / proteinTarget * 100);
+        }
+
+        private decimal Round(double var)
+        {
+            return Math.Round((decimal)var, 0, MidpointRounding.AwayFromZero);
         }
 
 
@@ -289,7 +291,6 @@ namespace NowyDotnecik.Controllers
             catch {}
             return RedirectToAction(nameof(Home), new { clientID, daySelected = day.Date });
         }
-
 
         public IActionResult EditWater(int dayID, int clientID)
         {
@@ -328,14 +329,6 @@ namespace NowyDotnecik.Controllers
             meal.DayId = _dayRepository.GetClientDayByDate(daySelected, clientID).DayId;
         }
 
-/*        public IActionResult Add(int clientID, int dayID, int inWhich)
-        {
-            ViewData["clientID"] = clientID;
-            ViewData["dayID"] = dayID;
-            ViewData["inWhich"] = inWhich;
-            return View();
-        }*/
-
         [HttpPost]
         public JsonResult Add(int inWhich, int dayID, int clientID, int grammage, int productID)
         {
@@ -352,7 +345,6 @@ namespace NowyDotnecik.Controllers
             _mealRepository.Add(meal);
             return Json(true);
         }
-
 
         [HttpPost]
         public IActionResult Edit(int mealID, int grammage)

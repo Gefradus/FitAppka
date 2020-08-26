@@ -26,18 +26,18 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> TrainingPanel(int dzienID)
+        public async Task<IActionResult> TrainingPanel(int dayID)
         {
-            dzienID = DajDzisJesliNieWybranoDnia(dzienID);
-            ViewData["dzien"] = DajDzienPoID(dzienID);
-            ViewData["dzienID"] = dzienID;
-            ViewData["klientID"] = DajZalogowanegoKlientaID();
-            ViewData["spaloneKcal"] = CaloriesBurnedInDay(dzienID);
-            ViewData["czasTreningow"] = CzasTreningowWDniu(dzienID);
-            ViewData["celKcal"] = GetKcalBurnedGoalInDay(dzienID);
-            ViewData["celMinut"] = GetTrainingTimeGoalInDay(dzienID);
+            dayID = GiveTodayIfDayNotChosen(dayID);
+            ViewData["day"] = GetDayDateById(dayID);
+            ViewData["dayID"] = dayID;
+            ViewData["clientID"] = DajZalogowanegoKlientaID();
+            ViewData["burnedKcal"] = CaloriesBurnedInDay(dayID);
+            ViewData["cardioTime"] = CzasTreningowWDniu(dayID);
+            ViewData["kcalTarget"] = GetKcalBurnedGoalInDay(dayID);
+            ViewData["timeTarget"] = GetTrainingTimeGoalInDay(dayID);
 
-            return View(await _context.CardioTraining.Include(t => t.CardioTrainingType).Include(t => t.DayId).ToListAsync());
+            return View(await _context.CardioTraining.ToListAsync());
         }
 
         [HttpGet]
@@ -86,7 +86,7 @@ namespace FitAppka.Controllers
             return (int) kcal;
         }
 
-        private int DajDzisJesliNieWybranoDnia(int dzienID)
+        private int GiveTodayIfDayNotChosen(int dzienID)
         {
             if(dzienID == 0)
             {
@@ -138,13 +138,13 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UsunTrening(int treningID)
+        public async Task<IActionResult> DeleteCardio(int cardioID)
         {
-            var trening = _context.CardioTraining.Where(t => t.CardioTrainingId == treningID).FirstOrDefault();
+            var training = _context.CardioTraining.Where(t => t.CardioTrainingId == cardioID).FirstOrDefault();
            
-            if (trening != null)
+            if (training != null)
             {
-                _context.CardioTraining.Remove(trening);
+                _context.CardioTraining.Remove(training);
                 await _context.SaveChangesAsync();
             }
             return Json(false);
@@ -182,7 +182,7 @@ namespace FitAppka.Controllers
 
         private void AddDayIfNotExists(DateTime day)
         {
-            var client = _clientRepository.GetClient(DajZalogowanegoKlientaID());
+            var client = _clientRepository.GetClientById(DajZalogowanegoKlientaID());
             int count = _context.Day.Count(dz => dz.Date == day && dz.ClientId == client.ClientId);
             if (count == 0)
             {
@@ -218,10 +218,9 @@ namespace FitAppka.Controllers
             return DajObecnyDzienID(DateTime.Now);
         }
 
-        private string DajDzienPoID(int dzienID)
+        private string GetDayDateById(int dayID)
         {
-            DateTime dateTime = (DateTime) _context.Day.Where(d => d.DayId == dzienID && d.ClientId == DajZalogowanegoKlientaID()).Select(d => d.Date).FirstOrDefault();
-            return dateTime.Date.ToString("dd.MM.yyyy");
+            return _dayRepository.GetDayDateTime(dayID).Date.ToString("dd.MM.yyyy");
         }
 
         private void SprawdzCzySzukano(string search){
@@ -236,17 +235,5 @@ namespace FitAppka.Controllers
         private int DajZalogowanegoKlientaID(){
             return _context.Client.Where(k => k.Login.ToLower() == User.Identity.Name.ToLower()).Select(k => k.ClientId).FirstOrDefault();
         }
-
-
-        private string NazwaPosilku(int wKtorym)
-        {
-            if (wKtorym == 1) { return "Śniadanie"; }
-            if (wKtorym == 2) { return "II śniadanie"; }
-            if (wKtorym == 3) { return "Obiad"; }
-            if (wKtorym == 4) { return "Deser"; }
-            if (wKtorym == 5) { return "Przekąska"; }
-            return "Kolacja";
-        }
-
     }
 }
