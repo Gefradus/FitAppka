@@ -33,7 +33,7 @@ namespace FitAppka.Controllers
             ViewData["dayID"] = dayID;
             ViewData["clientID"] = DajZalogowanegoKlientaID();
             ViewData["burnedKcal"] = CaloriesBurnedInDay(dayID);
-            ViewData["cardioTime"] = CzasTreningowWDniu(dayID);
+            ViewData["cardioTime"] = CardioTimeInDay(dayID);
             ViewData["kcalTarget"] = GetKcalBurnedGoalInDay(dayID);
             ViewData["timeTarget"] = GetTrainingTimeGoalInDay(dayID);
 
@@ -43,7 +43,7 @@ namespace FitAppka.Controllers
         [HttpGet]
         public IActionResult ChangeDay(string day)
         {
-            return RedirectToAction(nameof(TrainingPanel), new { dzienID = DajObecnyDzienID(Convert.ToDateTime(day)) });
+            return RedirectToAction(nameof(TrainingPanel), new { dzienID = GetSelectedDay(Convert.ToDateTime(day)) });
         }
 
         private int GetKcalBurnedGoalInDay(int dayID)
@@ -90,7 +90,7 @@ namespace FitAppka.Controllers
         {
             if(dzienID == 0)
             {
-                return DajDzisiajID();
+                return GetTodayID();
             }
             else
             {
@@ -98,7 +98,7 @@ namespace FitAppka.Controllers
             }
         }
 
-        private int CzasTreningowWDniu(int dayID)
+        private int CardioTimeInDay(int dayID)
         {
             List<CardioTraining> trainings = _context.CardioTraining.Where(t => t.DayId.Equals(dayID)).ToList();
             int? time = 0;
@@ -111,30 +111,30 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Search(string search, int dzienID)
+        public async Task<IActionResult> Search(string search, int dayID)
         {
-            ViewData["dzienID"] = dzienID;
-            SprawdzCzySzukano(search);
+            ViewData["dayID"] = dayID;
+            CheckIfThisWasSearchedFor(search);
             return View(await _context.CardioTrainingType.Where(c => c.TrainingName.Contains(search)).ToListAsync());
         }
 
         [HttpPost]
-        public IActionResult Search(int dzienID, int treningTypId, int czasWMinutach, int spaloneKcal)
+        public IActionResult Search(int dayID, int cardioTypeId, int timeInMinutes, int burnedKcal)
         {
             _context.Add(new CardioTraining()
             {
-                DayId = dzienID,
-                TimeInMinutes = czasWMinutach,
-                CardioTrainingTypeId = treningTypId,
-                CaloriesBurned = spaloneKcal
+                DayId = dayID,
+                TimeInMinutes = timeInMinutes,
+                CardioTrainingTypeId = cardioTypeId,
+                CaloriesBurned = burnedKcal
             });
 
             try
             {
                 _context.SaveChanges();
-                return RedirectToAction(nameof(TrainingPanel), new { dzienID });
+                return RedirectToAction(nameof(TrainingPanel), new { dayID });
             }
-            catch { return RedirectToAction(nameof(TrainingPanel), new { dzienID = DajDzisiajID() }); } 
+            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = GetTodayID() }); } 
         }
 
         [HttpPost]
@@ -165,19 +165,10 @@ namespace FitAppka.Controllers
         }
 
 
-        private int DajObecnyDzienID(DateTime dzien)
+        private int GetSelectedDay(DateTime day)
         {
-            int id = GetClientDayIDByDate(dzien);
-            if (id != 0)
-            {
-                return id;
-            }
-            else
-            {
-                AddDayIfNotExists(dzien);
-                return GetClientDayIDByDate(dzien);
-            }
-
+            AddDayIfNotExists(day);
+            return GetClientDayIDByDate(day);
         }
 
         private void AddDayIfNotExists(DateTime day)
@@ -213,9 +204,9 @@ namespace FitAppka.Controllers
         }
 
 
-        private int DajDzisiajID()
+        private int GetTodayID()
         {
-            return DajObecnyDzienID(DateTime.Now);
+            return GetSelectedDay(DateTime.Now);
         }
 
         private string GetDayDateById(int dayID)
@@ -223,17 +214,17 @@ namespace FitAppka.Controllers
             return _dayRepository.GetDayDateTime(dayID).Date.ToString("dd.MM.yyyy");
         }
 
-        private void SprawdzCzySzukano(string search){
-            ViewData["czySzukano"] = false;
+        private void CheckIfThisWasSearchedFor(string search){
+            ViewData["wasSearched"] = false;
         
             if (search != null)
             {
-                ViewData["czySzukano"] = true;
+                ViewData["wasSearched"] = true;
             }
         }
 
-        private int DajZalogowanegoKlientaID(){
-            return _context.Client.Where(k => k.Login.ToLower() == User.Identity.Name.ToLower()).Select(k => k.ClientId).FirstOrDefault();
+        private int DajZalogowanegoKlientaID() {
+            return _clientRepository.GetClientByLogin(User.Identity.Name).ClientId;
         }
     }
 }

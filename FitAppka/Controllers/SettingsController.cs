@@ -116,13 +116,9 @@ namespace FitAppka.Controllers
         {
             if (ModelState.IsValid)
             {
-                var client = SetClientGoals(m, _context.Client.Where(k => k.Login == User.Identity.Name).FirstOrDefault());
+                var client = SetClientGoals(m, _clientRepository.GetClientByLogin(User.Identity.Name));
 
-                if (isFirstLaunch == 1)
-                {
-                    client.DateOfJoining = DateTime.Now.Date;
-                }
-                
+                if (isFirstLaunch == 1) { client.DateOfJoining = DateTime.Now.Date; }
                 SetDataForDaysFromToday(m, client);
                 SetClientWeightMeasurement(m, SetClientData(m, client));
                 
