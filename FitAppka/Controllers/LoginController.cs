@@ -48,7 +48,7 @@ namespace FitAppka.Controllers
                 Client client = _context.Client.Where(c => c.Login.ToLower().Equals(loginOrEmail) || c.Email.ToLower().Equals(loginOrEmail)).FirstOrDefault();
                 if (client != null && client.Password.Equals(model.Password))
                 {
-                    await SignInAndStart(client.Login);
+                    return await SignInAndStart(client.Login);
                 }
                 else
                 {
@@ -78,7 +78,7 @@ namespace FitAppka.Controllers
                 {
                     if (model.ConfirmPassword == model.Password)
                     {
-                        await AddNewClientAndLogin(model);
+                        return await AddNewClientAndLogin(model);
                     }
                 }
                 else
@@ -98,7 +98,7 @@ namespace FitAppka.Controllers
         }
 
 
-        private async Task AddNewClientAndLogin(RegisterModel model)
+        private async Task<IActionResult> AddNewClientAndLogin(RegisterModel model)
         {
             await _clientRepository.AddAsync(new Client()
             {
@@ -109,7 +109,7 @@ namespace FitAppka.Controllers
                 SecondName = model.SecondName
             });
 
-            await SignInAndStart(model.Login);
+            return await SignInAndStart(model.Login);
         }
 
 
