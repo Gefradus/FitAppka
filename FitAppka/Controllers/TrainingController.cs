@@ -36,6 +36,7 @@ namespace FitAppka.Controllers
             ViewData["czasTreningow"] = CzasTreningowWDniu(dzienID);
             ViewData["celKcal"] = GetKcalBurnedGoalInDay(dzienID);
             ViewData["celMinut"] = GetTrainingTimeGoalInDay(dzienID);
+
             return View(await _context.CardioTraining.Include(t => t.CardioTrainingType).Include(t => t.DayId).ToListAsync());
         }
 
@@ -173,46 +174,42 @@ namespace FitAppka.Controllers
             }
             else
             {
-                AddNewDay(dzien);
+                AddDayIfNotExists(dzien);
                 return GetClientDayIDByDate(dzien);
             }
 
         }
 
-        private void AddNewDay(DateTime day)
+        private void AddDayIfNotExists(DateTime day)
         {
             var client = _clientRepository.GetClient(DajZalogowanegoKlientaID());
-
-            _dayRepository.Add(new Day() {
-                Date = day,
-                ClientId = DajZalogowanegoKlientaID(),
-                Breakfast = client.Breakfast,
-                Lunch = client.Lunch,
-                Dinner = client.Dinner,
-                Dessert = client.Dessert,
-                Snack = client.Snack,
-                Supper = client.Supper,
-                ProteinTarget = client.ProteinTarget,
-                FatTarget = client.FatTarget,
-                CarbsTarget = client.CarbsTarget,
-                CalorieTarget = client.CarbsTarget,
-                WaterDrunk = 0,
-            });
+            int count = _context.Day.Count(dz => dz.Date == day && dz.ClientId == client.ClientId);
+            if (count == 0)
+            {
+                _dayRepository.Add(new Day()
+                {
+                    Date = day,
+                    ClientId = DajZalogowanegoKlientaID(),
+                    Breakfast = client.Breakfast,
+                    Lunch = client.Lunch,
+                    Dinner = client.Dinner,
+                    Dessert = client.Dessert,
+                    Snack = client.Snack,
+                    Supper = client.Supper,
+                    ProteinTarget = client.ProteinTarget,
+                    FatTarget = client.FatTarget,
+                    CarbsTarget = client.CarbsTarget,
+                    CalorieTarget = client.CarbsTarget,
+                    WaterDrunk = 0,
+                });
+            }
         }
 
 
         private int GetClientDayIDByDate(DateTime day)
         {
-            try
-            {
-                return _dayRepository.GetClientDayByDate(day, DajZalogowanegoKlientaID()).DayId;
-            }
-            catch
-            {
-                AddNewDay(day);
-                return _dayRepository.GetClientDayByDate(day, DajZalogowanegoKlientaID()).DayId;
-            }
-            
+            AddDayIfNotExists(day);
+            return _dayRepository.GetClientDayByDate(day, DajZalogowanegoKlientaID()).DayId;
         }
 
 

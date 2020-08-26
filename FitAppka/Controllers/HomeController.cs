@@ -35,31 +35,35 @@ namespace NowyDotnecik.Controllers
         public async Task<IActionResult> Home(DateTime daySelected)
         {
             int clientID = GetLoggedInClientID();
-            
             CheckIfAdmin(clientID);
             AddDayIfNotExists(daySelected, clientID);
-            int daySelectedID = _dayRepository.GetClientDayByDate(daySelected, clientID).DayId;
-
-            ViewData["day"] = daySelected;
-            ViewData["date"] = DateFormat(daySelected);
-            ViewData["datepick"] = daySelected.ToString("yyyy-MM-dd");
-            ViewData["path"] = _env.WebRootPath.ToString();
-            SendDataToView(clientID, daySelectedID, 0, 0);
-            
+            SendDataToView(daySelected, clientID);
             CheckMealsOfTheDay(daySelected, clientID);
+            SendInfoAboutMealsToView(daySelected, clientID);
+            ShowWater(daySelected, clientID);
+            CountProgress(daySelected, clientID);
+
+            return View(await _context.Meal.Include(m => m.Day).Include(p => p.Product).Where(m => m.DayId == _dayRepository.GetClientDayByDate(daySelected, clientID).DayId).ToListAsync());
+        }
+
+        private void SendInfoAboutMealsToView(DateTime daySelected, int clientID)
+        {
             CountCalories(1, "breakfastKcal", daySelected, clientID);
             CountCalories(2, "lunchKcal", daySelected, clientID);
             CountCalories(3, "dinnerKcal", daySelected, clientID);
             CountCalories(4, "dessertKcal", daySelected, clientID);
             CountCalories(5, "snackKcal", daySelected, clientID);
             CountCalories(6, "supperKcal", daySelected, clientID);
-            ShowWater(daySelected, clientID);
-            CountProgress(daySelected, clientID);
+        }
 
-            var fitAppContext = _context.Meal.Include(m => m.Day).Include(p => p.Product).Where(m => m.DayId == daySelectedID);
-
-            return View(await fitAppContext.ToListAsync());
-            
+        private void SendDataToView(DateTime daySelected, int clientID)
+        {
+            ViewData["day"] = daySelected;
+            ViewData["date"] = DateFormat(daySelected);
+            ViewData["datepick"] = daySelected.ToString("yyyy-MM-dd");
+            ViewData["path"] = _env.WebRootPath.ToString();
+            ViewData["clientID"] = clientID;
+            ViewData["dayID"] = _dayRepository.GetClientDayByDate(daySelected, clientID).DayId;
         }
 
         private void CheckIfAdmin(int clientID)
@@ -129,13 +133,7 @@ namespace NowyDotnecik.Controllers
             }
         }
 
-        private void SendDataToView(int clientID, int dayID, int inWhich, int? mealID)
-        {
-            ViewData["clientID"] = clientID;
-            ViewData["dayID"] = dayID;
-            ViewData["inWhich"] = inWhich;
-            ViewData["mealID"] = mealID;
-        }
+        
 
 
         private string DateFormat(DateTime daySelected)
@@ -163,22 +161,11 @@ namespace NowyDotnecik.Controllers
             if (daySelected.Month == 9) { month = "wrz, "; }
             if (daySelected.Month == 10) { month = "paź, "; }
             if (daySelected.Month == 11) { month = "lis, "; }
-            if (daySelected.Month == 12) { month = "gru, "; }
-            
-            if (daySelected == DateTime.Now.Date)
-            {
-                day = "Dzisiaj, ";
-            }
+            if (daySelected.Month == 12) { month = "gru, "; } 
 
-            if (daySelected == DateTime.Now.Date.AddDays(-1))
-            {
-                day = "Wczoraj, ";
-            }
-
-            if (daySelected == DateTime.Now.Date.AddDays(1))
-            {
-                day = "Jutro, ";
-            }
+            if (daySelected == DateTime.Now.Date) { day = "Dzisiaj, "; }
+            if (daySelected == DateTime.Now.Date.AddDays(-1)) { day = "Wczoraj, "; }
+            if (daySelected == DateTime.Now.Date.AddDays(1)) { day = "Jutro, "; }
 
             return day + daySelected.Day + " " + month + daySelected.Year;
         }
@@ -186,8 +173,7 @@ namespace NowyDotnecik.Controllers
 
         private void AddDayIfNotExists(DateTime daySelected, int clientID)
         {
-            int count = _context.Day.Count(dz => dz.Date == daySelected && dz.ClientId == clientID);
-            if (count == 0)
+            if (_context.Day.Count(dz => dz.Date == daySelected && dz.ClientId == clientID) == 0)
             {
                 var client = _clientRepository.GetClient(clientID);
 
@@ -207,9 +193,7 @@ namespace NowyDotnecik.Controllers
                     CalorieTarget = client.CalorieGoal,
                     WaterDrunk = 0,
                 }); 
- 
             }
-
         }
 
         [HttpGet]
@@ -344,12 +328,13 @@ namespace NowyDotnecik.Controllers
             meal.DayId = _dayRepository.GetClientDayByDate(daySelected, clientID).DayId;
         }
 
-        public IActionResult Add(int clientID, int dayID, int inWhich)
+/*        public IActionResult Add(int clientID, int dayID, int inWhich)
         {
-            SendDataToView(clientID, dayID, inWhich, 0);
+            ViewData["clientID"] = clientID;
+            ViewData["dayID"] = dayID;
+            ViewData["inWhich"] = inWhich;
             return View();
-        }
-
+        }*/
 
         [HttpPost]
         public JsonResult Add(int inWhich, int dayID, int clientID, int grammage, int productID)
