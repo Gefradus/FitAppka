@@ -29,21 +29,19 @@ namespace FitAppka.Controllers
         [HttpGet]
         public IActionResult Settings()
         {
-            var clientID = _context.Client.Where(c => c.Login == User.Identity.Name).Select(c => c.ClientId).FirstOrDefault();
-            FirstAppLaunch(clientID);
-            ViewData["clientID"] = clientID;
+            FirstAppLaunch();
+            ViewData["clientID"] = _clientRepository.GetClientByLogin(User.Identity.Name).ClientId;
             return View();
         }
 
-        private void FirstAppLaunch(int clientID)
+        private void FirstAppLaunch()//(int clientID)
         {
             try     //jeśli try się powiedzie znaczy to że użytkownik już podał dane
             {
-                Client client = _clientRepository.GetClientById(clientID);
-                List<WeightMeasurement> measurementList = _context.WeightMeasurement.Where(w => w.ClientId == clientID).ToList();
+                Client client = _clientRepository.GetClientByLogin(User.Identity.Name);
 
                 ViewData["dateOfBirth"] = client.DateOfBirth.Value.ToString("yyyy-MM-dd");
-                ViewData["weight"] = SetLastWeightMeasurement(measurementList);
+                ViewData["weight"] = SetLastWeightMeasurement(_context.WeightMeasurement.Where(w => w.ClientId == client.ClientId).ToList());
                 ViewData["growth"] = client.Growth;
                 ViewData["changeGoal"] = (int)client.WeightChangeGoal;
                 ViewData["activity"] = (int)client.ActivityLevel;
@@ -143,7 +141,7 @@ namespace FitAppka.Controllers
             double pace = 0.4;
             try { pace = double.Parse(m.PaceOfChange.Replace('.', ',').Replace(" ", "")); } catch { }
 
-            int caloricDemand = service.CountCaloricDemand((bool)m.Sex, m.Date_of_birth, m.Growth, (double)m.Weight, service.PoziomAktywnosci(m.LevelOfActivity));
+            int caloricDemand = service.CountCaloricDemand(m.Sex, m.Date_of_birth, m.Growth, m.Weight, service.ActivityLevel(m.LevelOfActivity));
             int calorieTarget = service.CountCalorieTarget(caloricDemand, m.WeightChange_Goal, pace);
             int proteinTarget = service.CountProteinTarget(m.Weight, calorieTarget, m.LevelOfActivity);
             int fatTarget = service.CountFatTarget(calorieTarget);
@@ -181,19 +179,16 @@ namespace FitAppka.Controllers
                 {
                     if (day.DayId == dayID)
                     {
-
                         day.CalorieTarget = client.CalorieGoal;
                         day.ProteinTarget = client.ProteinTarget;
                         day.FatTarget = client.FatTarget;
                         day.CarbsTarget = client.CarbsTarget;
-
                         day.Breakfast = m.Breakfast;
                         day.Lunch = m.Lunch;
                         day.Dinner = m.Dinner;
                         day.Dessert = m.Dessert;
                         day.Snack = m.Snack;
                         day.Supper = m.Supper;
-
                         if (m.Breakfast == null) { day.Breakfast = false; }
                         if (m.Lunch == null) { day.Lunch = false; }
                         if (m.Dinner == null) { day.Dinner = false; }
@@ -219,14 +214,13 @@ namespace FitAppka.Controllers
             client.Supper = m.Supper;
             client.WeightChangeGoal = m.WeightChange_Goal;
             client.ActivityLevel = m.LevelOfActivity;
- 
             if (m.Breakfast == null) { client.Breakfast = false; }
             if (m.Lunch == null) { client.Lunch = false; }
             if (m.Dinner == null) { client.Dinner = false; }
             if (m.Dessert == null) { client.Dessert = false; }
             if (m.Snack == null) { client.Snack = false; }
             if (m.Supper == null) { client.Supper = false; }
-
+            
             return client;
         }
 

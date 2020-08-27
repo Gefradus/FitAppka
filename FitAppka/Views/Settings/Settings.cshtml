@@ -85,7 +85,7 @@
                     <div style="padding-bottom: 10px">
                         <div style="margin-bottom: 15px">
                             <label asp-for="Date_of_birth" style="font-size: 16px; color: gray"></label>
-                            <input id="datepicker" asp-for="Date_of_birth" onchange="" type="text" style="margin-top: -10px; width: calc(100% - 25px); margin-left: -1px; padding-left: 11px" readonly="readonly" />
+                            <input id="datepicker" asp-for="Date_of_birth" type="text" style="margin-top: -10px; width: calc(100% - 25px); margin-left: -1px; padding-left: 11px" readonly="readonly" />
                             <span asp-validation-for="Date_of_birth" class="text-danger" style="font-size: 16px"></span>
                         </div>
                         <div>
@@ -136,15 +136,15 @@
                     </div>
 
 
-                    <label asp-for="PaceOfChange" class="srodkowanie" style="padding-top: 15px"></label>
-                    <div class="form-group srodkowanie">
-                        <button type="button" class="przycisk" value="Odejmij" onclick="decrementPace()"><img class="img-fluid" src="~/img/minus.png"></button>
+                    <label asp-for="PaceOfChange" class="centering" style="padding-top: 15px"></label>
+                    <div class="form-group centering">
+                        <button type="button" class="przycisk" onclick="decrementPace()"><img class="img-fluid" src="~/img/minus.png"></button>
                         <input id="pace" asp-for="PaceOfChange" type="number" step="0.1" value="0.4" /><span style="margin-left: -33px; float:right; margin-top: 2.5px; z-index: 99">kg</span>
-                        <button type="button" class="przycisk" value="Dodaj" onclick="incrementPace()" style="margin-left: 13px"><img class="img-fluid" src="~/img/add.png"></button>
+                        <button type="button" class="przycisk" onclick="incrementPace()" style="margin-left: 13px"><img class="img-fluid" src="~/img/add.png"></button>
                     </div>
 
 
-                    <input id="dolnyPrzycisk" type="submit" value="Zapisz i kontynuuj" asp-route-isFirstLaunch="@ViewData["isFirstLaunch"]" class="btn btn-primary" />
+                    <input id="saveBtn" type="submit" value="Zapisz i kontynuuj" asp-route-isFirstLaunch="@ViewData["isFirstLaunch"]" class="btn btn-primary" />
                     <div style="width: 100%; height: 1px"></div>
                 </form>
             </div>

@@ -17,7 +17,7 @@ input::-webkit-inner-spin-button {
     pointer-events: none
 }
 
-#dolnyPrzycisk {
+#saveBtn {
     margin-left: 10%;
     width: 80%;
     height: 50px;
@@ -25,13 +25,13 @@ input::-webkit-inner-spin-button {
     margin-top: 25px;
 }
 
-.przycisk {
+.button {
     background-color: transparent;
     border: none;
     margin-top: 2px;
 }
 
-.srodkowanie {
+.centering {
     padding-bottom: 15px;
     display: flex;
     justify-content: center

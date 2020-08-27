@@ -4,136 +4,132 @@ namespace FitAppka.Controllers{
 
 public class SettingsServices
 {
-    public double PoziomAktywnosci(short? aktywnosc)
+    public double ActivityLevel(short? activity)
     {
-        if (aktywnosc == 1) { return 1.2; }
-        if (aktywnosc == 2) { return 1.3; }
-        if (aktywnosc == 3) { return 1.5; }
-        if (aktywnosc == 4) { return 1.7; }
-        if (aktywnosc == 5) { return 1.9; }
+        if (activity == 1) { return 1.2; }
+        if (activity == 2) { return 1.3; }
+        if (activity == 3) { return 1.5; }
+        if (activity == 4) { return 1.7; }
+        if (activity == 5) { return 1.9; }
         return 1.5;
     }
 
 
 
-    public int CountCalorieTarget(int zapotrzebowanie, short? celZmian, double tempo)
+    public int CountCalorieTarget(int demand, short? changeGoal, double pace)
         {
-            //-----------------------------schudnięcie--------------------------
-            if (celZmian == 1)
+            if (changeGoal == 1)
             {
-                int celKcal = (int)(zapotrzebowanie - (tempo * 1100));
+                int kcalTarget = (int)(demand - (pace * 1100));
 
-                if (celKcal <= 1000)
+                if (kcalTarget <= 1000)
                 {
                     return 1000;
                 }
                 else
                 {
-                    return celKcal;
+                    return kcalTarget;
                 }
             }
 
-            //-----------------------------przytycie--------------------------
-            if (celZmian == 3)
+            if (changeGoal == 3)
             {
-                int celKcal = (int)(zapotrzebowanie + (tempo * 1100));
+                int kcalTarget = (int)(demand + (pace * 1100));
 
-                if (celKcal <= 1000)
+                if (kcalTarget <= 1000)
                 {
                     return 1000;
                 }
                 else
                 {
-                    return celKcal;
+                    return kcalTarget;
                 }
             }
 
-            //-----------------------------utrzymanie--------------------------
-            if (zapotrzebowanie < 1000)
+            if (demand < 1000)
             {
                 return 1000;
             }
             else
             {
-                return (int)zapotrzebowanie;
+                return (int)demand;
             }
         }
 
 
-        public int CountCaloricDemand(bool plec, DateTime? dataUrodzenia, int? wzrost, double waga, double aktywnosc)
+        public int CountCaloricDemand(bool? sex, DateTime? birthDate, int? growth, double? weight, double activity)
         {
             int BMR;
-            int wiek = ObliczWiek((DateTime)dataUrodzenia);
+            int age = CountAge((DateTime)birthDate);
 
-            if (plec)
+            if ((bool)sex)
             {
-                BMR = (int)(66 + (13.7 * waga) + (5 * wzrost) - (6.76 * wiek));         //
+                BMR = (int)(66 + (13.7 * weight) + (5 * growth) - (6.76 * age));        //
             }                                                                           //
-            else                                                                        // METODA Harrisa-Benedicta
+            else                                                                        // Harris-Benedict's method
             {                                                                           //
-                BMR = (int)(655 + (9.6 * waga) + (1.85 * wzrost) - (4.7 * wiek));       //
+                BMR = (int)(655 + (9.6 * weight) + (1.85 * growth) - (4.7 * age));      //
             }
 
-            return (int)(BMR * aktywnosc);
-
+            return (int)(BMR * activity);
         }
 
-        public int CountProteinTarget(double? waga, int celKalorii, short? aktywnosc)
+        public int CountProteinTarget(double? weight, int kcalTarget, short? activity)
         {
-            int bialko;
-            if (aktywnosc < 3)
+            int proteins;
+            if (activity < 3)
             {
-                bialko = (int)waga;
-                if (bialko < celKalorii)
+                proteins = (int)weight;
+                if (proteins < kcalTarget)
                 {
-                    return bialko;
+                    return proteins;
                 }
                 else
                 {
-                    return (int)(0.3 * celKalorii);
+                    return (int)(0.3 * kcalTarget);
                 }
             }
-            else if (aktywnosc == 3 || aktywnosc == 4)
+            else if (activity == 3 || activity == 4)
             {
-                bialko = (int)(1.5 * waga);
-                if (bialko < celKalorii)
+                proteins = (int)(1.5 * weight);
+                if (proteins < kcalTarget)
                 {
-                    return bialko;
+                    return proteins;
                 }
                 else
                 {
-                    return (int)(0.5 * celKalorii);
+                    return (int)(0.5 * kcalTarget);
                 }
             }
             else
             {
-                bialko = (int)(2 * waga);
-                if (bialko < celKalorii)
+                proteins = (int)(2 * weight);
+                if (proteins < kcalTarget)
                 {
-                    return bialko;
+                    return proteins;
                 }
                 else
                 {
-                    return (int)(0.65 * celKalorii);
+                    return (int)(0.65 * kcalTarget);
                 }
             }
         }
 
-        public int CountFatTarget(int celKalorii)
+        public int CountFatTarget(int kcalTarget)
         {
-            return celKalorii / 36;    //25% zapotrzebowania z tłuszczu (każdy gram tłuszczu ma 9kcal)
+            return kcalTarget / 36;    //25% of demand from fats (1g of fat has 9kcal)
         }
 
-        public int CountCarbsTarget(int celKalorie, int celBialko, int celTluszcze)
+        public int CountCarbsTarget(int kcalTarget, int proteinsTarget, int fatsTarget)
         {
-            return (celKalorie - ((celBialko * 4) + (celTluszcze * 9))) / 4;
+            return (kcalTarget - ((proteinsTarget * 4) + (fatsTarget * 9))) / 4;
         }
 
 
-        public int ObliczWiek(DateTime dataUrodzenia)
+        public int CountAge(DateTime birthDate)
         {
-            int age = DateTime.Today.Year - dataUrodzenia.Year;
-            if (dataUrodzenia.Date > DateTime.Today.AddYears(-age)) age--;
+            int age = DateTime.Today.Year - birthDate.Year;
+            if (birthDate.Date > DateTime.Today.AddYears(-age)) age--;
             return age;
         }
 }
