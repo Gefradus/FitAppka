@@ -34,7 +34,7 @@ namespace FitAppka.Controllers
             return View();
         }
 
-        private void FirstAppLaunch()//(int clientID)
+        private void FirstAppLaunch()
         {
             try     //jeśli try się powiedzie znaczy to że użytkownik już podał dane
             {
@@ -220,7 +220,7 @@ namespace FitAppka.Controllers
             if (m.Dessert == null) { client.Dessert = false; }
             if (m.Snack == null) { client.Snack = false; }
             if (m.Supper == null) { client.Supper = false; }
-            
+
             return client;
         }
 

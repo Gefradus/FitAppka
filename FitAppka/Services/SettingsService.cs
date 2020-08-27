@@ -14,8 +14,6 @@ public class SettingsServices
         return 1.5;
     }
 
-
-
     public int CountCalorieTarget(int demand, short? changeGoal, double pace)
         {
             if (changeGoal == 1)
@@ -55,7 +53,6 @@ public class SettingsServices
                 return (int)demand;
             }
         }
-
 
         public int CountCaloricDemand(bool? sex, DateTime? birthDate, int? growth, double? weight, double activity)
         {
