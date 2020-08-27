@@ -8735,26 +8735,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\fader\\.nuget\\packages\\": {}
+    "C:\\Users\\dratwak\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\FitAppka.csproj",
+      "projectUniqueName": "C:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\FitAppka.csproj",
       "projectName": "FitAppka",
-      "projectPath": "C:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\FitAppka.csproj",
-      "packagesPath": "C:\\Users\\fader\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\obj\\",
+      "projectPath": "C:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\FitAppka.csproj",
+      "packagesPath": "C:\\Users\\dratwak\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\fader\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\dratwak\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8824,7 +8822,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

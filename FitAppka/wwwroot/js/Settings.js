@@ -3,24 +3,20 @@
 }  
 
 function checkForm() {
-    let waga = document.getElementById("waga").value;
-    let wzrost = document.getElementById("wzrost").value;
-    let dataUro = document.getElementById("datepicker").value;
+    let weight = document.getElementById("weight").value;
+    let growth = document.getElementById("growth").value;
+    let dateOfBirth = document.getElementById("datepicker").value;
 
-    if (!isNumeric(waga) || !isNumeric(wzrost) || !isDate(dataUro.toString())) {
+    if (!isNumeric(weight) || !isNumeric(growth) || !isDate(dateOfBirth.toString())) {
 
-        let invalidWzrost = document.getElementById("invalidWzrost");
+        let invalidGrowth = document.getElementById("invalidGrowth");
 
-        document.getElementById("invalidWaga").hidden = isNumeric(waga);
-        invalidWzrost.hidden = isNumeric(wzrost);
-        document.getElementById("invalidDate").hidden = isDate(dataUro.toString());
+        document.getElementById("invalidWeight").hidden = isNumeric(waga);
+        invalidGrowth.hidden = isNumeric(wzrost);
+        document.getElementById("invalidDate").hidden = isDate(dateOfBirth.toString());
 
-        if (isNumeric(waga)) {
-            invalidWzrost.style.position = 'relative';
-        }
-        else {
-            invalidWzrost.style.position = 'absolute';
-        }
+        if (isNumeric(weight)) { invalidGrowth.style.position = 'relative'; }
+        else { invalidGrowth.style.position = 'absolute'; }
 
         $('html, body').animate({ scrollTop: 0 }, 'slow');
 
@@ -30,49 +26,43 @@ function checkForm() {
     return true;
 } 
 
-function ustawFlage(flaga) {
+function setFlag(flaga) {
     if (flaga == '1') {
         return true;
     }
 }
 
-function zablokujTempo() {
-    tempo = document.getElementById("tempo");
-
-    if (document.getElementById("utrzymanie").checked) {
-        //tempo.disabled = true;
-        tempo.value = 0.4;
-    }
-/*    else {
-        tempo.disabled = false;
-    }*/
-}
-
-
-function ustawDefault() {
-    if (document.getElementById("tempo") == null) {
-        document.getElementById("tempo") = 0.4;
+function blockPace() {
+    if (document.getElementById("maintenance").checked) {
+        document.getElementById("pace").value = 0.4;
     }
 }
 
 
-function dekrementuj() {
-    if (!document.getElementById("utrzymanie").checked) {
-        var tempo = document.getElementById("tempo");
-        var value = parseFloat(tempo.value).toFixed(1);
+function setDefaultPace() {
+    if (document.getElementById("pace") == null) {
+        document.getElementById("pace") = 0.4;
+    }
+}
+
+
+function decrementPace() {
+    if (!document.getElementById("maintenance").checked) {
+        var pace = document.getElementById("pace");
+        var value = parseFloat(pace.value).toFixed(1);
         if (value > 0.1) {
-            tempo.value = parseFloat(value - 0.1).toFixed(1);
+            pace.value = parseFloat(value - 0.1).toFixed(1);
         }
     }
 }
 
-function inkrementuj() {
-    if (!document.getElementById("utrzymanie").checked) {
-        var tempo = document.getElementById("tempo");
-        var value = tempo.value;
+function incrementPage() {
+    if (!document.getElementById("maintenance").checked) {
+        var pace = document.getElementById("pace");
+        var value = pace.value;
         if (value <= 0.9) {
             value = parseFloat(value) + 0.1;
-            tempo.value = value.toFixed(1);
+            pace.value = value.toFixed(1);
         }
     }
 }

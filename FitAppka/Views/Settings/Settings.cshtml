@@ -11,46 +11,46 @@
         <script type="text/javascript">
             function onload() {
                 if (@ViewData["isFirstLaunch"] == 0) {
-                    przywrocUstawienia();
+                    restoreDefault();
                 }
 
                 document.getElementById("datepicker").value = '@ViewData["dateOfBirth"]';
             }
 
-            function przywrocUstawienia() {
-               if (ustawFlage('@ViewData["sex"]')) {
-                   document.getElementById("mezczyzna").checked = true;
+            function restoreDefault() {
+               if (setFlag('@ViewData["sex"]')) {
+                   document.getElementById("men").checked = true;
                }
                else {
-                   document.getElementById("kobieta").checked = true;
+                   document.getElementById("women").checked = true;
                }
 
-                document.getElementById("waga").value = parseInt('@ViewData["weight"]');
-                document.getElementById("wzrost").value = parseInt('@ViewData["growth"]');
+                document.getElementById("weight").value = parseInt('@ViewData["weight"]');
+                document.getElementById("growth").value = parseInt('@ViewData["growth"]');
 
 
                 if ('@ViewData["changeGoal"]' == 2) {
-                    document.getElementById("utrzymanie").checked = true;
+                    document.getElementById("maintenance").checked = true;
                 }
                 if ('@ViewData["changeGoal"]' == 3) {
-                    document.getElementById("przytycie").checked = true;
+                    document.getElementById("gainWeight").checked = true;
                 }
 
-                var listaAktywnosci = document.getElementsByName("aktywnosc");
-                for (let i = 0; i < listaAktywnosci.length; i++) {
-                    if (listaAktywnosci[i].value == '@ViewData["activity"]') {
-                        listaAktywnosci[i].checked = true;
+                var activityList = document.getElementsByName("activity");
+                for (let i = 0; i < activityList.length; i++) {
+                    if (activityList[i].value == '@ViewData["activity"]') {
+                        activityList[i].checked = true;
                     }
                 }
 
-                document.getElementById("Sniadanie").checked = ustawFlage('@ViewData["breakfast"]');
-                document.getElementById("Iisniadanie").checked = ustawFlage('@ViewData["lunch"]');
-                document.getElementById("Obiad").checked = ustawFlage('@ViewData["dinner"]');
-                document.getElementById("Deser").checked = ustawFlage('@ViewData["dessert"]');
-                document.getElementById("Przekaska").checked = ustawFlage('@ViewData["snack"]');
-                document.getElementById("Kolacja").checked = ustawFlage('@ViewData["supper"]');
+                document.getElementById("breakfast").checked = setFlag('@ViewData["breakfast"]');
+                document.getElementById("lunch").checked = setFlag('@ViewData["lunch"]');
+                document.getElementById("dinner").checked = setFlag('@ViewData["dinner"]');
+                document.getElementById("dDessert").checked = setFlag('@ViewData["dessert"]');
+                document.getElementById("snack").checked = setFlag('@ViewData["snack"]');
+                document.getElementById("supper").checked = setFlag('@ViewData["supper"]');
 
-                document.getElementById("tempo").value = parseFloat('@ViewData["pace"]').toFixed(1);
+                document.getElementById("pace").value = parseFloat('@ViewData["pace"]').toFixed(1);
             }
         </script>
     </head>
@@ -79,8 +79,8 @@
                 <form id="form" method="post" onsubmit="return checkForm()" style="font-size: 18px">
                     <label style="font-weight: 600; margin-top: 15px; padding-bottom: 5px">Płeć</label>
                     <div class="form-group">
-                        <label><input type="radio" id="kobieta" name="sex" checked value=false style="margin-right: 10px" />Kobieta</label>
-                        <label><input type="radio" id="mezczyzna" name="sex" value=true style="margin-left: 15px; margin-right: 10px" />Mężczyzna</label>
+                        <label><input type="radio" id="women" name="sex" checked value=false style="margin-right: 10px" />Kobieta</label>
+                        <label><input type="radio" id="men" name="sex" value=true style="margin-left: 15px; margin-right: 10px" />Mężczyzna</label>
                     </div>
                     <div style="padding-bottom: 10px">
                         <div style="margin-bottom: 15px">
@@ -95,25 +95,25 @@
                     <div style="padding-bottom: 25px; border-bottom: 1px solid darkgray">
                         <div class="cent">
                             <div style="width: calc(50% - 10px);">
-                                <input id="waga" asp-for="Weight" class="form-control" type="number" min="10" max="600" placeholder="Waga [kg]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)"/>
+                                <input id="weight" asp-for="Weight" class="form-control" type="number" min="10" max="600" placeholder="Waga [kg]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)"/>
                                 <span asp-validation-for="Weight" class="text-danger" style="font-size: 16px"></span>
                             </div>
                             <label style="margin-right: 10px; margin-top: 5px; margin-left: 2px">kg</label>
                             <div style="width: calc(50% - 10px)">
-                                <input id="wzrost" asp-for="Growth" class="form-control" min="50" max="300" placeholder="Wzrost [cm]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)">
+                                <input id="growth" asp-for="Growth" class="form-control" min="50" max="300" placeholder="Wzrost [cm]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)">
                                 <span asp-validation-for="Growth" class="text-danger" style="font-size: 16px"></span>
                             </div>
                             <label style="margin-top: 5px; margin-left: 2px">cm</label>
                         </div>
                         <div>
-                            <label id="invalidWaga" class="text-danger" hidden style="width: 50%">Podaj wagę [kg]</label>
-                            <label id="invalidWzrost" class="text-danger" hidden style="position: absolute; left: calc(50% + 5px)">Podaj wzrost [cm]</label>
+                            <label id="invalidWeight" class="text-danger" hidden style="width: 50%">Podaj wagę [kg]</label>
+                            <label id="invalidGrowth" class="text-danger" hidden style="position: absolute; left: calc(50% + 5px)">Podaj wzrost [cm]</label>
                         </div>
                     </div>
                     <label asp-for="WeightChange_Goal" style="font-weight: 600; padding-top: 15px"></label>
-                    <div><label><input id="schudniecie" type="radio" name="Cel" value="1" checked onclick="zablokujTempo()" style="margin-right: 10px" />Chcę schudnąć</label></div>
-                    <div><label><input id="utrzymanie" type="radio" name="Cel" value="2" onclick="zablokujTempo()" style="margin-right: 10px" />Chcę utrzymać wagę</label></div>
-                    <div style="border-bottom: 1px solid darkgray; padding-bottom: 15px;"><label><input id="przytycie" type="radio" name="Cel" value="3" onclick="zablokujTempo()" style="margin-right: 10px" />Chcę przytyć</label></div>
+                    <div><label><input id="loseWeight" type="radio" name="Cel" value="1" checked onclick="blockPace()" style="margin-right: 10px" />Chcę schudnąć</label></div>
+                    <div><label><input id="maintenance" type="radio" name="Cel" value="2" onclick="blockPace()" style="margin-right: 10px" />Chcę utrzymać wagę</label></div>
+                    <div style="border-bottom: 1px solid darkgray; padding-bottom: 15px;"><label><input id="gainWeight" type="radio" name="Cel" value="3" onclick="blockPace()" style="margin-right: 10px" />Chcę przytyć</label></div>
 
 
                     <label style="font-weight: 600; padding-top: 15px">Aktywność w ciągu doby</label>
@@ -125,22 +125,22 @@
 
                     <label style="font-weight: 600; padding-top: 15px">Posiłki dnia</label>
                     <div>
-                        <div><label><input id="Breakfast" type="checkbox" checked name="Breakfast" value="true" style="margin-right: 10px" />Śniadanie</label></div>
-                        <div><label><input id="Lunch" type="checkbox" checked name="Lunch" value="true" style="margin-right: 10px" />II śniadanie</label></div>
-                        <div><label><input id="Dinner" type="checkbox" checked name="Dinner" value="true" style="margin-right: 10px" />Obiad</label></div>
+                        <div><label><input id="breakfast" type="checkbox" checked name="Breakfast" value="true" style="margin-right: 10px" />Śniadanie</label></div>
+                        <div><label><input id="lunch" type="checkbox" checked name="Lunch" value="true" style="margin-right: 10px" />II śniadanie</label></div>
+                        <div><label><input id="dinner" type="checkbox" checked name="Dinner" value="true" style="margin-right: 10px" />Obiad</label></div>
                     </div>
                     <div style="border-bottom: 1px solid darkgray">
-                        <div><label><input id="Dessert" type="checkbox" checked name="Dessert" value="true" style="margin-right: 10px" />Deser</label></div>
-                        <div><label><input id="Snack" type="checkbox" checked name="Snack" value="true" style="margin-right: 10px" />Przekąska</label></div>
-                        <div style="padding-bottom: 15px"><label><input id="Supper" type="checkbox" checked name="Supper" value="true" style="margin-right: 10px" />Kolacja</label></div>
+                        <div><label><input id="dessert" type="checkbox" checked name="Dessert" value="true" style="margin-right: 10px" />Deser</label></div>
+                        <div><label><input id="snack" type="checkbox" checked name="Snack" value="true" style="margin-right: 10px" />Przekąska</label></div>
+                        <div style="padding-bottom: 15px"><label><input id="supper" type="checkbox" checked name="Supper" value="true" style="margin-right: 10px" />Kolacja</label></div>
                     </div>
 
 
                     <label asp-for="PaceOfChange" class="srodkowanie" style="padding-top: 15px"></label>
                     <div class="form-group srodkowanie">
-                        <button type="button" class="przycisk" value="Odejmij" onclick="dekrementuj()"><img class="img-fluid" src="~/img/minus.png"></button>
-                        <input id="tempo" asp-for="PaceOfChange" type="number" step="0.1" value="0.4" /><span style="margin-left: -33px; float:right; margin-top: 2.5px; z-index: 99">kg</span>
-                        <button type="button" class="przycisk" value="Dodaj" onclick="inkrementuj()" style="margin-left: 13px"><img class="img-fluid" src="~/img/add.png"></button>
+                        <button type="button" class="przycisk" value="Odejmij" onclick="decrementPace()"><img class="img-fluid" src="~/img/minus.png"></button>
+                        <input id="pace" asp-for="PaceOfChange" type="number" step="0.1" value="0.4" /><span style="margin-left: -33px; float:right; margin-top: 2.5px; z-index: 99">kg</span>
+                        <button type="button" class="przycisk" value="Dodaj" onclick="incrementPace()" style="margin-left: 13px"><img class="img-fluid" src="~/img/add.png"></button>
                     </div>
 
 

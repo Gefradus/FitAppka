@@ -810,16 +810,8 @@ C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminProduct.cshtml.g.cs
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminSettings.cshtml.g.cs
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminTraining.cshtml.g.cs
-C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\DeleteProduct.cshtml.g.cs
-C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditProduct.cshtml.g.cs
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\FindDay\FindDay.cshtml.g.cs
-C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Logowanie.cshtml.g.cs
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Register.cshtml.g.cs
-C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Posilek\OknoGlowne.cshtml.g.cs
-C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Product\Delete.cshtml.g.cs
-C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Product\Details.cshtml.g.cs
-C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Product\Edit.cshtml.g.cs
-C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Product\Index.cshtml.g.cs
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Search\Create.cshtml.g.cs
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Search\Index.cshtml.g.cs
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Settings\Settings.cshtml.g.cs
@@ -841,3 +833,5 @@ C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAp
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.genruntimeconfig.cache
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Home\Home.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Home\Home.cshtml.g.cs
+C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
