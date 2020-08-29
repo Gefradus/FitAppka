@@ -90,11 +90,11 @@ namespace FitAppka.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AdminEditProduct(CreateProductModel model, int produktID, int addOrEditPhoto)
+        public IActionResult AdminEditProduct(CreateProductModel model, int productID, int addOrEditPhoto)
         {
             if (ModelState.IsValid)
             {
-                EditProduct(model, produktID, addOrEditPhoto);
+                EditProduct(model, productID, addOrEditPhoto);
                 return RedirectToAction(nameof(AdminProduct));
             }
             return View(model);
@@ -156,7 +156,7 @@ namespace FitAppka.Controllers
         private void SendDataAboutProductToView(int id)
         {
             Product product = _productRepository.GetProduct(id);
-            ViewData["produktID"] = id;
+            ViewData["productID"] = id;
             ViewData["name"] = product.ProductName;
             ViewData["path"] = product.PhotoPath;
             ViewData["calories"] = product.Calories;

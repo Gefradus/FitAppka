@@ -9,7 +9,8 @@
 </head>
 
 <body style="background: linear-gradient(0deg, rgb(29 88 175) 0%, rgb(227 177 115) 100%)">
-    @if((int)ViewData["isAdmin"] == 0) {
+    @if ((int)ViewData["isAdmin"] == 0)
+    {
         <header>
             <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav">
 
@@ -47,7 +48,7 @@
             </div>
         </header>
     }
-    
+
     <div class="container" id="page">
         <div class="row cent" style="height: 100%; margin-top: -5px">
             <div class="col-9 col-sm-8 col-lg-7 col-xl-6" style="height: 100%; padding-top: 30px; background: white">
@@ -62,39 +63,39 @@
                         Wartość odżywcza w 100g:
                     </div>
                     <div class="form-group cent">
-                        <div class="lewaKol">
+                        <div class="leftCol">
                             <label class="control-label">Kalorie</label>
                             <div style="display: flex;">
-                                <input asp-for="Calories" class="form-control" type="number" min="0" max="99999" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)"/>
+                                <input asp-for="Calories" class="form-control" type="number" min="0" max="99999" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" />
                                 <div class="jednostka" style="margin-right: -5px;">kcal</div>
                             </div>
                             <span asp-validation-for="Calories" class="text-danger"></span>
                         </div>
-                        <div class="prawaKol">
+                        <div class="rightCol">
                             <label class="control-label">Białko</label>
                             <div style="display: flex;">
-                                <input asp-for="Proteins" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 3), 100)"   />
+                                <input asp-for="Proteins" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 3), 100)" />
                                 <div class="jednostka">g</div>
                             </div>
                             <span asp-validation-for="Proteins" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group cent">
-                        <div class="lewaKol">
+                        <div class="leftCol">
                             <label class="control-label">Tłuszcze</label>
                             <div id="tluInDiv" style="display: flex">
-                                <input asp-for="Fats" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 3), 100)"  />
+                                <input asp-for="Fats" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 3), 100)" />
                                 <div class="jednostka">g</div>
                             </div>
                             <span asp-validation-for="Fats" class="text-danger"></span>
                         </div>
-                        <div class="prawaKol">
+                        <div class="rightCol">
                             <label class="control-label">Węglowodany</label>
                             <div style="display: flex">
-                                <input asp-for="Carbohydrates" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 3), 100)"  />
+                                <input asp-for="Carbohydrates" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 3), 100)" />
                                 <div class="jednostka">g</div>
                             </div>
-                            <span asp-validation-for="Carbohydrates" class="text-danger" ></span>
+                            <span asp-validation-for="Carbohydrates" class="text-danger"></span>
                         </div>
                     </div>
                     <div id="moreInfoBtn" class="mb-4" onclick="moreInfo();">
@@ -104,118 +105,118 @@
                     <div id="moreInfoDiv" hidden>
                         <div class="naglowek">Witaminy w 100g:</div>
                         <div class="form-group cent">
-                            <div class="lewaKol">
+                            <div class="leftCol">
                                 <label class="control-label">Witamina A</label>
                                 <div style="display: flex">
-                                    <input asp-for="VitaminA" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="VitaminA" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="VitaminA" class="text-danger"></span>
                             </div>
-                            <div class="prawaKol">
+                            <div class="rightCol">
                                 <label class="control-label">Witamina B1</label>
                                 <div style="display: flex">
-                                    <input asp-for="VitaminB1" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="VitaminB1" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="VitaminB1" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group cent">
-                            <div class="lewaKol">
+                            <div class="leftCol">
                                 <label class="control-label">Witamina B2</label>
                                 <div style="display: flex">
-                                    <input asp-for="VitaminB2" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="VitaminB2" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="VitaminB2" class="text-danger"></span>
                             </div>
-                            <div class="prawaKol">
+                            <div class="rightCol">
                                 <label class="control-label">Witamina B5</label>
                                 <div style="display: flex">
-                                    <input asp-for="VitaminB5" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="VitaminB5" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="VitaminB5" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group cent">
-                            <div class="lewaKol">
+                            <div class="leftCol">
                                 <label class="control-label">Witamina B6</label>
                                 <div style="display: flex">
-                                    <input asp-for="VitaminB6" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="VitaminB6" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="VitaminB6" class="text-danger"></span>
                             </div>
-                            <div class="prawaKol">
+                            <div class="rightCol">
                                 <label class="control-label">Biotyna</label>
                                 <div style="display: flex">
-                                    <input asp-for="Biotin" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="Biotin" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="Biotin" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group cent">
-                            <div class="lewaKol">
+                            <div class="leftCol">
                                 <label class="control-label">Kwas foliowy</label>
                                 <div style="display: flex">
-                                    <input asp-for="FolicAcid" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="FolicAcid" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="FolicAcid" class="text-danger"></span>
                             </div>
-                            <div class="prawaKol">
+                            <div class="rightCol">
                                 <label class="control-label">Witamina B12</label>
                                 <div style="display: flex">
-                                    <input asp-for="VitaminB12" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="VitaminB12" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="VitaminB12" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group cent">
-                            <div class="lewaKol">
+                            <div class="leftCol">
                                 <label class="control-label">Witamina C</label>
                                 <div style="display: flex">
-                                    <input asp-for="VitaminC" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="VitaminC" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="VitaminC" class="text-danger"></span>
                             </div>
-                            <div class="prawaKol">
+                            <div class="rightCol">
                                 <label class="control-label">Witamina D</label>
                                 <div style="display: flex">
-                                    <input asp-for="VitaminD" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="VitaminD" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="VitaminD" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group cent">
-                            <div class="lewaKol">
+                            <div class="leftCol">
                                 <label class="control-label">Witamina E</label>
                                 <div style="display: flex">
-                                    <input asp-for="VitaminE" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="VitaminE" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="VitaminE" class="text-danger"></span>
                             </div>
-                            <div class="prawaKol">
+                            <div class="rightCol">
                                 <label class="control-label">Witamina PP</label>
                                 <div style="display: flex">
-                                    <input asp-for="VitaminPp" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="VitaminPp" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="VitaminPp" class="text-danger"></span>
                             </div>
                         </div>
                         <div style="margin-bottom: 2rem">
-                            <div class="lewaKol" style="margin-right: 0 !important">
+                            <div class="leftCol" style="margin-right: 0 !important">
                                 <label class="control-label">Witamina K</label>
                                 <div style="display: flex">
-                                    <input asp-for="VitaminK" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="VitaminK" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="VitaminK" class="text-danger"></span>
@@ -225,18 +226,18 @@
                         <div class="naglowek" style="padding-top: 15px; border-top: 1px solid #cacaca">Składniki mineralne w 100g:</div>
 
                         <div class="form-group cent">
-                            <div class="lewaKol">
+                            <div class="leftCol">
                                 <label class="control-label">Cynk</label>
                                 <div style="display: flex">
-                                    <input asp-for="Zinc" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="Zinc" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Zinc" class="text-danger"></span>
                             </div>
-                            <div class="prawaKol">
+                            <div class="rightCol">
                                 <label class="control-label">Fosfor</label>
                                 <div style="display: flex">
-                                    <input asp-for="Phosphorus" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="Phosphorus" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Phosphorus" class="text-danger"></span>
@@ -244,18 +245,18 @@
                         </div>
 
                         <div class="form-group cent">
-                            <div class="lewaKol">
+                            <div class="leftCol">
                                 <label class="control-label">Jod</label>
                                 <div style="display: flex">
-                                    <input asp-for="Iodine" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="Iodine" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="Iodine" class="text-danger"></span>
                             </div>
-                            <div class="prawaKol">
+                            <div class="rightCol">
                                 <label class="control-label">Magnez</label>
                                 <div style="display: flex">
-                                    <input asp-for="Magnesium" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="Magnesium" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Magnesium" class="text-danger"></span>
@@ -263,54 +264,54 @@
                         </div>
 
                         <div class="form-group cent">
-                            <div class="lewaKol">
+                            <div class="leftCol">
                                 <label class="control-label">Miedź</label>
                                 <div style="display: flex">
-                                    <input asp-for="Copper" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="Copper" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Copper" class="text-danger"></span>
                             </div>
-                            <div class="prawaKol">
+                            <div class="rightCol">
                                 <label class="control-label">Potas</label>
                                 <div style="display: flex">
-                                    <input asp-for="Potassium" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="Potassium" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Potassium" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group cent">
-                            <div class="lewaKol">
+                            <div class="leftCol">
                                 <label class="control-label">Selen</label>
                                 <div style="display: flex">
-                                    <input asp-for="Selenium" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="Selenium" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="Selenium" class="text-danger"></span>
                             </div>
-                            <div class="prawaKol">
+                            <div class="rightCol">
                                 <label class="control-label">Sód</label>
                                 <div style="display: flex">
-                                    <input asp-for="Sodium" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="Sodium" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Sodium" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group cent">
-                            <div class="lewaKol">
+                            <div class="leftCol">
                                 <label class="control-label">Wapń</label>
                                 <div style="display: flex">
-                                    <input asp-for="Calcium" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="Calcium" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Calcium" class="text-danger"></span>
                             </div>
-                            <div class="prawaKol">
+                            <div class="rightCol">
                                 <label class="control-label">Żelazo</label>
                                 <div style="display: flex">
-                                    <input asp-for="Iron" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)"  >
+                                    <input asp-for="Iron" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 5), 10000)">
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Iron" class="text-danger"></span>
@@ -338,28 +339,31 @@
                     }
 
                     <div class="form-group cent mt-5">
-                        <input type="submit" value="Dodaj produkt" class="btn btn-primary" style="width: 50%; height: 40px" asp-route-clientID="@ViewData["clientID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-dayID="@ViewData["dayID"]" asp-route-isAdmin="@ViewData["isAdmin"]"/>
+                        <input type="submit" value="Dodaj produkt" class="btn btn-primary" style="width: 50%; height: 40px" asp-route-clientID="@ViewData["clientID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-dayID="@ViewData["dayID"]" asp-route-isAdmin="@ViewData["isAdmin"]" />
                     </div>
 
                     <div class="form-group cent" style="margin-top: 35px; margin-bottom: 2rem">
-                        @if((int)ViewData["isAdmin"] == 0) {
+                        @if ((int)ViewData["isAdmin"] == 0)
+                        {
                             <a asp-controller="Search" asp-action="Index" asp-route-clientID="@ViewData["clientID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-dayID="@ViewData["dayID"]">
                                 Powrót do wyszukiwania
                             </a>
                         }
-                        else {
+                        else
+                        {
                             <a asp-controller="Admin" asp-action="AdminProduct">
                                 Powrót do przeglądania produktów
                             </a>
                         }
                     </div>
-                    
-                    @if((int)ViewData["isAdmin"] == 1) {
+
+                    @if ((int)ViewData["isAdmin"] == 1)
+                    {
                         <script>
                             document.getElementById("page").style.marginTop = "-85px";
                         </script>
                     }
-                    
+
                 </form>
             </div>
         </div>

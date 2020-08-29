@@ -107,11 +107,11 @@ form{
     }
 }
 
-.lewaKol {
+.leftCol {
     width: calc(50% - 10px);
     margin-right: 45px
 }
 
-.prawaKol {
+.rightCol {
     width: calc(50% - 20px)
 }

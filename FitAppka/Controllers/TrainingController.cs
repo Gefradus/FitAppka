@@ -31,7 +31,7 @@ namespace FitAppka.Controllers
             dayID = GiveTodayIfDayNotChosen(dayID);
             ViewData["day"] = GetDayDateById(dayID);
             ViewData["dayID"] = dayID;
-            ViewData["clientID"] = DajZalogowanegoKlientaID();
+            ViewData["clientID"] = GetLoggedInClientID();
             ViewData["burnedKcal"] = CaloriesBurnedInDay(dayID);
             ViewData["cardioTime"] = CardioTimeInDay(dayID);
             ViewData["kcalTarget"] = GetKcalBurnedGoalInDay(dayID);
@@ -173,14 +173,14 @@ namespace FitAppka.Controllers
 
         private void AddDayIfNotExists(DateTime day)
         {
-            var client = _clientRepository.GetClientById(DajZalogowanegoKlientaID());
+            var client = _clientRepository.GetClientById(GetLoggedInClientID());
             int count = _context.Day.Count(dz => dz.Date == day && dz.ClientId == client.ClientId);
             if (count == 0)
             {
                 _dayRepository.Add(new Day()
                 {
                     Date = day,
-                    ClientId = DajZalogowanegoKlientaID(),
+                    ClientId = client.ClientId,
                     Breakfast = client.Breakfast,
                     Lunch = client.Lunch,
                     Dinner = client.Dinner,
@@ -200,7 +200,7 @@ namespace FitAppka.Controllers
         private int GetClientDayIDByDate(DateTime day)
         {
             AddDayIfNotExists(day);
-            return _dayRepository.GetClientDayByDate(day, DajZalogowanegoKlientaID()).DayId;
+            return _dayRepository.GetClientDayByDate(day, GetLoggedInClientID()).DayId;
         }
 
 
@@ -223,7 +223,7 @@ namespace FitAppka.Controllers
             }
         }
 
-        private int DajZalogowanegoKlientaID() {
+        private int GetLoggedInClientID() {
             return _clientRepository.GetClientByLogin(User.Identity.Name).ClientId;
         }
     }

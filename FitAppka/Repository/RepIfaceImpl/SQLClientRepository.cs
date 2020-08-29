@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,6 +45,11 @@ namespace FitAppka.Repository
         public IEnumerable<Client> GetAllClients()
         {
             return _context.Client.ToList();
+        }
+
+        public Task<List<Client>> GetAllClientsAsync()
+        {
+            return _context.Client.ToListAsync();
         }
 
         public Client GetClientByEmail(string email)
