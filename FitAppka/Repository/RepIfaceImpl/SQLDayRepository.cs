@@ -44,6 +44,11 @@ namespace FitAppka.Repository
             return _context.Day.FirstOrDefault(d => d.Date == date && d.ClientId == clientID);
         }
 
+        public IEnumerable<Day> GetClientDays(int clientID)
+        {
+            return _context.Day.Where(d => d.ClientId == clientID);
+        }
+
         public Day GetDay(int id)
         {
             return _context.Day.Find(id);

@@ -1,5 +1,4 @@
-﻿
-using FitAppka.Models;
+﻿using FitAppka.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

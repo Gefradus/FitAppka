@@ -31,7 +31,6 @@ namespace FitAppka.Models
 
         [Display(Name = "Wybierz swój poziom aktywności")]
         public short? LevelOfActivity { get; set; }
-
         public bool? Breakfast { get; set; }
         public bool? Lunch { get; set; }
         public bool? Dinner { get; set; }

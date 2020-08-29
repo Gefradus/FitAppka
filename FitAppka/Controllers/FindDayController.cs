@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models;
+using FitAppka.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,39 +13,44 @@ namespace FitAppka.Controllers
     [Authorize]
     public class FindDayController : Controller
     {
-        private readonly FitAppContext _context;
-        public FindDayController(FitAppContext context)
+        private readonly IMealRepository _mealRepository;
+        private readonly IDayRepository _dayRepository;
+        private readonly IClientRepository _clientRepository;
+        private readonly IProductRepository _productRespository;
+        
+        public FindDayController(IClientRepository clientRepository, IDayRepository dayRepository, IMealRepository mealRepository, IProductRepository productRepository)
         {
-            _context = context;
+            _productRespository = productRepository;
+            _mealRepository = mealRepository;
+            _dayRepository = dayRepository;
+            _clientRepository = clientRepository;
         }
 
         public IActionResult FindDay(int productID, int from, int to, int searchType)
         {
-            var clientID = _context.Client.Where(k => k.Login.ToLower() == User.Identity.Name.ToLower()).Select(c => c.ClientId).FirstOrDefault();
-            
+            var clientID = _clientRepository.GetClientByLogin(User.Identity.Name).ClientId;
             var listOfDays = FindDays(from, to, productID, searchType, clientID);
 
             CreateProductsList(productID);
 
             ViewData["searchType"] = searchType;
-            ViewData["from"] = to;
-            ViewData["to"] = from;  
+            ViewData["from"] = from;
+            ViewData["to"] = to;  
             ViewData["daysID"] = listOfDays;
             ViewData["wheterFound"] = WheterDayFound(listOfDays);
             ViewData["clientID"] = clientID;
+            ViewData["listByWater"] = WaterInDays(listOfDays);                        
+            ViewData["listByKcal"] = CaloriesInDays(listOfDays);                   
+            ViewData["productID"] = productID;                                  
+            ViewData["listByGrammages"] = GrammageInDays(listOfDays, productID);  
 
-            ViewData["listByWater"] = WaterInDays(listOfDays);                        //gdy wyszukujemy po wodzie
-            ViewData["listByKcal"] = CaloriesInDays(listOfDays);                   //gdy wyszukujemy po kaloriach
-            ViewData["productID"] = productID;                                  //gdy wyszukujemy po produktach
-            ViewData["listByGrammages"] = GrammageInDays(listOfDays, productID);  //gdy wyszukujemy po produktach
-
-            return View(_context.Day.ToList());
+            return View(_dayRepository.GetAllDays());
         }
 
         private void CreateProductsList(int productID)
         {
             List<SelectListItem> productsList = new List<SelectListItem>();
-            foreach (var item in _context.Product)
+            foreach (var item in _productRespository.GetAllProducts())
             {
                 if (item.ProductId == productID)
                 {
@@ -67,7 +73,7 @@ namespace FitAppka.Controllers
             foreach (var dayID in daysList)
             {
                 int? sumOfDrunkWater = 0;
-                foreach (var day in _context.Day.ToList())
+                foreach (var day in _dayRepository.GetAllDays())
                 {
                     if (dayID == day.DayId)
                     {
@@ -87,17 +93,17 @@ namespace FitAppka.Controllers
             foreach (var dayID in daysList)
             {
                 int sumOfGrammages = 0;
-                foreach (var day in _context.Day.ToList())
+                foreach (var day in _dayRepository.GetAllDays())
                 {
                     if (dayID == day.DayId)
                     { 
-                        foreach (var meal in _context.Meal.ToList())
+                        foreach (var meal in _mealRepository.GetAllMeals())
                         {
                             if (meal.DayId == dayID)
                             {          
                                 if (meal.ProductId == productID)
                                 {
-                                    sumOfGrammages += (int)meal.Grammage;
+                                    sumOfGrammages += meal.Grammage;
                                 }
                             }
                         }
@@ -114,11 +120,11 @@ namespace FitAppka.Controllers
             foreach (var dayID in daysList)
             {
                 double? sumOfCalories = 0;
-                foreach (var day in _context.Day.ToList())
+                foreach (var day in _dayRepository.GetAllDays())
                 {
                     if (dayID == day.DayId)
                     {
-                        foreach (var meal in _context.Meal.ToList())
+                        foreach (var meal in _mealRepository.GetAllMeals())
                         {
                             if (meal.DayId == dayID)
                             {
@@ -138,18 +144,18 @@ namespace FitAppka.Controllers
         }
 
 
-        private List<int> FindDays(int od, int dO, int produktID, int typSzukania, int klientID){
-            if (typSzukania == 1)
+        private List<int> FindDays(int from, int to, int productID, int searchType, int clientID){
+            if (searchType == 1)
             {
-                return FindDayByProduct(od, dO, produktID, klientID);
+                return FindDayByProduct(from, to, productID, clientID);
             }
-            if (typSzukania == 2)
+            if (searchType == 2)
             {
-                return FindDaysByCalories(od, dO, klientID);
+                return FindDaysByCalories(from, to, clientID);
             }
-            if (typSzukania == 3)
+            if (searchType == 3)
             {
-                return FindDaysByWater(od, dO, klientID);
+                return FindDaysByWater(from, to, clientID);
             }
             
             return new List<int>();  
@@ -160,7 +166,7 @@ namespace FitAppka.Controllers
         {
             List<int> daysList = new List<int>();
 
-            foreach (var item in _context.Day.Where(d => d.ClientId == clientID).ToList())
+            foreach (var item in _dayRepository.GetClientDays(clientID))
             {
                 if(item.WaterDrunk >= from && (item.WaterDrunk <= to || to == 0))
                 {
@@ -174,15 +180,15 @@ namespace FitAppka.Controllers
 
         private List<int> FindDaysByCalories(int from, int to, int clientID)
         {
-            List<Meal> meals = _context.Meal.ToList(); 
             List<int> listOfCaloriesInDays = new List<int>();
             List<int> listOfDaysID = new List<int>();
             List<int> listOfDays = new List<int>();
+            var listOfMeals = _mealRepository.GetAllMeals();
 
-            foreach (var item in _context.Day.Where(d => d.ClientId == clientID).ToList())
+            foreach (var item in _dayRepository.GetClientDays(clientID))
             {
                 double? whichDayMeals = 0;
-                foreach (var meal in meals)
+                foreach (var meal in listOfMeals)
                 {
                     if (meal.DayId == item.DayId)
                     {
@@ -209,17 +215,14 @@ namespace FitAppka.Controllers
 
         private List<int> FindDayByProduct(int from, int to, int productID, int clientID)
         {
-            List<Meal> meals = _context.Meal.Where(p => p.ProductId == productID).ToList();
             List<int> daysList = new List<int>();
-
-            foreach(var item in _context.Day.Where(d => d.ClientId == clientID).ToList())
-            {
-                List<Meal> mealsList = meals.Where(p => p.DayId == item.DayId).ToList();
-                
+            var mealsWithProduct = _mealRepository.GetAllMeals().Where(p => p.ProductId == productID);
+            foreach (var item in _dayRepository.GetClientDays(clientID))
+            { 
                 int sumOfGrammages = 0;
-                foreach (var meal in mealsList)
+                foreach (var meal in mealsWithProduct.Where(p => p.DayId == item.DayId))
                 {
-                    sumOfGrammages += (int)meal.Grammage;
+                    sumOfGrammages += meal.Grammage;
                 }
 
                 if (sumOfGrammages >= from && (sumOfGrammages <= to || to == 0) && sumOfGrammages != 0)

@@ -2,7 +2,7 @@
     background-color: #ecf8ba
 }
 
-.szukajBtn {
+.searchBtn {
     width: 225px;
     margin-left: -10px;
     height: 32px;
@@ -66,7 +66,7 @@
     background-color: #f4f4f4
 }
 
-#nieZnalProd {
+#prodNotFound {
     margin-top: 125px;
     width: 100%
 }
@@ -83,7 +83,7 @@
     margin-left: 15px
 }
 
-.navSzukaj {
+.navsearch {
     height: 107px;
     position: fixed;
     left: 0;
@@ -93,7 +93,7 @@
     background-color: #f4f4f4
 }
 
-.naglowekDni {
+.dayHeader {
     background-color: #202020;
     padding-bottom: 10px;
     padding-top: 10px;
@@ -104,7 +104,7 @@
     font-weight: 600
 }
 
-.dzienWiersz {
+.dayRow {
     align-items: center;
     padding-top: 9px;
     padding-bottom: 10px;
@@ -116,7 +116,7 @@
     border-right: 1px solid darkgray;
 }
 
-#wybor {
+#choice {
     border-radius: .25rem;
     text-align-last: center;
 }
@@ -138,7 +138,7 @@
         margin-left: calc(50% - 125px)
     }
 
-    #navProdukt {
+    #navProduct {
         height: 160px
     }
 
@@ -146,7 +146,7 @@
         margin-top: 130px
     }
 
-    .naglowekDni {
+    .dayHeader {
         font-size: 14px;
     }
 
@@ -155,7 +155,7 @@
         margin-right: 5px
     }
 
-    #nieZnalProd {
+    #prodNotFound {
         margin-top: 175px
     }
 }

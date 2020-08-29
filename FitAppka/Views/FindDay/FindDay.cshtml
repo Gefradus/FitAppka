@@ -1,55 +1,46 @@
 ﻿@model IEnumerable<FitAppka.Models.Day>
 
-    <head>
-        <link rel="stylesheet" href="~/css/Home.css" type="text/css">
-        <link href="~/css/AllViews.css" rel="stylesheet" />
-        <link href="~/css/FindDay.css" rel="stylesheet" />
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <link href="~/chosen/chosen.min.css" rel="stylesheet" />
-        <script src="~/js/chosen.jquery.min.js"></script>
-        <script src="~/js/FindDay.js"></script>
-        <script type="text/javascript">
-            function szukaj(typSzukan) {
-                szukajDnia(typSzukan, '@Html.Raw(@Url.Action("FindDay", "FindDay", new { od = "_od_", produktID = "_id_", dO = "_dO_", typSzukania = "_typ_" }))');
+<head>
+    <link rel="stylesheet" href="~/css/Home.css" type="text/css">
+    <link href="~/css/AllViews.css" rel="stylesheet" />
+    <link href="~/css/FindDay.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="~/chosen/chosen.min.css" rel="stylesheet" />
+    <script src="~/js/chosen.jquery.min.js"></script>
+    <script src="~/js/FindDay.js"></script>
+    <script type="text/javascript">
+            function search(searchType) {
+                searchDay(searchType, '@Html.Raw(@Url.Action("FindDay", "FindDay", new { from = "_from_", productID = "_id_", to = "_to_", searchType = "_type_" }))');
             }
 
-            function przejdz(dzienID, klientID) {
-                var url = '@Html.Raw(@Url.Action("Powrot", "Posilek", new { dzienID = "_dzienID_", klientID = "_klientID_" }))';
-                window.location.href = url.replace('_dzienID_', dzienID).replace('_klientID_', klientID);
+            function home(dayID, clientID) {
+                var url = '@Html.Raw(@Url.Action("Return", "Home", new { dayID = "_dayID_", clientID = "_clientID_" }))';
+                window.location.href = url.replace('_dayID_', dayID).replace('_clientID_', clientID);
             }
 
-            function przywrocStan() {
-                przywroc(@ViewData["typSzukania"]);
+            function restoreState() {
+                restore(@ViewData["searchType"]);
             }
+    </script>
+</head>
 
-            function kolorujDrugiWiersz() {
-                var wszystkie = document.getElementsByClassName("dzienWiersz");
-                for (var i = 0; i < wszystkie.length; i++) {
-                    if (i % 2 == 0) {
-                        wszystkie[i].style.backgroundColor = "rgb(224, 221, 221)";
-                    }
-                }
-            }
-        </script>
-    </head>
-
-<body onload="zaladuj()">
+<body onload="onload()">
 
     <header>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav" style="text-align: center">
 
-            <div id="lewa">
+            <div id="left">
                 <div class="mr-auto mt-3">
-                    <a class="nav-link ml-sm-3 ml-md-4 ml-lg-5 mt-2 mt-md-0" asp-controller="Posilek" asp-action="Start" asp-route-id="@ViewData["klientID"]"><img style="height: 50px; width:185px; margin-top: -15px" src="~/img/logorozowe.png" /></a>
+                    <a class="nav-link ml-sm-3 ml-md-4 ml-lg-5 mt-2 mt-md-0" asp-controller="Home" asp-action="Start"><img style="height: 50px; width:185px; margin-top: -15px" src="~/img/logorozowe.png" /></a>
                 </div>
             </div>
             <div>
-                <div id="prawa" class="navbar-nav ml-auto">
+                <div id="right" class="navbar-nav ml-auto">
                     <button class="navbar-toggler mr-2 mr-sm-3" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Przełącznik nawigacji" type="button">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="d-none d-md-inline-block mr-md-5">
-                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Training" asp-action="TrainingPanel" asp-route-dzienID="@ViewData["dzienID"]">Treningi </a></div>
+                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi </a></div>
                         <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="FindDay" asp-action="FindDay">Szukaj dni <img style="height: 15px; width:15px" src="~/img/search.png" /></a></div>
                         <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Settings" asp-action="Settings">Ustawienia <img style="height: 15px; width:15px" src="~/img/settings.png" /></a></div>
                         <div class="fl"><a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img style="height: 15px; width:15px" src="~/img/logout.png" /></a></div>
@@ -62,7 +53,7 @@
 
             <ul class="navbar-nav">
                 <li>
-                    <a class="nav-link text-dark" asp-controller="Training" asp-action="TrainingPanel" asp-route-dzienID="@ViewData["dzienID"]">Treningi</a>
+                    <a class="nav-link text-dark" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi</a>
                 </li>
                 <li>
                     <a class="nav-link text-dark" asp-controller="FindDay" asp-action="FindDay">Szukaj dni</a>
@@ -79,7 +70,7 @@
             <div style="margin-top: -15px">
                 <div style="font-size:12px; margin-right: 10px; margin-bottom: 2px;">Szukaj dni gdzie:</div>
                 <div>
-                    <select id="wybor" onchange="wybor()">
+                    <select id="choice" onchange="choice()">
                         <option value="1">Spożyto dany posiłek</option>
                         <option value="2">Spożycie kalorii wyniosło</option>
                         <option value="3">Spożycie płynów wyniosło</option>
@@ -92,36 +83,36 @@
 
 
     <div class="container" style="margin-top: 100px">
-        <!-----------------------------------------------SZUKANIE PO PRODUKTACH--------------------------------------------------->
-        <div class="row no-gutters" id="produkt">
+        <!-------------------------------------------------------------------------------------------------->
+        <div id="product" class="row no-gutters">
             <div class="container">
                 <div class="row no-gutters">
-                    <nav id="navProdukt" class="navbar navbar-expand-md border-bottom cent navSzukaj">
+                    <nav id="navProduct" class="navbar navbar-expand-md border-bottom cent navsearch">
                         <div id="panelek">
                             <div id="chosenPanel">
                                 <div style="font-size: 12px">Wybierz produkt:</div>
-                                @Html.DropDownList("Produkt", (List<SelectListItem>)ViewData["allProducts"], new { id = "normalDropDown" })
+                                @Html.DropDownList("Product", (List<SelectListItem>)ViewData["allProducts"], new { id = "normalDropDown" })
                             </div>
                             <div id="panelGramatury">
                                 <div style="font-size: 12px">Przedział wagi produktu (*opcjonalne):</div>
                                 <div class="oddodiv">*Od: </div>
-                                <input id="odProdukt" class="oddo" type="number" value="@ViewData["od"]" />
+                                <input id="from_product" class="oddo" type="number" value="@ViewData["from"]" />
                                 <div class="g1">g</div>
                                 <div class="oddodiv">*Do: </div>
-                                <input id="doProdukt" class="oddo" type="number" value="@ViewData["do"]" />
+                                <input id="to_product" class="oddo" type="number" value="@ViewData["to"]" />
                                 <div class="g2">g</div>
                                 <div class="cb"></div>
                             </div>
-                            <div class="cent cb" style="padding-top: 20px"><button class="szukajBtn" type="button" onclick="szukaj(1)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
+                            <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(1)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
                         </div>
                     </nav>
                 </div>
 
-                @if ((bool)ViewData["czyZnaleziono"] && (int)ViewData["typSzukania"] == 1)
+                @if ((bool)ViewData["wheterFound"] && (int)ViewData["searchType"] == 1)
                 {
                     <div id="ctxProd" class="row no-gutters">
                         <div class="container">
-                            <div class="row no-gutters naglowekDni">
+                            <div class="row no-gutters dayHeader">
                                 <div class="col-4 cent" style="margin-left: -17px; margin-right: 17px">
                                     Dzień
                                 </div>
@@ -137,73 +128,73 @@
                 }
 
                 <div class="row no-gutters" style="font-weight: 600">
-                    @if ((bool)ViewData["czyZnaleziono"] && (int)ViewData["typSzukania"] == 1)
+                    @if ((bool)ViewData["wheterFound"] && (int)ViewData["searchType"] == 1)
                     {
                         <div class="container" style="border-bottom: 1px solid darkgray">
 
                             @{
-                                List<int> listaGramatur = (List<int>)ViewData["listaGramatur"];
-                                int ileDniWypisano = 0;
+                                List<int> grammagesList = (List<int>)ViewData["listByGrammages"];
+                                int counter = 0;
 
-                                foreach (var dzienID in (List<int>)ViewData["dniID"])
+                                foreach (var dayID in (List<int>)ViewData["daysID"])
                                 {
                                     foreach (var item in Model)
                                     {
-                                        if (item.DayId == dzienID)
+                                        if (item.DayId == dayID)
                                         {
-                                            <div class="row no-gutters dzienWiersz">
+                                            <div class="row no-gutters dayRow">
                                                 <div class="col-4 cent">
                                                     @{ var dayOfYear = item.Date.Value; }
                                                     @dayOfYear.ToString("dd/MM/yyyy")
                                                 </div>
                                                 <div class="col-4 cent">
-                                                    @listaGramatur[ileDniWypisano] g
+                                                    @grammagesList[counter] g
                                                 </div>
                                                 <div class="col-4 cent">
-                                                    <button type="button" onclick="przejdz('@item.DayId', '@item.ClientId')" style="background-color: #636363"><img src="~/img/logout.png" width="30" height="30"></button>
+                                                    <button type="button" onclick="home('@item.DayId', '@item.ClientId')" style="background-color: #636363"><img src="~/img/logout.png" width="30" height="30"></button>
                                                 </div>
                                             </div>
-                                            ileDniWypisano++;
+                                            counter++;
                                         }
                                     }
                                 }
                             }
                         </div>
                     }
-                    @if (!(bool)ViewData["czyZnaleziono"] && (int)ViewData["typSzukania"] == 1)
+                    @if (!(bool)ViewData["wheterFound"] && (int)ViewData["searchType"] == 1)
                     {
-                        <div class="cent" id="nieZnalProd">Nie znaleziono dni</div>
+                        <div class="cent" id="prodNotFound">Nie znaleziono dni</div>
                     }
 
                 </div>
             </div>
         </div>
 
-        <!-----------------------------------------------SZUKANIE PO KALORIACH--------------------------------------------------->
-        <div id="kalorie" style="width: 100%" hidden>
+        <!-------------------------------------------------------------------------------------------------->
+        <div id="calorie" style="width: 100%" hidden>
             <div class="container">
                 <div class="row no-gutters">
-                    <nav class="navbar navbar-expand-md border-bottom cent navSzukaj">
+                    <nav class="navbar navbar-expand-md border-bottom cent navsearch">
                         <div>
                             <div style="float: left; margin-right: 15px; margin-left:15px">
                                 <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych kalorii (*opcjonalne):</div>
                                 <div class="oddodiv">*Od: </div>
-                                <input id="odKalorie" class="oddo" type="number" value="@ViewData["od"]" />
+                                <input id="from_calorie" class="oddo" type="number" value="@ViewData["from"]" />
                                 <div class="g1">kcal</div>
                                 <div class="oddodiv">*Do: </div>
-                                <input id="doKalorie" class="oddo" type="number" value="@ViewData["do"]" />
+                                <input id="to_calorie" class="oddo" type="number" value="@ViewData["to"]" />
                                 <div class="g2">kcal</div>
                                 <div class="cb"></div>
                             </div>
-                            <div class="cent cb" style="padding-top: 20px"><button class="szukajBtn" type="button" onclick="szukaj(2)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
+                            <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(2)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
                         </div>
                     </nav>
                 </div>
-                @if ((bool)ViewData["czyZnaleziono"] && (int)ViewData["typSzukania"] == 2)
+                @if ((bool)ViewData["wheterFound"] && (int)ViewData["searchType"] == 2)
                 {
                     <div class="row no-gutters" style="margin-top: 100px;">
                         <div class="container">
-                            <div class="row no-gutters naglowekDni">
+                            <div class="row no-gutters dayHeader">
                                 <div class="col-4 cent" style="margin-left: -17px; margin-right: 17px">
                                     Dzień
                                 </div>
@@ -218,71 +209,71 @@
                     </div>
                 }
                 <div class="row no-gutters" style="font-weight: 600">
-                    @if ((bool)ViewData["czyZnaleziono"] && (int)ViewData["typSzukania"] == 2)
+                    @if ((bool)ViewData["wheterFound"] && (int)ViewData["searchType"] == 2)
                     {
                         <div class="container" style="border-bottom: 1px solid darkgray">
 
                             @{
-                                List<decimal> listaKcal = (List<decimal>)ViewData["listaKcal"];
-                                int ileDniWypisano = 0;
+                                List<decimal> listOfKcal = (List<decimal>)ViewData["listByKcal"];
+                                int counter = 0;
 
-                                foreach (var dzienID in (List<int>)ViewData["dniID"])
+                                foreach (var dayID in (List<int>)ViewData["daysID"])
                                 {
                                     foreach (var item in Model)
                                     {
-                                        if (item.DayId == dzienID)
+                                        if (item.DayId == dayID)
                                         {
-                                            <div class="row no-gutters dzienWiersz">
+                                            <div class="row no-gutters dayRow">
                                                 <div class="col-4 cent">
                                                     @{ var dayOfYear = item.Date.Value; }
                                                     @dayOfYear.ToString("dd/MM/yyyy")
                                                 </div>
                                                 <div class="col-4 cent">
-                                                    @listaKcal[ileDniWypisano] kcal
+                                                    @listOfKcal[counter] kcal
                                                 </div>
                                                 <div class="col-4 cent">
-                                                    <button type="button" onclick="przejdz('@item.DayId', '@item.ClientId')" style="background-color: #636363"><img src="~/img/logout.png" width="30" height="30"></button>
+                                                    <button type="button" onclick="home('@item.DayId', '@item.ClientId')" style="background-color: #636363"><img src="~/img/logout.png" width="30" height="30"></button>
                                                 </div>
                                             </div>
-                                            ileDniWypisano++;
+                                            counter++;
                                         }
                                     }
                                 }
                             }
                         </div>
                     }
-                    @if (!(bool)ViewData["czyZnaleziono"] && (int)ViewData["typSzukania"] == 2)
+                    @if (!(bool)ViewData["wheterFound"] && (int)ViewData["searchType"] == 2)
                     {
                         <div class="cent" style="margin-top: 125px; width: 100%">Nie znaleziono dni</div>
                     }
                 </div>
             </div>
         </div>
-        <!-----------------------------------------------SZUKANIE PO WODZIE--------------------------------------------------->
-        <div id="plyny" style="width: 100%" hidden>
+        <!-------------------------------------------------------------------------------------------------->
+        <div id="waterConsumption" style="width: 100%" hidden>
             <div class="container">
                 <div class="row no-gutters">
-                    <nav class="navbar navbar-expand-md border-bottom cent navSzukaj">
+                    <nav class="navbar navbar-expand-md border-bottom cent navsearch">
                         <div>
                             <div style="float: left; margin-right: 15px; margin-left:15px">
                                 <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych płynów (*opcjonalne):</div>
                                 <div class="oddodiv">*Od: </div>
-                                <input id="odWoda" class="oddo" type="number" value="@ViewData["od"]" />
+                                <input id="from_water" class="oddo" type="number" value="@ViewData["from"]" />
                                 <div class="g1">ml</div>
                                 <div class="oddodiv">*Do: </div>
-                                <input id="doWoda" class="oddo" type="number" value="@ViewData["do"]" />
+                                <input id="to_water" class="oddo" type="number" value="@ViewData["to"]" />
                                 <div class="g2">ml</div>
                                 <div class="cb"></div>
                             </div>
-                            <div class="cent cb" style="padding-top: 20px"><button class="szukajBtn" type="button" onclick="szukaj(3)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
+                            <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(3)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
                         </div>
                     </nav>
                 </div>
-                @if ((bool)ViewData["czyZnaleziono"] && (int)ViewData["typSzukania"] == 3)
+                @if ((bool)ViewData["wheterFound"] && (int)ViewData["searchType"] == 3)
                 {
                     <div class="row no-gutters" style="margin-top: 100px;">
                         <div class="container">
-                            <div class="row no-gutters naglowekDni">
+                            <div class="row no-gutters dayHeader">
                                 <div class="col-4 cent" style="margin-left: -17px; margin-right: 17px">
                                     Dzień
                                 </div>
@@ -297,40 +288,40 @@
                     </div>
                 }
                 <div class="row no-gutters" style="font-weight: 600">
-                    @if ((bool)ViewData["czyZnaleziono"] && (int)ViewData["typSzukania"] == 3)
+                    @if ((bool)ViewData["wheterFound"] && (int)ViewData["searchType"] == 3)
                     {
                         <div class="container" style="border-bottom: 1px solid darkgray">
 
                             @{
-                                List<int?> listaMl = (List<int?>)ViewData["listaMl"];
-                                int ileDniWypisano = 0;
+                                List<int?> listOfMl = (List<int?>)ViewData["listByWater"];
+                                int counter = 0;
 
-                                foreach (var dzienID in (List<int>)ViewData["dniID"])
+                                foreach (var dayID in (List<int>)ViewData["daysID"])
                                 {
                                     foreach (var item in Model)
                                     {
-                                        if (item.DayId == dzienID)
+                                        if (item.DayId == dayID)
                                         {
-                                            <div class="row no-gutters dzienWiersz">
+                                            <div class="row no-gutters dayRow">
                                                 <div class="col-4 cent">
                                                     @{ var dayOfYear = item.Date.Value; }
                                                     @dayOfYear.ToString("dd/MM/yyyy")
                                                 </div>
                                                 <div class="col-4 cent">
-                                                    @listaMl[ileDniWypisano] ml
+                                                    @listOfMl[counter] ml
                                                 </div>
                                                 <div class="col-4 cent">
-                                                    <button type="button" onclick="przejdz('@item.DayId', '@item.ClientId')" style="background-color: #636363"><img src="~/img/logout.png" width="30" height="30"></button>
+                                                    <button type="button" onclick="home('@item.DayId', '@item.ClientId')" style="background-color: #636363"><img src="~/img/logout.png" width="30" height="30"></button>
                                                 </div>
                                             </div>
-                                            ileDniWypisano++;
+                                            counter++;
                                         }
                                     }
                                 }
                             }
                         </div>
                     }
-                    @if (!(bool)ViewData["czyZnaleziono"] && (int)ViewData["typSzukania"] == 3)
+                    @if (!(bool)ViewData["wheterFound"] && (int)ViewData["searchType"] == 3)
                     {
                         <div class="cent" style="margin-top: 125px; width: 100%">Nie znaleziono dni</div>
                     }
@@ -339,7 +330,7 @@
         </div>
     </div>
     <script>
-        kolorujDrugiWiersz();
+        colorEverySecondRow();
     </script>
 </body>
 

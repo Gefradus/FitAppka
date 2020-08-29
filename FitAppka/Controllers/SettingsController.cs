@@ -30,15 +30,15 @@ namespace FitAppka.Controllers
         public IActionResult Settings()
         {
             FirstAppLaunch();
-            ViewData["clientID"] = _clientRepository.GetClientByLogin(User.Identity.Name).ClientId;
+            ViewData["clientID"] = GetLoggedInClient().ClientId;
             return View();
         }
 
         private void FirstAppLaunch()
         {
-            try     //jeśli try się powiedzie znaczy to że użytkownik już podał dane
+            try
             {
-                Client client = _clientRepository.GetClientByLogin(User.Identity.Name);
+                Client client = GetLoggedInClient();
 
                 ViewData["dateOfBirth"] = client.DateOfBirth.Value.ToString("yyyy-MM-dd");
                 ViewData["weight"] = SetLastWeightMeasurement(_context.WeightMeasurement.Where(w => w.ClientId == client.ClientId).ToList());
@@ -47,20 +47,24 @@ namespace FitAppka.Controllers
                 ViewData["activity"] = (int)client.ActivityLevel;
                 ViewData["pace"] = client.PaceOfChanges.ToString().Replace(',', '.');
                 ViewData["isFirstLaunch"] = 0;
-
-                SetBoolean(client.Sex, "sex");
-                SetBoolean(client.Breakfast, "breakfast");
-                SetBoolean(client.Lunch, "lunch");
-                SetBoolean(client.Dinner, "dinner");
-                SetBoolean(client.Dessert, "dessert");
-                SetBoolean(client.Snack, "snack");
-                SetBoolean(client.Supper, "supper");
+                SendDataAboutClientBooleans(client);
             }
-            catch   //użytkownik nie podał danych (pierwsze uruchomienie)
+            catch
             {
                 ViewData["dateOfBirth"] = DateTime.Now.ToString("yyyy-MM-dd");
                 ViewData["isFirstLaunch"] = 1;
             }
+        }
+
+        private void SendDataAboutClientBooleans(Client client)
+        {
+            SetBoolean(client.Sex, "sex");
+            SetBoolean(client.Breakfast, "breakfast");
+            SetBoolean(client.Lunch, "lunch");
+            SetBoolean(client.Dinner, "dinner");
+            SetBoolean(client.Dessert, "dessert");
+            SetBoolean(client.Snack, "snack");
+            SetBoolean(client.Supper, "supper");
         }
 
         private double SetLastWeightMeasurement(List<WeightMeasurement> measurementList)
@@ -114,7 +118,7 @@ namespace FitAppka.Controllers
         {
             if (ModelState.IsValid)
             {
-                var client = SetClientGoals(m, _clientRepository.GetClientByLogin(User.Identity.Name));
+                var client = SetClientGoals(m, GetLoggedInClient());
 
                 if (isFirstLaunch == 1) { client.DateOfJoining = DateTime.Now.Date; }
                 SetDataForDaysFromToday(m, client);
@@ -130,7 +134,6 @@ namespace FitAppka.Controllers
                     ModelState.AddModelError("", "Data urodzenia nie może być mniejsza niż 01.01.1900r.");
                     return View(m);
                 }
-
             }
 
             return View(m);
@@ -160,7 +163,7 @@ namespace FitAppka.Controllers
         private List<int> GetListOfDaysIDFromToday(Client client)
         {
             List<int> listOfIDDaysFromToday = new List<int>();
-            foreach (var item in _context.Day.Where(d => d.ClientId == client.ClientId))
+            foreach (var item in _dayRepository.GetClientDays(client.ClientId))
             {
                 if (item.Date >= DateTime.Now.Date)
                 {
@@ -236,6 +239,11 @@ namespace FitAppka.Controllers
             _context.Update(client);
         }
 
+
+        private Client GetLoggedInClient()
+        {
+            return _clientRepository.GetClientByLogin(User.Identity.Name);
+        }
 
     }
 }

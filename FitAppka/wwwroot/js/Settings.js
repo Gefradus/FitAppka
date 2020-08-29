@@ -26,8 +26,8 @@ function checkForm() {
     return true;
 } 
 
-function setFlag(flaga) {
-    if (flaga == '1') {
+function setFlag(flag) {
+    if (flag == '1') {
         return true;
     }
 }
@@ -56,7 +56,7 @@ function decrementPace() {
     }
 }
 
-function incrementPage() {
+function incrementPace() {
     if (!document.getElementById("maintenance").checked) {
         var pace = document.getElementById("pace");
         var value = pace.value;

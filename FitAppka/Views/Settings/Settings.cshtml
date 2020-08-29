@@ -18,12 +18,12 @@
             }
 
             function restoreDefault() {
-               if (setFlag('@ViewData["sex"]')) {
-                   document.getElementById("men").checked = true;
-               }
-               else {
-                   document.getElementById("women").checked = true;
-               }
+                if (setFlag('@ViewData["sex"]')) {
+                    document.getElementById("men").checked = true;
+                }
+                else {
+                    document.getElementById("women").checked = true;
+                }
 
                 document.getElementById("weight").value = parseInt('@ViewData["weight"]');
                 document.getElementById("growth").value = parseInt('@ViewData["growth"]');
@@ -36,7 +36,7 @@
                     document.getElementById("gainWeight").checked = true;
                 }
 
-                var activityList = document.getElementsByName("activity");
+                var activityList = document.getElementsByName("LevelOfActivity");
                 for (let i = 0; i < activityList.length; i++) {
                     if (activityList[i].value == '@ViewData["activity"]') {
                         activityList[i].checked = true;
@@ -46,10 +46,9 @@
                 document.getElementById("breakfast").checked = setFlag('@ViewData["breakfast"]');
                 document.getElementById("lunch").checked = setFlag('@ViewData["lunch"]');
                 document.getElementById("dinner").checked = setFlag('@ViewData["dinner"]');
-                document.getElementById("dDessert").checked = setFlag('@ViewData["dessert"]');
+                document.getElementById("dessert").checked = setFlag('@ViewData["dessert"]');
                 document.getElementById("snack").checked = setFlag('@ViewData["snack"]');
                 document.getElementById("supper").checked = setFlag('@ViewData["supper"]');
-
                 document.getElementById("pace").value = parseFloat('@ViewData["pace"]').toFixed(1);
             }
         </script>
@@ -111,16 +110,16 @@
                         </div>
                     </div>
                     <label asp-for="WeightChange_Goal" style="font-weight: 600; padding-top: 15px"></label>
-                    <div><label><input id="loseWeight" type="radio" name="Cel" value="1" checked onclick="blockPace()" style="margin-right: 10px" />Chcę schudnąć</label></div>
-                    <div><label><input id="maintenance" type="radio" name="Cel" value="2" onclick="blockPace()" style="margin-right: 10px" />Chcę utrzymać wagę</label></div>
-                    <div style="border-bottom: 1px solid darkgray; padding-bottom: 15px;"><label><input id="gainWeight" type="radio" name="Cel" value="3" onclick="blockPace()" style="margin-right: 10px" />Chcę przytyć</label></div>
+                    <div><label><input id="loseWeight" type="radio" name="WeightChange_Goal" value="1" checked onclick="blockPace()" style="margin-right: 10px" />Chcę schudnąć</label></div>
+                    <div><label><input id="maintenance" type="radio" name="WeightChange_Goal" value="2" onclick="blockPace()" style="margin-right: 10px" />Chcę utrzymać wagę</label></div>
+                    <div style="border-bottom: 1px solid darkgray; padding-bottom: 15px;"><label><input id="gainWeight" type="radio" name="WeightChange_Goal" value="3" onclick="blockPace()" style="margin-right: 10px" />Chcę przytyć</label></div>
 
                     <label style="font-weight: 600; padding-top: 15px">Aktywność w ciągu doby</label>
-                    <div style="padding-top: 5px"><label><input type="radio" name="activity" value=1 style="margin-right: 10px" />Brak aktywności, praca siedząca</label></div>
-                    <div><label><input type="radio" name="activity" value=2 style="margin-right: 10px" />Niska (praca siedząca, 1-2 treningi/tydz.)</label></div>
-                    <div><label><input type="radio" name="activity" value=3 checked style="margin-right: 10px" />Średnia (praca siedząca, 3-4 treningi/tydz.)</label></div>
-                    <div><label><input type="radio" name="activity" value=4 style="margin-right: 10px" />Wysoka (praca fizyczna, 3-4 treningi/tydz.)</label></div>
-                    <div style="padding-bottom: 1rem; border-bottom: 1px solid darkgray;"><label><input type="radio" name="activity" value=5 style="margin-right: 10px" />B. wysoka (zawodowi sportowcy, osoby codziennie trenujące)</label></div>
+                    <div style="padding-top: 5px"><label><input type="radio" name="LevelOfActivity" value=1 style="margin-right: 10px" />Brak aktywności, praca siedząca</label></div>
+                    <div><label><input type="radio" name="LevelOfActivity" value=2 style="margin-right: 10px" />Niska (praca siedząca, 1-2 treningi/tydz.)</label></div>
+                    <div><label><input type="radio" name="LevelOfActivity" value=3 checked style="margin-right: 10px" />Średnia (praca siedząca, 3-4 treningi/tydz.)</label></div>
+                    <div><label><input type="radio" name="LevelOfActivity" value=4 style="margin-right: 10px" />Wysoka (praca fizyczna, 3-4 treningi/tydz.)</label></div>
+                    <div style="padding-bottom: 1rem; border-bottom: 1px solid darkgray;"><label><input type="radio" name="LevelOfActivity" value=5 style="margin-right: 10px" />B. wysoka (zawodowi sportowcy, osoby codziennie trenujące)</label></div>
 
                     <label style="font-weight: 600; padding-top: 15px">Posiłki dnia</label>
                     <div>
@@ -136,9 +135,9 @@
 
                     <label asp-for="PaceOfChange" class="centering" style="padding-top: 15px"></label>
                     <div class="form-group centering">
-                        <button type="button" class="przycisk" onclick="decrementPace()"><img class="img-fluid" src="~/img/minus.png"></button>
+                        <button type="button" class="button" onclick="decrementPace()"><img class="img-fluid" src="~/img/minus.png"></button>
                         <input id="pace" asp-for="PaceOfChange" type="number" step="0.1" value="0.4" /><span style="margin-left: -33px; float:right; margin-top: 2.5px; z-index: 99">kg</span>
-                        <button type="button" class="przycisk" onclick="incrementPace()" style="margin-left: 13px"><img class="img-fluid" src="~/img/add.png"></button>
+                        <button type="button" class="button" onclick="incrementPace()" style="margin-left: 13px"><img class="img-fluid" src="~/img/add.png"></button>
                     </div>
 
                     <input id="saveBtn" type="submit" value="Zapisz i kontynuuj" asp-route-isFirstLaunch="@ViewData["isFirstLaunch"]" class="btn btn-primary" />

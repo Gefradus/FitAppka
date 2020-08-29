@@ -35,7 +35,6 @@ namespace FitAppka.Repository
         }
 
 
-
         private void DeleteRelatedMeals(int productID)
         {
             List<Meal> relatedMeals = _context.Meal.Where(p => p.ProductId == productID).ToList();
