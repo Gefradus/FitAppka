@@ -23,15 +23,15 @@ namespace FitAppka.Repository.RepIfaceImpl
 
         public Day Delete(int id)
         {
-            Day dzien = GetDay(id);
+            Day day = GetDay(id);
 
-            if (dzien != null)
+            if (day != null)
             {
-                _context.Day.Remove(dzien);
+                _context.Day.Remove(day);
                 _context.SaveChanges();
             }
 
-            return dzien;
+            return day;
         }
 
         public IEnumerable<Day> GetAllDays()

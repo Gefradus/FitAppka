@@ -59,7 +59,7 @@
                     $.ajax({
                         type: 'POST',
                         url: '@Url.Action("Add","Home")',
-                        data: { productID: id, grammage: gram, dayID:@ViewData["dayID"], inWhich:@ViewData["inWhich"], clientID:@ViewData["clientID"] },
+                        data: { productID: id, grammage: gram, dayID:@ViewData["dayID"], inWhich:@ViewData["inWhich"] },
                         success: function() {
                             var url = $("#RedirectTo").val();
                             location.href = url;
@@ -104,12 +104,12 @@
 
             <div>
                 <div class="mr-auto">
-                    <a class="text-dark ml-md-4 ml-lg-5 d-none d-md-block" asp-controller="Home" asp-action="Return" asp-route-clientID="@ViewData["clientID"]" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" style="height: 50px; width:185px; margin-top: -10px" src="~/img/logorozowe.png" /></a>
-                    <a class="text-dark ml-sm-1 d-md-none" asp-controller="Home" asp-action="Return" asp-route-clientID="@ViewData["clientID"]" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" style="height: 47px; width:56px; margin-top: 1px" src="~/img/back.png" /></a>
+                    <a class="text-dark ml-md-4 ml-lg-5 d-none d-md-block" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" style="height: 50px; width:185px; margin-top: -10px" src="~/img/logorozowe.png" /></a>
+                    <a class="text-dark ml-sm-1 d-md-none" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" style="height: 47px; width:56px; margin-top: 1px" src="~/img/back.png" /></a>
                 </div>
             </div>
 
-            <a asp-action="Index" asp-route-clientID="@ViewData["clientID"]" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" class="mx-auto" style="text-align:center; color:white; position: absolute; top:5px; width: 124px; left: calc(50% - 62px)">
+            <a asp-action="Index" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" class="mx-auto" style="text-align:center; color:white; position: absolute; top:5px; width: 124px; left: calc(50% - 62px)">
                 <h4 class="cent" style="margin-top:4px; font-weight: 600">@ViewData["meal"]</h4>
                 <h5 class="cent" style="margin-top:4px">@ViewData["day"]</h5>
             </a>
@@ -153,7 +153,6 @@
                                 <div style="clear:both"></div>
                             </div>
 
-                            @Html.Hidden("clientID", ViewData["clientID"])
                             @Html.Hidden("inWhich", ViewData["inWhich"])
                             @Html.Hidden("dayID", ViewData["dayID"])
                         }
@@ -161,7 +160,7 @@
                 </div>
                 <div class="col-12 cent" style="margin-top:20px; width:100%;">
                     <div style="border-top: 1px dotted black; padding-top: 20px">
-                        <a class="btn btn-outline-dark" style="width: 275px; background: #5fb259 !important; color: white" asp-action="Create" asp-route-clientID="@ViewData["clientID"]" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-isAdmin="0">
+                        <a class="btn btn-outline-dark" style="width: 275px; background: #5fb259 !important; color: white" asp-action="Create" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-isAdmin="0">
                             Dodaj nowy produkt
                         </a>
                     </div>
@@ -201,7 +200,7 @@
                             <div class="row no-gutters cent" style="margin-top: 10px;">
                                 <input id="gramatura" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center" /><div style="font-weight: 600; margin-top: 2px">g</div>
                                 <button id="addProduct" style="margin-left: 5px; background: none; border:none"><img style="height:30px; width: 30px" src="~/img/add.png"></button>
-                                @Html.Hidden("RedirectTo", Url.Action("Return", "Home", new { clientID = ViewData["clientID"], dayID = ViewData["dayID"] }))
+                                @Html.Hidden("RedirectTo", Url.Action("Return", "Home", new { dayID = ViewData["dayID"] }))
                             </div>
                         </div>
                     </div>

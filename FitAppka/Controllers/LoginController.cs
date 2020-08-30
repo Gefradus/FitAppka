@@ -13,12 +13,11 @@ namespace FitAppka.Controllers
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class LoginController : Controller
     {
-        private readonly FitAppContext _context;
+        
         private readonly IClientRepository _clientRepository;
 
-        public LoginController(FitAppContext context, IClientRepository clientRepository)
+        public LoginController(IClientRepository clientRepository)
         {
-            _context = context;
             _clientRepository = clientRepository;
         }
 
@@ -45,7 +44,7 @@ namespace FitAppka.Controllers
             if (ModelState.IsValid)
             {
                 string loginOrEmail = model.Login.ToLower();
-                Client client = _context.Client.Where(c => c.Login.ToLower().Equals(loginOrEmail) || c.Email.ToLower().Equals(loginOrEmail)).FirstOrDefault();
+                Client client = _clientRepository.GetAllClients().FirstOrDefault(c => c.Login.ToLower().Equals(loginOrEmail) || c.Email.ToLower().Equals(loginOrEmail));
                 if (client != null && client.Password.Equals(model.Password))
                 {
                     return await SignInAndStart(client.Login);

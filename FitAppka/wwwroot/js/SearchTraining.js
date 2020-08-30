@@ -2,19 +2,19 @@
     $("#addTraining").modal('show');
 }
 
-function dodaj() {
-    var czas = document.getElementById("czasWMinutach").value;
-    var kalorie = document.getElementById("spaloneKcal").value;
+function addTraining() {
+    var time = document.getElementById("timeInMinutes").value;
+    var burnedKcal = document.getElementById("burnedKcal").value;
 
-    if (!isEmpty(czas) && !isEmpty(kalorie)) {
+    if (!isEmpty(time) && !isEmpty(burnedKcal)) {
         document.getElementById("formAdd").submit();
     }
     else
     {
-        if (isEmpty(czas) && isEmpty(kalorie)) {
+        if (isEmpty(time) && isEmpty(burnedKcal)) {
             validation("Podaj czas trwania ćwiczenia i spalone kcal");
         }
-        else if (isEmpty(czas)){
+        else if (isEmpty(time)){
             validation("Podaj czas trwania ćwiczenia");
         }
         else{
@@ -23,19 +23,19 @@ function dodaj() {
     }
 }
 
-function addTraining(dzienID, url) {
+function addCardioType(dayID, url) {
 
-    var nazwa = document.getElementById("nazwaTreningu").value;
-    var wydatek = document.getElementById("wydatek").value;
-    var wydatekInteger = parseInt(wydatek);
+    var trainingName = document.getElementById("trainingName").value;
+    var expenditure = document.getElementById("expenditure").value;
+    var expenditureInteger = parseInt(expenditure);
 
-    if (!isEmpty(nazwa) && !isEmpty(wydatek)) {
-        if (!isNaN(wydatekInteger)) {
+    if (!isEmpty(trainingName) && !isEmpty(expenditure)) {
+        if (!isNaN(expenditureInteger)) {
             if (nazwa.length >= 3) {
                 $.ajax({
                     type: 'POST',
                     url: url,
-                    data: { dzienID: dzienID, nazwa: nazwa, wydatek: wydatekInteger },
+                    data: { dayID: dayID, name: trainingName, kcalPerMin: expenditureInteger },
                     success: function () {
                         location.reload();
                     }
@@ -78,8 +78,8 @@ function validation(validMsg) {
 function setParams(nazwa, kcalNaMin, treningTypId, dzienId) {
     document.getElementById("dzienId").value = dzienId;
     document.getElementById("treningTypId").value = treningTypId;
-    document.getElementById("czasWMinutach").value = null;
-    document.getElementById("spaloneKcal").value = null;
+    document.getElementById("timeInMinutes").value = null;
+    document.getElementById("burnedKcal").value = null;
     document.getElementById("nazwacwiczenia").innerHTML = nazwa;
     document.getElementById("czas").hidden = false;
     document.getElementById("spalonekalorie").hidden = false;

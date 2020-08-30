@@ -90,9 +90,9 @@ namespace FitAppka.Controllers
 
       
         [HttpGet]
-        public IActionResult Create(int clientID, int inWhich, int dayID, int isAdmin)
+        public IActionResult Create(int inWhich, int dayID, int isAdmin)
         {
-            CreateProductViewData(clientID, inWhich, dayID, isAdmin);
+            CreateProductViewData(inWhich, dayID, isAdmin);
             return View();
         }
 
@@ -111,15 +111,14 @@ namespace FitAppka.Controllers
                 }
             }
 
-            CreateProductViewData(clientID, inWhich, dayID, isAdmin);
+            CreateProductViewData(inWhich, dayID, isAdmin);
             return View(model); 
         }
 
-        private void CreateProductViewData(int clientID, int inWhich, int dayID, int isAdmin) 
+        private void CreateProductViewData(int inWhich, int dayID, int isAdmin) 
         {
             ViewData["dayID"] = dayID;
             ViewData["inWhich"] = inWhich;
-            ViewData["clientID"] = clientID;
             ViewData["isAdmin"] = isAdmin;
         }
 

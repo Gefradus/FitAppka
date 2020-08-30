@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,9 +21,12 @@ namespace FitAppka.Controllers
         private readonly IStrengthTrainingRepository _strengthTrainingRepository;
         private readonly FitAppContext _context;
 
-        public TrainingController(FitAppContext context, IDayRepository dayRepository, IClientRepository clientRepository)
+        public TrainingController(FitAppContext context, IDayRepository dayRepository, IClientRepository clientRepository, ICardioTrainingTypeRepository cardioTypeRepository, ICardioTrainingRepository cardioRepository, IStrengthTrainingTypeRepository strengthTrainingTypeRepository, IStrengthTrainingRepository strengthTrainingRepository)
         {
-            
+            _cardioTypeRepository = cardioTypeRepository;
+            _cardioRepository = cardioRepository;
+            _strengthTrainingTypeRepository = strengthTrainingTypeRepository;
+            _strengthTrainingRepository = strengthTrainingRepository;
             _clientRepository = clientRepository;
             _dayRepository = dayRepository;
             _context = context;
@@ -145,7 +147,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTraining(int dayID, string name, int kcalPerMin)
+        public IActionResult AddCardioType(int dayID, string name, int kcalPerMin)
         {
             _cardioTypeRepository.Add(new CardioTrainingType
             {

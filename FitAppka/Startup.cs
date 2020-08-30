@@ -37,6 +37,8 @@ namespace FitAppka
             services.AddScoped<IClientRepository, SQLClientRepository>();
             services.AddScoped<IStrengthTrainingTypeRepository, SQLStrengthTrainingTypeRepository>();
             services.AddScoped<IStrengthTrainingRepository, SQLStrengthTrainingRepository>();
+            services.AddScoped<ICardioTrainingTypeRepository, SQLCardioTrainingTypeRepository>();
+            services.AddScoped<ICardioTrainingRepository, SQLCardioTrainingRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

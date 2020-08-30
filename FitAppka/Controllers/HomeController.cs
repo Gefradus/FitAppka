@@ -99,21 +99,14 @@ namespace NowyDotnecik.Controllers
             return _clientRepository.GetClientById(clientID).CarbsTarget == null;
         }
 
-        public IActionResult Return(int clientID, int dayID)
+        public IActionResult Return(int dayID)
         {
             DateTime daySelected;
             DateTime day = _dayRepository.GetDayDateTime(dayID);
-            if (day != null && dayID != 0 && clientID != 0)
-            {
-                daySelected = day;
-            }
-            else
-            {
-                daySelected = DateTime.Now.Date;
-                clientID = GetLoggedInClientID();
-            }
+            if (day != null && dayID != 0) { daySelected = day; }
+            else { daySelected = DateTime.Now.Date; }
   
-            return RedirectToAction(nameof(Home), new { clientID, daySelected});
+            return RedirectToAction(nameof(Home), new { clientID = GetLoggedInClientID(), daySelected});
         }
 
 
@@ -278,7 +271,7 @@ namespace NowyDotnecik.Controllers
             ViewData["water"] = _dayRepository.GetClientDayByDate(daySelected, clientID).WaterDrunk;
         }
 
-        public IActionResult AddWater(int dayID, int clientID)
+        public IActionResult AddWater(int dayID)
         {
             Day day = _dayRepository.GetDay(dayID);
 
@@ -289,10 +282,10 @@ namespace NowyDotnecik.Controllers
                 _dayRepository.Update(day);
             }
             catch {}
-            return RedirectToAction(nameof(Home), new { clientID, daySelected = day.Date });
+            return RedirectToAction(nameof(Home), new { daySelected = day.Date });
         }
 
-        public IActionResult EditWater(int dayID, int clientID)
+        public IActionResult EditWater(int dayID)
         {
             Day day = _dayRepository.GetDay(dayID);
             try 
@@ -302,11 +295,11 @@ namespace NowyDotnecik.Controllers
                 _dayRepository.Update(day);
             }
             catch {}
-            return RedirectToAction(nameof(Home), new { clientID, daySelected = day.Date });
+            return RedirectToAction(nameof(Home), new { daySelected = day.Date });
         }
 
      
-        private void SetTheMeal(Meal meal, DateTime daySelected, int clientID)
+        private void SetTheMeal(Meal meal, DateTime daySelected)
         {
             var product = _productRepository.GetProduct(meal.ProductId);
 
@@ -325,12 +318,12 @@ namespace NowyDotnecik.Controllers
             meal.Carbohydrates = (double) Math.Round(carbs, 1, MidpointRounding.AwayFromZero);
             meal.Fats = (double) Math.Round(fats, 1, MidpointRounding.AwayFromZero);
 
-            AddDayIfNotExists(daySelected, clientID);
-            meal.DayId = _dayRepository.GetClientDayByDate(daySelected, clientID).DayId;
+            AddDayIfNotExists(daySelected, GetLoggedInClientID());
+            meal.DayId = _dayRepository.GetClientDayByDate(daySelected, GetLoggedInClientID()).DayId;
         }
 
         [HttpPost]
-        public JsonResult Add(int inWhich, int dayID, int clientID, int grammage, int productID)
+        public JsonResult Add(int inWhich, int dayID, int grammage, int productID)
         {
             DateTime daySelected = _dayRepository.GetDayDateTime(dayID);
             Meal meal = new Meal()
@@ -341,7 +334,7 @@ namespace NowyDotnecik.Controllers
                 DayId = dayID,
             };
 
-            SetTheMeal(meal, daySelected, clientID);
+            SetTheMeal(meal, daySelected);
             _mealRepository.Add(meal);
             return Json(true);
         }
@@ -356,7 +349,7 @@ namespace NowyDotnecik.Controllers
             { 
                 if (meal == null) { return NotFound(); }
                 meal.Grammage = grammage;
-                SetTheMeal(meal, (DateTime)day.Date, day.ClientId);
+                SetTheMeal(meal, (DateTime)day.Date);
                 _mealRepository.Update(meal);
             }
             catch (DbUpdateConcurrencyException) { }
