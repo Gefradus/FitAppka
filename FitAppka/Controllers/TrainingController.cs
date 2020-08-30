@@ -17,10 +17,10 @@ namespace FitAppka.Controllers
         private readonly IDayRepository _dayRepository;
         private readonly IClientRepository _clientRepository;
         private readonly ICardioTrainingTypeRepository _cardioTypeRepository;
-        private readonly ICardioTrainingRepository cardioRepository;
+        private readonly ICardioTrainingRepository _cardioRepository;
         private readonly IStrengthTrainingTypeRepository _strengthTrainingTypeRepository;
         private readonly IStrengthTrainingRepository _strengthTrainingRepository;
-        /*private readonly FitAppContext _context;*/
+        private readonly FitAppContext _context;
 
         public TrainingController(FitAppContext context, IDayRepository dayRepository, IClientRepository clientRepository)
         {
@@ -41,9 +41,9 @@ namespace FitAppka.Controllers
             ViewData["cardioTime"] = CardioTimeInDay(dayID);
             ViewData["kcalTarget"] = GetKcalBurnedGoalInDay(dayID);
             ViewData["timeTarget"] = GetTrainingTimeGoalInDay(dayID);
-            ViewData["strengthTrainings"] = 
+            ViewData["strengthTrainings"] = _strengthTrainingRepository.GetAllStrengthTrainings();
 
-            return View(await _context.CardioTraining.ToListAsync());
+            return View(await _cardioRepository.GetAllCardioTrainingsAsync());
         }
 
 
@@ -80,13 +80,10 @@ namespace FitAppka.Controllers
             }
         }
 
-
-
         private int CaloriesBurnedInDay(int dayID)
         {
-            List<CardioTraining> trainings = _context.CardioTraining.Where(t => t.DayId.Equals(dayID)).ToList();
             int? kcal = 0;
-            foreach (CardioTraining cardio in trainings) {
+            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID))) {
                 kcal += cardio.CaloriesBurned;
             }
 
@@ -107,10 +104,8 @@ namespace FitAppka.Controllers
 
         private int CardioTimeInDay(int dayID)
         {
-            List<CardioTraining> trainings = _context.CardioTraining.Where(t => t.DayId.Equals(dayID)).ToList();
             int? time = 0;
-            foreach (CardioTraining cardio in trainings)
-            {
+            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID))) {
                 time += cardio.TimeInMinutes;
             }
 
@@ -128,47 +123,37 @@ namespace FitAppka.Controllers
         [HttpPost]
         public IActionResult Search(int dayID, int cardioTypeId, int timeInMinutes, int burnedKcal)
         {
-            _context.Add(new CardioTraining()
-            {
-                DayId = dayID,
-                TimeInMinutes = timeInMinutes,
-                CardioTrainingTypeId = cardioTypeId,
-                CaloriesBurned = burnedKcal
-            });
-
             try
             {
-                _context.SaveChanges();
+                _cardioRepository.Add(new CardioTraining()
+                {
+                    DayId = dayID,
+                    TimeInMinutes = timeInMinutes,
+                    CardioTrainingTypeId = cardioTypeId,
+                    CaloriesBurned = burnedKcal
+                });
                 return RedirectToAction(nameof(TrainingPanel), new { dayID });
             }
             catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = GetTodayID() }); } 
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteCardio(int cardioID)
+        public JsonResult DeleteCardio(int cardioID)
         {
-            var training = _context.CardioTraining.Where(t => t.CardioTrainingId == cardioID).FirstOrDefault();
-           
-            if (training != null)
-            {
-                _context.CardioTraining.Remove(training);
-                await _context.SaveChangesAsync();
-            }
+            _cardioRepository.Delete(cardioID);
             return Json(false);
         }
 
         [HttpPost]
-        public IActionResult AddTraining(int dzienID, string nazwa, int wydatek)
+        public IActionResult AddTraining(int dayID, string name, int kcalPerMin)
         {
-            _context.Add(new CardioTrainingType
+            _cardioTypeRepository.Add(new CardioTrainingType
             {
-                TrainingName = nazwa,
-                KcalPerMin = wydatek
+                TrainingName = name,
+                KcalPerMin = kcalPerMin
             });
 
-            _context.SaveChanges();
-
-            return RedirectToAction(nameof(Search), new { dzienID });
+            return RedirectToAction(nameof(Search), new { dayID });
         }
 
 

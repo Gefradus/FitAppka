@@ -1,6 +1,8 @@
 ﻿using FitAppka.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FitAppka.Repository.RepIfaceImpl
 {
@@ -35,6 +37,11 @@ namespace FitAppka.Repository.RepIfaceImpl
         public IEnumerable<CardioTraining> GetAllCardioTrainings()
         {
             return _context.CardioTraining.ToList();
+        }
+
+        public Task<List<CardioTraining>> GetAllCardioTrainingsAsync()
+        {
+            return _context.CardioTraining.ToListAsync();
         }
 
         public CardioTraining GetCardioTraining(int id)

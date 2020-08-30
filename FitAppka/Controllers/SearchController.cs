@@ -15,39 +15,28 @@ namespace FitAppka.Controllers
     [Authorize]
     public class SearchController : Controller
     {
-        private readonly FitAppContext _context;
+        
         private readonly IDayRepository _dayRepository;
         private readonly IProductRepository _productRepository;
-        private readonly IWebHostEnvironment hostingEnvironment;
+        private readonly IClientRepository _clientRepository;
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly FitAppContext _context;
 
-        public SearchController(FitAppContext context, IWebHostEnvironment hostingEnvironment, IDayRepository dayRepository, IProductRepository productRepository)
+        public SearchController(FitAppContext context, IWebHostEnvironment hostingEnvironment, IDayRepository dayRepository, IProductRepository productRepository, IClientRepository clientRepository)
         {
+            _clientRepository = clientRepository;
             _dayRepository = dayRepository;
             _productRepository = productRepository;
             _context = context;
-            this.hostingEnvironment = hostingEnvironment;
+            _hostingEnvironment = hostingEnvironment;
         }
 
-        public async Task<IActionResult> Index(string search, int clientID, int inWhich, int dayID)
+        public async Task<IActionResult> Index(string search, int inWhich, int dayID)
         {
-            if (clientID == 0 || inWhich == 0 || dayID == 0)
-            {
-                clientID = _context.Client.Where(c => c.Login.ToLower() == User.Identity.Name.ToLower()).Select(c => c.ClientId).FirstOrDefault();
-                return RedirectToAction("Home", "Home", new { clientID, daySelected = DateTime.Now.Date });
-            }
-
-            if (User.Identity.Name.ToLower() != _context.Client.Where(c => c.ClientId == clientID).Select(c => c.Login.ToLower()).FirstOrDefault())
-            {
-                return RedirectToAction("Logout", "Login");  //zabezpieczenie przed wchodzeniem na obce konto
-            }
             ViewData["wereSearched"] = false;
-
-            if (search != null)
-            {
-                ViewData["wereSearched"] = true;
-            }
+            if (search != null) { ViewData["wereSearched"] = true; }
        
-            ViewData["clientID"] = clientID;
+            ViewData["clientID"] = _clientRepository.GetClientByLogin(User.Identity.Name).ClientId; 
             ViewData["dayID"] = dayID;
             ViewData["inWhich"] = inWhich;
             ViewData["search"] = search;
@@ -112,17 +101,14 @@ namespace FitAppka.Controllers
         {
             if (ModelState.IsValid)
             {     
-                _context.Add(CreateProductFromModel(model, CreatePathToPhoto(model)));
-                _context.SaveChanges();
-
+                _productRepository.Add(CreateProductFromModel(model, CreatePathToPhoto(model)));
+                
                 if(isAdmin == 1) {
                     return RedirectToAction("AdminProduct", "Admin");
                 } 
-                else 
-                {
+                else {
                     return RedirectToAction(nameof(Index), new { dayID, inWhich, clientID });
                 }
-
             }
 
             CreateProductViewData(clientID, inWhich, dayID, isAdmin);
@@ -143,7 +129,7 @@ namespace FitAppka.Controllers
             string uniqueFileName = null;
             if (model.Photo != null)
             {
-                string folder = Path.Combine(hostingEnvironment.WebRootPath, "photos");
+                string folder = Path.Combine(_hostingEnvironment.WebRootPath, "photos");
                 uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
                 string filePath = Path.Combine(folder, uniqueFileName);
                 model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
