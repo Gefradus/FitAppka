@@ -16,10 +16,15 @@ namespace FitAppka.Controllers
     {
         private readonly IDayRepository _dayRepository;
         private readonly IClientRepository _clientRepository;
-        private readonly FitAppContext _context;
+        private readonly ICardioTrainingTypeRepository _cardioTypeRepository;
+        private readonly ICardioTrainingRepository cardioRepository;
+        private readonly IStrengthTrainingTypeRepository _strengthTrainingTypeRepository;
+        private readonly IStrengthTrainingRepository _strengthTrainingRepository;
+        /*private readonly FitAppContext _context;*/
 
         public TrainingController(FitAppContext context, IDayRepository dayRepository, IClientRepository clientRepository)
         {
+            
             _clientRepository = clientRepository;
             _dayRepository = dayRepository;
             _context = context;
@@ -36,14 +41,16 @@ namespace FitAppka.Controllers
             ViewData["cardioTime"] = CardioTimeInDay(dayID);
             ViewData["kcalTarget"] = GetKcalBurnedGoalInDay(dayID);
             ViewData["timeTarget"] = GetTrainingTimeGoalInDay(dayID);
+            ViewData["strengthTrainings"] = 
 
             return View(await _context.CardioTraining.ToListAsync());
         }
 
+
         [HttpGet]
         public IActionResult ChangeDay(string day)
         {
-            return RedirectToAction(nameof(TrainingPanel), new { dzienID = GetSelectedDay(Convert.ToDateTime(day)) });
+            return RedirectToAction(nameof(TrainingPanel), new { dayID = GetSelectedDay(Convert.ToDateTime(day)) });
         }
 
         private int GetKcalBurnedGoalInDay(int dayID)
@@ -86,15 +93,15 @@ namespace FitAppka.Controllers
             return (int) kcal;
         }
 
-        private int GiveTodayIfDayNotChosen(int dzienID)
+        private int GiveTodayIfDayNotChosen(int dayID)
         {
-            if(dzienID == 0)
+            if(dayID == 0)
             {
                 return GetTodayID();
             }
             else
             {
-                return dzienID;
+                return dayID;
             }
         }
 
@@ -202,7 +209,6 @@ namespace FitAppka.Controllers
             AddDayIfNotExists(day);
             return _dayRepository.GetClientDayByDate(day, GetLoggedInClientID()).DayId;
         }
-
 
         private int GetTodayID()
         {

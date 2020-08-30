@@ -1,5 +1,6 @@
 using FitAppka.Models;
 using FitAppka.Repository;
+using FitAppka.Repository.RepIfaceImpl;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,8 @@ namespace FitAppka
             services.AddScoped<IMealRepository, SQLMealRepository>();
             services.AddScoped<IDayRepository, SQLDayRepository>();
             services.AddScoped<IClientRepository, SQLClientRepository>();
+            services.AddScoped<IStrengthTrainingTypeRepository, SQLStrengthTrainingTypeRepository>();
+            services.AddScoped<IStrengthTrainingRepository, SQLStrengthTrainingRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

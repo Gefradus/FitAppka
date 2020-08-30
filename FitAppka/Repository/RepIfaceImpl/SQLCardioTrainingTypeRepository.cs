@@ -1,6 +1,8 @@
 ﻿using FitAppka.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FitAppka.Repository.RepIfaceImpl
 {
@@ -22,7 +24,7 @@ namespace FitAppka.Repository.RepIfaceImpl
 
         public CardioTrainingType Delete(int id)
         {
-            CardioTrainingType cardioType = GetCardioTrainingType(id);
+            CardioTrainingType cardioType = GetCardioType(id);
 
             if (cardioType != null)
             {
@@ -33,12 +35,17 @@ namespace FitAppka.Repository.RepIfaceImpl
             return cardioType;
         }
 
-        public IEnumerable<CardioTrainingType> GetAllCardioTrainingTypes()
+        public IEnumerable<CardioTrainingType> GetAllCardioTypes()
         {
             return _context.CardioTrainingType.ToList();
         }
 
-        public CardioTrainingType GetCardioTrainingType(int id)
+        public async Task<List<CardioTrainingType>> GetAllCardioTypesAsync()
+        {
+            return await _context.CardioTrainingType.ToListAsync();
+        }
+
+        public CardioTrainingType GetCardioType(int id)
         {
             return _context.CardioTrainingType.Find(id);
         }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FitAppka.Repository
+namespace FitAppka.Repository.RepIfaceImpl
 {
     public class SQLDayRepository : IDayRepository
     {

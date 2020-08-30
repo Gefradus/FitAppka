@@ -7,10 +7,9 @@
     <link href="~/css/TrainingPanel.css" rel="stylesheet" />
     <link href="~/css/Datepicker.css" rel="stylesheet" />
     <link href="~/lib/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
-<body onload="kolorujCoDrugiWiersz();">
+<body onload="colorEverySecondRow();">
     <header>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav" style="text-align: center">
 
@@ -53,7 +52,7 @@
         </div>
     </header>
 
-    <div id="kontener" class="container" style="margin-top: 2.5rem !important">
+    <div id="cont" class="container" style="margin-top: 1.5rem !important">
 
         <div class="modal fade" tabindex="-1" id="deleteModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
             <div class="modal-dialog" style="display: flex; justify-content: center;">
@@ -71,7 +70,7 @@
                         <form method="post">
                             <div style="display:flex; justify-content: center">
                                 <button type="button" onclick="hideModal()" style="margin-right: 15px; border-radius:10%; background-color: #4d62d7; height: 32px; width: 100px; color: white">Anuluj</button>
-                                <button type="button" id="usun" style="border-radius:10%; background-color: #ce1a22; height: 32px; width: 100px; color: white">Tak, usuń</button>
+                                <button type="button" id="delete" style="border-radius:10%; background-color: #ce1a22; height: 32px; width: 100px; color: white">Tak, usuń</button>
                             </div>
                         </form>
                     </div>
@@ -79,13 +78,15 @@
             </div>
         </div>
 
-        <div style="display: flex;">
-            <div id="dziennik">Dziennik treningowy dla: </div>
+        <div style="display: flex; margin-bottom: 1.5rem">
+            <div id="diary">Dziennik treningowy dla: </div>
             <input id="datepicker" onchange="changeDay('@Url.Action("ChangeDay", "Training")');" type="text" style="margin-left: 10px; margin-right: 15px; margin-top: 2px; text-align: center" value="@ViewData["day"]" readonly="readonly" />
             <a class="btn acent" id="btnAdd" asp-controller="Training" asp-action="Search" asp-route-dayID="@ViewData["dayID"]">Dodaj nowy trening</a>
         </div>
 
-        <div id="all" style="margin-top: 2.5rem !important; border-bottom: 1px solid darkgray">
+        <div style="color:dimgrey; font-size: 1.2rem">Treningi cardio:</div>
+
+        <div id="all">
             <div class="row no-gutters headCol" style="height: 41px; color:white;">
                 <div class="col-5 cent" style="border-left: 0">Nazwa treningu:</div>
                 <div class="col-7 container">
@@ -105,14 +106,14 @@
             {
                 if (training.Day.DayId.Equals(ViewData["dayID"]))
                 {
-                    <div class="row no-gutters wierszTreningu">
+                    <div class="row no-gutters trainingRow">
                         <div class="col-5 cent">@training.CardioTrainingType.TrainingName</div>
                         <div class="col-7 container">
                             <div class="row no-gutters">
                                 <div class="cent column borl">@training.TimeInMinutes</div>
                                 <div class="cent column borl">@training.CaloriesBurned</div>
                                 <div class="cent btnArea borl">
-                                    <button id="btnUsun" type="button" onclick="potwierdzUsuniecie(@training.CardioTrainingId);"><img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
+                                    <button id="btnDelete" type="button" onclick="confirmDeleting(@training.CardioTrainingId);"><img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +124,7 @@
 
             if (trainingCount == 0)
             {
-                <div class="col-12 cent py-5" style="font-size: 18px; background: #f7f7f796">
+                <div class="col-12 cent py-4" style="font-size: 18px; background: #f7f7f796">
                     Aktualnie brak treningów w tym dniu
                 </div>
                 <script>
@@ -135,42 +136,46 @@
 
 
 
-        <div class="row no-gutters pt-4">
+        <div class="row no-gutters pt-2">
             <div class="col-12" style="border-top: 1px dotted #656565"></div>
         </div>
 
-        <div class="row no-gutters pt-4 celRow" style="border-top:0; font-weight: 600">
-            <div class="col-5 cent kolumna py-2" style="border-left: 0">Łącznie:</div>
+        <div class="row no-gutters pt-2 goalRow" style="border-top:0; font-weight: 600">
+            <div class="col-5 cent col py-1" style="border-left: 0">Łącznie:</div>
             <div class="col-7 container">
                 <div class="row no-gutters">
-                    <div class="kolumna py-2 column">
+                    <div class="col py-1 column">
                         @ViewData["cardioTime"]
                     </div>
-                    <div class="kolumna py-2 column">
+                    <div class="col py-1 column">
                         @ViewData["burnedKcal"]
                     </div>
-                    <div class="kolumna btnArea">
+                    <div class="col btnArea">
 
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row no-gutters celRow" style="border-top:0; font-weight: 600">
-            <div class="col-5 cent kolumna py-2" style="border-left: 0">Cel dnia:</div>
+        <div class="row no-gutters goalRow" style="border-top:0; font-weight: 600">
+            <div class="col-5 cent col py-1" style="border-left: 0">Cel dnia:</div>
             <div class="col-7 container">
                 <div class="row no-gutters" style="height: 100%">
-                    <div class="kolumna py-2 column">
+                    <div class="col py-1 column">
                         @ViewData["timeTarget"]
                     </div>
-                    <div class="kolumna py-2 column">
+                    <div class="col py-1 column">
                         @ViewData["kcalTarget"]
                     </div>
-                    <div class="kolumna btnArea">
+                    <div class="col btnArea">
 
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div>
+
         </div>
 
     </div>
@@ -195,10 +200,10 @@
         });
     </script>
     <script>
-        function potwierdzUsuniecie(id) {
+        function confirmDeleting(id) {
             $("#deleteModal").modal('show');
-            $("#usun").click(function () {
-                usunTrening(id, '@Url.Action("DeleteCardio", "Training")')
+            $("#delete").click(function () {
+                deleteTraining(id, '@Url.Action("DeleteCardio", "Training")')
             });
         }
     </script>

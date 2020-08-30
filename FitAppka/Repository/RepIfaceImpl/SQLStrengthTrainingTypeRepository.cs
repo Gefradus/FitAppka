@@ -1,7 +1,8 @@
 ﻿using FitAppka.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace FitAppka.Repository.RepIfaceImpl
 {
@@ -37,6 +38,11 @@ namespace FitAppka.Repository.RepIfaceImpl
         public IEnumerable<StrengthTrainingType> GetAllStrengthTrainingTypes()
         {
             return _context.StrengthTrainingType.ToList();
+        }
+
+        public async Task<List<StrengthTrainingType>> GetAllStrengthTypesAsync()
+        {
+            return await _context.StrengthTrainingType.ToListAsync();
         }
 
         public StrengthTrainingType GetStrengthTrainingType(int id)

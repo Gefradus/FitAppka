@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FitAppka.Repository
+namespace FitAppka.Repository.RepIfaceImpl
 {
     public class SQLClientRepository : IClientRepository
     {
