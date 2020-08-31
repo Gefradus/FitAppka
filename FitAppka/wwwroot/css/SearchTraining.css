@@ -24,7 +24,7 @@ body{
     font-weight: 600;
 }
 
-#time{
+#time {
     margin-top: 25px;
     margin-bottom: 15px;
     margin-left: calc(50% - 57.5px);
@@ -39,14 +39,14 @@ body{
     width: 100px
 }
 
-#addTrainingType {
+#addCardio {
     width: 115px;
     margin-top: 35px;
     height: 35px;
     font-size: 14px
 }
 
-#burnedKcal
+#kcal
 {
     margin-left: calc(50% - 57.5px);
 }
@@ -111,16 +111,16 @@ body{
     border-bottom: 1px solid #f7f7f7;
 }
 
-#stworzTrening:hover {
+#createTraining:hover {
     background: #425a9085;
 }
 
 
-#nazwatreningu:hover
+/*#trainingName:hover
 {
     margin-left: 10px;
     color: orange;
-}
+}*/
 
 .training:hover{
     background-color: lightgray;

@@ -11,11 +11,11 @@ function colorEverySecondRow() {
     }
 }
 
-function deleteTraining(id, url) {
+function deleteCardio(id, url) {
     $.ajax({
         type: 'POST',
         url: url,
-        data: { treningID: id },
+        data: { cardioID: id },
         success: function () {
             location.reload();
         }

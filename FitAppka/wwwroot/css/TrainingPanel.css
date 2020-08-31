@@ -46,6 +46,7 @@
     border-left: 1px solid darkgray;
     display: flex;
     justify-content: center;
+    flex-basis: auto
 }
 
 .cancel{

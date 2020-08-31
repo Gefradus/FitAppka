@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="~/css/Home.css" type="text/css">
     <link rel="stylesheet" href="~/css/SearchTraining.css" type="text/css">
     <link href="~/css/AllViews.css" rel="stylesheet" />
+    <script src="~/js/SearchTraining.js"></script>
 </head>
 <body>
     <header>
@@ -69,7 +70,7 @@
                                 <div style="margin-left: -58px">Nazwa ćwiczenia: </div>
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 3px;">
-                                <input id="trainingName" type="text" maxlength="50" oninput="validity.valid || (value = '')" />
+                                <input id="cardioTypeName" type="text" maxlength="50" oninput="validity.valid || (value = '')" />
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 15px;">
                                 <div style="margin-left: -50px">Wydatek kcal/min: </div>
@@ -139,7 +140,7 @@
             </div>
 
             <div class="mt-lg-2 col-5 col-lg-4" id="paramsPanel">
-                <div id="nazwacwiczenia"></div>
+                <div id="trainingName"></div>
                 <form id="formAdd" method="POST">
                     <div id="time" hidden>
                         <div>Czas trwania:</div>
@@ -152,18 +153,17 @@
                         <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kcal</div>
                     </div>
                     <div id="add" hidden class="cent cb">
-                        <button type="button" onclick="addTraining();" class="btn btn-dark" id="addTraining">Dodaj trening</button>
+                        <button type="button" onclick="addCardioTraining()" class="btn btn-dark" id="addCardio">Dodaj trening</button>
                     </div>
 
                     <input type="hidden" id="cardioTypeId" name="cardioTypeId" />
-                    <input type="hidden" id="dayID" name="dayID" />
+                    <input type="hidden" id="dayId" name="dayID" />
                 </form>
-                <div id="kcalNaMin" hidden></div>
+                <div id="kcalPerMin" hidden></div>
             </div>
         </div>
     </div>
-    <script src="~/js/SearchTraining.js"></script>
+    
     <script src="~/js/Settings.js"></script>
-
 </body>
 </html>

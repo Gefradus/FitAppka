@@ -45,7 +45,7 @@ namespace FitAppka.Controllers
             ViewData["timeTarget"] = GetTrainingTimeGoalInDay(dayID);
             ViewData["strengthTrainings"] = _strengthTrainingRepository.GetAllStrengthTrainings();
 
-            return View(await _cardioRepository.GetAllCardioTrainingsAsync());
+            return View(await _context.CardioTraining.Include(c => c.CardioTrainingType).Include(c => c.Day).ToListAsync());
         }
 
 
@@ -123,7 +123,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
-        public IActionResult Search(int dayID, int cardioTypeId, int timeInMinutes, int burnedKcal)
+        public IActionResult Search(int cardioTypeId, int dayID, int timeInMinutes, int burnedKcal)
         {
             try
             {

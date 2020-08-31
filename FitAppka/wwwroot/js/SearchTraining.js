@@ -1,8 +1,8 @@
 ﻿function showModalAddTraining() {
-    $("#addTraining").modal('show');
+    $("#addTrainingType").modal('show');
 }
 
-function addTraining() {
+function addCardioTraining() {
     var time = document.getElementById("timeInMinutes").value;
     var burnedKcal = document.getElementById("burnedKcal").value;
 
@@ -25,17 +25,17 @@ function addTraining() {
 
 function addCardioType(dayID, url) {
 
-    var trainingName = document.getElementById("trainingName").value;
+    var cardioTypeName = document.getElementById("cardioTypeName").value;
     var expenditure = document.getElementById("expenditure").value;
     var expenditureInteger = parseInt(expenditure);
 
-    if (!isEmpty(trainingName) && !isEmpty(expenditure)) {
+    if (!isEmpty(cardioTypeName) && !isEmpty(expenditure)) {
         if (!isNaN(expenditureInteger)) {
-            if (nazwa.length >= 3) {
+            if (cardioTypeName.length >= 3) {
                 $.ajax({
                     type: 'POST',
                     url: url,
-                    data: { dayID: dayID, name: trainingName, kcalPerMin: expenditureInteger },
+                    data: { dayID: dayID, name: cardioTypeName, kcalPerMin: expenditureInteger },
                     success: function () {
                         location.reload();
                     }
@@ -50,10 +50,10 @@ function addCardioType(dayID, url) {
         }
     }
     else {
-        if (isEmpty(nazwa) && isEmpty(wydatek)) {
+        if (isEmpty(cardioTypeName) && isEmpty(expenditure)) {
             validation("Podaj nazwę ćwiczenia i wydatek kcal/min.");
         }
-        else if (isEmpty(nazwa)) {
+        else if (isEmpty(cardioTypeName)) {
             validation("Podaj nazwę ćwiczenia.");
         }
         else {
@@ -75,21 +75,21 @@ function validation(validMsg) {
     })
 }
 
-function setParams(nazwa, kcalNaMin, treningTypId, dzienId) {
-    document.getElementById("dzienId").value = dzienId;
-    document.getElementById("treningTypId").value = treningTypId;
+function setParams(name, kcalPerMin, cardioTypeId, dayID) {
+    document.getElementById("dayId").value = parseInt(dayID);
+    document.getElementById("cardioTypeId").value = parseInt(cardioTypeId);
     document.getElementById("timeInMinutes").value = null;
     document.getElementById("burnedKcal").value = null;
-    document.getElementById("nazwacwiczenia").innerHTML = nazwa;
-    document.getElementById("czas").hidden = false;
-    document.getElementById("spalonekalorie").hidden = false;
-    document.getElementById("dodajtrening").hidden = false;
-    document.getElementById("kcalNaMin").value = kcalNaMin;
+    document.getElementById("trainingName").innerHTML = name;
+    document.getElementById("time").hidden = false;
+    document.getElementById("kcal").hidden = false;
+    document.getElementById("add").hidden = false;
+    document.getElementById("kcalPerMin").value = parseInt(kcalPerMin);
 }
 
 function changeCalorie() {
-    var minuty = parseInt(document.getElementById("czasWMinutach").value);
-    var kcalNaMin = document.getElementById("kcalNaMin").value;
-    var spalonekalorie = parseInt(minuty * kcalNaMin);
-    document.getElementById("spaloneKcal").value = spalonekalorie;
+    var minutes = parseInt(document.getElementById("timeInMinutes").value);
+    var kcalPerMin = document.getElementById("kcalPerMin").value;
+    var burnedKcal = parseInt(minutes * kcalPerMin);
+    document.getElementById("burnedKcal").value = burnedKcal;
 }
