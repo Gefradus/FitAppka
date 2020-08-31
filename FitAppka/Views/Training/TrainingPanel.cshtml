@@ -101,7 +101,7 @@
         </div>
 
         @{
-            int trainingCount = 0;
+            int cardioCount = 0;
             foreach (var training in Model)
             {
                 if (training.Day.DayId.Equals(ViewData["dayID"]))
@@ -118,14 +118,14 @@
                             </div>
                         </div>
                     </div>
-                    trainingCount++;
+                    cardioCount++;
                 }
             }
 
-            if (trainingCount == 0)
+            if (cardioCount == 0)
             {
                 <div class="col-12 cent py-4" style="font-size: 18px; background: #f7f7f796">
-                    Aktualnie brak treningów w tym dniu
+                    Aktualnie brak treningów cardio w tym dniu
                 </div>
                 <script>
                     $("#all").css('border', '0px');
@@ -174,9 +174,57 @@
             </div>
         </div>
 
-        <div>
+        <div style="color:dimgrey; font-size: 1.2rem; margin-top: 25px">Treningi siłowe:</div>
 
+        <div id="all">
+            <div class="row no-gutters headCol" style="height: 41px; color:white;">
+                <div class="col-5 cent" style="border-left: 0">Nazwa treningu:</div>
+                <div class="col-7 container">
+                    <div class="row no-gutters" style="height: 100%">
+                        <div class="headCol sHead cent">Serie:</div>
+                        <div class="headCol sHead cent">Powtórzenia:</div>
+                        <div class="headCol sHead cent">Ciężar:</div>
+                        <div class="btnArea borl" style="background: #3f3f3f"></div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+        @{
+            int trainingCount = 0;
+            foreach (var training in (List<FitAppka.Models.StrengthTraining>)ViewData["strengthTrainings"])
+            {
+                if (training.Day.DayId.Equals(ViewData["dayID"]))
+                {
+                    <div class="row no-gutters trainingRow">
+                        <div class="col-5 cent">@training.StrengthTrainingType.TrainingName</div>
+                        <div class="col-7 container">
+                            <div class="row no-gutters">
+                                <div class="cent scol borl">@training.Sets</div>
+                                <div class="cent scol borl">@training.Repetitions</div>
+                                <div class="cent scol borl">@training.Weight</div>
+                                <div class="cent btnArea borl">
+                                    <button id="btnDelete" type="button" onclick="confirmDeleting(@training.StrengthTrainingId);"><img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    trainingCount++;
+                }
+            }
+
+            if (trainingCount == 0)
+            {
+                <div class="col-12 cent py-4" style="font-size: 18px; background: #f7f7f796">
+                    Aktualnie brak treningów siłowych w tym dniu
+                </div>
+                <script>
+                    $("#all").css('border', '0px');
+                </script>
+
+            }
+        }
 
     </div>
 
