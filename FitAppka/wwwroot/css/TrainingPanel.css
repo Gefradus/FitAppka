@@ -22,14 +22,25 @@
     height: 41px;
 }
 
-#btnAdd {
+#btnAddStrength, #btnAddCardio {
     margin-left: auto;
-    background: #ff000047;
     font-size: 18px;
     color: white
 }
 
-#btnAdd:hover {
+#btnAddCardio{
+    background: #ff000047;
+}
+
+#btnAddStrength{
+    background: #53b2c7ad;
+}
+
+#btnAddStrength:hover {
+    background: #5e96a2ad
+}
+
+#btnAddCardio:hover {
     background: #4444446b
 }
 

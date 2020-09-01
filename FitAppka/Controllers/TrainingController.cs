@@ -64,9 +64,7 @@ namespace FitAppka.Controllers
             else {
                 return 0;
             }
-
         }
-
 
         private int GetTrainingTimeGoalInDay(int dayID) {
             int? timeGoal = _dayRepository.GetDay(dayID).TrainingTimeGoal;
@@ -141,7 +139,6 @@ namespace FitAppka.Controllers
 
             return RedirectToAction(nameof(Search), new { dayID });
         }
-
 
         private int GetSelectedDay(DateTime day) {
             AddDayIfNotExists(day);
