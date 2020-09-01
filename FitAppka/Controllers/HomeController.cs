@@ -22,6 +22,7 @@ namespace NowyDotnecik.Controllers
         private readonly IClientRepository _clientRepository;
         private readonly IProductRepository _productRepository;
 
+
         public HomeController(FitAppContext context, IWebHostEnvironment env, IMealRepository mealRepository, IDayRepository dayRepository, IClientRepository clientRepository, IProductRepository productRepository)
         {
             _mealRepository = mealRepository;
@@ -331,8 +332,7 @@ namespace NowyDotnecik.Controllers
         [HttpPost]
         public JsonResult Add(int inWhich, int dayID, int grammage, int productID)
         {
-            Day day = _dayRepository.GetDay(dayID);
-            if (day.ClientId == GetLoggedInClientID())
+            if (_dayRepository.GetDay(dayID).ClientId == GetLoggedInClientID())
             {
                 Meal meal = new Meal()
                 {
@@ -342,7 +342,7 @@ namespace NowyDotnecik.Controllers
                     DayId = dayID,
                 };
 
-                SetTheMeal(meal, (DateTime) day.Date);
+                SetTheMeal(meal, _dayRepository.GetDayDateTime(dayID));
                 _mealRepository.Add(meal);
             }
 
