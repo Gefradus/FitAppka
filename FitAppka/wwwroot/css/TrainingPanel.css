@@ -36,9 +36,9 @@
     background: #53b2c7ad;
 }
 
-#btnAddStrength:hover {
-    background: #5e96a2ad
-}
+    #btnAddStrength:hover {
+        background: #2f8fa3ad
+    }
 
 #btnAddCardio:hover {
     background: #4444446b
@@ -68,16 +68,15 @@
 
 }
 
-.headCol {
+.headCol, .sHeadCol {
     border-left: 1px solid darkgray;
     font-weight: 600;
-    background: #3f3f3f;
     align-items: center;
     text-align: center;
 }
 
 .sHeadCol {
-    width: calc(33.33% - 20px)
+    width: calc(33.33% - 20px);
 }
 
 .column {
@@ -92,8 +91,15 @@
     border-left: 1px solid darkgray;
 }
 
+.trainTypeHeader {
+    font-size: 1.2rem;
+    margin-top: 7px;
+    color: dimgray;
+    font-weight: 600
+}
+
 #all {
-    margin-top: 1rem !important;
+    margin-top: 8px !important;
     border-bottom: 1px solid darkgray
 }
 
@@ -119,7 +125,7 @@
         max-width: initial !important;
     }
 
-    .headCol{
+    .headCol, .sHeadCol{
         font-weight: 400;
         font-size: 14px;
     }
@@ -149,7 +155,7 @@
 }
 
 @media(max-width: 482px){
-    #diary, #btnAdd, #datepicker, .headCol, .goalRow {
+    #diary, #btnAdd, #datepicker, .headCol, .goalRow, .sHeadCol {
         font-size: 12px;
     }
     .trainingRow{
