@@ -126,14 +126,17 @@ namespace FitAppka.Controllers
 
         [HttpPost]
         public JsonResult DeleteCardio(int cardioID) {
-            _cardioRepository.Delete(cardioID);
+            if(_dayRepository.GetDay(_cardioRepository.GetCardioTraining(cardioID).DayId).ClientId == GetLoggedInClientID())
+            {
+                _cardioRepository.Delete(cardioID);
+            }
             return Json(false);
         }
 
         [HttpPost]
         public IActionResult AddCardioType(int dayID, string name, int kcalPerMin) {
             _cardioTypeRepository.Add(new CardioTrainingType {
-                TrainingName = name,
+               TrainingName = name,
                 KcalPerMin = kcalPerMin
             });
 
