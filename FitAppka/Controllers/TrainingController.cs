@@ -67,6 +67,7 @@ namespace FitAppka.Controllers
 
         }
 
+
         private int GetTrainingTimeGoalInDay(int dayID) {
             int? timeGoal = _dayRepository.GetDay(dayID).TrainingTimeGoal;
             if (timeGoal != null) {

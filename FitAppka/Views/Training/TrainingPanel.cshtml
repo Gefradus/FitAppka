@@ -84,7 +84,7 @@
             <a class="btn acent" id="btnAdd" asp-controller="Training" asp-action="Search" asp-route-dayID="@ViewData["dayID"]">Dodaj nowy trening</a>
         </div>
 
-        <div style="color:dimgrey; font-size: 1.2rem">Treningi cardio:</div>
+        <div style="font-size: 1.2rem">Treningi cardio:</div>
 
         <div id="all">
             <div class="row no-gutters headCol" style="height: 41px; color:white;">
@@ -174,16 +174,16 @@
             </div>
         </div>
 
-        <div style="color:dimgrey; font-size: 1.2rem; margin-top: 25px">Treningi siłowe:</div>
+        <div style="font-size: 1.2rem; margin-top: 25px">Treningi siłowe:</div>
 
         <div id="all">
             <div class="row no-gutters headCol" style="height: 41px; color:white;">
                 <div class="col-5 cent" style="border-left: 0">Nazwa treningu:</div>
                 <div class="col-7 container">
                     <div class="row no-gutters" style="height: 100%">
-                        <div class="headCol sHead cent">Serie:</div>
-                        <div class="headCol sHead cent">Powtórzenia:</div>
-                        <div class="headCol sHead cent">Ciężar:</div>
+                        <div class="headCol sHeadCol cent">Serie:</div>
+                        <div class="headCol sHeadCol cent">Powtórzenia:</div>
+                        <div class="headCol sHeadCol cent">Ciężar:</div>
                         <div class="btnArea borl" style="background: #3f3f3f"></div>
                     </div>
                 </div>
@@ -201,9 +201,9 @@
                         <div class="col-5 cent">@training.StrengthTrainingType.TrainingName</div>
                         <div class="col-7 container">
                             <div class="row no-gutters">
-                                <div class="cent scol borl">@training.Sets</div>
-                                <div class="cent scol borl">@training.Repetitions</div>
-                                <div class="cent scol borl">@training.Weight</div>
+                                <div class="cent sHeadCol borl">@training.Sets</div>
+                                <div class="cent sHeadCol borl">@training.Repetitions</div>
+                                <div class="cent sHeadCol borl">@training.Weight</div>
                                 <div class="cent btnArea borl">
                                     <button id="btnDelete" type="button" onclick="confirmDeleting(@training.StrengthTrainingId);"><img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
                                 </div>
@@ -222,7 +222,6 @@
                 <script>
                     $("#all").css('border', '0px');
                 </script>
-
             }
         }
 
