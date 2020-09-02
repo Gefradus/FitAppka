@@ -41,19 +41,18 @@ namespace FitAppka.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(Client model)
         {
-            if (ModelState.IsValid)
+            if (model.Login != null || model.Email != null)
             {
-                string loginOrEmail = model.Login.ToLower();
-                Client client = _clientRepository.GetAllClients().FirstOrDefault(c => c.Login.ToLower().Equals(loginOrEmail) || c.Email.ToLower().Equals(loginOrEmail));
-                if (client != null && client.Password.Equals(model.Password))
+                if (ModelState.IsValid)
                 {
-                    return await SignInAndStart(client.Login);
+                    string loginOrEmail = model.Login.ToLower();
+                    Client client = _clientRepository.GetAllClients().FirstOrDefault(c => c.Login.ToLower().Equals(loginOrEmail) || c.Email.ToLower().Equals(loginOrEmail));
+                    if (client != null && client.Password.Equals(model.Password)) {
+                        return await SignInAndStart(client.Login);
+                    }
+                    else { ModelState.AddModelError(string.Empty, "Nieprawidłowy login i/lub hasło"); }
                 }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Nieprawidłowy login i/lub hasło");
-                }
-            }
+            } else { ModelState.AddModelError("Login", "Należy podać login lub e-mail"); }
 
             return View(model);
         }

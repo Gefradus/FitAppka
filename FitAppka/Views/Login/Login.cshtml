@@ -1,19 +1,14 @@
 ﻿@model FitAppka.Models.Client;
 
-@{
-    ViewData["Title"] = "Index";
-}
+<head>
+    <link rel="stylesheet" href="~/css/Home.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/LoginStyle.css" type="text/css" />
+    <link href="~/css/AllViews.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 
-
-    <head>
-        <link rel="stylesheet" href="~/css/Home.css" type="text/css" />
-        <link rel="stylesheet" href="~/css/LoginStyle.css" type="text/css" />
-        <link href="~/css/AllViews.css" rel="stylesheet" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-
-        <script type="text/javascript">
-              $(document).click(function (event) {
+    <script type="text/javascript">
+        $(document).click(function (event) {
             var clickover = $(event.target);
             var $navbar = $(".navbar-collapse");
             var _opened = $navbar.hasClass("in");
@@ -21,175 +16,171 @@
                 $navbar.collapse('hide');
             }
         });
-        </script>
+    </script>
 
-    </head>
+</head>
 
-    <body style="background-color: white">
-        <header>
-            <nav class="navbar navbar-dark navbar-expand-md border-bottom box-shadow mb-3 czarnyNav">
+<body style="background-color: white">
+    <header>
+        <nav class="navbar navbar-dark navbar-expand-md border-bottom box-shadow mb-3 czarnyNav">
 
-                    <div>
-                        <div class="mr-auto">
-                            <a asp-action="Logout"><img class="mt-md-1 ml-2 ml-sm-3 ml-md-4 ml-lg-5" style="height: 50px; width:185px;" src="~/img/logorozowe.png" /></a>
-                        </div>
+            <div>
+                <div class="mr-auto">
+                    <a asp-action="Logout"><img class="mt-md-1 ml-2 ml-sm-3 ml-md-4 ml-lg-5" style="height: 50px; width:185px;" src="~/img/logorozowe.png" /></a>
+                </div>
+            </div>
+            <div>
+                <div class="navbar-nav ml-auto" style="position: absolute; right: 0; margin-top: -21px">
+                    <button class="navbar-toggler mr-2 mr-sm-3 mr-md-4 mr-md-5" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Przełącznik nawigacji" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div style="margin-top:-2px" class="d-none d-md-inline-block mr-2 mr-sm-3 mr-md-4 mr-md-5">
+                        <div style="float:left" class="mr-4"><button data-target="#loginModal" data-toggle="modal" style="height: 27px; margin-top: 7px; background-color: transparent; border: none; color: white" type="button">Zaloguj się</button></div>
+                        <div style="float:left;"><a class="nav-link text-light" asp-controller="Login" asp-action="Register">Zarejestruj się</a></div>
+                        <div style="clear:both"></div>
                     </div>
-                    <div>
-                        <div class="navbar-nav ml-auto" style="position: absolute; right: 0; margin-top: -21px">
-                            <button class="navbar-toggler mr-2 mr-sm-3 mr-md-4 mr-md-5" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Przełącznik nawigacji" type="button">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
 
-                            <div style="margin-top:-2px" class="d-none d-md-inline-block mr-2 mr-sm-3 mr-md-4 mr-md-5">
-                                <div style="float:left" class="mr-4"><button data-target="#loginModal" data-toggle="modal" style="height: 27px; margin-top: 7px; background-color: transparent; border: none; color: white" type="button">Zaloguj się</button></div>
-                                <div style="float:left;"><a class="nav-link text-light" asp-controller="Login" asp-action="Register">Zarejestruj się</a></div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse in d-md-none" id="navMenu">
+            <ul class="navbar-nav" style="width: 1000%">
+                <li class="nav-item">
+                    <button data-target="#loginModal" style="height: 27px; margin-top: 7px; background-color: transparent; border: none; font-weight: 600; color: #343a40" data-toggle="modal" class="loginButton" type="button">Zaloguj się</button>
+                </li>
+                <li style="margin-left: -15px; margin-top: 10px; font-weight: 600">
+                    <a class="nav-link text-dark" asp-controller="Login" asp-action="Register">Zarejestruj się</a>
+                </li>
+            </ul>
+        </div>
+
+    </header>
+
+    <div class="container mt-5">
+        <div class="row no-gutters">
+            <div class="d-lg-none col-12 mb-5">
+                <div id="logUpper">
+                    <form method="post" id="formLogin">
+                        <div id="loginPanel">
+                            <div class="form-group">
+                                <label>E-mail lub login</label>
+                                <input asp-for="Login" class="form-control" tyle="width: 100%" />
+                                <span asp-validation-for="Login" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Hasło</label>
+                                <input asp-for="Password" class="form-control" type="password" style="width: 100%" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 15px; width: 100%">Zaloguj się</button>
+                            <div style="margin-top: 10px; padding-left: 2px; display: flex; justify-content: center">
+                                <div style="float:left; padding-top:7.5px">Nie masz jeszcze konta?</div>
+                                <div style="float:left; margin-left: -10px"><a class="nav-link" asp-controller="Login" asp-action="Register">Zarejestruj się!</a></div>
                                 <div style="clear:both"></div>
                             </div>
 
                         </div>
-                    </div>
-            </nav>
-
-            <div class="collapse navbar-collapse in d-md-none" id="navMenu">
-                <ul class="navbar-nav" style="        width: 1000%
-">
-                    <li class="nav-item">
-                        <button data-target="#loginModal" style="height: 27px; margin-top: 7px; background-color: transparent; border: none; font-weight: 600; color: #343a40" data-toggle="modal" class="loginButton" type="button">Zaloguj się</button>
-                    </li>
-                    <li style="margin-left: -15px; margin-top: 10px; font-weight: 600">
-                        <a class="nav-link text-dark" asp-controller="Login" asp-action="Register">Zarejestruj się</a>
-                    </li>
-                </ul>
+                    </form>
+                </div>
             </div>
 
-        </header>
+            <div class="modal fade" tabindex="-1" id="loginModal" data-keyboard="false" style="margin-top: 100px">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                        </div>
 
-        <div class="container mt-5">
-            <div class="row no-gutters">
-                <div class="d-lg-none col-12 mb-5">
-                    <div id="logGorny">
-                        <form method="post" style="margin-left: calc(50% - 162.5px)">
-                            <div style="width: 325px;">
-                                <div class="form-group">
-                                    <label>E-mail lub login</label>
-                                    <input asp-for="Login" class="form-control" tyle="width: 100%"/>
-                                    <span asp-validation-for="Login" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label>Hasło</label>
-                                    <input asp-for="Password" class="form-control" type="password" style="width: 100%"/>
-                                    <span asp-validation-for="Password" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
+                        <div class="modal-body" style="margin-bottom: 15px">
+                            <form method="post" style="margin-left: calc(50% - 162.5px)">
+                                <div style="width: 325px;">
 
-                                </div>
-                                <button type="submit" class="btn btn-primary" style="margin-top: 15px; width: 100%">Zaloguj się</button>
-                                <div style="margin-top: 10px; padding-left: 2px">
-                                    <div style="float:left; padding-top:7.5px">Nie masz jeszcze konta?</div>
-                                    <div style="float:left; margin-left: -10px"><a class="nav-link" asp-controller="Login" asp-action="Register">Zarejestruj się!</a></div>
-                                    <div style="clear:both"></div>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="modal fade" tabindex="-1" id="loginModal" data-keyboard="false" style="margin-top: 100px">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">×</button>
-                            </div>
-
-                            <div class="modal-body" style="margin-bottom: 15px">
-                                <form method="post" style="margin-left: calc(50% - 162.5px)">
-                                    <div style="width: 325px;">
-
-                                        <div class="form-group">
-                                            <label>E-mail lub login</label>
-                                            <input asp-for="Login" class="form-control" tyle="width: 100%"/>
-                                            <span asp-validation-for="Login" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Hasło</label>
-                                            <input asp-for="Password" class="form-control" type="password" style="width: 100%"/>
-                                            <span asp-validation-for="Password" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-group">
-
-                                        </div>
-                                        <button type="submit" class="btn btn-primary" style="margin-top: 15px; width: 100%">Zaloguj się</button>
-                                        <div style="margin-top: 10px; padding-left: 2px">
-                                            <div style="float:left; padding-top:7.5px">Nie masz jeszcze konta?</div>
-                                            <div style="float:left; margin-left: -10px"><a class="nav-link" asp-controller="Login" asp-action="Register">Zarejestruj się!</a></div>
-                                            <div style="clear:both"></div>
-                                        </div>
+                                    <div class="form-group">
+                                        <label>E-mail lub login</label>
+                                        <input asp-for="Login" class="form-control" tyle="width: 100%" />
+                                        <span asp-validation-for="Login" class="text-danger"></span>
                                     </div>
-                                </form>
-                            </div>
+                                    <div class="form-group">
+                                        <label>Hasło</label>
+                                        <input asp-for="Password" class="form-control" type="password" style="width: 100%" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 15px; width: 100%">Zaloguj się</button>
+                                    <div style="margin-top: 10px; padding-left: 2px">
+                                        <div style="float:left; padding-top:7.5px">Nie masz jeszcze konta?</div>
+                                        <div style="float:left; margin-left: -10px"><a class="nav-link" asp-controller="Login" asp-action="Register">Zarejestruj się!</a></div>
+                                        <div style="clear:both"></div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-12 col-lg-7 pr-3">
-                    <div class="ml-3 ml-lg-0">
-                        <h2 style="margin-top:-10px">Jak to działa?</h2>
-                        <h6>
-                            Twoje DARMOWE członkostwo w FitnessApp oferuje:<br />
-                        </h6>
-                        <ul>
-                            <li>Bazę liczącą ponad 10000 produktów (i ciągle rośnie)</li>
-                            <li>Możliwość dodawania własnych produktów</li>
-                            <li>Niezwykle prosty interfejs - zapisz co zjadłeś za pomocą kilku klinięć</li>
-                            <li>Ustalanie celów i planowanie jadłospisu</li>
-                            <li>Kontrolę wagi z możliwością obserwowania swoich postępów w czasie</li>
-                        </ul>
-                    </div>
-                    <div id="panelJablko" class="mt-5">
-                        <img class="float-left mr-3" style="height: 210px; width:180px; margin-top: 3px; border: 2px solid #d6d6d6" src="~/img/shake.jpeg" />
-                        <div style="min-height: 200px">
-                            <p1>
-                                Wiemy jak ciężko jest zrzucić wagę, dlatego nasz system został zaprojektowany by ułatwić
-                                proces odchudzania. FitnessApp udostępnia narzędzia, wspomagające utrzymanie diety, a co najlepsze
-                                możesz założyć konto za darmo.
-                                Badania wykazały, że prowadzenie dziennika dietetycznego zwiększa prawdopodobieństwo na pozbycie się
-                                zbędnych kilogramów. Zasada jest prosta - konsekwentne monitorowanie ilości spożywanego jedzenia
-                                podnosi szansę utraty wagi.
-                            </p1>
-                        </div>
+            <div class="col-12 col-lg-7 pr-3">
+                <div class="ml-3 ml-lg-0">
+                    <h2 style="margin-top:-10px">Jak to działa?</h2>
+                    <h6>
+                        Twoje DARMOWE członkostwo w FitnessApp oferuje:<br />
+                    </h6>
+                    <ul>
+                        <li>Bazę liczącą ponad 10000 produktów (i ciągle rośnie)</li>
+                        <li>Możliwość dodawania własnych produktów</li>
+                        <li>Niezwykle prosty interfejs - zapisz co zjadłeś za pomocą kilku klinięć</li>
+                        <li>Ustalanie celów i planowanie jadłospisu</li>
+                        <li>Kontrolę wagi z możliwością obserwowania swoich postępów w czasie</li>
+                    </ul>
+                </div>
+                <div id="photoPanel" class="mt-5">
+                    <img class="float-left mr-3" style="height: 210px; width:180px; margin-top: 3px; border: 2px solid #d6d6d6" src="~/img/shake.jpeg" />
+                    <div style="min-height: 200px">
+                        <p1>
+                            Wiemy jak ciężko jest zrzucić wagę, dlatego nasz system został zaprojektowany by ułatwić
+                            proces odchudzania. FitnessApp udostępnia narzędzia, wspomagające utrzymanie diety, a co najlepsze
+                            możesz założyć konto za darmo.
+                            Badania wykazały, że prowadzenie dziennika dietetycznego zwiększa prawdopodobieństwo na pozbycie się
+                            zbędnych kilogramów. Zasada jest prosta - konsekwentne monitorowanie ilości spożywanego jedzenia
+                            podnosi szansę utraty wagi.
+                        </p1>
                     </div>
                 </div>
+            </div>
 
-                <div class="d-none d-lg-inline-block col-md-4 ml-5">
-                    <div id="logBoczny">
-                        <form method="post">
-                            <div style="width: 325px;">
-                                <div asp-validation-summary="All" class="text-danger"></div>
-                                <div class="form-group">
-                                    <label>E-mail lub login</label>
-                                    <input asp-for="Login" class="form-control" style="width: 100%" />
-                                    <span asp-validation-for="Login" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label>Hasło</label>
-                                    <input asp-for="Password" class="form-control" type="password" style="width: 100%" />
-                                    <span asp-validation-for="Password" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-
-                                </div>
-                                <button type="submit" class="btn btn-primary" style="margin-top: 15px;width: 100%">Zaloguj się</button>
-                                <div style="margin-top: 10px; padding-left: 2px">
-                                    <div style="float:left; padding-top:7.5px">Nie masz jeszcze konta?</div>
-                                    <div style="float:left; margin-left: -10px"><a class="nav-link" asp-controller="Login" asp-action="Register">Zarejestruj się!</a></div>
-                                    <div style="clear:both"></div>
-                                </div>
+            <div class="d-none d-lg-inline-block col-md-4 ml-5">
+                <div id="logSide">
+                    <form method="post">
+                        <div style="width: 325px;">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <label>E-mail lub login</label>
+                                <input asp-for="Login" class="form-control" style="width: 100%" />
+                                <span asp-validation-for="Login" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Hasło</label>
+                                <input asp-for="Password" class="form-control" type="password" style="width: 100%" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
 
                             </div>
-                        </form>
-                    </div>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 15px;width: 100%">Zaloguj się</button>
+                            <div style="margin-top: 10px; padding-left: 2px">
+                                <div style="float:left; padding-top:7.5px">Nie masz jeszcze konta?</div>
+                                <div style="float:left; margin-left: -10px"><a class="nav-link" asp-controller="Login" asp-action="Register">Zarejestruj się!</a></div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
