@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: #ecf8ba
+    background: #ecf8ba !important
 }
 
 .searchBtn {
@@ -56,14 +56,14 @@
     margin-top: 100px
 }
 
-#navGlowny {
+#navMain {
     height: 70px;
     position: fixed;
     left: 0;
     width: 100%;
     margin-top: -5px;
     z-index: 99;
-    background-color: #f4f4f4
+    background-color: rgba(250, 255, 212, 0.97)
 }
 
 #prodNotFound {
@@ -90,7 +90,7 @@
     width: 100%;
     margin-top: -35px;
     z-index: 99;
-    background-color: #f4f4f4
+    background-color: rgba(250, 255, 212, 0.97)
 }
 
 .dayHeader {

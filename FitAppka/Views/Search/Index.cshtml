@@ -150,7 +150,7 @@
                             <div style="margin-top: -3px">
                                 <div style="float:left; top:30px; padding-top:15px">@Html.TextBox("search", "", new { placeholder = "Szukaj produktu w bazie", @class = "form-control valid", @data_val = "true", @data_val_required = "Należy wpisać nazwę produktu" })</div>
                                 <div style="float:left; padding-top:15px; margin-left: 10px"><input style="height: 38px; border-radius: 15%; background-color:rgb(46, 44, 44); color: white" type="submit" value="Szukaj" /></div>
-                                <div style="clear:both"></div>
+                                <div class="cb"></div>
                             </div>
 
                             @Html.Hidden("inWhich", ViewData["inWhich"])
@@ -259,30 +259,26 @@
             </div>
 
             <div style="margin-top: -16px">
-                @foreach (var item in Model)
+                @foreach (var item in Model) 
                 {
                     <div id="wierszeTabeli" class="row no-gutters wieeersz">
                         <div class="col-4" style="display: flex; align-items: center">
                             <div class="container" style="padding-left: 0px">
                                 <div class="row no-gutters">
                                     <div class="d-none d-md-inline-block col-md-5 col-lg-6">
-                                        @{
-                                            string photoPath;
-                                            if (item.PhotoPath != null)
-                                            {
+                                        @{  string photoPath;
+                                            if (item.PhotoPath != null) {
                                                 photoPath = "~/photos/" + (item.PhotoPath);
                                                 <script>
                                                     pathArray.push('@item.PhotoPath');
                                                 </script>
                                             }
-                                            else
-                                            {
+                                            else {
                                                 photoPath = "~/img/miss.png";
                                                 <script>
                                                     pathArray.push('null');
                                                 </script>
                                             }
-
                                             <script>
                                                 IDarray.push('@item.ProductId');
                                                 nameArray.push('@item.ProductName');
@@ -291,7 +287,6 @@
                                                 tluszczeArray.push('@item.Fats');
                                                 wegleArray.push('@item.Carbohydrates');
                                             </script>
-
                                         }
                                         <img src="@photoPath" class="img-fluid" id="obrazek" asp-append-version="true" />
                                     </div>
@@ -305,43 +300,29 @@
                         <div class="col-7 marauto">
                             <div class="container">
                                 <div class="row no-gutters">
-                                    <div class="col-3">
-                                        @Html.DisplayFor(i => item.Calories)kcal
-                                    </div>
-                                    <div class="col-3">
-                                        @Html.DisplayFor(i => item.Proteins)g
-                                    </div>
-                                    <div class="col-3">
-                                        @Html.DisplayFor(i => item.Fats)g
-                                    </div>
-                                    <div class="col-3">
-                                        @Html.DisplayFor(i => item.Carbohydrates)g
-                                    </div>
+                                    <div class="col-3">@Html.DisplayFor(i => item.Calories)kcal</div>
+                                    <div class="col-3">@Html.DisplayFor(i => item.Proteins)g</div>
+                                    <div class="col-3">@Html.DisplayFor(i => item.Fats)g</div>
+                                    <div class="col-3">@Html.DisplayFor(i => item.Carbohydrates)g</div>
                                 </div>
                             </div>
                         </div>
                         <div id="panelPrzyciskow" class="col-1">
                             <div>
                                 <button class="przycisk" style="background: none; border: none;" onclick="addProduct(@item.ProductId)"><img style="height:30px; width: 30px" src="~/img/add.png"></button>
-
                             </div>
-                            <div style="clear:both"></div>
+                            <div class="cb"></div>
                         </div>
-
                     </div>
                 }
             </div>
         }
-        else
-        {
-            if ((bool)ViewData["wereSearched"])
-            {
+        else {
+            if ((bool)ViewData["wereSearched"]) {
                 <div style="display: flex; justify-content: center; margin-top: 25px">
                     Nie znaleziono produktów o podanej nazwie
                 </div>
             }
         }
-
-
     </div>
 </body>

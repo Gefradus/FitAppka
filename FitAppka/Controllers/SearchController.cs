@@ -40,7 +40,7 @@ namespace FitAppka.Controllers
             ViewData["dayID"] = dayID;
             ViewData["inWhich"] = inWhich;
             ViewData["search"] = search;
-            ViewData["day"] = NapisDnia(dayID);
+            ViewData["day"] = DayPattern(dayID);
             ViewData["meal"] = MealName(inWhich);
 
             return View(await _context.Product.Where(p => p.ProductName.Contains(search)).ToListAsync());
@@ -56,7 +56,7 @@ namespace FitAppka.Controllers
             return "Kolacja";
         }
 
-        private string NapisDnia(int dayID)
+        private string DayPattern(int dayID)
         {
             DateTime daySelected = _dayRepository.GetDayDateTime(dayID);
             string month = "";
