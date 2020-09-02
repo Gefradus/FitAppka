@@ -29,11 +29,11 @@
 }
 
 #btnAddCardio{
-    background: #ff000047;
+    background: rgba(230, 0, 0, 0.35);
 }
 
 #btnAddStrength{
-    background: #53b2c7ad;
+    background: rgba(49, 157, 211, 0.4);
 }
 
 #btnAddStrength:hover {
