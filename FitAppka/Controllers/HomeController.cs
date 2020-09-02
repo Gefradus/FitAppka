@@ -70,12 +70,10 @@ namespace NowyDotnecik.Controllers
         private void CheckIfAdmin(int clientID)
         {
             Client client = _clientRepository.GetClientById(clientID);
-            if (client.IsAdmin)
-            {
+            if (client.IsAdmin) {
                 ViewData["admin"] = 1;
             }
-            else
-            {
+            else {
                 ViewData["admin"] = 0;
             }
         }

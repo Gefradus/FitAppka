@@ -36,9 +36,9 @@
     background: #53b2c7ad;
 }
 
-    #btnAddStrength:hover {
-        background: #2f8fa3ad
-    }
+#btnAddStrength:hover {
+    background: #2f8fa3ad
+}
 
 #btnAddCardio:hover {
     background: #4444446b
@@ -73,6 +73,7 @@
     font-weight: 600;
     align-items: center;
     text-align: center;
+    color: white
 }
 
 .sHeadCol {

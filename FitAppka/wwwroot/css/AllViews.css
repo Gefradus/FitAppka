@@ -1,7 +1,4 @@
-﻿body {
-}
-
-.fl{
+﻿.fl{
     float:left
 }
 
@@ -76,3 +73,10 @@
     content: "Przeglądaj";
 }
 
+.transparent {
+    filter:alpha(opacity=30); 
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+    -moz-opacity:0.3;
+    -khtml-opacity: 0.3;
+    opacity: 0.3; 
+}
