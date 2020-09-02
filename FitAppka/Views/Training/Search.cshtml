@@ -104,7 +104,7 @@
                 <div id="searchHeader">Przeszukaj naszą bazę ćwiczeń:</div>
             </div>
             <div class="row no-gutters pb-4" style="margin-left: 20px">
-                <div style="width: 50%; border-right: 1px dotted #f7f7f7">
+                <div style="width: 50%; border-right: 1px dotted #f7f7f7" class="col-12 col-md-6">
                     @using (Html.BeginForm("Search", "Training", FormMethod.Get))
                     {
                         <div id="divValidation">@Html.ValidationSummary(false, "", new { @class = "text-danger" })</div>
@@ -116,7 +116,7 @@
                         @Html.Hidden("dayID", ViewData["dayID"])
                     }
                 </div>
-                <div id="createTrainingDiv">
+                <div id="createTrainingDiv" class="col-md-6">
                     <button class="btn" id="createTraining" onclick="showModalAddTraining();">Stwórz własne ćwiczenie</button>
                 </div>
             </div>

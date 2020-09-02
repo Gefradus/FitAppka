@@ -5,7 +5,7 @@
     margin-right: -25px;
     border-radius: 15px;
     border: 2px solid #dedede;
-    background: #f7f7f796;
+    background: rgba(247, 247, 247, 0.6);
 }
 
 #logGorny {
@@ -18,7 +18,7 @@
     padding: 15px;
     margin-right: -15px;
     min-height: 230px;
-    background-color: #f7f7f796;
+    background-color: rgba(247, 247, 247, 0.6);
     border-radius: 15px;
     border: 2px solid #dedede
 }
