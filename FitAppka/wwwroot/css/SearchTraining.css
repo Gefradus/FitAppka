@@ -127,3 +127,29 @@ body{
     cursor: pointer;
     color: orange;
 }
+
+#searchArea{
+    width: 50%; border-right: 1px dotted #f7f7f7
+}
+
+#searchAreaRow{
+    margin-left: 20px
+}
+
+@media(max-width: 768px){
+    #searchArea{
+        border-right: 0;
+        justify-content: center;
+        display: flex;
+        margin-top: -5px;
+        margin-bottom: 20px;
+    }
+
+    #createTraining{
+        width: 250px;
+    }
+
+    #searchAreaRow{
+        margin-left: 0;
+    }
+}
