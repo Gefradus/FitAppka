@@ -98,7 +98,8 @@ body{
     align-items: center;
     display: flex;
     font-size: 18px;
-    width: 350px;
+    width: 93%;
+    max-width: 350px;
     justify-content: center;
     color: #fbff00;
     border: 1px solid #eee5e58f
@@ -178,11 +179,6 @@ body{
         float: left;
         width: 100px;
     }
-
-    #createTraining{
-        width: 250px;
-    }
-
     #searchAreaRow{
         margin-left: 0;
     }
@@ -248,9 +244,6 @@ body{
     #searchBtn{
         width: 65px;
         font-size: 13px;
-    }
-    #createTraining{
-        width: 220px;
     }
     .form-control{
         font-size: 13px;
