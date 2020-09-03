@@ -194,9 +194,9 @@ body{
     }
 }
 
-@media(max-width: 435px){
+@media(max-width: 442px){
     #textboxDIV{
-        width: 225px;
+        width: 200px;
     }
 }
 
@@ -209,19 +209,13 @@ body{
     }
 }
 
-@media(max-width: 395px){
+@media(max-width: 397px){
     #textboxDIV{
         width: 175px;
     }
 }
 
-@media(max-width: 388px){
-    #textboxDIV{
-        width: 165px;
-    }
-}
-
-@media(max-width: 365px){
+@media(max-width: 382px){
     #textboxDIV{
         width: 165px;
     }
@@ -241,7 +235,7 @@ body{
     }
 }
 
-@media(max-width: 350px){
+@media(max-width: 352px){
     #searchHeader{
         font-size: 14px
     }
