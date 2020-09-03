@@ -200,12 +200,18 @@ body{
     }
 }
 
-@media(max-width: 418px){
+@media(max-width: 424px){
     #textboxDIV{
         width: 190px;
     }
     #searchBtn{
         width: 90px;
+    }
+}
+
+@media(max-width: 395px){
+    #textboxDIV{
+        width: 175px;
     }
 }
 
