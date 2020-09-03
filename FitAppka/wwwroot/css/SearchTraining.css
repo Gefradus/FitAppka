@@ -136,7 +136,36 @@ body{
     margin-left: 20px
 }
 
+@media(max-width: 991px){
+    #createTraining{
+        margin-left: 30px;
+        margin-right: 20px;
+    }
+
+    #textboxDIV{
+        width: 205px;
+    }
+
+    #searchArea{
+        border-right: 0
+    }
+    #searchBtn{
+        float: initial;
+        width: 90px;
+        
+    }
+}
+
+
 @media(max-width: 768px){
+    #createTraining{
+        margin: 0
+    }
+
+    #textboxDIV{
+        width: 250px;
+    }
+
     #searchArea{
         border-right: 0;
         justify-content: center;
@@ -145,11 +174,61 @@ body{
         margin-bottom: 20px;
     }
 
+    #searchBtn{
+        float: left;
+        width: 100px;
+    }
+
     #createTraining{
         width: 250px;
     }
 
     #searchAreaRow{
         margin-left: 0;
+    }
+}
+
+@media(max-width: 475px){
+    #textboxDIV{
+        width: 225px;
+    }
+}
+
+@media(max-width: 435px){
+    #textboxDIV{
+        width: 225px;
+    }
+}
+
+@media(max-width: 418px){
+    #textboxDIV{
+        width: 190px;
+    }
+    #searchBtn{
+        width: 90px;
+    }
+}
+
+@media(max-width: 388px){
+    #textboxDIV{
+        width: 165px;
+    }
+}
+
+@media(max-width: 365px){
+    #textboxDIV{
+        width: 165px;
+    }
+    #searchBtn{
+        width: 70px;
+    }
+    #searchHeader{
+        font-size: 16px
+    }
+    #createTraining{
+        font-size: 16px;
+    }
+    .form-control{
+        font-size: 14px;
     }
 }
