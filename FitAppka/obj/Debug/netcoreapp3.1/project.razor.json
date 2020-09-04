@@ -14397,8 +14397,13 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Training\\Search.cshtml",
-      "TargetPath": "Views\\Training\\Search.cshtml",
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Training\\AddCardio.cshtml",
+      "TargetPath": "Views\\Training\\AddCardio.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dratwak\\Documents\\repos\\FitAppka\\FitAppka\\Views\\Training\\AddStrengthTraining.cshtml",
+      "TargetPath": "Views\\Training\\AddStrengthTraining.cshtml",
       "FileKind": "mvc"
     },
     {

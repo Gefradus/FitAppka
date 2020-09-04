@@ -132,7 +132,20 @@ namespace FitAppka.Controllers
             return View(await _context.StrengthTrainingType.Where(s => s.TrainingName.Contains(search)).ToListAsync());
         }
 
-        []
+        [HttpPost]
+        public IActionResult AddStrengthTraining(int trainingTypeId, int dayID, short sets, short reps, short weight) {
+            try {
+                _strengthTrainingRepository.Add(new StrengthTraining(){
+                    DayId = dayID,
+                    Sets = sets,
+                    Repetitions = reps,
+                    Weight = weight
+                });
+                return RedirectToAction(nameof(TrainingPanel), new { dayID });
+            }
+            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = GetTodayID() }); } 
+        }
+
 
 
         [HttpPost]
