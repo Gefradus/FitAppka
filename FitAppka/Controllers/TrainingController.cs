@@ -104,17 +104,18 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Search(string search, int dayID) {
+        public async Task<IActionResult> AddCardio(string search, int dayID) {
             ViewData["dayID"] = dayID;
             CheckIfThisWasSearchedFor(search);
             return View(await _context.CardioTrainingType.Where(c => c.TrainingName.Contains(search)).ToListAsync());
         }
 
         [HttpPost]
-        public IActionResult Search(int cardioTypeId, int dayID, int timeInMinutes, int burnedKcal) {
+        public IActionResult AddCardio(int cardioTypeId, int dayID, int timeInMinutes, int burnedKcal) {
             try {
                 _cardioRepository.Add(new CardioTraining() {
                     DayId = dayID,
+
                     TimeInMinutes = timeInMinutes,
                     CardioTrainingTypeId = cardioTypeId,
                     CaloriesBurned = burnedKcal
@@ -123,6 +124,16 @@ namespace FitAppka.Controllers
             }
             catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = GetTodayID() }); } 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddStrengthTraining(string search, int dayID) {
+            ViewData["dayID"] = dayID;
+            CheckIfThisWasSearchedFor(search);
+            return View(await _context.StrengthTrainingType.Where(s => s.TrainingName.Contains(search)).ToListAsync());
+        }
+
+        []
+
 
         [HttpPost]
         public JsonResult DeleteCardio(int cardioID) {
@@ -140,7 +151,7 @@ namespace FitAppka.Controllers
                 KcalPerMin = kcalPerMin
             });
 
-            return RedirectToAction(nameof(Search), new { dayID });
+            return RedirectToAction(nameof(AddCardio), new { dayID });
         }
 
         private int GetSelectedDay(DateTime day) {

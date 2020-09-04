@@ -1,0 +1,169 @@
+@model IEnumerable<FitAppka.Models.CardioTrainingType>
+<html>
+
+<head>
+    <link rel="stylesheet" href="~/css/Home.css" type="text/css">
+    <link rel="stylesheet" href="~/css/AddTraining.css" type="text/css">
+    <link href="~/css/AllViews.css" rel="stylesheet" />
+    <script src="~/js/AddCardio.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav" style="text-align: center">
+
+            <div id="left">
+                <div class="mr-auto mt-3">
+                    <a class="nav-link ml-sm-3 ml-md-4 ml-lg-5" asp-controller="Home" asp-action="Start"><img style="height: 50px; width:185px; margin-top: -15px" src="~/img/logorozowe.png" /></a>
+                </div>
+            </div>
+            <div>
+                <div id="right" class="navbar-nav ml-auto">
+                    <button class="navbar-toggler mr-2 mr-sm-3" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Przełącznik nawigacji" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="d-none d-md-inline-block mr-md-5">
+                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi </a></div>
+                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="FindDay" asp-action="FindDay">Szukaj dni <img style="height: 15px; width:15px" src="~/img/search.png" /></a></div>
+                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Settings" asp-action="Settings">Ustawienia <img style="height: 15px; width:15px" src="~/img/settings.png" /></a></div>
+                        <div class="fl"><a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img style="height: 15px; width:15px" src="~/img/logout.png" /></a></div>
+                        <div class="cb"></div>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+        <div class="collapse navbar-collapse in d-md-none" id="navMenu">
+
+            <ul class="navbar-nav">
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" asp-controller="FindDay" asp-action="FindDay">Szukaj dni</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Settings" asp-action="Settings">Ustawienia</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Wyloguj się</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container-fluid mt-3">
+
+        <div class="modal fade" tabindex="-1" id="addTrainingType" data-keyboard="false" style="margin-top: 170px">
+            <div class="modal-dialog" style="display: flex; justify-content: center">
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 35px">
+                        <div style="margin-top: -10px">
+                            Tworzenie ćwiczenia
+                        </div>
+                        <button type="button" style="margin-top: -29px" class="close" data-dismiss="modal">×</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row no-gutters cent">
+                                <div style="margin-left: -58px">Nazwa ćwiczenia: </div>
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 3px;">
+                                <input id="cardioTypeName" type="text" maxlength="50" oninput="validity.valid || (value = '')" />
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 15px;">
+                                <div style="margin-left: -50px">Wydatek kcal/min: </div>
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 3px;">
+                                <input id="expenditure" type="number" max="99999" onkeypress="return tylkoLiczbyCalkowite(event)" oninput="validity.valid || (value = '')" />
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
+                                <button type="button" onclick="addCardioType(@ViewData["dayID"], '@Url.Action("AddCardioType", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="validationModal" class="modal fade" data-backdrop="static" role="dialog">
+            <div id="valDialog" class="modal-dialog cent">
+                <div class="modal-content" style="width: 300px">
+                    <div id="validatMsg" class="modal-body cent"></div>
+                    <div class="modal-footer">
+                        <button id="closeVal" type="button" class="btn">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row no-gutters container" id="panelek">
+            <div class="row no-gutters pt-2" style="margin-left: 20px">
+                <div id="searchHeader">Przeszukaj naszą bazę ćwiczeń:</div>
+            </div>
+            <div class="row no-gutters pb-4" id="searchAreaRow">
+                <div id="searchArea" class="col-12 col-md-6">
+                    @using (Html.BeginForm("AddCardio", "Training", FormMethod.Get))
+                    {
+                        <div id="divValidation">@Html.ValidationSummary(false, "", new { @class = "text-danger" })</div>
+                        <div style="margin-top: -3px">
+                            <div id="textboxDIV">@Html.TextBox("search", "", new { @class = "form-control valid", @data_val = "true", @data_val_required = "Należy wpisać nazwę ćwiczenia" })</div>
+                            <div style="float:left; padding-top:15px; margin-left: 10px"><input id="searchBtn" type="submit" value="Szukaj" /></div>
+                            <div style="clear:both"></div>
+                        </div>
+                        @Html.Hidden("dayID", ViewData["dayID"])
+                    }
+                </div>
+                <div id="createTrainingDiv" class="col-12 col-md-6">
+                    <button class="btn" id="createTraining" onclick="showModalAddTraining();">Stwórz własne cardio</button>
+                </div>
+            </div>
+        </div>
+        <div class="row no-gutters pt-4">
+            <div id="trainingPanel" class="mb-3 mb-md-0 mt-lg-2 col-md-6 col-lg-5 mr-md-4">
+                @{
+                    foreach (var item in Model)
+                    {
+                        <div class="training row no-gutters" onclick="setParams('@item.TrainingName', '@item.KcalPerMin', '@item.CardioTrainingTypeId', '@ViewData["dayID"]')">
+                            @item.TrainingName
+                        </div>
+                    }
+                    if (Model.Count() == 0 && (bool)ViewData["wasSearched"])
+                    {
+                        <div style="display: flex; justify-content: center; align-items: center; height: 90%">
+                            Nie znaleziono treningu
+                        </div>
+                    }
+                }
+            </div>
+
+            <div class="mt-lg-2 col-md-5 col-lg-4" id="paramsPanel">
+                <div id="trainingName"></div>
+                <form id="formAdd" method="POST">
+                    <div id="time" hidden>
+                        <div>Czas trwania:</div>
+                        <input id="timeInMinutes" type="number" name="timeInMinutes" min="1" max="10000" step="1" oninput="validity.valid||(value=''); changeCalorie()">
+                        <div style="font-size: 13px; margin-top: 5px; font-weight: 600">min.</div>
+                    </div>
+                    <div id="kcal" hidden>
+                        <div>Spalone kalorie:</div>
+                        <input id="burnedKcal" type="number" step="1" name="burnedKcal" />
+                        <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kcal</div>
+                    </div>
+                    <div id="add" hidden class="cent cb">
+                        <button type="button" onclick="addCardioTraining()" class="btn btn-dark" id="addCardio">Dodaj trening</button>
+                    </div>
+
+                    <input type="hidden" id="cardioTypeId" name="cardioTypeId" />
+                    <input type="hidden" id="dayId" name="dayID" />
+                </form>
+                <div id="kcalPerMin" hidden></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="~/js/Settings.js"></script>
+</body>
+</html>

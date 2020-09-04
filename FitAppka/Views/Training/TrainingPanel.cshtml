@@ -85,7 +85,7 @@
 
         <div style="display: flex">
             <div class="trainTypeHeader">Treningi cardio:</div>
-            <a class="btn acent" id="btnAddCardio" asp-controller="Training" asp-action="Search" asp-route-dayID="@ViewData["dayID"]">Dodaj trening cardio</a>
+            <a class="btn acent" id="btnAddCardio" asp-controller="Training" asp-action="AddCardio" asp-route-dayID="@ViewData["dayID"]">Dodaj trening cardio</a>
         </div>
 
         <div id="all">
@@ -178,7 +178,7 @@
 
         <div style="display: flex">
             <div class="trainTypeHeader">Treningi siłowe:</div>
-            <a class="btn acent" id="btnAddStrength" asp-controller="Training" asp-action="AddStrength" asp-route-dayID="@ViewData["dayID"]">Dodaj trening siłowy</a>
+            <a class="btn acent" id="btnAddStrength" asp-controller="Training" asp-action="AddStrengthTraining" asp-route-dayID="@ViewData["dayID"]">Dodaj trening siłowy</a>
         </div>
 
         <div id="all">
