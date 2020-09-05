@@ -136,6 +136,7 @@ namespace FitAppka.Controllers
         public IActionResult AddStrengthTraining(int trainingTypeId, int dayID, short sets, short reps, short weight) {
             try {
                 _strengthTrainingRepository.Add(new StrengthTraining(){
+                    StrengthTrainingTypeId = trainingTypeId,
                     DayId = dayID,
                     Sets = sets,
                     Repetitions = reps,

@@ -2,7 +2,7 @@
     $("#addTrainingType").modal('show');
 }
 
-function addStrengthTraining() {
+function addTraining() {
     var sets = document.getElementById("sets").value;
     var reps = document.getElementById("reps").value;
 
@@ -88,9 +88,9 @@ function validation(validMsg) {
 }
 
 function setParams(name, typeId, dayID) {
-    if (document.getElementById("strengthTrainingTypeId").value != parseInt(typeId)) {
+    if (document.getElementById("trainingTypeId").value != parseInt(typeId)) {
         document.getElementById("dayId").value = parseInt(dayID);
-        document.getElementById("strengthTrainingTypeId").value = parseInt(typeId);
+        document.getElementById("trainingTypeId").value = parseInt(typeId);
         document.getElementById("trainingName").innerHTML = name;
         document.getElementById("sets").value = null;
         document.getElementById("reps").value = null;
