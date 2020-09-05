@@ -158,13 +158,49 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCardioType(int dayID, string name, int kcalPerMin) {
-            _cardioTypeRepository.Add(new CardioTrainingType {
-               TrainingName = name,
-                KcalPerMin = kcalPerMin
-            });
+        public IActionResult AddCardioType(int dayID, string name, int kcalPerMin)
+        {
+            if (GetLoggedInClientID() == _dayRepository.GetDay(dayID).ClientId)
+            {
+                _cardioTypeRepository.Add(new CardioTrainingType
+                {
+                    TrainingName = name,
+                    KcalPerMin = kcalPerMin,
+                    ClientId = GetLoggedInClientID(),
 
-            return RedirectToAction(nameof(AddCardio), new { dayID });
+                });
+
+                return RedirectToAction(nameof(AddCardio), new { dayID });
+            }
+
+            return RedirectToAction("Logout", "Login");
+        }
+
+        [HttpPost]
+        public IActionResult AddStrengthTrainingType(int dayID, string name, short sets, short reps, short weight)
+        {
+            if (GetLoggedInClientID() == _dayRepository.GetDay(dayID).ClientId)
+            {
+                StrengthTrainingType type = _strengthTrainingTypeRepository.Add(new StrengthTrainingType()
+                {
+                    VisibleToAll = false,
+                    ClientId = GetLoggedInClientID(),
+                    TrainingName = name
+                });
+
+                _strengthTrainingRepository.Add(new StrengthTraining()
+                {
+                    StrengthTrainingTypeId = type.StrengthTrainingTypeId,
+                    DayId = dayID,
+                    Sets = sets,
+                    Repetitions = reps,
+                    Weight = weight
+                });
+
+                return RedirectToAction(nameof(TrainingPanel), new { dayID });
+            }
+
+            return RedirectToAction("Logout", "Login"); 
         }
 
         private int GetSelectedDay(DateTime day) {

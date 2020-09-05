@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="~/css/AddTraining.css" type="text/css">
     <link href="~/css/AllViews.css" rel="stylesheet" />
     <script src="~/js/AddCardio.js"></script>
+    <script src="~/js/Validation.js"></script>
 </head>
 <body>
     <header>
@@ -76,7 +77,7 @@
                                 <div style="margin-left: -50px">Wydatek kcal/min: </div>
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 3px;">
-                                <input id="expenditure" type="number" max="99999" onkeypress="return tylkoLiczbyCalkowite(event)" oninput="validity.valid || (value = '')" />
+                                <input id="expenditure" type="number" max="99999" onkeypress="return onlyInt(event)" oninput="validity.valid || (value = '')" />
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
                                 <button type="button" onclick="addCardioType(@ViewData["dayID"], '@Url.Action("AddCardioType", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
@@ -147,7 +148,7 @@
                         <input id="timeInMinutes" type="number" name="timeInMinutes" min="1" max="10000" step="1" oninput="validity.valid||(value=''); changeCalorie()">
                         <div style="font-size: 13px; margin-top: 5px; font-weight: 600">min.</div>
                     </div>
-                    <div id="kcal" hidden>
+                    <div id="kcal" class="param" hidden>
                         <div>Spalone kalorie:</div>
                         <input id="burnedKcal" type="number" step="1" name="burnedKcal" />
                         <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kcal</div>

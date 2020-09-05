@@ -1,11 +1,12 @@
-@model IEnumerable<FitAppka.Models.CardioTrainingType>
+@model IEnumerable<FitAppka.Models.StrengthTrainingType>
 <html>
 
 <head>
     <link rel="stylesheet" href="~/css/Home.css" type="text/css">
     <link rel="stylesheet" href="~/css/AddTraining.css" type="text/css">
     <link href="~/css/AllViews.css" rel="stylesheet" />
-    <script src="~/js/AddStrength.js"></script>
+    <script src="~/js/AddStrengthTraining.js"></script>
+    <script src="~/js/Validation.js"></script>
 </head>
 <body>
     <header>
@@ -54,7 +55,7 @@
 
     <div class="container-fluid mt-3">
 
-        <div class="modal fade" tabindex="-1" id="addTrainingType" data-keyboard="false" style="margin-top: 170px">
+        <div class="modal fade" tabindex="-1" id="addTrainingType" data-keyboard="false" style="margin-top: 100px">
             <div class="modal-dialog" style="display: flex; justify-content: center">
                 <div class="modal-content">
                     <div class="modal-header" style="height: 35px">
@@ -67,19 +68,31 @@
                     <div class="modal-body">
                         <div class="container">
                             <div class="row no-gutters cent">
-                                <div style="margin-left: -58px">Nazwa ćwiczenia: </div>
+                                <div style="margin-left: -58px">Nazwa ćwiczenia:</div><div class="star">*</div>
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 3px;">
-                                <input id="cardioTypeName" type="text" maxlength="50" oninput="validity.valid || (value = '')" />
+                                <input id="strengthTrainingTypeName" type="text" maxlength="50" oninput="validity.valid || (value = '')" />
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 15px;">
-                                <div style="margin-left: -50px">Wydatek kcal/min: </div>
+                                <div style="margin-left: -143px">Serie:</div><div class="star">*</div>
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 3px;">
-                                <input id="expenditure" type="number" max="99999" onkeypress="return tylkoLiczbyCalkowite(event)" oninput="validity.valid || (value = '')" />
+                                <input id="setsT" type="number" max="9999" onkeypress="return onlyInt(event)" oninput="validity.valid || (value = '')" />
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 15px;">
+                                <div style="margin-left: -90px">Powtórzenia:</div><div class="star">*</div>
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 3px;">
+                                <input id="repsT" type="number" max="9999" onkeypress="return onlyInt(event)" oninput="validity.valid || (value = '')" />
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 15px;">
+                                <div style="margin-left: -135px">Ciężar:</div>
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 3px;">
+                                <input id="weightT" type="number" max="9999" onkeypress="return onlyInt(event)" oninput="validity.valid || (value = '')" />
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
-                                <button type="button" onclick="addCardioType(@ViewData["dayID"], '@Url.Action("AddCardioType", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
+                                <button type="button" onclick="addStrengthTrainingType(@ViewData["dayID"], '@Url.Action("AddStrengthTrainingType", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
                             </div>
                         </div>
                     </div>
@@ -105,7 +118,7 @@
             </div>
             <div class="row no-gutters pb-4" id="searchAreaRow">
                 <div id="searchArea" class="col-12 col-md-6">
-                    @using (Html.BeginForm("AddCardio", "Training", FormMethod.Get))
+                    @using (Html.BeginForm("AddStrengthTraining", "Training", FormMethod.Get))
                     {
                         <div id="divValidation">@Html.ValidationSummary(false, "", new { @class = "text-danger" })</div>
                         <div style="margin-top: -3px">
@@ -117,16 +130,16 @@
                     }
                 </div>
                 <div id="createTrainingDiv" class="col-12 col-md-6">
-                    <button class="btn" id="createTraining" onclick="showModalAddTraining();">Stwórz własne cardio</button>
+                    <button class="btn" id="createTraining" onclick="showModalAddTraining();">Stwórz swój trening siłowy</button>
                 </div>
             </div>
         </div>
         <div class="row no-gutters pt-4">
-            <div id="trainingPanel" class="mb-3 mb-md-0 mt-lg-2 col-md-6 col-lg-5 mr-md-4">
+            <div id="trainingPanel" class="mb-3 mb-md-0 mt-lg-2 col-md-6 col-lg-5 mr-md-4" style="height: 350px">
                 @{
                     foreach (var item in Model)
                     {
-                        <div class="training row no-gutters" onclick="setParams('@item.TrainingName', '@item.KcalPerMin', '@item.CardioTrainingTypeId', '@ViewData["dayID"]')">
+                        <div class="training row no-gutters" onclick="setParams('@item.TrainingName', '@item.StrengthTrainingTypeId', '@ViewData["dayID"]')">
                             @item.TrainingName
                         </div>
                     }
@@ -139,27 +152,32 @@
                 }
             </div>
 
-            <div class="mt-lg-2 col-md-5 col-lg-4" id="paramsPanel">
+            <div class="mt-lg-2 col-md-5 col-lg-4" id="paramsPanel" style="height: 350px">
                 <div id="trainingName"></div>
                 <form id="formAdd" method="POST">
-                    <div id="time" hidden>
-                        <div>Czas trwania:</div>
-                        <input id="timeInMinutes" type="number" name="timeInMinutes" min="1" max="10000" step="1" oninput="validity.valid||(value=''); changeCalorie()">
-                        <div style="font-size: 13px; margin-top: 5px; font-weight: 600">min.</div>
+                    <div id="setsArea" hidden>
+                        <div class="acent">
+                            <div>Serie:</div><div class="star">*</div>
+                        </div>
+                        <input class="cb" id="sets" type="number" name="sets" min="1" max="10000" step="1" oninput="validity.valid||(value='')">
                     </div>
-                    <div id="kcal" hidden>
-                        <div>Spalone kalorie:</div>
-                        <input id="burnedKcal" type="number" step="1" name="burnedKcal" />
-                        <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kcal</div>
+                    <div id="repsArea" class="param" hidden>
+                        <div class="acent">
+                            <div>Powtórzenia:</div><div class="star">*</div>
+                        </div>
+                        <input class="cb" id="reps" type="number" step="1" name="reps" />
+                    </div>
+                    <div id="weightArea" class="param" hidden>
+                        <div>Ciężar:</div>
+                        <input id="weight" type="number" step="1" name="weight" />
+                        <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kg.</div>
                     </div>
                     <div id="add" hidden class="cent cb">
-                        <button type="button" onclick="addCardioTraining()" class="btn btn-dark" id="addCardio">Dodaj trening</button>
+                        <button type="button" onclick="addStrengthTraining()" class="btn btn-dark" id="addStrengthTraining">Dodaj trening</button>
                     </div>
-
-                    <input type="hidden" id="cardioTypeId" name="cardioTypeId" />
+                    <input type="hidden" id="strengthTrainingTypeId" name="strengthTrainingTypeId" />
                     <input type="hidden" id="dayId" name="dayID" />
                 </form>
-                <div id="kcalPerMin" hidden></div>
             </div>
         </div>
     </div>

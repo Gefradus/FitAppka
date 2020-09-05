@@ -76,15 +76,17 @@ function validation(validMsg) {
 }
 
 function setParams(name, kcalPerMin, cardioTypeId, dayID) {
-    document.getElementById("dayId").value = parseInt(dayID);
-    document.getElementById("cardioTypeId").value = parseInt(cardioTypeId);
-    document.getElementById("timeInMinutes").value = null;
-    document.getElementById("burnedKcal").value = null;
-    document.getElementById("trainingName").innerHTML = name;
-    document.getElementById("time").hidden = false;
-    document.getElementById("kcal").hidden = false;
-    document.getElementById("add").hidden = false;
-    document.getElementById("kcalPerMin").value = parseInt(kcalPerMin);
+    if (document.getElementById("cardioTypeId").value != parseInt(cardioTypeId)) {
+        document.getElementById("dayId").value = parseInt(dayID);
+        document.getElementById("cardioTypeId").value = parseInt(cardioTypeId);
+        document.getElementById("timeInMinutes").value = null;
+        document.getElementById("burnedKcal").value = null;
+        document.getElementById("trainingName").innerHTML = name;
+        document.getElementById("time").hidden = false;
+        document.getElementById("kcal").hidden = false;
+        document.getElementById("add").hidden = false;
+        document.getElementById("kcalPerMin").value = parseInt(kcalPerMin);
+    }
 }
 
 function changeCalorie() {

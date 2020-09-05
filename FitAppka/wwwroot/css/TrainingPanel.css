@@ -68,12 +68,15 @@
 
 }
 
+.headCol {
+    color: white
+}
+
 .headCol, .sHeadCol {
     border-left: 1px solid darkgray;
     font-weight: 600;
     align-items: center;
     text-align: center;
-    color: white
 }
 
 .sHeadCol {

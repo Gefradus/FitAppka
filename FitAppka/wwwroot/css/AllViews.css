@@ -40,6 +40,12 @@
     display: flex;
 }
 
+.star{
+    color:red;
+    margin-left: 3px;
+}
+
+
 #validatMsg{
     align-items: center;
 }

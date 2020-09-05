@@ -30,6 +30,12 @@ body{
     margin-left: calc(50% - 57.5px);
 }
 
+#setsArea {
+    margin-top: 25px;
+    margin-bottom: 40px;
+    margin-left: calc(50% - 57.5px);
+}
+
 #searchBtn
 {
     height: 38px; 
@@ -51,13 +57,19 @@ body{
     margin-left: calc(50% - 57.5px);
 }
 
+.param {
+    margin-left: calc(50% - 57.5px);
+    margin-bottom:40px;
+}
+
 #paramsPanel {
     background-color: #f3f3f3;
     border-radius: .15rem;
     height: 300px;
 }
 
-#timeInMinutes, #burnedKcal
+
+#timeInMinutes, #burnedKcal, #sets, #reps, #weight
 {
     width: 115px; 
     float:left;
