@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FitAppka.Models;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using FitAppka.Repository;
+using FitAppka.Service;
 
 namespace NowyDotnecik.Controllers
 {
@@ -18,59 +18,85 @@ namespace NowyDotnecik.Controllers
         private readonly FitAppContext _context;
         private readonly IWebHostEnvironment _env;
         private readonly IDayRepository _dayRepository;
-        private readonly IMealRepository _mealRepository;
         private readonly IClientRepository _clientRepository;
-        private readonly IProductRepository _productRepository;
+        private readonly IHomePageService _homeService;
 
 
-        public HomeController(FitAppContext context, IWebHostEnvironment env, IMealRepository mealRepository, IDayRepository dayRepository, IClientRepository clientRepository, IProductRepository productRepository)
+        public HomeController(FitAppContext context, IWebHostEnvironment env, IHomePageService homePageService,
+            IDayRepository dayRepository, IClientRepository clientRepository)
         {
-            _mealRepository = mealRepository;
+            _homeService = homePageService;
             _dayRepository = dayRepository;
             _clientRepository = clientRepository;
-            _productRepository = productRepository;
             _context = context;
             _env = env;
         }
 
         public async Task<IActionResult> Home(DateTime daySelected)
         {
-            int clientID = GetLoggedInClientID();
-            CheckIfAdmin(clientID);
-            AddDayIfNotExists(daySelected, clientID);
-            SendDataToView(daySelected, clientID);
-            CheckMealsOfTheDay(daySelected, clientID);
-            SendInfoAboutMealsToView(daySelected, clientID);
-            ShowWater(daySelected, clientID);
-            CountProgress(daySelected, clientID);
-
-            return View(await _context.Meal.Include(m => m.Day).Include(p => p.Product).Where(m => m.DayId == _dayRepository.GetClientDayByDate(daySelected, clientID).DayId).ToListAsync());
+            _homeService.Home(daySelected);
+            SendDataToView(daySelected);
+            return View(await _context.Meal.Include(m => m.Day).Include(p => p.Product).
+                Where(m => m.DayId == _dayRepository.GetClientDayByDate(daySelected, _clientRepository.GetLoggedInClientId()).DayId).ToListAsync());
         }
 
-        private void SendInfoAboutMealsToView(DateTime daySelected, int clientID)
+        private void SendDataToView(DateTime daySelected)
         {
-            CountCalories(1, "breakfastKcal", daySelected, clientID);
-            CountCalories(2, "lunchKcal", daySelected, clientID);
-            CountCalories(3, "dinnerKcal", daySelected, clientID);
-            CountCalories(4, "dessertKcal", daySelected, clientID);
-            CountCalories(5, "snackKcal", daySelected, clientID);
-            CountCalories(6, "supperKcal", daySelected, clientID);
+            int clientID = _clientRepository.GetLoggedInClientId();
+            Day day = _dayRepository.GetClientDayByDate(daySelected, clientID);
+            SendBasicData(daySelected, clientID, day);
+            CheckIfAdmin(clientID);
+            CountProgress(day);
+            CheckMealsOfTheDay(day);
         }
 
-        private void SendDataToView(DateTime daySelected, int clientID)
+        private void SendBasicData(DateTime daySelected, int clientID, Day day)
         {
             ViewData["day"] = daySelected;
-            ViewData["date"] = DateFormat(daySelected);
+            ViewData["date"] = _homeService.DateFormat(daySelected);
             ViewData["datepick"] = daySelected.ToString("yyyy-MM-dd");
             ViewData["path"] = _env.WebRootPath.ToString();
             ViewData["clientID"] = clientID;
-            ViewData["dayID"] = _dayRepository.GetClientDayByDate(daySelected, clientID).DayId;
+            ViewData["dayID"] = day.DayId;
+            ViewData["water"] = day.WaterDrunk;
         }
 
-        private void CheckIfAdmin(int clientID)
+        private void CountProgress(Day day)
         {
-            Client client = _clientRepository.GetClientById(clientID);
-            if (client.IsAdmin) {
+            var daySelected = (DateTime) day.Date;
+            var meals = _context.Meal.Where(m => m.Day == day);
+            
+            ViewData["calories"] = _homeService.SumAllKcalInDay(daySelected);
+            ViewData["proteins"] = _homeService.SumAllProteinsInDay(daySelected);
+            ViewData["carbs"] = _homeService.SumAllCarbsInDay(daySelected);
+            ViewData["fats"] = _homeService.SumAllFatsInDay(daySelected);
+            ViewData["calories0"] = _homeService.Round(_homeService.SumAllKcalInDay(daySelected));
+            ViewData["proteins0"] = _homeService.Round(_homeService.SumAllProteinsInDay(daySelected));
+            ViewData["carbs0"] = _homeService.Round(_homeService.SumAllCarbsInDay(daySelected));
+            ViewData["fats0"] = _homeService.Round(_homeService.SumAllFatsInDay(daySelected));
+            ViewData["calorieTarget"] = day.CalorieTarget;
+            ViewData["proteinTarget"] = day.ProteinTarget;
+            ViewData["fatTarget"] = day.FatTarget;
+            ViewData["carbsTarget"] = day.CarbsTarget;
+            ViewData["%calories"] = _homeService.CountPercentageOfTarget(_homeService.SumAllKcalInDay(daySelected), day.CalorieTarget);
+            ViewData["%carbs"] = _homeService.CountPercentageOfTarget(_homeService.SumAllCarbsInDay(daySelected), day.CarbsTarget);
+            ViewData["%fats"] = _homeService.CountPercentageOfTarget(_homeService.SumAllFatsInDay(daySelected), day.FatTarget);
+            ViewData["%proteins"] = _homeService.CountPercentageOfTarget(_homeService.SumAllProteinsInDay(daySelected), day.ProteinTarget);
+        }
+
+        private void CheckMealsOfTheDay(Day day)
+        {
+            ViewData["breakfast"] = day.Breakfast;
+            ViewData["lunch"] = day.Lunch;
+            ViewData["dinner"] = day.Dinner;
+            ViewData["dessert"] = day.Dessert;
+            ViewData["snack"] = day.Snack;
+            ViewData["supper"] = day.Supper;
+        }
+
+        private void CheckIfAdmin(int clientID) 
+        {
+            if (_clientRepository.GetClientById(clientID).IsAdmin) {
                 ViewData["admin"] = 1;
             }
             else {
@@ -78,26 +104,18 @@ namespace NowyDotnecik.Controllers
             }
         }
 
-        private int GetLoggedInClientID()
-        {
-            return _clientRepository.GetClientByLogin(User.Identity.Name).ClientId;
-        }
-
+        [HttpGet]
         public IActionResult Start()
         {
-            if (IsItFirstLaunch(GetLoggedInClientID()))
+            if (_homeService.IsItFirstLaunch())
             {
-                return RedirectToAction("Settings", "Settings", new { czyPierwsze = 1 });
+                return RedirectToAction("Settings", "Settings");
             }
             
             return RedirectToAction(nameof(Home), new { daySelected = DateTime.Now.Date});
         }
 
-        private bool IsItFirstLaunch(int clientID)
-        {
-            return _clientRepository.GetClientById(clientID).CarbsTarget == null;
-        }
-
+        [HttpGet]
         public IActionResult Return(int dayID)
         {
             DateTime daySelected;
@@ -105,7 +123,7 @@ namespace NowyDotnecik.Controllers
             if (day != null && dayID != 0) { daySelected = day; }
             else { daySelected = DateTime.Now.Date; }
   
-            return RedirectToAction(nameof(Home), new { clientID = GetLoggedInClientID(), daySelected});
+            return RedirectToAction(nameof(Home), new { clientID = _clientRepository.GetLoggedInClientId(), daySelected});
         }
 
 
@@ -125,255 +143,44 @@ namespace NowyDotnecik.Controllers
             }
         }
 
-        private string DateFormat(DateTime daySelected)
-        {
-            int dayOfWeek = (int) daySelected.DayOfWeek;
-            string day = "";
-            string month = "";
-
-            if(dayOfWeek == 0){ day = "Niedziela, "; }
-            if(dayOfWeek == 1){ day = "Poniedziałek, "; }
-            if(dayOfWeek == 2){ day = "Wtorek, "; }
-            if(dayOfWeek == 3){ day = "Środa, "; }
-            if(dayOfWeek == 4){ day = "Czwartek, "; }
-            if(dayOfWeek == 5){ day = "Piątek, "; }   
-            if(dayOfWeek == 6){ day = "Sobota, "; }
-
-            if (daySelected.Month == 1) { month = "sty, "; }
-            if (daySelected.Month == 2) { month = "lut, "; }
-            if (daySelected.Month == 3) { month = "mar, "; }
-            if (daySelected.Month == 4) { month = "kwi, "; }
-            if (daySelected.Month == 5) { month = "maj, "; }
-            if (daySelected.Month == 6) { month = "czer, "; }
-            if (daySelected.Month == 7) { month = "lip, "; }
-            if (daySelected.Month == 8) { month = "sie, "; }
-            if (daySelected.Month == 9) { month = "wrz, "; }
-            if (daySelected.Month == 10) { month = "paź, "; }
-            if (daySelected.Month == 11) { month = "lis, "; }
-            if (daySelected.Month == 12) { month = "gru, "; } 
-
-            if (daySelected == DateTime.Now.Date) { day = "Dzisiaj, "; }
-            if (daySelected == DateTime.Now.Date.AddDays(-1)) { day = "Wczoraj, "; }
-            if (daySelected == DateTime.Now.Date.AddDays(1)) { day = "Jutro, "; }
-
-            return day + daySelected.Day + " " + month + daySelected.Year;
-        }
-
-
-        private void AddDayIfNotExists(DateTime daySelected, int clientID)
-        {
-            if (_context.Day.Count(dz => dz.Date == daySelected && dz.ClientId == clientID) == 0)
-            {
-                var client = _clientRepository.GetClientById(clientID);
-
-                _dayRepository.Add(new Day()
-                {
-                    Date = daySelected,
-                    ClientId = clientID,
-                    Breakfast = client.Breakfast,
-                    Lunch = client.Lunch,
-                    Dinner = client.Dinner,
-                    Dessert = client.Dessert,
-                    Snack = client.Snack,
-                    Supper = client.Supper,
-                    ProteinTarget = client.ProteinTarget,
-                    FatTarget = client.FatTarget,
-                    CarbsTarget = client.CarbsTarget,
-                    CalorieTarget = client.CalorieGoal,
-                    WaterDrunk = 0,
-                }); 
-            }
-        }
-
         [HttpGet]
         public IActionResult ChangeDay(string day) 
         { 
             return RedirectToAction(nameof(Home), new { daySelected = Convert.ToDateTime(day) });
         }
 
-
-        private void CountCalories(int whichMeal, string kcalMeal, DateTime daySelected, int clientID)
-        {
-            AddDayIfNotExists(daySelected, clientID);
-            var meal = _context.Meal.Where(m => m.InWhichMealOfTheDay == whichMeal && m.Day.ClientId == clientID && m.Day.Date == daySelected);
-            List<double> listOfCalories = meal.Select(m => m.Calories).ToList();
-            double? kcal = 0;
-
-            foreach(var item in listOfCalories)
-            { kcal += item;}
-            
-            ViewData[kcalMeal] = Math.Round((decimal)kcal, 0, MidpointRounding.AwayFromZero);
-        }
-  
-        private void CheckMealsOfTheDay(DateTime daySelected, int clientID)
-        {
-            AddDayIfNotExists(daySelected, clientID);
-            Day day = _dayRepository.GetClientDayByDate(daySelected, clientID);
-
-            ViewData["breakfast"] = day.Breakfast;
-            ViewData["lunch"] = day.Lunch;
-            ViewData["dinner"] = day.Dinner;
-            ViewData["dessert"] = day.Dessert;
-            ViewData["snack"] = day.Snack;
-            ViewData["supper"] = day.Supper;
-        }
-
-        private void CountProgress(DateTime daySelected, int clientID)
-        {
-            AddDayIfNotExists(daySelected, clientID);
-
-            var meals = _context.Meal.Where(m => m.Day.ClientId == clientID && m.Day.Date == daySelected);
-            double kcal = SumAllListItems(meals.Select(m => m.Calories).ToList());
-            double proteins = SumAllListItems(meals.Select(m => m.Proteins).ToList());
-            double fats = SumAllListItems(meals.Select(m => m.Fats).ToList());
-            double carbs = SumAllListItems(meals.Select(m => m.Carbohydrates).ToList());
-
-            var day = _dayRepository.GetClientDayByDate(daySelected, clientID);
-            double? calorieTarget = day.CalorieTarget;
-            double? proteinTarget = day.ProteinTarget;
-            double? fatTarget = day.FatTarget;
-            double? carbsTarget = day.CarbsTarget;
-
-            ViewData["calories"] = kcal;
-            ViewData["proteins"] = proteins;
-            ViewData["carbs"] = carbs;
-            ViewData["fats"] = fats;
-            ViewData["calories0"] = Round(kcal);
-            ViewData["proteins0"] = Round(proteins);
-            ViewData["carbs0"] = Round(carbs);
-            ViewData["fats0"] = Round(fats);
-            ViewData["calorieTarget"] = calorieTarget;
-            ViewData["proteinTarget"] = proteinTarget;
-            ViewData["fatTarget"] = fatTarget;
-            ViewData["carbsTarget"] = carbsTarget;
-            ViewData["%calories"] = (int)(kcal / calorieTarget * 100);
-            ViewData["%carbs"] = (int)(carbs / carbsTarget * 100);
-            ViewData["%fats"] = (int)(fats / fatTarget * 100);
-            ViewData["%proteins"] = (int)(proteins / proteinTarget * 100);
-        }
-
-        private decimal Round(double var)
-        {
-            return Math.Round((decimal)var, 0, MidpointRounding.AwayFromZero);
-        }
-
-
-        private double SumAllListItems(List<double> lista)
-        {
-            double dana = 0;
-            foreach (var item in lista) { dana += item; }
-            return dana;
-        }
-
-        private void ShowWater(DateTime daySelected, int clientID)
-        {
-            ViewData["water"] = _dayRepository.GetClientDayByDate(daySelected, clientID).WaterDrunk;
-        }
-
+        [HttpPost]
         public IActionResult AddWater(int dayID)
         {
-            Day day = _dayRepository.GetDay(dayID);
-            if (day.ClientId == GetLoggedInClientID())
-            {
-                try
-                {
-                    int addedWater = int.Parse(HttpContext.Request.Form["AddedWater"]);
-                    day.WaterDrunk += addedWater;
-                    _dayRepository.Update(day);
-                }
-                catch { }
-            }
-
-            return RedirectToAction(nameof(Home), new { daySelected = day.Date });
+            _homeService.AddWater(dayID, HttpContext.Request.Form["AddedWater"]);
+            return RedirectToAction(nameof(Home), new { daySelected = _dayRepository.GetDayDateTime(dayID) });
         }
 
+        [HttpPost]
         public IActionResult EditWater(int dayID)
         {
-            Day day = _dayRepository.GetDay(dayID);
-            if (day.ClientId == GetLoggedInClientID())
-            {
-                try
-                {
-                    int editedWater = int.Parse(HttpContext.Request.Form["EditedWater"]);
-                    day.WaterDrunk = editedWater;
-                    _dayRepository.Update(day);
-                }
-                catch { }
-            }
-            return RedirectToAction(nameof(Home), new { daySelected = day.Date });
-        }
-
-     
-        private void SetTheMeal(Meal meal, DateTime daySelected)
-        {
-            var product = _productRepository.GetProduct(meal.ProductId);
-
-            double? kcalIn100gr = product.Calories;
-            double? proteinsIn100gr = product.Proteins;
-            double? carbsIn100gr = product.Carbohydrates;
-            double? fatsIn100gr = product.Fats;
-
-            decimal calories = (decimal)(meal.Grammage * kcalIn100gr / 100);
-            decimal proteins = (decimal)(meal.Grammage * proteinsIn100gr / 100);
-            decimal carbs = (decimal)(meal.Grammage * carbsIn100gr / 100);
-            decimal fats = (decimal)(meal.Grammage * fatsIn100gr / 100);
-
-            meal.Calories = (double) Math.Round(calories, 1, MidpointRounding.AwayFromZero);
-            meal.Proteins = (double) Math.Round(proteins, 1, MidpointRounding.AwayFromZero);
-            meal.Carbohydrates = (double) Math.Round(carbs, 1, MidpointRounding.AwayFromZero);
-            meal.Fats = (double) Math.Round(fats, 1, MidpointRounding.AwayFromZero);
-
-            AddDayIfNotExists(daySelected, GetLoggedInClientID());
-            meal.DayId = _dayRepository.GetClientDayByDate(daySelected, GetLoggedInClientID()).DayId;
+            _homeService.EditWater(dayID, HttpContext.Request.Form["EditedWater"]);
+            return RedirectToAction(nameof(Home), new { daySelected = _dayRepository.GetDayDateTime(dayID) });
         }
 
         [HttpPost]
         public JsonResult Add(int inWhich, int dayID, int grammage, int productID)
         {
-            if (_dayRepository.GetDay(dayID).ClientId == GetLoggedInClientID())
-            {
-                Meal meal = new Meal()
-                {
-                    Grammage = grammage,
-                    ProductId = productID,
-                    InWhichMealOfTheDay = inWhich,
-                    DayId = dayID,
-                };
-
-                SetTheMeal(meal, _dayRepository.GetDayDateTime(dayID));
-                _mealRepository.Add(meal);
-            }
-
+            _homeService.AddMeal(inWhich, dayID, grammage, productID);
             return Json(true);
         }
 
         [HttpPost]
-        public IActionResult Edit(int mealID, int grammage)
+        public JsonResult Edit(int mealID, int grammage)
         {
-            var meal = _mealRepository.GetMeal(mealID);
-            var day = _dayRepository.GetDay(meal.DayId);
-
-            if (day.ClientId == GetLoggedInClientID())
-            {
-                try
-                {
-                    if (meal == null) { return NotFound(); }
-                    meal.Grammage = grammage;
-                    SetTheMeal(meal, (DateTime)day.Date);
-                    _mealRepository.Update(meal);
-                } catch (DbUpdateConcurrencyException) { }
-            }
-
+            _homeService.EditMeal(mealID, grammage);
             return Json(true);
         }
 
         [HttpPost]
-        public IActionResult Delete(int mealID)
+        public JsonResult Delete(int mealID)
         {
-            if(_dayRepository.GetDay(_mealRepository.GetMeal(mealID).DayId).ClientId == GetLoggedInClientID())
-            {
-                _mealRepository.Delete(mealID);
-            }
+            _homeService.DeleteMeal(mealID);
             return Json(false);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,5 +17,6 @@ namespace FitAppka.Repository
         Client Update(Client client);
         Client Delete(int id);
         Client GetLoggedInClient();
+        int GetLoggedInClientId();
     }
 }
