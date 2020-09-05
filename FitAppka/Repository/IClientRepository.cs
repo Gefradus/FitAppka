@@ -15,5 +15,6 @@ namespace FitAppka.Repository
         Task<Client> AddAsync(Client client);
         Client Update(Client client);
         Client Delete(int id);
+        Client GetLoggedInClient();
     }
 }

@@ -10,6 +10,7 @@ namespace FitAppka.Repository
     {
         WeightMeasurement GetWeightMeasurement(int id);
         IEnumerable<WeightMeasurement> GetAllWeightMeasurements();
+        IEnumerable<WeightMeasurement> GetClientsWeightMeasurements(Client client);
         WeightMeasurement Add(WeightMeasurement weightMeasurement);
         WeightMeasurement Update(WeightMeasurement weightMeasurement);
         WeightMeasurement Delete(int id);

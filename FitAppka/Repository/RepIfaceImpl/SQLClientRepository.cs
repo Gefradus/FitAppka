@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,11 @@ namespace FitAppka.Repository.RepIfaceImpl
     public class SQLClientRepository : IClientRepository
     {
         private readonly FitAppContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public SQLClientRepository(FitAppContext context)
+        public SQLClientRepository(FitAppContext context, IHttpContextAccessor httpContextAccessor)
         {
+            _httpContextAccessor = httpContextAccessor;
             _context = context;
         }
 
@@ -65,6 +68,11 @@ namespace FitAppka.Repository.RepIfaceImpl
         public Client GetClientByLogin(string login)
         {
             return _context.Client.Where(k => k.Login.ToLower().Equals(login.ToLower())).FirstOrDefault();
+        }
+
+        public Client GetLoggedInClient()
+        {
+            return GetClientByLogin(_httpContextAccessor.HttpContext.User.Identity.Name);
         }
 
         public Client Update(Client client)

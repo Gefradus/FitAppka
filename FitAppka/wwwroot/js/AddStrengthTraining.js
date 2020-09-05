@@ -72,7 +72,7 @@ function areRequiredFieldsValid(name, sets, reps) {
 }
 
 function areValuesValid(weight, sets, reps) {
-    return isValueInteger(weight) && isValueInteger(sets) && isValueInteger(reps);
+    return (isValueInteger(weight) || isEmpty(weight)) && isValueInteger(sets) && isValueInteger(reps);
 }
 
 function isValueInteger(value) {

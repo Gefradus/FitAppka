@@ -1,5 +1,6 @@
 ﻿using FitAppka.Models;
 using FitAppka.Repository;
+using FitAppka.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,94 +14,40 @@ namespace FitAppka.Controllers
     [Authorize]
     public class TrainingController : Controller
     {
+        private readonly FitAppContext _context;
         private readonly IDayRepository _dayRepository;
         private readonly IClientRepository _clientRepository;
-        private readonly ICardioTrainingTypeRepository _cardioTypeRepository;
-        private readonly ICardioTrainingRepository _cardioRepository;
-        private readonly IStrengthTrainingTypeRepository _strengthTrainingTypeRepository;
-        private readonly IStrengthTrainingRepository _strengthTrainingRepository;
-        private readonly FitAppContext _context;
+        private readonly ICardioTrainingService _cardioServices;
+        private readonly IStrengthTrainingService _strengthTrainingService;
 
-        public TrainingController(FitAppContext context, IDayRepository dayRepository, 
-            IClientRepository clientRepository, ICardioTrainingTypeRepository cardioTypeRepository, 
-            ICardioTrainingRepository cardioRepository, IStrengthTrainingTypeRepository strengthTrainingTypeRepository, 
-            IStrengthTrainingRepository strengthTrainingRepository) 
+        public TrainingController(IClientRepository clientRepository, ICardioTrainingService cardioTrainingServices, 
+            IStrengthTrainingService strengthTrainingServices, FitAppContext context, IDayRepository dayRepository) 
         {
-            _cardioTypeRepository = cardioTypeRepository;
-            _cardioRepository = cardioRepository;
-            _strengthTrainingTypeRepository = strengthTrainingTypeRepository;
-            _strengthTrainingRepository = strengthTrainingRepository;
-            _clientRepository = clientRepository;
             _dayRepository = dayRepository;
             _context = context;
+            _clientRepository = clientRepository;
+            _cardioServices = cardioTrainingServices;
+            _strengthTrainingService = strengthTrainingServices;
         }
 
         [HttpGet]
         public async Task<IActionResult> TrainingPanel(int dayID) {
-            dayID = GiveTodayIfDayNotChosen(dayID);
-            ViewData["day"] = GetDayDateById(dayID);
+
             ViewData["dayID"] = dayID;
-            ViewData["clientID"] = GetLoggedInClientID();
-            ViewData["burnedKcal"] = CaloriesBurnedInDay(dayID);
-            ViewData["cardioTime"] = CardioTimeInDay(dayID);
-            ViewData["kcalTarget"] = GetKcalBurnedGoalInDay(dayID);
-            ViewData["timeTarget"] = GetTrainingTimeGoalInDay(dayID);
+            ViewData["day"] = GetDayDateById(dayID);
+            ViewData["clientID"] = _clientRepository.GetLoggedInClient().ClientId;
+            ViewData["burnedKcal"] = _cardioServices.CaloriesBurnedInDay(dayID);
+            ViewData["cardioTime"] = _cardioServices.CardioTimeInDay(dayID);
+            ViewData["kcalTarget"] = _cardioServices.GetKcalBurnedGoalInDay(dayID);
+            ViewData["timeTarget"] = _cardioServices.GetTrainingTimeGoalInDay(dayID);
             ViewData["strengthTrainings"] = _context.StrengthTraining.Include(s => s.StrengthTrainingType).Include(s => s.Day).ToList();
 
             return View(await _context.CardioTraining.Include(c => c.CardioTrainingType).Include(c => c.Day).ToListAsync());
         }
 
-
         [HttpGet]
         public IActionResult ChangeDay(string day) {
-            return RedirectToAction(nameof(TrainingPanel), new { dayID = GetSelectedDay(Convert.ToDateTime(day)) });
-        }
-
-        private int GetKcalBurnedGoalInDay(int dayID) {
-            int? kcalBurnedGoal = _dayRepository.GetDay(dayID).KcalBurnedGoal;
-            if(kcalBurnedGoal != null) {
-                return (int) kcalBurnedGoal;
-            }
-            else {
-                return 0;
-            }
-        }
-
-        private int GetTrainingTimeGoalInDay(int dayID) {
-            int? timeGoal = _dayRepository.GetDay(dayID).TrainingTimeGoal;
-            if (timeGoal != null) {
-                return (int)timeGoal;
-            }
-            else {
-                return 0;
-            }
-        }
-
-        private int CaloriesBurnedInDay(int dayID) {
-            int? kcal = 0;
-            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID))) {
-                kcal += cardio.CaloriesBurned;
-            }
-
-            return (int) kcal;
-        }
-
-        private int GiveTodayIfDayNotChosen(int dayID) {
-            if(dayID == 0) {
-                return GetTodayID();
-            }
-            else {
-                return dayID;
-            }
-        }
-
-        private int CardioTimeInDay(int dayID) {
-            int? time = 0;
-            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID))) {
-                time += cardio.TimeInMinutes;
-            }
-
-            return (int)time;
+            return RedirectToAction(nameof(TrainingPanel), new { dayID = _cardioServices.GetSelectedDay(Convert.ToDateTime(day)) });
         }
 
         [HttpGet]
@@ -112,17 +59,12 @@ namespace FitAppka.Controllers
 
         [HttpPost]
         public IActionResult AddCardio(int cardioTypeId, int dayID, int timeInMinutes, int burnedKcal) {
-            try {
-                _cardioRepository.Add(new CardioTraining() {
-                    DayId = dayID,
-
-                    TimeInMinutes = timeInMinutes,
-                    CardioTrainingTypeId = cardioTypeId,
-                    CaloriesBurned = burnedKcal
-                });
+            try 
+            {
+                _cardioServices.AddCardio(cardioTypeId, dayID, timeInMinutes, burnedKcal);
                 return RedirectToAction(nameof(TrainingPanel), new { dayID });
             }
-            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = GetTodayID() }); } 
+            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = _cardioServices.GetTodayID() }); } 
         }
 
         [HttpGet]
@@ -134,43 +76,26 @@ namespace FitAppka.Controllers
 
         [HttpPost]
         public IActionResult AddStrengthTraining(int trainingTypeId, int dayID, short sets, short reps, short weight) {
-            try {
-                _strengthTrainingRepository.Add(new StrengthTraining(){
-                    StrengthTrainingTypeId = trainingTypeId,
-                    DayId = dayID,
-                    Sets = sets,
-                    Repetitions = reps,
-                    Weight = weight
-                });
+            try 
+            {
+                _strengthTrainingService.AddStrengthTraining(trainingTypeId, dayID, sets, reps, weight);
                 return RedirectToAction(nameof(TrainingPanel), new { dayID });
             }
-            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = GetTodayID() }); } 
+            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = _cardioServices.GetTodayID() }); } 
         }
-
-
 
         [HttpPost]
         public JsonResult DeleteCardio(int cardioID) {
-            if(_dayRepository.GetDay(_cardioRepository.GetCardioTraining(cardioID).DayId).ClientId == GetLoggedInClientID())
-            {
-                _cardioRepository.Delete(cardioID);
-            }
+            _cardioServices.DeleteCardio(cardioID);
             return Json(false);
         }
 
         [HttpPost]
         public IActionResult AddCardioType(int dayID, string name, int kcalPerMin)
         {
-            if (GetLoggedInClientID() == _dayRepository.GetDay(dayID).ClientId)
+            if (_clientRepository.GetLoggedInClient().ClientId == _dayRepository.GetDay(dayID).ClientId)
             {
-                _cardioTypeRepository.Add(new CardioTrainingType
-                {
-                    TrainingName = name,
-                    KcalPerMin = kcalPerMin,
-                    ClientId = GetLoggedInClientID(),
-
-                });
-
+                _cardioServices.AddCardioTrainingType(name, kcalPerMin);
                 return RedirectToAction(nameof(AddCardio), new { dayID });
             }
 
@@ -180,66 +105,13 @@ namespace FitAppka.Controllers
         [HttpPost]
         public IActionResult AddStrengthTrainingType(int dayID, string name, short sets, short reps, short weight)
         {
-            if (GetLoggedInClientID() == _dayRepository.GetDay(dayID).ClientId)
+            if (_clientRepository.GetLoggedInClient().ClientId == _dayRepository.GetDay(dayID).ClientId)
             {
-                StrengthTrainingType type = _strengthTrainingTypeRepository.Add(new StrengthTrainingType()
-                {
-                    VisibleToAll = false,
-                    ClientId = GetLoggedInClientID(),
-                    TrainingName = name
-                });
-
-                _strengthTrainingRepository.Add(new StrengthTraining()
-                {
-                    StrengthTrainingTypeId = type.StrengthTrainingTypeId,
-                    DayId = dayID,
-                    Sets = sets,
-                    Repetitions = reps,
-                    Weight = weight
-                });
-
+                _strengthTrainingService.AddStrengthTrainingType(dayID, name, sets, reps, weight);
                 return RedirectToAction(nameof(TrainingPanel), new { dayID });
             }
 
             return RedirectToAction("Logout", "Login"); 
-        }
-
-        private int GetSelectedDay(DateTime day) {
-            AddDayIfNotExists(day);
-            return GetClientDayIDByDate(day);
-        }
-
-        private void AddDayIfNotExists(DateTime day) {
-            var client = _clientRepository.GetClientById(GetLoggedInClientID());
-            int count = _context.Day.Count(dz => dz.Date == day && dz.ClientId == client.ClientId);
-            if (count == 0)
-            {
-                _dayRepository.Add(new Day() {
-                    Date = day,
-                    ClientId = client.ClientId,
-                    Breakfast = client.Breakfast,
-                    Lunch = client.Lunch,
-                    Dinner = client.Dinner,
-                    Dessert = client.Dessert,
-                    Snack = client.Snack,
-                    Supper = client.Supper,
-                    ProteinTarget = client.ProteinTarget,
-                    FatTarget = client.FatTarget,
-                    CarbsTarget = client.CarbsTarget,
-                    CalorieTarget = client.CarbsTarget,
-                    WaterDrunk = 0,
-                });
-            }
-        }
-
-
-        private int GetClientDayIDByDate(DateTime day) {
-            AddDayIfNotExists(day);
-            return _dayRepository.GetClientDayByDate(day, GetLoggedInClientID()).DayId;
-        }
-
-        private int GetTodayID() {
-            return GetSelectedDay(DateTime.Now);
         }
 
         private string GetDayDateById(int dayID) {
@@ -253,10 +125,6 @@ namespace FitAppka.Controllers
             {
                 ViewData["wasSearched"] = true;
             }
-        }
-
-        private int GetLoggedInClientID() {
-            return _clientRepository.GetClientByLogin(User.Identity.Name).ClientId;
         }
     }
 }

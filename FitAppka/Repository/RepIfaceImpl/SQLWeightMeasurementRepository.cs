@@ -38,6 +38,11 @@ namespace FitAppka.Repository.RepIfaceImpl
             return _context.WeightMeasurement.ToList();
         }
 
+        public IEnumerable<WeightMeasurement> GetClientsWeightMeasurements(Client client)
+        {
+            return _context.WeightMeasurement.Where(w => w.ClientId == client.ClientId).ToList();
+        }
+
         public WeightMeasurement GetWeightMeasurement(int id)
         {
             return _context.WeightMeasurement.Find(id);
