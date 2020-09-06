@@ -77,6 +77,36 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" tabindex="-1" id="editCardioModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
+            <div class="modal-dialog" style="display: flex; justify-content: center;">
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 20px">
+                        <button type="button" class="close" onclick="hideModal()" style="margin-top: -30px">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="trainingName"></div>
+                        <form id="formEdit" method="POST">
+                            <div id="time" hidden>
+                                <div>Czas trwania:</div>
+                                <input id="timeInMinutes" type="number" name="timeInMinutes" min="1" max="10000" step="1" oninput="validity.valid||(value=''); changeCalorie()">
+                                <div style="font-size: 13px; margin-top: 5px; font-weight: 600">min.</div>
+                            </div>
+                            <div id="kcal" class="param" hidden>
+                                <div>Spalone kalorie:</div>
+                                <input id="burnedKcal" type="number" step="1" name="burnedKcal" />
+                                <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kcal</div>
+                            </div>
+                            <div id="add" hidden class="cent cb">
+                                <button type="button" onclick="editCardioTraining()" class="btn btn-dark" id="editCardio">Zapisz zmiany</button>
+                            </div>
+                        </form>
+                        <div id="kcalPerMin" hidden></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <div style="display: flex; margin-bottom: 12px">
             <div id="diary">Dziennik treningowy dla: </div>
@@ -109,7 +139,7 @@
                 if (training.Day.DayId.Equals(ViewData["dayID"]))
                 {
                     <div class="row no-gutters trainingRow">
-                        <div class="col-5 cent">@training.CardioTrainingType.TrainingName</div>
+                        <div class="col-5 cent trainingName">@training.CardioTrainingType.TrainingName</div>
                         <div class="col-7 container">
                             <div class="row no-gutters">
                                 <div class="cent column borl">@training.TimeInMinutes</div>
@@ -203,7 +233,7 @@
                 if (training.Day.DayId.Equals(ViewData["dayID"]))
                 {
                     <div class="row no-gutters trainingRow">
-                        <div class="col-5 cent">@training.StrengthTrainingType.TrainingName</div>
+                        <div class="col-5 cent trainingName">@training.StrengthTrainingType.TrainingName</div>
                         <div class="col-7 container">
                             <div class="row no-gutters">
                                 <div class="cent sHeadCol borl">@training.Sets</div>

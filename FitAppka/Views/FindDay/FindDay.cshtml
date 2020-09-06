@@ -8,6 +8,7 @@
     <link href="~/chosen/chosen.min.css" rel="stylesheet" />
     <script src="~/js/chosen.jquery.min.js"></script>
     <script src="~/js/FindDay.js"></script>
+    <script src="~/js/Validation.js"></script>
     <script type="text/javascript">
             function search(searchType) {
                 searchDay(searchType, '@Html.Raw(@Url.Action("FindDay", "FindDay", new { from = "_from_", productID = "_id_", to = "_to_", searchType = "_type_" }))');
@@ -96,10 +97,10 @@
                             <div id="panelGramatury">
                                 <div style="font-size: 12px">Przedział wagi produktu (*opcjonalne):</div>
                                 <div class="oddodiv">*Od: </div>
-                                <input id="from_product" class="oddo" type="number" value="@ViewData["from"]" />
+                                <input id="from_product" class="oddo" type="number" min="0" max="99999" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" value="@ViewData["from"]" />
                                 <div class="g1">g</div>
                                 <div class="oddodiv">*Do: </div>
-                                <input id="to_product" class="oddo" type="number" value="@ViewData["to"]" />
+                                <input id="to_product" class="oddo" type="number" min="0" max="99999" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" value="@ViewData["to"]" />
                                 <div class="g2">g</div>
                                 <div class="cb"></div>
                             </div>
@@ -179,10 +180,10 @@
                             <div style="float: left; margin-right: 15px; margin-left:15px">
                                 <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych kalorii (*opcjonalne):</div>
                                 <div class="oddodiv">*Od: </div>
-                                <input id="from_calorie" class="oddo" type="number" value="@ViewData["from"]" />
+                                <input id="from_calorie" class="oddo" type="number" min="0" max="99999" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" value="@ViewData["from"]" />
                                 <div class="g1">kcal</div>
                                 <div class="oddodiv">*Do: </div>
-                                <input id="to_calorie" class="oddo" type="number" value="@ViewData["to"]" />
+                                <input id="to_calorie" class="oddo" type="number" min="0" max="99999" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" value="@ViewData["to"]" />
                                 <div class="g2">kcal</div>
                                 <div class="cb"></div>
                             </div>
@@ -258,10 +259,10 @@
                             <div style="float: left; margin-right: 15px; margin-left:15px">
                                 <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych płynów (*opcjonalne):</div>
                                 <div class="oddodiv">*Od: </div>
-                                <input id="from_water" class="oddo" type="number" value="@ViewData["from"]" />
+                                <input id="from_water" class="oddo" type="number" min="0" max="99999" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" value="@ViewData["from"]" />
                                 <div class="g1">ml</div>
                                 <div class="oddodiv">*Do: </div>
-                                <input id="to_water" class="oddo" type="number" value="@ViewData["to"]" />
+                                <input id="to_water" class="oddo" type="number" min="0" max="99999" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" value="@ViewData["to"]" />
                                 <div class="g2">ml</div>
                                 <div class="cb"></div>
                             </div>

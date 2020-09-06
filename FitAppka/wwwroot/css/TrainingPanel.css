@@ -29,11 +29,11 @@
 }
 
 #btnAddCardio{
-    background: rgba(230, 0, 0, 0.35);
+    background: rgba(255, 10, 10, 0.35);
 }
 
 #btnAddStrength{
-    background: rgba(49, 157, 211, 0.4);
+    background: rgba(32, 164, 231, 0.45);
 }
 
 #btnAddStrength:hover {
@@ -69,18 +69,27 @@
 }
 
 .headCol {
-    color: white
+    color: white;
+    font-weight: 600;
 }
 
 .headCol, .sHeadCol {
     border-left: 1px solid darkgray;
-    font-weight: 600;
     align-items: center;
     text-align: center;
 }
 
 .sHeadCol {
     width: calc(33.33% - 20px);
+}
+
+.trainingName{
+    /*color: darkblue*/
+}
+
+.trainingName:hover {
+    color: coral;
+    cursor: pointer
 }
 
 .column {
