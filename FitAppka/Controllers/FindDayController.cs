@@ -2,6 +2,9 @@
 using FitAppka.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+
 namespace FitAppka.Controllers
 {
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
@@ -22,7 +25,7 @@ namespace FitAppka.Controllers
         [HttpGet]
         public IActionResult FindDay(int productID, int from, int to, int searchType)
         {
-            var clientID = _clientRepository.GetClientByLogin(User.Identity.Name).ClientId;
+            var clientID = _clientRepository.GetLoggedInClientId();
             var listOfDays = _findDayService.FindDays(from, to, productID, searchType, clientID);
 
             ViewData["from"] = from;
@@ -31,6 +34,7 @@ namespace FitAppka.Controllers
             ViewData["daysID"] = listOfDays;
             ViewData["clientID"] = clientID;
             ViewData["productID"] = productID;
+            ViewData["dayID"] = _dayRepository.GetClientDays(clientID).Where(d => d.Date == DateTime.Now.Date).FirstOrDefault().DayId;
             ViewData["allProducts"] = _findDayService.CreateProductsList(productID);
             ViewData["wheterFound"] = _findDayService.WheterDayFound(listOfDays);
             ViewData["listByWater"] = _findDayService.WaterInDays(listOfDays);

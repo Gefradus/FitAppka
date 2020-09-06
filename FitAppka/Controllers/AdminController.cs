@@ -130,7 +130,7 @@ namespace FitAppka.Controllers
             ViewData["calcium"] = product.Calcium;
             ViewData["iron"] = product.Iron;
 
-            if(product.PhotoPath == null) {
+            if (product.PhotoPath == null) {
                 ViewData["addOrEdit"] = 0;
             }
             else {
