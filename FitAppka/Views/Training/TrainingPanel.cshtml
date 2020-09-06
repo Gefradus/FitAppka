@@ -8,6 +8,7 @@
     <link href="~/css/Datepicker.css" rel="stylesheet" />
     <link href="~/lib/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
 </head>
 <body onload="colorEverySecondRow();">
     <header>
@@ -58,55 +59,60 @@
             <div class="modal-dialog" style="display: flex; justify-content: center;">
                 <div class="modal-content">
                     <div class="modal-header" style="height: 20px">
-                        <button type="button" class="close" onclick="hideModal()" style="margin-top: -30px">×</button>
+                        <button type="button" class="close" data-dismiss="modal" style="margin-top: -30px">×</button>
                     </div>
-
                     <div class="modal-body">
                         <div style="margin-top: -10px;">
-                            <label>Czy na pewno chcesz usunąć ten trening?</label>
+                            <label>Czy na pewno chcesz usunąć trening</label><label id="deletingTrainingName"></label>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <form method="post">
+                        <form id="formDeleteCardio" method="post" hidden>
                             <div style="display:flex; justify-content: center">
-                                <button type="button" onclick="hideModal()" style="margin-right: 15px; border-radius:10%; background-color: #4d62d7; height: 32px; width: 100px; color: white">Anuluj</button>
-                                <button type="button" id="delete" style="border-radius:10%; background-color: #ce1a22; height: 32px; width: 100px; color: white">Tak, usuń</button>
+                                <button type="button" data-dismiss="modal" class="cancelDeleteBtn">Anuluj</button>
+                                <button type="button" id="delete" onclick="deleteCardio('@Url.Action("Cardio", "Training")')">Tak, usuń</button>
+                                <div id="deletingCardioID" hidden></div>
+                            </div>
+                        </form>
+                        <form id="formDeleteStrength" method="post" hidden>
+                            <div style="display:flex; justify-content: center">
+                                <button type="button" data-dismiss="modal" class="cancelDeleteBtn">Anuluj</button>
+                                <button type="button" id="delete" onclick="deleteStrengthTraining('@Url.Action("StrengthTraining", "Training")')">Tak, usuń</button>
+                                <div id="deletingStrengthTrainingID" hidden></div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="modal fade" tabindex="-1" id="editCardioModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
             <div class="modal-dialog" style="display: flex; justify-content: center;">
                 <div class="modal-content">
                     <div class="modal-header" style="height: 20px">
-                        <button type="button" class="close" onclick="hideModal()" style="margin-top: -30px">×</button>
+                        <button type="button" class="close" data-dismiss="modal" style="margin-top: -30px">×</button>
                     </div>
                     <div class="modal-body">
-                        <div id="trainingName"></div>
-                        <form id="formEdit" method="POST">
-                            <div id="time" hidden>
-                                <div>Czas trwania:</div>
-                                <input id="timeInMinutes" type="number" name="timeInMinutes" min="1" max="10000" step="1" oninput="validity.valid||(value=''); changeCalorie()">
-                                <div style="font-size: 13px; margin-top: 5px; font-weight: 600">min.</div>
-                            </div>
-                            <div id="kcal" class="param" hidden>
-                                <div>Spalone kalorie:</div>
-                                <input id="burnedKcal" type="number" step="1" name="burnedKcal" />
-                                <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kcal</div>
-                            </div>
-                            <div id="add" hidden class="cent cb">
-                                <button type="button" onclick="editCardioTraining()" class="btn btn-dark" id="editCardio">Zapisz zmiany</button>
-                            </div>
-                        </form>
+                        <div id="cardioName"></div>
+                        <div id="time">
+                            <div>Czas trwania:</div>
+                            <input id="timeInMinutes" type="number" name="timeInMinutes" min="1" max="10000" step="1" oninput="validity.valid||(value=''); changeCalorie()">
+                            <div style="font-size: 13px; margin-top: 5px; font-weight: 600">min.</div>
+                        </div>
+                        <div id="kcal" class="param">
+                            <div>Spalone kalorie:</div>
+                            <input id="burnedKcal" type="number" step="1" name="burnedKcal" />
+                            <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kcal</div>
+                        </div>
+                        <div id="add" class="cent cb">
+                            <button type="button" onclick="editCardio('@Url.Action("Cardio", "Training")')" class="btn btn-dark" id="editCardio">Zapisz zmiany</button>
+                        </div>
+                        <div id="editingCardioID" hidden></div>
                         <div id="kcalPerMin" hidden></div>
                     </div>
                 </div>
             </div>
         </div>
-
-
 
         <div style="display: flex; margin-bottom: 12px">
             <div id="diary">Dziennik treningowy dla: </div>
@@ -115,7 +121,7 @@
 
         <div style="display: flex">
             <div class="trainTypeHeader">Treningi cardio:</div>
-            <a class="btn acent" id="btnAddCardio" asp-controller="Training" asp-action="AddCardio" asp-route-dayID="@ViewData["dayID"]">Dodaj trening cardio</a>
+            <a class="btn acent" id="btnAddCardio" asp-controller="Training" asp-action="Cardio" asp-route-dayID="@ViewData["dayID"]">Dodaj trening cardio</a>
         </div>
 
         <div id="all">
@@ -139,13 +145,15 @@
                 if (training.Day.DayId.Equals(ViewData["dayID"]))
                 {
                     <div class="row no-gutters trainingRow">
-                        <div class="col-5 cent trainingName">@training.CardioTrainingType.TrainingName</div>
+                        <div class="col-5 cent trainingName" onclick="showEditCardioModal(@training.CardioTrainingId,@training.TimeInMinutes,@training.CaloriesBurned,'@training.CardioTrainingType.TrainingName','@training.CardioTrainingType.KcalPerMin')">
+                            @training.CardioTrainingType.TrainingName
+                        </div>
                         <div class="col-7 container">
                             <div class="row no-gutters">
                                 <div class="cent column borl">@training.TimeInMinutes</div>
                                 <div class="cent column borl">@training.CaloriesBurned</div>
                                 <div class="cent btnArea borl">
-                                    <button id="btnDelete" type="button" onclick="confirmDeleting(@training.CardioTrainingId);"><img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
+                                    <button id="btnDelete" type="button" onclick="showDeleteCardioModal(@training.CardioTrainingId, '@training.CardioTrainingType.TrainingName');"><img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
                                 </div>
                             </div>
                         </div>
@@ -208,7 +216,7 @@
 
         <div style="display: flex">
             <div class="trainTypeHeader">Treningi siłowe:</div>
-            <a class="btn acent" id="btnAddStrength" asp-controller="Training" asp-action="AddStrengthTraining" asp-route-dayID="@ViewData["dayID"]">Dodaj trening siłowy</a>
+            <a class="btn acent" id="btnAddStrength" asp-controller="Training" asp-action="StrengthTraining" asp-route-dayID="@ViewData["dayID"]">Dodaj trening siłowy</a>
         </div>
 
         <div id="all">
@@ -233,14 +241,16 @@
                 if (training.Day.DayId.Equals(ViewData["dayID"]))
                 {
                     <div class="row no-gutters trainingRow">
-                        <div class="col-5 cent trainingName">@training.StrengthTrainingType.TrainingName</div>
+                        <div class="col-5 cent trainingName" onclick="showEditStrengthModal()">@training.StrengthTrainingType.TrainingName</div>
                         <div class="col-7 container">
                             <div class="row no-gutters">
                                 <div class="cent sHeadCol borl">@training.Sets</div>
                                 <div class="cent sHeadCol borl">@training.Repetitions</div>
                                 <div class="cent sHeadCol borl">@training.Weight</div>
                                 <div class="cent btnArea borl">
-                                    <button id="btnDelete" type="button" onclick="confirmDeleting(@training.StrengthTrainingId);"><img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
+                                    <button id="btnDelete" type="button" onclick="showDeleteStrengthModal(@training.StrengthTrainingId, '@training.StrengthTrainingType.TrainingName');">
+                                        <img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png">
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -282,12 +292,7 @@
         });
     </script>
     <script>
-        function confirmDeleting(id) {
-            $("#deleteModal").modal('show');
-            $("#delete").click(function () {
-                deleteCardio(id, '@Url.Action("DeleteCardio", "Training")')
-            });
-        }
+        
     </script>
     <script src="~/js/TrainingPanel.js"></script>
 

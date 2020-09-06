@@ -14,7 +14,8 @@ namespace FitAppka.Service
         public int GetTodayID();
         public void AddDayIfNotExists(DateTime day);
         public void AddCardioTrainingType(int dayID, string name, int kcalPerMin);
-        public void DeleteCardio(int cardioID);
         public void AddCardio(int cardioTypeId, int dayID, int timeInMinutes, int burnedKcal);
+        public bool EditCardio(int id, int time, int burnedKcal);
+        public bool DeleteCardio(int id);
     }
 }

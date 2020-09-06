@@ -832,7 +832,7 @@ C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Home\Home.cshtml.g.cs
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\AddCardio.cshtml.g.cs
-C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\AddCardio.cshtml.g.cs
-C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\AddStrengthTraining.cshtml.g.cs
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Product\Create.cshtml.g.cs
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Product\Search.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\Cardio.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\StrengthTraining.cshtml.g.cs

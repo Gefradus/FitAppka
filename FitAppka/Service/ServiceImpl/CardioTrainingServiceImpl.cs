@@ -9,13 +9,15 @@ namespace FitAppka.Service.ServiceImpl
     {
         private readonly ICardioTrainingRepository _cardioRepository;
         private readonly ICardioTrainingTypeRepository _cardioTypeRepository;
+        private readonly IClientManageService _clientManageService;
         private readonly IClientRepository _clientRepository;
         private readonly IDayRepository _dayRepository;
         
 
         public CardioTrainingServiceImpl(IDayRepository dayRepository, ICardioTrainingRepository cardioRepository, 
-            ICardioTrainingTypeRepository cardioTypeRepository, IClientRepository clientRepository)
+            ICardioTrainingTypeRepository cardioTypeRepository, IClientRepository clientRepository, IClientManageService clientManageService)
         {
+            _clientManageService = clientManageService;
             _cardioTypeRepository = cardioTypeRepository;
             _clientRepository = clientRepository;
             _cardioRepository = cardioRepository;
@@ -34,18 +36,31 @@ namespace FitAppka.Service.ServiceImpl
             });
         }
 
-
-        public void DeleteCardio(int cardioID)
+        public bool EditCardio(int id, int time, int burnedKcal)
         {
-            if (_dayRepository.GetDay(_cardioRepository.GetCardioTraining(cardioID).DayId).ClientId == _clientRepository.GetLoggedInClient().ClientId)
+            CardioTraining cardio = _cardioRepository.GetCardioTraining(id);
+            if (_clientManageService.HasUserAccess(cardio.DayId))
             {
-                _cardioRepository.Delete(cardioID);
+                cardio.TimeInMinutes = time;
+                cardio.CaloriesBurned = burnedKcal;
+                _cardioRepository.Update(cardio);
+                return true;
             }
+            return false;
+        }
+
+        public bool DeleteCardio(int id)
+        {
+            if(_clientManageService.HasUserAccess(_cardioRepository.GetCardioTraining(id).DayId)){
+                _cardioRepository.Delete(id);
+                return true;
+            }
+            return false;
         }
 
         public void AddCardioTrainingType(int dayID, string name, int kcalPerMin)
         {
-            if (_clientRepository.GetLoggedInClientId() == _dayRepository.GetDay(dayID).ClientId)
+            if (_clientManageService.HasUserAccess(dayID))
             {
                 _cardioTypeRepository.Add(new CardioTrainingType
                 {
@@ -72,12 +87,10 @@ namespace FitAppka.Service.ServiceImpl
         public int GetTrainingTimeGoalInDay(int dayID)
         {
             int? timeGoal = _dayRepository.GetDay(dayID).TrainingTimeGoal;
-            if (timeGoal != null)
-            {
+            if (timeGoal != null) {
                 return (int)timeGoal;
             }
-            else
-            {
+            else {
                 return 0;
             }
         }
@@ -85,8 +98,7 @@ namespace FitAppka.Service.ServiceImpl
         public int CaloriesBurnedInDay(int dayID)
         {
             int? kcal = 0;
-            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID)))
-            {
+            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID))) {
                 kcal += cardio.CaloriesBurned;
             }
 
@@ -106,8 +118,7 @@ namespace FitAppka.Service.ServiceImpl
         public int CardioTimeInDay(int dayID)
         {
             int? time = 0;
-            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID)))
-            {
+            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID))) {
                 time += cardio.TimeInMinutes;
             }
 
@@ -123,7 +134,7 @@ namespace FitAppka.Service.ServiceImpl
         public int GetClientDayIDByDate(DateTime day)
         {
             AddDayIfNotExists(day);
-            return _dayRepository.GetClientDayByDate(day, _clientRepository.GetLoggedInClient().ClientId).DayId;
+            return _dayRepository.GetClientDayByDate(day, _clientRepository.GetLoggedInClientId()).DayId;
         }
 
         public int GetTodayID()
@@ -156,6 +167,6 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-
+        
     }
 }

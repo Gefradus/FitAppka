@@ -7,9 +7,11 @@ namespace FitAppka.Service.ServiceImpl
     public class ClientManageServiceImpl : IClientManageService
     {
         private readonly IClientRepository _clientRepository;
+        private readonly IDayRepository _dayRepository;
 
-        public ClientManageServiceImpl(IClientRepository clientRepository)
+        public ClientManageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository)
         {
+            _dayRepository = dayRepository;
             _clientRepository = clientRepository;
         }
 
@@ -40,6 +42,11 @@ namespace FitAppka.Service.ServiceImpl
         {
             Client client = GetClientFromModel(model);
             return client != null && client.Password.Equals(model.Password);
+        }
+
+        public bool HasUserAccess(int dayID)
+        {
+            return _dayRepository.GetDay(dayID).ClientId == _clientRepository.GetLoggedInClientId() || _clientRepository.GetLoggedInClient().IsAdmin;
         }
         
     }

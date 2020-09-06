@@ -5,15 +5,15 @@ namespace FitAppka.Service.ServiceImpl
 {
     public class StrengthTrainingServiceImpl : IStrengthTrainingService
     {
-        private readonly IDayRepository _dayRepository;
         private readonly IClientRepository _clientRepository;
+        private readonly IClientManageService _clientManageService;
         private readonly IStrengthTrainingRepository _strengthTrainingRepository;
         private readonly IStrengthTrainingTypeRepository _strengthTrainingTypeRepository;
 
-        public StrengthTrainingServiceImpl(IStrengthTrainingRepository strengthTrainingRepository, IDayRepository dayRepository,
+        public StrengthTrainingServiceImpl(IStrengthTrainingRepository strengthTrainingRepository, IClientManageService clientManageService,
             IStrengthTrainingTypeRepository strengthTrainingTypeRepository, IClientRepository clientRepository)
         {
-            _dayRepository = dayRepository;
+            _clientManageService = clientManageService;
             _clientRepository = clientRepository;
             _strengthTrainingTypeRepository = strengthTrainingTypeRepository;
             _strengthTrainingRepository = strengthTrainingRepository;
@@ -21,19 +21,22 @@ namespace FitAppka.Service.ServiceImpl
 
         public void AddStrengthTraining(int trainingTypeId, int dayID, short sets, short reps, short weight)
         {
-            _strengthTrainingRepository.Add(new StrengthTraining()
+            if (_clientManageService.HasUserAccess(dayID))
             {
-                StrengthTrainingTypeId = trainingTypeId,
-                DayId = dayID,
-                Sets = sets,
-                Repetitions = reps,
-                Weight = weight
-            });
+                _strengthTrainingRepository.Add(new StrengthTraining()
+                {
+                    StrengthTrainingTypeId = trainingTypeId,
+                    DayId = dayID,
+                    Sets = sets,
+                    Repetitions = reps,
+                    Weight = weight
+                });
+            }
         }
 
         public void AddStrengthTrainingType(int dayID, string name, short sets, short reps, short weight)
         {
-            if (_clientRepository.GetLoggedInClientId() == _dayRepository.GetDay(dayID).ClientId)
+            if (_clientManageService.HasUserAccess(dayID))
             {
                 StrengthTrainingType type = _strengthTrainingTypeRepository.Add(new StrengthTrainingType()
                 {
@@ -52,5 +55,30 @@ namespace FitAppka.Service.ServiceImpl
                 });
             }
         }
+
+        public bool DeleteStrengthTraining(int id)
+        {
+            if (_clientManageService.HasUserAccess(_strengthTrainingRepository.GetStrengthTraining(id).DayId))
+            {
+                _strengthTrainingRepository.Delete(id);
+                return true;
+            }
+            return false;
+        }
+
+        public bool EditStrengthTraining(int id, short sets, short reps, short weight)
+        {
+            StrengthTraining training = _strengthTrainingRepository.GetStrengthTraining(id);
+            if (_clientManageService.HasUserAccess(training.DayId))
+            {
+                training.Sets = sets;
+                training.Repetitions = reps;
+                training.Weight = weight;
+                _strengthTrainingRepository.Update(training);
+                return true;
+            }
+            return false;
+        }
+
     }
 }

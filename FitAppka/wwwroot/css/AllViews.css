@@ -45,6 +45,15 @@
     margin-left: 3px;
 }
 
+.cancelDeleteBtn {
+    margin-right: 15px; 
+    border-radius:10%; 
+    background-color: #4d62d7; 
+    height: 32px; 
+    width: 100px; 
+    color: white
+}
+
 
 #validatMsg{
     align-items: center;

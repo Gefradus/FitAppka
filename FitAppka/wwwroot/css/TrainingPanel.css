@@ -28,6 +28,14 @@
     color: white
 }
 
+#delete {
+    border-radius: 10%;
+    background-color: #ce1a22;
+    height: 32px;
+    width: 100px;
+    color: white
+}
+
 #btnAddCardio{
     background: rgba(255, 10, 10, 0.35);
 }

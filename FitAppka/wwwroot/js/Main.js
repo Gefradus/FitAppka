@@ -112,8 +112,8 @@ function deleteMealUrl(id, url) {
     $("#delete").click(function () {
         $.ajax({
             type: 'DELETE',
-            url: url + "?id=" + id,
-            dataType: "json",
+            url: url,
+            data: { id: id },
             success: function () {
                 location.reload();
             }

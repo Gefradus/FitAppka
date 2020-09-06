@@ -106,7 +106,7 @@
             </div>
             <div class="row no-gutters pb-4" id="searchAreaRow">
                 <div id="searchArea" class="col-12 col-md-6">
-                    @using (Html.BeginForm("AddCardio", "Training", FormMethod.Get))
+                    @using (Html.BeginForm("Cardio", "Training", FormMethod.Get))
                     {
                         <div id="divValidation">@Html.ValidationSummary(false, "", new { @class = "text-danger" })</div>
                         <div style="margin-top: -3px">

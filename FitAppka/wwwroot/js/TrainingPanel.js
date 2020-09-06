@@ -1,5 +1,5 @@
 function changeDay(url) {
-    window.location.href = url + "?day=" + document.getElementById("datepicker").value;
+    window.location.href = url + "?day=" + $("#datepicker").val();
 }
 
 function colorEverySecondRow() {
@@ -11,17 +11,71 @@ function colorEverySecondRow() {
     }
 }
 
-function deleteCardio(id, url) {
+function changeCalorie() {
+    var minutes = parseInt($("#timeInMinutes").val());
+    var kcalPerMin = $("#kcalPerMin").val();
+    $("#burnedKcal").val(parseInt(minutes * kcalPerMin));
+}
+
+function showEditCardioModal(id, time, burnedKcal, name, kcalPerMin) {
+    $("cardioName").html(name);
+    $("#kcalPerMin").val(parseInt(kcalPerMin));
+    $("#timeInMinutes").val(parseInt(time));
+    $("#burnedKcal").val(parseInt(burnedKcal));
+    $("#editCardioModal").modal('show');
+    $("#editingCardioID").val(parseInt(id));
+}
+
+function showDeleteCardioModal(id, name) {
+    document.getElementById("formDeleteCardio").hidden = false;
+    document.getElementById("formDeleteStrength").hidden = true;
+    document.getElementById("deletingTrainingName").innerHTML = ": " + name + ' ?';
+    $("#deleteModal").modal('show');
+    $("#deletingCardioID").val(parseInt(id));
+}
+
+function showDeleteStrengthModal(id, name) {
+    document.getElementById("formDeleteCardio").hidden = true;
+    document.getElementById("formDeleteStrength").hidden = false;
+    document.getElementById("deletingTrainingName").innerHTML = ": " + name + ' ?';
+    $("#deleteModal").modal('show');
+    $("#deletingStrengthTrainingID").val(parseInt(id));
+}
+
+function deleteStrengthTraining(url) {
     $.ajax({
-        type: 'POST',
+        type: 'DELETE',
         url: url,
-        data: { cardioID: id },
+        data: { id: parseInt($("#deletingStrengthTrainingID").val()) },
         success: function () {
             location.reload();
         }
     });
 }
 
-function hideModal() {
-    location.reload();
+function deleteCardio(url) {
+    $.ajax({
+        type: 'DELETE',
+        url: url,
+        data: { id: parseInt($("#deletingCardioID").val()) },
+        success: function () {
+            location.reload();
+        }
+    });
 }
+
+function editCardio(url) {
+    $.ajax({
+        type: 'PUT',
+        url: url,
+        data: {
+            id: parseInt($("#editingCardioID").val()),
+            time: parseInt($("#timeInMinutes").val()),
+            burnedKcal: parseInt($("#burnedKcal").val())
+        },
+        success: function () {
+            location.reload();
+        }
+    });
+}
+
