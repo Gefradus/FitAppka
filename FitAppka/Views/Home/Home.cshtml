@@ -106,7 +106,6 @@
             <div>
                 <div id="dziennik">
                     <div style="background-color: transparent; display: inline-block">
-
                         <div class="data"><a asp-action="ChooseDay" asp-route-choice="1" asp-route-dayID="@ViewData["dayID"]"><img class="prev-next" src="~/img/prev.png" /></a></div>
                     </div>
 
@@ -210,7 +209,11 @@
                             </div>
                         </div>
 
-                        <div style="float:right; width: 60px" class="addButton"><a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="1" asp-route-dayID="@ViewData["dayID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
+                        <div style="float:right; width: 60px" class="addButton">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="1" asp-route-dayID="@ViewData["dayID"]">
+                                <img class="img-fluid" src="~/img/add.png">
+                            </a>
+                        </div>
                         <div class="cb"></div>
                     </div>
                 }
@@ -253,7 +256,11 @@
                                 @ViewData["lunchKcal"]kcal
                             </div>
                         </div>
-                        <div style="float:right; width: 60px" class="addButton"><a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="2" asp-route-dayID="@ViewData["dayID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
+                        <div style="float:right; width: 60px" class="addButton">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="2" asp-route-dayID="@ViewData["dayID"]">
+                                <img class="img-fluid" src="~/img/add.png">
+                            </a>
+                        </div>
                         <div class="cb"></div>
                     </div>
                 }
@@ -297,7 +304,11 @@
                                 @ViewData["dinnerKcal"]kcal
                             </div>
                         </div>
-                        <div style="float:right; width: 60px" class="addButton"><a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="3" asp-route-dayID="@ViewData["dayID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
+                        <div style="float:right; width: 60px" class="addButton">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="3" asp-route-dayID="@ViewData["dayID"]">
+                                <img class="img-fluid" src="~/img/add.png">
+                            </a>
+                        </div>
                         <div style="clear:both"></div>
                     </div>
                 }
@@ -339,7 +350,11 @@
                                 @ViewData["dessertKcal"]kcal
                             </div>
                         </div>
-                        <div style="float:right; width: 60px" class="addButton"><a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="4" asp-route-dayID="@ViewData["dayID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
+                        <div style="float:right; width: 60px" class="addButton">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="4" asp-route-dayID="@ViewData["dayID"]">
+                                <img class="img-fluid" src="~/img/add.png">
+                            </a>
+                        </div>
                         <div class="cb"></div>
                     </div>
                 }
@@ -383,7 +398,11 @@
                                 @ViewData["snackKcal"]kcal
                             </div>
                         </div>
-                        <div style="float:right; width: 60px" class="addButton"><a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="5" asp-route-dayID="@ViewData["dayID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
+                        <div style="float:right; width: 60px" class="addButton">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="5" asp-route-dayID="@ViewData["dayID"]">
+                                <img class="img-fluid" src="~/img/add.png">
+                            </a>
+                        </div>
                         <div class="cb"></div>
                     </div>
                 }
@@ -426,7 +445,11 @@
                                 @ViewData["supperKcal"]kcal
                             </div>
                         </div>
-                        <div style="float:right; width: 60px" class="addButton"><a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="6" asp-route-dayID="@ViewData["dayID"]"><img class="img-fluid" src="~/img/add.png"></a></div>
+                        <div style="float:right; width: 60px" class="addButton">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="6" asp-route-dayID="@ViewData["dayID"]">
+                                <img class="img-fluid" src="~/img/add.png">
+                            </a>
+                        </div>
                         <div class="cb"></div>
                     </div>
                 }

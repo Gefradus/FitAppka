@@ -80,6 +80,11 @@ namespace FitAppka.Repository.RepIfaceImpl
             return GetClientByLogin(_httpContextAccessor.HttpContext.User.Identity.Name).ClientId;
         }
 
+        public bool IsLoggedInClientAdmin()
+        {
+            return GetClientByLogin(_httpContextAccessor.HttpContext.User.Identity.Name).IsAdmin;
+        }
+
         public Client Update(Client client)
         {
             _context.Update(client);

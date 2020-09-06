@@ -1,9 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using FitAppka.Models;
 using FitAppka.Repository;
+using FitAppka.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +16,15 @@ namespace FitAppka.Controllers
     public class AdminController : Controller
     {
         private readonly IProductRepository _productRepository;
+        private readonly IProductManageService _productManageService;
         private readonly IClientRepository _clientRepository;
         private readonly FitAppContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public AdminController(FitAppContext context, IWebHostEnvironment env, IProductRepository productRepository, IClientRepository clientRepository)
+        public AdminController(FitAppContext context, IWebHostEnvironment env, IProductRepository productRepository, 
+            IClientRepository clientRepository, IProductManageService productManageService)
         {
+            _productManageService = productManageService;
             _clientRepository = clientRepository;
             _productRepository = productRepository;
             _context = context;
@@ -32,12 +34,10 @@ namespace FitAppka.Controllers
         [HttpGet]
         public IActionResult AdminHome()
         {
-            if (GetLoggedInClient().IsAdmin)
-            {
+            if (_clientRepository.IsLoggedInClientAdmin()) {
                 return View();
             }
-            else
-            {
+            else {
                 return RedirectToAction("Logout", "Login");
             }
         }
@@ -45,12 +45,10 @@ namespace FitAppka.Controllers
         [HttpGet]
         public IActionResult AdminSettings()
         {
-            if (GetLoggedInClient().IsAdmin)
-            {
+            if (_clientRepository.IsLoggedInClientAdmin()) {
                 return View();
             }
-            else
-            {
+            else {
                 return RedirectToAction("Logout", "Login");
             }
         }
@@ -59,8 +57,7 @@ namespace FitAppka.Controllers
         [HttpGet]
         public async Task<IActionResult> AdminProduct(string search)
         {
-            if (GetLoggedInClient().IsAdmin)
-            {
+            if (_clientRepository.IsLoggedInClientAdmin()) {
                 if(search != null) {
                     return View(await _context.Product.Where(p => p.ProductName.Contains(search)).ToListAsync());
                 } 
@@ -68,8 +65,7 @@ namespace FitAppka.Controllers
                     return View(await _context.Product.ToListAsync());
                 }
             }
-            else
-            {
+            else {
                 return RedirectToAction("Logout", "Login");
             }
         }
@@ -77,7 +73,7 @@ namespace FitAppka.Controllers
         [HttpGet]
         public IActionResult AdminEditProduct(int id)
         {
-            if (GetLoggedInClient().IsAdmin)
+            if (_clientRepository.IsLoggedInClientAdmin())
             {
                 SendDataAboutProductToView(id);
                 return View();
@@ -94,63 +90,10 @@ namespace FitAppka.Controllers
         {
             if (ModelState.IsValid)
             {
-                EditProduct(model, productID, addOrEditPhoto);
+                _productManageService.UpdateProduct(model, productID, addOrEditPhoto);
                 return RedirectToAction(nameof(AdminProduct));
             }
             return View(model);
-        }
-
-        private void EditProduct(CreateProductModel model, int id, int addOrEditPhoto)
-        {
-            if (ModelState.IsValid)
-            {
-                string uniqueFileName = null;
-                if (model.Photo != null)
-                {
-                    string folder = Path.Combine(_env.WebRootPath, "photos");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                    string filePath = Path.Combine(folder, uniqueFileName);
-                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
-                }
-
-                Product product = _productRepository.GetProduct(id);
-
-                product.ProductName = model.ProductName;
-                product.Calories = (double) model.Calories;
-                product.Proteins = (double) model.Proteins;
-                product.Fats = (double) model.Fats;
-                product.Carbohydrates = (double) model.Carbohydrates;
-                product.VitaminA = model.VitaminA;
-                product.VitaminC = model.VitaminC;
-                product.VitaminD = model.VitaminD;
-                product.VitaminK = model.VitaminK;
-                product.VitaminE = model.VitaminE;
-                product.VitaminB1 = model.VitaminB1;
-                product.VitaminB2 = model.VitaminB2;
-                product.VitaminB5 = model.VitaminB5;
-                product.VitaminB6 = model.VitaminB6;
-                product.Biotin = model.Biotin;
-                product.VitaminB12 = model.VitaminB12;
-                product.VitaminPp = model.VitaminPp;
-                product.Zinc = model.Zinc;
-                product.Phosphorus = model.Phosphorus;
-                product.Iodine = model.Iodine;
-                product.FolicAcid = model.FolicAcid;
-                product.Magnesium = model.Magnesium;
-                product.Copper = model.Copper;
-                product.Potassium = model.Potassium;
-                product.Selenium = model.Selenium;
-                product.Sodium = model.Sodium;
-                product.Calcium = model.Calcium;
-                product.Iron = model.Iron;
-
-                if(addOrEditPhoto == 0 || uniqueFileName != null)
-                {
-                    product.PhotoPath = uniqueFileName;
-                }
-
-                _productRepository.Update(product);
-            }
         }
 
         private void SendDataAboutProductToView(int id)
@@ -187,20 +130,17 @@ namespace FitAppka.Controllers
             ViewData["calcium"] = product.Calcium;
             ViewData["iron"] = product.Iron;
 
-            if(product.PhotoPath == null)
-            {
+            if(product.PhotoPath == null) {
                 ViewData["addOrEdit"] = 0;
             }
-            else
-            {
+            else {
                 ViewData["addOrEdit"] = 1;
             }
 
         }
 
-        
         [HttpPost]
-        public IActionResult Delete(int productID)
+        public JsonResult Delete(int productID)
         {
             _productRepository.Delete(productID);
             return Json(false);
@@ -210,9 +150,9 @@ namespace FitAppka.Controllers
         [HttpGet]
         public async Task<IActionResult> AdminClient()
         {
-            if (GetLoggedInClient().IsAdmin)
+            if (_clientRepository.IsLoggedInClientAdmin())
             {
-                return View(await _context.Client.ToListAsync());
+                return View(await _clientRepository.GetAllClientsAsync());
             }
             else
             {
@@ -220,10 +160,7 @@ namespace FitAppka.Controllers
             }
         }
 
-        private Client GetLoggedInClient()
-        {
-            return _clientRepository.GetClientByLogin(User.Identity.Name);
-        }
+
         
     }
 }

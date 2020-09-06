@@ -11,9 +11,12 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IDayRepository _dayRepository;
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly IProductRepository _productRepository;
+        private readonly IClientRepository _clientRepository;
 
-        public ProductManageServiceImpl(IDayRepository dayRepository, IWebHostEnvironment hostEnvironment, IProductRepository productRepository)
+        public ProductManageServiceImpl(IDayRepository dayRepository, IWebHostEnvironment hostEnvironment, 
+            IProductRepository productRepository, IClientRepository clientRepository)
         {
+            _clientRepository = clientRepository;
             _productRepository = productRepository;
             _hostEnvironment = hostEnvironment;
             _dayRepository = dayRepository;
@@ -61,6 +64,16 @@ namespace FitAppka.Service.ServiceImpl
             } 
         }
 
+        private void SetProductVisibility(Product product)
+        {
+            if (_clientRepository.GetLoggedInClient().IsAdmin) {
+                product.VisibleToAll = true;
+            }
+            else {
+                product.VisibleToAll = false;
+            }
+        }
+
         private string CreatePathToPhoto(CreateProductModel model)
         {
             string uniqueFileName = null;
@@ -76,8 +89,9 @@ namespace FitAppka.Service.ServiceImpl
 
         public void CreateProductFromModel(CreateProductModel model)
         {
-            _productRepository.Add(new Product()
+            SetProductVisibility( _productRepository.Add(new Product()
             {
+                ClientId = _clientRepository.GetLoggedInClientId(),
                 ProductName = model.ProductName,
                 PhotoPath = CreatePathToPhoto(model),
                 Calories = (double)model.Calories,
@@ -105,7 +119,49 @@ namespace FitAppka.Service.ServiceImpl
                 Sodium = model.Sodium,
                 Calcium = model.Calcium,
                 Iron = model.Iron
-            }); 
+            }));
+        }
+
+        public void UpdateProduct(CreateProductModel model, int id, int addOrEditPhoto)
+        {
+            Product product = _productRepository.GetProduct(id);
+            if(product.ClientId == _clientRepository.GetLoggedInClientId() || _clientRepository.GetLoggedInClient().IsAdmin)
+            {
+                product.ProductName = model.ProductName;
+                product.Calories = (double)model.Calories;
+                product.Proteins = (double)model.Proteins;
+                product.Fats = (double)model.Fats;
+                product.Carbohydrates = (double)model.Carbohydrates;
+                product.VitaminA = model.VitaminA;
+                product.VitaminC = model.VitaminC;
+                product.VitaminD = model.VitaminD;
+                product.VitaminK = model.VitaminK;
+                product.VitaminE = model.VitaminE;
+                product.VitaminB1 = model.VitaminB1;
+                product.VitaminB2 = model.VitaminB2;
+                product.VitaminB5 = model.VitaminB5;
+                product.VitaminB6 = model.VitaminB6;
+                product.Biotin = model.Biotin;
+                product.VitaminB12 = model.VitaminB12;
+                product.VitaminPp = model.VitaminPp;
+                product.Zinc = model.Zinc;
+                product.Phosphorus = model.Phosphorus;
+                product.Iodine = model.Iodine;
+                product.FolicAcid = model.FolicAcid;
+                product.Magnesium = model.Magnesium;
+                product.Copper = model.Copper;
+                product.Potassium = model.Potassium;
+                product.Selenium = model.Selenium;
+                product.Sodium = model.Sodium;
+                product.Calcium = model.Calcium;
+                product.Iron = model.Iron;
+
+                if (addOrEditPhoto == 0 || CreatePathToPhoto(model) != null) {
+                    product.PhotoPath = CreatePathToPhoto(model);
+                }
+
+                _productRepository.Update(product);
+            }            
         }
     }
 }

@@ -18,5 +18,6 @@ namespace FitAppka.Repository
         Client Delete(int id);
         Client GetLoggedInClient();
         int GetLoggedInClientId();
+        bool IsLoggedInClientAdmin();
     }
 }

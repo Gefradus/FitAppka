@@ -34,7 +34,6 @@ namespace FitAppka.Repository.RepIfaceImpl
             return product;
         }
 
-
         private void DeleteRelatedMeals(int productID)
         {
             List<Meal> relatedMeals = _context.Meal.Where(p => p.ProductId == productID).ToList();
