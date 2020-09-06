@@ -111,9 +111,9 @@ function deleteMealUrl(id, url) {
     $("#deleteModal").modal('show');
     $("#delete").click(function () {
         $.ajax({
-            type: 'POST',
-            url: url,
-            data: { mealID: id },
+            type: 'DELETE',
+            url: url + "?id=" + id,
+            dataType: "json",
             success: function () {
                 location.reload();
             }
@@ -146,9 +146,9 @@ function showEditModalUrl(id, url) {
         }
         else if (gram >= 1 && gram <= 9999) {
             $.ajax({
-                type: 'POST',
+                type: 'PUT',
                 url: url,
-                data: { mealID: id, grammage: gram },
+                data: { id: id, grammage: gram },
                 success: function () {
                     location.reload();
                 }

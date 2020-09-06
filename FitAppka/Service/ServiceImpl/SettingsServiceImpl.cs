@@ -1,10 +1,10 @@
 using FitAppka.Models;
 using FitAppka.Repository;
-using FitAppka.Service;
 using System;
 using System.Collections.Generic;
 
-namespace FitAppka.Controllers {
+namespace FitAppka.Service.ServiceImpl
+{
     public class SettingsServiceImpl : ISettingsService {
 
         private readonly IDayRepository _dayRepository;

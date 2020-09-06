@@ -11,8 +11,8 @@
         function createChart() { drawChart(@ViewData["proteins0"], @ViewData["carbs0"], @ViewData["fats0"]); }
         function showWater() { glass(@ViewData["water"], @ViewData["calorieTarget"]); }
         function overflow() { colorItRed(@ViewData["%proteins"], @ViewData["%carbs"], @ViewData["%fats"], @ViewData["%calories"]); }
-        function deleteMeal(id) { deleteMealUrl(id, '@Url.Action("Delete","Home")'); }
-        function showEditModal(id) { showEditModalUrl(id, '@Url.Action("Edit","Home")'); }
+        function deleteMeal(id) { deleteMealUrl(id, '@Url.Action("Meal","Home")'); }
+        function showEditModal(id) { showEditModalUrl(id, '@Url.Action("Meal","Home")'); }
         function hide() {
             if (!(@ViewData["proteins0"] == 0 && @ViewData["carbs0"] == 0 && @ViewData["fats0"] == 0)) {
                 document.getElementById("chartArea").style.display = "block";
@@ -108,7 +108,7 @@
                 <div id="dziennik">
                     <div style="background-color: transparent; display: inline-block">
 
-                        <div class="data"><a asp-action="ChooseDay" asp-route-id="1" asp-route-dayID="@ViewData["dayID"]"><img class="prev-next" src="~/img/prev.png" /></a></div>
+                        <div class="data"><a asp-action="ChooseDay" asp-route-choice="1" asp-route-dayID="@ViewData["dayID"]"><img class="prev-next" src="~/img/prev.png" /></a></div>
                     </div>
 
                     <div style="display: inline-block;">
@@ -118,7 +118,7 @@
                     </div>
 
                     <div style="background-color: transparent; display: inline-block;">
-                        <div class="data"><a asp-action="ChooseDay" asp-route-id="2" asp-route-dayID="@ViewData["dayID"]"><img class="prev-next" src="~/img/next.png" /></a></div>
+                        <div class="data"><a asp-action="ChooseDay" asp-route-choice="2" asp-route-dayID="@ViewData["dayID"]"><img class="prev-next" src="~/img/next.png" /></a></div>
                     </div>
                     <div>
                         <input id="dateBtn" type="text" hidden />
@@ -480,11 +480,11 @@
                     </div>
 
                     <div id="waterEdit" style="display:none">
-                        <form method="post">
+                        <form method="put">
                             <div class="container">
                                 <div class="row" style="margin-bottom: 10px">
                                     <div id="editingWater"><input id="EditedWater" name="EditedWater" type="number" min="0" max="10000" value="@ViewData["water"]" /></div>
-                                    <div class="divDodEdyWode"><button class="button" asp-action="EditWater" asp-route-dayID="@ViewData["dayID"]"><img style="height:20px; width:20px; padding-top:2px;" src="~/img/save.png"></button></div>
+                                    <div class="divDodEdyWode"><button class="button" asp-action="Water" asp-route-dayID="@ViewData["dayID"]"><img style="height:20px; width:20px; padding-top:2px;" src="~/img/save.png"></button></div>
                                 </div>
                             </div>
                         </form>
@@ -496,7 +496,7 @@
                             <div style="padding-bottom: 30px" class="row">
                                 <div id="addingWater"><input id="AddedWater" name="AddedWater" type="number" min="1" max="10000" value="@ViewData["AddedWater"]" /></div>
                                 <div id="ml">ml</div>
-                                <div class="divDodEdyWode"><button id="dodajWode" class="btn" asp-action="AddWater" asp-route-dayID="@ViewData["dayID"]" value="dodajWode">Dodaj</button></div>
+                                <div class="divDodEdyWode"><button id="dodajWode" class="btn" asp-action="Water" asp-route-dayID="@ViewData["dayID"]" value="dodajWode">Dodaj</button></div>
                             </div>
                         </div>
                     </form>

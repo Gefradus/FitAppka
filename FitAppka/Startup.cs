@@ -1,19 +1,16 @@
-using FitAppka.Controllers;
 using FitAppka.Models;
 using FitAppka.Repository;
 using FitAppka.Repository.RepIfaceImpl;
 using FitAppka.Service;
-using FitAppka.Services;
-using FitAppka.Services.ServicesImpl;
+using FitAppka.Service.ServiceImpl;
+using FitAppka.Service.ServicesImpl;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Security.Claims;
 
 namespace FitAppka
 {
@@ -48,6 +45,7 @@ namespace FitAppka
             services.AddScoped<ISettingsService, SettingsServiceImpl>();
             services.AddScoped<IStrengthTrainingService, StrengthTrainingServiceImpl>();
             services.AddScoped<ICardioTrainingService, CardioTrainingServiceImpl>();
+            services.AddScoped<IHomePageService, HomePageServiceImpl>();
         }
 
         private void RepositoriesAddScoped(IServiceCollection services)

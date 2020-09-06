@@ -58,11 +58,10 @@
                     document.getElementById('addProduct').disabled = true;
                     $.ajax({
                         type: 'POST',
-                        url: '@Url.Action("Add","Home")',
+                        url: '@Url.Action("Meal","Home")',
                         data: { productID: id, grammage: gram, dayID:@ViewData["dayID"], inWhich:@ViewData["inWhich"] },
                         success: function() {
-                            var url = $("#RedirectTo").val();
-                            location.href = url;
+                            location.href = $("#RedirectTo").val();
                         }
                     });
                 }

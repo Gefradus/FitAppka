@@ -1,7 +1,7 @@
 ﻿using FitAppka.Models;
 using FitAppka.Repository;
 
-namespace FitAppka.Services.ServicesImpl
+namespace FitAppka.Service.ServiceImpl
 {
     public class StrengthTrainingServiceImpl : IStrengthTrainingService
     {
@@ -9,8 +9,10 @@ namespace FitAppka.Services.ServicesImpl
         private readonly IStrengthTrainingRepository _strengthTrainingRepository;
         private readonly IStrengthTrainingTypeRepository _strengthTrainingTypeRepository;
 
-        public StrengthTrainingServiceImpl(IStrengthTrainingRepository strengthTrainingRepository, IStrengthTrainingTypeRepository strengthTrainingTypeRepository)
+        public StrengthTrainingServiceImpl(IStrengthTrainingRepository strengthTrainingRepository, 
+            IStrengthTrainingTypeRepository strengthTrainingTypeRepository, IClientRepository clientRepository)
         {
+            _clientRepository = clientRepository;
             _strengthTrainingTypeRepository = strengthTrainingTypeRepository;
             _strengthTrainingRepository = strengthTrainingRepository;
         }

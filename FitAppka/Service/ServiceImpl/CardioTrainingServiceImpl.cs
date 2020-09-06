@@ -4,21 +4,23 @@ using System;
 using System.Linq;
 
 
-namespace FitAppka.Services.ServicesImpl
+namespace FitAppka.Service.ServiceImpl
 {
     public class CardioTrainingServiceImpl : ICardioTrainingService
     {
         private readonly ICardioTrainingRepository _cardioRepository;
+        private readonly IOperationsService _operationsService;
         private readonly ICardioTrainingTypeRepository _cardioTypeRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IDayRepository _dayRepository;
         private readonly FitAppContext _context;
         
 
-        public CardioTrainingServiceImpl(IDayRepository dayRepository, ICardioTrainingRepository cardioRepository, 
+        public CardioTrainingServiceImpl(IDayRepository dayRepository, ICardioTrainingRepository cardioRepository, IOperationsService operationsService, 
             ICardioTrainingTypeRepository cardioTypeRepository, IClientRepository clientRepository, FitAppContext context)
         {
             _context = context;
+            _operationsService = operationsService;
             _cardioTypeRepository = cardioTypeRepository;
             _clientRepository = clientRepository;
             _cardioRepository = cardioRepository;

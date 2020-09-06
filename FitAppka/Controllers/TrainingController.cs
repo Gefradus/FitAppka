@@ -1,6 +1,6 @@
 ﻿using FitAppka.Models;
 using FitAppka.Repository;
-using FitAppka.Services;
+using FitAppka.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +34,7 @@ namespace FitAppka.Controllers
         public async Task<IActionResult> TrainingPanel(int dayID) {
 
             ViewData["dayID"] = dayID;
-            ViewData["day"] = GetDayDateById(dayID);
+            ViewData["day"] = _dayRepository.GetDayDateTime(dayID).Date.ToString("dd.MM.yyyy");
             ViewData["clientID"] = _clientRepository.GetLoggedInClient().ClientId;
             ViewData["burnedKcal"] = _cardioServices.CaloriesBurnedInDay(dayID);
             ViewData["cardioTime"] = _cardioServices.CardioTimeInDay(dayID);
@@ -112,10 +112,6 @@ namespace FitAppka.Controllers
             }
 
             return RedirectToAction("Logout", "Login"); 
-        }
-
-        private string GetDayDateById(int dayID) {
-            return _dayRepository.GetDayDateTime(dayID).Date.ToString("dd.MM.yyyy");
         }
 
         private void CheckIfThisWasSearchedFor(string search) {
