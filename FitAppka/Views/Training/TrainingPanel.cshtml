@@ -68,20 +68,20 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <form id="formDeleteCardio" method="post" hidden>
+                        <div id="formDeleteCardio" hidden>
                             <div style="display:flex; justify-content: center">
                                 <button type="button" data-dismiss="modal" class="cancelDeleteBtn">Anuluj</button>
                                 <button type="button" id="delete" onclick="deleteCardio('@Url.Action("Cardio", "Training")')">Tak, usuń</button>
                                 <div id="deletingCardioID" hidden></div>
                             </div>
-                        </form>
-                        <form id="formDeleteStrength" method="post" hidden>
+                        </div>
+                        <div id="formDeleteStrength" hidden>
                             <div style="display:flex; justify-content: center">
                                 <button type="button" data-dismiss="modal" class="cancelDeleteBtn">Anuluj</button>
                                 <button type="button" id="delete" onclick="deleteStrengthTraining('@Url.Action("StrengthTraining", "Training")')">Tak, usuń</button>
                                 <div id="deletingStrengthTrainingID" hidden></div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
