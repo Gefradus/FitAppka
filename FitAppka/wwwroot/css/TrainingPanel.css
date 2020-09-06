@@ -92,12 +92,13 @@
 }
 
 .trainingName{
-    /*color: darkblue*/
+    height: 100%;
+    align-items: center;
 }
 
 .trainingName:hover {
     color: coral;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .column {
