@@ -142,7 +142,11 @@ namespace FitAppka.Controllers
         [HttpPost]
         public JsonResult Delete(int productID)
         {
-            _productRepository.Delete(productID);
+            if (_clientRepository.IsLoggedInClientAdmin())
+            {
+                _productRepository.Delete(productID);
+                return Json(true);
+            }
             return Json(false);
         }
 

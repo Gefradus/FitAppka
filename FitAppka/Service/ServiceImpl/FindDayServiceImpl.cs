@@ -208,8 +208,5 @@ namespace FitAppka.Service.ServiceImpl
         }
 
 
-
-
-
     }
 }
