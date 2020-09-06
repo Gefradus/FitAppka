@@ -107,3 +107,14 @@ function isNumeric(s) {
     return !isNaN(s - parseFloat(s));
 }
 
+function isEmpty(string) {
+    return string.length == 0;
+}
+
+function validation(validMsg) {
+    $("#validationModal").modal('show');
+    document.getElementById("validatMsg").innerHTML = "<p>" + validMsg + "</p>";
+    $("#closeVal").click(function () {
+        $("#validationModal").modal('hide');
+    })
+}

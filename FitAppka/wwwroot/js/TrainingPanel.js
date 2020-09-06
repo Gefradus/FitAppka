@@ -18,7 +18,7 @@ function changeCalorie() {
 }
 
 function showEditCardioModal(id, time, burnedKcal, name, kcalPerMin) {
-    $("cardioName").html(name);
+    document.getElementById("cardioName").innerHTML = name;
     $("#kcalPerMin").val(parseInt(kcalPerMin));
     $("#timeInMinutes").val(parseInt(time));
     $("#burnedKcal").val(parseInt(burnedKcal));
@@ -32,6 +32,15 @@ function showDeleteCardioModal(id, name) {
     document.getElementById("deletingTrainingName").innerHTML = ": " + name + ' ?';
     $("#deleteModal").modal('show');
     $("#deletingCardioID").val(parseInt(id));
+}
+
+function showEditStrengthModal(id, sets, reps, weight, name) {
+    document.getElementById("strengthName").innerHTML = name;
+    $("#sets").val(parseInt(sets));
+    $("#reps").val(parseInt(reps));
+    $("#weight").val(parseInt(weight));
+    $("#editStrengthModal").modal('show');
+    $("#editingStrengthTrainingID").val(parseInt(id));
 }
 
 function showDeleteStrengthModal(id, name) {
@@ -64,14 +73,14 @@ function deleteCardio(url) {
     });
 }
 
-function editCardio(url) {
+function editCardioVal(url, time, burnedKcal) {
     $.ajax({
         type: 'PUT',
         url: url,
         data: {
             id: parseInt($("#editingCardioID").val()),
-            time: parseInt($("#timeInMinutes").val()),
-            burnedKcal: parseInt($("#burnedKcal").val())
+            time: parseInt(time),
+            burnedKcal: parseInt(burnedKcal)
         },
         success: function () {
             location.reload();
@@ -79,3 +88,22 @@ function editCardio(url) {
     });
 }
 
+function editCardio(url) {
+    var time = document.getElementById("timeInMinutes").value;
+    var burnedKcal = document.getElementById("burnedKcal").value;
+
+    if (!isEmpty(time) && !isEmpty(burnedKcal)) {
+        editCardioVal(url, time, burnedKcal);
+    }
+    else {
+        if (isEmpty(time) && isEmpty(burnedKcal)) {
+            validation("Podaj czas trwania æwiczenia i spalone kcal");
+        }
+        else if (isEmpty(time)) {
+            validation("Podaj czas trwania æwiczenia");
+        }
+        else {
+            validation("Podaj iloœæ spalonych kcal");
+        }
+    }
+}

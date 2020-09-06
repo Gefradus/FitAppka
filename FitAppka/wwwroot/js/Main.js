@@ -99,14 +99,6 @@ function onload() {
 
 }
 
-function validation(validMsg) {
-    $("#validationModal").modal('show');
-    document.getElementById("validatMsg").innerHTML = "<p>" + validMsg + "</p>";
-    $("#closeVal").click(function () {
-        $("#validationModal").modal('hide');
-    })
-}
-
 function deleteMealUrl(id, url) {
     $("#deleteModal").modal('show');
     $("#delete").click(function () {

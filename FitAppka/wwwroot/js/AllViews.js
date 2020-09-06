@@ -7,6 +7,4 @@
     }
 }
 
-function hideModal() {
-    location.reload();
-}
+

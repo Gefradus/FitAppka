@@ -62,18 +62,6 @@ function addCardioType(dayID, url) {
     }
 }
 
-function isEmpty(string) {
-    return string.length == 0;
-}
-
-
-function validation(validMsg) {
-    $("#validationModal").modal('show');
-    document.getElementById("validatMsg").innerHTML = "<p>" + validMsg + "</p>";
-    $("#closeVal").click(function () {
-        $("#validationModal").modal('hide');
-    })
-}
 
 function setParams(name, kcalPerMin, cardioTypeId, dayID) {
     if (document.getElementById("cardioTypeId").value != parseInt(cardioTypeId)) {
