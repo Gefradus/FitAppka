@@ -3,24 +3,19 @@ using FitAppka.Repository;
 using System;
 using System.Linq;
 
-
 namespace FitAppka.Service.ServiceImpl
 {
     public class CardioTrainingServiceImpl : ICardioTrainingService
     {
         private readonly ICardioTrainingRepository _cardioRepository;
-        private readonly IOperationsService _operationsService;
         private readonly ICardioTrainingTypeRepository _cardioTypeRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IDayRepository _dayRepository;
-        private readonly FitAppContext _context;
         
 
-        public CardioTrainingServiceImpl(IDayRepository dayRepository, ICardioTrainingRepository cardioRepository, IOperationsService operationsService, 
-            ICardioTrainingTypeRepository cardioTypeRepository, IClientRepository clientRepository, FitAppContext context)
+        public CardioTrainingServiceImpl(IDayRepository dayRepository, ICardioTrainingRepository cardioRepository, 
+            ICardioTrainingTypeRepository cardioTypeRepository, IClientRepository clientRepository)
         {
-            _context = context;
-            _operationsService = operationsService;
             _cardioTypeRepository = cardioTypeRepository;
             _clientRepository = clientRepository;
             _cardioRepository = cardioRepository;
@@ -48,15 +43,17 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-
-        public void AddCardioTrainingType(string name, int kcalPerMin)
+        public void AddCardioTrainingType(int dayID, string name, int kcalPerMin)
         {
-            _cardioTypeRepository.Add(new CardioTrainingType
+            if (_clientRepository.GetLoggedInClientId() == _dayRepository.GetDay(dayID).ClientId)
             {
-                TrainingName = name,
-                KcalPerMin = kcalPerMin,
-                ClientId = _clientRepository.GetLoggedInClient().ClientId
-            });
+                _cardioTypeRepository.Add(new CardioTrainingType
+                {
+                    TrainingName = name,
+                    KcalPerMin = kcalPerMin,
+                    ClientId = _clientRepository.GetLoggedInClient().ClientId
+                });
+            }
         }
 
         public int GetKcalBurnedGoalInDay(int dayID)
@@ -98,12 +95,10 @@ namespace FitAppka.Service.ServiceImpl
 
         public int GiveTodayIfDayNotChosen(int dayID)
         {
-            if (dayID == 0)
-            {
+            if (dayID == 0) {
                 return GetTodayID();
             }
-            else
-            {
+            else {
                 return dayID;
             }
         }
@@ -139,7 +134,7 @@ namespace FitAppka.Service.ServiceImpl
         public void AddDayIfNotExists(DateTime day)
         {
             var client = _clientRepository.GetLoggedInClient();
-            int count = _context.Day.Count(dz => dz.Date == day && dz.ClientId == client.ClientId);
+            int count = _dayRepository.GetAllDays().Count(dz => dz.Date == day && dz.ClientId == client.ClientId);
             if (count == 0)
             {
                 _dayRepository.Add(new Day()

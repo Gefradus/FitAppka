@@ -32,8 +32,6 @@ C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.g
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csproj.CopyComplete
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\FindDay\FindDay.cshtml.g.cs
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Login\Register.cshtml.g.cs
-C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Search\Create.cshtml.g.cs
-C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Search\Index.cshtml.g.cs
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
@@ -836,3 +834,5 @@ C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\AddCardio.cshtml.g.cs
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\AddCardio.cshtml.g.cs
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\AddStrengthTraining.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Product\Create.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Product\Search.cshtml.g.cs

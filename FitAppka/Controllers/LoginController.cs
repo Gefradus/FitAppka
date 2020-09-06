@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FitAppka.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -7,17 +6,19 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using FitAppka.Repository;
+using FitAppka.Service;
 
 namespace FitAppka.Controllers
 {
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class LoginController : Controller
     {
-        
+        private readonly IClientManageService _clientManageService;
         private readonly IClientRepository _clientRepository;
 
-        public LoginController(IClientRepository clientRepository)
+        public LoginController(IClientRepository clientRepository, IClientManageService clientManageService)
         {
+            _clientManageService = clientManageService;
             _clientRepository = clientRepository;
         }
 
@@ -45,10 +46,8 @@ namespace FitAppka.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    string loginOrEmail = model.Login.ToLower();
-                    Client client = _clientRepository.GetAllClients().FirstOrDefault(c => c.Login.ToLower().Equals(loginOrEmail) || c.Email.ToLower().Equals(loginOrEmail));
-                    if (client != null && client.Password.Equals(model.Password)) {
-                        return await SignInAndStart(client.Login);
+                    if (_clientManageService.CheckIfPassCorrect(model)) {
+                        return await SignInAndStart(_clientManageService.GetClientLoginFromModel(model));
                     }
                     else { ModelState.AddModelError(string.Empty, "Nieprawidłowy login i/lub hasło"); }
                 }
@@ -72,15 +71,12 @@ namespace FitAppka.Controllers
                 var clientByEmail = _clientRepository.GetClientByEmail(model.Email);
                 var clientByLogin = _clientRepository.GetClientByLogin(model.Login);
 
-                if (clientByEmail == null && clientByLogin == null)
-                {
-                    if (model.ConfirmPassword == model.Password)
-                    {
+                if (clientByEmail == null && clientByLogin == null) {
+                    if (model.ConfirmPassword == model.Password) {
                         return await AddNewClientAndLogin(model);
                     }
                 }
-                else
-                {
+                else {
                     if (clientByEmail != null) {
                         ModelState.AddModelError(string.Empty, "Istnieje już użytkownik o podanym adresie e-mail");
                     }
@@ -95,21 +91,11 @@ namespace FitAppka.Controllers
             return View(model);
         }
 
-
         private async Task<IActionResult> AddNewClientAndLogin(RegisterModel model)
         {
-            await _clientRepository.AddAsync(new Client()
-            {
-                Login = model.Login,
-                Email = model.Email,
-                Password = model.Password,
-                FirstName = model.FirstName,
-                SecondName = model.SecondName
-            });
-
+            _clientManageService.AddNewClient(model);
             return await SignInAndStart(model.Login);
         }
-
 
         private async Task<IActionResult> SignInAndStart(string login)
         {

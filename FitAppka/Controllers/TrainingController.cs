@@ -93,25 +93,15 @@ namespace FitAppka.Controllers
         [HttpPost]
         public IActionResult AddCardioType(int dayID, string name, int kcalPerMin)
         {
-            if (_clientRepository.GetLoggedInClient().ClientId == _dayRepository.GetDay(dayID).ClientId)
-            {
-                _cardioServices.AddCardioTrainingType(name, kcalPerMin);
-                return RedirectToAction(nameof(AddCardio), new { dayID });
-            }
-
-            return RedirectToAction("Logout", "Login");
+            _cardioServices.AddCardioTrainingType(dayID, name, kcalPerMin);
+            return RedirectToAction(nameof(AddCardio), new { dayID });
         }
 
         [HttpPost]
         public IActionResult AddStrengthTrainingType(int dayID, string name, short sets, short reps, short weight)
         {
-            if (_clientRepository.GetLoggedInClient().ClientId == _dayRepository.GetDay(dayID).ClientId)
-            {
-                _strengthTrainingService.AddStrengthTrainingType(dayID, name, sets, reps, weight);
-                return RedirectToAction(nameof(TrainingPanel), new { dayID });
-            }
-
-            return RedirectToAction("Logout", "Login"); 
+            _strengthTrainingService.AddStrengthTrainingType(dayID, name, sets, reps, weight);
+            return RedirectToAction(nameof(TrainingPanel), new { dayID });
         }
 
         private void CheckIfThisWasSearchedFor(string search) {

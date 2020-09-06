@@ -36,16 +36,19 @@ namespace FitAppka
             });
 
             services.AddHttpContextAccessor();
-            AddMyServices(services);
+            ServicesAddScoped(services);
             RepositoriesAddScoped(services);
         }
 
-        private void AddMyServices(IServiceCollection services)
+        private void ServicesAddScoped(IServiceCollection services)
         {
             services.AddScoped<ISettingsService, SettingsServiceImpl>();
             services.AddScoped<IStrengthTrainingService, StrengthTrainingServiceImpl>();
             services.AddScoped<ICardioTrainingService, CardioTrainingServiceImpl>();
             services.AddScoped<IHomePageService, HomePageServiceImpl>();
+            services.AddScoped<IFindDayService, FindDayServiceImpl>();
+            services.AddScoped<IClientManageService, ClientManageServiceImpl>();
+            services.AddScoped<IProductManageService, ProductManageServiceImpl>();
         }
 
         private void RepositoriesAddScoped(IServiceCollection services)

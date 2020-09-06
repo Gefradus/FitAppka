@@ -20,12 +20,10 @@ namespace NowyDotnecik.Controllers
         private readonly IDayRepository _dayRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IHomePageService _homeService;
-        private readonly IOperationsService _operationsService;
 
         public HomeController(FitAppContext context, IWebHostEnvironment env, IHomePageService homePageService,
-            IDayRepository dayRepository, IClientRepository clientRepository, IOperationsService operationsService)
+            IDayRepository dayRepository, IClientRepository clientRepository)
         {
-            _operationsService = operationsService;
             _homeService = homePageService;
             _dayRepository = dayRepository;
             _clientRepository = clientRepository;
@@ -37,7 +35,7 @@ namespace NowyDotnecik.Controllers
         public async Task<IActionResult> Home(DateTime daySelected)
         {
             _homeService.Home(daySelected);
-            SendDataToView(daySelected);
+            SendAllDataToView(daySelected);
             return View(await _context.Meal.Include(m => m.Day).Include(p => p.Product).
                 Where(m => m.DayId == _dayRepository.GetClientDayByDate(daySelected, _clientRepository.GetLoggedInClientId()).DayId).ToListAsync());
         }
@@ -72,12 +70,10 @@ namespace NowyDotnecik.Controllers
             DateTime daySelected = _dayRepository.GetDayDateTime(dayID);
 
             if (choice == 1) {
-                daySelected = daySelected.AddDays(-1);
-                return RedirectToAction(nameof(Home), new { daySelected });
+                return RedirectToAction(nameof(Home), new { daySelected = daySelected.AddDays(-1) });
             }
             else {
-                daySelected = daySelected.AddDays(1);
-                return RedirectToAction(nameof(Home), new { daySelected });
+                return RedirectToAction(nameof(Home), new { daySelected = daySelected.AddDays(1) });
             }
         }
 
@@ -88,15 +84,13 @@ namespace NowyDotnecik.Controllers
         }
 
         [HttpPost]
-        [ActionName("Water")]
         public IActionResult AddWater(int dayID)
         {
             _homeService.AddWater(dayID, HttpContext.Request.Form["AddedWater"]);
             return RedirectToAction(nameof(Home), new { daySelected = _dayRepository.GetDayDateTime(dayID) });
         }
 
-        [HttpPut]
-        [ActionName("Water")]
+        [HttpPost]
         public IActionResult EditWater(int dayID)
         {
             _homeService.EditWater(dayID, HttpContext.Request.Form["EditedWater"]);
@@ -124,15 +118,16 @@ namespace NowyDotnecik.Controllers
             return Json(true);
         }
 
-        private void SendDataToView(DateTime daySelected)
+        private void SendAllDataToView(DateTime daySelected)
         {
             int clientID = _clientRepository.GetLoggedInClientId();
             Day day = _dayRepository.GetClientDayByDate(daySelected, clientID);
+
             SendBasicData(daySelected, clientID, day);
-            CheckIfAdmin(clientID);
-            CountProgress(day);
-            CheckMealsOfTheDay(day);
-            SendInfoAboutMealsToView(daySelected, clientID);
+            SendInfoIfIsAdminClient(clientID);
+            SendInfoAboutMacronutritions(day);
+            SendInfoAboutMealsOfTheDay(day);
+            SendInfoAboutCaloriesInMeals(daySelected, clientID);
         }
 
         private void SendBasicData(DateTime daySelected, int clientID, Day day)
@@ -146,30 +141,23 @@ namespace NowyDotnecik.Controllers
             ViewData["water"] = day.WaterDrunk;
         }
 
-        private void CountProgress(Day day)
+        private void SendInfoAboutMacronutritions(Day day)
         {
-            var daySelected = (DateTime)day.Date;
-            var meals = _context.Meal.Where(m => m.Day == day);
-
-            ViewData["calories"] = _homeService.SumAllKcalInDay(daySelected);
-            ViewData["proteins"] = _homeService.SumAllProteinsInDay(daySelected);
-            ViewData["carbs"] = _homeService.SumAllCarbsInDay(daySelected);
-            ViewData["fats"] = _homeService.SumAllFatsInDay(daySelected);
-            ViewData["calories0"] = _operationsService.Round(_homeService.SumAllKcalInDay(daySelected));
-            ViewData["proteins0"] = _operationsService.Round(_homeService.SumAllProteinsInDay(daySelected));
-            ViewData["carbs0"] = _operationsService.Round(_homeService.SumAllCarbsInDay(daySelected));
-            ViewData["fats0"] = _operationsService.Round(_homeService.SumAllFatsInDay(daySelected));
-            ViewData["calorieTarget"] = day.CalorieTarget;
-            ViewData["proteinTarget"] = day.ProteinTarget;
-            ViewData["fatTarget"] = day.FatTarget;
-            ViewData["carbsTarget"] = day.CarbsTarget;
-            ViewData["%calories"] = _homeService.CountPercentageOfTarget(_homeService.SumAllKcalInDay(daySelected), day.CalorieTarget);
-            ViewData["%carbs"] = _homeService.CountPercentageOfTarget(_homeService.SumAllCarbsInDay(daySelected), day.CarbsTarget);
-            ViewData["%fats"] = _homeService.CountPercentageOfTarget(_homeService.SumAllFatsInDay(daySelected), day.FatTarget);
-            ViewData["%proteins"] = _homeService.CountPercentageOfTarget(_homeService.SumAllProteinsInDay(daySelected), day.ProteinTarget);
+            CountMacronutrionNumbers(_homeService.SumAllKcalInDay((DateTime)day.Date), "calories", day.CalorieTarget);
+            CountMacronutrionNumbers(_homeService.SumAllProteinsInDay((DateTime)day.Date), "proteins", day.CalorieTarget);
+            CountMacronutrionNumbers(_homeService.SumAllCarbsInDay((DateTime)day.Date), "carbs", day.CalorieTarget);
+            CountMacronutrionNumbers(_homeService.SumAllFatsInDay((DateTime)day.Date), "fats", day.CalorieTarget);
         }
 
-        private void CheckMealsOfTheDay(Day day)
+        private void CountMacronutrionNumbers(double sumOfMacronutrion, string name, int? target)
+        {
+            ViewData[name] = sumOfMacronutrion;
+            ViewData[name + "0"] = _homeService.Round(sumOfMacronutrion);
+            ViewData[name + "Target"] = target;
+            ViewData["%" + name] = _homeService.CountPercentageOfTarget(sumOfMacronutrion, target);
+        }
+
+        private void SendInfoAboutMealsOfTheDay(Day day)
         {
             ViewData["breakfast"] = day.Breakfast;
             ViewData["lunch"] = day.Lunch;
@@ -179,7 +167,7 @@ namespace NowyDotnecik.Controllers
             ViewData["supper"] = day.Supper;
         }
 
-        private void SendInfoAboutMealsToView(DateTime daySelected, int clientID)
+        private void SendInfoAboutCaloriesInMeals(DateTime daySelected, int clientID)
         {
             ViewData["breakfastKcal"] = _homeService.CountCalories(1, daySelected, clientID);
             ViewData["lunchKcal"] = _homeService.CountCalories(2, daySelected, clientID);
@@ -189,15 +177,12 @@ namespace NowyDotnecik.Controllers
             ViewData["supperKcal"] = _homeService.CountCalories(6, daySelected, clientID);
         }
 
-
-        private void CheckIfAdmin(int clientID)
+        private void SendInfoIfIsAdminClient(int clientID)
         {
-            if (_clientRepository.GetClientById(clientID).IsAdmin)
-            {
+            if (_clientRepository.GetClientById(clientID).IsAdmin) {
                 ViewData["admin"] = 1;
             }
-            else
-            {
+            else {
                 ViewData["admin"] = 0;
             }
         }

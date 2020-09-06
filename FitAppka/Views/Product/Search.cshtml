@@ -143,7 +143,7 @@
             <div class="row no-gutters" style="margin-left: 0 !important; margin-top: -15px; width: 100%">
                 <div class="col-12 cent" style="width: 100%;">
                     <div>
-                        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+                        @using (Html.BeginForm("Search", "Product", FormMethod.Get))
                         {
                             <div style="height: 24px; padding-top: 10px; margin-left: -20px; font-size:14px">@Html.ValidationSummary(false, "", new { @class = "text-danger" })</div>
                             <div style="margin-top: -3px">

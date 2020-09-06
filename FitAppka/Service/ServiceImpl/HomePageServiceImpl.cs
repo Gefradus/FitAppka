@@ -2,6 +2,7 @@
 using FitAppka.Repository;
 using Microsoft.Extensions.Primitives;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FitAppka.Service.ServicesImpl
@@ -12,14 +13,12 @@ namespace FitAppka.Service.ServicesImpl
         private readonly IDayRepository _dayRepository;
         private readonly IMealRepository _mealRepository;
         private readonly IProductRepository _productRepository;
-        private readonly IOperationsService _operationsService;
         private readonly FitAppContext _context;
 
-        public HomePageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository, IOperationsService operationsService,
+        public HomePageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository,
             IMealRepository mealRepository, IProductRepository productRepository, FitAppContext context)
         {
             _context = context;
-            _operationsService = operationsService;
             _productRepository = productRepository;
             _mealRepository = mealRepository;
             _dayRepository = dayRepository;
@@ -64,8 +63,9 @@ namespace FitAppka.Service.ServicesImpl
         }
 
 
-        public bool IsItFirstLaunch(){
-            return _clientRepository.GetLoggedInClient().CarbsTarget == null;
+        public bool IsItFirstLaunch() {
+            Client client = _clientRepository.GetLoggedInClient();
+            return client.CarbsTarget == null || client.ProteinTarget == null || client.FatTarget == null || client.CalorieGoal == null;
         }
 
         private IQueryable<Meal> GetMealsOfTheDay(DateTime dayDate){
@@ -73,21 +73,20 @@ namespace FitAppka.Service.ServicesImpl
         }
 
         public double SumAllKcalInDay(DateTime daySelected){
-            return _operationsService.SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Calories).ToList());
+            return SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Calories).ToList());
         }
 
         public double SumAllProteinsInDay(DateTime daySelected){
-            return _operationsService.SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Proteins).ToList());
+            return SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Proteins).ToList());
         }
 
         public double SumAllCarbsInDay(DateTime daySelected){
-            return _operationsService.SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Calories).ToList());
+            return SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Calories).ToList());
         }
 
         public double SumAllFatsInDay(DateTime daySelected){
-            return _operationsService.SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Fats).ToList());
+            return SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Fats).ToList());
         }
-
 
         public int CountPercentageOfTarget(double var, int? target){
             return (int)(var / target * 100);
@@ -195,22 +194,37 @@ namespace FitAppka.Service.ServicesImpl
         {
             AddDayIfNotExists(daySelected, clientID);
             var meals = _context.Meal.Where(m => m.InWhichMealOfTheDay == whichMeal && m.Day.ClientId == clientID && m.Day.Date == daySelected);
-            return _operationsService.Round((double)_operationsService.SumAllListItems(meals.Select(m => m.Calories).ToList()));
+            return Round((double) SumAllListItems(meals.Select(m => m.Calories).ToList()));
         }
 
         private void SetTheMeal(Meal meal, DateTime daySelected)
         {
             Product product = _productRepository.GetProduct(meal.ProductId);
 
-            meal.Calories = _operationsService.RoundDouble(meal.Grammage * product.Calories / 100);
-            meal.Proteins = _operationsService.RoundDouble(meal.Grammage * product.Proteins / 100);
-            meal.Carbohydrates = _operationsService.RoundDouble(meal.Grammage * product.Carbohydrates / 100);
-            meal.Fats = _operationsService.RoundDouble(meal.Grammage * product.Fats / 100);
+            meal.Calories = RoundDouble(meal.Grammage * product.Calories / 100);
+            meal.Proteins = RoundDouble(meal.Grammage * product.Proteins / 100);
+            meal.Carbohydrates = RoundDouble(meal.Grammage * product.Carbohydrates / 100);
+            meal.Fats = RoundDouble(meal.Grammage * product.Fats / 100);
 
             AddDayIfNotExists(daySelected, _clientRepository.GetLoggedInClientId());
             meal.DayId = _dayRepository.GetClientDayByDate(daySelected, _clientRepository.GetLoggedInClientId()).DayId;
         }
 
+        public decimal Round(double number)
+        {
+            return Math.Round((decimal)number, 0, MidpointRounding.AwayFromZero);
+        }
 
+        private double RoundDouble(double? number)
+        {
+            return (double)Math.Round((decimal)number, 1, MidpointRounding.AwayFromZero);
+        }
+
+        public double SumAllListItems(List<double> list)
+        {
+            double var = 0;
+            foreach (var item in list) { var += item; }
+            return var;
+        }
     }
 }
