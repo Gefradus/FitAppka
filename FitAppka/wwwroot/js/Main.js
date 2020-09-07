@@ -89,6 +89,14 @@ function hideModal() {
     location.reload();
 }
 
+function hideChart(proteins, carbs, fats) {
+    if (!(proteins == 0 && carbs == 0 && fats == 0)) {
+        document.getElementById("chartArea").style.display = "block";
+    }
+    else {
+        document.getElementById("waterHeader").style.borderTopWidth = 0;
+    }
+}
 
 function onload() {
     showWater();

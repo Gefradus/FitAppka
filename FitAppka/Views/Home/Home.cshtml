@@ -13,33 +13,18 @@
         function overflow() { colorItRed(@ViewData["%proteins"], @ViewData["%carbs"], @ViewData["%fats"], @ViewData["%calories"]); }
         function deleteMeal(id) { deleteMealUrl(id, '@Url.Action("Meal","Home")'); }
         function showEditModal(id) { showEditModalUrl(id, '@Url.Action("Meal","Home")'); }
-        function hide() {
-            if (!(@ViewData["proteins0"] == 0 && @ViewData["carbs0"] == 0 && @ViewData["fats0"] == 0)) {
-                document.getElementById("chartArea").style.display = "block";
-            }
-            else {
-                document.getElementById("waterHeader").style.borderTopWidth = 0;
-            }
-        }
+        function hide() { hideChart(@ViewData["proteins0"], @ViewData["carbs0"], @ViewData["fats0"]); }
     </script>
     <script src="~/js/Main.js"></script>
 </head>
 
 <body onload="onload()">
-
-    @foreach (var item in Model)
-    {
-        if (item.Product.PhotoPath != null)
-        {
-            <script>
-                pathArray.push('@item.Product.PhotoPath');
-            </script>
+    @foreach (var item in Model) {
+        if (item.Product.PhotoPath != null) {
+            <script>pathArray.push('@item.Product.PhotoPath');</script>
         }
-        else
-        {
-            <script>
-                pathArray.push('null');
-            </script>
+        else {
+            <script>pathArray.push('null');</script>
         }
         <script>
             IDarray.push('@item.MealId');
@@ -52,10 +37,8 @@
         </script>
     }
 
-
     <header>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav" style="text-align: center">
-
             <div id="left">
                 <div class="mr-auto mt-3">
                     <a class="nav-link ml-sm-3 ml-md-4 ml-lg-5 mt-2 mt-md-0" asp-action="Start"><img style="height: 50px; width:185px; margin-top: -15px" src="~/img/logorozowe.png" /></a>
@@ -498,7 +481,9 @@
                     <div id="showWater" class="container">
                         <div class="row" style="margin-bottom: 10px">
                             <div id="water">@ViewData["water"] ml</div>
-                            <div id="divWyswietlWode"><button class="button" onclick="editWater()"><img style="height:15px; width:15px;" src="~/img/pen.png"></button></div>
+                            <div id="divWyswietlWode">
+                                <button class="button" onclick="editWater()"><img style="height:15px; width:15px;" src="~/img/pen.png"></button>
+                            </div>
                         </div>
                     </div>
 
@@ -506,8 +491,14 @@
                         <form method="post">
                             <div class="container">
                                 <div class="row" style="margin-bottom: 10px">
-                                    <div id="editingWater"><input id="EditedWater" name="EditedWater" type="number" min="0" max="10000" value="@ViewData["water"]" /></div>
-                                    <div class="divDodEdyWode"><button class="button" asp-action="EditWater" asp-route-dayID="@ViewData["dayID"]"><img style="height:20px; width:20px; padding-top:2px;" src="~/img/save.png"></button></div>
+                                    <div id="editingWater">
+                                        <input id="EditedWater" name="EditedWater" type="number" min="0" value="@ViewData["water"]" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" />
+                                    </div>
+                                    <div class="divDodEdyWode">
+                                        <button class="button" asp-action="EditWater" asp-route-dayID="@ViewData["dayID"]">
+                                            <img style="height:20px; width:20px; padding-top:2px;" src="~/img/save.png">
+                                         </button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -517,7 +508,9 @@
                     <form method="post">
                         <div class="container">
                             <div style="padding-bottom: 30px" class="row">
-                                <div id="addingWater"><input id="AddedWater" name="AddedWater" type="number" min="1" max="10000" /></div>
+                                <div id="addingWater">
+                                    <input id="AddedWater" name="AddedWater" type="number" min="1" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 100000)"/>
+                                </div>
                                 <div id="ml">ml</div>
                                 <div class="divDodEdyWode"><button id="dodajWode" class="btn" asp-action="AddWater" asp-route-dayID="@ViewData["dayID"]" value="dodajWode">Dodaj</button></div>
                             </div>
