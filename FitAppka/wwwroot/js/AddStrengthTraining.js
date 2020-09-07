@@ -3,22 +3,8 @@
 }
 
 function addTraining() {
-    var sets = document.getElementById("sets").value;
-    var reps = document.getElementById("reps").value;
-
-    if (!isEmpty(sets) && !isEmpty(reps)) {
+    if (strengthTrainingVal()) {
         document.getElementById("formAdd").submit();
-    }
-    else {
-        if (isEmpty(sets) && isEmpty(reps)) {
-            validation("Podaj liczbę serii i powtórzeń");
-        }
-        else if (isEmpty(sets)) {
-            validation("Podaj liczbę serii");
-        }
-        else {
-            validation("Podaj liczbę powtórzeń");
-        }
     }
 }
 

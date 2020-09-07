@@ -73,37 +73,37 @@ function deleteCardio(url) {
     });
 }
 
-function editCardioVal(url, time, burnedKcal) {
-    $.ajax({
-        type: 'PUT',
-        url: url,
-        data: {
-            id: parseInt($("#editingCardioID").val()),
-            time: parseInt(time),
-            burnedKcal: parseInt(burnedKcal)
-        },
-        success: function () {
-            location.reload();
-        }
-    });
+function editCardio(url) {
+    if (cardioVal()) {
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            data: {
+                id: parseInt($("#editingCardioID").val()),
+                time: parseInt($("#timeInMinutes").val()),
+                burnedKcal: parseInt($("#burnedKcal").val())
+            },
+            success: function () {
+                location.reload();
+            }
+        });
+    }
 }
 
-function editCardio(url) {
-    var time = document.getElementById("timeInMinutes").value;
-    var burnedKcal = document.getElementById("burnedKcal").value;
-
-    if (!isEmpty(time) && !isEmpty(burnedKcal)) {
-        editCardioVal(url, time, burnedKcal);
-    }
-    else {
-        if (isEmpty(time) && isEmpty(burnedKcal)) {
-            validation("Podaj czas trwania æwiczenia i spalone kcal");
-        }
-        else if (isEmpty(time)) {
-            validation("Podaj czas trwania æwiczenia");
-        }
-        else {
-            validation("Podaj iloœæ spalonych kcal");
-        }
+function editStrengthTraining(url) {
+    if (strengthTrainingVal()) {
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            data: {
+                id: parseInt($("#editingStrengthTrainingID").val()),
+                sets: parseInt($("#sets").val()),
+                reps: parseInt($("#reps").val()),
+                weight: parseInt($("#weight").val())
+            },
+            success: function () {
+                location.reload();
+            }
+        });
     }
 }

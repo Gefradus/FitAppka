@@ -9,7 +9,7 @@
     <link href="~/css/Datepicker.css" rel="stylesheet" />
     <link href="~/lib/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    
+    <script src="~/js/Validation.js"></script>
 </head>
 <body onload="colorEverySecondRow();">
     <header>
@@ -97,12 +97,12 @@
                         <div id="cardioName"></div>
                         <div id="time">
                             <div>Czas trwania:</div>
-                            <input id="timeInMinutes" type="number" name="timeInMinutes" min="1" max="10000" step="1" oninput="validity.valid||(value=''); changeCalorie()">
+                            <input id="timeInMinutes" type="number" name="timeInMinutes" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" oninput="changeCalorie()">
                             <div style="font-size: 13px; margin-top: 5px; font-weight: 600">min.</div>
                         </div>
                         <div id="kcal" class="param">
                             <div>Spalone kalorie:</div>
-                            <input id="burnedKcal" type="number" step="1" name="burnedKcal" />
+                            <input id="burnedKcal" type="number" name="burnedKcal" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 1000000)"/>
                             <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kcal</div>
                         </div>
                         <div id="saveCardio" class="cent cb">
@@ -340,7 +340,7 @@
         });
     </script>
     <script src="~/js/Validation.js"></script>
+    <script src="~/js/TrainingValidation.js"></script>
     <script src="~/js/TrainingPanel.js"></script>
-
 </body>
 </html>

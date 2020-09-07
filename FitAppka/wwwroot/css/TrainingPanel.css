@@ -28,6 +28,15 @@
     color: white
 }
 
+#cardioName, #strengthName {
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: -10px
+}
+
+
 #delete {
     border-radius: 10%;
     background-color: #ce1a22;
@@ -92,8 +101,8 @@
 }
 
 .trainingName{
-    height: 100%;
-    align-items: center;
+/*    height: 100%;
+    align-items: center;*/
 }
 
 .trainingName:hover {

@@ -3,43 +3,32 @@
 }
 
 function addCardioTraining() {
-    var time = document.getElementById("timeInMinutes").value;
-    var burnedKcal = document.getElementById("burnedKcal").value;
-
-    if (!isEmpty(time) && !isEmpty(burnedKcal)) {
+    if (cardioVal()) {
         document.getElementById("formAdd").submit();
-    }
-    else
-    {
-        if (isEmpty(time) && isEmpty(burnedKcal)) {
-            validation("Podaj czas trwania ćwiczenia i spalone kcal");
+    }  
+}
+
+function addCardioTypeVal(dayID, url, name, kcalPerMin) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: { dayID: dayID, name: name, kcalPerMin: kcalPerMin },
+        success: function () {
+            location.reload();
         }
-        else if (isEmpty(time)){
-            validation("Podaj czas trwania ćwiczenia");
-        }
-        else{
-            validation("Podaj ilość spalonych kcal");
-        }
-    }
+    });
 }
 
 function addCardioType(dayID, url) {
 
-    var cardioTypeName = document.getElementById("cardioTypeName").value;
+    var name = document.getElementById("cardioTypeName").value;
     var expenditure = document.getElementById("expenditure").value;
-    var expenditureInteger = parseInt(expenditure);
+    var expenditureInt = parseInt(expenditure);
 
-    if (!isEmpty(cardioTypeName) && !isEmpty(expenditure)) {
-        if (!isNaN(expenditureInteger)) {
-            if (cardioTypeName.length >= 3) {
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: { dayID: dayID, name: cardioTypeName, kcalPerMin: expenditureInteger },
-                    success: function () {
-                        location.reload();
-                    }
-                });
+    if (!isEmpty(name) && !isEmpty(expenditure)) {
+        if (!isNaN(expenditureInt)) {
+            if (name.length >= 3) {
+                addCardioTypeVal(dayID, url, name, kcalPerMin);
             }
             else {
                 validation("Nazwa ćwiczenia musi wynosić min. 3 znaki");
@@ -50,10 +39,10 @@ function addCardioType(dayID, url) {
         }
     }
     else {
-        if (isEmpty(cardioTypeName) && isEmpty(expenditure)) {
+        if (isEmpty(name) && isEmpty(expenditure)) {
             validation("Podaj nazwę ćwiczenia i wydatek kcal/min.");
         }
-        else if (isEmpty(cardioTypeName)) {
+        else if (isEmpty(name)) {
             validation("Podaj nazwę ćwiczenia.");
         }
         else {
