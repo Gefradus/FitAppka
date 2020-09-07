@@ -84,16 +84,18 @@ namespace NowyDotnecik.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddWater(int dayID)
+        [ActionName("Water")]
+        public JsonResult AddWater(int dayID, int addedWater)
         {
-            _homeService.AddWater(dayID, HttpContext.Request.Form["AddedWater"]);
+            _homeService.AddWater(dayID, addedWater);
             return Json(true);
         }
 
-        [HttpPost]
-        public JsonResult EditWater(int dayID)
+        [HttpPut]
+        [ActionName("Water")]
+        public JsonResult EditWater(int dayID, int editedWater)
         {
-            _homeService.EditWater(dayID, HttpContext.Request.Form["EditedWater"]);
+            _homeService.EditWater(dayID, editedWater);
             return Json(true);
         }
 

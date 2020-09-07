@@ -482,40 +482,38 @@
                         <div class="row" style="margin-bottom: 10px">
                             <div id="water">@ViewData["water"] ml</div>
                             <div id="divWyswietlWode">
-                                <button class="button" onclick="editWater()"><img style="height:15px; width:15px;" src="~/img/pen.png"></button>
+                                <button class="button" onclick="editingWater()"><img style="height:15px; width:15px;" src="~/img/pen.png"></button>
                             </div>
                         </div>
                     </div>
 
                     <div id="waterEdit" style="display:none">
-                        <form method="post">
-                            <div class="container">
-                                <div class="row" style="margin-bottom: 10px">
-                                    <div id="editingWater">
-                                        <input id="EditedWater" name="EditedWater" type="number" min="0" value="@ViewData["water"]" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" />
-                                    </div>
-                                    <div class="divDodEdyWode">
-                                        <button class="button" asp-action="EditWater" asp-route-dayID="@ViewData["dayID"]">
-                                            <img style="height:20px; width:20px; padding-top:2px;" src="~/img/save.png">
-                                         </button>
-                                    </div>
+                        <div class="container">
+                            <div class="row" style="margin-bottom: 10px">
+                                <div id="editingWater">
+                                    <input id="EditedWater" name="EditedWater" type="number" min="0" value="@ViewData["water"]" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" />
+                                </div>
+                                <div class="divDodEdyWode">
+                                    <button type="button" class="button" onclick="editWater('@Url.Action("Water", "Home")', @ViewData["dayID"])">
+                                        <img style="height:20px; width:20px; padding-top:2px;" src="~/img/save.png">
+                                    </button>
                                 </div>
                             </div>
-                        </form>
+                        </div>    
                     </div>
 
                     <div style="clear:both" id="target">Celuj dziś w wypicie przynajmniej @ViewData["caloriesTarget"] mililitrów wody.</div>
-                    <form method="post">
                         <div class="container">
                             <div style="padding-bottom: 30px" class="row">
                                 <div id="addingWater">
                                     <input id="AddedWater" name="AddedWater" type="number" min="1" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 100000)"/>
                                 </div>
                                 <div id="ml">ml</div>
-                                <div class="divDodEdyWode"><button id="dodajWode" class="btn" asp-action="AddWater" asp-route-dayID="@ViewData["dayID"]" value="dodajWode">Dodaj</button></div>
+                                <div class="divDodEdyWode">
+                                    <button id="dodajWode" type="button" class="btn" onclick="addWater('@Url.Action("Water", "Home")', @ViewData["dayID"])" value="dodajWode">Dodaj</button>
+                                </div>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
 

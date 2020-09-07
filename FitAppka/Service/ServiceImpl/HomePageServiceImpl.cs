@@ -117,14 +117,13 @@ namespace FitAppka.Service.ServicesImpl
             }
         }
 
-        public void AddWater(int dayID, StringValues form)
+        public void AddWater(int dayID, int addedWater)
         {
             Day day = _dayRepository.GetDay(dayID);
             if (day.ClientId == _clientRepository.GetLoggedInClientId())
             {
                 try
                 {
-                    int addedWater = int.Parse(form);
                     day.WaterDrunk += addedWater;
                     _dayRepository.Update(day);
                 }
@@ -132,14 +131,13 @@ namespace FitAppka.Service.ServicesImpl
             }
         }
 
-        public void EditWater(int dayID, StringValues form)
+        public void EditWater(int dayID, int editedWater)
         {
             Day day = _dayRepository.GetDay(dayID);
             if (day.ClientId == _clientRepository.GetLoggedInClientId())
             {
                 try
                 {
-                    int editedWater = int.Parse(form);
                     day.WaterDrunk = editedWater;
                     _dayRepository.Update(day);
                 }

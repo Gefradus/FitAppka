@@ -30,7 +30,6 @@ $(document).scroll(function () {
 $(document).ready(function () {
     if (localStorage['page'] == document.URL) {
         $('html, body').animate({ scrollTop: localStorage['scrollTop'] }, 'slow');
-        // $('html, body').scrollTop(localStorage['scrollTop']);
     }
 });
 
@@ -80,13 +79,9 @@ function hidePanel(id) {
     }
 }
 
-function editWater() {
+function editingWater() {
     document.getElementById("showWater").hidden = true;
     document.getElementById("waterEdit").style.display = "block";
-}
-
-function hideModal() {
-    location.reload();
 }
 
 function hideChart(proteins, carbs, fats) {
@@ -104,7 +99,6 @@ function onload() {
     overflow();
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(createChart);
-
 }
 
 function deleteMealUrl(id, url) {
@@ -132,6 +126,33 @@ function giveIterFromID(id){
     return iter;
 }
 
+function addWater(url, dayID) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: {
+            dayID: dayID,
+            addedWater: parseInt($("#AddedWater").val())
+        },
+        success: function () {
+            location.reload();
+        }
+    });
+}
+
+function editWater(url, dayID) {
+    $.ajax({
+        type: 'PUT',
+        url: url,
+        data: {
+            dayID: dayID,
+            editedWater: parseInt($("#EditedWater").val())
+        },
+        success: function () {
+            location.reload();
+        }
+    });
+}
 
 function showEditModalUrl(id, url) {
     prepareModalData(id);
@@ -146,20 +167,24 @@ function showEditModalUrl(id, url) {
             validation("Gramatura posiłku nie może przekraczać 9999 gram.");
         }
         else if (gram >= 1 && gram <= 9999) {
-            $.ajax({
-                type: 'PUT',
-                url: url,
-                data: {
-                    id: $("#mealID").val(),
-                    grammage: gram
-                },
-                success: function () {
-                    location.reload();
-                }
-            });
+            editMeal(url, gram);
         }
         else {
             validation("Należy podać liczbę");
+        }
+    });
+}
+
+function editMeal(url, gram) {
+    $.ajax({
+        type: 'PUT',
+        url: url,
+        data: {
+            id: $("#mealID").val(),
+            grammage: gram
+        },
+        success: function () {
+            location.reload();
         }
     });
 }
@@ -184,10 +209,6 @@ function prepareModalData(id) {
     document.getElementById("fatsHeader").innerHTML = 'Tł.: ' + fatsArray[iter] + ' g,';
     document.getElementById("carbsHeader").innerHTML = 'Węgl.: ' + carbsArray[iter] + ' g';
 }
-
-$("#editModal").on('hide.bs.modal', function () {
-    location.reload();
-});
 
 
 var IDarray = [];

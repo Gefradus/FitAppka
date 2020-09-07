@@ -10,8 +10,8 @@ namespace FitAppka.Service
         public void EditMeal(int id, int grammage);
         public void DeleteMeal(int id);
         public void AddMeal(int inWhich, int dayID, int grammage, int productID);
-        public void AddWater(int dayID, StringValues form);
-        public void EditWater(int dayID, StringValues form);
+        public void AddWater(int dayID, int addedWater);
+        public void EditWater(int dayID, int editedWater);
         public bool IsItFirstLaunch();
         public int CountPercentageOfTarget(double var, int? target);
         public decimal Round(double number);
