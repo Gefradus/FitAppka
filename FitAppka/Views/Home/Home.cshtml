@@ -38,7 +38,7 @@
     }
 
     <div id="mealID" hidden></div>
-    <div id="waterCount" value="@ViewData["water"]" hidden></div>
+    <input type="hidden" id="waterCount" value="@ViewData["water"]" />
 
     <header>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav" style="text-align: center">
@@ -511,7 +511,7 @@
                                 </div>
                                 <div id="ml">ml</div>
                                 <div class="divDodEdyWode">
-                                    <button id="dodajWode" type="button" class="btn" onclick="addWater('@Url.Action("Water", "Home")', @ViewData["dayID"], @ViewData["water"], @ViewData["caloriesTarget"])" value="dodajWode">Dodaj</button>
+                                    <button id="dodajWode" type="button" class="btn" onclick="addWater('@Url.Action("Water", "Home")', @ViewData["dayID"], @ViewData["caloriesTarget"])" value="dodajWode">Dodaj</button>
                                 </div>
                             </div>
                         </div>

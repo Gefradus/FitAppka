@@ -133,7 +133,8 @@ function giveIterFromID(id){
     return iter;
 }
 
-function addWater(url, dayID, water, target) {
+function addWater(url, dayID, target) {
+    var water = parseInt($("#waterCount").val())
     var addedWater = parseInt($("#AddedWater").val());
 
     $.ajax({
@@ -145,7 +146,9 @@ function addWater(url, dayID, water, target) {
         },
         success: function () {
             //location.reload();
-            document.getElementById("water").innerHTML = parseInt(addedWater + water) + " ml";
+            var sum = parseInt(addedWater + water);
+            document.getElementById("waterCount").value = sum;
+            document.getElementById("water").innerHTML = sum + " ml";
             glass(water, target);
         }
     });
