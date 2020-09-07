@@ -145,7 +145,6 @@ function addWater(url, dayID, target) {
             addedWater: addedWater
         },
         success: function () {
-            //location.reload();
             var sum = parseInt(addedWater + water);
             document.getElementById("waterCount").value = sum;
             document.getElementById("water").innerHTML = sum + " ml";
@@ -165,7 +164,6 @@ function editWater(url, dayID, target) {
             editedWater: editedWater
         },
         success: function () {
-            //location.reload();
             document.getElementById("water").innerHTML = editedWater + " ml";
             glass(water, target);
             closeEditingWater(editedWater);

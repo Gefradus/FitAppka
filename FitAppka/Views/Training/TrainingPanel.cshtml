@@ -208,57 +208,54 @@
                 }
             }
 
-            if (cardioCount == 0)
-            {
-                <div class="col-12 cent py-4" style="font-size: 18px; background: rgba(247, 247, 247, 0.7)">
+            if (cardioCount == 0) {
+                <div class="col-12 cent py-4" style="font-size: 18px; background: rgba(247, 247, 247, 0.7); margin-bottom: 25px">
                     Aktualnie brak treningów cardio w tym dniu
                 </div>
                 <script>
                     $("#all").css('border', '0px');
                 </script>
+            }
+            else { 
+                <div class="row no-gutters">
+                    <div class="col-12" style="border-top: 1px dotted #656565"></div>
+                </div>
 
+                <div class="row no-gutters goalRow" style="border-top:0; font-weight: 600">
+                    <div class="col-5 cent col py-1" style="border-left: 0">Łącznie:</div>
+                    <div class="col-7 container">
+                        <div class="row no-gutters">
+                            <div class="col py-1 column">
+                                @ViewData["cardioTime"]
+                            </div>
+                            <div class="col py-1 column">
+                                @ViewData["burnedKcal"]
+                            </div>
+                            <div class="col btnArea">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row no-gutters goalRow" style="border-top:0; font-weight: 600; margin-bottom: 1.5rem">
+                    <div class="col-5 cent col py-1" style="border-left: 0">Cel dnia:</div>
+                    <div class="col-7 container">
+                        <div class="row no-gutters" style="height: 100%">
+                            <div class="col py-1 column">
+                                @ViewData["timeTarget"]
+                            </div>
+                            <div class="col py-1 column">
+                                @ViewData["kcalTarget"]
+                            </div>
+                            <div class="col btnArea">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
         }
-
-
-
-        <div class="row no-gutters">
-            <div class="col-12" style="border-top: 1px dotted #656565"></div>
-        </div>
-
-        <div class="row no-gutters goalRow" style="border-top:0; font-weight: 600">
-            <div class="col-5 cent col py-1" style="border-left: 0">Łącznie:</div>
-            <div class="col-7 container">
-                <div class="row no-gutters">
-                    <div class="col py-1 column">
-                        @ViewData["cardioTime"]
-                    </div>
-                    <div class="col py-1 column">
-                        @ViewData["burnedKcal"]
-                    </div>
-                    <div class="col btnArea">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row no-gutters goalRow" style="border-top:0; font-weight: 600; margin-bottom: 1.5rem">
-            <div class="col-5 cent col py-1" style="border-left: 0">Cel dnia:</div>
-            <div class="col-7 container">
-                <div class="row no-gutters" style="height: 100%">
-                    <div class="col py-1 column">
-                        @ViewData["timeTarget"]
-                    </div>
-                    <div class="col py-1 column">
-                        @ViewData["kcalTarget"]
-                    </div>
-                    <div class="col btnArea">
-
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div style="display: flex">
             <div class="trainTypeHeader">Treningi siłowe:</div>
