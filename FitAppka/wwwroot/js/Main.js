@@ -80,8 +80,15 @@ function hidePanel(id) {
 }
 
 function editingWater() {
+    document.getElementById("EditedWater").value = document.getElementById("waterCount").value;
     document.getElementById("showWater").hidden = true;
-    document.getElementById("waterEdit").style.display = "block";
+    document.getElementById("waterEdit").hidden = false;
+}
+
+function closeEditingWater(water) {
+    document.getElementById("waterCount").value = water;
+    document.getElementById("showWater").hidden = false;
+    document.getElementById("waterEdit").hidden = true;
 }
 
 function hideChart(proteins, carbs, fats) {
@@ -126,30 +133,39 @@ function giveIterFromID(id){
     return iter;
 }
 
-function addWater(url, dayID) {
+function addWater(url, dayID, water, target) {
+    var addedWater = parseInt($("#AddedWater").val());
+
     $.ajax({
         type: 'POST',
         url: url,
         data: {
             dayID: dayID,
-            addedWater: parseInt($("#AddedWater").val())
+            addedWater: addedWater
         },
         success: function () {
-            location.reload();
+            //location.reload();
+            document.getElementById("water").innerHTML = parseInt(addedWater + water) + " ml";
+            glass(water, target);
         }
     });
 }
 
-function editWater(url, dayID) {
+function editWater(url, dayID, target) {
+    var editedWater = parseInt($("#EditedWater").val());
+
     $.ajax({
         type: 'PUT',
         url: url,
         data: {
             dayID: dayID,
-            editedWater: parseInt($("#EditedWater").val())
+            editedWater: editedWater
         },
         success: function () {
-            location.reload();
+            //location.reload();
+            document.getElementById("water").innerHTML = editedWater + " ml";
+            glass(water, target);
+            closeEditingWater(editedWater);
         }
     });
 }

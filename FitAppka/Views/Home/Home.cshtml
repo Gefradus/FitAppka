@@ -38,6 +38,7 @@
     }
 
     <div id="mealID" hidden></div>
+    <div id="waterCount" value="@ViewData["water"]" hidden></div>
 
     <header>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav" style="text-align: center">
@@ -487,14 +488,14 @@
                         </div>
                     </div>
 
-                    <div id="waterEdit" style="display:none">
+                    <div id="waterEdit" hidden>
                         <div class="container">
                             <div class="row" style="margin-bottom: 10px">
                                 <div id="editingWater">
                                     <input id="EditedWater" name="EditedWater" type="number" min="0" value="@ViewData["water"]" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" />
                                 </div>
                                 <div class="divDodEdyWode">
-                                    <button type="button" class="button" onclick="editWater('@Url.Action("Water", "Home")', @ViewData["dayID"])">
+                                    <button type="button" class="button" onclick="editWater('@Url.Action("Water", "Home")', @ViewData["dayID"], @ViewData["caloriesTarget"])">
                                         <img style="height:20px; width:20px; padding-top:2px;" src="~/img/save.png">
                                     </button>
                                 </div>
@@ -510,7 +511,7 @@
                                 </div>
                                 <div id="ml">ml</div>
                                 <div class="divDodEdyWode">
-                                    <button id="dodajWode" type="button" class="btn" onclick="addWater('@Url.Action("Water", "Home")', @ViewData["dayID"])" value="dodajWode">Dodaj</button>
+                                    <button id="dodajWode" type="button" class="btn" onclick="addWater('@Url.Action("Water", "Home")', @ViewData["dayID"], @ViewData["water"], @ViewData["caloriesTarget"])" value="dodajWode">Dodaj</button>
                                 </div>
                             </div>
                         </div>
