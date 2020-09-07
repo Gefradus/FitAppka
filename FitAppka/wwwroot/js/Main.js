@@ -108,12 +108,13 @@ function onload() {
 }
 
 function deleteMealUrl(id, url) {
+    $("#mealID").val(id);
     $("#deleteModal").modal('show');
     $("#delete").click(function () {
         $.ajax({
             type: 'DELETE',
             url: url,
-            data: { id: id },
+            data: { id: $("#mealID").val() },
             success: function () {
                 location.reload();
             }
@@ -148,7 +149,10 @@ function showEditModalUrl(id, url) {
             $.ajax({
                 type: 'PUT',
                 url: url,
-                data: { id: id, grammage: gram },
+                data: {
+                    id: $("#mealID").val(),
+                    grammage: gram
+                },
                 success: function () {
                     location.reload();
                 }
@@ -172,6 +176,7 @@ function prepareModalData(id) {
         document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + "/FitAppka/photos/" + photoPath + '" class="img-fluid" asp-append-version="true" />';
     }
 
+    document.getElementById("mealID").value = id;
     document.getElementById("grammage").value = gram;
     document.getElementById("name").innerHTML = nameArray[iter] + ", " + gram + "g";
     document.getElementById("kcalHeader").innerHTML = kcalArray[iter] + ' kcal';

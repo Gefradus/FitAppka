@@ -84,17 +84,17 @@ namespace NowyDotnecik.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddWater(int dayID)
+        public JsonResult AddWater(int dayID)
         {
             _homeService.AddWater(dayID, HttpContext.Request.Form["AddedWater"]);
-            return RedirectToAction(nameof(Home), new { daySelected = _dayRepository.GetDayDateTime(dayID) });
+            return Json(true);
         }
 
         [HttpPost]
-        public IActionResult EditWater(int dayID)
+        public JsonResult EditWater(int dayID)
         {
             _homeService.EditWater(dayID, HttpContext.Request.Form["EditedWater"]);
-            return RedirectToAction(nameof(Home), new { daySelected = _dayRepository.GetDayDateTime(dayID) });
+            return Json(true);
         }
 
         [HttpPost]
