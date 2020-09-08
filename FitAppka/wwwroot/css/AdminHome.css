@@ -38,8 +38,8 @@ a{
     background-color: #343a4012 !important
 }
 
-    .btn-dark:hover {
-        cursor: pointer;
-        background-color: #27c11447 !important;
-        border: 1px solid black !important;
-    }
+.btn-dark:hover {
+    cursor: pointer;
+    background-color: #fbff9970 !important;
+    border: 1px solid black !important;
+}

@@ -1,4 +1,6 @@
-﻿
+﻿body {
+    background: linear-gradient(0deg, rgb(138 211 240) 0%, rgb(255 129 0) 100%);
+}
 
 .searchBtn {
     width: 225px;

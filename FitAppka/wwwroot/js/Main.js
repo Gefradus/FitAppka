@@ -51,8 +51,10 @@ function colorItRed(proteins, carbs, fats, calories) {
 
 function glass(water, caloriesTarget) {
     var percentage = (water) / (caloriesTarget);
-
-    if (percentage > 0.005 && percentage < 0.20) {
+    if (percentage < 0.005) {
+        document.getElementById("glass").src = "/FitAppka/img/00.png";
+    }
+    if (percentage >= 0.005 && percentage < 0.20) {
         document.getElementById("glass").src = "/FitAppka/img/10.png";
     }
     if (percentage >= 0.20 && percentage < 0.5) {
@@ -79,17 +81,6 @@ function hidePanel(id) {
     }
 }
 
-function editingWater() {
-    document.getElementById("EditedWater").value = document.getElementById("waterCount").value;
-    document.getElementById("showWater").hidden = true;
-    document.getElementById("waterEdit").hidden = false;
-}
-
-function closeEditingWater(water) {
-    document.getElementById("waterCount").value = water;
-    document.getElementById("showWater").hidden = false;
-    document.getElementById("waterEdit").hidden = true;
-}
 
 function hideChart(proteins, carbs, fats) {
     if (!(proteins == 0 && carbs == 0 && fats == 0)) {
@@ -133,9 +124,19 @@ function giveIterFromID(id){
     return iter;
 }
 
+function preventZero(val) {
+    if (!isNumeric(val)) {
+        return 0;
+    }
+    else {
+        return val;
+    }
+}
+
+
 function addWater(url, dayID, target) {
-    var water = parseInt($("#waterCount").val())
-    var addedWater = parseInt($("#AddedWater").val());
+    var water = parseInt($("#waterCount").val());
+    var addedWater = parseInt(preventZero($("#AddedWater").val()));
 
     $.ajax({
         type: 'POST',
@@ -156,20 +157,42 @@ function addWater(url, dayID, target) {
 function editWater(url, dayID, target) {
     var editedWater = parseInt($("#EditedWater").val());
 
-    $.ajax({
-        type: 'PUT',
-        url: url,
-        data: {
-            dayID: dayID,
-            editedWater: editedWater
-        },
-        success: function () {
-            document.getElementById("water").innerHTML = editedWater + " ml";
-            closeEditingWater(editedWater);
-            glass(water, target);
-        }
-    });
+    if (isNumeric(editedWater)) {
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            data: {
+                dayID: dayID,
+                editedWater: editedWater
+            },
+            success: function () {
+                successEditingWater(editedWater, target);
+            }
+        });
+    }
+    else {
+        closeEditingWater();
+    }
 }
+
+function editingWater() {
+    document.getElementById("EditedWater").value = document.getElementById("waterCount").value;
+    document.getElementById("showWater").hidden = true;
+    document.getElementById("waterEdit").hidden = false;
+}
+
+function closeEditingWater() {
+    document.getElementById("showWater").hidden = false;
+    document.getElementById("waterEdit").hidden = true;
+}
+
+function successEditingWater(editedWater, target) {
+    document.getElementById("water").innerHTML = editedWater + " ml";
+    document.getElementById("waterCount").value = editedWater;
+    closeEditingWater();
+    glass(editedWater, target);
+}
+
 
 function showEditModalUrl(id, url) {
     prepareModalData(id);

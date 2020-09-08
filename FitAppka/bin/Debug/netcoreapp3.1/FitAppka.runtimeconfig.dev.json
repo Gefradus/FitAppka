@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\dratwak\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\dratwak\\.nuget\\packages"
+      "C:\\Users\\fader\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\fader\\.nuget\\packages"
     ]
   }
 }
