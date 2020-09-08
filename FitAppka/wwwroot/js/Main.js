@@ -165,8 +165,8 @@ function editWater(url, dayID, target) {
         },
         success: function () {
             document.getElementById("water").innerHTML = editedWater + " ml";
-            glass(water, target);
             closeEditingWater(editedWater);
+            glass(water, target);
         }
     });
 }
