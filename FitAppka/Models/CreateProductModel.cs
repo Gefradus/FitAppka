@@ -9,19 +9,25 @@ namespace FitAppka.Models
         [Required(ErrorMessage = "Podaj nazwę produktu")]
         [MaxLength(25, ErrorMessage = "Maksymalna długość nazwy to 25 znaków")]
         public string ProductName { get; set; }
+
         public IFormFile Photo { get; set; }
+
         [Required(ErrorMessage = "Podaj kaloryczność w 100g")]
-        [Range(0, 10000, ErrorMessage = "Ilość kcal musi wynosić max. 10000")]
+        [Range(0, 900, ErrorMessage = "Ilość kcal musi wynosić max. 900")]
         public double? Calories { get; set; }
+
         [Required(ErrorMessage = "Podaj białko w 100g")]
         [Range(0, 100, ErrorMessage = "Ilość białka musi wynosić max. 100g")]
         public double? Proteins { get; set; }
+
         [Required(ErrorMessage = "Podaj tłuszcze w 100g")]
         [Range(0, 100, ErrorMessage = "Ilość tłuszczy musi wynosić max. 100g")]
         public double? Fats { get; set; }
+
         [Required(ErrorMessage = "Podaj węglowodany w 100g")]
         [Range(0, 100, ErrorMessage = "Ilośćść węgl. musi wynosić max. 100g")]
         public double? Carbohydrates { get; set; }
+
         [Range(0, 10000, ErrorMessage = "Wit. A może wynosić max. 10000")]
         public double? VitaminA { get; set; }
         [Range(0, 10000, ErrorMessage = "Wit. C może wynosić max. 10000")]
