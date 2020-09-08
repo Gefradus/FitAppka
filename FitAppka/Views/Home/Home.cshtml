@@ -84,7 +84,7 @@
         </div>
     </header>
 
-    <div id="admin"></div>
+    
 
     <div class="navbar-light box-shadow mb-3" id="navbarDzien">
         <div class="mx-auto">
@@ -470,7 +470,10 @@
             </div>
 
 
-            <div id="boczny" class="col-lg-4 ml-lg-0 my-1 my-lg-0">
+            <div id="boczny" class="col-lg-4 ml-lg-0 my-1 my-lg-0"> 
+                <div id="admin" class="pt-2 pb-2" style="background: #f5f5f5; margin-bottom: 1px" hidden>
+                    <button id="adminBtn" class="btn btn-dark">PANEL ADMINISTRATORA</button>
+                </div> 
                 <div id="chartArea">
                     <h6 style="padding-top: 5px; font-weight:600">Proporcje energetyczne</h6>
                     <div id="piechart" style="padding-bottom: 10px"></div>
@@ -601,7 +604,7 @@
             });
 
             if ('@ViewData["admin"]' == 1) {
-                document.getElementById("admin").innerHTML = '<button id="adminBtn" class="btn btn-dark">PANEL ADMINISTRATORA</button>';
+                document.getElementById("admin").hidden = false;
             }
 
             $j("#adminBtn").click(function () { window.location.href = '@Url.Action("AdminHome", "Admin")'; });

@@ -186,7 +186,10 @@
 }
 
 #adminBtn {
-    background-color: #ff946b !important;
+    width: 95%;
+    background-color: #95abe7 !important;
+    color: white;
+    border: none;
 }
 
 
@@ -416,7 +419,7 @@
 }
 
 #adminBtn:hover {
-    background-color: #875f50 !important;
+    background-color: #6987d8 !important;
 }
 
 .panel:hover {
