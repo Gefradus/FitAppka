@@ -53,11 +53,11 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="d-none d-md-inline-block mr-md-5">
-                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Goals" asp-action="Goals">Cele</a></div>
-                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi </a></div>
-                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="FindDay" asp-action="FindDay">Szukaj dni <img style="height: 15px; width:15px" src="~/img/search.png" /></a></div>
-                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Settings" asp-action="Settings">Ustawienia <img style="height: 15px; width:15px" src="~/img/settings.png" /></a></div>
+                    <div class="d-none d-md-inline-block mr-md-4">
+                        <div class="fl"><a class="nav-link text-light nava" asp-controller="Goals" asp-action="Goals">Cele <img style="height: 18px; width:18px" src="~/img/goal.png" /></a></div>
+                        <div class="fl"><a class="nav-link text-light nava" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi <img style="height: 15px; width:15px" src="~/img/dumbell.png" /></a></div>
+                        <div class="fl"><a class="nav-link text-light nava" asp-controller="FindDay" asp-action="FindDay">Szukaj dni <img style="height: 15px; width:15px" src="~/img/search.png" /></a></div>
+                        <div class="fl"><a class="nav-link text-light nava" asp-controller="Settings" asp-action="Settings" style="margin-right: 15px; border-right: 1px dotted #6b6b6b">Ustawienia <img style="height: 15px; width:15px" src="~/img/settings.png" /></a></div>
                         <div class="fl"><a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img style="height: 15px; width:15px" src="~/img/logout.png" /></a></div>
                         <div class="cb"></div>
                     </div>
@@ -482,7 +482,7 @@
                 <div style="background: #f5f5f5">
                     <h6 id="waterHeader">Spożycie płynów</h6>
                     <input type="hidden" id="div_position" name="div_position" />
-                    <img id="glass" class="my-3 my-sm-4 my-lg-5" src="~/img/00.png">
+                    <img id="glass" class="my-3 my-sm-4 my-lg-5" src="~/img/glass.png">
                     <div id="showWater" class="container">
                         <div class="row" style="margin-bottom: 10px">
                             <div id="water">@ViewData["water"] ml</div>
@@ -500,7 +500,7 @@
                                 </div>
                                 <div class="divDodEdyWode">
                                     <button type="button" class="button" onclick="editWater('@Url.Action("Water", "Home")', @ViewData["dayID"], @ViewData["caloriesTarget"])">
-                                        <img style="height:20px; width:20px; padding-top:2px;" src="~/img/save.png">
+                                        <img style="height:20px; width:20px;" src="~/img/save.png">
                                     </button>
                                 </div>
                             </div>

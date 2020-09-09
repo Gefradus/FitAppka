@@ -273,7 +273,8 @@
 
 
 .img-fluid {
-    margin-top: 11px;
+    margin-top: 12px;
+    margin-left: -1px;
     height: 30px;
     width: 30px;
 }
@@ -285,6 +286,11 @@
 
 .naglowek {
     font-weight: 600;
+}
+
+.nava{
+    width: 130px;
+    border-left: 1px dotted #6b6b6b;
 }
 
 .cancel {
