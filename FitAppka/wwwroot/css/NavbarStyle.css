@@ -8,15 +8,22 @@
     z-index: 9999
 }
 
-#navMenu {
+#navMenu, #navMenu2 {
     margin-right: -15px;
-    margin-top: 80px;
     position: fixed;
     right: 15px;
     z-index: 9999;
     background-color: white;
     padding: 5px 100px 5px 120px;
     border: 1px #828282 solid;
+}
+
+#navMenu {
+    margin-top: 80px;
+}
+
+#navMenu2 {
+    margin-top: -5px
 }
 
 #logoPink {
@@ -49,4 +56,10 @@
 #left {
     margin-right: -226px;
     margin-left: -15px
+}
+
+#backImg {
+    height: 47px;
+    width: 56px;
+    margin-top: 1px
 }
