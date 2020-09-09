@@ -8,7 +8,7 @@ namespace FitAppka.Models
     {
         [Required(ErrorMessage = "Podaj cel spożycia kalorii")]
         [Range(0, 20000, ErrorMessage = "Cel kalorii może wynosić max. 20000")]
-        public double? CaloriesTarget { get; set; }
+        public int? CaloriesTarget { get; set; }
 
         [Required(ErrorMessage = "Podaj cel spożycia białka")]
         [Range(0, 5000, ErrorMessage = "Cel białka może wynosić max. 20000")]
