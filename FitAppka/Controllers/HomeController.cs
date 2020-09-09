@@ -61,7 +61,7 @@ namespace NowyDotnecik.Controllers
                 daySelected = DateTime.Now.Date; 
             }
   
-            return RedirectToAction(nameof(Home), new { clientID = _clientRepository.GetLoggedInClientId(), daySelected});
+            return RedirectToAction(nameof(Home), new { daySelected });
         }
 
         [HttpGet]
