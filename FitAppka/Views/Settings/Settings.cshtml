@@ -11,45 +11,14 @@
         <script type="text/javascript">
             function onload() {
                 if (@ViewData["isFirstLaunch"] == 0) {
-                    restoreDefault();
+                    setSex('@ViewData["sex"]');
+                    setWeightAndGrowth('@ViewData["weight"]','@ViewData["growth"]')
+                    setWeightChangeGoal('@ViewData["changeGoal"]')
+                    setActivityLevel('@ViewData["activity"]');
+                    setMeals('@ViewData["breakfast"]','@ViewData["lunch"]','@ViewData["dinner"]','@ViewData["dessert"]','@ViewData["snack"]','@ViewData["supper"]');
+                    setPace('@ViewData["pace"]');
                 }
-
-                document.getElementById("datepicker").value = '@ViewData["dateOfBirth"]';
-            }
-
-            function restoreDefault() {
-                if (setFlag('@ViewData["sex"]')) {
-                    document.getElementById("men").checked = true;
-                }
-                else {
-                    document.getElementById("women").checked = true;
-                }
-
-                document.getElementById("weight").value = parseInt('@ViewData["weight"]');
-                document.getElementById("growth").value = parseInt('@ViewData["growth"]');
-
-
-                if ('@ViewData["changeGoal"]' == 2) {
-                    document.getElementById("maintenance").checked = true;
-                }
-                if ('@ViewData["changeGoal"]' == 3) {
-                    document.getElementById("gainWeight").checked = true;
-                }
-
-                var activityList = document.getElementsByName("LevelOfActivity");
-                for (let i = 0; i < activityList.length; i++) {
-                    if (activityList[i].value == '@ViewData["activity"]') {
-                        activityList[i].checked = true;
-                    }
-                }
-
-                document.getElementById("breakfast").checked = setFlag('@ViewData["breakfast"]');
-                document.getElementById("lunch").checked = setFlag('@ViewData["lunch"]');
-                document.getElementById("dinner").checked = setFlag('@ViewData["dinner"]');
-                document.getElementById("dessert").checked = setFlag('@ViewData["dessert"]');
-                document.getElementById("snack").checked = setFlag('@ViewData["snack"]');
-                document.getElementById("supper").checked = setFlag('@ViewData["supper"]');
-                document.getElementById("pace").value = parseFloat('@ViewData["pace"]').toFixed(1);
+                setDatepickerValue('@ViewData["dateOfBirth"]');
             }
         </script>
     </head>
@@ -57,7 +26,7 @@
 
     <body onload="onload()">
         <header>
-            <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav">
+            <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 blackNav">
                 <div>
                     <div class="mr-auto mt-3">
                         <a class="ml-2 ml-sm-3 ml-md-4 ml-lg-5" asp-controller="Home" asp-action="Start"><img style="height: 50px; width:185px; margin-top: -10px" src="~/img/logorozowe.png" /></a>
@@ -147,24 +116,6 @@
         </div>
 
         <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
-        <script>
-            var $j = jQuery.noConflict();
-            $j("#datepicker").datepicker({
-                minDate: new Date(1850, 0, 0),
-                maxDate: Date.now(),
-                dateFormat: 'yy-mm-dd',
-                monthNames: ["Styczeń", "Luty", "Marzec", "Kwiecień",
-                    "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
-                    "Październik", "Listopad", "Grudzień"],
-                monthNamesShort: ["Sty", "Lut", "Mar", "Kwi",
-                    "Maj", "Cze", "Lip", "Sie", "Wrz",
-                    "Paź", "Lis", "Gru"],
-                dayNames: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
-                dayNamesShort: ['Ndz', 'Pon', 'Wto', 'Śro', 'Czw', 'Pt', 'Sob'],
-                dayNamesMin: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb'],
-                changeYear: true,
-                changeMonth: true
-            });
-        </script>
+        <script>birthDateDatepicker();</script>
     </body>
 </html>

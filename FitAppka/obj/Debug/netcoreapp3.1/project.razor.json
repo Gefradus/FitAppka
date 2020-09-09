@@ -14500,6 +14500,11 @@
       "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Goals\\Goals.cshtml",
       "TargetPath": "Views\\Goals\\Goals.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Home\\Navbar.cshtml",
+      "TargetPath": "Views\\Home\\Navbar.cshtml",
+      "FileKind": "mvc"
     }
   ],
   "SerializationFormat": "0.2"

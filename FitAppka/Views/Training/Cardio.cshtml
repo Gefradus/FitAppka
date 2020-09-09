@@ -8,52 +8,9 @@
     <script src="~/js/Validation.js"></script>
     <script src="~/js/TrainingValidation.js"></script>
     <script src="~/js/AddCardio.js"></script>
+    <script src="~/js/ShowNavbar.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 czarnyNav" style="text-align: center">
-
-            <div id="left">
-                <div class="mr-auto mt-3">
-                    <a class="nav-link ml-sm-3 ml-md-4 ml-lg-5" asp-controller="Home" asp-action="Start"><img style="height: 50px; width:185px; margin-top: -15px" src="~/img/logorozowe.png" /></a>
-                </div>
-            </div>
-            <div>
-                <div id="right" class="navbar-nav ml-auto">
-                    <button class="navbar-toggler mr-2 mr-sm-3" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Przełącznik nawigacji" type="button">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="d-none d-md-inline-block mr-md-5">
-                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi </a></div>
-                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="FindDay" asp-action="FindDay">Szukaj dni <img style="height: 15px; width:15px" src="~/img/search.png" /></a></div>
-                        <div class="mr-md-4 mr-lg-5 fl"><a class="nav-link text-light" asp-controller="Settings" asp-action="Settings">Ustawienia <img style="height: 15px; width:15px" src="~/img/settings.png" /></a></div>
-                        <div class="fl"><a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img style="height: 15px; width:15px" src="~/img/logout.png" /></a></div>
-                        <div class="cb"></div>
-                    </div>
-                </div>
-            </div>
-
-        </nav>
-        <div class="collapse navbar-collapse in d-md-none" id="navMenu">
-
-            <ul class="navbar-nav">
-                <li>
-                    <a class="nav-link text-dark" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi</a>
-                </li>
-                <li>
-                    <a class="nav-link text-dark" asp-controller="FindDay" asp-action="FindDay">Szukaj dni</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-controller="Settings" asp-action="Settings">Ustawienia</a>
-                </li>
-                <li>
-                    <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Wyloguj się</a>
-                </li>
-            </ul>
-        </div>
-    </header>
-
     <div class="container-fluid mt-3">
 
         <div class="modal fade" tabindex="-1" id="addTrainingType" data-keyboard="false" style="margin-top: 170px">

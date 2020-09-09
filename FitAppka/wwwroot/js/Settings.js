@@ -32,6 +32,56 @@ function setFlag(flag) {
     }
 }
 
+function setWeightAndGrowth(weight, growth) {
+    document.getElementById("weight").value = parseInt(weight);
+    document.getElementById("growth").value = parseInt(growth);
+}
+
+function setActivityLevel(activity) {
+    var activityList = document.getElementsByName("LevelOfActivity");
+    for (let i = 0; i < activityList.length; i++) {
+        if (activityList[i].value == activity) {
+            activityList[i].checked = true;
+        }
+    }
+}
+
+function setSex(sex) {
+    if (setFlag(sex)) {
+        document.getElementById("men").checked = true;
+    }
+    else {
+        document.getElementById("women").checked = true;
+    }
+}
+
+function setPace(pace) {
+    document.getElementById("pace").value = parseFloat(pace).toFixed(1)
+}
+
+function setWeightChangeGoal(changeGoal) {
+    if (changeGoal == 2) {
+        document.getElementById("maintenance").checked = true;
+    }
+    if (changeGoal == 3) {
+        document.getElementById("gainWeight").checked = true;
+    }
+}
+
+function setDatepickerValue(value) {
+    document.getElementById("datepicker").value = value;
+}
+
+function setMeals(breakfast, lunch, dinner, dessert, snack, supper) {
+    document.getElementById("breakfast").checked = setFlag(breakfast);
+    document.getElementById("lunch").checked = setFlag(lunch);
+    document.getElementById("dinner").checked = setFlag(dinner);
+    document.getElementById("dessert").checked = setFlag(dessert);
+    document.getElementById("snack").checked = setFlag(snack);
+    document.getElementById("supper").checked = setFlag(supper);
+}
+
+
 function blockPace() {
     if (document.getElementById("maintenance").checked) {
         document.getElementById("pace").value = 0.4;
@@ -65,4 +115,24 @@ function incrementPace() {
             pace.value = value.toFixed(1);
         }
     }
+}
+
+function birthDateDatepicker() {
+    var $j = jQuery.noConflict();
+    $j("#datepicker").datepicker({
+        minDate: new Date(1850, 0, 0),
+        maxDate: Date.now(),
+        dateFormat: 'yy-mm-dd',
+        monthNames: ["Styczeń", "Luty", "Marzec", "Kwiecień",
+            "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
+            "Październik", "Listopad", "Grudzień"],
+        monthNamesShort: ["Sty", "Lut", "Mar", "Kwi",
+            "Maj", "Cze", "Lip", "Sie", "Wrz",
+            "Paź", "Lis", "Gru"],
+        dayNames: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
+        dayNamesShort: ['Ndz', 'Pon', 'Wto', 'Śro', 'Czw', 'Pt', 'Sob'],
+        dayNamesMin: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb'],
+        changeYear: true,
+        changeMonth: true
+    });
 }

@@ -3,13 +3,57 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FitAppka</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/chosen/chosen.min.css" rel="stylesheet" />
-    
+    <link href="~/css/NavbarStyle.css" rel="stylesheet" />
 </head>
 <body>
+    <div id="allViewsNav" hidden>
+        <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 blackNav" style="text-align: center">
+            <div id="left">
+                <div class="mr-auto mt-3">
+                    <a class="nav-link ml-sm-3 ml-md-4 ml-lg-5 mt-2 mt-md-0" asp-controller="Home" asp-action="Start"><img id="logoPink" src="~/img/logorozowe.png" /></a>
+                </div>
+            </div>
+            <div>
+                <div id="right" class="navbar-nav ml-auto">
+                    <button class="navbar-toggler mr-2 mr-sm-3" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="d-none d-md-inline-block mr-md-4">
+                        <div class="fl"><a class="nav-link text-light nava" asp-controller="Goals" asp-action="Goals">Cele <img id="goalImg" src="~/img/goal.png" /></a></div>
+                        <div class="fl"><a class="nav-link text-light nava" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi <img class="navIcon" src="~/img/dumbell.png" /></a></div>
+                        <div class="fl"><a class="nav-link text-light nava" asp-controller="FindDay" asp-action="FindDay">Szukaj dni <img class="navIcon" src="~/img/search.png" /></a></div>
+                        <div class="fl"><a class="nav-link text-light nava" asp-controller="Settings" asp-action="Settings" id="settingsBtn">Ustawienia <img class="navIcon" src="~/img/settings.png" /></a></div>
+                        <div class="fl"><a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img class="navIcon" src="~/img/logout.png" /></a></div>
+                        <div class="cb"></div>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+        <div class="collapse navbar-collapse in d-md-none" id="navMenu">
+            <ul class="navbar-nav">
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Goals" asp-action="Goals">Cele <img /></a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" asp-controller="FindDay" asp-action="FindDay">Szukaj dni</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Settings" asp-action="Settings">Ustawienia</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Wyloguj się</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <div class="container">
         <main role="main" class="pb-3" style="padding-top: 85px;">

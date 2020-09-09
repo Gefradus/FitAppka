@@ -10,6 +10,6 @@ namespace FitAppka.Service
         public List<int?> WaterInDays(List<int> daysList);
         public List<int> GrammageInDays(List<int> daysList, int productID);
         public List<decimal> CaloriesInDays(List<int> daysList);
-        public bool WheterDayFound(List<int> listaDni);
+        public bool WheterDayFound(List<int> daysList);
     }
 }

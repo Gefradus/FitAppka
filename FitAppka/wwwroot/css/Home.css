@@ -7,6 +7,7 @@
     margin-right: 1px;
 }
 
+
 .params {
     font-size: 14px;
 }
@@ -117,16 +118,7 @@
     justify-content: center;
 }
 
-#right {
-    position: absolute;
-    right: 0;
-    margin-top: -20px;
-}
 
-#left {
-    margin-right: -226px;
-    margin-left: -15px
-}
 
 #navbarDzien
 {
@@ -148,16 +140,7 @@
     margin-left: calc(50% - 27px)
 }
 
-#navMenu {
-    margin-right: -15px;
-    margin-top: -5px;
-    position: fixed;
-    right: 15px;
-    z-index: 9999;
-    background-color: white;
-    padding: 5px 100px 5px 120px;
-    border: 1px #828282 solid;
-}
+
 
 #glass {
     height: 100px;
@@ -444,25 +427,3 @@
     cursor: pointer;
 }
 
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
-
-button:focus {
-    outline: none;
-}
-
-button::-moz-focus-inner {
-    border: 0;
-}
-
-a::-moz-focus-inner {
-    border: 0;
-}
