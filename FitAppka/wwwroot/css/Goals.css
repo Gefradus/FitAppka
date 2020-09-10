@@ -1,0 +1,14 @@
+﻿body {
+    background: radial-gradient(#b2ffed, #808080);
+}
+
+
+html{
+    height: 100%;
+}
+
+#mainRow {
+    height: unset;
+    padding-top: 30px;
+    background: white
+}

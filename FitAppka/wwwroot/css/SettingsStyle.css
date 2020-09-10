@@ -1,8 +1,11 @@
-﻿body {
-    background: linear-gradient(0deg, rgba(146,223,242,1) 0%, rgba(251,171,96,1) 100%);
-    line-height: 1.4;
+﻿html, body, main, .container {
+    height: 100% !important
 }
 
+body {
+    background: radial-gradient(#b2ffed, #808080);
+    line-height: 1.4;
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

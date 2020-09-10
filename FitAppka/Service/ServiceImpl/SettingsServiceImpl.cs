@@ -2,6 +2,7 @@ using FitAppka.Models;
 using FitAppka.Repository;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FitAppka.Service.ServiceImpl
 {
@@ -21,7 +22,7 @@ namespace FitAppka.Service.ServiceImpl
             _dayRepository = dayRepository;
         }
 
-        public async void ChangeSettings(SettingsModel m, int isFirstLaunch)
+        public async Task ChangeSettings(SettingsModel m, int isFirstLaunch)
         {
             Client client = _clientRepository.GetLoggedInClient();
             SetClientGoals(m, client);
