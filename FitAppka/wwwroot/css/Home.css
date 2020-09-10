@@ -39,7 +39,7 @@
 .product {
     padding-left: 7px;
     background-color: #fbf9fb00;
-    border-bottom: 0.5px solid #edc589;
+    border-bottom: 1px dotted darkgray;
 }
 
 .panelWithoutBtn {

@@ -1,15 +1,11 @@
-﻿html{
-    height: unset;
+﻿html, body, main, .container{
+    height: 100%;
 }
 
 body {
     height: 100%;
-    background-color: #dddddd
 }
 
-main {
-    height: 100%;
-}
 
 .naglowek {
     display: flex;

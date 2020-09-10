@@ -149,7 +149,7 @@ function addWater(url, dayID, target) {
             var sum = parseInt(addedWater + water);
             document.getElementById("waterCount").value = sum;
             document.getElementById("water").innerHTML = sum + " ml";
-            glass(water, target);
+            glass(sum, target);
         }
     });
 }

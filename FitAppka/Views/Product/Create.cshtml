@@ -8,7 +8,7 @@
     <script src="~/js/Validation.js"></script>
 </head>
 
-<body style="background: linear-gradient(0deg, rgb(29 88 175) 0%, rgb(227 177 115) 100%)">
+<body>
     @if ((int)ViewData["isAdmin"] == 0)
     {
         <header>
@@ -51,7 +51,7 @@
 
     <div class="container" id="page">
         <div class="row cent" style="height: 100%; margin-top: -5px">
-            <div class="col-9 col-sm-8 col-lg-7 col-xl-6" style="height: 100%; padding-top: 30px; background: white">
+            <div class="col-9 col-sm-8 col-lg-7 col-xl-6" style="height: unset; padding-top: 30px; background: white">
                 <form enctype="multipart/form-data" method="post" asp-action="CreateProduct">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group" style="border-bottom: 1px solid #cacaca; padding-bottom: 20px">
