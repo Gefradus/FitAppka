@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: #ecf8ba;
+    background: linear-gradient(0deg, rgb(175 218 230) 0%, rgb(255 219 125) 100%) !important;
 }
 
 #panelPrzyciskow {
@@ -24,7 +24,7 @@
     top: 80px;
     left: 0;
     z-index: 2;
-    background-color: #99c0b7;
+    background-color: rgb(228, 218, 160);
     border-bottom: 1px solid #ebe7e7;
 }
 

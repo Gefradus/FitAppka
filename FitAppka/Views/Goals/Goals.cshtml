@@ -81,7 +81,7 @@
                             <label class="control-label">Cel minut treningów:</label>
                             <div style="display: flex;">
                                 <input asp-for="TrainingTimeGoal" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 1440)" />
-                                <div class="jednostka">g</div>
+                                <div class="jednostka">min</div>
                             </div>
                             <span asp-validation-for="TrainingTimeGoal" class="text-danger"></span>
                         </div>
