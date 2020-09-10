@@ -10,21 +10,25 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IDayRepository _dayRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
+        private readonly FitAppContext _context;
 
-        public SettingsServiceImpl(IDayRepository dayRepository, IClientRepository clientRepository, IWeightMeasurementRepository weightMeasurementRepository)
+        public SettingsServiceImpl(IDayRepository dayRepository, IClientRepository clientRepository, 
+            IWeightMeasurementRepository weightMeasurementRepository, FitAppContext context)
         {
+            _context = context;
             _weightMeasurementRepository = weightMeasurementRepository;
             _clientRepository = clientRepository;
             _dayRepository = dayRepository;
         }
 
-        public void ChangeSettings(SettingsModel m, int isFirstLaunch)
+        public async void ChangeSettings(SettingsModel m, int isFirstLaunch)
         {
             Client client = _clientRepository.GetLoggedInClient();
             SetClientGoals(m, client);
             SetDateOfJoiningIfFirstLaunch(isFirstLaunch, client);
             SetDataForDaysFromToday(m, client);
             SetClientWeightMeasurement(m, SetClientData(m, client));
+            await _context.SaveChangesAsync();
         }
 
         private void SetDateOfJoiningIfFirstLaunch(int isFirstLaunch, Client client)
