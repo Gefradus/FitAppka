@@ -26,7 +26,9 @@
     margin-left: auto;
     font-size: 18px;
     color: white;
-    background: #72c27a
+    background: #72c27a;
+    font-family:Corbel
+    
 }
 
 #cardioName, #strengthName {
@@ -118,7 +120,8 @@
     font-size: 1.2rem;
     margin-top: 7px;
     color: white;
-    font-weight: 600
+    font-weight: 600;
+    font-family: Bahnschrift;
 }
 
 #all {
@@ -127,10 +130,10 @@
 }
 
 #diary {
-    margin-top: 8px;
-    font-size: 18px;
+    margin-top: 10px;
+    /*font-size: 18px;*/
     text-align: right;
-}
+    font-family:'Javanese Text'
 
 
 @media(max-width: 767px){
