@@ -47,7 +47,7 @@ namespace FitAppka.Controllers
             }
             catch
             {
-                ViewData["dateOfBirth"] = DateTime.Now.ToString("yyyy-MM-dd");
+                ViewData["dateOfBirth"] = "2000-01-01";
                 ViewData["isFirstLaunch"] = 1;
             }
         }

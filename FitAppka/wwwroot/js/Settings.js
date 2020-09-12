@@ -155,4 +155,5 @@ function birthDateDatepicker() {
         changeMonth: true,
         yearRange: "1970:+nn"
     });
+    $j("#datepicker").datepicker("setDate", new Date(2000,1,1));
 }
