@@ -118,3 +118,12 @@ function validation(validMsg) {
         $("#validationModal").modal('hide');
     })
 }
+
+function preventZero(val) {
+    if (!isNumeric(val)) {
+        return 0;
+    }
+    else {
+        return val;
+    }
+}

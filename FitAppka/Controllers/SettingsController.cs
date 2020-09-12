@@ -14,9 +14,11 @@ namespace FitAppka.Controllers
     {
         private readonly IClientRepository _clientRepository;
         private readonly ISettingsService _settingsService;
+        private readonly IDietaryTargetsService _dietaryTargetsService;
 
-        public SettingsController(IClientRepository clientRepository, ISettingsService settingsService)
+        public SettingsController(IClientRepository clientRepository, ISettingsService settingsService, IDietaryTargetsService dietaryTargetsService)
         {
+            _dietaryTargetsService = dietaryTargetsService;
             _clientRepository = clientRepository;
             _settingsService = settingsService;
         }
@@ -35,7 +37,7 @@ namespace FitAppka.Controllers
             {
                 Client client = _clientRepository.GetLoggedInClient();
                 ViewData["dateOfBirth"] = client.DateOfBirth.Value.ToString("yyyy-MM-dd");
-                ViewData["weight"] = _settingsService.SetLastWeightMeasurement();
+                ViewData["weight"] = _dietaryTargetsService.GetLastWeightMeasurement();
                 ViewData["growth"] = client.Growth;
                 ViewData["changeGoal"] = (int)client.WeightChangeGoal;
                 ViewData["activity"] = (int)client.ActivityLevel;

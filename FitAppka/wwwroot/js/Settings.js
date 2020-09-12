@@ -81,10 +81,29 @@ function setMeals(breakfast, lunch, dinner, dessert, snack, supper) {
     document.getElementById("supper").checked = setFlag(supper);
 }
 
+function setNotAllowedCursor(mouseTarget) {
+    mouseTarget.style.cursor = 'not-allowed';
+}
+
+function setNormalCursor(mouseTarget) {
+    mouseTarget.style.cursor = 'pointer';
+}
 
 function blockPace() {
+    var incBtn = document.getElementById("incBtn");
+    var decBtn = document.getElementById("decBtn");
+    var pace = document.getElementById("pace");
+
     if (document.getElementById("maintenance").checked) {
-        document.getElementById("pace").value = 0.4;
+        pace.value = 0.4;
+        pace.disabled = true;
+        setNotAllowedCursor(incBtn);
+        setNotAllowedCursor(decBtn);
+    }
+    else {
+        pace.disabled = false;
+        setNormalCursor(incBtn);
+        setNormalCursor(decBtn);
     }
 }
 
@@ -121,7 +140,7 @@ function birthDateDatepicker() {
     var $j = jQuery.noConflict();
     $j("#datepicker").datepicker({
         minDate: new Date(1850, 0, 0),
-        maxDate: Date.now(),
+        maxDate: '0',
         dateFormat: 'yy-mm-dd',
         monthNames: ["Styczeń", "Luty", "Marzec", "Kwiecień",
             "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
@@ -133,6 +152,7 @@ function birthDateDatepicker() {
         dayNamesShort: ['Ndz', 'Pon', 'Wto', 'Śro', 'Czw', 'Pt', 'Sob'],
         dayNamesMin: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb'],
         changeYear: true,
-        changeMonth: true
+        changeMonth: true,
+        yearRange: "1970:+nn"
     });
 }

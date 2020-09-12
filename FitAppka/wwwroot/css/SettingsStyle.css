@@ -20,6 +20,10 @@ input::-webkit-inner-spin-button {
     pointer-events: none
 }
 
+#incBtn {
+    margin-left: 13px;
+}
+
 #saveBtn {
     margin-left: 10%;
     width: 80%;

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FitAppka.Repository;
 using FitAppka.Models;
+using FitAppka.Service;
 
 namespace FitAppka.Controllers
 {
@@ -15,8 +14,11 @@ namespace FitAppka.Controllers
     {
         private readonly IDayRepository _dayRepository;
         private readonly IClientRepository _clientRepository;
-        public GoalsController(IDayRepository dayRepository, IClientRepository clientRepository)
+        private readonly IGoalsService _goalsService;
+
+        public GoalsController(IDayRepository dayRepository, IClientRepository clientRepository, IGoalsService goalsService)
         {
+            _goalsService = goalsService;
             _clientRepository = clientRepository;
             _dayRepository = dayRepository;
         }
@@ -24,15 +26,35 @@ namespace FitAppka.Controllers
         [HttpGet]
         public IActionResult Goals()
         {
-            ViewData["dayID"] = _dayRepository.GetClientDays(_clientRepository.GetLoggedInClient().ClientId).Where(d => d.Date == DateTime.Now.Date).FirstOrDefault().DayId;
+            ViewData["dayID"] = GetTodayId();
+            SendDataAboutGoals();
             return View();
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult Goals(CreateGoalsModel model)
         {
-
+            _goalsService.CreateGoals(model);
             return RedirectToAction("Start", "Home");
+        }
+
+        private void SendDataAboutGoals()
+        {
+            Client client = _clientRepository.GetLoggedInClient();
+            ViewData["auto"] = client.AutoDietaryGoals;
+            ViewData["include"] = client.IncludeCaloriesBurned;
+            ViewData["burnGoal"] = client.KcalBurnedGoal;
+            ViewData["timeGoal"] = client.TrainingTimeGoal;
+            ViewData["calorieTarget"] = client.CalorieGoal;
+            ViewData["proteinTarget"] = client.ProteinTarget;
+            ViewData["fatTarget"] = client.FatTarget;
+            ViewData["carbsTarget"] = client.CarbsTarget;
+
+        }
+
+        private int GetTodayId()
+        {
+            return _dayRepository.GetClientDays(_clientRepository.GetLoggedInClientId()).Where(d => d.Date == DateTime.Now.Date).FirstOrDefault().DayId;
         }
     }
 }

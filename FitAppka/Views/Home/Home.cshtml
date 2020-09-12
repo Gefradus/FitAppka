@@ -537,32 +537,20 @@
 
     <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
     <script>
-            var $j = jQuery.noConflict();
-            $j("#dateBtn").datepicker({
-                showOn: "button",
-                buttonImage: "https://icons.iconarchive.com/icons/paomedia/small-n-flat/24/calendar-icon.png",
-                buttonImageOnly: true,
-                minDate: new Date(1850, 0, 0),
-                dateFormat: 'yy-mm-dd',
-                monthNames: ["Styczeń", "Luty", "Marzec", "Kwiecień",
-                    "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
-                    "Październik", "Listopad", "Grudzień"],
-                dayNamesMin: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb']
-            });
-            document.getElementsByClassName("ui-datepicker-trigger")[0].setAttribute("title", "");
+        var $j = jQuery.noConflict();
+        changeDayDatepicker();
+        $j("#dateBtn").datepicker("setDate", new Date('@ViewData["datepick"]'));
 
-            $j("#dateBtn").datepicker("setDate", new Date('@ViewData["datepick"]'));
+        $j("#dateBtn").change(function () {
+            var date = $j("#dateBtn").datepicker("getDate").toISOString();
+            window.location.href = '@Url.Action("ChangeDay", "Home")' + "?day=" + date;
+        });
 
-            $j("#dateBtn").change(function () {
-                var date = $j("#dateBtn").datepicker("getDate").toISOString();
-                window.location.href = '@Url.Action("ChangeDay", "Home")' + "?day=" + date;
-            });
+        if ('@ViewData["admin"]' == 1) {
+            document.getElementById("admin").hidden = false;
+        }
 
-            if ('@ViewData["admin"]' == 1) {
-                document.getElementById("admin").hidden = false;
-            }
-
-            $j("#adminBtn").click(function () { window.location.href = '@Url.Action("AdminHome", "Admin")'; });
+        $j("#adminBtn").click(function () { window.location.href = '@Url.Action("AdminHome", "Admin")'; });
     </script>
 </body>
 

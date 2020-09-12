@@ -19,6 +19,7 @@
                     setPace('@ViewData["pace"]');
                 }
                 setDatepickerValue('@ViewData["dateOfBirth"]');
+                blockPace();
             }
         </script>
     </head>
@@ -104,9 +105,9 @@
 
                     <label asp-for="PaceOfChange" class="centering" style="padding-top: 15px"></label>
                     <div class="form-group centering">
-                        <button type="button" class="button" onclick="decrementPace()"><img class="img-fluid" src="~/img/minus.png"></button>
+                        <button type="button" class="button" onclick="decrementPace()" id="decBtn"><img class="img-fluid" src="~/img/minus.png"></button>
                         <input id="pace" asp-for="PaceOfChange" type="number" step="0.1" value="0.4" /><span style="margin-left: -33px; float:right; margin-top: 4px; font-size:16px; z-index: 99">kg</span>
-                        <button type="button" class="button" onclick="incrementPace()" style="margin-left: 13px"><img class="img-fluid" src="~/img/add.png"></button>
+                        <button type="button" class="button" onclick="incrementPace()"  id="incBtn"><img class="img-fluid" src="~/img/add.png"></button>
                     </div>
 
                     <input id="saveBtn" type="submit" value="Zapisz i kontynuuj" asp-route-isFirstLaunch="@ViewData["isFirstLaunch"]" class="btn btn-primary" />

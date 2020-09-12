@@ -124,15 +124,6 @@ function giveIterFromID(id){
     return iter;
 }
 
-function preventZero(val) {
-    if (!isNumeric(val)) {
-        return 0;
-    }
-    else {
-        return val;
-    }
-}
-
 
 function addWater(url, dayID, target) {
     var water = parseInt($("#waterCount").val());
@@ -248,6 +239,21 @@ function prepareModalData(id) {
     document.getElementById("proteinsHeader").innerHTML = 'Białko: ' + proteinsArray[iter] + ' g,';
     document.getElementById("fatsHeader").innerHTML = 'Tł.: ' + fatsArray[iter] + ' g,';
     document.getElementById("carbsHeader").innerHTML = 'Węgl.: ' + carbsArray[iter] + ' g';
+}
+
+function changeDayDatepicker() {
+    $j("#dateBtn").datepicker({
+        showOn: "button",
+        buttonImage: "https://icons.iconarchive.com/icons/paomedia/small-n-flat/24/calendar-icon.png",
+        buttonImageOnly: true,
+        minDate: new Date(1850, 0, 0),
+        dateFormat: 'yy-mm-dd',
+        monthNames: ["Styczeń", "Luty", "Marzec", "Kwiecień",
+            "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
+            "Październik", "Listopad", "Grudzień"],
+        dayNamesMin: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb']
+    });
+    document.getElementsByClassName("ui-datepicker-trigger")[0].setAttribute("title", "");
 }
 
 
