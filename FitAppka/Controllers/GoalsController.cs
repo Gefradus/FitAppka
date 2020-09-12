@@ -34,8 +34,14 @@ namespace FitAppka.Controllers
         [HttpPost]
         public IActionResult Goals(CreateGoalsModel model)
         {
-            _goalsService.CreateGoals(model);
-            return RedirectToAction("Start", "Home");
+            if (ModelState.IsValid) {
+                _goalsService.CreateGoals(model);
+                return RedirectToAction("Start", "Home");
+            }
+            else {
+                SendDataAboutGoals();
+                return View(model);
+            }
         }
 
         private void SendDataAboutGoals()

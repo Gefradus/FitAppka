@@ -92,16 +92,13 @@ function setNormalCursor(mouseTarget) {
 function blockPace() {
     var incBtn = document.getElementById("incBtn");
     var decBtn = document.getElementById("decBtn");
-    var pace = document.getElementById("pace");
-
+    
     if (document.getElementById("maintenance").checked) {
-        pace.value = 0.4;
-        pace.disabled = true;
+        document.getElementById("pace").value = 0.4;
         setNotAllowedCursor(incBtn);
         setNotAllowedCursor(decBtn);
     }
     else {
-        pace.disabled = false;
         setNormalCursor(incBtn);
         setNormalCursor(decBtn);
     }
@@ -139,7 +136,7 @@ function incrementPace() {
 function birthDateDatepicker() {
     var $j = jQuery.noConflict();
     $j("#datepicker").datepicker({
-        minDate: new Date(1850, 0, 0),
+        minDate: new Date(1850, 1, 1),
         maxDate: '0',
         dateFormat: 'yy-mm-dd',
         monthNames: ["Styczeń", "Luty", "Marzec", "Kwiecień",

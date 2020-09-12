@@ -12,7 +12,7 @@ function setCursor(autoChecked) {
 function blockInputIfAutoChecked(autoChecked, element) {
     if (autoChecked) {
         setNotAllowedCursor(element);
-        element.value = '';
+        element.value = '0';
         element.disabled = true;
     }
     else {

@@ -14,7 +14,7 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IDayRepository _dayRepository;
         
 
-        public CardioTrainingServiceImpl(IDayRepository dayRepository, ICardioTrainingRepository cardioRepository, 
+        public CardioTrainingServiceImpl(IDayRepository dayRepository, ICardioTrainingRepository cardioRepository,
             ICardioTrainingTypeRepository cardioTypeRepository, IClientRepository clientRepository, IClientManageService clientManageService)
         {
             _clientManageService = clientManageService;
@@ -106,16 +106,6 @@ namespace FitAppka.Service.ServiceImpl
             return (int)kcal;
         }
 
-        public int GiveTodayIfDayNotChosen(int dayID)
-        {
-            if (dayID == 0) {
-                return GetTodayID();
-            }
-            else {
-                return dayID;
-            }
-        }
-
         public int CardioTimeInDay(int dayID)
         {
             int? time = 0;
@@ -124,50 +114,6 @@ namespace FitAppka.Service.ServiceImpl
             }
 
             return (int)time;
-        }
-
-        public int GetSelectedDay(DateTime day)
-        {
-            AddDayIfNotExists(day);
-            return GetClientDayIDByDate(day);
-        }
-
-        public int GetClientDayIDByDate(DateTime day)
-        {
-            AddDayIfNotExists(day);
-            return _dayRepository.GetClientDayByDate(day, _clientRepository.GetLoggedInClientId()).DayId;
-        }
-
-        public int GetTodayID()
-        {
-            return GetSelectedDay(DateTime.Now);
-        }
-
-        public void AddDayIfNotExists(DateTime day)
-        {
-            var client = _clientRepository.GetLoggedInClient();
-            int count = _dayRepository.GetAllDays().Count(dz => dz.Date == day && dz.ClientId == client.ClientId);
-            if (count == 0)
-            {
-                _dayRepository.Add(new Day()
-                {
-                    Date = day,
-                    ClientId = client.ClientId,
-                    Breakfast = client.Breakfast,
-                    Lunch = client.Lunch,
-                    Dinner = client.Dinner,
-                    Dessert = client.Dessert,
-                    Snack = client.Snack,
-                    Supper = client.Supper,
-                    ProteinTarget = client.ProteinTarget,
-                    FatTarget = client.FatTarget,
-                    CarbsTarget = client.CarbsTarget,
-                    CalorieGoal = client.CarbsTarget,
-                    WaterDrunk = 0,
-                });
-            }
-        }
-
-        
+        }  
     }
 }

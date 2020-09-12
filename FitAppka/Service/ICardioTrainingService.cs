@@ -7,12 +7,7 @@ namespace FitAppka.Service
         public int GetKcalBurnedGoalInDay(int dayID);
         public int GetTrainingTimeGoalInDay(int dayID);
         public int CaloriesBurnedInDay(int dayID);
-        public int GiveTodayIfDayNotChosen(int dayID);
         public int CardioTimeInDay(int dayID);
-        public int GetSelectedDay(DateTime day);
-        public int GetClientDayIDByDate(DateTime day);
-        public int GetTodayID();
-        public void AddDayIfNotExists(DateTime day);
         public void AddCardioTrainingType(int dayID, string name, int kcalPerMin);
         public void AddCardio(int cardioTypeId, int dayID, int timeInMinutes, int burnedKcal);
         public bool EditCardio(int id, int time, int burnedKcal);
