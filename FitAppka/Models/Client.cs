@@ -68,7 +68,10 @@ namespace FitAppka.Models
         public int? KcalBurnedGoal { get; set; }
         [Column("Training_time_goal")]
         public int? TrainingTimeGoal { get; set; }
-
+        [Column("Auto_dietary_goals")]
+        public bool? AutoDietaryGoals { get; set; }
+        [Column("Include_calories_burned")]
+        public bool? IncludeCaloriesBurned { get; set; }
         [InverseProperty("Client")]
         public virtual ICollection<CardioTrainingType> CardioTrainingType { get; set; }
         [InverseProperty("Client")]

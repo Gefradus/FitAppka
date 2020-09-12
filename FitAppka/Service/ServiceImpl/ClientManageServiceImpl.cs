@@ -1,6 +1,8 @@
 ﻿using FitAppka.Models;
 using FitAppka.Repository;
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FitAppka.Service.ServiceImpl
 {
@@ -15,7 +17,7 @@ namespace FitAppka.Service.ServiceImpl
             _clientRepository = clientRepository;
         }
 
-        public async void AddNewClient(RegisterModel model)
+        public async Task AddNewClient(RegisterModel model)
         {
             await _clientRepository.AddAsync(new Client()
             {
@@ -23,7 +25,11 @@ namespace FitAppka.Service.ServiceImpl
                 Email = model.Email,
                 Password = model.Password,
                 FirstName = model.FirstName,
-                SecondName = model.SecondName
+                SecondName = model.SecondName,
+                IsAdmin = false,
+                AutoDietaryGoals = true,
+                IncludeCaloriesBurned = false,
+                DateOfJoining = DateTime.Now
             });
         }
 

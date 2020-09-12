@@ -21,8 +21,8 @@ namespace FitAppka.Models
         public int ClientId { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? Date { get; set; }
-        [Column("Calorie_target")]
-        public int? CalorieTarget { get; set; }
+        [Column("Calorie_goal")]
+        public int? CalorieGoal { get; set; }
         [Column("Water_drunk")]
         public int? WaterDrunk { get; set; }
         public bool? Breakfast { get; set; }

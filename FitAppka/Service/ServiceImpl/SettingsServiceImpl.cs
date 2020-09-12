@@ -179,7 +179,7 @@ namespace FitAppka.Service.ServiceImpl
                 {
                     if (day.DayId == dayID)
                     {
-                        day.CalorieTarget = client.CalorieGoal;
+                        day.CalorieGoal = client.CalorieGoal;
                         day.ProteinTarget = client.ProteinTarget;
                         day.FatTarget = client.FatTarget;
                         day.CarbsTarget = client.CarbsTarget;
@@ -205,7 +205,7 @@ namespace FitAppka.Service.ServiceImpl
             client.WeightMeasurement.Add(new WeightMeasurement()
             {
                 DateOfMeasurement = DateTime.Now,
-                Weight = (double)m.Weight,
+                Weight = (short)m.Weight,
 
             });
 

@@ -22,10 +22,10 @@
 <body onload="onload()">
     @foreach (var item in Model) {
         if (item.Product.PhotoPath != null) {
-            <script>pathArray.push('@item.Product.PhotoPath');</script>
+            <script> pathArray.push('@item.Product.PhotoPath'); </script>
         }
         else {
-            <script>pathArray.push('null');</script>
+            <script> pathArray.push('null'); </script>
         }
         <script>
             IDarray.push('@item.MealId');
@@ -38,14 +38,8 @@
         </script>
     }
 
-    <div id="mealID" hidden></div>
-    <input type="hidden" id="waterCount" value="@ViewData["water"]" />
-
-    <div id="nav-placeholder">
-
-    </div>
-
-    
+    <input id="mealID" type="hidden">
+    <input id="waterCount" type="hidden" value="@ViewData["water"]" />
 
     <div class="navbar-light box-shadow mb-3" id="navbarDzien">
         <div class="mx-auto">
@@ -432,7 +426,7 @@
 
 
             <div id="boczny" class="col-lg-4 ml-lg-0 my-1 my-lg-0"> 
-                <div id="admin" class="pt-2 pb-2" style="background: #f5f5f5; margin-bottom: 1px" hidden>
+                <div id="admin" hidden>
                     <button id="adminBtn" class="btn btn-dark">PANEL ADMINISTRATORA</button>
                 </div> 
                 <div id="chartArea">
@@ -543,8 +537,6 @@
 
     <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
     <script>
-            
-
             var $j = jQuery.noConflict();
             $j("#dateBtn").datepicker({
                 showOn: "button",

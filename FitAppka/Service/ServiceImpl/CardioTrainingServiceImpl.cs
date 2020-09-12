@@ -161,7 +161,7 @@ namespace FitAppka.Service.ServiceImpl
                     ProteinTarget = client.ProteinTarget,
                     FatTarget = client.FatTarget,
                     CarbsTarget = client.CarbsTarget,
-                    CalorieTarget = client.CarbsTarget,
+                    CalorieGoal = client.CarbsTarget,
                     WaterDrunk = 0,
                 });
             }

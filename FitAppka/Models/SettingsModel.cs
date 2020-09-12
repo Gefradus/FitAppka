@@ -16,7 +16,7 @@ namespace FitAppka.Models
         [Display(Name = "Masa ciała [kg]")]
         [DataType(DataType.Currency, ErrorMessage = "Waga została podana nieprawidłowo")]
         [Required(ErrorMessage = "Prosze podać wagę (w kg)")]
-        public double? Weight { get; set; }
+        public short? Weight { get; set; }
 
         [Display(Name = "Wzrost [cm]")]
         [Required(ErrorMessage = "Proszę podać wzrost [w cm]")]

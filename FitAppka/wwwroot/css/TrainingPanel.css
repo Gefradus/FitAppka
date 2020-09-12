@@ -133,8 +133,7 @@
     margin-top: 10px;
     /*font-size: 18px;*/
     text-align: right;
-    font-family:'Javanese Text'
-
+}
 
 @media(max-width: 767px){
     #diary, #btnAdd, #datepicker {

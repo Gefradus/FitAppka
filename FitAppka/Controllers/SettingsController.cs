@@ -12,15 +12,13 @@ namespace FitAppka.Controllers
     [Authorize]
     public class SettingsController : Controller
     {
-        private readonly FitAppContext _context;
         private readonly IClientRepository _clientRepository;
         private readonly ISettingsService _settingsService;
 
-        public SettingsController(FitAppContext context, IClientRepository clientRepository, ISettingsService settingsService)
+        public SettingsController(IClientRepository clientRepository, ISettingsService settingsService)
         {
             _clientRepository = clientRepository;
             _settingsService = settingsService;
-            _context = context;
         }
 
         [HttpGet]
@@ -92,6 +90,7 @@ namespace FitAppka.Controllers
                 }
             }
 
+            FirstAppLaunch();
             return View(m);
         }
 

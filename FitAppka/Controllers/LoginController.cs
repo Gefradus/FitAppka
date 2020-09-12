@@ -73,7 +73,8 @@ namespace FitAppka.Controllers
 
                 if (clientByEmail == null && clientByLogin == null) {
                     if (model.ConfirmPassword == model.Password) {
-                        return await AddNewClientAndLogin(model);
+                        await _clientManageService.AddNewClient(model);
+                        return await SignInAndStart(model.Login);
                     }
                 }
                 else {
@@ -91,11 +92,6 @@ namespace FitAppka.Controllers
             return View(model);
         }
 
-        private async Task<IActionResult> AddNewClientAndLogin(RegisterModel model)
-        {
-            _clientManageService.AddNewClient(model);
-            return await SignInAndStart(model.Login);
-        }
 
         private async Task<IActionResult> SignInAndStart(string login)
         {

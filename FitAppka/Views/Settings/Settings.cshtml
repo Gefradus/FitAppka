@@ -10,7 +10,7 @@
         <script src="~/js/Validation.js"></script>
         <script type="text/javascript">
             function onload() {
-                if (@ViewData["isFirstLaunch"] == 0) {
+                if ('@ViewData["isFirstLaunch"]' == 0) {
                     setSex('@ViewData["sex"]');
                     setWeightAndGrowth('@ViewData["weight"]','@ViewData["growth"]')
                     setWeightChangeGoal('@ViewData["changeGoal"]')

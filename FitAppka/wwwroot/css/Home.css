@@ -8,6 +8,12 @@
     margin-right: 1px;
 }
 
+#admin {
+    background: #f5f5f5;
+    margin-bottom: 1px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
 
 .params {
     font-size: 14px;
