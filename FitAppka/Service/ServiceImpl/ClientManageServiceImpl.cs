@@ -10,9 +10,11 @@ namespace FitAppka.Service.ServiceImpl
     {
         private readonly IClientRepository _clientRepository;
         private readonly IDayRepository _dayRepository;
+        private readonly IProductRepository _productRepository;
 
-        public ClientManageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository)
+        public ClientManageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository, IProductRepository productRepository)
         {
+            _productRepository = productRepository;
             _dayRepository = dayRepository;
             _clientRepository = clientRepository;
         }
@@ -50,10 +52,19 @@ namespace FitAppka.Service.ServiceImpl
             return client != null && client.Password.Equals(model.Password);
         }
 
-        public bool HasUserAccess(int dayID)
+        public bool HasUserAccessToDay(int dayID)
         {
-            return _dayRepository.GetDay(dayID).ClientId == _clientRepository.GetLoggedInClientId() || _clientRepository.GetLoggedInClient().IsAdmin;
+            return HasUserAccess(_dayRepository.GetDay(dayID).ClientId);
+        }
+
+        public bool HasUserAccessToProduct(int productID)
+        {
+            return HasUserAccess(_productRepository.GetProduct(productID).ClientId);
         }
         
+        private bool HasUserAccess(int clientID)
+        {
+            return clientID == _clientRepository.GetLoggedInClientId() || _clientRepository.GetLoggedInClient().IsAdmin;
+        }
     }
 }

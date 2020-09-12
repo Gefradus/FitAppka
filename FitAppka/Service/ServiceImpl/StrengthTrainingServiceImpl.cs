@@ -21,7 +21,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public void AddStrengthTraining(int trainingTypeId, int dayID, short sets, short reps, short weight)
         {
-            if (_clientManageService.HasUserAccess(dayID))
+            if (_clientManageService.HasUserAccessToDay(dayID))
             {
                 _strengthTrainingRepository.Add(new StrengthTraining()
                 {
@@ -36,12 +36,12 @@ namespace FitAppka.Service.ServiceImpl
 
         public void AddStrengthTrainingType(int dayID, string name, short sets, short reps, short weight)
         {
-            if (_clientManageService.HasUserAccess(dayID))
+            if (_clientManageService.HasUserAccessToDay(dayID))
             {
                 StrengthTrainingType type = _strengthTrainingTypeRepository.Add(new StrengthTrainingType()
                 {
-                    VisibleToAll = false,
-                    ClientId = _clientRepository.GetLoggedInClient().ClientId,
+                    VisibleToAll = _clientRepository.IsLoggedInClientAdmin(),
+                    ClientId = _clientRepository.GetLoggedInClientId(),
                     TrainingName = name
                 });
 
@@ -58,7 +58,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public bool DeleteStrengthTraining(int id)
         {
-            if (_clientManageService.HasUserAccess(_strengthTrainingRepository.GetStrengthTraining(id).DayId))
+            if (_clientManageService.HasUserAccessToDay(_strengthTrainingRepository.GetStrengthTraining(id).DayId))
             {
                 _strengthTrainingRepository.Delete(id);
                 return true;
@@ -69,7 +69,7 @@ namespace FitAppka.Service.ServiceImpl
         public bool EditStrengthTraining(int id, short sets, short reps, short weight)
         {
             StrengthTraining training = _strengthTrainingRepository.GetStrengthTraining(id);
-            if (_clientManageService.HasUserAccess(training.DayId))
+            if (_clientManageService.HasUserAccessToDay(training.DayId))
             {
                 training.Sets = sets;
                 training.Repetitions = reps;

@@ -49,6 +49,7 @@ namespace FitAppka
             services.AddScoped<IFindDayService, FindDayServiceImpl>();
             services.AddScoped<IClientManageService, ClientManageServiceImpl>();
             services.AddScoped<IProductManageService, ProductManageServiceImpl>();
+            services.AddScoped<IGoalsService, GoalsServiceImpl>();
         }
 
         private void RepositoriesAddScoped(IServiceCollection services)

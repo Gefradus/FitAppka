@@ -39,7 +39,7 @@ namespace FitAppka.Service.ServiceImpl
         public bool EditCardio(int id, int time, int burnedKcal)
         {
             CardioTraining cardio = _cardioRepository.GetCardioTraining(id);
-            if (_clientManageService.HasUserAccess(cardio.DayId))
+            if (_clientManageService.HasUserAccessToDay(cardio.DayId))
             {
                 cardio.TimeInMinutes = time;
                 cardio.CaloriesBurned = burnedKcal;
@@ -51,7 +51,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public bool DeleteCardio(int id)
         {
-            if(_clientManageService.HasUserAccess(_cardioRepository.GetCardioTraining(id).DayId)){
+            if(_clientManageService.HasUserAccessToDay(_cardioRepository.GetCardioTraining(id).DayId)){
                 _cardioRepository.Delete(id);
                 return true;
             }
@@ -60,13 +60,14 @@ namespace FitAppka.Service.ServiceImpl
 
         public void AddCardioTrainingType(int dayID, string name, int kcalPerMin)
         {
-            if (_clientManageService.HasUserAccess(dayID))
+            if (_clientManageService.HasUserAccessToDay(dayID))
             {
                 _cardioTypeRepository.Add(new CardioTrainingType
                 {
                     TrainingName = name,
                     KcalPerMin = kcalPerMin,
-                    ClientId = _clientRepository.GetLoggedInClient().ClientId
+                    ClientId = _clientRepository.GetLoggedInClientId(),
+                    VisibleToAll = _clientRepository.IsLoggedInClientAdmin()
                 });
             }
         }

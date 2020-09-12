@@ -15,7 +15,7 @@ namespace FitAppka.Models
         [Column("Product_ID")]
         public int ProductId { get; set; }
         [Column("Client_ID")]
-        public int? ClientId { get; set; }
+        public int ClientId { get; set; }
         [Required]
         [Column("Product_name")]
         [StringLength(50)]

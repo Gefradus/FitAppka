@@ -12,10 +12,12 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly IProductRepository _productRepository;
         private readonly IClientRepository _clientRepository;
+        private readonly IClientManageService _clientManageService;
 
         public ProductManageServiceImpl(IDayRepository dayRepository, IWebHostEnvironment hostEnvironment, 
-            IProductRepository productRepository, IClientRepository clientRepository)
+            IProductRepository productRepository, IClientRepository clientRepository, IClientManageService clientManageService)
         {
+            _clientManageService = clientManageService;
             _clientRepository = clientRepository;
             _productRepository = productRepository;
             _hostEnvironment = hostEnvironment;
@@ -64,15 +66,6 @@ namespace FitAppka.Service.ServiceImpl
             } 
         }
 
-        private void SetProductVisibility(Product product)
-        {
-            if (_clientRepository.GetLoggedInClient().IsAdmin) {
-                product.VisibleToAll = true;
-            }
-            else {
-                product.VisibleToAll = false;
-            }
-        }
 
         private string CreatePathToPhoto(CreateProductModel model)
         {
@@ -89,9 +82,10 @@ namespace FitAppka.Service.ServiceImpl
 
         public void CreateProductFromModel(CreateProductModel model)
         {
-            SetProductVisibility( _productRepository.Add(new Product()
+            _productRepository.Add(new Product()
             {
                 ClientId = _clientRepository.GetLoggedInClientId(),
+                VisibleToAll = _clientRepository.IsLoggedInClientAdmin(),
                 ProductName = model.ProductName,
                 PhotoPath = CreatePathToPhoto(model),
                 Calories = (double)model.Calories,
@@ -119,13 +113,13 @@ namespace FitAppka.Service.ServiceImpl
                 Sodium = model.Sodium,
                 Calcium = model.Calcium,
                 Iron = model.Iron
-            }));
+            });
         }
 
         public void UpdateProduct(CreateProductModel model, int id, int addOrEditPhoto)
         {
             Product product = _productRepository.GetProduct(id);
-            if(product.ClientId == _clientRepository.GetLoggedInClientId() || _clientRepository.GetLoggedInClient().IsAdmin)
+            if(_clientManageService.HasUserAccessToProduct(product.ProductId))
             {
                 product.ProductName = model.ProductName;
                 product.Calories = (double)model.Calories;

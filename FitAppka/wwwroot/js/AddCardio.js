@@ -28,7 +28,7 @@ function addCardioType(dayID, url) {
     if (!isEmpty(name) && !isEmpty(expenditure)) {
         if (!isNaN(expenditureInt)) {
             if (name.length >= 3) {
-                addCardioTypeVal(dayID, url, name, kcalPerMin);
+                addCardioTypeVal(dayID, url, name, expenditureInt);
             }
             else {
                 validation("Nazwa ćwiczenia musi wynosić min. 3 znaki");

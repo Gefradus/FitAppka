@@ -8,7 +8,8 @@ namespace FitAppka.Service
         public Task AddNewClient(RegisterModel model);
         public string GetClientLoginFromModel(Client model);
         public bool CheckIfPassCorrect(Client model);
-        public bool HasUserAccess(int dayID);
+        public bool HasUserAccessToDay(int dayID);
+        public bool HasUserAccessToProduct(int productID);
 
     }
 }

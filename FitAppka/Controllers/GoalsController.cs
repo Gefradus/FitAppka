@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FitAppka.Repository;
+using FitAppka.Models;
 
 namespace FitAppka.Controllers
 {
@@ -25,6 +26,13 @@ namespace FitAppka.Controllers
         {
             ViewData["dayID"] = _dayRepository.GetClientDays(_clientRepository.GetLoggedInClient().ClientId).Where(d => d.Date == DateTime.Now.Date).FirstOrDefault().DayId;
             return View();
+        }
+
+        [HttpPut]
+        public IActionResult Goals(CreateGoalsModel model)
+        {
+
+            return RedirectToAction("Start", "Home");
         }
     }
 }

@@ -22,7 +22,8 @@ namespace FitAppka.Models
         public string TrainingName { get; set; }
         [Column("Kcal_per_min")]
         public int? KcalPerMin { get; set; }
-
+        [Column("Visible_to_all")]
+        public bool? VisibleToAll { get; set; }
         [ForeignKey(nameof(ClientId))]
         [InverseProperty("CardioTrainingType")]
         public virtual Client Client { get; set; }
