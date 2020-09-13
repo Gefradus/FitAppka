@@ -23,8 +23,5 @@ namespace FitAppka.Service
         public double SumAllFatsInDay(DateTime daySelected);
         public string DateFormat(DateTime daySelected);
         
-        
-        
-
     }
 }

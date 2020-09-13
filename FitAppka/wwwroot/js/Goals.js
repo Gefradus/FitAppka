@@ -1,18 +1,22 @@
-﻿function inputBlocking() {
+﻿function setInputsValues() {
     block(document.getElementById("auto").checked);
+    $("#caloriesTarget").val(parseInt($("#hiddenKcal").val()));
+    $("#proteinsTarget").val(parseInt($("#hiddenProtein").val()));
+    $("#fatsTarget").val(parseInt($("#hiddenFat").val()));
+    $("#carbsTarget").val(parseInt($("#hiddenCarbs").val()));
 }
 
 function block(autoChecked) {
-    blockInputIfAutoChecked(autoChecked, document.getElementById("caloriesTarget"));
-    blockInputIfAutoChecked(autoChecked, document.getElementById("proteinsTarget"));
-    blockInputIfAutoChecked(autoChecked, document.getElementById("carbsTarget"));
-    blockInputIfAutoChecked(autoChecked, document.getElementById("fatsTarget"));
+    blockInputIfAutoChecked(autoChecked, document.getElementById("caloriesTarget"), parseInt($("#hiddenKcal").val()));
+    blockInputIfAutoChecked(autoChecked, document.getElementById("proteinsTarget"), parseInt($("#hiddenProtein").val()));
+    blockInputIfAutoChecked(autoChecked, document.getElementById("carbsTarget"), parseInt($("#hiddenFat").val()));
+    blockInputIfAutoChecked(autoChecked, document.getElementById("fatsTarget"), parseInt($("#hiddenCarbs").val()));
 }
 
-function blockInputIfAutoChecked(autoChecked, element) {
+function blockInputIfAutoChecked(autoChecked, element, val) {
     if (autoChecked) {
         setNotAllowedCursor(element);
-        element.value = '';
+        element.value = val;
         element.disabled = true;
         hideOrShowStars(true);
     }
