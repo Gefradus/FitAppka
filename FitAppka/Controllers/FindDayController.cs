@@ -2,8 +2,6 @@
 using FitAppka.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
 
 namespace FitAppka.Controllers
 {
@@ -12,13 +10,13 @@ namespace FitAppka.Controllers
     public class FindDayController : Controller
     {
         private readonly IFindDayService _findDayService;
-        private readonly IDayRepository _dayRepository;
+        private readonly IDayManageService _dayManageService;
         private readonly IClientRepository _clientRepository;
         
-        public FindDayController(IClientRepository clientRepository, IDayRepository dayRepository, IFindDayService findDayService)
+        public FindDayController(IClientRepository clientRepository, IDayManageService dayManageService, IFindDayService findDayService)
         {
             _findDayService = findDayService;
-            _dayRepository = dayRepository;
+            _dayManageService = dayManageService;
             _clientRepository = clientRepository;
         }
 
@@ -34,14 +32,14 @@ namespace FitAppka.Controllers
             ViewData["daysID"] = listOfDays;
             ViewData["clientID"] = clientID;
             ViewData["productID"] = productID;
-            ViewData["dayID"] = _dayRepository.GetClientDays(clientID).Where(d => d.Date == DateTime.Now.Date).FirstOrDefault().DayId;
+            ViewData["dayID"] = _dayManageService.GetTodayId();
             ViewData["allProducts"] = _findDayService.CreateProductsList(productID);
             ViewData["wheterFound"] = _findDayService.WheterDayFound(listOfDays);
             ViewData["listByWater"] = _findDayService.WaterInDays(listOfDays);
             ViewData["listByKcal"] = _findDayService.CaloriesInDays(listOfDays);
             ViewData["listByGrammages"] = _findDayService.GrammageInDays(listOfDays, productID);
                          
-            return View(_dayRepository.GetAllDays());
+            return View(_dayManageService.GetAllDays());
         }
 
     }

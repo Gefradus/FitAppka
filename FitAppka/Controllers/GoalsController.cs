@@ -12,21 +12,21 @@ namespace FitAppka.Controllers
     [Authorize]
     public class GoalsController : Controller
     {
-        private readonly IDayRepository _dayRepository;
+        private readonly IDayManageService _dayService;
         private readonly IClientRepository _clientRepository;
         private readonly IGoalsService _goalsService;
 
-        public GoalsController(IDayRepository dayRepository, IClientRepository clientRepository, IGoalsService goalsService)
+        public GoalsController(IDayManageService dayService, IClientRepository clientRepository, IGoalsService goalsService)
         {
+            _dayService = dayService;
             _goalsService = goalsService;
             _clientRepository = clientRepository;
-            _dayRepository = dayRepository;
         }
 
         [HttpGet]
         public IActionResult Goals()
         {
-            ViewData["dayID"] = GetTodayId();
+            ViewData["dayID"] = _dayService.GetTodayId();
             SendDataAboutGoals();
             return View();
         }
@@ -58,9 +58,5 @@ namespace FitAppka.Controllers
 
         }
 
-        private int GetTodayId()
-        {
-            return _dayRepository.GetClientDays(_clientRepository.GetLoggedInClientId()).Where(d => d.Date == DateTime.Now.Date).FirstOrDefault().DayId;
-        }
     }
 }

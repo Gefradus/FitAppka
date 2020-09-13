@@ -1,11 +1,12 @@
 ﻿using FitAppka.Models;
 using FitAppka.Repository;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FitAppka.Service.ServiceImpl
 {
-    public class DayServiceImpl : IDayService
+    public class DayServiceImpl : IDayManageService
     {
         private readonly IClientRepository _clientRepository;
         private readonly IDayRepository _dayRepository;
@@ -49,14 +50,24 @@ namespace FitAppka.Service.ServiceImpl
             return _dayRepository.GetClientDayByDate(day, _clientRepository.GetLoggedInClientId()).DayId;
         }
 
-        public int GetTodayID()
+        public int GetTodayId()
         {
-            return GetDayIDByDate(DateTime.Now);
+            return GetDayIDByDate(DateTime.Now.Date);
         }
 
         public DateTime GetDayDateTime(int id)
         {
             return _dayRepository.GetDayDateTime(id);
+        }
+
+        public IEnumerable<Day> GetAllDays()
+        {
+            return _dayRepository.GetAllDays();
+        }
+
+        public Day GetClientDayByDate(DateTime date, int clientID)
+        {
+            return _dayRepository.GetClientDayByDate(date, clientID);
         }
     }
 }

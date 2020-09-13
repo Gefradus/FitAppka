@@ -18,10 +18,10 @@ namespace FitAppka.Controllers
         private readonly IClientRepository _clientRepository;
         private readonly ICardioTrainingService _cardioServices;
         private readonly IStrengthTrainingService _strengthTrainingService;
-        private readonly IDayService _dayService;
+        private readonly IDayManageService _dayService;
 
         public TrainingController(IClientRepository clientRepository, ICardioTrainingService cardioTrainingServices, 
-            IStrengthTrainingService strengthTrainingServices, FitAppContext context, IDayService dayService) 
+            IStrengthTrainingService strengthTrainingServices, FitAppContext context, IDayManageService dayService) 
         {
             _dayService = dayService;
             _context = context;
@@ -64,7 +64,7 @@ namespace FitAppka.Controllers
                 _cardioServices.AddCardio(cardioTypeId, dayID, timeInMinutes, burnedKcal);
                 return RedirectToAction(nameof(TrainingPanel), new { dayID });
             }
-            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = _dayService.GetTodayID() }); } 
+            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = _dayService.GetTodayId() }); } 
         }
 
         [HttpPut]
@@ -93,7 +93,7 @@ namespace FitAppka.Controllers
                 _strengthTrainingService.AddStrengthTraining(trainingTypeId, dayID, sets, reps, weight);
                 return RedirectToAction(nameof(TrainingPanel), new { dayID });
             }
-            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = _dayService.GetTodayID() }); } 
+            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = _dayService.GetTodayId() }); } 
         }
 
         [HttpPut]

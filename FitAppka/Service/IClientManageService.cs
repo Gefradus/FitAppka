@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FitAppka.Service
@@ -10,6 +11,5 @@ namespace FitAppka.Service
         public bool CheckIfPassCorrect(Client model);
         public bool HasUserAccessToDay(int dayID);
         public bool HasUserAccessToProduct(int productID);
-
     }
 }

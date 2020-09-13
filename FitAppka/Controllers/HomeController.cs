@@ -17,15 +17,15 @@ namespace NowyDotnecik.Controllers
     {
         private readonly FitAppContext _context;
         private readonly IWebHostEnvironment _env;
-        private readonly IDayRepository _dayRepository;
+        private readonly IDayManageService _dayService;
         private readonly IClientRepository _clientRepository;
         private readonly IHomePageService _homeService;
 
         public HomeController(FitAppContext context, IWebHostEnvironment env, IHomePageService homePageService,
-            IDayRepository dayRepository, IClientRepository clientRepository)
+            IDayManageService dayService, IClientRepository clientRepository)
         {
             _homeService = homePageService;
-            _dayRepository = dayRepository;
+            _dayService = dayService;
             _clientRepository = clientRepository;
             _context = context;
             _env = env;
@@ -37,7 +37,7 @@ namespace NowyDotnecik.Controllers
             _homeService.Home(daySelected);
             SendAllDataToView(daySelected);
             return View(await _context.Meal.Include(m => m.Day).Include(p => p.Product).
-                Where(m => m.DayId == _dayRepository.GetClientDayByDate(daySelected, _clientRepository.GetLoggedInClientId()).DayId).ToListAsync());
+                Where(m => m.DayId == _dayService.GetClientDayByDate(daySelected, _clientRepository.GetLoggedInClientId()).DayId).ToListAsync());
         }
 
         [HttpGet]
@@ -53,7 +53,7 @@ namespace NowyDotnecik.Controllers
         public IActionResult Return(int dayID)
         {
             DateTime daySelected;
-            DateTime day = _dayRepository.GetDayDateTime(dayID);
+            DateTime day = _dayService.GetDayDateTime(dayID);
             if (day != null && dayID != 0) { 
                 daySelected = day; 
             }
@@ -67,7 +67,7 @@ namespace NowyDotnecik.Controllers
         [HttpGet]
         public IActionResult ChooseDay(int choice, int dayID)
         {
-            DateTime daySelected = _dayRepository.GetDayDateTime(dayID);
+            DateTime daySelected = _dayService.GetDayDateTime(dayID);
 
             if (choice == 1) {
                 return RedirectToAction(nameof(Home), new { daySelected = daySelected.AddDays(-1) });
@@ -123,7 +123,7 @@ namespace NowyDotnecik.Controllers
         private void SendAllDataToView(DateTime daySelected)
         {
             int clientID = _clientRepository.GetLoggedInClientId();
-            Day day = _dayRepository.GetClientDayByDate(daySelected, clientID);
+            Day day = _dayService.GetClientDayByDate(daySelected, clientID);
 
             SendBasicData(daySelected, clientID, day);
             SendInfoIfIsAdminClient(clientID);

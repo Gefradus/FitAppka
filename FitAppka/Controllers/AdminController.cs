@@ -15,18 +15,15 @@ namespace FitAppka.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        private readonly IProductRepository _productRepository;
         private readonly IProductManageService _productManageService;
         private readonly IClientRepository _clientRepository;
         private readonly FitAppContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public AdminController(FitAppContext context, IWebHostEnvironment env, IProductRepository productRepository, 
-            IClientRepository clientRepository, IProductManageService productManageService)
+        public AdminController(FitAppContext context, IWebHostEnvironment env, IClientRepository clientRepository, IProductManageService productManageService)
         {
             _productManageService = productManageService;
             _clientRepository = clientRepository;
-            _productRepository = productRepository;
             _context = context;
             _env = env;
         }
@@ -98,7 +95,7 @@ namespace FitAppka.Controllers
 
         private void SendDataAboutProductToView(int id)
         {
-            Product product = _productRepository.GetProduct(id);
+            Product product = _productManageService.GetProduct(id);
             ViewData["productID"] = id;
             ViewData["name"] = product.ProductName;
             ViewData["path"] = product.PhotoPath;
@@ -144,7 +141,7 @@ namespace FitAppka.Controllers
         {
             if (_clientRepository.IsLoggedInClientAdmin())
             {
-                _productRepository.Delete(productID);
+                _productManageService.Delete(productID);
                 return Json(true);
             }
             return Json(false);
