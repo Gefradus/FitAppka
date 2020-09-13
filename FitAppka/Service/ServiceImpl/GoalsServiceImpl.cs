@@ -69,12 +69,14 @@ namespace FitAppka.Service.ServiceImpl
             {
                 foreach (var day in _dayRepository.GetClientDays(client.ClientId))
                 {
-                    if (day.DayId.Equals(dayID))
+                    if (day.DayId == dayID)
                     {
                         day.CalorieGoal = client.CalorieGoal;
                         day.ProteinTarget = client.ProteinTarget;
                         day.FatTarget = client.FatTarget;
                         day.CarbsTarget = client.CarbsTarget;
+                        day.KcalBurnedGoal = client.KcalBurnedGoal;
+                        day.TrainingTimeGoal = client.TrainingTimeGoal;
                         _dayRepository.Update(day);
                     }
                 }
