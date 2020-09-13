@@ -110,17 +110,6 @@
             </div>
         </div>
 
-        <div id="validationModal" class="modal fade" data-backdrop="static" role="dialog">
-            <div id="valDialog" class="modal-dialog cent">
-                <div class="modal-content" style="width: 300px">
-                    <div id="validatMsg" class="modal-body cent"></div>
-                    <div class="modal-footer">
-                        <button id="closeVal" type="button" class="btn">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div style="display: flex; margin-bottom: 12px">
             <div id="diary">Dziennik treningowy dla: </div>
             <input id="datepicker" onchange="changeDay('@Url.Action("ChangeDay", "Training")');" type="text" style="margin-left: 10px; margin-right: 15px; margin-top: 2px; text-align: center" value="@ViewData["day"]" readonly="readonly" />
