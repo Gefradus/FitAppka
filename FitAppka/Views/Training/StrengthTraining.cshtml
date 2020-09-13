@@ -36,19 +36,19 @@
                                 <div style="margin-left: -143px">Serie:</div><div class="star">*</div>
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 3px;">
-                                <input id="setsT" type="number" max="9999" onkeypress="return onlyInt(event)" oninput="validity.valid || (value = '')" />
+                                <input id="setsT" type="number" max="99999999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000)" oninput="validity.valid || (value = '')" />
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 15px;">
                                 <div style="margin-left: -90px">Powtórzenia:</div><div class="star">*</div>
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 3px;">
-                                <input id="repsT" type="number" max="9999" onkeypress="return onlyInt(event)" oninput="validity.valid || (value = '')" />
+                                <input id="repsT" type="number" max="99999999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000)" oninput="validity.valid || (value = '')" />
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 15px;">
                                 <div style="margin-left: -135px">Ciężar:</div>
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 3px;">
-                                <input id="weightT" type="number" max="9999" onkeypress="return onlyInt(event)" oninput="validity.valid || (value = '')" />
+                                <input id="weightT" type="number" max="99999999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000)" oninput="validity.valid || (value = '')" />
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
                                 <button type="button" onclick="addStrengthTrainingType(@ViewData["dayID"], '@Url.Action("AddStrengthTrainingType", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
@@ -106,17 +106,17 @@
                         <div class="acent">
                             <div>Serie:</div><div class="star">*</div>
                         </div>
-                        <input class="cb" id="sets" type="number" name="sets" min="1" max="10000" step="1" oninput="validity.valid||(value='')">
+                        <input class="cb" id="sets" type="number" name="sets" min="1" max="9999999" step="1" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000)" oninput="validity.valid || (value = '')">
                     </div>
                     <div id="repsArea" class="param" hidden>
                         <div class="acent">
                             <div>Powtórzenia:</div><div class="star">*</div>
                         </div>
-                        <input class="cb" id="reps" type="number" step="1" name="reps" />
+                        <input class="cb" id="reps" type="number" max="9999999" step="1" name="reps" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000)" oninput="validity.valid || (value = '')"/>
                     </div>
                     <div id="weightArea" class="param" hidden>
                         <div>Ciężar:</div>
-                        <input id="weight" type="number" step="1" name="weight" />
+                        <input id="weight" type="number" step="1" max="9999999" name="weight" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000)" oninput="validity.valid || (value = '')"/>
                         <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kg.</div>
                     </div>
                     <div id="add" hidden class="cent cb">

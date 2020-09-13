@@ -48,7 +48,7 @@
                         <div class="rightCol">
                             <label class="control-label fl">Białka:</label><div class="star fl">*</div>
                             <div style="display: flex;" class="cb">
-                                <input id="proteinsTarget" asp-for="ProteinsTarget" class="form-control" type="text" disabled onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
+                                <input id="proteinsTarget" asp-for="ProteinsTarget" class="form-control" type="number" disabled onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
                                 <div class="jednostka">g</div>
                             </div>
                             <span asp-validation-for="ProteinsTarget" class="text-danger"></span>
@@ -58,7 +58,7 @@
                         <div class="leftCol">
                             <label class="control-label fl">Tłuszczy:</label><div class="star fl">*</div>
                             <div id="tluInDiv" style="display: flex" class="cb">
-                                <input id="fatsTarget" asp-for="FatsTarget" class="form-control" type="text" disabled onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
+                                <input id="fatsTarget" asp-for="FatsTarget" class="form-control" type="number" disabled onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
                                 <div class="jednostka">g</div>
                             </div>
                             <span asp-validation-for="FatsTarget" class="text-danger"></span>
@@ -66,7 +66,7 @@
                         <div class="rightCol">
                             <label class="control-label fl">Węglowodanów:</label><div class="star fl">*</div>
                             <div style="display: flex" class="cb">
-                                <input id="carbsTarget" asp-for="CarbohydratesTarget" class="form-control" type="text" disabled onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
+                                <input id="carbsTarget" asp-for="CarbohydratesTarget" class="form-control" type="number" disabled onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
                                 <div class="jednostka">g</div>
                             </div>
                             <span asp-validation-for="CarbohydratesTarget" class="text-danger"></span>
@@ -87,7 +87,7 @@
                         <div class="rightCol">
                             <label class="control-label">Cel minut treningów:</label>
                             <div style="display: flex; margin-right: 14px">
-                                <input id="timeGoal" asp-for="TrainingTimeGoal" class="form-control" type="text" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1440)" />
+                                <input id="timeGoal" asp-for="TrainingTimeGoal" class="form-control" type="number" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1440)" />
 
                             </div>
                             <span asp-validation-for="TrainingTimeGoal" class="text-danger"></span>
