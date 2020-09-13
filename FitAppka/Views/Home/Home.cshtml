@@ -9,11 +9,11 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="~/js/Validation.js"></script>
     <script type="text/javascript">
-        function createChart() { drawChart(@ViewData["proteins0"], @ViewData["carbs0"], @ViewData["fats0"]); }
         function showWater() { glass(@ViewData["water"], @ViewData["caloriesTarget"]); }
         function overflow() { colorItRed(@ViewData["%proteins"], @ViewData["%carbs"], @ViewData["%fats"], @ViewData["%calories"]); }
         function deleteMeal(id) { deleteMealUrl(id, '@Url.Action("Meal","Home")'); }
         function showEditModal(id) { showEditModalUrl(id, '@Url.Action("Meal","Home")'); }
+        function createChart() { drawChart(@ViewData["proteins0"], @ViewData["carbs0"], @ViewData["fats0"]); }
         function hide() { hideChart(@ViewData["proteins0"], @ViewData["carbs0"], @ViewData["fats0"]); }
     </script>
     <script src="~/js/Main.js"></script>
@@ -117,7 +117,7 @@
                             </div>
 
                             <div class="row no-gutters cent" style="margin-top: 10px;">
-                                <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center;" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 999999)"/><div style="font-weight: 600; margin-top: 2px">g</div>
+                                <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center;" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 999999)"/><div style="font-weight: 600; margin-top: 2px">g</div>
                                 <button id="editMeal" style="margin-left: 5px; background:none; border:none"><img style="width:30px; height:30px" src="~/img/save.png" /></button>
                             </div>
                         </div>
@@ -425,7 +425,7 @@
                 <div style="background: #f5f5f5">
                     <h6 id="waterHeader">Spożycie płynów</h6>
                     <input type="hidden" id="div_position" name="div_position" />
-                    <img id="glass" class="my-3 my-sm-4 my-lg-5" src="~/img/glass.png">
+                    <img id="glass" class="my-3 my-sm-4 my-lg-5" src="~/img/00.png">
                     <div id="showWater" class="container">
                         <div class="row" style="margin-bottom: 10px">
                             <div id="water">@ViewData["water"] ml</div>
@@ -439,7 +439,7 @@
                         <div class="container">
                             <div class="row" style="margin-bottom: 10px">
                                 <div id="editingWater">
-                                    <input id="EditedWater" name="EditedWater" type="number" min="0" max="99999999" value="@ViewData["water"]" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 100000)" oninput="validity.valid || (value = '')"/>
+                                    <input id="EditedWater" name="EditedWater" type="number" min="0" max="99999999" value="@ViewData["water"]" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 100000)" oninput="validity.valid || (value = '')"/>
                                 </div>
                                 <div class="divDodEdyWode">
                                     <button type="button" class="button" onclick="editWater('@Url.Action("Water", "Home")', @ViewData["dayID"], @ViewData["caloriesTarget"])">
@@ -454,7 +454,7 @@
                         <div class="container">
                             <div style="padding-bottom: 30px" class="row">
                                 <div id="addingWater">
-                                    <input id="AddedWater" name="AddedWater" type="number" min="1" max="9999999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 10000)" oninput="validity.valid || (value = '')"/>
+                                    <input id="AddedWater" name="AddedWater" type="number" min="1" max="9999999" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 10000)" oninput="validity.valid || (value = '')"/>
                                 </div>
                                 <div id="ml">ml</div>
                                 <div class="divDodEdyWode">

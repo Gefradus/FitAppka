@@ -17,8 +17,8 @@ function contains(string, substring) {
     return string.indexOf(substring) !== -1
 }
 
-function changeToInteger(value){
-    var convertedInteger = parseInt(value.replace('e','').replace('E','')).toString();
+function changeToInteger(value) {
+    var convertedInteger = parseInt(value.replace('e', '').replace('E', '')).toString();
 
     if (convertedInteger.length > 5){
         return parseInt(removeNonNumericChars(convertedInteger.slice(0, -(convertedInteger.length - 5))));
@@ -95,7 +95,7 @@ function changeToMaxIfGreaterFloat(value, maxLength, max) {
         return max;
     }
     else {
-        return value;
+        return changeToNumeric(value, maxLength);
     }
 }
 
@@ -141,3 +141,5 @@ function preventZero(val) {
         return val;
     }
 }
+
+

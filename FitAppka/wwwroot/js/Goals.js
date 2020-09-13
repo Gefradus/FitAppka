@@ -112,3 +112,17 @@ function setMaxValue(maxValue, message, element) {
         return true;
     }
 }
+
+function inputsOnChange() {
+    $(".target").on("change", function () {
+        this.value = changeToInteger(this.value)
+    });
+
+    $("#timeGoal").on("change", function () {
+        this.value = changeToMaxIfGreaterInt(this.value, 1440);
+    });
+
+    $("#burnGoal").on("change", function () {
+        this.value = changeToMaxIfGreaterInt(this.value, 5000);
+    });
+}

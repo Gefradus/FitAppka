@@ -7,3 +7,11 @@
     }
 });
 
+function siteLoad() {
+    $(".num").on("keypress", function (event) {
+        return onlyNumbers(event);
+    });
+    $(".int").on("keypress", function (event) {
+        return onlyInt(event);
+    });
+}

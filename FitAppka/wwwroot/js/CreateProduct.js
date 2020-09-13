@@ -21,3 +21,15 @@
         imgDown.style.marginLeft = '5px';
     }
 }
+
+function micronutritionsValidation() {
+    $(".micro").on("change", function () {
+        this.value = changeToMaxIfGreaterFloat(this.value, 5, 10000);
+    });
+    $(".macro").on("change", function () {
+        this.value = changeToMaxIfGreaterFloat(this.value, 3, 100);
+    });
+    $(".int").on("change", function () {
+        this.value = changeToMaxIfGreaterInt(this.value, 9000);
+    });
+}

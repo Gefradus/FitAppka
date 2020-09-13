@@ -12,3 +12,8 @@ html{
     padding-top: 20px;
     background: white
 }
+
+.flexcb{
+    display: flex;
+    clear: both;
+}
