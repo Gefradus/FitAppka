@@ -16,7 +16,7 @@ function block(autoChecked) {
 function blockInputIfAutoChecked(autoChecked, element, val) {
     if (autoChecked) {
         setNotAllowedCursor(element);
-        element.value = val;
+        restoreValueIfAuto(element, val);
         element.disabled = true;
         hideOrShowStars(true);
     }
@@ -26,6 +26,16 @@ function blockInputIfAutoChecked(autoChecked, element, val) {
         hideOrShowStars(false);
     }
 }
+
+function restoreValueIfAuto(element, val) {
+    if ($("#hiddenAuto").val() == 1) {
+        element.value = val;
+    }
+    else {
+        element.value = '';
+    }
+}
+
 
 function hideOrShowStars(boolean) {
     var list = document.getElementsByClassName("star");

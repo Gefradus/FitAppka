@@ -10,7 +10,7 @@
     <script src="~/js/Goals.js"></script>
     <script>
         function onload() {
-            $("#auto").prop("checked", '@((bool)ViewData["auto"] ? 1 : 0)' == 1);
+            $("#auto").prop("checked", $("#hiddenAuto").val() == 1);
             $("#include").prop("checked", '@((bool)ViewData["include"] ? 1 : 0)' == 1);
             setInputsValues();
             $("#burnGoal").val(parseInt(preventZero(@ViewData["burnGoal"])));
@@ -19,6 +19,7 @@
     </script>
 </head>
 <body onload="onload()">
+    <input type="hidden" id="hiddenAuto" value="@((bool)ViewData["auto"] ? 1 : 0)">
     <input type="hidden" id="hiddenKcal" value="@ViewData["calorieTarget"]" />
     <input type="hidden" id="hiddenProtein" value="@ViewData["proteinTarget"]" />
     <input type="hidden" id="hiddenFat" value="@ViewData["fatTarget"]" />
@@ -56,7 +57,7 @@
                     <div class="form-group cent" style="border-bottom: 1px solid darkgray; padding-bottom: 30px">
                         <div class="leftCol">
                             <label class="control-label fl">Tłuszczy:</label><div class="star fl">*</div>
-                            <div style="display: flex" class="cb">
+                            <div id="tluInDiv" style="display: flex" class="cb">
                                 <input id="fatsTarget" asp-for="FatsTarget" class="form-control" type="text" disabled onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
                                 <div class="jednostka">g</div>
                             </div>
@@ -77,16 +78,16 @@
                     <div class="form-group cent">
                         <div class="leftCol">
                             <label class="control-label">Cel spalonych kalorii:</label>
-                            <div style="display: flex;">
-                                <input id="burnGoal" asp-for="CaloriesBurnedGoal" class="form-control" type="number" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 5000)" />
+                            <div style="display: flex; margin-right: 25px">
+                                <input id="burnGoal" asp-for="CaloriesBurnedGoal" class="form-control" type="number" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 5000)" />
 
                             </div>
                             <span asp-validation-for="CaloriesBurnedGoal" class="text-danger"></span>
                         </div>
                         <div class="rightCol">
                             <label class="control-label">Cel minut treningów:</label>
-                            <div style="display: flex;">
-                                <input id="timeGoal" asp-for="TrainingTimeGoal" class="form-control" type="text" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 1440)" />
+                            <div style="display: flex; margin-right: 14px">
+                                <input id="timeGoal" asp-for="TrainingTimeGoal" class="form-control" type="text" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1440)" />
 
                             </div>
                             <span asp-validation-for="TrainingTimeGoal" class="text-danger"></span>

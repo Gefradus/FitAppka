@@ -439,7 +439,7 @@
                         <div class="container">
                             <div class="row" style="margin-bottom: 10px">
                                 <div id="editingWater">
-                                    <input id="EditedWater" name="EditedWater" type="number" min="0" value="@ViewData["water"]" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 100000)" />
+                                    <input id="EditedWater" name="EditedWater" type="number" min="0" max="99999999" value="@ViewData["water"]" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 100000)" oninput="validity.valid || (value = '')"/>
                                 </div>
                                 <div class="divDodEdyWode">
                                     <button type="button" class="button" onclick="editWater('@Url.Action("Water", "Home")', @ViewData["dayID"], @ViewData["caloriesTarget"])">
@@ -454,7 +454,7 @@
                         <div class="container">
                             <div style="padding-bottom: 30px" class="row">
                                 <div id="addingWater">
-                                    <input id="AddedWater" name="AddedWater" type="number" min="1" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)"/>
+                                    <input id="AddedWater" name="AddedWater" type="number" min="1" max="9999999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 10000)" oninput="validity.valid || (value = '')"/>
                                 </div>
                                 <div id="ml">ml</div>
                                 <div class="divDodEdyWode">

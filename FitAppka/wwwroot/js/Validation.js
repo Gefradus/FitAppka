@@ -21,11 +21,11 @@ function changeToInteger(value){
     var convertedInteger = parseInt(value.replace('e','').replace('E','')).toString();
 
     if (convertedInteger.length > 5){
-        return removeNonNumericChars(convertedInteger.slice(0, -(convertedInteger.length - 5)));
+        return parseInt(removeNonNumericChars(convertedInteger.slice(0, -(convertedInteger.length - 5))));
     }
     else 
     {
-        return removeNonNumericChars(convertedInteger);
+        return parseInt(removeNonNumericChars(convertedInteger));
     }
 }
 
@@ -90,12 +90,21 @@ function countCommaInString(string) {
     return counter;
 }
 
-function changeToMaxIfGreater(value, max){
-    if(parseFloat(value.replace(',','.'), 2) > max) {
+function changeToMaxIfGreaterFloat(value, maxLength, max) {
+    if (parseFloat(changeToNumeric(value, maxLength).replace(',', '.'), 2) > max) {
         return max;
     }
     else {
         return value;
+    }
+}
+
+function changeToMaxIfGreaterInt(value, max) {
+    if (parseInt(changeToInteger(value)) > max) {
+        return max;
+    }
+    else {
+        return parseInt(changeToInteger(value));
     }
 }
 

@@ -57,6 +57,7 @@ form{
 .jednostka {
     margin-left: 5px;
     margin-top: 6px;
+    font-family: initial
 }
 
 .custom-file-input:lang(en) ~ .custom-file-label::after {

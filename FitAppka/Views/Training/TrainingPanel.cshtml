@@ -58,12 +58,12 @@
                         <div id="cardioName"></div>
                         <div id="time">
                             <div>Czas trwania:</div>
-                            <input id="timeInMinutes" type="number" name="timeInMinutes" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" oninput="changeCalorie()">
+                            <input id="timeInMinutes" type="number" max="99999" name="timeInMinutes" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 10000)" oninput="validity.valid || (value = ''); changeCalorie()">
                             <div style="font-size: 13px; margin-top: 5px; font-weight: 600">min.</div>
                         </div>
                         <div id="kcal" class="param">
                             <div>Spalone kalorie:</div>
-                            <input id="burnedKcal" type="number" name="burnedKcal" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 1000000)"/>
+                            <input id="burnedKcal" type="number" max="9999999" name="burnedKcal" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000000)" oninput="validity.valid||(value='')"/>
                             <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kcal</div>
                         </div>
                         <div id="saveCardio" class="cent cb">
@@ -88,17 +88,17 @@
                             <div class="acent">
                                 <div>Serie:</div><div class="star">*</div>
                             </div>
-                            <input class="cb" id="sets" type="number" name="sets" min="1" max="10000" step="1" oninput="validity.valid||(value='')">
+                            <input class="cb" id="sets" type="number" name="sets" min="1" max="99999" step="1" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 10000)" oninput="validity.valid||(value='')">
                         </div>
                         <div id="repsArea" class="param">
                             <div class="acent">
                                 <div>Powtórzenia:</div><div class="star">*</div>
                             </div>
-                            <input class="cb" id="reps" type="number" step="1" name="reps" />
+                            <input class="cb" id="reps" type="number" name="reps" max="9999" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000)" oninput="validity.valid||(value='')"/>
                         </div>
                         <div id="weightArea" class="param">
                             <div>Ciężar:</div>
-                            <input id="weight" type="number" step="1" name="weight" />
+                            <input id="weight" type="number" max="9999" name="weight" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000)" oninput="validity.valid||(value='')"/>
                             <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kg.</div>
                         </div>
                         <div id="saveStrength" class="cent cb">

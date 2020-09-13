@@ -35,7 +35,7 @@
                                 <div style="margin-left: -50px">Wydatek kcal/min: </div>
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 3px;">
-                                <input id="expenditure" type="number" max="99999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value), 10000)" />
+                                <input id="expenditure" type="number" max="99999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 10000)" />
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
                                 <button type="button" onclick="addCardioType(@ViewData["dayID"], '@Url.Action("AddCardioType", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
@@ -92,12 +92,12 @@
                 <form id="formAdd" method="POST">
                     <div id="time" hidden>
                         <div>Czas trwania:</div>
-                        <input id="timeInMinutes" type="number" name="timeInMinutes" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 10000)" oninput="changeCalorie()"/>
+                        <input id="timeInMinutes" type="number" max="99999" name="timeInMinutes" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 10000)" oninput="validity.valid || (value = ''); changeCalorie()"/>
                         <div style="font-size: 13px; margin-top: 5px; font-weight: 600">min.</div>
                     </div>
                     <div id="kcal" class="param" hidden>
                         <div>Spalone kalorie:</div>
-                        <input id="burnedKcal" type="number" name="burnedKcal" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 1000000)"/>
+                        <input id="burnedKcal" type="number" max="9999999" name="burnedKcal" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000000)" oninput="validity.valid || (value = '')"/>
                         <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kcal</div>
                     </div>
                     <div id="add" hidden class="cent cb">
