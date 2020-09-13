@@ -46,7 +46,7 @@ namespace FitAppka.Service.ServiceImpl
                 return 1000;
             }
             else {
-                return (int)demand;
+                return demand;
             }
         }
 

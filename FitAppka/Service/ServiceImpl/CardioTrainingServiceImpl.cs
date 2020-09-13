@@ -12,7 +12,6 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IClientManageService _clientManageService;
         private readonly IClientRepository _clientRepository;
         private readonly IDayRepository _dayRepository;
-        
 
         public CardioTrainingServiceImpl(IDayRepository dayRepository, ICardioTrainingRepository cardioRepository,
             ICardioTrainingTypeRepository cardioTypeRepository, IClientRepository clientRepository, IClientManageService clientManageService)
