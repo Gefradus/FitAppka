@@ -35,7 +35,7 @@ namespace FitAppka.Controllers
         public IActionResult Goals(CreateGoalsModel model)
         {
             if (ModelState.IsValid) {
-                _goalsService.CreateGoals(model);
+                _goalsService.UpdateGoals(model);
                 return RedirectToAction("Start", "Home");
             }
             else {

@@ -36,17 +36,17 @@
                     </div>
                     <div class="form-group cent">
                         <div class="leftCol">
-                            <label class="control-label">Kalorii:</label>
-                            <div style="display: flex;">
-                                <input id="caloriesTarget" asp-for="CaloriesTarget" class="form-control" type="number" disabled onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 20000)" />
+                            <label class="control-label fl">Kalorii:</label><div class="star fl">*</div>
+                            <div style="display: flex;" class="cb">
+                                <input id="caloriesTarget" asp-for="CaloriesTarget" class="form-control" type="number" disabled onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
                                 <div class="jednostka" style="margin-right: -5px;">kcal</div>
                             </div>
                             <span asp-validation-for="CaloriesTarget" class="text-danger"></span>
                         </div>
                         <div class="rightCol">
-                            <label class="control-label">Białka:</label>
-                            <div style="display: flex;">
-                                <input id="proteinsTarget" asp-for="ProteinsTarget" class="form-control" type="text" disabled onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 4), 5000)" />
+                            <label class="control-label fl">Białka:</label><div class="star fl">*</div>
+                            <div style="display: flex;" class="cb">
+                                <input id="proteinsTarget" asp-for="ProteinsTarget" class="form-control" type="text" disabled onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
                                 <div class="jednostka">g</div>
                             </div>
                             <span asp-validation-for="ProteinsTarget" class="text-danger"></span>
@@ -54,17 +54,17 @@
                     </div>
                     <div class="form-group cent" style="border-bottom: 1px solid darkgray; padding-bottom: 30px">
                         <div class="leftCol">
-                            <label class="control-label">Tłuszczy:</label>
-                            <div id="tluInDiv" style="display: flex">
-                                <input id="fatsTarget" asp-for="FatsTarget" class="form-control" type="text" disabled onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 4), 2222)" />
+                            <label class="control-label fl">Tłuszczy:</label><div class="star fl">*</div>
+                            <div style="display: flex" class="cb">
+                                <input id="fatsTarget" asp-for="FatsTarget" class="form-control" type="text" disabled onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
                                 <div class="jednostka">g</div>
                             </div>
                             <span asp-validation-for="FatsTarget" class="text-danger"></span>
                         </div>
                         <div class="rightCol">
-                            <label class="control-label">Węglowodanów:</label>
-                            <div style="display: flex">
-                                <input id="carbsTarget" asp-for="CarbohydratesTarget" class="form-control" type="text" disabled onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToNumeric(this.value, 4), 5000)" />
+                            <label class="control-label fl">Węglowodanów:</label><div class="star fl">*</div>
+                            <div style="display: flex" class="cb">
+                                <input id="carbsTarget" asp-for="CarbohydratesTarget" class="form-control" type="text" disabled onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
                                 <div class="jednostka">g</div>
                             </div>
                             <span asp-validation-for="CarbohydratesTarget" class="text-danger"></span>
@@ -77,7 +77,7 @@
                         <div class="leftCol">
                             <label class="control-label">Cel spalonych kalorii:</label>
                             <div style="display: flex;">
-                                <input id="burnGoal" asp-for="CaloriesBurnedGoal" class="form-control" type="number" onkeypress="onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 5000)" />
+                                <input id="burnGoal" asp-for="CaloriesBurnedGoal" class="form-control" type="number" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 5000)" />
 
                             </div>
                             <span asp-validation-for="CaloriesBurnedGoal" class="text-danger"></span>
@@ -85,7 +85,7 @@
                         <div class="rightCol">
                             <label class="control-label">Cel minut treningów:</label>
                             <div style="display: flex;">
-                                <input id="timeGoal" asp-for="TrainingTimeGoal" class="form-control" type="text" onkeypress="return onlyNumbers(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 1440)" />
+                                <input id="timeGoal" asp-for="TrainingTimeGoal" class="form-control" type="text" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreater(changeToInteger(this.value), 1440)" />
 
                             </div>
                             <span asp-validation-for="TrainingTimeGoal" class="text-danger"></span>
@@ -97,7 +97,7 @@
                     </div>
 
                     <div class="form-group cent mt-5">
-                        <button type="submit" class="btn btn-primary" style="width: 50%; height: 40px">Zapisz zmiany</button>
+                        <button type="button" onclick="saveGoal()" class="btn btn-primary" style="width: 50%; height: 40px">Zapisz zmiany</button>
                     </div>
                 </form>
             </div>

@@ -4,6 +4,6 @@ namespace FitAppka.Service
 {
     public interface IGoalsService
     {
-        public void CreateGoals(CreateGoalsModel createGoalsModel);
+        public void UpdateGoals(CreateGoalsModel createGoalsModel);
     }
 }

@@ -39,21 +39,24 @@ namespace FitAppka.Service.ServiceImpl
         }
 
         private void SetClientGoals(SettingsModel m, Client client) {
-            double pace = 0.4;
-            try { pace = double.Parse(m.PaceOfChange.Replace('.', ',').Replace(" ", "")); } catch { }
+            if ((bool) client.AutoDietaryGoals) 
+            {
+                double pace = 0.4;
+                try { pace = double.Parse(m.PaceOfChange.Replace('.', ',').Replace(" ", "")); } catch { }
 
-            int caloricDemand = _dietaryTargetsService.CountCaloricDemand(m.Sex, m.Date_of_birth, m.Growth, m.Weight, ActivityLevel(m.LevelOfActivity));
-            int calorieTarget = _dietaryTargetsService.CountCalorieTarget(caloricDemand, m.WeightChange_Goal, pace);
-            int proteinTarget = _dietaryTargetsService.CountProteinTarget(m.Weight, calorieTarget, m.LevelOfActivity);
-            int fatTarget = _dietaryTargetsService.CountFatTarget(calorieTarget);
-            int carbsTarget = _dietaryTargetsService.CountCarbsTarget(calorieTarget, proteinTarget, fatTarget);
+                int caloricDemand = _dietaryTargetsService.CountCaloricDemand(m.Sex, m.Date_of_birth, m.Growth, m.Weight, ActivityLevel(m.LevelOfActivity));
+                int calorieTarget = _dietaryTargetsService.CountCalorieTarget(caloricDemand, m.WeightChange_Goal, pace);
+                int proteinTarget = _dietaryTargetsService.CountProteinTarget(m.Weight, calorieTarget, m.LevelOfActivity);
+                int fatTarget = _dietaryTargetsService.CountFatTarget(calorieTarget);
+                int carbsTarget = _dietaryTargetsService.CountCarbsTarget(calorieTarget, proteinTarget, fatTarget);
 
-            client.CalorieGoal = calorieTarget;
-            client.CaloricDemand = caloricDemand;
-            client.ProteinTarget = proteinTarget;
-            client.FatTarget = fatTarget;
-            client.CarbsTarget = carbsTarget;
-            client.PaceOfChanges = pace;
+                client.CaloricDemand = caloricDemand;
+                client.CalorieGoal = calorieTarget;
+                client.ProteinTarget = proteinTarget;
+                client.FatTarget = fatTarget;
+                client.CarbsTarget = carbsTarget;
+                client.PaceOfChanges = pace;
+            }
         }
 
         private double ActivityLevel(short? activity)
@@ -65,7 +68,6 @@ namespace FitAppka.Service.ServiceImpl
             if (activity == 5) { return 1.9; }
             return 1.5;
         }
-
 
         private void SetDataForDaysFromToday(SettingsModel m, Client client)
         {
@@ -102,13 +104,10 @@ namespace FitAppka.Service.ServiceImpl
             {
                 DateOfMeasurement = DateTime.Now,
                 Weight = (short)m.Weight,
-
             });
 
             _clientRepository.Update(client);
         }
-
-        
 
         private Client SetClientData(SettingsModel m, Client client)
         {
@@ -132,9 +131,6 @@ namespace FitAppka.Service.ServiceImpl
 
             return client;
         }
-
-
-
 
     }
 }

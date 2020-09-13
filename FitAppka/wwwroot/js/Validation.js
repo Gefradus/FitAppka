@@ -111,6 +111,11 @@ function isEmpty(string) {
     return string.length == 0;
 }
 
+function isEmptyOrNumeric(s) {
+    return isEmpty(s) || isNumeric(s);
+}
+
+
 function validation(validMsg) {
     $("#validationModal").modal('show');
     document.getElementById("validatMsg").innerHTML = "<p>" + validMsg + "</p>";

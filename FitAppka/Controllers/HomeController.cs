@@ -146,9 +146,9 @@ namespace NowyDotnecik.Controllers
         private void SendInfoAboutMacronutritions(Day day)
         {
             CountMacronutrionNumbers(_homeService.SumAllKcalInDay((DateTime)day.Date), "calories", day.CalorieGoal);
-            CountMacronutrionNumbers(_homeService.SumAllProteinsInDay((DateTime)day.Date), "proteins", day.CalorieGoal);
-            CountMacronutrionNumbers(_homeService.SumAllCarbsInDay((DateTime)day.Date), "carbs", day.CalorieGoal);
-            CountMacronutrionNumbers(_homeService.SumAllFatsInDay((DateTime)day.Date), "fats", day.CalorieGoal);
+            CountMacronutrionNumbers(_homeService.SumAllProteinsInDay((DateTime)day.Date), "proteins", day.ProteinTarget);
+            CountMacronutrionNumbers(_homeService.SumAllCarbsInDay((DateTime)day.Date), "carbs", day.CarbsTarget);
+            CountMacronutrionNumbers(_homeService.SumAllFatsInDay((DateTime)day.Date), "fats", day.FatTarget);
         }
 
         private void CountMacronutrionNumbers(double sumOfMacronutrion, string name, int? target)

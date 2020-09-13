@@ -6,19 +6,15 @@ namespace FitAppka.Models
 {
     public class CreateGoalsModel
     {
-        [Required(ErrorMessage = "Podaj cel spożycia kalorii")]
-        [Range(0, 20000, ErrorMessage = "Cel kalorii może wynosić max. 20000")]
+        [Range(500, 20000, ErrorMessage = "Cel kalorii musi wynosić 500 - 20000")]
         public int? CaloriesTarget { get; set; }
 
-        [Required(ErrorMessage = "Podaj cel spożycia białka")]
         [Range(0, 5000, ErrorMessage = "Cel białka może wynosić max. 5000")]
         public int? ProteinsTarget { get; set; }
 
-        [Required(ErrorMessage = "Podaj cel spożycia węglowodanów")]
         [Range(0, 5000, ErrorMessage = "Cel węglowodanów może wynosić max. 5000")]
         public int? CarbohydratesTarget { get; set; }
 
-        [Required(ErrorMessage = "Podaj cel spożycia tłuszczy")]
         [Range(0, 2222, ErrorMessage = "Cel tłuszczy może wynosić max. 2222")]
         public int? FatsTarget { get; set; }
 
