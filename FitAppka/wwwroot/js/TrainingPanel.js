@@ -109,16 +109,13 @@ function editStrengthTraining(url) {
 }
 
 function setInputsValidation() {
-    $(".int1").on("change", function () {
+    $j(".int1").on("change", function () {
         this.value = changeToMaxIfGreaterInt(this.value, 1000);
     });
-    $(".int1").on("input", function () {
-        validity.valid || (value = '');
-    });
-    $("#burnedKcal").on("keypress", function () {
+    $j("#burnedKcal").on("keypress", function () {
         this.value = changeToMaxIfGreaterInt(this.value, 1000000);
     });
-    $("#timeInMinutes").on("keypress", function () {
+    $j("#timeInMinutes").on("keypress", function () {
         this.value = changeToMaxIfGreaterInt(this.value, 1000000);
     });
 }
