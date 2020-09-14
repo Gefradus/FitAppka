@@ -23,29 +23,13 @@
 
                 <div>
                     <div class="navbar-nav ml-auto" style="position: absolute; right: 0; margin-top: -20px">
-                        <button class="navbar-toggler mr-2 mr-sm-3" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Przełącznik nawigacji" type="button">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        <div class="d-none d-md-inline-block mr-md-5">
-                            <div style="float:left;" class="mr-lg-5"><a class="nav-link text-light" asp-controller="Settings" asp-action="Settings">Ustawienia <img style="height: 15px; width:15px" src="~/img/settings.png" /></a></div>
+                        <div class="mr-md-5">
                             <div style="float:left;"><a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img style="height: 15px; width:15px" src="~/img/logout.png" /></a></div>
                             <div style="clear:both"></div>
                         </div>
-
                     </div>
                 </div>
             </nav>
-            <div class="collapse navbar-collapse in d-md-none" id="navMenu">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Settings" asp-action="Settings">Ustawienia</a>
-                    </li>
-                    <li>
-                        <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Wyloguj się</a>
-                    </li>
-                </ul>
-            </div>
         </header>
     }
 

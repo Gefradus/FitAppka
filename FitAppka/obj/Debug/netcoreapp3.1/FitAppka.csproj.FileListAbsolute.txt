@@ -839,3 +839,4 @@ C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor
 C:\Users\dratwak\Documents\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Training\StrengthTraining.cshtml.g.cs
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Goals\Goals.cshtml.g.cs
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\ProgressMonitoring\ProgressMonitoring.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Measurements\Measurements.cshtml.g.cs

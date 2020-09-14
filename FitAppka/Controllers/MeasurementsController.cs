@@ -8,7 +8,7 @@ namespace FitAppka.Controllers
 {
     public class MeasurementsController : Controller
     {
-        public IActionResult Measurement()
+        public IActionResult Measurements()
         {
             return View();
         }
