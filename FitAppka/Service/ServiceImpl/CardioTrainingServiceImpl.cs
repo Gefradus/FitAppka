@@ -101,8 +101,6 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-        
-
         public int CardioTimeInDay(int dayID)
         {
             int? time = 0;

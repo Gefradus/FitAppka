@@ -22,7 +22,9 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="d-none d-md-inline-block mr-md-4">
+                    <div class="d-none d-lg-inline-block mr-md-4">
+                        <div class="fl"><a class="nav-link text-light nava" asp-controller="Measurement" asp-action="Measurement">Pomiary <img class="navIcon" src="~/img/body.png" /></a></div>
+                        <div class="fl"><a class="nav-link text-light nava" asp-controller="ProgressMonitoring" asp-action="ProgressMonitoring">Postępy <img class="navIcon" src="~/img/chart.png" /></a></div>
                         <div class="fl"><a class="nav-link text-light nava" asp-controller="Goals" asp-action="Goals">Cele <img id="goalImg" src="~/img/goal.png" /></a></div>
                         <div class="fl"><a class="nav-link text-light nava" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">Treningi <img class="navIcon" src="~/img/dumbell.png" /></a></div>
                         <div class="fl"><a class="nav-link text-light nava" asp-controller="FindDay" asp-action="FindDay">Szukaj dni <img class="navIcon" src="~/img/search.png" /></a></div>
@@ -34,7 +36,7 @@
                 </div>
             </div>
         </nav>
-        <div class="collapse navbar-collapse in d-md-none" id="navMenu">
+        <div class="collapse navbar-collapse in d-lg-none" id="navMenu">
             <ul class="navbar-nav">
                 <li>
                     <a class="nav-link text-dark" asp-controller="Goals" asp-action="Goals">Cele <img /></a>
