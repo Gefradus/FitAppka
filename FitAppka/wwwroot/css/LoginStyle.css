@@ -1,4 +1,8 @@
-﻿#logSide {
+﻿body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+#logSide {
     margin-left: calc(100% - 325px);
     padding: 10px;
     margin-right: -25px;
