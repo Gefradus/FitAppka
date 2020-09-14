@@ -5,21 +5,17 @@ namespace FitAppka.Service.ServiceImpl
     public class GoalsServiceImpl : IGoalsService
     {
         private readonly IClientRepository _clientRepository;
-        private readonly ICardioTrainingService _cardioService;
-        private readonly IDayRepository _dayRepository;
         private readonly IDietaryTargetsService _dietaryTargetsService;
 
-        public GoalsServiceImpl(IClientRepository clientRepository, IDietaryTargetsService dietaryTargetsService, IDayRepository dayRepository, ICardioTrainingService cardioService)
+        public GoalsServiceImpl(IClientRepository clientRepository, IDietaryTargetsService dietaryTargetsService)
         {
-            _cardioService = cardioService;
-            _dayRepository = dayRepository;
             _dietaryTargetsService = dietaryTargetsService;
             _clientRepository = clientRepository;
         }
 
         public void UpdateGoals(CreateGoalsModel m)
         {
-            SetTargetsInDaysFromToday(_clientRepository.Update(SetClientTargets(m, SetClientPreferences(m))));
+            _dietaryTargetsService.SetTargetsInDaysFromToday(_clientRepository.Update(SetClientTargets(m, SetClientPreferences(m))));
         }
 
         private Client SetClientPreferences(CreateGoalsModel m){
@@ -37,88 +33,28 @@ namespace FitAppka.Service.ServiceImpl
                 return CountClientTargets(client);
             }
             else {
-                return GetTargetsFromModel(m, client);
+                return SetClientTargets(client, (int)m.CaloriesTarget, (int)m.CarbohydratesTarget, (int)m.ProteinsTarget, (int)m.FatsTarget);
             }
         }
-
 
         private Client CountClientTargets(Client c)
         {
             int calorieTarget = _dietaryTargetsService.CountCalorieTarget((int) c.CaloricDemand, c.WeightChangeGoal, (double) c.PaceOfChanges);
-            int proteinTarget = _dietaryTargetsService.CountProteinTarget(_dietaryTargetsService.GetLastWeightMeasurement(), calorieTarget, c.ActivityLevel);
-            int fatTarget = _dietaryTargetsService.CountFatTarget(calorieTarget);
-            int carbsTarget = _dietaryTargetsService.CountCarbsTarget(calorieTarget, proteinTarget, fatTarget);
+            int proteinsTarget = _dietaryTargetsService.CountProteinTarget(_dietaryTargetsService.GetLastWeightMeasurement(), calorieTarget, c.ActivityLevel);
+            int fatsTarget = _dietaryTargetsService.CountFatTarget(calorieTarget);
+            int carbsTarget = _dietaryTargetsService.CountCarbsTarget(calorieTarget, proteinsTarget, fatsTarget);
+            return SetClientTargets(c, calorieTarget, carbsTarget, proteinsTarget, fatsTarget);
+        }
 
-            c.CalorieGoal = calorieTarget;
-            c.ProteinTarget = proteinTarget;
-            c.FatTarget = fatTarget;
+        private Client SetClientTargets(Client c, int kcalTarget, int carbsTarget, int proteinsTarget, int fatsTarget)
+        {
+            c.CalorieGoal = kcalTarget;
             c.CarbsTarget = carbsTarget;
+            c.ProteinTarget = proteinsTarget;
+            c.FatTarget = fatsTarget;
             return c;
         }
 
-        private Client GetTargetsFromModel(CreateGoalsModel m, Client c)
-        {
-            c.CalorieGoal = m.CaloriesTarget;
-            c.CarbsTarget = m.CarbohydratesTarget;
-            c.ProteinTarget = m.ProteinsTarget;
-            c.FatTarget = m.FatsTarget;
-            return c;
-        }
-
-        private void SetTargetsInDaysFromToday(Client client)
-        {
-            foreach (var dayID in _dietaryTargetsService.GetListOfDaysIDFromToday(client))
-            {
-                foreach (var day in _dayRepository.GetClientDays(client.ClientId))
-                {
-                    if (day.DayId == dayID)
-                    {
-                        _dayRepository.Update(MapTargetsFromClientToDay(day, client));
-                    }
-                }
-            }    
-        }
-
-        private Day MapTargetsFromClientToDay(Day day, Client client)
-        {
-            if ((bool)client.IncludeCaloriesBurned) 
-            {
-                int kcalBurned = _cardioService.CaloriesBurnedInDay(day.DayId);
-                day.CalorieGoal = client.CalorieGoal + kcalBurned;
-                day.ProteinTarget = countProteinTarget(kcalBurned, client);
-                day.FatTarget = countFatTarget(kcalBurned, client);
-                day.CarbsTarget = countCarbsTarget(kcalBurned, client);
-            }
-            else 
-            {
-                day.CalorieGoal = client.CalorieGoal;
-                day.ProteinTarget = client.ProteinTarget;
-                day.FatTarget = client.FatTarget;
-                day.CarbsTarget = client.CarbsTarget;
-            }
-
-            day.KcalBurnedGoal = client.KcalBurnedGoal;
-            day.TrainingTimeGoal = client.TrainingTimeGoal;
-            return day;
-        }
-
-
-        private int countProteinTarget(int caloriesBurned, Client client)
-        {
-            double proteinProportion = ((double)(client.ProteinTarget * 4)) / (double)client.CalorieGoal;
-            return (int)((caloriesBurned * proteinProportion) + client.ProteinTarget);
-
-        }
-
-        private int countFatTarget(int caloriesBurned, Client client) {
-            double fatProportion = ((double)(client.FatTarget * 9)) / (double)client.CalorieGoal;
-            return (int)(caloriesBurned * fatProportion + client.FatTarget);
-        }
-
-        private int countCarbsTarget(int caloriesBurned, Client client)
-        {
-            double carbsProportion = ((double)(client.CarbsTarget * 4)) / (double)client.CalorieGoal;
-            return (int)(caloriesBurned * carbsProportion + client.CarbsTarget);
-        }
+       
     }
 }

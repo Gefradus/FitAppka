@@ -14,5 +14,6 @@ namespace FitAppka.Service
         public int CountAge(DateTime birthDate);
         public short GetLastWeightMeasurement();
         public List<int> GetListOfDaysIDFromToday(Client client);
+        public void SetTargetsInDaysFromToday(Client client);
     }
 }

@@ -26,7 +26,8 @@ namespace FitAppka.Service.ServiceImpl
             Client client = _clientRepository.GetLoggedInClient();
             SetClientGoals(m, client);
             SetDateOfJoiningIfFirstLaunch(isFirstLaunch, client);
-            SetDataForDaysFromToday(m, client);
+            MapDayMealsFromClientToDaysFromToday(m, client);
+            _dietaryTargetsService.SetTargetsInDaysFromToday(client);
             SetClientWeightMeasurement(m, SetClientData(m, client));
             await _context.SaveChangesAsync();
         }
@@ -69,7 +70,7 @@ namespace FitAppka.Service.ServiceImpl
             return 1.5;
         }
 
-        private void SetDataForDaysFromToday(SettingsModel m, Client client)
+        private void MapDayMealsFromClientToDaysFromToday(SettingsModel m, Client client)
         {
             foreach (var dayID in _dietaryTargetsService.GetListOfDaysIDFromToday(client))
             {
@@ -77,22 +78,12 @@ namespace FitAppka.Service.ServiceImpl
                 {
                     if (day.DayId == dayID)
                     {
-                        day.CalorieGoal = client.CalorieGoal;
-                        day.ProteinTarget = client.ProteinTarget;
-                        day.FatTarget = client.FatTarget;
-                        day.CarbsTarget = client.CarbsTarget;
-                        day.Breakfast = m.Breakfast;
-                        day.Lunch = m.Lunch;
-                        day.Dinner = m.Dinner;
-                        day.Dessert = m.Dessert;
-                        day.Snack = m.Snack;
-                        day.Supper = m.Supper;
-                        if (m.Breakfast == null) { day.Breakfast = false; }
-                        if (m.Lunch == null) { day.Lunch = false; }
-                        if (m.Dinner == null) { day.Dinner = false; }
-                        if (m.Dessert == null) { day.Dessert = false; }
-                        if (m.Snack == null) { day.Snack = false; }
-                        if (m.Supper == null) { day.Supper = false; }
+                        day.Breakfast = m.Breakfast.GetValueOrDefault(false);
+                        day.Lunch = m.Lunch.GetValueOrDefault(false);
+                        day.Dinner = m.Dinner.GetValueOrDefault(false);
+                        day.Dessert = m.Dessert.GetValueOrDefault(false);
+                        day.Snack = m.Snack.GetValueOrDefault(false);
+                        day.Supper = m.Supper.GetValueOrDefault(false);
                     }
                 }
             }
@@ -112,23 +103,16 @@ namespace FitAppka.Service.ServiceImpl
         private Client SetClientData(SettingsModel m, Client client)
         {
             client.DateOfBirth = m.Date_of_birth;
-            client.Sex = m.Sex;
             client.Growth = m.Growth;
-            client.Breakfast = m.Breakfast;
-            client.Lunch = m.Lunch;
-            client.Dinner = m.Dinner;
-            client.Dessert = m.Dessert;
-            client.Snack = m.Snack;
-            client.Supper = m.Supper;
+            client.Sex = m.Sex.GetValueOrDefault(false);
+            client.Breakfast = m.Breakfast.GetValueOrDefault(false);
+            client.Lunch = m.Lunch.GetValueOrDefault(false);
+            client.Dinner = m.Dinner.GetValueOrDefault(false);
+            client.Dessert = m.Dessert.GetValueOrDefault(false);
+            client.Snack = m.Snack.GetValueOrDefault(false);
+            client.Supper = m.Supper.GetValueOrDefault(false);
             client.WeightChangeGoal = m.WeightChange_Goal;
             client.ActivityLevel = m.LevelOfActivity;
-            if (m.Breakfast == null) { client.Breakfast = false; }
-            if (m.Lunch == null) { client.Lunch = false; }
-            if (m.Dinner == null) { client.Dinner = false; }
-            if (m.Dessert == null) { client.Dessert = false; }
-            if (m.Snack == null) { client.Snack = false; }
-            if (m.Supper == null) { client.Supper = false; }
-
             return client;
         }
 

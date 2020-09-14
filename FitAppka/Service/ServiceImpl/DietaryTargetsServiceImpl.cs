@@ -10,9 +10,12 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IDayRepository _dayRepository;
+        private readonly ICardioTrainingService _cardioTrainingService;
 
-        public DietaryTargetsServiceImpl(IWeightMeasurementRepository weightMeasurementRepository, IClientRepository clientRepository, IDayRepository dayRepository)
+        public DietaryTargetsServiceImpl(IWeightMeasurementRepository weightMeasurementRepository, 
+            IClientRepository clientRepository, IDayRepository dayRepository, ICardioTrainingService cardioTrainingService)
         {
+            _cardioTrainingService = cardioTrainingService;
             _dayRepository = dayRepository;
             _weightMeasurementRepository = weightMeasurementRepository;
             _clientRepository = clientRepository;
@@ -160,5 +163,52 @@ namespace FitAppka.Service.ServiceImpl
 
             return listOfIDDaysFromToday;
         }
+
+
+        public void SetTargetsInDaysFromToday(Client client)
+        {
+            foreach (var dayID in GetListOfDaysIDFromToday(client))
+            {
+                foreach (var day in _dayRepository.GetClientDays(client.ClientId))
+                {
+                    if (day.DayId == dayID)
+                    {
+                        _dayRepository.Update(MapTargetsFromClientToDay(day, client));
+                    }
+                }
+            }
+        }
+
+        private Day MapTargetsFromClientToDay(Day day, Client client)
+        {
+            if ((bool)client.IncludeCaloriesBurned)
+            {
+                int kcalBurned = _cardioTrainingService.CaloriesBurnedInDay(day.DayId);
+                day.CalorieGoal = client.CalorieGoal + kcalBurned;
+                day.ProteinTarget = CountTargetWithBurnedKcal(kcalBurned, client.ProteinTarget, 4, client.CalorieGoal);
+                day.FatTarget = CountTargetWithBurnedKcal(kcalBurned, client.FatTarget, 9, client.CalorieGoal);
+                day.CarbsTarget = CountTargetWithBurnedKcal(kcalBurned, client.CarbsTarget, 4, client.CalorieGoal);
+            }
+            else
+            {
+                day.CalorieGoal = client.CalorieGoal;
+                day.ProteinTarget = client.ProteinTarget;
+                day.FatTarget = client.FatTarget;
+                day.CarbsTarget = client.CarbsTarget;
+            }
+
+            day.KcalBurnedGoal = client.KcalBurnedGoal;
+            day.TrainingTimeGoal = client.TrainingTimeGoal;
+            return day;
+        }
+
+
+        private int CountTargetWithBurnedKcal(int kcalBurned, int? target, int multiplier, int? kcalGoal)
+        {
+            double proportion = ((double)(target * multiplier)) / (double)kcalGoal;
+            return (int)(kcalBurned * proportion + target);
+        }
+
+
     }
 }
