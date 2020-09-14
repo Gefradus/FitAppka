@@ -211,8 +211,7 @@ namespace FitAppka.Service.ServiceImpl
         public int CaloriesBurnedInDay(int dayID)
         {
             int? kcal = 0;
-            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID)))
-            {
+            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID))) {
                 kcal += cardio.CaloriesBurned;
             }
 
