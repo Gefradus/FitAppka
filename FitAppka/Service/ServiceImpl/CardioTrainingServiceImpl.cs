@@ -1,6 +1,5 @@
 ﻿using FitAppka.Models;
 using FitAppka.Repository;
-using System;
 using System.Linq;
 
 namespace FitAppka.Service.ServiceImpl
@@ -9,13 +8,15 @@ namespace FitAppka.Service.ServiceImpl
     {
         private readonly ICardioTrainingRepository _cardioRepository;
         private readonly ICardioTrainingTypeRepository _cardioTypeRepository;
+        private readonly IDietaryTargetsService _dietaryTargetsService;
         private readonly IClientManageService _clientManageService;
         private readonly IClientRepository _clientRepository;
         private readonly IDayRepository _dayRepository;
 
-        public CardioTrainingServiceImpl(IDayRepository dayRepository, ICardioTrainingRepository cardioRepository,
+        public CardioTrainingServiceImpl(IDayRepository dayRepository, ICardioTrainingRepository cardioRepository, IDietaryTargetsService dietaryTargetsService,
             ICardioTrainingTypeRepository cardioTypeRepository, IClientRepository clientRepository, IClientManageService clientManageService)
         {
+            _dietaryTargetsService = dietaryTargetsService;
             _clientManageService = clientManageService;
             _cardioTypeRepository = cardioTypeRepository;
             _clientRepository = clientRepository;
@@ -33,6 +34,9 @@ namespace FitAppka.Service.ServiceImpl
                 CardioTrainingTypeId = cardioTypeId,
                 CaloriesBurned = burnedKcal
             });
+
+
+            _dietaryTargetsService.UpdateTargetsInDaysFromToday(_clientRepository.GetLoggedInClient());
         }
 
         public bool EditCardio(int id, int time, int burnedKcal)
@@ -43,6 +47,7 @@ namespace FitAppka.Service.ServiceImpl
                 cardio.TimeInMinutes = time;
                 cardio.CaloriesBurned = burnedKcal;
                 _cardioRepository.Update(cardio);
+                _dietaryTargetsService.UpdateTargetsInDaysFromToday(_clientRepository.GetLoggedInClient());
                 return true;
             }
             return false;
@@ -52,6 +57,7 @@ namespace FitAppka.Service.ServiceImpl
         {
             if(_clientManageService.HasUserAccessToDay(_cardioRepository.GetCardioTraining(id).DayId)){
                 _cardioRepository.Delete(id);
+                _dietaryTargetsService.UpdateTargetsInDaysFromToday(_clientRepository.GetLoggedInClient());
                 return true;
             }
             return false;
@@ -95,15 +101,7 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-        public int CaloriesBurnedInDay(int dayID)
-        {
-            int? kcal = 0;
-            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID))) {
-                kcal += cardio.CaloriesBurned;
-            }
-
-            return (int)kcal;
-        }
+        
 
         public int CardioTimeInDay(int dayID)
         {

@@ -27,7 +27,7 @@ namespace FitAppka.Service.ServiceImpl
             SetClientGoals(m, client);
             SetDateOfJoiningIfFirstLaunch(isFirstLaunch, client);
             MapDayMealsFromClientToDaysFromToday(m, client);
-            _dietaryTargetsService.SetTargetsInDaysFromToday(client);
+            _dietaryTargetsService.UpdateTargetsInDaysFromToday(client);
             SetClientWeightMeasurement(m, SetClientData(m, client));
             await _context.SaveChangesAsync();
         }

@@ -6,7 +6,6 @@ namespace FitAppka.Service
     {
         public int GetKcalBurnedGoalInDay(int dayID);
         public int GetTrainingTimeGoalInDay(int dayID);
-        public int CaloriesBurnedInDay(int dayID);
         public int CardioTimeInDay(int dayID);
         public void AddCardioTrainingType(int dayID, string name, int kcalPerMin);
         public void AddCardio(int cardioTypeId, int dayID, int timeInMinutes, int burnedKcal);

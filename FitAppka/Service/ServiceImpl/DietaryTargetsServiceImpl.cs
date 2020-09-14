@@ -2,6 +2,7 @@
 using FitAppka.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FitAppka.Service.ServiceImpl
 {
@@ -9,13 +10,13 @@ namespace FitAppka.Service.ServiceImpl
     {
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
         private readonly IClientRepository _clientRepository;
+        private readonly ICardioTrainingRepository _cardioRepository;
         private readonly IDayRepository _dayRepository;
-        private readonly ICardioTrainingService _cardioTrainingService;
 
         public DietaryTargetsServiceImpl(IWeightMeasurementRepository weightMeasurementRepository, 
-            IClientRepository clientRepository, IDayRepository dayRepository, ICardioTrainingService cardioTrainingService)
+            IClientRepository clientRepository, IDayRepository dayRepository, ICardioTrainingRepository cardioRepository)
         {
-            _cardioTrainingService = cardioTrainingService;
+            _cardioRepository = cardioRepository;
             _dayRepository = dayRepository;
             _weightMeasurementRepository = weightMeasurementRepository;
             _clientRepository = clientRepository;
@@ -23,8 +24,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public int CountCalorieTarget(int demand, short? changeGoal, double pace)
         {
-            if (changeGoal == 1)
-            {
+            if (changeGoal == 1) {
                 int kcalTarget = (int)(demand - (pace * 1100));
 
                 if (kcalTarget <= 1000) {
@@ -34,8 +34,7 @@ namespace FitAppka.Service.ServiceImpl
                     return kcalTarget;
                 }
             }
-            if (changeGoal == 3)
-            {
+            if (changeGoal == 3) {
                 int kcalTarget = (int)(demand + (pace * 1100));
 
                 if (kcalTarget <= 1000) {
@@ -165,7 +164,7 @@ namespace FitAppka.Service.ServiceImpl
         }
 
 
-        public void SetTargetsInDaysFromToday(Client client)
+        public void UpdateTargetsInDaysFromToday(Client client)
         {
             foreach (var dayID in GetListOfDaysIDFromToday(client))
             {
@@ -183,7 +182,7 @@ namespace FitAppka.Service.ServiceImpl
         {
             if ((bool)client.IncludeCaloriesBurned)
             {
-                int kcalBurned = _cardioTrainingService.CaloriesBurnedInDay(day.DayId);
+                int kcalBurned = CaloriesBurnedInDay(day.DayId);
                 day.CalorieGoal = client.CalorieGoal + kcalBurned;
                 day.ProteinTarget = CountTargetWithBurnedKcal(kcalBurned, client.ProteinTarget, 4, client.CalorieGoal);
                 day.FatTarget = CountTargetWithBurnedKcal(kcalBurned, client.FatTarget, 9, client.CalorieGoal);
@@ -209,6 +208,15 @@ namespace FitAppka.Service.ServiceImpl
             return (int)(kcalBurned * proportion + target);
         }
 
+        public int CaloriesBurnedInDay(int dayID)
+        {
+            int? kcal = 0;
+            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID)))
+            {
+                kcal += cardio.CaloriesBurned;
+            }
 
+            return (int)kcal;
+        }
     }
 }

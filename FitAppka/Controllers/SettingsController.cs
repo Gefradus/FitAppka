@@ -83,7 +83,7 @@ namespace FitAppka.Controllers
                 try
                 {
                     await _settingsService.ChangeSettings(m, isFirstLaunch);
-                    return RedirectToAction("Start", "Home", new { id = _clientRepository.GetLoggedInClient() });
+                    return RedirectToAction("Start", "Home");
                 }
                 catch
                 {

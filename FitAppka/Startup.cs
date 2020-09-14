@@ -42,6 +42,7 @@ namespace FitAppka
 
         private void ServicesAddScoped(IServiceCollection services)
         {
+            services.AddScoped<IDietaryTargetsService, DietaryTargetsServiceImpl>();
             services.AddScoped<ISettingsService, SettingsServiceImpl>();
             services.AddScoped<IStrengthTrainingService, StrengthTrainingServiceImpl>();
             services.AddScoped<ICardioTrainingService, CardioTrainingServiceImpl>();
@@ -50,7 +51,6 @@ namespace FitAppka
             services.AddScoped<IClientManageService, ClientManageServiceImpl>();
             services.AddScoped<IProductManageService, ProductManageServiceImpl>();
             services.AddScoped<IGoalsService, GoalsServiceImpl>();
-            services.AddScoped<IDietaryTargetsService, DietaryTargetsServiceImpl>();
             services.AddScoped<IDayManageService, DayServiceImpl>();
         }
 

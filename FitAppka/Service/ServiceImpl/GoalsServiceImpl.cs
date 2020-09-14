@@ -15,7 +15,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public void UpdateGoals(CreateGoalsModel m)
         {
-            _dietaryTargetsService.SetTargetsInDaysFromToday(_clientRepository.Update(SetClientTargets(m, SetClientPreferences(m))));
+            _dietaryTargetsService.UpdateTargetsInDaysFromToday(_clientRepository.Update(SetClientTargets(m, SetClientPreferences(m))));
         }
 
         private Client SetClientPreferences(CreateGoalsModel m){
