@@ -53,7 +53,6 @@ namespace FitAppka.Controllers
             ViewData["proteinTarget"] = client.ProteinTarget;
             ViewData["fatTarget"] = client.FatTarget;
             ViewData["carbsTarget"] = client.CarbsTarget;
-
         }
 
     }
