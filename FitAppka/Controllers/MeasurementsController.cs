@@ -4,7 +4,7 @@ using FitAppka.Service;
 using FitAppka.Repository;
 using FitAppka.Models;
 using Microsoft.EntityFrameworkCore;
-
+using System.Threading.Tasks;
 
 
 
@@ -24,10 +24,11 @@ namespace FitAppka.Controllers
             _dayService = dayService;
         }
 
-        public IActionResult Measurements()
+        [HttpGet]
+        public async Task<IActionResult> Measurements()
         {
             ViewData["dayID"] = _dayService.GetTodayId();
-            return View(_context.WeightMeasurement.Where(w => w.ClientId == _clientRepository.GetLoggedInClientId()).Include(w => w.FatMeasurement).ToListAsync());
+            return View(await _context.WeightMeasurement.Where(w => w.ClientId == _clientRepository.GetLoggedInClientId()).Include(w => w.FatMeasurement).ToListAsync());
         }
     }
 }
