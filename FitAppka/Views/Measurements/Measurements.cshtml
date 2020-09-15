@@ -17,11 +17,13 @@
         </div>
         @foreach (var item in Model)
         {
-            double? waistCircumference = null;
-            double? bodyFatLevel = null;
-            if(item.FatMeasurementNavigation.WaistCircumference != null){
-                waistCircumference = item.FatMeasurementNavigation.WaistCircumference;
-                bodyFatLevel = item.FatMeasurementNavigation.BodyFatLevel;
+            string waistCircumference = null; string bodyFatLevel = null;
+            try {
+                waistCircumference = item.FatMeasurementNavigation.WaistCircumference.ToString();
+                bodyFatLevel = item.FatMeasurementNavigation.ToString();
+            } catch {
+                waistCircumference = "-";
+                bodyFatLevel = "-";
             }
 
             <div class="row no-gutters">
