@@ -22,12 +22,14 @@ namespace FitAppka.Service.ServiceImpl
         }
 
         public bool AddOrUpdateMeasurement(WeightMeasurement weightMeasurement)
-        {
-            int clientId = _clientRepository.GetLoggedInClientId();
-            if (weightMeasurement.ClientId == clientId)
-            {
-                var weightMeasurements = _weightMeasurementRepository.GetClientsWeightMeasurements(clientId);
-                _weightMeasurementRepository.Add(weightMeasurement);
+        { 
+            if (weightMeasurement.ClientId == _clientRepository.GetLoggedInClientId()) {
+                if(_weightMeasurementRepository.GetWeightMeasurement(weightMeasurement.WeightMeasurementId) != null) {
+                    UpdateMeasurement(weightMeasurement);
+                } 
+                else {
+                    _weightMeasurementRepository.Add(weightMeasurement);
+                }            
                 return true;
             }
             return false;
@@ -35,8 +37,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public bool DeleteMeasurement(int id)
         {
-            if (_clientManageService.HasUserAccessToWeightMeasurement(id))
-            {
+            if (_clientManageService.HasUserAccessToWeightMeasurement(id)) {
                 List<FatMeasurement> relatedFatMeasaurement = _weightMeasurementRepository.GetWeightMeasurement(id).FatMeasurement.ToList();
                 foreach(var item in relatedFatMeasaurement) {
                     _fatMeasurementRepository.Delete(item.FatMeasurementId);
@@ -49,8 +50,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public bool UpdateMeasurement(WeightMeasurement weightMeasurement)
         {
-            if (_clientManageService.HasUserAccessToWeightMeasurement(weightMeasurement.WeightMeasurementId))
-            {
+            if (_clientManageService.HasUserAccessToWeightMeasurement(weightMeasurement.WeightMeasurementId)) {
                 _weightMeasurementRepository.Update(weightMeasurement);
                 return true;
             }
