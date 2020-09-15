@@ -1,4 +1,16 @@
 .row{
-    background: wheat;
+    background-color:ghostwhite;
     border: 1px solid black;
+    height: 40px;
+    align-items: center
+}
+
+.btnImg{
+    height: 18px;
+    width: 18px
+}
+
+#headRow {
+    background-color: #202020;
+    color: white
 }

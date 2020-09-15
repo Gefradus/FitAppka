@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FitAppka.Models;
 using FitAppka.Repository;
 using FitAppka.Service;
