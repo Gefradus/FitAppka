@@ -1,4 +1,4 @@
-﻿using FitAppka.Models;
+﻿using FitAppka.Model;
 using System.Collections.Generic;
 
 namespace FitAppka.Repository

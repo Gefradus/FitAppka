@@ -1,4 +1,4 @@
-﻿using FitAppka.Models;
+﻿using FitAppka.Model;
 using FitAppka.Repository;
 
 namespace FitAppka.Service.ServiceImpl

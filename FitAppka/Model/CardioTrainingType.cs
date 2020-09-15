@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FitAppka.Models
+namespace FitAppka.Model
 {
     public partial class CardioTrainingType
     {
@@ -17,13 +17,15 @@ namespace FitAppka.Models
         public int CardioTrainingTypeId { get; set; }
         [Column("Client_ID")]
         public int? ClientId { get; set; }
+        [Required]
         [Column("Training_name")]
         [StringLength(50)]
         public string TrainingName { get; set; }
         [Column("Kcal_per_min")]
-        public int? KcalPerMin { get; set; }
+        public int KcalPerMin { get; set; }
         [Column("Visible_to_all")]
-        public bool? VisibleToAll { get; set; }
+        public bool VisibleToAll { get; set; }
+
         [ForeignKey(nameof(ClientId))]
         [InverseProperty("CardioTrainingType")]
         public virtual Client Client { get; set; }

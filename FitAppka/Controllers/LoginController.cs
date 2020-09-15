@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using FitAppka.Models;
+using FitAppka.Model;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using FitAppka.Models;
+﻿using FitAppka.Model;
 
 namespace FitAppka.Service
 {

@@ -1,4 +1,4 @@
-﻿using FitAppka.Models;
+﻿using FitAppka.Model;
 using System.Threading.Tasks;
 
 namespace FitAppka.Service

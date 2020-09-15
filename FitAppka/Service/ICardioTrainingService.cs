@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FitAppka.Service
+﻿namespace FitAppka.Service
 {
     public interface ICardioTrainingService
     {

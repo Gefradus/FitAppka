@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace FitAppka.Models
+namespace FitAppka.Model
 {
     public class SettingsModel
     {

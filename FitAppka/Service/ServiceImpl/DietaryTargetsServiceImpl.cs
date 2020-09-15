@@ -1,4 +1,4 @@
-﻿using FitAppka.Models;
+﻿using FitAppka.Model;
 using FitAppka.Repository;
 using System;
 using System.Collections.Generic;
@@ -119,7 +119,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public short GetLastWeightMeasurement()
         {
-            var measurementList = _weightMeasurementRepository.GetClientsWeightMeasurements(_clientRepository.GetLoggedInClient());
+            var measurementList = _weightMeasurementRepository.GetClientsWeightMeasurements(_clientRepository.GetLoggedInClientId());
 
             short lastWeightMeasurement = 0;
             foreach (var item in measurementList)

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FitAppka.Repository;
-using FitAppka.Models;
+using FitAppka.Model;
 using FitAppka.Service;
 
 namespace FitAppka.Controllers

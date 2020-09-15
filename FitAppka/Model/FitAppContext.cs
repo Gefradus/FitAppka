@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace FitAppka.Models
+namespace FitAppka.Model
 {
     public partial class FitAppContext : DbContext
     {
@@ -31,7 +31,7 @@ namespace FitAppka.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-P22JPL7\\SQLEXPRESS;Initial Catalog=FitApp;Integrated Security=True;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-P22JPL7\\SQLEXPRESS;Initial Catalog=FitApp23456;Integrated Security=True;Trusted_Connection=True;");
             }
         }
 
@@ -98,17 +98,8 @@ namespace FitAppka.Models
 
             modelBuilder.Entity<FatMeasurement>(entity =>
             {
-                entity.HasIndex(e => e.ClientId)
-                    .HasName("r4_FK");
-
                 entity.HasIndex(e => e.WeightMeasurementId)
                     .HasName("r6_FK");
-
-                entity.HasOne(d => d.Client)
-                    .WithMany(p => p.FatMeasurement)
-                    .HasForeignKey(d => d.ClientId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FAT_MEAS_R4_CLIENT");
 
                 entity.HasOne(d => d.WeightMeasurement)
                     .WithMany(p => p.FatMeasurement)

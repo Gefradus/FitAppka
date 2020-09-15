@@ -1,4 +1,4 @@
-using FitAppka.Models;
+using FitAppka.Model;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,9 +19,7 @@ namespace FitAppka.Repository.RepIfaceImpl{
         public IEnumerable<FatMeasurement> GetAllFatMeasurements(){
             return _context.FatMeasurement.ToList();
         }
-        public IEnumerable<FatMeasurement> GetClientsFatMeasurements(Client client){
-            return _context.FatMeasurement.Where(f => f.Client.ClientId == client.ClientId).ToList();
-        }
+
 
         public FatMeasurement Add(FatMeasurement fatMeasurement) {
             _context.Add(fatMeasurement);

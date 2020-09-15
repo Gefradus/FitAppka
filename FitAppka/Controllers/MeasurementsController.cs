@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using FitAppka.Service;
 using FitAppka.Repository;
-using FitAppka.Models;
+using FitAppka.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -12,13 +12,15 @@ namespace FitAppka.Controllers
 {
     public class MeasurementsController : Controller
     {
-        private IDayManageService _dayService;
-        private IWeightMeasurementRepository _weightMeasurementRepository;
-        private FitAppContext _context;
-        private IClientRepository _clientRepository;
+        private readonly IDayManageService _dayService;
+        private readonly FitAppContext _context;
+        private readonly IClientRepository _clientRepository;
+        private readonly IMeasurementsService _measurementsService;
 
-        public MeasurementsController(IDayManageService dayService, FitAppContext context, IClientRepository clientRepository)
+        public MeasurementsController(IDayManageService dayService, FitAppContext context, 
+            IClientRepository clientRepository, IMeasurementsService measurementsService)
         {
+            _measurementsService = measurementsService;
             _context = context;
             _clientRepository = clientRepository;
             _dayService = dayService;
@@ -29,6 +31,13 @@ namespace FitAppka.Controllers
         {
             ViewData["dayID"] = _dayService.GetTodayId();
             return View(await _context.WeightMeasurement.Where(w => w.ClientId == _clientRepository.GetLoggedInClientId()).Include(w => w.FatMeasurement).ToListAsync());
+        }
+
+
+        [HttpDelete]
+        public JsonResult Measurements(int id)
+        {
+            return Json(_measurementsService.DeleteMeasurement(id));
         }
     }
 }

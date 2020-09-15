@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace FitAppka.Service
+﻿namespace FitAppka.Service
 {
     public interface IAdminService
     {

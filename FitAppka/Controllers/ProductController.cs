@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using FitAppka.Models;
+using FitAppka.Model;
 using Microsoft.AspNetCore.Authorization;
 using FitAppka.Repository;
 using FitAppka.Service;

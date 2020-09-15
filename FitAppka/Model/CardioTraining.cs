@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FitAppka.Models
+namespace FitAppka.Model
 {
     public partial class CardioTraining
     {
@@ -15,9 +15,9 @@ namespace FitAppka.Models
         [Column("Day_ID")]
         public int DayId { get; set; }
         [Column("Time_in_minutes")]
-        public int? TimeInMinutes { get; set; }
+        public int TimeInMinutes { get; set; }
         [Column("Calories_burned")]
-        public int? CaloriesBurned { get; set; }
+        public int CaloriesBurned { get; set; }
 
         [ForeignKey(nameof(CardioTrainingTypeId))]
         [InverseProperty("CardioTraining")]

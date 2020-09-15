@@ -1,4 +1,4 @@
-﻿using FitAppka.Models;
+﻿using FitAppka.Model;
 using FitAppka.Repository;
 using Microsoft.AspNetCore.Hosting;
 using System;

@@ -1,4 +1,4 @@
-using FitAppka.Models;
+using FitAppka.Model;
 using System.Collections.Generic;
 
 namespace FitAppka.Repository
@@ -7,7 +7,6 @@ namespace FitAppka.Repository
     {
         FatMeasurement GetFatMeasurement(int id);
         IEnumerable<FatMeasurement> GetAllFatMeasurements();
-        IEnumerable<FatMeasurement> GetClientsFatMeasurements(Client client);
         FatMeasurement Add(FatMeasurement fatMeasurement);
         FatMeasurement Update(FatMeasurement fatMeasurement);
         FatMeasurement Delete(int id);

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using FitAppka.Models;
+using FitAppka.Model;
 using FitAppka.Repository;
 using FitAppka.Service;
 using Microsoft.AspNetCore.Authorization;

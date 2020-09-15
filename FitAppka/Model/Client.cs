@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FitAppka.Models
+namespace FitAppka.Model
 {
     public partial class Client
     {
@@ -11,7 +11,6 @@ namespace FitAppka.Models
         {
             CardioTrainingType = new HashSet<CardioTrainingType>();
             Day = new HashSet<Day>();
-            FatMeasurement = new HashSet<FatMeasurement>();
             Product = new HashSet<Product>();
             StrengthTrainingType = new HashSet<StrengthTrainingType>();
             WeightMeasurement = new HashSet<WeightMeasurement>();
@@ -26,7 +25,7 @@ namespace FitAppka.Models
         
         [StringLength(50)]
         public string Login { get; set; }
-        [Required(ErrorMessage = "Należy podać hasło")]
+        [Required]
         [StringLength(50)]
         public string Password { get; set; }
         [Column("First_name")]
@@ -72,12 +71,11 @@ namespace FitAppka.Models
         public bool? AutoDietaryGoals { get; set; }
         [Column("Include_calories_burned")]
         public bool? IncludeCaloriesBurned { get; set; }
+
         [InverseProperty("Client")]
         public virtual ICollection<CardioTrainingType> CardioTrainingType { get; set; }
         [InverseProperty("Client")]
         public virtual ICollection<Day> Day { get; set; }
-        [InverseProperty("Client")]
-        public virtual ICollection<FatMeasurement> FatMeasurement { get; set; }
         [InverseProperty("Client")]
         public virtual ICollection<Product> Product { get; set; }
         [InverseProperty("Client")]

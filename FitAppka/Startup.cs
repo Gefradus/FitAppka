@@ -1,4 +1,4 @@
-using FitAppka.Models;
+using FitAppka.Model;
 using FitAppka.Repository;
 using FitAppka.Repository.RepIfaceImpl;
 using FitAppka.Service;

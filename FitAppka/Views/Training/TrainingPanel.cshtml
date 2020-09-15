@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FitAppka.Models.CardioTraining>
+﻿@model IEnumerable<FitAppka.Model.CardioTraining>
 <html lang="pl">
 
 <head>
@@ -232,7 +232,7 @@
 
         @{
             int trainingCount = 0;
-            foreach (var training in (List<FitAppka.Models.StrengthTraining>)ViewData["strengthTrainings"])
+            foreach (var training in (List<FitAppka.Model.StrengthTraining>)ViewData["strengthTrainings"])
             {
                 if (training.Day.DayId.Equals(ViewData["dayID"]))
                 {

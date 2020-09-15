@@ -1,4 +1,4 @@
-﻿using FitAppka.Models;
+﻿using FitAppka.Model;
 using System.Collections.Generic;
 
 namespace FitAppka.Repository
@@ -7,7 +7,7 @@ namespace FitAppka.Repository
     {
         WeightMeasurement GetWeightMeasurement(int id);
         IEnumerable<WeightMeasurement> GetAllWeightMeasurements();
-        IEnumerable<WeightMeasurement> GetClientsWeightMeasurements(Client client);
+        IEnumerable<WeightMeasurement> GetClientsWeightMeasurements(int clientId);
         WeightMeasurement Add(WeightMeasurement weightMeasurement);
         WeightMeasurement Update(WeightMeasurement weightMeasurement);
         WeightMeasurement Delete(int id);
