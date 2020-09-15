@@ -1,4 +1,6 @@
-﻿namespace FitAppka.Service
+﻿using FitAppka.Model;
+
+namespace FitAppka.Service
 {
     public interface IMeasurementsService
     {
