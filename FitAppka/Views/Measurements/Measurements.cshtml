@@ -1,11 +1,31 @@
-﻿<html>
+﻿@model IEnumerable<FitAppka.Models.WeightMeasurement>
+<html>
 <head>
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
+    <link href="~/css/Measurements.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
-        
+    <div class="container" style="padding-top: 80px">
+        <div class="row no-gutters">
+            <div class="col-2 cent">Waga</div>
+            <div class="col-2 cent">Obwód talii</div>
+            <div class="col-2 cent">Proc. tłuszczu</div>
+            <div class="col-4 cent">Data pomiaru</div>
+            <div class="col-1 cent"></div>
+            <div class="col-1 cent"></div>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="row no-gutters">
+            <div class="col-2 cent">@item.Weight</div>
+            <div class="col-2 cent">@item.FatMeasurementNavigation.WaistCircumference</div>
+            <div class="col-2 cent">@item.FatMeasurementNavigation.BodyFatLevel</div>
+            <div class="col-4 cent">@item.DateOfMeasurement</div>
+            <div class="col-1 cent"><img src="~/img/pen.png" style="height: 25px; width: 25px"></div>
+            <div class="col-1 cent"><img src="!!"></div>
+        </div>
+        }
     </div>
     <script src="~/js/ShowNavbar.js"></script>
 </body>
