@@ -6,6 +6,7 @@ namespace FitAppka.Model
     public class SettingsModel
     {
         [Required]
+        [Display(Name = "Płeć")]
         public bool? Sex { get; set; }
 
         [Display(Name = "Data urodzenia")]

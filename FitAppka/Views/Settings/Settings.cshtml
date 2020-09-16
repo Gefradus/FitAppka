@@ -33,14 +33,17 @@
         <div class="row cent">
             <div class="col-9 col-sm-8 col-lg-7 col-xl-6 cent" style="background-color: white; margin-top: -5px; height: unset">
                 <form id="form" method="post" onsubmit="return checkForm()" style="font-size: 18px">
-                    <label style="font-weight: 600; margin-top: 15px; padding-bottom: 5px">Płeć</label>
+                    <label style="font-weight: 600; margin-top: 15px; padding-bottom: 10px">Podstawowe dane</label>
                     <div class="form-group">
+                        <div>
+                            <label asp-for="Sex" class="label"></label>
+                        </div>
                         <label><input type="radio" id="women" name="sex" checked value=false style="margin-right: 10px" />Kobieta</label>
                         <label><input type="radio" id="men" name="sex" value=true style="margin-left: 15px; margin-right: 10px" />Mężczyzna</label>
                     </div>
-                    <div style="padding-bottom: 10px">
+                    <div style="padding-bottom: 5px">
                         <div style="margin-bottom: 15px">
-                            <label asp-for="Date_of_birth" style="font-size: 16px; color: gray"></label>
+                            <label asp-for="Date_of_birth" class="label"></label>
                             <input id="datepicker" asp-for="Date_of_birth" type="text" style="margin-top: -10px; width: calc(100% - 25px); margin-left: -1px; padding-left: 11px" readonly="readonly" />
                             <span asp-validation-for="Date_of_birth" class="text-danger" style="font-size: 16px"></span>
                         </div>
@@ -51,13 +54,13 @@
                     <div style="padding-bottom: 25px; border-bottom: 1px solid darkgray">
                         <div class="cent">
                             <div style="width: calc(50% - 10px);">
-                                <label asp-for="Weight" style="font-size: 16px; color: gray"></label>
+                                <label asp-for="Weight" class="label"></label>
                                 <input id="weight" asp-for="Weight" class="form-control" type="number" min="10" max="600" placeholder="Waga [kg]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
                                 <span asp-validation-for="Weight" class="text-danger" style="font-size: 16px"></span>
                             </div>
                             <label class="unit" style="margin-right: 15px">kg</label>
                             <div style="width: calc(50% - 10px)">
-                                <label asp-for="Growth" style="font-size: 16px; color: gray"></label>
+                                <label asp-for="Growth" class="label"></label>
                                 <input id="growth" asp-for="Growth" class="form-control" min="50" max="300" placeholder="Wzrost [cm]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)">
                                 <span asp-validation-for="Growth" class="text-danger" style="font-size: 16px"></span>
                             </div>
