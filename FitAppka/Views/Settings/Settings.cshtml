@@ -72,7 +72,7 @@
                             <div style="width: calc(50% - 10px);">
                                 <label asp-for="Weight" class="label"></label>
                                 <div class="tooltip2">
-                                    <input id="weight" asp-for="Weight" class="form-control" type="number" min="10" max="600" placeholder="Waga [kg]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
+                                    <input id="weight" asp-for="Weight" class="form-control" type="number" min="10" max="600" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
                                     <span id="weightTip" class="tooltiptext" hidden>By zmienić wagę przejdź do widoku "Pomiary"</span>
                                 </div>
                                 <span asp-validation-for="Weight" class="text-danger" style="font-size: 16px"></span>
@@ -80,7 +80,7 @@
                             <label class="unit" style="margin-right: 15px">kg</label>
                             <div style="width: calc(50% - 10px)">
                                 <label asp-for="Growth" class="label"></label>
-                                <input id="growth" asp-for="Growth" class="form-control" min="50" max="300" placeholder="Wzrost [cm]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)">
+                                <input id="growth" asp-for="Growth" class="form-control" min="50" max="300" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)">
                                 <span asp-validation-for="Growth" class="text-danger" style="font-size: 16px"></span>
                             </div>
                             <label class="unit">cm</label>
