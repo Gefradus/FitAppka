@@ -11,25 +11,28 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IDayRepository _dayRepository;
         private readonly IClientRepository _clientRepository;
         private readonly FitAppContext _context;
+        private readonly IMeasurementsService _measurementsService;
 
         public SettingsServiceImpl(IDayRepository dayRepository, IClientRepository clientRepository, 
-            FitAppContext context, IDietaryTargetsService dietaryTargetsService)
+            FitAppContext context, IDietaryTargetsService dietaryTargetsService, IMeasurementsService measurementsService)
         {
+            _measurementsService = measurementsService;
             _dietaryTargetsService = dietaryTargetsService;
             _context = context;
             _clientRepository = clientRepository;
             _dayRepository = dayRepository;
         }
 
-        public async Task ChangeSettings(SettingsModel m, int isFirstLaunch)
+        public void ChangeSettings(SettingsModel m, int isFirstLaunch)
         {
             Client client = _clientRepository.GetLoggedInClient();
             SetClientGoals(m, client);
             SetDateOfJoiningIfFirstLaunch(isFirstLaunch, client);
             MapDayMealsFromClientToDaysFromToday(m, client);
             _dietaryTargetsService.UpdateTargetsInDaysFromToday(client);
-            SetClientWeightMeasurement(m, SetClientData(m, client));
-            await _context.SaveChangesAsync();
+            SetClientData(m, client);
+            SetClientWeightMeasurement(m, client);
+            //await _context.SaveChangesAsync();
         }
 
         private void SetDateOfJoiningIfFirstLaunch(int isFirstLaunch, Client client)
@@ -91,16 +94,15 @@ namespace FitAppka.Service.ServiceImpl
 
         private void SetClientWeightMeasurement(SettingsModel m, Client client)
         {
-            client.WeightMeasurement.Add(new WeightMeasurement()
+            _measurementsService.AddOrUpdateMeasurement(new WeightMeasurement()
             {
+                ClientId = client.ClientId,
                 DateOfMeasurement = DateTime.Now,
-                Weight = (short)m.Weight,
+                Weight = (short)m.Weight
             });
-
-            _clientRepository.Update(client);
         }
 
-        private Client SetClientData(SettingsModel m, Client client)
+        private void SetClientData(SettingsModel m, Client client)
         {
             client.DateOfBirth = m.Date_of_birth;
             client.Growth = m.Growth;
@@ -113,7 +115,6 @@ namespace FitAppka.Service.ServiceImpl
             client.Supper = m.Supper.GetValueOrDefault(false);
             client.WeightChangeGoal = m.WeightChange_Goal;
             client.ActivityLevel = m.LevelOfActivity;
-            return client;
         }
 
     }

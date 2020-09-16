@@ -13,12 +13,12 @@ namespace FitAppka.Model
         [DataType(DataType.Date)]
         public DateTime? Date_of_birth { get; set; }
 
-        [Display(Name = "Masa ciała [kg]")]
+        [Display(Name = "Masa ciała")]
         [DataType(DataType.Currency, ErrorMessage = "Waga została podana nieprawidłowo")]
         [Required(ErrorMessage = "Prosze podać wagę (w kg)")]
         public short? Weight { get; set; }
 
-        [Display(Name = "Wzrost [cm]")]
+        [Display(Name = "Wzrost")]
         [Required(ErrorMessage = "Proszę podać wzrost [w cm]")]
         public int? Growth { get; set; }
 

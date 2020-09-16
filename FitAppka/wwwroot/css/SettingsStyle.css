@@ -25,6 +25,10 @@ input::-webkit-inner-spin-button {
     margin-left: 17px;
 }
 
+.unit {
+    margin-top: 37px; margin-left: 5px; font-family: initial
+}
+
 #saveBtn {
     margin-left: 10%;
     width: 80%;

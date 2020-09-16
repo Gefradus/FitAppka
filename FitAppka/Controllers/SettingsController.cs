@@ -75,13 +75,13 @@ namespace FitAppka.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Settings(SettingsModel m, int isFirstLaunch)
+        public IActionResult Settings(SettingsModel m, int isFirstLaunch)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _settingsService.ChangeSettings(m, isFirstLaunch);
+                    _settingsService.ChangeSettings(m, isFirstLaunch);
                     return RedirectToAction("Start", "Home");
                 }
                 catch

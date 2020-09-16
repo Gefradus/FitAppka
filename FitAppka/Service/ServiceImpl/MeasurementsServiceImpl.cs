@@ -22,14 +22,17 @@ namespace FitAppka.Service.ServiceImpl
         }
 
         public bool AddOrUpdateMeasurement(WeightMeasurement weightMeasurement)
-        { 
-            if (weightMeasurement.ClientId == _clientRepository.GetLoggedInClientId()) {
-                if(_weightMeasurementRepository.GetWeightMeasurement(weightMeasurement.WeightMeasurementId) != null) {
-                    UpdateMeasurement(weightMeasurement);
-                } 
-                else {
-                    _weightMeasurementRepository.Add(weightMeasurement);
-                }            
+        {
+            int clientId = _clientRepository.GetLoggedInClientId();
+            if (weightMeasurement.ClientId == clientId) {
+                foreach(var item in _weightMeasurementRepository.GetClientsWeightMeasurements(clientId)) {
+                    if(item.DateOfMeasurement.Value.Date == weightMeasurement.DateOfMeasurement.Value.Date) {
+                        item.Weight = weightMeasurement.Weight;
+                        UpdateMeasurement(item);
+                        return true;
+                    }
+                }
+                _weightMeasurementRepository.Add(weightMeasurement);           
                 return true;
             }
             return false;

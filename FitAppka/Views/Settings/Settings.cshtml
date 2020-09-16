@@ -8,15 +8,18 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/js/Settings.js"></script>
         <script src="~/js/Validation.js"></script>
+        <script src="~/js/ShowNavbar.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             function onload() {
                 if ('@ViewData["isFirstLaunch"]' == 0) {
                     setSex('@ViewData["sex"]');
-                    setWeightAndGrowth('@ViewData["weight"]','@ViewData["growth"]')
-                    setWeightChangeGoal('@ViewData["changeGoal"]')
+                    setWeightAndGrowth('@ViewData["weight"]', '@ViewData["growth"]');
+                    setWeightChangeGoal('@ViewData["changeGoal"]');
                     setActivityLevel('@ViewData["activity"]');
                     setMeals('@ViewData["breakfast"]','@ViewData["lunch"]','@ViewData["dinner"]','@ViewData["dessert"]','@ViewData["snack"]','@ViewData["supper"]');
                     setPace('@ViewData["pace"]');
+                    blockWeightInput();
                 }
                 setDatepickerValue('@ViewData["dateOfBirth"]');
                 blockPace();
@@ -26,22 +29,6 @@
 
 
     <body onload="onload()">
-        <header>
-            <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 blackNav">
-                <div>
-                    <div class="mr-auto mt-3">
-                        <a class="ml-2 ml-sm-3 ml-md-4 ml-lg-5" asp-controller="Home" asp-action="Start"><img style="height: 50px; width:185px; margin-top: -10px" src="~/img/logorozowe.png" /></a>
-                    </div>
-                </div>
-                <div>
-                    <div class="navbar-nav ml-auto" style="position: absolute; right: 0; margin-top: -20px">
-                        <div class="mr-2 mr-xs-3 mr-sm-4 mr-md-5">
-                            <a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img style="height: 15px; width:15px" src="~/img/logout.png" /></a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
 
         <div class="row cent">
             <div class="col-9 col-sm-8 col-lg-7 col-xl-6 cent" style="background-color: white; margin-top: -5px; height: unset">
@@ -64,15 +51,17 @@
                     <div style="padding-bottom: 25px; border-bottom: 1px solid darkgray">
                         <div class="cent">
                             <div style="width: calc(50% - 10px);">
-                                <input id="weight" asp-for="Weight" class="form-control" type="number" min="10" max="600" placeholder="Waga [kg]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)"/>
+                                <label asp-for="Weight" style="font-size: 16px; color: gray"></label>
+                                <input id="weight" asp-for="Weight" class="form-control" type="number" min="10" max="600" placeholder="Waga [kg]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
                                 <span asp-validation-for="Weight" class="text-danger" style="font-size: 16px"></span>
                             </div>
-                            <label style="margin-right: 10px; margin-top: 5px; margin-left: 2px">kg</label>
+                            <label class="unit" style="margin-right: 15px">kg</label>
                             <div style="width: calc(50% - 10px)">
+                                <label asp-for="Growth" style="font-size: 16px; color: gray"></label>
                                 <input id="growth" asp-for="Growth" class="form-control" min="50" max="300" placeholder="Wzrost [cm]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)">
                                 <span asp-validation-for="Growth" class="text-danger" style="font-size: 16px"></span>
                             </div>
-                            <label style="margin-top: 5px; margin-left: 2px">cm</label>
+                            <label class="unit">cm</label>
                         </div>
                         <div>
                             <label id="invalidWeight" class="text-danger" hidden style="width: 50%">Podaj wagę [kg]</label>
@@ -107,7 +96,7 @@
                     <div class="form-group centering">
                         <button type="button" class="button" onclick="decrementPace()" id="decBtn"><img class="img-fluid" src="~/img/minus.png"></button>
                         <input id="pace" asp-for="PaceOfChange" type="number" step="0.1" value="0.4" /><span style="margin-left: -33px; float:right; margin-top: 4px; font-size:16px; z-index: 99">kg</span>
-                        <button type="button" class="button" onclick="incrementPace()"  id="incBtn"><img class="img-fluid" src="~/img/add.png"></button>
+                        <button type="button" class="button" onclick="incrementPace()" id="incBtn"><img class="img-fluid" src="~/img/add.png"></button>
                     </div>
 
                     <input id="saveBtn" type="submit" value="Zapisz i kontynuuj" asp-route-isFirstLaunch="@ViewData["isFirstLaunch"]" class="btn btn-primary" />
@@ -117,6 +106,10 @@
         </div>
 
         <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
-        <script>birthDateDatepicker();</script>
+        <script>
+        var $j = jQuery.noConflict();
+        birthDateDatepicker();
+            $j('#weight').tooltip({ 'trigger': 'focus', 'title': 'By zmienić wagę przejdź do zakładki Pomiary' });
+        </script>
     </body>
 </html>

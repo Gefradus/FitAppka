@@ -81,6 +81,14 @@ function setMeals(breakfast, lunch, dinner, dessert, snack, supper) {
     document.getElementById("supper").checked = setFlag(supper);
 }
 
+function blockWeightInput() {
+    var weightInput = document.getElementById("weight");
+    setNotAllowedCursor(weightInput);
+    weightInput.disabled = true;
+    weightInput.title = "By zmienić wagę przejdź do widoku \"Pomiary\"";
+}
+
+
 function setNotAllowedCursor(mouseTarget) {
     mouseTarget.style.cursor = 'not-allowed';
 }
@@ -134,7 +142,6 @@ function incrementPace() {
 }
 
 function birthDateDatepicker() {
-    var $j = jQuery.noConflict();
     $j("#datepicker").datepicker({
         minDate: new Date(1850, 1, 1),
         maxDate: '0',

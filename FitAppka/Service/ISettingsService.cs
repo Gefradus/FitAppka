@@ -5,6 +5,6 @@ namespace FitAppka.Service
 {
     public interface ISettingsService
     {
-        public Task ChangeSettings(SettingsModel m, int isFirstLaunch);
+        public void ChangeSettings(SettingsModel m, int isFirstLaunch);
     }
 }
