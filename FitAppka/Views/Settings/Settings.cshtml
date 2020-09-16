@@ -8,8 +8,7 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/js/Settings.js"></script>
         <script src="~/js/Validation.js"></script>
-        <script src="~/js/ShowNavbar.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <link href="~/css/Tooltip.css" rel="stylesheet" />
         <script type="text/javascript">
             function onload() {
                 if ('@ViewData["isFirstLaunch"]' == 0) {
@@ -20,6 +19,7 @@
                     setMeals('@ViewData["breakfast"]','@ViewData["lunch"]','@ViewData["dinner"]','@ViewData["dessert"]','@ViewData["snack"]','@ViewData["supper"]');
                     setPace('@ViewData["pace"]');
                     blockWeightInput();
+                    setNavbar();
                 }
                 setDatepickerValue('@ViewData["dateOfBirth"]');
                 blockPace();
@@ -29,6 +29,22 @@
 
 
     <body onload="onload()">
+        <header id="headerFirstRun">
+            <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 blackNav">
+                <div>
+                    <div class="mr-auto mt-3">
+                        <a class="ml-2 ml-sm-3 ml-md-4 ml-lg-5" asp-controller="Home" asp-action="Start"><img style="height: 50px; width:185px; margin-top: -10px" src="~/img/logorozowe.png" /></a>
+                    </div>
+                </div>
+                <div>
+                    <div class="navbar-nav ml-auto" style="position: absolute; right: 0; margin-top: -20px">
+                        <div class="mr-2 mr-xs-3 mr-sm-4 mr-md-5">
+                            <a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img style="height: 15px; width:15px" src="~/img/logout.png" /></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
         <div class="row cent">
             <div class="col-9 col-sm-8 col-lg-7 col-xl-6 cent" style="background-color: white; margin-top: -5px; height: unset">
@@ -55,7 +71,10 @@
                         <div class="cent">
                             <div style="width: calc(50% - 10px);">
                                 <label asp-for="Weight" class="label"></label>
-                                <input id="weight" asp-for="Weight" class="form-control" type="number" min="10" max="600" placeholder="Waga [kg]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
+                                <div class="tooltip2">
+                                    <input id="weight" asp-for="Weight" class="form-control" type="number" min="10" max="600" placeholder="Waga [kg]" onkeypress="return onlyInt(event)" onchange="this.value = changeToInteger(this.value)" />
+                                    <span id="weightTip" class="tooltiptext" hidden>By zmienić wagę przejdź do widoku "Pomiary"</span>
+                                </div>
                                 <span asp-validation-for="Weight" class="text-danger" style="font-size: 16px"></span>
                             </div>
                             <label class="unit" style="margin-right: 15px">kg</label>
@@ -109,10 +128,6 @@
         </div>
 
         <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
-        <script>
-        var $j = jQuery.noConflict();
-        birthDateDatepicker();
-            $j('#weight').tooltip({ 'trigger': 'focus', 'title': 'By zmienić wagę przejdź do zakładki Pomiary' });
-        </script>
+        <script>birthDateDatepicker();</script>
     </body>
 </html>

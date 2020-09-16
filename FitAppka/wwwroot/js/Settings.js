@@ -81,13 +81,16 @@ function setMeals(breakfast, lunch, dinner, dessert, snack, supper) {
     document.getElementById("supper").checked = setFlag(supper);
 }
 
-function blockWeightInput() {
-    var weightInput = document.getElementById("weight");
-    setNotAllowedCursor(weightInput);
-    weightInput.disabled = true;
-    weightInput.title = "By zmienić wagę przejdź do widoku \"Pomiary\"";
+function setNavbar() {
+    document.getElementById("headerFirstRun").hidden = true;
+    document.getElementById("allViewsNav").hidden = false;
 }
 
+function blockWeightInput() {
+    setNotAllowedCursor(document.getElementById("weight"));
+    document.getElementById("weight").disabled = true;
+    document.getElementById("weightTip").hidden = false;
+}
 
 function setNotAllowedCursor(mouseTarget) {
     mouseTarget.style.cursor = 'not-allowed';
@@ -95,6 +98,11 @@ function setNotAllowedCursor(mouseTarget) {
 
 function setNormalCursor(mouseTarget) {
     mouseTarget.style.cursor = 'pointer';
+}
+
+function setTitle(element1, element2, title) {
+    element1.title = title;
+    element2.title = title;
 }
 
 function blockPace() {
@@ -105,10 +113,12 @@ function blockPace() {
         document.getElementById("pace").value = 0.4;
         setNotAllowedCursor(incBtn);
         setNotAllowedCursor(decBtn);
+        setTitle(incBtn, decBtn, "Zmiany zablokowane gdyż celem jest utrzymanie wagi")
     }
     else {
         setNormalCursor(incBtn);
         setNormalCursor(decBtn);
+        setTitle(incBtn, decBtn, "");
     }
 }
 
@@ -142,6 +152,7 @@ function incrementPace() {
 }
 
 function birthDateDatepicker() {
+    var $j = jQuery.noConflict();
     $j("#datepicker").datepicker({
         minDate: new Date(1850, 1, 1),
         maxDate: '0',
