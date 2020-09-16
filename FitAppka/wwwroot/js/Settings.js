@@ -87,8 +87,10 @@ function setNavbar() {
 }
 
 function blockWeightInput() {
-    setNotAllowedCursor(document.getElementById("weight"));
-    document.getElementById("weight").disabled = true;
+    let weight = document.getElementById("weight");
+    setNotAllowedCursor(weight);
+    weight.readOnly = true;
+    weight.style.backgroundColor = "#e9ecef";
     document.getElementById("weightTip").hidden = false;
 }
 
