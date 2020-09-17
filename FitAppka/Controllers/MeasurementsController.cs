@@ -36,23 +36,6 @@ namespace FitAppka.Controllers
         public JsonResult Measurements(short weight, int waist)
         {
             return Json(_measurementsService.AddOrUpdateMeasurements(weight, waist));
-
-            /*WeightMeasurement weightMeasurement = _measurementsService.AddOrUpdateWeightMeasurement(new WeightMeasurement()
-            {
-                ClientId = _clientRepository.GetLoggedInClientId(),
-                Weight = weight,
-                DateOfMeasurement = DateTime.Now,
-            });*/
-
-            /*weightMeasurement.FatMeasurementId = _measurementsService.AddFatMeasurement(new FatMeasurement() {
-                WaistCircumference = waist,
-                BodyFatLevel = _measurementsService.EstimateBodyFatLevel(weight, waist),
-                WeightMeasurementId = weightMeasurement.WeightMeasurementId
-            }).FatMeasurementId;
-
-            _measurementsService.UpdateWeightMeasurement(weightMeasurement);
-
-            return Json(true);*/
         }
 
 
