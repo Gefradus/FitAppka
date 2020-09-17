@@ -1,7 +1,6 @@
 using FitAppka.Model;
 using FitAppka.Repository;
 using System;
-using System.Threading.Tasks;
 
 namespace FitAppka.Service.ServiceImpl
 {
@@ -10,15 +9,13 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IDietaryTargetsService _dietaryTargetsService;
         private readonly IDayRepository _dayRepository;
         private readonly IClientRepository _clientRepository;
-        private readonly FitAppContext _context;
         private readonly IMeasurementsService _measurementsService;
 
         public SettingsServiceImpl(IDayRepository dayRepository, IClientRepository clientRepository, 
-            FitAppContext context, IDietaryTargetsService dietaryTargetsService, IMeasurementsService measurementsService)
+            IDietaryTargetsService dietaryTargetsService, IMeasurementsService measurementsService)
         {
             _measurementsService = measurementsService;
             _dietaryTargetsService = dietaryTargetsService;
-            _context = context;
             _clientRepository = clientRepository;
             _dayRepository = dayRepository;
         }
@@ -31,8 +28,7 @@ namespace FitAppka.Service.ServiceImpl
             MapDayMealsFromClientToDaysFromToday(m, client);
             _dietaryTargetsService.UpdateTargetsInDaysFromToday(client);
             SetClientData(m, client);
-            SetClientWeightMeasurement(m, client);
-            //await _context.SaveChangesAsync();
+            SetClientWeightMeasurement(m);
         }
 
         private void SetDateOfJoiningIfFirstLaunch(int isFirstLaunch, Client client)
@@ -92,14 +88,9 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-        private void SetClientWeightMeasurement(SettingsModel m, Client client)
+        private void SetClientWeightMeasurement(SettingsModel m)
         {
-            _measurementsService.AddOrUpdateMeasurement(new WeightMeasurement()
-            {
-                ClientId = client.ClientId,
-                DateOfMeasurement = DateTime.Now,
-                Weight = (short)m.Weight
-            });
+            _measurementsService.AddOrUpdateMeasurements((short)m.Weight, 0);
         }
 
         private void SetClientData(SettingsModel m, Client client)

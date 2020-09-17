@@ -4,8 +4,8 @@
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
     <link href="~/css/Measurements.css" rel="stylesheet" />
-    <script src="~/js/Measurement.js"></script>
     <script src="~/js/Validation.js"></script>
+    <script src="~/js/Measurement.js"></script>
     <script>
         function colorEverySecondRow() {
             var rows = document.getElementsByClassName("rowM");
@@ -22,24 +22,25 @@
             <div class="modal-dialog" style="display: flex; justify-content: center;">
                 <div class="modal-content">
                     <div class="modal-header" style="height: 20px">
+                        <div style="margin-top: -12px">Dodawanie pomiaru ciała</div>
                         <button type="button" class="close" data-dismiss="modal" style="margin-top: -30px">×</button>
                     </div>
                 <div class="modal-body">
                     <div class="container">
                         <div class="row no-gutters cent" style="margin-top: 15px;">
-                            <div style="margin-left: -90px">Obwód talii:</div>
-                        </div>
-                        <div class="row no-gutters cent" style="margin-top: 3px;">
-                            <input id="circum" type="number" max="99999999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000)" oninput="validity.valid || (value = '')" />
-                        </div>
-                        <div class="row no-gutters cent" style="margin-top: 15px;">
-                            <div style="margin-left: -127px">Waga:</div>
+                            <div style="margin-left: -127px">Waga:</div><div class="star">*</div>
                         </div>
                         <div class="row no-gutters cent" style="margin-top: 3px;">
                             <input id="weight" type="number" max="99999999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000)" oninput="validity.valid || (value = '')" />
                         </div>
+                        <div class="row no-gutters cent" style="margin-top: 15px;">
+                            <div style="margin-left: -90px">Obwód talii:</div>
+                        </div>
+                        <div class="row no-gutters cent" style="margin-top: 3px;">
+                            <input id="waist" type="number" max="99999999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000)" oninput="validity.valid || (value = '')" />
+                        </div>
                         <div class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
-                            <button type="button" onclick="" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Dodaj pomiar</button>
+                            <button id="btnAddMeasurement" type="button" onclick="addMeasurement('@Url.Action("Measurements","Measurements")')" class="btn btn-dark">Zapisz pomiar ciała</button>
                         </div>
                     </div>
                 </div>
@@ -49,7 +50,7 @@
 
     <div class="container" style="padding-top: 30px">
         <div style="display: flex">
-            <button class="btn acent" id="btnAddMeasurement" onclick="addMeasurement()">Dodaj nowy pomiar</button>
+            <button class="btn acent" id="btnShowModalAddMeasurement" onclick="showModalAddMeasurement()">Dodaj pomiar ciała</button>
         </div>
         <div class="row no-gutters" id="headRow">
             <div class="col-2 cent">Waga</div>
@@ -65,7 +66,7 @@
             if (item.FatMeasurementNavigation != null)
             {
                 waistCircumference = item.FatMeasurementNavigation.WaistCircumference.ToString();
-                bodyFatLevel = item.FatMeasurementNavigation.ToString();
+                bodyFatLevel = item.FatMeasurementNavigation.BodyFatLevel.ToString();
             }
             
             <div class="row no-gutters rowM">

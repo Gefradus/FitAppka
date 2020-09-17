@@ -7,6 +7,7 @@ namespace FitAppka.Repository
     {
         FatMeasurement GetFatMeasurement(int id);
         IEnumerable<FatMeasurement> GetAllFatMeasurements();
+        IEnumerable<FatMeasurement> GetClientFatMeasurements();
         FatMeasurement Add(FatMeasurement fatMeasurement);
         FatMeasurement Update(FatMeasurement fatMeasurement);
         FatMeasurement Delete(int id);

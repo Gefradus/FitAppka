@@ -17,15 +17,22 @@
     align-items: center;
 }
 
-#btnAddMeasurement{
+#btnAddMeasurement {
+    background: #52ad3c;
+    color: white;
+    height: 37px;
+    width: 170px
+}
+
+#btnShowModalAddMeasurement {
     margin-left: auto;
     font-size: 18px;
     color: white;
     background: #72c27a;
-    font-family:Corbel;
+    font-family: Corbel;
     margin-bottom: 15px;
 }
 
-#btnAddMeasurement:hover {
+#btnShowModalAddMeasurement:hover {
     background: #da706a
 }

@@ -7,10 +7,12 @@ namespace FitAppka.Repository.RepIfaceImpl{
     public class SQLFatMeasurementRepository : IFatMeasurementRepository
     {
         private readonly FitAppContext _context;
+        private readonly IClientRepository _clientRepository;
 
-        public SQLFatMeasurementRepository(FitAppContext context)
+        public SQLFatMeasurementRepository(FitAppContext context, IClientRepository clientRepository)
         {
             _context = context;
+            _clientRepository = clientRepository;
         }
 
         public FatMeasurement GetFatMeasurement(int id){
@@ -41,6 +43,23 @@ namespace FitAppka.Repository.RepIfaceImpl{
             }
             
             return fatMeasurement;
-        }  
+        }
+
+        public IEnumerable<FatMeasurement> GetClientFatMeasurements()
+        {
+            var fatMeasurements = new List<FatMeasurement>();
+            foreach (var fatMeasurement in GetAllFatMeasurements())
+            {
+                if(fatMeasurement.WeightMeasurement != null)
+                {
+                    if(fatMeasurement.WeightMeasurement.ClientId == _clientRepository.GetLoggedInClientId())
+                    {
+                        fatMeasurements.Add(fatMeasurement);
+                    }
+                }
+            }
+
+            return fatMeasurements;
+        }
     }
 }

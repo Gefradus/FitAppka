@@ -5,8 +5,7 @@ using FitAppka.Repository;
 using FitAppka.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-
-
+using System;
 
 namespace FitAppka.Controllers
 {
@@ -31,6 +30,29 @@ namespace FitAppka.Controllers
         {
             ViewData["dayID"] = _dayService.GetTodayId();
             return View(await _context.WeightMeasurement.Where(w => w.ClientId == _clientRepository.GetLoggedInClientId()).Include(w => w.FatMeasurement).ToListAsync());
+        }
+
+        [HttpPost]
+        public JsonResult Measurements(short weight, int waist)
+        {
+            return Json(_measurementsService.AddOrUpdateMeasurements(weight, waist));
+
+            /*WeightMeasurement weightMeasurement = _measurementsService.AddOrUpdateWeightMeasurement(new WeightMeasurement()
+            {
+                ClientId = _clientRepository.GetLoggedInClientId(),
+                Weight = weight,
+                DateOfMeasurement = DateTime.Now,
+            });*/
+
+            /*weightMeasurement.FatMeasurementId = _measurementsService.AddFatMeasurement(new FatMeasurement() {
+                WaistCircumference = waist,
+                BodyFatLevel = _measurementsService.EstimateBodyFatLevel(weight, waist),
+                WeightMeasurementId = weightMeasurement.WeightMeasurementId
+            }).FatMeasurementId;
+
+            _measurementsService.UpdateWeightMeasurement(weightMeasurement);
+
+            return Json(true);*/
         }
 
 
