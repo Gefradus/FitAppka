@@ -111,7 +111,7 @@ namespace FitAppka.Service.ServiceImpl
                     UpdateFatMeasurement(fatMeasurement);
                 }
                 else {
-                    UpdateWeightMeasurementByFatMeasurement(item, weight, waist);
+                    AddMeasurements(item, weight, waist);
                 }
             }
         }
@@ -129,16 +129,12 @@ namespace FitAppka.Service.ServiceImpl
                 }
             }
 
-            return AddMeasurements(createdMeasurement, weight, waist);
-        }
-
-        private bool AddMeasurements(WeightMeasurement createdMeasurement, short weight, int waist)
-        {
-            UpdateWeightMeasurementByFatMeasurement(_weightMeasurementRepository.Add(createdMeasurement), weight, waist);
+            AddMeasurements(_weightMeasurementRepository.Add(createdMeasurement), weight, waist);
             return true;
         }
 
-        private void UpdateWeightMeasurementByFatMeasurement(WeightMeasurement addedMeasurement, short weight, int waist)
+
+        private void AddMeasurements(WeightMeasurement addedMeasurement, short weight, int waist)
         {
             FatMeasurement fatMeasurement = AddFatMeasurementIfWaistNotZero(addedMeasurement, weight, waist);
             if (fatMeasurement != null)
