@@ -1,4 +1,4 @@
-.row{
+.rowM{
     background-color:ghostwhite;
     border: 1px solid black;
     height: 40px;
@@ -12,7 +12,8 @@
 
 #headRow {
     background-color: #202020;
-    color: white
+    color: white;
+    height: 40px;
 }
 
 #btnAddMeasurement{
