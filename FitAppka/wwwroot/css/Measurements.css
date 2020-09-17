@@ -14,3 +14,16 @@
     background-color: #202020;
     color: white
 }
+
+#btnAddMeasurement{
+    margin-left: auto;
+    font-size: 18px;
+    color: white;
+    background: #72c27a;
+    font-family:Corbel;
+    margin-bottom: 15px;
+}
+
+#btnAddMeasurement:hover {
+    background: #da706a
+}

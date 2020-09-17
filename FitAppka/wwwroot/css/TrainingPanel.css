@@ -28,7 +28,6 @@
     color: white;
     background: #72c27a;
     font-family:Corbel
-    
 }
 
 #cardioName, #strengthName {
@@ -47,8 +46,6 @@
     width: 100px;
     color: white
 }
-
-
 
 #btnAddStrength:hover, #btnAddCardio:hover {
     background: #da706a
