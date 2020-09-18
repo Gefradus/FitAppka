@@ -23,8 +23,10 @@ function clearModalField(){
 function fillModalFields(id, weight, waist){
     $("#editMeasurementId").val(id);
     $("#weight").val(weight);
-    if(waist != '-'){
-        $("#waist").val(waist);
+    if (waist != '-') {
+        $("#waist").val(parseInt(waist));
+    } else {
+        $("#waist").val("");
     }
 }
 

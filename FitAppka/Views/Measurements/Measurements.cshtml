@@ -99,7 +99,7 @@
                 <div class="col-2 cent">@waistCircumference</div>
                 <div class="col-2 cent">@bodyFatLevel</div>
                 <div class="col-4 cent">@item.DateOfMeasurement.Value.ToString("dd.MM.yyyy")</div>
-                <div class="col-1 cent"><img class="btnImg" src="~/img/pen.png" onclick="showEditMeasurementModal(@item.WeightMeasurementId, @item.Weight, @waistCircumference)"></div>
+                <div class="col-1 cent"><img class="btnImg" src="~/img/pen.png" onclick="showEditMeasurementModal(@item.WeightMeasurementId, @item.Weight, '@waistCircumference')"></div>
                 <div class="col-1 cent"><img class="btnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" onclick="showDeleteModal(@item.WeightMeasurementId)"></div>
             </div>
         }

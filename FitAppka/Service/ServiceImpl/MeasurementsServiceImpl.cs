@@ -1,8 +1,6 @@
 ﻿using FitAppka.Model;
 using FitAppka.Repository;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace FitAppka.Service.ServiceImpl
 {
@@ -36,10 +34,11 @@ namespace FitAppka.Service.ServiceImpl
         {
             if (_clientManageService.HasUserAccessToWeightMeasurement(id)) 
             {
-                List<FatMeasurement> relatedFatMeasaurement = _weightMeasurementRepository.GetWeightMeasurement(id).FatMeasurement.ToList();
-                foreach(var item in relatedFatMeasaurement) {
-                    _fatMeasurementRepository.Delete(item.FatMeasurementId);
+                int? relatedFatMeasurementId = _weightMeasurementRepository.GetWeightMeasurement(id).FatMeasurementId;
+                if (relatedFatMeasurementId != null) {
+                    _fatMeasurementRepository.Delete((int)relatedFatMeasurementId);
                 }
+                
                 _weightMeasurementRepository.Delete(id);
                 return true;
             }
@@ -136,16 +135,16 @@ namespace FitAppka.Service.ServiceImpl
 
         public bool AddOrUpdateMeasurements(short weight, int waist)
         {
-            WeightMeasurement createdMeasurement = CreateWeightMeasurement(weight);
-            foreach (var item in _weightMeasurementRepository.GetClientsWeightMeasurements(_clientRepository.GetLoggedInClientId())) {
+           // WeightMeasurement createdMeasurement = CreateWeightMeasurement(weight);
+            /*foreach (var item in _weightMeasurementRepository.GetClientsWeightMeasurements(_clientRepository.GetLoggedInClientId())) {
                 if (item.DateOfMeasurement.Value.Date == createdMeasurement.DateOfMeasurement.Value.Date) {
                     item.Weight = createdMeasurement.Weight;
                     UpdateOrAddFatMeasurementIfExist(item, weight, waist);
                     return UpdateWeightMeasurement(item);
                 }
-            }
+            }*/
 
-            AddFatMeasurementAndUpdateWeightMeasurement(_weightMeasurementRepository.Add(createdMeasurement), weight, waist);
+            AddFatMeasurementAndUpdateWeightMeasurement(_weightMeasurementRepository.Add(CreateWeightMeasurement(weight)), weight, waist);
             return true;
         }
 
