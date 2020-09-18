@@ -5,7 +5,6 @@ using FitAppka.Repository;
 using FitAppka.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using System;
 
 namespace FitAppka.Controllers
 {
