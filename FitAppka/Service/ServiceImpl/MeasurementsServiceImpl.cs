@@ -135,15 +135,6 @@ namespace FitAppka.Service.ServiceImpl
 
         public bool AddOrUpdateMeasurements(short weight, int waist)
         {
-           // WeightMeasurement createdMeasurement = CreateWeightMeasurement(weight);
-            /*foreach (var item in _weightMeasurementRepository.GetClientsWeightMeasurements(_clientRepository.GetLoggedInClientId())) {
-                if (item.DateOfMeasurement.Value.Date == createdMeasurement.DateOfMeasurement.Value.Date) {
-                    item.Weight = createdMeasurement.Weight;
-                    UpdateOrAddFatMeasurementIfExist(item, weight, waist);
-                    return UpdateWeightMeasurement(item);
-                }
-            }*/
-
             AddFatMeasurementAndUpdateWeightMeasurement(_weightMeasurementRepository.Add(CreateWeightMeasurement(weight)), weight, waist);
             return true;
         }

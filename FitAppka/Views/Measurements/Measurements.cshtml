@@ -6,6 +6,7 @@
     <link href="~/css/Measurements.css" rel="stylesheet" />
     <script src="~/js/Validation.js"></script>
     <script src="~/js/Measurement.js"></script>
+    <link href="~/css/Tooltip.css" rel="stylesheet" />
     <script>
         function colorEverySecondRow() {
             var rows = document.getElementsByClassName("rowM");
@@ -79,10 +80,15 @@
             <button class="btn acent" id="btnShowModalAddMeasurement" onclick="showModalAddMeasurement()">Dodaj pomiar ciała</button>
         </div>
         <div class="row no-gutters" id="headRow">
-            <div class="col-2 cent">Waga</div>
-            <div class="col-2 cent">Obwód talii</div>
-            <div class="col-2 cent">Proc. tłuszczu</div>
-            <div class="col-4 cent">Data pomiaru</div>
+            <div class="col-2 cent">Waga [kg]</div>
+            <div class="col-2 cent">Obwód talii [cm]</div>
+            <div class="col-3 cent">Poziom BF [%]
+                <div class="tooltip2">
+                    <img id="help" src="~/img/help.png" />
+                    <span id="bftip" class="tooltiptext">Szacowany udział tłuszczu w organizmie</span>
+                </div>
+            </div>
+            <div class="col-3 cent">Data pomiaru</div>
             <div class="col-1 cent"></div>
             <div class="col-1 cent"></div>
         </div>
@@ -97,8 +103,8 @@
             <div class="row no-gutters rowM">
                 <div class="col-2 cent">@item.Weight</div>
                 <div class="col-2 cent">@waistCircumference</div>
-                <div class="col-2 cent">@bodyFatLevel</div>
-                <div class="col-4 cent">@item.DateOfMeasurement.Value.ToString("dd.MM.yyyy")</div>
+                <div class="col-3 cent">@bodyFatLevel</div>
+                <div class="col-3 cent">@item.DateOfMeasurement.Value.ToString("dd.MM.yyyy")</div>
                 <div class="col-1 cent"><img class="btnImg" src="~/img/pen.png" onclick="showEditMeasurementModal(@item.WeightMeasurementId, @item.Weight, '@waistCircumference')"></div>
                 <div class="col-1 cent"><img class="btnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" onclick="showDeleteModal(@item.WeightMeasurementId)"></div>
             </div>
