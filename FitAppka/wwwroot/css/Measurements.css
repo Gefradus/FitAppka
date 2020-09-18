@@ -11,6 +11,10 @@
     cursor: pointer
 }
 
+#modal-title{
+    margin-top: -12px
+}
+
 #headRow {
     background-color: #202020;
     color: white;
@@ -18,7 +22,7 @@
     align-items: center;
 }
 
-#btnAddMeasurement {
+#btnAddMeasurement, #btnEditMeasurement {
     background: #52ad3c;
     color: white;
     height: 37px;

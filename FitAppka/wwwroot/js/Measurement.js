@@ -1,11 +1,13 @@
 function showModalAddMeasurement(){
     showModal(true);
     clearModalField();
+    document.getElementById("modal-title").innerHTML = "Tworzenie pomiaru";
 }
 
 function showEditMeasurementModal(id, weight, waist){
     showModal(false);
     fillModalFields(id, weight, waist);
+    document.getElementById("modal-title").innerHTML = "Edytowanie pomiaru";
 }
 
 function showDeleteModal(id){

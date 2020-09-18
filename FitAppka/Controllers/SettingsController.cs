@@ -14,9 +14,11 @@ namespace FitAppka.Controllers
         private readonly IClientRepository _clientRepository;
         private readonly ISettingsService _settingsService;
         private readonly IDietaryTargetsService _dietaryTargetsService;
+        private readonly IDayManageService _dayService;
 
-        public SettingsController(IClientRepository clientRepository, ISettingsService settingsService, IDietaryTargetsService dietaryTargetsService)
+        public SettingsController(IClientRepository clientRepository, ISettingsService settingsService, IDietaryTargetsService dietaryTargetsService, IDayManageService dayService)
         {
+            _dayService = dayService;
             _dietaryTargetsService = dietaryTargetsService;
             _clientRepository = clientRepository;
             _settingsService = settingsService;
@@ -27,6 +29,7 @@ namespace FitAppka.Controllers
         {
             FirstAppLaunch();
             ViewData["clientID"] = _clientRepository.GetLoggedInClient().ClientId;
+            ViewData["dayID"] = _dayService.GetTodayId();
             return View();
         }
 
