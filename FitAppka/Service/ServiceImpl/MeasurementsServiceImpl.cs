@@ -34,7 +34,8 @@ namespace FitAppka.Service.ServiceImpl
 
         public bool DeleteMeasurement(int id)
         {
-            if (_clientManageService.HasUserAccessToWeightMeasurement(id)) {
+            if (_clientManageService.HasUserAccessToWeightMeasurement(id)) 
+            {
                 List<FatMeasurement> relatedFatMeasaurement = _weightMeasurementRepository.GetWeightMeasurement(id).FatMeasurement.ToList();
                 foreach(var item in relatedFatMeasaurement) {
                     _fatMeasurementRepository.Delete(item.FatMeasurementId);

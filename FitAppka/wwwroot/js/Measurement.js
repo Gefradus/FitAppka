@@ -1,10 +1,29 @@
 function showModalAddMeasurement(){
     showModal(true);
+    clearModalField();
 }
 
-function showEditMeasurementModal(id){
+function showEditMeasurementModal(id, weight, waist){
     showModal(false);
+    fillModalFields(id, weight, waist);
+}
+
+function showDeleteModal(id){
+    $("#deleteModal").modal('show');
+    $("#deleteMeasurementId").val(id);
+}
+
+function clearModalField(){
+    $("#weight").val("");
+    $("#waist").val("");
+}
+
+function fillModalFields(id, weight, waist){
     $("#editMeasurementId").val(id);
+    $("#weight").val(weight);
+    if(waist != '-'){
+        $("#waist").val(waist);
+    }
 }
 
 function showModal(bool){
@@ -67,6 +86,19 @@ function editMeasurementAjax(url){
             id: parseInt($("#editMeasurementId").val()), 
             weight: parseInt($("#weight").val()), 
             waist: parseInt($("#waist").val()) 
+        },
+        success: function () {
+            location.reload();
+        }
+    });
+}
+
+function deleteMeasurement(url){
+    $.ajax({
+        type: 'DELETE',
+        url: url,
+        data: { 
+            id: parseInt($("#deleteMeasurementId").val())
         },
         success: function () {
             location.reload();

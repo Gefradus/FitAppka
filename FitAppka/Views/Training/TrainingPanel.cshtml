@@ -31,15 +31,15 @@
                     <div class="modal-footer">
                         <div id="formDeleteCardio" hidden>
                             <div style="display:flex; justify-content: center">
-                                <button type="button" data-dismiss="modal" class="cancelDeleteBtn">Anuluj</button>
-                                <button type="button" id="delete" onclick="deleteCardio('@Url.Action("Cardio", "Training")')">Tak, usuń</button>
+                                <button type="button" data-dismiss="modal" class="cancelBtn">Anuluj</button>
+                                <button type="button" class="deleteBtn" onclick="deleteCardio('@Url.Action("Cardio", "Training")')">Tak, usuń</button>
                                 <div id="deletingCardioID" hidden></div>
                             </div>
                         </div>
                         <div id="formDeleteStrength" hidden>
                             <div style="display:flex; justify-content: center">
-                                <button type="button" data-dismiss="modal" class="cancelDeleteBtn">Anuluj</button>
-                                <button type="button" id="delete" onclick="deleteStrengthTraining('@Url.Action("StrengthTraining", "Training")')">Tak, usuń</button>
+                                <button type="button" data-dismiss="modal" class="cancelBtn">Anuluj</button>
+                                <button type="button" class="deleteBtn" onclick="deleteStrengthTraining('@Url.Action("StrengthTraining", "Training")')">Tak, usuń</button>
                                 <div id="deletingStrengthTrainingID" hidden></div>
                             </div>
                         </div>

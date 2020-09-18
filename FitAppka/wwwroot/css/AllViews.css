@@ -11,6 +11,23 @@
     border-left: 1px dotted #6b6b6b;
 }
 
+.deleteBtn {
+    border-radius:10%; 
+    background-color: #ce1a22; 
+    height: 32px; 
+    width: 100px; 
+    color: white
+}
+
+.cancelBtn{
+    margin-right: 15px; 
+    border-radius:10%; 
+    background-color: #4d62d7; 
+    height: 32px; 
+    width: 100px; 
+    color: white
+}
+
 #btnBackImg {
     height: 67px;
     width: 68px;
@@ -38,15 +55,6 @@
 .star{
     color:red;
     margin-left: 3px;
-}
-
-.cancelDeleteBtn {
-    margin-right: 15px; 
-    border-radius:10%; 
-    background-color: #4d62d7; 
-    height: 32px; 
-    width: 100px; 
-    color: white
 }
 
 

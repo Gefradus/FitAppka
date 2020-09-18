@@ -38,19 +38,9 @@
     margin-bottom: -10px
 }
 
-
-#delete {
-    border-radius: 10%;
-    background-color: #ce1a22;
-    height: 32px;
-    width: 100px;
-    color: white
-}
-
 #btnAddStrength:hover, #btnAddCardio:hover {
     background: #da706a
 }
-
 
 #btnDelete {
     height: 20px;
@@ -73,7 +63,6 @@
     width: 20px;
     margin-top: -8px;
     margin-left: -6px
-
 }
 
 .headCol {
@@ -91,10 +80,6 @@
     width: calc(33.33% - 20px);
 }
 
-.trainingName{
-/*    height: 100%;
-    align-items: center;*/
-}
 
 .trainingName:hover {
     color: coral;
