@@ -27,7 +27,9 @@
     font-size: 18px;
     color: white;
     background: #72c27a;
-    font-family:Corbel
+    font-family:Corbel;
+    justify-content: center;
+    width: 180px;
 }
 
 #cardioName, #strengthName {
