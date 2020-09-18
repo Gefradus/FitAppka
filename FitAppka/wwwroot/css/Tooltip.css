@@ -22,3 +22,7 @@
 .tooltip2:hover .tooltiptext {
     visibility: visible;
 }
+
+.tooltiptext{
+    cursor: default
+}
