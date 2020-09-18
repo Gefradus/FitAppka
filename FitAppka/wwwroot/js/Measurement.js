@@ -46,17 +46,16 @@ function editMeasurement(url){
     }
 }
 
-function addOrEditMeasurementValidation() {
-    var weight = parseInt($("#weight").val());
-    var waist = parseInt($("#waist").val());
-    if (isNumeric(weight) && isEmptyOrNumeric(waist)) {
+function addOrEditMeasurementValidation() 
+{
+    if (isNumeric(parseInt($("#weight").val())) && isEmptyOrNumeric($("#waist").val())) {
         return true;
     }
     else {
-        if (isEmpty(weight)) {
+        if (isEmpty($("#weight").val())) {
             validation("Należy podać wagę ciała");
         }
-        else if (!isEmptyOrNumeric(waist)) {
+        else if (!isEmptyOrNumeric($("#waist").val())) {
             validation("Należy podać obwód w pasie jako liczbę");
         }
         else {
