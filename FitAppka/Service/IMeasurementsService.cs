@@ -4,9 +4,9 @@ namespace FitAppka.Service
 {
     public interface IMeasurementsService
     {
-        public bool AddOrUpdateMeasurements(short weight, int waist);
-        public WeightMeasurement UpdateWeightMeasurement(WeightMeasurement weightMeasurement);
-        public bool DeleteMeasurement(int id);
-        public double EstimateBodyFatLevel(short weight, int waist);
+        bool AddOrUpdateMeasurements(short weight, int waist);
+        bool UpdateMeasurements(int id, short weight, int waist);
+        bool DeleteMeasurement(int id);
+        double EstimateBodyFatLevel(short weight, int waist);
     }
 }

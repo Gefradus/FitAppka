@@ -107,6 +107,11 @@ function setTitle(element1, element2, title) {
     element2.title = title;
 }
 
+function hideDecIncTip(hidden){
+    document.getElementById("decTip").hidden = hidden;
+    document.getElementById("incTip").hidden = hidden;
+}
+
 function blockPace() {
     var incBtn = document.getElementById("incBtn");
     var decBtn = document.getElementById("decBtn");
@@ -115,12 +120,12 @@ function blockPace() {
         document.getElementById("pace").value = 0.4;
         setNotAllowedCursor(incBtn);
         setNotAllowedCursor(decBtn);
-        setTitle(incBtn, decBtn, "Zmiany zablokowane gdyż celem jest utrzymanie wagi")
+        hideDecIncTip(false);
     }
     else {
         setNormalCursor(incBtn);
         setNormalCursor(decBtn);
-        setTitle(incBtn, decBtn, "");
+        hideDecIncTip(true);
     }
 }
 

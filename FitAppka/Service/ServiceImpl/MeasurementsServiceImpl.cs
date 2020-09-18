@@ -55,7 +55,25 @@ namespace FitAppka.Service.ServiceImpl
                 var = 76.76;
             }
 
-            return ((4.15 * waist / 2.54) - (0.082 * weight * 2.2) - var) / (weight * 2.2) * 100;   //YMCA Method
+            return FormatBodyFatLevel(((4.15 * waist / 2.54) - (0.082 * weight * 2.2) - var) / (weight * 2.2) * 100);   //YMCA Method
+        }
+
+        private double FormatBodyFatLevel(double fatLevel){
+            double var = RoundDouble(fatLevel);
+            if(var > 100){
+                return 100;
+            }
+            else if(var < 0){
+                return 0;
+            }
+            else {
+                return var;
+            }
+        }
+
+        private double RoundDouble(double number)
+        {
+            return (double)Math.Round((decimal)number, 1, MidpointRounding.AwayFromZero);
         }
 
         private FatMeasurement UpdateFatMeasurement(FatMeasurement fatMeasurement)
@@ -67,13 +85,14 @@ namespace FitAppka.Service.ServiceImpl
             return null;
         }
 
-        public WeightMeasurement UpdateWeightMeasurement(WeightMeasurement weightMeasurement)
+        private bool UpdateWeightMeasurement(WeightMeasurement weightMeasurement)
         {
             if (_clientManageService.HasUserAccessToWeightMeasurement(weightMeasurement.WeightMeasurementId)) 
             {
-                return _weightMeasurementRepository.Update(weightMeasurement);
+                _weightMeasurementRepository.Update(weightMeasurement);
+                return true;
             }
-            return null;
+            return false;
         }
 
         private WeightMeasurement CreateWeightMeasurement(short weight)
@@ -87,10 +106,8 @@ namespace FitAppka.Service.ServiceImpl
 
         private FatMeasurement CreateFatMeasurementIfWaistNotZero(WeightMeasurement weightMeasurement, short weight, int waist)
         {
-            if (waist != 0)
-            {
-                return new FatMeasurement()
-                {
+            if (waist != 0) {
+                return new FatMeasurement() {
                     WeightMeasurementId = weightMeasurement.WeightMeasurementId,
                     BodyFatLevel = EstimateBodyFatLevel(weight, waist),
                     WaistCircumference = waist
@@ -111,7 +128,7 @@ namespace FitAppka.Service.ServiceImpl
                     UpdateFatMeasurement(fatMeasurement);
                 }
                 else {
-                    AddMeasurements(item, weight, waist);
+                    AddFatMeasurementAndUpdateWeightMeasurement(item, weight, waist);
                 }
             }
         }
@@ -119,26 +136,30 @@ namespace FitAppka.Service.ServiceImpl
         public bool AddOrUpdateMeasurements(short weight, int waist)
         {
             WeightMeasurement createdMeasurement = CreateWeightMeasurement(weight);
-            foreach (var item in _weightMeasurementRepository.GetClientsWeightMeasurements(_clientRepository.GetLoggedInClientId()))
-            {
+            foreach (var item in _weightMeasurementRepository.GetClientsWeightMeasurements(_clientRepository.GetLoggedInClientId())) {
                 if (item.DateOfMeasurement.Value.Date == createdMeasurement.DateOfMeasurement.Value.Date) {
                     item.Weight = createdMeasurement.Weight;
                     UpdateOrAddFatMeasurementIfExist(item, weight, waist);
-                    UpdateWeightMeasurement(item);
-                    return true;
+                    return UpdateWeightMeasurement(item);
                 }
             }
 
-            AddMeasurements(_weightMeasurementRepository.Add(createdMeasurement), weight, waist);
+            AddFatMeasurementAndUpdateWeightMeasurement(_weightMeasurementRepository.Add(createdMeasurement), weight, waist);
             return true;
         }
 
+        public bool UpdateMeasurements(int id, short weight, int waist){
+            WeightMeasurement weightMeasurement = _weightMeasurementRepository.GetWeightMeasurement(id);
+            weightMeasurement.Weight = weight;
+            UpdateWeightMeasurement(weightMeasurement);
+            UpdateOrAddFatMeasurementIfExist(weightMeasurement, weight, waist);
+            return true;
+        }
 
-        private void AddMeasurements(WeightMeasurement addedMeasurement, short weight, int waist)
+        private void AddFatMeasurementAndUpdateWeightMeasurement(WeightMeasurement addedMeasurement, short weight, int waist)
         {
             FatMeasurement fatMeasurement = AddFatMeasurementIfWaistNotZero(addedMeasurement, weight, waist);
-            if (fatMeasurement != null)
-            {
+            if (fatMeasurement != null) {
                 addedMeasurement.FatMeasurementId = fatMeasurement.FatMeasurementId;
                 UpdateWeightMeasurement(addedMeasurement);
             }

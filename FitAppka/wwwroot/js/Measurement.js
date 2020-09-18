@@ -1,34 +1,75 @@
 function showModalAddMeasurement(){
-    $("#addMeasurement").modal('show');
+    showModal(true);
 }
 
-function addMeasurement(url) {
+function showEditMeasurementModal(id){
+    showModal(false);
+    $("#editMeasurementId").val(id);
+}
+
+function showModal(bool){
+    $("#addOrEditModal").modal('show');
+    document.getElementById("btnAddMeasurement").hidden = !bool;
+    document.getElementById("btnEditMeasurement").hidden = bool;
+}
+
+function addMeasurement(url){
+    if(addOrEditMeasurementValidation()){
+        addMeasurementAjax(url);
+    } 
+}
+
+function editMeasurement(url){
+    if(addOrEditMeasurementValidation()){
+        editMeasurementAjax(url);
+    }
+}
+
+function addOrEditMeasurementValidation() {
     var weight = parseInt($("#weight").val());
     var waist = parseInt($("#waist").val());
     if (isNumeric(weight) && isEmptyOrNumeric(waist)) {
-        addMeasurementAjax(url, weight, waist);
+        return true;
     }
     else {
         if (isEmpty(weight)) {
-            validation("Nale¿y podaæ wagê cia³a");
+            validation("NaleÅ¼y podaÄ‡ wagÄ™ ciaÅ‚a");
         }
         else if (!isEmptyOrNumeric(waist)) {
-            validation("Nale¿y podaæ obwód w pasie jako liczbê");
+            validation("NaleÅ¼y podaÄ‡ obwÃ³d w pasie jako liczbÄ™");
         }
         else {
-            validation("Nale¿y podaæ wagê jako liczbê");
+            validation("NaleÅ¼y podaÄ‡ wagÄ™ jako liczbÄ™");
         }
+        return false;
     }
 }
 
-function addMeasurementAjax(url, weight, waist) {
+function addMeasurementAjax(url) {
     $.ajax({
         type: 'POST',
         url: url,
-        data: { weight: weight, waist: waist },
+        data: { 
+            weight: parseInt($("#weight").val()), 
+            waist: parseInt($("#waist").val()) 
+        },
         success: function () {
             location.reload();
         }
     });
 }
 
+function editMeasurementAjax(url){
+    $.ajax({
+        type: 'PUT',
+        url: url,
+        data: { 
+            id: parseInt($("#editMeasurementId").val()), 
+            weight: parseInt($("#weight").val()), 
+            waist: parseInt($("#waist").val()) 
+        },
+        success: function () {
+            location.reload();
+        }
+    });
+}

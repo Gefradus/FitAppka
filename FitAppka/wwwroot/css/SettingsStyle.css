@@ -60,7 +60,11 @@ input::-webkit-inner-spin-button {
     margin-top: -8px
 }
 
-
+#decTip, #incTip{
+    width: 320px;
+    left: calc(50% - 160px);
+    margin-top: 35px;
+}
 
 /* Firefox */
 input[type=number] {

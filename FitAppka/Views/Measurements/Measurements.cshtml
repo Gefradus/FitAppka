@@ -18,11 +18,10 @@
     </script>
 </head>
 <body onload="colorEverySecondRow()">
-    <div class="modal fade" tabindex="-1" id="addMeasurement" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
+    <div class="modal fade" tabindex="-1" id="addOrEditModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
             <div class="modal-dialog" style="display: flex; justify-content: center;">
                 <div class="modal-content">
                     <div class="modal-header" style="height: 20px">
-                        <div style="margin-top: -12px">Dodawanie pomiaru ciała</div>
                         <button type="button" class="close" data-dismiss="modal" style="margin-top: -30px">×</button>
                     </div>
                 <div class="modal-body">
@@ -40,8 +39,10 @@
                             <input id="waist" type="number" max="99999999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 1000)" oninput="validity.valid || (value = '')" />
                         </div>
                         <div class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
-                            <button id="btnAddMeasurement" type="button" onclick="addMeasurement('@Url.Action("Measurements","Measurements")')" class="btn btn-dark">Zapisz pomiar ciała</button>
+                            <button hidden id="btnAddMeasurement" type="button" onclick="addMeasurement('@Url.Action("Measurements","Measurements")')" class="btn btn-dark">Dodaj pomiar ciała</button>
+                            <button hidden id="btnEditMeasurement" type="button" onclick="editMeasurement('@Url.Action("Measurements","Measurements")')" class="btn btn-dark">Zapisz pomiar ciała</button>
                         </div>
+                        <input type="hidden" id="editMeasurementId" />
                     </div>
                 </div>
             </div>
@@ -63,8 +64,7 @@
         @foreach (var item in Model)
         {
             string waistCircumference = "-"; string bodyFatLevel = "-";
-            if (item.FatMeasurementNavigation != null)
-            {
+            if (item.FatMeasurementNavigation != null) {
                 waistCircumference = item.FatMeasurementNavigation.WaistCircumference.ToString();
                 bodyFatLevel = item.FatMeasurementNavigation.BodyFatLevel.ToString();
             }
@@ -74,7 +74,7 @@
                 <div class="col-2 cent">@waistCircumference</div>
                 <div class="col-2 cent">@bodyFatLevel</div>
                 <div class="col-4 cent">@item.DateOfMeasurement.Value.ToString("dd.MM.yyyy")</div>
-                <div class="col-1 cent"><img class="btnImg" src="~/img/pen.png" ></div>
+                <div class="col-1 cent"><img class="btnImg" src="~/img/pen.png" onclick="showEditMeasurementModal(@item.WeightMeasurementId)"></div>
                 <div class="col-1 cent"><img class="btnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></div>
             </div>
         }

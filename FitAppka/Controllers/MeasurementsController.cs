@@ -38,6 +38,10 @@ namespace FitAppka.Controllers
             return Json(_measurementsService.AddOrUpdateMeasurements(weight, waist));
         }
 
+        [HttpPut]
+        public JsonResult Measurements(int id, short weight, int waist){
+            return Json(_measurementsService.UpdateMeasurements(id, weight, waist));
+        }
 
         [HttpDelete]
         public JsonResult Measurements(int id)
