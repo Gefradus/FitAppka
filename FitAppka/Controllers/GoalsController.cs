@@ -25,7 +25,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
-        public IActionResult Goals(CreateGoalsModel model)
+        public IActionResult Goals(GoalsDTO model)
         {
             if (ModelState.IsValid) {
                 _goalsService.UpdateGoals(model);

@@ -68,7 +68,7 @@ namespace FitAppka.Service.ServiceImpl
         }
 
 
-        private string CreatePathToPhoto(CreateProductModel model)
+        private string CreatePathToPhoto(ProductDTO model)
         {
             string uniqueFileName = null;
             if (model.Photo != null)
@@ -81,7 +81,7 @@ namespace FitAppka.Service.ServiceImpl
             return uniqueFileName;
         }
 
-        public void CreateProductFromModel(CreateProductModel model)
+        public void CreateProductFromModel(ProductDTO model)
         {
             _productRepository.Add(new Product()
             {
@@ -117,7 +117,7 @@ namespace FitAppka.Service.ServiceImpl
             });
         }
 
-        public void UpdateProduct(CreateProductModel model, int id, int addOrEditPhoto)
+        public void UpdateProduct(ProductDTO model, int id, int addOrEditPhoto)
         {
             Product product = _productRepository.GetProduct(id);
             if(_clientManageService.HasUserAccessToProduct(product.ProductId))

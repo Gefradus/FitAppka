@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FitAppka.Models;
 using FitAppka.Repository;
 using FitAppka.Service;
@@ -19,9 +20,12 @@ namespace FitAppka.Controllers
         private readonly IClientRepository _clientRepository;
         private readonly FitAppContext _context;
         private readonly IWebHostEnvironment _env;
+        private readonly IMapper _mapper;
 
-        public AdminController(FitAppContext context, IWebHostEnvironment env, IClientRepository clientRepository, IProductManageService productManageService)
+        public AdminController(FitAppContext context, IWebHostEnvironment env, IClientRepository clientRepository, 
+            IProductManageService productManageService, IMapper mapper)
         {
+            _mapper = mapper;
             _productManageService = productManageService;
             _clientRepository = clientRepository;
             _context = context;
@@ -72,8 +76,7 @@ namespace FitAppka.Controllers
         {
             if (_clientRepository.IsLoggedInClientAdmin())
             {
-                SendDataAboutProductToView(id);
-                return View();
+                return View(SendDataAboutProductToView(id));
             }
             else
             {
@@ -83,7 +86,7 @@ namespace FitAppka.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AdminEditProduct(CreateProductModel model, int productID, int addOrEditPhoto)
+        public IActionResult AdminEditProduct(ProductDTO model, int productID, int addOrEditPhoto)
         {
             if (ModelState.IsValid)
             {
@@ -93,40 +96,10 @@ namespace FitAppka.Controllers
             return View(model);
         }
 
-        private void SendDataAboutProductToView(int id)
+        private ProductDTO SendDataAboutProductToView(int id)
         {
             Product product = _productManageService.GetProduct(id);
-            ViewData["productID"] = id;
-            ViewData["name"] = product.ProductName;
-            ViewData["path"] = product.PhotoPath;
-            ViewData["calories"] = product.Calories;
-            ViewData["proteins"] = product.Proteins;
-            ViewData["fats"] = product.Fats;
-            ViewData["carbs"] = product.Carbohydrates;
-            ViewData["vitA"] = product.VitaminA;
-            ViewData["vitC"] = product.VitaminC;
-            ViewData["vitD"] = product.VitaminD;
-            ViewData["vitK"] = product.VitaminK;
-            ViewData["vitE"] = product.VitaminE;
-            ViewData["vitB1"] = product.VitaminB1;
-            ViewData["vitB2"] = product.VitaminB2;
-            ViewData["vitB5"] = product.VitaminB5;
-            ViewData["vitB6"] = product.VitaminB6;
-            ViewData["biotin"] = product.Biotin;
-            ViewData["vitB12"] = product.VitaminB12;
-            ViewData["vitPP"] = product.VitaminPp;
-            ViewData["zinc"] = product.Zinc;
-            ViewData["phosphorus"] = product.Phosphorus;
-            ViewData["iodine"] = product.Iodine;
-            ViewData["folicAcid"] = product.FolicAcid;
-            ViewData["magnesium"] = product.Magnesium;
-            ViewData["copper"] = product.Copper;
-            ViewData["potassium"] = product.Potassium;
-            ViewData["selenium"] = product.Selenium;
-            ViewData["sodium"] = product.Sodium;
-            ViewData["calcium"] = product.Calcium;
-            ViewData["iron"] = product.Iron;
-
+            
             if (product.PhotoPath == null) {
                 ViewData["addOrEdit"] = 0;
             }
@@ -134,6 +107,7 @@ namespace FitAppka.Controllers
                 ViewData["addOrEdit"] = 1;
             }
 
+            return _mapper.Map<Product, ProductDTO>(product);
         }
 
         [HttpPost]

@@ -37,7 +37,7 @@ namespace NowyDotnecik.Controllers
             _dayService.AddDayIfNotExists(daySelected);
             SendAllDataToView(daySelected);
             return View(await _context.Meal.Include(m => m.Day).Include(p => p.Product).
-                Where(m => m.DayId == _dayService.GetClientDayByDate(daySelected, _clientRepository.GetLoggedInClientId()).DayId).ToListAsync());
+                Where(m => m.DayId == _dayService.GetLoggedInClientDayByDate(daySelected).DayId).ToListAsync());
         }
 
         [HttpGet]
@@ -122,23 +122,22 @@ namespace NowyDotnecik.Controllers
 
         private void SendAllDataToView(DateTime daySelected)
         {
-            int clientID = _clientRepository.GetLoggedInClientId();
-            Day day = _dayService.GetClientDayByDate(daySelected, clientID);
+            Day day = _dayService.GetLoggedInClientDayByDate(daySelected);
 
-            SendBasicData(daySelected, clientID, day);
-            SendInfoIfIsAdminClient(clientID);
+            SendBasicData(daySelected, day);
+            SendInfoIfIsAdminClient();
             SendInfoAboutMacronutritions(day);
             SendInfoAboutMealsOfTheDay(day);
-            SendInfoAboutCaloriesInMeals(daySelected, clientID);
+            SendInfoAboutCaloriesInMeals(daySelected);
         }
 
-        private void SendBasicData(DateTime daySelected, int clientID, Day day)
+        private void SendBasicData(DateTime daySelected, Day day)
         {
             ViewData["day"] = daySelected;
             ViewData["date"] = _homeService.DateFormat(daySelected);
             ViewData["datepick"] = daySelected.ToString("yyyy-MM-dd");
             ViewData["path"] = _env.WebRootPath.ToString();
-            ViewData["clientID"] = clientID;
+            ViewData["clientID"] = _clientRepository.GetLoggedInClientId();
             ViewData["dayID"] = day.DayId;
             ViewData["water"] = day.WaterDrunk;
         }
@@ -170,8 +169,9 @@ namespace NowyDotnecik.Controllers
             ViewData["supper"] = day.Supper;
         }
 
-        private void SendInfoAboutCaloriesInMeals(DateTime daySelected, int clientID)
+        private void SendInfoAboutCaloriesInMeals(DateTime daySelected)
         {
+            int clientID = _clientRepository.GetLoggedInClientId();
             ViewData["breakfastKcal"] = _homeService.CountCalories(1, daySelected, clientID);
             ViewData["lunchKcal"] = _homeService.CountCalories(2, daySelected, clientID);
             ViewData["dinnerKcal"] = _homeService.CountCalories(3, daySelected, clientID);
@@ -180,9 +180,9 @@ namespace NowyDotnecik.Controllers
             ViewData["supperKcal"] = _homeService.CountCalories(6, daySelected, clientID);
         }
 
-        private void SendInfoIfIsAdminClient(int clientID)
+        private void SendInfoIfIsAdminClient()
         {
-            if (_clientRepository.GetClientById(clientID).IsAdmin) {
+            if (_clientRepository.IsLoggedInClientAdmin()) {
                 ViewData["admin"] = 1;
             }
             else {

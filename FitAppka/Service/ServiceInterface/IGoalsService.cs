@@ -16,9 +16,9 @@ namespace FitAppka.Service
         List<int> GetListOfDaysIDFromToday(int clientId);
         void UpdateGoalsInDaysFromToday();
         int CaloriesBurnedInDay(int dayID);
-        void UpdateGoals(CreateGoalsModel createGoalsModel);
+        void UpdateGoals(GoalsDTO createGoalsModel);
         Goals AddOrUpdateClientGoals(Client client, int calorieTarget, int proteinTarget, int fatTarget, int carbsTarget);
         Goals SetClientGoalsIfAutoDietaryGoals(bool autoDietaryGoals);
-        CreateGoalsModel MapClientGoalsToCreateGoalsModel();
+        GoalsDTO MapClientGoalsToCreateGoalsModel();
     }
 }

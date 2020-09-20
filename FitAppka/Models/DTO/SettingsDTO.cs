@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FitAppka.Models
 {
-    public class SettingsModel
+    public class SettingsDTO
     {
         [Required]
         [Display(Name = "Płeć")]

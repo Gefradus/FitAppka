@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FitAppka.Models
 {
-    public class CreateGoalsModel
+    public class GoalsDTO
     {
         [Range(500, 20000, ErrorMessage = "Cel kalorii musi wynosić 500 - 20000")]
         public int? Calories { get; set; }

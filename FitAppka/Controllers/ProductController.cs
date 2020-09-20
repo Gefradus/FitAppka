@@ -39,7 +39,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateProductModel model, int dayID, int inWhich, int clientID, int isAdmin)
+        public IActionResult Create(ProductDTO model, int dayID, int inWhich, int clientID, int isAdmin)
         {
             if (ModelState.IsValid)
             {     

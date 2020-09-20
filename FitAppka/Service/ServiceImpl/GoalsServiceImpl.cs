@@ -99,7 +99,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public int CountFatTarget(int kcalTarget)
         {
-            return kcalTarget / 36;    //25% of demand from fats (1g of fat has 9kcal)
+            return kcalTarget / 36; //25% of demand from fats
         }
 
         public int CountCarbsTarget(int kcalTarget, int proteinsTarget, int fatsTarget)
@@ -207,13 +207,13 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-        public void UpdateGoals(CreateGoalsModel m)
+        public void UpdateGoals(GoalsDTO m)
         {
             SetClientPreferences(m, SetClientGoalsIfAutoDietaryGoals(m.AutoDietaryGoals));
             UpdateGoalsInDaysFromToday();
         }
 
-        private void SetClientPreferences(CreateGoalsModel m, Goals clientGoals)
+        private void SetClientPreferences(GoalsDTO m, Goals clientGoals)
         {
             Client client = _clientRepository.GetLoggedInClient();
             client.AutoDietaryGoals = m.AutoDietaryGoals;
@@ -281,10 +281,10 @@ namespace FitAppka.Service.ServiceImpl
             return _goalsRepository.GetClientGoals(c.ClientId);
         }
 
-        public CreateGoalsModel MapClientGoalsToCreateGoalsModel()
+        public GoalsDTO MapClientGoalsToCreateGoalsModel()
         {
             Client client = _clientRepository.GetLoggedInClient();
-            CreateGoalsModel model = _mapper.Map<Goals, CreateGoalsModel>(_goalsRepository.GetClientGoals(client.ClientId));
+            GoalsDTO model = _mapper.Map<Goals, GoalsDTO>(_goalsRepository.GetClientGoals(client.ClientId));
             model.IncludeCaloriesBurned = (bool)client.IncludeCaloriesBurned;
             model.AutoDietaryGoals = (bool)client.AutoDietaryGoals;
             return model;

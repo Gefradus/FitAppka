@@ -5,7 +5,7 @@ namespace FitAppka.Service
 {
     public interface IClientManageService
     {
-        Task AddNewClient(RegisterModel model);
+        Task AddNewClient(RegisterDTO model);
         string GetClientLoginFromModel(Client model);
         bool CheckIfPassCorrect(Client model);
         bool HasUserAccessToDay(int dayID);

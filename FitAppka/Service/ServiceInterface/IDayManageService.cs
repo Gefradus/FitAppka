@@ -11,7 +11,7 @@ namespace FitAppka.Service
         public int GetTodayId();
         public IEnumerable<Day> GetAllDays();
         public DateTime GetDayDateTime(int id);
-        public Day GetClientDayByDate(DateTime date, int clientID);
+        public Day GetLoggedInClientDayByDate(DateTime date);
         Goals GetDayGoals(int dayId);
     }
 }

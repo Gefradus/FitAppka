@@ -18,7 +18,7 @@ namespace FitAppka.Service.ServiceImpl
             _dayRepository = dayRepository;
         }
 
-        public void ChangeSettings(SettingsModel m, int isFirstLaunch)
+        public void ChangeSettings(SettingsDTO m, int isFirstLaunch)
         {
             Client client = _clientRepository.GetLoggedInClient();
             SetClientGoals(m, client);
@@ -28,7 +28,7 @@ namespace FitAppka.Service.ServiceImpl
             SetClientWeightMeasurement(m, isFirstLaunch);
         }
 
-        private void SetClientGoals(SettingsModel m, Client client) {
+        private void SetClientGoals(SettingsDTO m, Client client) {
             if ((bool) client.AutoDietaryGoals) 
             {
                 double pace = 0.4;
@@ -46,7 +46,7 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-        private void MapDayMealsFromClientToDaysFromToday(SettingsModel m, int clientId)
+        private void MapDayMealsFromClientToDaysFromToday(SettingsDTO m, int clientId)
         {
             foreach (var dayID in _goalsService.GetListOfDaysIDFromToday(clientId))
             {
@@ -65,14 +65,14 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-        private void SetClientWeightMeasurement(SettingsModel m, int isItFirstLaunch)
+        private void SetClientWeightMeasurement(SettingsDTO m, int isItFirstLaunch)
         {
             if (isItFirstLaunch == 1) {
                 _measurementsService.AddMeasurements((short)m.Weight, null);
             }
         }
 
-        private void SetClientData(SettingsModel m, Client client)
+        private void SetClientData(SettingsDTO m, Client client)
         {
             client.DateOfBirth = m.Date_of_birth;
             client.Growth = m.Growth;

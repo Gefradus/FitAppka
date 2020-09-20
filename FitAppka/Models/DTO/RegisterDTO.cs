@@ -3,7 +3,7 @@
 
 namespace FitAppka.Models
 {
-    public class RegisterModel
+    public class RegisterDTO
     {
         [Required(ErrorMessage = "Proszę podać imię")]
         [Display(Name = "Imię")]

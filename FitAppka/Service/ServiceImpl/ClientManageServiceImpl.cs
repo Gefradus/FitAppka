@@ -22,7 +22,7 @@ namespace FitAppka.Service.ServiceImpl
             _clientRepository = clientRepository;
         }
 
-        public async Task AddNewClient(RegisterModel model)
+        public async Task AddNewClient(RegisterDTO model)
         {
             await _clientRepository.AddAsync(new Client()
             {

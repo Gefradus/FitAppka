@@ -7,15 +7,12 @@ namespace FitAppka
     {
         public MappingProfile()
         {
-            //CreateMap<CreateGoalsModel, Client>();
-            // CreateMap<Client, CreateGoalsModel>();
-            //CreateMap<CreateGoalsModel, Goals>();
-            //CreateMap<Goals, Goals>().ForMember(g => g.ClientId, opt => opt.Ignore());
-
-
-            CreateMap<Goals, CreateGoalsModel>()
+            CreateMap<Goals, GoalsDTO>()
                 .ForMember(g => g.AutoDietaryGoals, opt => opt.Ignore())
                 .ForMember(g => g.IncludeCaloriesBurned, opt => opt.Ignore());
+
+            CreateMap<Product, ProductDTO>()
+                .ForMember(p => p.Photo, opt => opt.Ignore());
         }
     }
 }

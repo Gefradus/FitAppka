@@ -108,9 +108,9 @@ namespace FitAppka.Service.ServiceImpl
             return _dayRepository.GetAllDays();
         }
 
-        public Day GetClientDayByDate(DateTime date, int clientID)
+        public Day GetLoggedInClientDayByDate(DateTime date)
         {
-            return _dayRepository.GetClientDayByDate(date, clientID);
+            return _dayRepository.GetClientDayByDate(date, _clientRepository.GetLoggedInClientId());
         }
 
         public Goals GetDayGoals(int dayId)
