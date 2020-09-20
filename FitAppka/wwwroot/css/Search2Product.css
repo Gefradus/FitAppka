@@ -40,3 +40,7 @@
     background-color: rgb(228, 218, 160);
     border-bottom: 1px solid #ebe7e7;
 }
+
+#searchInput{
+    width: 225px;
+}
