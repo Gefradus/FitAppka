@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<FitAppka.Models.Product>
 
 <head>
-    <link href="~/css/SearchProduct.css" rel="stylesheet" />
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
+    <link href="~/css/SearchProduct.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
@@ -37,7 +37,7 @@
             document.getElementById("tluszcze").innerHTML = 'Tł.: ' + tluszcze + ' g,';
             document.getElementById("wegle").innerHTML = 'Węgl.: ' + wegle + ' g';
 
-            function validation(validMsg) {            
+            function validation(validMsg) {
                 $("#validationModal").modal('show');
                 document.getElementById("validatMsg").innerHTML = "<p>" + validMsg + "</p>";
                 $("#closeVal").click(function() {
@@ -69,7 +69,7 @@
                     validation("Należy podać liczbę");
                 }
             });
-                
+
             $("#addModal").on('hide.bs.modal', function () {
                 location.reload();
             });
@@ -90,7 +90,7 @@
             for (var i = 0; i < wszystkie.length; i++) {
                 if (i % 2 == 0) {
                     wszystkie[i].style.backgroundColor = "rgb(243, 243, 243)";
-                } 
+                }
             }
         }
 
