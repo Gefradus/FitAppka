@@ -3,7 +3,6 @@ using FitAppka.Models;
 using FitAppka.Repository;
 using Microsoft.AspNetCore.Hosting;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace FitAppka.Service.ServiceImpl
@@ -109,21 +108,6 @@ namespace FitAppka.Service.ServiceImpl
         public Product GetProduct(int id)
         {
             return _productRepository.GetProduct(id);
-        }
-
-        public IEnumerable<Product> GetAllProducts()
-        {
-            return _productRepository.GetAllProducts();
-        }
-
-        public Product Add(Product product)
-        {
-            return _productRepository.Add(product);
-        }
-
-        public Product Update(Product product)
-        {
-            return _productRepository.Update(product);
         }
 
         public Product Delete(int id)

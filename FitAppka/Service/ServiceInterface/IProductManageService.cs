@@ -1,5 +1,4 @@
 ﻿using FitAppka.Models;
-using System.Collections.Generic;
 
 namespace FitAppka.Service
 {
@@ -10,9 +9,6 @@ namespace FitAppka.Service
         public void CreateProductFromModel(ProductDTO model);
         public void UpdateProduct(ProductDTO model, int id, int addOrEditPhoto);
         Product GetProduct(int id);
-        IEnumerable<Product> GetAllProducts();
-        Product Add(Product product);
-        Product Update(Product product);
         Product Delete(int id);
     }
 }
