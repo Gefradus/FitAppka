@@ -342,9 +342,10 @@
 
                     @if ((int)ViewData["isAdmin"] == 1)
                     {
-                        <script>
-                            document.getElementById("page").style.marginTop = "-85px";
-                        </script>
+                        <script>document.getElementById("page").style.marginTop = "-85px";</script>
+                    } else
+                    {
+                        <script>document.getElementsByTagName("main").style.paddingTop = "0"</script>
                     }
 
                 </form>
