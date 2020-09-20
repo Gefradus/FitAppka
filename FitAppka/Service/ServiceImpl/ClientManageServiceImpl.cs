@@ -62,7 +62,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public bool HasUserAccessToProduct(int productID)
         {
-            return HasUserAccess(_productRepository.GetProduct(productID).ClientId);
+            return HasUserAccess(_productRepository.GetProductAsNoTracking(productID).ClientId);
         }
 
         public bool HasUserAccessToWeightMeasurement(int id)

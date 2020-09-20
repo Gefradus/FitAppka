@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,6 +56,11 @@ namespace FitAppka.Repository.RepIfaceImpl
             _context.Update(product);
             _context.SaveChanges();
             return product;
+        }
+
+        public Product GetProductAsNoTracking(int id)
+        {
+            return _context.Product.AsNoTracking().FirstOrDefault(p => p.ProductId == id);
         }
     }
 }

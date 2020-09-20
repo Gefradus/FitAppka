@@ -1,4 +1,5 @@
-﻿using FitAppka.Models;
+﻿using AutoMapper;
+using FitAppka.Models;
 using FitAppka.Repository;
 using Microsoft.AspNetCore.Hosting;
 using System;
@@ -14,10 +15,12 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IProductRepository _productRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IClientManageService _clientManageService;
+        private readonly IMapper _mapper;
 
-        public ProductManageServiceImpl(IDayRepository dayRepository, IWebHostEnvironment hostEnvironment, 
+        public ProductManageServiceImpl(IDayRepository dayRepository, IWebHostEnvironment hostEnvironment, IMapper mapper,
             IProductRepository productRepository, IClientRepository clientRepository, IClientManageService clientManageService)
         {
+            _mapper = mapper;
             _clientManageService = clientManageService;
             _clientRepository = clientRepository;
             _productRepository = productRepository;
@@ -67,95 +70,39 @@ namespace FitAppka.Service.ServiceImpl
             } 
         }
 
-
-        private string CreatePathToPhoto(ProductDTO model)
+        private string CreatePathToPhoto(ProductDTO productDTO)
         {
             string uniqueFileName = null;
-            if (model.Photo != null)
+            if (productDTO.Photo != null)
             {
                 string folder = Path.Combine(_hostEnvironment.WebRootPath, "photos");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + productDTO.Photo.FileName;
                 string filePath = Path.Combine(folder, uniqueFileName);
-                model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                productDTO.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
             }
             return uniqueFileName;
         }
 
-        public void CreateProductFromModel(ProductDTO model)
+        public void CreateProductFromModel(ProductDTO productDTO)
         {
-            _productRepository.Add(new Product()
-            {
-                ClientId = _clientRepository.GetLoggedInClientId(),
-                VisibleToAll = _clientRepository.IsLoggedInClientAdmin(),
-                ProductName = model.ProductName,
-                PhotoPath = CreatePathToPhoto(model),
-                Calories = (double)model.Calories,
-                Proteins = (double)model.Proteins,
-                Fats = (double)model.Fats,
-                Carbohydrates = (double)model.Carbohydrates,
-                VitaminA = model.VitaminA,
-                VitaminC = model.VitaminC,
-                VitaminD = model.VitaminD,
-                VitaminK = model.VitaminK,
-                VitaminE = model.VitaminE,
-                VitaminB1 = model.VitaminB1,
-                VitaminB2 = model.VitaminB2,
-                VitaminB6 = model.VitaminB6,
-                Biotin = model.Biotin,
-                VitaminB12 = model.VitaminB12,
-                VitaminPp = model.VitaminPp,
-                Zinc = model.Zinc,
-                Phosphorus = model.Phosphorus,
-                Iodine = model.Iodine,
-                Magnesium = model.Magnesium,
-                Copper = model.Copper,
-                Potassium = model.Potassium,
-                Selenium = model.Selenium,
-                Sodium = model.Sodium,
-                Calcium = model.Calcium,
-                Iron = model.Iron
-            });
+            Product product = _mapper.Map<ProductDTO, Product>(productDTO);
+            product.ClientId = _clientRepository.GetLoggedInClientId();
+            product.VisibleToAll = _clientRepository.IsLoggedInClientAdmin();
+            product.PhotoPath = CreatePathToPhoto(productDTO);
+            _productRepository.Add(product);
         }
 
-        public void UpdateProduct(ProductDTO model, int id, int addOrEditPhoto)
+        public void UpdateProduct(ProductDTO productDTO, int id, int addOrEditPhoto)
         {
-            Product product = _productRepository.GetProduct(id);
+            Product product = _productRepository.GetProductAsNoTracking(id);
             if(_clientManageService.HasUserAccessToProduct(product.ProductId))
             {
-                product.ProductName = model.ProductName;
-                product.Calories = (double)model.Calories;
-                product.Proteins = (double)model.Proteins;
-                product.Fats = (double)model.Fats;
-                product.Carbohydrates = (double)model.Carbohydrates;
-                product.VitaminA = model.VitaminA;
-                product.VitaminC = model.VitaminC;
-                product.VitaminD = model.VitaminD;
-                product.VitaminK = model.VitaminK;
-                product.VitaminE = model.VitaminE;
-                product.VitaminB1 = model.VitaminB1;
-                product.VitaminB2 = model.VitaminB2;
-                product.VitaminB5 = model.VitaminB5;
-                product.VitaminB6 = model.VitaminB6;
-                product.Biotin = model.Biotin;
-                product.VitaminB12 = model.VitaminB12;
-                product.VitaminPp = model.VitaminPp;
-                product.Zinc = model.Zinc;
-                product.Phosphorus = model.Phosphorus;
-                product.Iodine = model.Iodine;
-                product.FolicAcid = model.FolicAcid;
-                product.Magnesium = model.Magnesium;
-                product.Copper = model.Copper;
-                product.Potassium = model.Potassium;
-                product.Selenium = model.Selenium;
-                product.Sodium = model.Sodium;
-                product.Calcium = model.Calcium;
-                product.Iron = model.Iron;
-
-                if (addOrEditPhoto == 0 || CreatePathToPhoto(model) != null) {
-                    product.PhotoPath = CreatePathToPhoto(model);
+                string photoPath = CreatePathToPhoto(productDTO);
+                if (addOrEditPhoto == 0 || photoPath != null) {
+                    product.PhotoPath = photoPath;
                 }
 
-                _productRepository.Update(product);
+                _productRepository.Update(_mapper.Map(product, _mapper.Map<ProductDTO, Product>(productDTO)));
             }            
         }
 
