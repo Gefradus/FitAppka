@@ -66,7 +66,7 @@
                     <div class="form-group cent">
                         <div class="leftCol">
                             <label class="control-label">Tłuszcze</label>
-                            <div id="tluInDiv" style="display: flex"> 
+                            <div id="tluInDiv" style="display: flex">
                                 <input asp-for="Fats" class="form-control num macro" type="text" />
                                 <div class="jednostka">g</div>
                             </div>
@@ -342,10 +342,7 @@
 
                     @if ((int)ViewData["isAdmin"] == 1)
                     {
-                        <script>document.getElementById("page").style.marginTop = "-85px";</script>
-                    } else
-                    {
-                        <script>document.getElementsByTagName("main").style.paddingTop = "0"</script>
+                        <script>document.getElementsByTagName("main")[0].style.paddingTop = "0"</script>
                     }
 
                 </form>
