@@ -1,4 +1,4 @@
-﻿using FitAppka.Model;
+﻿using FitAppka.Models;
 using System;
 using System.Collections.Generic;
 

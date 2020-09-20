@@ -19,7 +19,6 @@ namespace FitAppka.Service.ServiceImpl
             _mealRepository = mealRepository;
         }
 
-
         public List<int> FindDays(int from, int to, int productID, int searchType, int clientID)
         {
             if (searchType == 1) {
@@ -34,7 +33,6 @@ namespace FitAppka.Service.ServiceImpl
 
             return new List<int>();
         }
-
 
 
         private List<int> FindDayByProduct(int from, int to, int productID, int clientID)
@@ -202,11 +200,9 @@ namespace FitAppka.Service.ServiceImpl
             return caloriesList;
         }
 
-        public bool WheterDayFound(List<int> listaDni)
+        public bool WheterDayFound(List<int> daysList)
         {
-            return listaDni.Count > 0;
+            return daysList.Count > 0;
         }
-
-
     }
 }

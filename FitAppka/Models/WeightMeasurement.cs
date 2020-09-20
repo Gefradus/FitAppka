@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FitAppka.Model
+namespace FitAppka.Models
 {
     [Table("Weight_measurement")]
     public partial class WeightMeasurement

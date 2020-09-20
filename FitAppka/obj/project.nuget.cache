@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "k/qrD/o2NjhIuroWrVvWQtT54kDf9cqSGOFxPnmE7p6Ouz+wczYqEo+HapWxLm4oTmSkHdCRlXKSHRKdqtuwnw==",
+  "dgSpecHash": "SilWUN7e7DSYgThy4vag4amuqFg5W4wKZj1AxwEoG+3v3/U7ykA7V6aRpmHxtQrdFGKdVVqbGSKQrxxs/utQTg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\fader\\source\\repos\\Nowy folder\\FitAppka\\FitAppka\\FitAppka.csproj",
+  "projectFilePath": "C:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\FitAppka.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\fader\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
+    "C:\\Users\\fader\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.0.1\\automapper.extensions.microsoft.dependencyinjection.8.0.1.nupkg.sha512",
     "C:\\Users\\fader\\.nuget\\packages\\jquery\\1.12.4\\jquery.1.12.4.nupkg.sha512",
     "C:\\Users\\fader\\.nuget\\packages\\jquery.ui.combined\\1.12.1\\jquery.ui.combined.1.12.1.nupkg.sha512",
     "C:\\Users\\fader\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
@@ -126,7 +128,7 @@
     "C:\\Users\\fader\\.nuget\\packages\\system.objectmodel\\4.3.0\\system.objectmodel.4.3.0.nupkg.sha512",
     "C:\\Users\\fader\\.nuget\\packages\\system.private.datacontractserialization\\4.3.0\\system.private.datacontractserialization.4.3.0.nupkg.sha512",
     "C:\\Users\\fader\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
-    "C:\\Users\\fader\\.nuget\\packages\\system.reflection.emit\\4.3.0\\system.reflection.emit.4.3.0.nupkg.sha512",
+    "C:\\Users\\fader\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\fader\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.3.0\\system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",
     "C:\\Users\\fader\\.nuget\\packages\\system.reflection.emit.lightweight\\4.3.0\\system.reflection.emit.lightweight.4.3.0.nupkg.sha512",
     "C:\\Users\\fader\\.nuget\\packages\\system.reflection.extensions\\4.3.0\\system.reflection.extensions.4.3.0.nupkg.sha512",

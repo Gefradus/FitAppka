@@ -89,17 +89,8 @@ function setNavbar() {
 function blockWeightInput() {
     let weight = document.getElementById("weight");
     setNotAllowedCursor(weight);
-    weight.readOnly = true;
-    weight.style.backgroundColor = "#e9ecef";
+    setDisabled(weight);
     document.getElementById("weightTip").hidden = false;
-}
-
-function setNotAllowedCursor(mouseTarget) {
-    mouseTarget.style.cursor = 'not-allowed';
-}
-
-function setNormalCursor(mouseTarget) {
-    mouseTarget.style.cursor = 'pointer';
 }
 
 function setTitle(element1, element2, title) {
@@ -123,8 +114,8 @@ function blockPace() {
         hideDecIncTip(false);
     }
     else {
-        setNormalCursor(incBtn);
-        setNormalCursor(decBtn);
+        setPointerCursor(incBtn);
+        setPointerCursor(decBtn);
         hideDecIncTip(true);
     }
 }

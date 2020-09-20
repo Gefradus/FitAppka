@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FitAppka.Model
+namespace FitAppka.Models
 {
     public partial class Client
     {
@@ -11,6 +11,7 @@ namespace FitAppka.Model
         {
             CardioTrainingType = new HashSet<CardioTrainingType>();
             Day = new HashSet<Day>();
+            GoalsNavigation = new HashSet<Goals>();
             Product = new HashSet<Product>();
             StrengthTrainingType = new HashSet<StrengthTrainingType>();
             WeightMeasurement = new HashSet<WeightMeasurement>();
@@ -19,6 +20,8 @@ namespace FitAppka.Model
         [Key]
         [Column("Client_ID")]
         public int ClientId { get; set; }
+        [Column("Goals_ID")]
+        public int? GoalsId { get; set; }
         
         [StringLength(50)]
         public string Email { get; set; }
@@ -49,33 +52,26 @@ namespace FitAppka.Model
         public double? PaceOfChanges { get; set; }
         [Column("Activity_level")]
         public short? ActivityLevel { get; set; }
-        [Column("Calorie_goal")]
-        public int? CalorieGoal { get; set; }
-        [Column("Protein_target")]
-        public int? ProteinTarget { get; set; }
-        [Column("Fat_target")]
-        public int? FatTarget { get; set; }
-        [Column("Carbs_target")]
-        public int? CarbsTarget { get; set; }
         public bool? Breakfast { get; set; }
         public bool? Lunch { get; set; }
         public bool? Dinner { get; set; }
         public bool? Dessert { get; set; }
         public bool? Snack { get; set; }
         public bool? Supper { get; set; }
-        [Column("Kcal_burned_goal")]
-        public int? KcalBurnedGoal { get; set; }
-        [Column("Training_time_goal")]
-        public int? TrainingTimeGoal { get; set; }
-        [Column("Auto_dietary_goals")]
-        public bool? AutoDietaryGoals { get; set; }
         [Column("Include_calories_burned")]
         public bool? IncludeCaloriesBurned { get; set; }
+        [Column("Auto_dietary_goals")]
+        public bool? AutoDietaryGoals { get; set; }
 
+        [ForeignKey(nameof(GoalsId))]
+        [InverseProperty("Client")]
+        public virtual Goals Goals { get; set; }
         [InverseProperty("Client")]
         public virtual ICollection<CardioTrainingType> CardioTrainingType { get; set; }
         [InverseProperty("Client")]
         public virtual ICollection<Day> Day { get; set; }
+        [InverseProperty("ClientNavigation")]
+        public virtual ICollection<Goals> GoalsNavigation { get; set; }
         [InverseProperty("Client")]
         public virtual ICollection<Product> Product { get; set; }
         [InverseProperty("Client")]

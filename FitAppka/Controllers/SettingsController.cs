@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using FitAppka.Model;
+﻿using FitAppka.Models;
 using FitAppka.Repository;
 using FitAppka.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -13,13 +12,16 @@ namespace FitAppka.Controllers
     {
         private readonly IClientRepository _clientRepository;
         private readonly ISettingsService _settingsService;
-        private readonly IDietaryTargetsService _dietaryTargetsService;
         private readonly IDayManageService _dayService;
+        private readonly IMeasurementsService _measurementsService;
+        private readonly IWeightMeasurementRepository _weightMeasurementRepository;
 
-        public SettingsController(IClientRepository clientRepository, ISettingsService settingsService, IDietaryTargetsService dietaryTargetsService, IDayManageService dayService)
+        public SettingsController(IClientRepository clientRepository, ISettingsService settingsService, 
+            IDayManageService dayService, IMeasurementsService measurementsService, IWeightMeasurementRepository weightMeasurementRepository)
         {
+            _weightMeasurementRepository = weightMeasurementRepository;
             _dayService = dayService;
-            _dietaryTargetsService = dietaryTargetsService;
+            _measurementsService = measurementsService;
             _clientRepository = clientRepository;
             _settingsService = settingsService;
         }
@@ -29,26 +31,25 @@ namespace FitAppka.Controllers
         {
             FirstAppLaunch();
             ViewData["clientID"] = _clientRepository.GetLoggedInClient().ClientId;
-            ViewData["dayID"] = _dayService.GetTodayId();
+            
             return View();
         }
 
         private void FirstAppLaunch()
         {
-            try
-            {
+            try {
                 Client client = _clientRepository.GetLoggedInClient();
                 ViewData["dateOfBirth"] = client.DateOfBirth.Value.ToString("yyyy-MM-dd");
-                ViewData["weight"] = _dietaryTargetsService.GetLastWeightMeasurement();
+                ViewData["weight"] = _weightMeasurementRepository.GetLastLoggedInClientWeightMeasurement();
                 ViewData["growth"] = client.Growth;
                 ViewData["changeGoal"] = (int)client.WeightChangeGoal;
                 ViewData["activity"] = (int)client.ActivityLevel;
                 ViewData["pace"] = client.PaceOfChanges.ToString().Replace(',', '.');
                 ViewData["isFirstLaunch"] = 0;
+                ViewData["dayID"] = _dayService.GetTodayId();
                 SendDataAboutClientBooleans(client);
             }
-            catch
-            {
+            catch {
                 ViewData["dateOfBirth"] = "2000-01-01";
                 ViewData["isFirstLaunch"] = 1;
             }

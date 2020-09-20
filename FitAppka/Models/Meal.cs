@@ -3,29 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FitAppka.Model
+namespace FitAppka.Models
 {
-    public partial class Product
+    public partial class Meal
     {
-        public Product()
-        {
-            Meal = new HashSet<Meal>();
-        }
-
         [Key]
+        [Column("Meal_ID")]
+        public int MealId { get; set; }
+        [Column("Day_ID")]
+        public int DayId { get; set; }
         [Column("Product_ID")]
         public int ProductId { get; set; }
-        [Column("Client_ID")]
-        public int ClientId { get; set; }
-        [Required]
-        [Column("Product_name")]
-        [StringLength(50)]
-        public string ProductName { get; set; }
-        [Column("Photo_path")]
-        [StringLength(512)]
-        public string PhotoPath { get; set; }
-        [Column("Visible_to_all")]
-        public bool VisibleToAll { get; set; }
+        [Column("In_which_meal_of_the_day")]
+        public int InWhichMealOfTheDay { get; set; }
+        public int Grammage { get; set; }
         public double Calories { get; set; }
         public double Proteins { get; set; }
         public double Fats { get; set; }
@@ -66,10 +57,11 @@ namespace FitAppka.Model
         public double? Calcium { get; set; }
         public double? Iron { get; set; }
 
-        [ForeignKey(nameof(ClientId))]
-        [InverseProperty("Product")]
-        public virtual Client Client { get; set; }
-        [InverseProperty("Product")]
-        public virtual ICollection<Meal> Meal { get; set; }
+        [ForeignKey(nameof(DayId))]
+        [InverseProperty("Meal")]
+        public virtual Day Day { get; set; }
+        [ForeignKey(nameof(ProductId))]
+        [InverseProperty("Meal")]
+        public virtual Product Product { get; set; }
     }
 }

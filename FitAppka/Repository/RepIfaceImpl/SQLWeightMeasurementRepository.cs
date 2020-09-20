@@ -1,4 +1,5 @@
-﻿using FitAppka.Model;
+﻿using FitAppka.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,8 +9,11 @@ namespace FitAppka.Repository.RepIfaceImpl
     public class SQLWeightMeasurementRepository : IWeightMeasurementRepository
     {
         private readonly FitAppContext _context;
-        public SQLWeightMeasurementRepository(FitAppContext context)
+        private readonly IClientRepository _clientRepository;
+
+        public SQLWeightMeasurementRepository(FitAppContext context, IClientRepository clientRepository)
         {
+            _clientRepository = clientRepository;
             _context = context;
         }
 
@@ -53,6 +57,38 @@ namespace FitAppka.Repository.RepIfaceImpl
             _context.Update(weightMeasurement);
             _context.SaveChanges();
             return weightMeasurement;
+        }
+
+        public short GetLastLoggedInClientWeightMeasurement()
+        {
+            var measurementList = GetClientsWeightMeasurements(_clientRepository.GetLoggedInClientId());
+
+            short lastWeightMeasurement = 0;
+            foreach (var item in measurementList)
+            {
+                if (GetLastMeasurementDate(measurementList) == item.DateOfMeasurement)
+                {
+                    lastWeightMeasurement = item.Weight;
+                    break;
+                }
+            }
+
+            return lastWeightMeasurement;
+        }
+
+        private DateTime? GetLastMeasurementDate(IEnumerable<WeightMeasurement> measurementList)
+        {
+            DateTime? dateOfMeasurement = DateTime.MinValue;
+
+            foreach (var measurement in measurementList)
+            {
+                if (dateOfMeasurement < measurement.DateOfMeasurement)
+                {
+                    dateOfMeasurement = measurement.DateOfMeasurement;
+                }
+            }
+
+            return dateOfMeasurement;
         }
     }
 }

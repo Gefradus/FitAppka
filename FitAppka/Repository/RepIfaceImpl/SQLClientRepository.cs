@@ -1,4 +1,4 @@
-﻿using FitAppka.Model;
+﻿using FitAppka.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

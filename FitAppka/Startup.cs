@@ -1,4 +1,5 @@
-using FitAppka.Model;
+using AutoMapper;
+using FitAppka.Models;
 using FitAppka.Repository;
 using FitAppka.Repository.RepIfaceImpl;
 using FitAppka.Service;
@@ -26,7 +27,6 @@ namespace FitAppka
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddControllersWithViews();
             services.AddDbContext<FitAppContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));            
@@ -38,11 +38,16 @@ namespace FitAppka
             services.AddHttpContextAccessor();
             ServicesAddScoped(services);
             RepositoriesAddScoped(services);
+
+            var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+            services.AddMvc();
         }
 
         private void ServicesAddScoped(IServiceCollection services)
         {
-            services.AddScoped<IDietaryTargetsService, DietaryTargetsServiceImpl>();
+            services.AddScoped<IGoalsService, GoalsServiceImpl>();
             services.AddScoped<ISettingsService, SettingsServiceImpl>();
             services.AddScoped<IStrengthTrainingService, StrengthTrainingServiceImpl>();
             services.AddScoped<ICardioTrainingService, CardioTrainingServiceImpl>();
@@ -67,6 +72,7 @@ namespace FitAppka
             services.AddScoped<ICardioTrainingRepository, SQLCardioTrainingRepository>();
             services.AddScoped<IWeightMeasurementRepository, SQLWeightMeasurementRepository>();
             services.AddScoped<IFatMeasurementRepository, SQLFatMeasurementRepository>();
+            services.AddScoped<IGoalsRepository, SQLGoalsRepositoryImpl>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

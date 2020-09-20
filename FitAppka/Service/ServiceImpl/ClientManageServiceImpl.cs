@@ -1,4 +1,4 @@
-﻿using FitAppka.Model;
+﻿using FitAppka.Models;
 using FitAppka.Repository;
 using System;
 using System.Linq;
@@ -12,12 +12,10 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IDayRepository _dayRepository;
         private readonly IProductRepository _productRepository;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
-        private readonly IFatMeasurementRepository _fatMeasurementRepository;
 
-        public ClientManageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository, IFatMeasurementRepository fatMeasurementRepository,
+        public ClientManageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository,
             IProductRepository productRepository, IWeightMeasurementRepository weightMeasurementRepository)
         {
-            _fatMeasurementRepository = fatMeasurementRepository;
             _weightMeasurementRepository = weightMeasurementRepository;
             _productRepository = productRepository;
             _dayRepository = dayRepository;
@@ -72,11 +70,24 @@ namespace FitAppka.Service.ServiceImpl
             return HasUserAccess(_weightMeasurementRepository.GetWeightMeasurement(id).ClientId);
         }
 
-
         private bool HasUserAccess(int clientID)
         {
             return clientID == _clientRepository.GetLoggedInClientId() || _clientRepository.GetLoggedInClient().IsAdmin;
         }
 
+        public int GetLoggedInClientId()
+        {
+            return _clientRepository.GetLoggedInClientId();
+        }
+
+        public Client GetLoggedInClient()
+        {
+            return _clientRepository.GetLoggedInClient();
+        }
+
+        public bool IsLoggedInClientAdmin()
+        {
+            return _clientRepository.IsLoggedInClientAdmin();
+        }
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using FitAppka.Service;
 using FitAppka.Repository;
-using FitAppka.Model;
+using FitAppka.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -32,13 +32,15 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
-        public JsonResult Measurements(short weight, int waist)
+        public JsonResult Measurements(short weight, int waist) 
         {
-            return Json(_measurementsService.AddOrUpdateMeasurements(weight, waist));
+            _measurementsService.AddMeasurements(weight, waist);
+            return Json(true);
         }
 
         [HttpPut]
-        public JsonResult Measurements(int id, short weight, int waist){
+        public JsonResult Measurements(int id, short weight, int waist)
+        {
             return Json(_measurementsService.UpdateMeasurements(id, weight, waist));
         }
 

@@ -1,4 +1,4 @@
-﻿using FitAppka.Model;
+﻿using FitAppka.Models;
 using System.Collections.Generic;
 
 namespace FitAppka.Repository
@@ -11,5 +11,6 @@ namespace FitAppka.Repository
         WeightMeasurement Add(WeightMeasurement weightMeasurement);
         WeightMeasurement Update(WeightMeasurement weightMeasurement);
         WeightMeasurement Delete(int id);
+        short GetLastLoggedInClientWeightMeasurement();
     }
 }

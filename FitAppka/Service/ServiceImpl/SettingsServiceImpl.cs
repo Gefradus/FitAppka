@@ -1,21 +1,19 @@
-using FitAppka.Model;
+using FitAppka.Models;
 using FitAppka.Repository;
-using System;
 
 namespace FitAppka.Service.ServiceImpl
 {
     public class SettingsServiceImpl : ISettingsService {
-
-        private readonly IDietaryTargetsService _dietaryTargetsService;
         private readonly IDayRepository _dayRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IMeasurementsService _measurementsService;
+        private readonly IGoalsService _goalsService;
 
-        public SettingsServiceImpl(IDayRepository dayRepository, IClientRepository clientRepository, 
-            IDietaryTargetsService dietaryTargetsService, IMeasurementsService measurementsService)
+        public SettingsServiceImpl(IDayRepository dayRepository, IClientRepository clientRepository,
+            IGoalsService goalsService, IMeasurementsService measurementsService)
         {
+            _goalsService = goalsService;
             _measurementsService = measurementsService;
-            _dietaryTargetsService = dietaryTargetsService;
             _clientRepository = clientRepository;
             _dayRepository = dayRepository;
         }
@@ -24,18 +22,10 @@ namespace FitAppka.Service.ServiceImpl
         {
             Client client = _clientRepository.GetLoggedInClient();
             SetClientGoals(m, client);
-            SetDateOfJoiningIfFirstLaunch(isFirstLaunch, client);
-            MapDayMealsFromClientToDaysFromToday(m, client);
-            _dietaryTargetsService.UpdateTargetsInDaysFromToday(client);
+            MapDayMealsFromClientToDaysFromToday(m, client.ClientId);
+            _goalsService.UpdateGoalsInDaysFromToday();
             SetClientData(m, client);
-            SetClientWeightMeasurement(m);
-        }
-
-        private void SetDateOfJoiningIfFirstLaunch(int isFirstLaunch, Client client)
-        {
-            if (isFirstLaunch == 1) { 
-                client.DateOfJoining = DateTime.Now.Date; 
-            }
+            SetClientWeightMeasurement(m, isFirstLaunch);
         }
 
         private void SetClientGoals(SettingsModel m, Client client) {
@@ -44,34 +34,21 @@ namespace FitAppka.Service.ServiceImpl
                 double pace = 0.4;
                 try { pace = double.Parse(m.PaceOfChange.Replace('.', ',').Replace(" ", "")); } catch { }
 
-                int caloricDemand = _dietaryTargetsService.CountCaloricDemand(m.Sex, m.Date_of_birth, m.Growth, m.Weight, ActivityLevel(m.LevelOfActivity));
-                int calorieTarget = _dietaryTargetsService.CountCalorieTarget(caloricDemand, m.WeightChange_Goal, pace);
-                int proteinTarget = _dietaryTargetsService.CountProteinTarget(m.Weight, calorieTarget, m.LevelOfActivity);
-                int fatTarget = _dietaryTargetsService.CountFatTarget(calorieTarget);
-                int carbsTarget = _dietaryTargetsService.CountCarbsTarget(calorieTarget, proteinTarget, fatTarget);
+                int caloricDemand = _goalsService.CountCaloricDemand(m.Sex, m.Date_of_birth, m.Growth, m.Weight, _goalsService.ActivityLevel(m.LevelOfActivity));
+                int calorieTarget = _goalsService.CountCalorieTarget(caloricDemand, m.WeightChange_Goal, pace);
+                int proteinTarget = _goalsService.CountProteinTarget(m.Weight, calorieTarget, m.LevelOfActivity);
+                int fatTarget = _goalsService.CountFatTarget(calorieTarget);
+                int carbsTarget = _goalsService.CountCarbsTarget(calorieTarget, proteinTarget, fatTarget);
 
+                _goalsService.AddOrUpdateClientGoals(client, calorieTarget, proteinTarget, fatTarget, carbsTarget);
                 client.CaloricDemand = caloricDemand;
-                client.CalorieGoal = calorieTarget;
-                client.ProteinTarget = proteinTarget;
-                client.FatTarget = fatTarget;
-                client.CarbsTarget = carbsTarget;
                 client.PaceOfChanges = pace;
             }
         }
 
-        private double ActivityLevel(short? activity)
+        private void MapDayMealsFromClientToDaysFromToday(SettingsModel m, int clientId)
         {
-            if (activity == 1) { return 1.2; }
-            if (activity == 2) { return 1.3; }
-            if (activity == 3) { return 1.5; }
-            if (activity == 4) { return 1.7; }
-            if (activity == 5) { return 1.9; }
-            return 1.5;
-        }
-
-        private void MapDayMealsFromClientToDaysFromToday(SettingsModel m, Client client)
-        {
-            foreach (var dayID in _dietaryTargetsService.GetListOfDaysIDFromToday(client))
+            foreach (var dayID in _goalsService.GetListOfDaysIDFromToday(clientId))
             {
                 foreach (var day in _dayRepository.GetAllDays())
                 {
@@ -88,9 +65,11 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-        private void SetClientWeightMeasurement(SettingsModel m)
+        private void SetClientWeightMeasurement(SettingsModel m, int isItFirstLaunch)
         {
-            _measurementsService.AddOrUpdateMeasurements((short)m.Weight, 0);
+            if (isItFirstLaunch == 1) {
+                _measurementsService.AddMeasurements((short)m.Weight, null);
+            }
         }
 
         private void SetClientData(SettingsModel m, Client client)

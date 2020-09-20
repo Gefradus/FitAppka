@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using FitAppka.Model;
+using FitAppka.Models;
 using FitAppka.Repository;
 using FitAppka.Service;
 using Microsoft.AspNetCore.Authorization;

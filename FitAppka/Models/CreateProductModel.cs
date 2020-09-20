@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace FitAppka.Model
+namespace FitAppka.Models
 {
     public class CreateProductModel
     {

@@ -1,38 +1,29 @@
-﻿function setInputsValues() {
+﻿function blockIfAutoChecked() {
     block(document.getElementById("auto").checked);
-    $("#caloriesTarget").val(parseInt($("#hiddenKcal").val()));
-    $("#proteinsTarget").val(parseInt($("#hiddenProtein").val()));
-    $("#fatsTarget").val(parseInt($("#hiddenFat").val()));
-    $("#carbsTarget").val(parseInt($("#hiddenCarbs").val()));
 }
 
 function block(autoChecked) {
-    blockInputIfAutoChecked(autoChecked, document.getElementById("caloriesTarget"), parseInt($("#hiddenKcal").val()));
-    blockInputIfAutoChecked(autoChecked, document.getElementById("proteinsTarget"), parseInt($("#hiddenProtein").val()));
-    blockInputIfAutoChecked(autoChecked, document.getElementById("carbsTarget"), parseInt($("#hiddenFat").val()));
-    blockInputIfAutoChecked(autoChecked, document.getElementById("fatsTarget"), parseInt($("#hiddenCarbs").val()));
+    var inputs = document.getElementsByClassName("form-control");
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].id != "burnGoal" && inputs[i].id != "timeGoal") {
+            blockInputIfAutoChecked(autoChecked, inputs[i]);
+        }
+    }
 }
 
-function blockInputIfAutoChecked(autoChecked, element, val) {
+function blockInputIfAutoChecked(autoChecked, element) {
     if (autoChecked) {
         setNotAllowedCursor(element);
-        restoreValueIfAuto(element, val);
-        element.disabled = true;
+        element.value = element.defaultValue;
+        element.title = "Pole zablokowane - cele dietetyczne ustawiane automatycznie"
+        setDisabled(element);
         hideOrShowStars(true);
     }
     else {
         setNormalCursor(element);
-        element.disabled = false;
+        element.title = "";
+        setEnabled(element);
         hideOrShowStars(false);
-    }
-}
-
-function restoreValueIfAuto(element, val) {
-    if ($("#hiddenAuto").val() == 1) {
-        element.value = val;
-    }
-    else {
-        element.value = '';
     }
 }
 
@@ -46,10 +37,6 @@ function hideOrShowStars(boolean) {
 
 function setNotAllowedCursor(mouseTarget) {
     mouseTarget.style.cursor = 'not-allowed';
-}
-
-function setNormalCursor(mouseTarget) {
-    mouseTarget.style.cursor = 'text';
 }
 
 function saveGoal() {
@@ -113,7 +100,35 @@ function setMaxValue(maxValue, message, element) {
     }
 }
 
-function inputOnChange() {
+function moreInfo() {
+    var moreInfoDiv = document.getElementById("moreInfoDiv");
+    var imgDown = document.getElementById("imgDown");
+    var moreOrLess = document.getElementById("moreOrLess");
+
+    if (moreInfoDiv.hidden == false) {
+        moreInfoDiv.hidden = true;
+        imgDown.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Arrow-down.svg/200px-Arrow-down.svg.png';
+        imgDown.style.height = '15px';
+        imgDown.style.width = '27px';
+        imgDown.style.marginTop = '5px';
+        imgDown.style.marginRight = '5px';
+        imgDown.style.marginLeft = '0px';
+        moreOrLess.innerHTML = "Pokaż więcej celów dziennego spożycia";
+    }
+    else {
+        imgDown.src = 'https://www.pinclipart.com/picdir/big/84-848449_png-file-icon-arrow-up-svg-clipart.png';
+        moreInfoDiv.hidden = false;
+        imgDown.style.height = '10px';
+        imgDown.style.width = '16px';
+        imgDown.style.marginTop = '6px';
+        imgDown.style.marginRight = '7px';
+        imgDown.style.marginLeft = '5px';
+        moreOrLess.innerHTML = "Pokaż mniej celów dziennego spożycia";
+    }
+}
+
+function inputsOnChange() {
+    var $j = jQuery.noConflict();
     $j(".target").on("change", function () {
         this.value = changeToInteger(this.value)
     });
@@ -124,5 +139,9 @@ function inputOnChange() {
 
     $j("#burnGoal").on("change", function () {
         this.value = changeToMaxIfGreaterInt(this.value, 5000);
+    });
+
+    $j(".micro").on("change", function () {
+        this.value = changeToMaxIfGreaterFloat(this.value, 5, 10000);
     });
 }

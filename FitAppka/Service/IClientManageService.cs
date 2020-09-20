@@ -1,15 +1,19 @@
-﻿using FitAppka.Model;
+﻿using FitAppka.Models;
 using System.Threading.Tasks;
 
 namespace FitAppka.Service
 {
     public interface IClientManageService
     {
-        public Task AddNewClient(RegisterModel model);
-        public string GetClientLoginFromModel(Client model);
-        public bool CheckIfPassCorrect(Client model);
-        public bool HasUserAccessToDay(int dayID);
-        public bool HasUserAccessToProduct(int productID);
-        public bool HasUserAccessToWeightMeasurement(int id);
+        Task AddNewClient(RegisterModel model);
+        string GetClientLoginFromModel(Client model);
+        bool CheckIfPassCorrect(Client model);
+        bool HasUserAccessToDay(int dayID);
+        bool HasUserAccessToProduct(int productID);
+        bool HasUserAccessToWeightMeasurement(int id);
+        bool IsLoggedInClientAdmin();
+        int GetLoggedInClientId();
+        Client GetLoggedInClient();
+        
     }
 }

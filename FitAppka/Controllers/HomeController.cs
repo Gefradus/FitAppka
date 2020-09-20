@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using FitAppka.Model;
+using FitAppka.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using FitAppka.Repository;
@@ -34,7 +34,7 @@ namespace NowyDotnecik.Controllers
         [HttpGet]
         public async Task<IActionResult> Home(DateTime daySelected)
         {
-            _homeService.Home(daySelected);
+            _dayService.AddDayIfNotExists(daySelected);
             SendAllDataToView(daySelected);
             return View(await _context.Meal.Include(m => m.Day).Include(p => p.Product).
                 Where(m => m.DayId == _dayService.GetClientDayByDate(daySelected, _clientRepository.GetLoggedInClientId()).DayId).ToListAsync());
@@ -145,13 +145,14 @@ namespace NowyDotnecik.Controllers
 
         private void SendInfoAboutMacronutritions(Day day)
         {
-            CountMacronutrionNumbers(_homeService.SumAllKcalInDay((DateTime)day.Date), "calories", day.CalorieGoal);
-            CountMacronutrionNumbers(_homeService.SumAllProteinsInDay((DateTime)day.Date), "proteins", day.ProteinTarget);
-            CountMacronutrionNumbers(_homeService.SumAllCarbsInDay((DateTime)day.Date), "carbs", day.CarbsTarget);
-            CountMacronutrionNumbers(_homeService.SumAllFatsInDay((DateTime)day.Date), "fats", day.FatTarget);
+            Goals dayGoals = _dayService.GetDayGoals(day.DayId);
+            CountMacronutrionNumbers(_homeService.SumAllKcalInDay((DateTime)day.Date), "calories", dayGoals.Calories);
+            CountMacronutrionNumbers(_homeService.SumAllProteinsInDay((DateTime)day.Date), "proteins", dayGoals.Proteins);
+            CountMacronutrionNumbers(_homeService.SumAllCarbsInDay((DateTime)day.Date), "carbs", dayGoals.Carbohydrates);
+            CountMacronutrionNumbers(_homeService.SumAllFatsInDay((DateTime)day.Date), "fats", dayGoals.Fats);
         }
 
-        private void CountMacronutrionNumbers(double sumOfMacronutrion, string name, int? target)
+        private void CountMacronutrionNumbers(double sumOfMacronutrion, string name, double target)
         {
             ViewData[name] = sumOfMacronutrion;
             ViewData[name + "0"] = _homeService.Round(sumOfMacronutrion);

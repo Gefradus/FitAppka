@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace FitAppka.Model
+namespace FitAppka.Models
 {
     public partial class FitAppContext : DbContext
     {
@@ -20,6 +18,7 @@ namespace FitAppka.Model
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Day> Day { get; set; }
         public virtual DbSet<FatMeasurement> FatMeasurement { get; set; }
+        public virtual DbSet<Goals> Goals { get; set; }
         public virtual DbSet<Meal> Meal { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<StrengthTraining> StrengthTraining { get; set; }
@@ -31,7 +30,7 @@ namespace FitAppka.Model
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-P22JPL7\\SQLEXPRESS;Initial Catalog=FitApp23456;Integrated Security=True;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-P22JPL7\\SQLEXPRESS;Initial Catalog=FitAppka;Integrated Security=True;Trusted_Connection=True;");
             }
         }
 
@@ -73,6 +72,9 @@ namespace FitAppka.Model
 
             modelBuilder.Entity<Client>(entity =>
             {
+                entity.HasIndex(e => e.GoalsId)
+                    .HasName("r13_FK");
+
                 entity.Property(e => e.Email).IsUnicode(false);
 
                 entity.Property(e => e.FirstName).IsUnicode(false);
@@ -82,6 +84,11 @@ namespace FitAppka.Model
                 entity.Property(e => e.Password).IsUnicode(false);
 
                 entity.Property(e => e.SecondName).IsUnicode(false);
+
+                entity.HasOne(d => d.Goals)
+                    .WithMany(p => p.Client)
+                    .HasForeignKey(d => d.GoalsId)
+                    .HasConstraintName("FK_CLIENT_R13_GOALS");
             });
 
             modelBuilder.Entity<Day>(entity =>
@@ -89,11 +96,20 @@ namespace FitAppka.Model
                 entity.HasIndex(e => e.ClientId)
                     .HasName("r1_FK");
 
+                entity.HasIndex(e => e.GoalsId)
+                    .HasName("r15_FK");
+
                 entity.HasOne(d => d.Client)
                     .WithMany(p => p.Day)
                     .HasForeignKey(d => d.ClientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DAY_R1_CLIENT");
+
+                entity.HasOne(d => d.Goals)
+                    .WithMany(p => p.Day)
+                    .HasForeignKey(d => d.GoalsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DAY_R15_GOALS");
             });
 
             modelBuilder.Entity<FatMeasurement>(entity =>
@@ -106,6 +122,25 @@ namespace FitAppka.Model
                     .HasForeignKey(d => d.WeightMeasurementId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_FAT_MEAS_R6_WEIGHT_M");
+            });
+
+            modelBuilder.Entity<Goals>(entity =>
+            {
+                entity.HasIndex(e => e.ClientId)
+                    .HasName("r14_FK");
+
+                entity.HasIndex(e => e.DayId)
+                    .HasName("r16_FK");
+
+                entity.HasOne(d => d.ClientNavigation)
+                    .WithMany(p => p.GoalsNavigation)
+                    .HasForeignKey(d => d.ClientId)
+                    .HasConstraintName("FK_GOALS_R14_CLIENT");
+
+                entity.HasOne(d => d.DayNavigation)
+                    .WithMany(p => p.GoalsNavigation)
+                    .HasForeignKey(d => d.DayId)
+                    .HasConstraintName("FK_GOALS_R16_DAY");
             });
 
             modelBuilder.Entity<Meal>(entity =>
@@ -147,7 +182,7 @@ namespace FitAppka.Model
             modelBuilder.Entity<StrengthTraining>(entity =>
             {
                 entity.HasIndex(e => e.DayId)
-                    .HasName("Relationship_12_FK");
+                    .HasName("r12_FK");
 
                 entity.HasIndex(e => e.StrengthTrainingTypeId)
                     .HasName("Relationship_11_FK");
@@ -156,7 +191,7 @@ namespace FitAppka.Model
                     .WithMany(p => p.StrengthTraining)
                     .HasForeignKey(d => d.DayId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_STRENGTH_RELATIONS_DAY");
+                    .HasConstraintName("FK_STRENGTH_R12_DAY");
 
                 entity.HasOne(d => d.StrengthTrainingType)
                     .WithMany(p => p.StrengthTraining)

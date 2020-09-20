@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FitAppka.Repository;
-using FitAppka.Model;
+using FitAppka.Models;
 using FitAppka.Service;
 
 namespace FitAppka.Controllers
@@ -13,9 +13,12 @@ namespace FitAppka.Controllers
         private readonly IDayManageService _dayService;
         private readonly IClientRepository _clientRepository;
         private readonly IGoalsService _goalsService;
+        private readonly IGoalsRepository _goalsRepository;
 
-        public GoalsController(IDayManageService dayService, IClientRepository clientRepository, IGoalsService goalsService)
+        public GoalsController(IDayManageService dayService, IClientRepository clientRepository, 
+            IGoalsService goalsService, IGoalsRepository goalsRepository)
         {
+            _goalsRepository = goalsRepository;
             _dayService = dayService;
             _goalsService = goalsService;
             _clientRepository = clientRepository;
@@ -26,7 +29,7 @@ namespace FitAppka.Controllers
         {
             ViewData["dayID"] = _dayService.GetTodayId();
             SendDataAboutGoals();
-            return View();
+            return View(SendDataAboutGoals());
         }
 
         [HttpPost]
@@ -42,17 +45,45 @@ namespace FitAppka.Controllers
             }
         }
 
-        private void SendDataAboutGoals()
+        private CreateGoalsModel SendDataAboutGoals()
         {
             Client client = _clientRepository.GetLoggedInClient();
-            ViewData["auto"] = client.AutoDietaryGoals;
-            ViewData["include"] = client.IncludeCaloriesBurned;
-            ViewData["burnGoal"] = client.KcalBurnedGoal;
-            ViewData["timeGoal"] = client.TrainingTimeGoal;
-            ViewData["calorieTarget"] = client.CalorieGoal;
-            ViewData["proteinTarget"] = client.ProteinTarget;
-            ViewData["fatTarget"] = client.FatTarget;
-            ViewData["carbsTarget"] = client.CarbsTarget;
+            Goals clientGoals = _goalsRepository.GetClientGoals(client.ClientId);
+
+            return new CreateGoalsModel()
+            {
+                AutoDietaryGoals = (bool)client.AutoDietaryGoals,
+                IncludeCaloriesBurned = (bool)client.IncludeCaloriesBurned,
+                KcalBurnedGoal = clientGoals.KcalBurned,
+                TrainingTimeGoal = clientGoals.TrainingTime,
+                CalorieGoal = (int?)clientGoals.Calories,
+                ProteinTarget = (int?)clientGoals.Proteins,
+                FatTarget = (int?)clientGoals.Fats,
+                CarbsTarget = (int?)clientGoals.Carbohydrates,
+                VitaminA = clientGoals.VitaminA,
+                VitaminB1 = clientGoals.VitaminB1,
+                VitaminB2 = clientGoals.VitaminB2,
+                VitaminB5 = clientGoals.VitaminB5,
+                VitaminB6 = clientGoals.VitaminB6,
+                VitaminB12 = clientGoals.VitaminB12,
+                VitaminC = clientGoals.VitaminC,
+                VitaminD = clientGoals.VitaminD,
+                VitaminE = clientGoals.VitaminE,
+                VitaminK = clientGoals.VitaminK,
+                VitaminPp = clientGoals.VitaminPp,
+                Biotin = clientGoals.Biotin,
+                Calcium = clientGoals.Calcium,
+                Copper = clientGoals.Copper,
+                FolicAcid = clientGoals.FolicAcid,
+                Iodine = clientGoals.Iodine,
+                Iron = clientGoals.Iron,
+                Magnesium = clientGoals.Magnesium,
+                Phosphorus = clientGoals.Phosphorus,
+                Potassium = clientGoals.Potassium,
+                Selenium = clientGoals.Selenium,
+                Sodium = clientGoals.Sodium,
+                Zinc = clientGoals.Zinc,
+            };
         }
 
     }

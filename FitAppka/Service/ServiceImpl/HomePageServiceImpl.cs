@@ -1,6 +1,5 @@
-﻿using FitAppka.Model;
+﻿using FitAppka.Models;
 using FitAppka.Repository;
-using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +10,22 @@ namespace FitAppka.Service.ServicesImpl
     {
         private readonly IClientRepository _clientRepository;
         private readonly IDayRepository _dayRepository;
+        private readonly IDayManageService _dayManageService;
         private readonly IMealRepository _mealRepository;
         private readonly IProductRepository _productRepository;
+        private readonly IGoalsRepository _goalsRepository;
         private readonly FitAppContext _context;
 
-        public HomePageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository,
-            IMealRepository mealRepository, IProductRepository productRepository, FitAppContext context)
+        public HomePageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository, IDayManageService dayManageService,
+            IMealRepository mealRepository, IProductRepository productRepository, IGoalsRepository goalsRepository, FitAppContext context)
         {
             _context = context;
             _productRepository = productRepository;
             _mealRepository = mealRepository;
             _dayRepository = dayRepository;
+            _dayManageService = dayManageService;
             _clientRepository = clientRepository;
-        }
-
-        public void Home(DateTime daySelected)
-        {
-            AddDayIfNotExists(daySelected, _clientRepository.GetLoggedInClient().ClientId);
+            _goalsRepository = goalsRepository;
         }
 
         public string DateFormat(DateTime daySelected)
@@ -63,9 +61,9 @@ namespace FitAppka.Service.ServicesImpl
         }
 
 
-        public bool IsItFirstLaunch() {
-            Client client = _clientRepository.GetLoggedInClient();
-            return client.CarbsTarget == null || client.ProteinTarget == null || client.FatTarget == null || client.CalorieGoal == null;
+        public bool IsItFirstLaunch() 
+        {
+            return _goalsRepository.GetClientGoals(_clientRepository.GetLoggedInClientId()) == null;
         }
 
         private IQueryable<Meal> GetMealsOfTheDay(DateTime dayDate){
@@ -88,33 +86,8 @@ namespace FitAppka.Service.ServicesImpl
             return SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Fats).ToList());
         }
 
-        public int CountPercentageOfTarget(double var, int? target){
+        public int CountPercentageOfTarget(double var, double target){
             return (int)(var / target * 100);
-        }
-
-        private void AddDayIfNotExists(DateTime daySelected, int clientID)
-        {
-            if (_context.Day.Count(dz => dz.Date == daySelected && dz.ClientId == clientID) == 0)
-            {
-                var client = _clientRepository.GetClientById(clientID);
-
-                _dayRepository.Add(new Day()
-                {
-                    Date = daySelected,
-                    ClientId = clientID,
-                    Breakfast = client.Breakfast,
-                    Lunch = client.Lunch,
-                    Dinner = client.Dinner,
-                    Dessert = client.Dessert,
-                    Snack = client.Snack,
-                    Supper = client.Supper,
-                    ProteinTarget = client.ProteinTarget,
-                    FatTarget = client.FatTarget,
-                    CarbsTarget = client.CarbsTarget,
-                    CalorieGoal = client.CalorieGoal,
-                    WaterDrunk = 0,
-                });
-            }
         }
 
         public void AddWater(int dayID, int addedWater)
@@ -190,7 +163,7 @@ namespace FitAppka.Service.ServicesImpl
 
         public decimal CountCalories(int whichMeal, DateTime daySelected, int clientID)
         {
-            AddDayIfNotExists(daySelected, clientID);
+            _dayManageService.AddDayIfNotExists(daySelected);
             var meals = _context.Meal.Where(m => m.InWhichMealOfTheDay == whichMeal && m.Day.ClientId == clientID && m.Day.Date == daySelected);
             return Round((double) SumAllListItems(meals.Select(m => m.Calories).ToList()));
         }
@@ -204,7 +177,7 @@ namespace FitAppka.Service.ServicesImpl
             meal.Carbohydrates = RoundDouble(meal.Grammage * product.Carbohydrates / 100);
             meal.Fats = RoundDouble(meal.Grammage * product.Fats / 100);
 
-            AddDayIfNotExists(daySelected, _clientRepository.GetLoggedInClientId());
+            _dayManageService.AddDayIfNotExists(daySelected);
             meal.DayId = _dayRepository.GetClientDayByDate(daySelected, _clientRepository.GetLoggedInClientId()).DayId;
         }
 

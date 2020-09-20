@@ -1,4 +1,4 @@
-﻿using FitAppka.Model;
+﻿using FitAppka.Models;
 using FitAppka.Repository;
 using FitAppka.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -18,10 +18,10 @@ namespace FitAppka.Controllers
         private readonly IClientRepository _clientRepository;
         private readonly ICardioTrainingService _cardioServices;
         private readonly IStrengthTrainingService _strengthTrainingService;
-        private readonly IDietaryTargetsService _dietaryTargetsService;
+        private readonly IGoalsService _dietaryTargetsService;
         private readonly IDayManageService _dayService;
 
-        public TrainingController(IClientRepository clientRepository, ICardioTrainingService cardioTrainingServices, IDietaryTargetsService dietaryTargetsService,
+        public TrainingController(IClientRepository clientRepository, ICardioTrainingService cardioTrainingServices, IGoalsService dietaryTargetsService,
             IStrengthTrainingService strengthTrainingServices, FitAppContext context, IDayManageService dayService) 
         {
             _dietaryTargetsService = dietaryTargetsService;
@@ -39,7 +39,7 @@ namespace FitAppka.Controllers
             ViewData["day"] = _dayService.GetDayDateTime(dayID).Date.ToString("dd.MM.yyyy");
             ViewData["clientID"] = _clientRepository.GetLoggedInClient().ClientId;
             ViewData["burnedKcal"] = _dietaryTargetsService.CaloriesBurnedInDay(dayID);
-            ViewData["cardioTime"] = _cardioServices.CardioTimeInDay(dayID);
+            ViewData["cardioTime"] = _cardioServices.GetCardioTimeInDay(dayID);
             ViewData["kcalTarget"] = _cardioServices.GetKcalBurnedGoalInDay(dayID);
             ViewData["timeTarget"] = _cardioServices.GetTrainingTimeGoalInDay(dayID);
             ViewData["strengthTrainings"] = _context.StrengthTraining.Include(s => s.StrengthTrainingType).Include(s => s.Day).ToList();

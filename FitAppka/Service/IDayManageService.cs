@@ -1,4 +1,4 @@
-﻿using FitAppka.Model;
+﻿using FitAppka.Models;
 using System;
 using System.Collections.Generic;
 
@@ -12,5 +12,6 @@ namespace FitAppka.Service
         public IEnumerable<Day> GetAllDays();
         public DateTime GetDayDateTime(int id);
         public Day GetClientDayByDate(DateTime date, int clientID);
+        Goals GetDayGoals(int dayId);
     }
 }

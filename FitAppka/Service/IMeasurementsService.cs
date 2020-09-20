@@ -1,12 +1,10 @@
-﻿using FitAppka.Model;
-
-namespace FitAppka.Service
+﻿namespace FitAppka.Service
 {
     public interface IMeasurementsService
     {
-        bool AddOrUpdateMeasurements(short weight, int waist);
-        bool UpdateMeasurements(int id, short weight, int waist);
+        void AddMeasurements(short weight, int? waist);
+        bool UpdateMeasurements(int id, short weight, int? waist);
         bool DeleteMeasurement(int id);
-        double EstimateBodyFatLevel(short weight, int waist);
+        double EstimateBodyFatLevel(short weight, int? waist);
     }
 }

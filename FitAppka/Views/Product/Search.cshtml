@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FitAppka.Model.Product>
+﻿@model IEnumerable<FitAppka.Models.Product>
 
 <head>
     <link href="~/css/SearchProduct.css" rel="stylesheet" />
@@ -103,7 +103,7 @@
 
             <div>
                 <div class="mr-auto">
-                    <a class="text-dark ml-md-4 ml-lg-5 d-none d-md-block" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" id="logoPink" src="~/img/logorozowe.png" /></a>
+                    <a class="text-dark ml-md-4 ml-lg-5 d-none d-md-block" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" id="logoPink" src="~/img/logorozowe.png" title="Strona główna"/></a>
                     <a class="text-dark ml-sm-1 d-md-none" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" id="backImg" src="~/img/back.png" /></a>
                 </div>
             </div>
