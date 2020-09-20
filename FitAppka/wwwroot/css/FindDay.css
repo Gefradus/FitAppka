@@ -56,6 +56,13 @@
     margin-top: 100px
 }
 
+#findDayWhere {
+    font-size: 12px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    margin-left: -10px
+}
+
 #navMain {
     height: 70px;
     position: fixed;
@@ -121,6 +128,10 @@
 #choice {
     border-radius: .25rem;
     text-align-last: center;
+    padding: 2px;
+    padding-top: 0;
+    margin-left: -10px;
+    width: 225px;
 }
 
 @media(max-width: 767px) {

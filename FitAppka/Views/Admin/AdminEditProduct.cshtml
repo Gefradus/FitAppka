@@ -11,7 +11,7 @@
 
 <body>
     <div class="container">
-        <div class="row cent" style="height: unset; margin-top: -5px">
+        <div class="row cent" style="height: 100%; margin-top: -5px">
             <div class="col-9 col-sm-8 col-lg-7 col-xl-6" style="padding-top: 30px; background: white">
                 <form enctype="multipart/form-data" method="post">
                     <div style="color: red; text-align: center; font-weight: 200; margin-bottom: 20px">
@@ -324,8 +324,9 @@
                         </script>
                     }
 
+                    @Html.HiddenFor(m => m.ProductId, new { @name = "id"})
                     <div class="form-group cent mt-5">
-                        <input type="submit" value="Zapisz produkt" class="btn btn-primary" style="width: 50%; height: 40px" asp-route-productID="@ViewData["productID"]" asp-route-addOrEditPhoto="@ViewData["addOrEdit"]" />
+                        <input type="submit" value="Zapisz produkt" class="btn btn-primary" style="width: 50%; height: 40px" asp-route-addOrEditPhoto="@ViewData["addOrEdit"]" />
                     </div>
 
                     <div class="form-group cent" style="margin-top: 35px; margin-bottom: 2rem">
