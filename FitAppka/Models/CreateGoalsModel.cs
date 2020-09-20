@@ -7,23 +7,23 @@ namespace FitAppka.Models
     public class CreateGoalsModel
     {
         [Range(500, 20000, ErrorMessage = "Cel kalorii musi wynosić 500 - 20000")]
-        public int? CalorieGoal { get; set; }
+        public int? Calories { get; set; }
 
         [Range(0, 5000, ErrorMessage = "Cel białka może wynosić max. 5000")]
-        public int? ProteinTarget { get; set; }
+        public int? Proteins { get; set; }
 
         [Range(0, 5000, ErrorMessage = "Cel węglowodanów może wynosić max. 5000")]
-        public int? CarbsTarget { get; set; }
+        public int? Carbohydrates { get; set; }
 
         [Range(0, 2222, ErrorMessage = "Cel tłuszczy może wynosić max. 2222")]
-        public int? FatTarget { get; set; }
+        public int? Fats { get; set; }
 
         [Range(0, 5000, ErrorMessage = "Cel spalonych kcal może wynosić max. 5000")]
         
-        public int? KcalBurnedGoal { get; set; }
+        public int? KcalBurned { get; set; }
 
         [Range(0, 1440, ErrorMessage = "Cel minut treningów może wynosić max. 1440")]
-        public int? TrainingTimeGoal { get; set; }
+        public int? TrainingTime { get; set; }
 
         [Required]
         public bool AutoDietaryGoals { get; set; }

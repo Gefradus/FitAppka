@@ -106,14 +106,17 @@ function hideDecIncTip(hidden){
 function blockPace() {
     var incBtn = document.getElementById("incBtn");
     var decBtn = document.getElementById("decBtn");
+    var pace = document.getElementById("pace");
     
     if (document.getElementById("maintenance").checked) {
-        document.getElementById("pace").value = 0.4;
+        pace.value = 0.4;
+        setDisabled(pace);
         setNotAllowedCursor(incBtn);
         setNotAllowedCursor(decBtn);
         hideDecIncTip(false);
     }
     else {
+        setEnabled(pace);
         setPointerCursor(incBtn);
         setPointerCursor(decBtn);
         hideDecIncTip(true);

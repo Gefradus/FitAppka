@@ -216,11 +216,11 @@ namespace FitAppka.Service.ServiceImpl
             client.AutoDietaryGoals = m.AutoDietaryGoals;
             client.IncludeCaloriesBurned = m.IncludeCaloriesBurned;
             _clientRepository.Update(client);
-            clientGoals.TrainingTime = m.TrainingTimeGoal;
-            clientGoals.KcalBurned = m.KcalBurnedGoal;
+            clientGoals.TrainingTime = m.TrainingTime;
+            clientGoals.KcalBurned = m.KcalBurned;
 
             if (!m.AutoDietaryGoals) {
-                UpdateClientGoals(clientGoals, (int)m.CalorieGoal, (int)m.ProteinTarget, (int)m.FatTarget, (int)m.CarbsTarget);
+                UpdateClientGoals(clientGoals, (int)m.Calories, (int)m.Proteins, (int)m.Fats, (int)m.Carbohydrates);
             }
         }
 
