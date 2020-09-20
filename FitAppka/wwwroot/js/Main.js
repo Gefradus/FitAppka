@@ -114,16 +114,6 @@ function deleteMealUrl(id, url) {
     });
 }
 
-function giveIterFromID(id){
-    var iter = 0;
-    for (var i = 0; i < IDarray.length; i++) {
-        if (IDarray[i] == id) {
-            iter = i;
-        }
-    }
-    return iter;
-}
-
 
 function addWater(url, dayID, target) {
     var water = parseInt($("#waterCount").val());

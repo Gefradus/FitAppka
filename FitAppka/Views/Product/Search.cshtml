@@ -4,155 +4,12 @@
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
     <link href="~/css/SearchProduct.css" rel="stylesheet" />
+    <script src="~/js/Validation.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-
-    <script type="text/javascript">
-        function addProduct(id) {
-            var iter = 0;
-            for (var i = 0; i < IDarray.length; i++) {
-                if (IDarray[i] == id) {
-                    iter = i;
-                }
-            }
-
-            var photoPath = pathArray[iter];
-            var name = nameArray[iter];
-            var kcal = kcalArray[iter];
-            var bialko = bialkoArray[iter];
-            var tluszcze = tluszczeArray[iter];
-            var wegle = wegleArray[iter];
-
-            if (photoPath == 'null') {
-                document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="/FitAppka/img/miss.png" class="img-fluid" asp-append-version="true" />';
-            }
-            else {
-                document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + "/FitAppka/photos/" + photoPath + '" class="img-fluid" asp-append-version="true" />';
-            }
-
-            document.getElementById("name").innerHTML = name;
-            document.getElementById("kcal").innerHTML = kcal + ' kcal';
-            document.getElementById("bialko").innerHTML = 'Białko: ' + bialko + ' g,';
-            document.getElementById("tluszcze").innerHTML = 'Tł.: ' + tluszcze + ' g,';
-            document.getElementById("wegle").innerHTML = 'Węgl.: ' + wegle + ' g';
-
-            function validation(validMsg) {
-                $("#validationModal").modal('show');
-                document.getElementById("validatMsg").innerHTML = "<p>" + validMsg + "</p>";
-                $("#closeVal").click(function() {
-                    $("#validationModal").modal('hide');
-                })
-            }
-
-            $("#addModal").modal('show');
-            $("#addProduct").click(function() {
-                var gram = parseInt(document.getElementById("gramatura").value, 10);
-                if (gram < 1) {
-                    validation("Gramatura posiłku musi wynosić przynajmniej 1 gram.");
-                }
-                else if (gram > 9999) {
-                    validation("Gramatura posiłku nie może przekraczać 9999 gram.");
-                }
-                else if (gram >= 1 && gram <= 9999) {
-                    document.getElementById('addProduct').disabled = true;
-                    $.ajax({
-                        type: 'POST',
-                        url: '@Url.Action("Meal","Home")',
-                        data: { productID: id, grammage: gram, dayID:@ViewData["dayID"], inWhich:@ViewData["inWhich"] },
-                        success: function() {
-                            location.href = $("#RedirectTo").val();
-                        }
-                    });
-                }
-                else {
-                    validation("Należy podać liczbę");
-                }
-            });
-
-            $("#addModal").on('hide.bs.modal', function () {
-                location.reload();
-            });
-
-        }
-
-        var IDarray = [];
-        var nameArray = [];
-        var pathArray = [];
-        var kcalArray = [];
-        var bialkoArray = [];
-        var tluszczeArray = [];
-        var wegleArray = [];
-
-
-        function kolorujDrugiWiersz() {
-            var wszystkie = document.getElementsByClassName("wieeersz");
-            for (var i = 0; i < wszystkie.length; i++) {
-                if (i % 2 == 0) {
-                    wszystkie[i].style.backgroundColor = "rgb(243, 243, 243)";
-                }
-            }
-        }
-
-    </script>
+    <script src="~/js/SearchProduct.js"></script>
 </head>
 
 <body onload="kolorujDrugiWiersz();">
-    <header>
-        <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 blackNav">
-
-            <div>
-                <div class="mr-auto">
-                    <a class="text-dark ml-md-4 ml-lg-5 d-none d-md-block" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" id="logoPink" src="~/img/logorozowe.png" title="Strona główna"/></a>
-                    <a class="text-dark ml-sm-1 d-md-none" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" id="backImg" src="~/img/back.png" title="Strona główna"/></a>
-                </div>
-            </div>
-
-            <a asp-action="Search" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" class="mx-auto" style="text-align:center; color:white; position: absolute; top:5px; width: 124px; left: calc(50% - 62px)">
-                <h4 class="cent" style="margin-top:4px; font-weight: 600">@ViewData["meal"]</h4>
-                <h5 class="cent" style="margin-top:4px">@ViewData["day"]</h5>
-            </a>
-
-            <div>
-                <div class="navbar-nav ml-auto" id="right">
-                    <div class="mr-3 mr-md-5">
-                        <div style="float:left;"><a class="nav-link text-light" asp-controller="Login" asp-action="Logout">Wyloguj się <img class="navIcon" src="~/img/logout.png" /></a></div>
-                        <div style="clear:both"></div>
-                    </div>
-
-                </div>
-            </div>
-        </nav>
-        
-
-        <nav class="navbar navbar-expand-md mb-3 container-fluid" id="srcPan">
-            <div class="row no-gutters" style="margin-left: 0 !important; margin-top: -15px; width: 100%">
-                <div class="col-12 cent" style="width: 100%;">
-                    <div>
-                        @using (Html.BeginForm("Search", "Product", FormMethod.Get))
-                        {
-                            <div style="height: 24px; padding-top: 10px; margin-left: -20px; font-size:14px">@Html.ValidationSummary(false, "", new { @class = "text-danger" })</div>
-                            <div style="margin-top: -3px">
-                                <div style="float:left; top:30px; padding-top:15px">@Html.TextBox("search", "", new { placeholder = "Szukaj produktu w bazie", @class = "form-control valid", @data_val = "true", @data_val_required = "Należy wpisać nazwę produktu" })</div>
-                                <div style="float:left; padding-top:15px; margin-left: 10px"><input style="height: 38px; border-radius: 15%; background-color:rgb(46, 44, 44); color: white" type="submit" value="Szukaj" /></div>
-                                <div class="cb"></div>
-                            </div>
-
-                            @Html.Hidden("inWhich", ViewData["inWhich"])
-                            @Html.Hidden("dayID", ViewData["dayID"])
-                        }
-                    </div>
-                </div>
-                <div class="col-12 cent" style="margin-top:20px; width:100%;">
-                    <div style="border-top: 1px dotted black; padding-top: 20px">
-                        <a class="btn btn-outline-dark" style="width: 275px; background: #5fb259 !important; color: white" asp-action="Create" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-isAdmin="0">
-                            Dodaj nowy produkt
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
 
     <div class="container" style="padding-top: 170px">
         <div class="modal fade" tabindex="-1" id="addModal" data-keyboard="false" style="margin-top: 170px">
@@ -171,8 +28,8 @@
                                         <div id="name" class="row no-gutters cent"></div>
                                         <div id="kcal" class="row no-gutters cent"></div>
                                         <div class="row no-gutters cent" style="width: 170px; font-size: 13px; margin-left: 7px">
-                                            <div id="bialko"></div>
-                                            <div id="tluszcze"></div>
+                                            <div id="proteins"></div>
+                                            <div id="fats"></div>
                                             <div id="wegle"></div>
                                         </div>
                                         <div class="row no-gutters cent" style="font-size: 13px; font-weight: 600">/100g</div>
@@ -183,25 +40,13 @@
                                 <div>Ile dodać?</div>
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 10px;">
-                                <input id="gramatura" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center" /><div style="font-weight: 600; margin-top: 2px">g</div>
+                                <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center" /><div style="font-weight: 600; margin-top: 2px">g</div>
                                 <button id="addProduct" style="margin-left: 5px; background: none; border:none"><img style="height:30px; width: 30px" src="~/img/add.png"></button>
                                 @Html.Hidden("RedirectTo", Url.Action("Return", "Home", new { dayID = ViewData["dayID"] }))
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div id="validationModal" class="modal fade" data-backdrop="static" role="dialog">
-            <div id="valDialog" class="modal-dialog cent">
-                <div class="modal-content" style="width: 300px">
-                    <div id="validatMsg" class="modal-body cent"></div>
-                    <div class="modal-footer">
-                        <button id="closeVal" type="button" class="btn">OK</button>
-                    </div>
-                </div>
-
             </div>
         </div>
 
@@ -244,19 +89,21 @@
             </div>
 
             <div style="margin-top: -16px">
-                @foreach (var item in Model) 
+                @foreach (var item in Model)
                 {
                     <div id="wierszeTabeli" class="row no-gutters wieeersz">
                         <div class="col-4" style="display: flex; align-items: center">
                             <div class="container" style="padding-left: 0px">
                                 <div class="row no-gutters">
                                     <div class="d-none d-md-inline-block col-md-5 col-lg-6">
-                                        @{  string photoPath;
-                                            if (item.PhotoPath != null) {
+                                        @{ string photoPath;
+                                            if (item.PhotoPath != null)
+                                            {
                                                 photoPath = "~/photos/" + (item.PhotoPath);
                                                 <script>pathArray.push('@item.PhotoPath');</script>
                                             }
-                                            else {
+                                            else
+                                            {
                                                 photoPath = "~/img/miss.png";
                                                 <script>pathArray.push('null');</script>
                                             }
@@ -264,9 +111,9 @@
                                                 IDarray.push('@item.ProductId');
                                                 nameArray.push('@item.ProductName');
                                                 kcalArray.push('@item.Calories');
-                                                bialkoArray.push('@item.Proteins');
-                                                tluszczeArray.push('@item.Fats');
-                                                wegleArray.push('@item.Carbohydrates');
+                                                proteinsArray.push('@item.Proteins');
+                                                fatsArray.push('@item.Fats');
+                                                carbsArray.push('@item.Carbohydrates');
                                             </script>
                                         }
                                         <img src="@photoPath" class="img-fluid" id="obrazek" asp-append-version="true" />
@@ -298,8 +145,10 @@
                 }
             </div>
         }
-        else {
-            if ((bool)ViewData["wereSearched"]) {
+        else
+        {
+            if ((bool)ViewData["wereSearched"])
+            {
                 <div style="display: flex; justify-content: center; margin-top: 25px">
                     Nie znaleziono produktów o podanej nazwie
                 </div>

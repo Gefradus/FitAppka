@@ -1,0 +1,42 @@
+﻿#navSearch {
+    margin-left: 0 !important;
+    margin-top: -15px;
+    width: 100%
+}
+
+#mealAndDay {
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 5px;
+    width: 124px;
+    left: calc(50% - 62px)
+}
+
+#mealName {
+    margin-top: 4px;
+    font-weight: 600;
+    justify-content: center;
+    display: flex;
+}
+
+#dayBtn {
+    margin-top: 4px;
+    justify-content: center;
+    display: flex
+}
+
+.w100{
+    width: 100%;
+}
+
+#srcPan {
+    position: fixed;
+    width: 100%;
+    height: 90px;
+    top: 80px;
+    left: 0;
+    z-index: 2;
+    background-color: rgb(228, 218, 160);
+    border-bottom: 1px solid #ebe7e7;
+}

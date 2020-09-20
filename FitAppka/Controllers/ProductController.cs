@@ -30,7 +30,15 @@ namespace FitAppka.Controllers
             SearchProductViewData(search, inWhich, dayID);
             return View(await _context.Product.Where(p => p.ProductName.Contains(search)).ToListAsync());
         }
-      
+
+        [HttpGet]
+        public async Task<IActionResult> Search2(string search, int inWhich, int dayID)
+        {
+            SearchProductViewData(search, inWhich, dayID);
+            return View(await _context.Product.Where(p => p.ProductName.Contains(search)).ToListAsync());
+        }
+
+
         [HttpGet]
         public IActionResult Create(int inWhich, int dayID, int isAdmin)
         {
@@ -65,7 +73,6 @@ namespace FitAppka.Controllers
             ViewData["dayID"] = dayID;
             ViewData["inWhich"] = inWhich;
             ViewData["search"] = search;
-            ViewData["clientID"] = _clientRepository.GetLoggedInClient();
             ViewData["day"] = _productManageService.DayPattern(dayID);
             ViewData["meal"] = _productManageService.MealName(inWhich);
         }

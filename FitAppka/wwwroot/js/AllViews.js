@@ -19,3 +19,22 @@ function setPointerCursor(mouseTarget) {
 function setNormalCursor(mouseTarget) {
     mouseTarget.style.cursor = 'text';
 }
+
+function giveIterFromID(id) {
+    var iter = 0;
+    for (var i = 0; i < IDarray.length; i++) {
+        if (IDarray[i] == id) {
+            iter = i;
+        }
+    }
+    return iter;
+}
+
+function kolorujDrugiWiersz() {
+    var wszystkie = document.getElementsByClassName("wieeersz");
+    for (var i = 0; i < wszystkie.length; i++) {
+        if (i % 2 == 0) {
+            wszystkie[i].style.backgroundColor = "rgb(243, 243, 243)";
+        }
+    }
+}
