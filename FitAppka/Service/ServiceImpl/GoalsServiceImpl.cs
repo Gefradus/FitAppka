@@ -278,5 +278,46 @@ namespace FitAppka.Service.ServiceImpl
             return _goalsRepository.GetClientGoals(c.ClientId);
         }
 
+        public CreateGoalsModel MapClientGoalsToCreateGoalsModel()
+        {
+            Client client = _clientRepository.GetLoggedInClient();
+            Goals clientGoals = _goalsRepository.GetClientGoals(client.ClientId);
+
+            return new CreateGoalsModel()
+            {
+                AutoDietaryGoals = (bool)client.AutoDietaryGoals,
+                IncludeCaloriesBurned = (bool)client.IncludeCaloriesBurned,
+                KcalBurned = clientGoals.KcalBurned,
+                TrainingTime = clientGoals.TrainingTime,
+                Calories = (int?)clientGoals.Calories,
+                Proteins = (int?)clientGoals.Proteins,
+                Fats = (int?)clientGoals.Fats,
+                Carbohydrates = (int?)clientGoals.Carbohydrates,
+                VitaminA = clientGoals.VitaminA,
+                VitaminB1 = clientGoals.VitaminB1,
+                VitaminB2 = clientGoals.VitaminB2,
+                VitaminB5 = clientGoals.VitaminB5,
+                VitaminB6 = clientGoals.VitaminB6,
+                VitaminB12 = clientGoals.VitaminB12,
+                VitaminC = clientGoals.VitaminC,
+                VitaminD = clientGoals.VitaminD,
+                VitaminE = clientGoals.VitaminE,
+                VitaminK = clientGoals.VitaminK,
+                VitaminPp = clientGoals.VitaminPp,
+                Biotin = clientGoals.Biotin,
+                Calcium = clientGoals.Calcium,
+                Copper = clientGoals.Copper,
+                FolicAcid = clientGoals.FolicAcid,
+                Iodine = clientGoals.Iodine,
+                Iron = clientGoals.Iron,
+                Magnesium = clientGoals.Magnesium,
+                Phosphorus = clientGoals.Phosphorus,
+                Potassium = clientGoals.Potassium,
+                Selenium = clientGoals.Selenium,
+                Sodium = clientGoals.Sodium,
+                Zinc = clientGoals.Zinc,
+            };
+        }
+
     }
 }
