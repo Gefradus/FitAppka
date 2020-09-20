@@ -1,4 +1,5 @@
-﻿using FitAppka.Models;
+﻿using AutoMapper;
+using FitAppka.Models;
 using FitAppka.Repository;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IDayRepository _dayRepository;
         private readonly IGoalsRepository _goalsRepository;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
+        private readonly IMapper _mapper;
 
-        public GoalsServiceImpl(IGoalsRepository goalsRepository, IWeightMeasurementRepository weightMeasurementRepository,
+        public GoalsServiceImpl(IGoalsRepository goalsRepository, IWeightMeasurementRepository weightMeasurementRepository, IMapper mapper,
             IDayRepository dayRepository, ICardioTrainingRepository cardioRepository, IClientRepository clientRepository)
         {
+            _mapper = mapper;
             _weightMeasurementRepository = weightMeasurementRepository;
             _goalsRepository = goalsRepository;
             _cardioRepository = cardioRepository;
@@ -281,42 +284,10 @@ namespace FitAppka.Service.ServiceImpl
         public CreateGoalsModel MapClientGoalsToCreateGoalsModel()
         {
             Client client = _clientRepository.GetLoggedInClient();
-            Goals clientGoals = _goalsRepository.GetClientGoals(client.ClientId);
-
-            return new CreateGoalsModel()
-            {
-                AutoDietaryGoals = (bool)client.AutoDietaryGoals,
-                IncludeCaloriesBurned = (bool)client.IncludeCaloriesBurned,
-                KcalBurned = clientGoals.KcalBurned,
-                TrainingTime = clientGoals.TrainingTime,
-                Calories = (int?)clientGoals.Calories,
-                Proteins = (int?)clientGoals.Proteins,
-                Fats = (int?)clientGoals.Fats,
-                Carbohydrates = (int?)clientGoals.Carbohydrates,
-                VitaminA = clientGoals.VitaminA,
-                VitaminB1 = clientGoals.VitaminB1,
-                VitaminB2 = clientGoals.VitaminB2,
-                VitaminB5 = clientGoals.VitaminB5,
-                VitaminB6 = clientGoals.VitaminB6,
-                VitaminB12 = clientGoals.VitaminB12,
-                VitaminC = clientGoals.VitaminC,
-                VitaminD = clientGoals.VitaminD,
-                VitaminE = clientGoals.VitaminE,
-                VitaminK = clientGoals.VitaminK,
-                VitaminPp = clientGoals.VitaminPp,
-                Biotin = clientGoals.Biotin,
-                Calcium = clientGoals.Calcium,
-                Copper = clientGoals.Copper,
-                FolicAcid = clientGoals.FolicAcid,
-                Iodine = clientGoals.Iodine,
-                Iron = clientGoals.Iron,
-                Magnesium = clientGoals.Magnesium,
-                Phosphorus = clientGoals.Phosphorus,
-                Potassium = clientGoals.Potassium,
-                Selenium = clientGoals.Selenium,
-                Sodium = clientGoals.Sodium,
-                Zinc = clientGoals.Zinc,
-            };
+            CreateGoalsModel model = _mapper.Map<Goals, CreateGoalsModel>(_goalsRepository.GetClientGoals(client.ClientId));
+            model.IncludeCaloriesBurned = (bool)client.IncludeCaloriesBurned;
+            model.AutoDietaryGoals = (bool)client.AutoDietaryGoals;
+            return model;
         }
 
     }
