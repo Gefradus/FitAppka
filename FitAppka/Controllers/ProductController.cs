@@ -40,7 +40,7 @@ namespace FitAppka.Controllers
         // }
 
         [HttpGet]
-        public async Task<IActionResult> Search2(string search, int inWhich, int dayID)
+        public async Task<IActionResult> Search(string search, int inWhich, int dayID)
         {
             SearchProductViewData(search, inWhich, dayID);
             return View(await _context.Product.Where(p => p.ProductName.Contains(search) || string.IsNullOrEmpty(search)).ToListAsync());
