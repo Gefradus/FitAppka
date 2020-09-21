@@ -38,11 +38,12 @@
     z-index: 2;
     background: rgba(44, 44, 44, 0.24);
     border-bottom: 1px solid #ebe7e7;
+    backdrop-filter: blur(1px);
 }
 
 .navbar-fixed-top.scrolled {
     background: rgba(44, 44, 44, 0.975) !important;
-    transition: background 200ms linear;
+    transition: background 350ms linear;
 }
 
 #submitSearch {

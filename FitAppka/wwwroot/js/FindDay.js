@@ -45,6 +45,7 @@ function searchDay(searchType, htmlUrl) {
 }
 
 function onload() {
+    transparentWhenScrollDown();
     $('#normalDropDown').chosen({ search_contains: true });
     restoreState();
 }

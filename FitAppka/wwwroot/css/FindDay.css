@@ -38,6 +38,7 @@
 }
 
 
+
 .chosen-single {
     height: 28px;
     border-radius: 3px;
@@ -98,8 +99,14 @@
     z-index: 99;
 }
 
-.navsearch, #navMain{
-    background: radial-gradient(#f5f5f5, #ffffff);
+.navsearch, #navMain {
+    background: rgba(245, 245, 245, 0.1);
+    backdrop-filter: blur(1px);
+}
+
+.navbar-fixed-top.scrolled {
+    background: rgba(245, 245, 245, 0.96) !important;
+    transition: background 350ms linear;
 }
 
 .dayHeader {

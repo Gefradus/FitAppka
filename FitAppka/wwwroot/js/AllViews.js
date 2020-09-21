@@ -1,4 +1,11 @@
-﻿function setDisabled(element) {
+﻿function transparentWhenScrollDown() {
+    $(document).scroll(function () {
+        var $nav = $(".navbar-fixed-top");
+        $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+    });
+}
+
+function setDisabled(element) {
     element.readOnly = true;
     element.style.backgroundColor = "#e9ecef";
 }
