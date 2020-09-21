@@ -36,13 +36,13 @@
     top: 80px;
     left: 0;
     z-index: 2;
-    background-color: rgb(44, 44, 44);
+    background: rgba(44, 44, 44, 0.24);
     border-bottom: 1px solid #ebe7e7;
 }
 
 .navbar-fixed-top.scrolled {
-    background-color: #fff !important;
-    transition: background-color 200ms linear;
+    background: rgb(44, 44, 44) !important;
+    transition: background 300ms linear;
 }
 
 #submitSearch {
@@ -98,7 +98,9 @@
 
 #container{
     padding-top: 135px;
-    margin-bottom: 35px
+    margin-bottom: 35px;
+    padding-left: 0 !important;
+    padding-right: 0 !important
 }
 
 .showModalAddMealBtn {
