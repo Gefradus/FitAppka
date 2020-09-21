@@ -41,8 +41,8 @@
 }
 
 .navbar-fixed-top.scrolled {
-    background: rgb(44, 44, 44) !important;
-    transition: background 300ms linear;
+    background: rgba(44, 44, 44, 0.975) !important;
+    transition: background 200ms linear;
 }
 
 #submitSearch {
@@ -69,8 +69,8 @@
 
 #addIcon {
     width: 20px;
-    margin-top: -4px;
-    margin-left: 2px
+    margin-top: -5px;
+    margin-left: 4px
 }
 
 #addProduct {
