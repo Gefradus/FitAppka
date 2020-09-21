@@ -65,7 +65,7 @@ namespace FitAppka.Controllers
                     return RedirectToAction("AdminProduct", "Admin");
                 } 
                 else {
-                    return RedirectToAction(nameof(Search2), new { dayID, inWhich, clientID });
+                    return RedirectToAction(nameof(Search), new { dayID, inWhich, clientID });
                 }
             }
 
