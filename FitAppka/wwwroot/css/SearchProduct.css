@@ -135,7 +135,7 @@
     margin: auto;
 }
 
-#photo {
+.photo {
     height: 80px;
     width: 80px;
     margin-top: 10px;
