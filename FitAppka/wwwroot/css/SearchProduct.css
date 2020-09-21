@@ -82,7 +82,7 @@
     border: none
 }
 
-.addProductIcon {
+.addMealIcon {
     height: 30px;
     width: 30px
 }
@@ -103,12 +103,12 @@
     margin-bottom: 35px
 }
 
-.showModalAddProductBtn {
+.showModalAddMealBtn {
     background: none;
     border: none;
 }
 
-.addProductPanel {
+.addMealPanel {
     display: flex;
     align-items: center;
     justify-content: center;
