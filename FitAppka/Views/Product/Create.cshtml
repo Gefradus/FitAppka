@@ -38,8 +38,8 @@
                 <form enctype="multipart/form-data" method="post" asp-action="CreateProduct">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group" style="border-bottom: 1px solid #cacaca; padding-bottom: 20px">
-                        <label class="control-label">Nazwa produktu</label><div class="star">*</div>
-                        <input asp-for="ProductName" class="form-control" />
+                        <label class="control-label fl">Nazwa produktu</label><div class="star fl">*</div>
+                        <input asp-for="ProductName" class="form-control cb" />
                         <span asp-validation-for="ProductName" class="text-danger" placeholder="Nazwa produktu"></span>
                     </div>
                     <div class="naglowek">
@@ -48,7 +48,7 @@
                     <div class="form-group cent">
                         <div class="leftCol">
                             <label class="control-label fl">Kalorie</label><div class="star fl">*</div>
-                            <div class="flexcb">
+                            <div class="flex cb">
                                 <input asp-for="Calories" class="form-control int" type="number" min="0" max="9000" />
                                 <div class="jednostka" style="margin-right: -5px;">kcal</div>
                             </div>
@@ -56,7 +56,7 @@
                         </div>
                         <div class="rightCol">
                             <label class="control-label fl">Białko</label><div class="star fl">*</div>
-                            <div class="flexcb">
+                            <div class="flex cb">
                                 <input asp-for="Proteins" class="form-control num macro" type="text" />
                                 <div class="jednostka">g</div>
                             </div>
@@ -66,7 +66,7 @@
                     <div class="form-group cent">
                         <div class="leftCol">
                             <label class="control-label fl">Tłuszcze</label><div class="star fl">*</div>
-                            <div id="tluInDiv" class="flexcb">
+                            <div id="tluInDiv" class="flex cb">
                                 <input asp-for="Fats" class="form-control num macro" type="text" />
                                 <div class="jednostka">g</div>
                             </div>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="rightCol">
                             <label class="control-label fl">Węglowodany</label><div class="star fl">*</div>
-                            <div class="flexcb">
+                            <div class="flex cb">
                                 <input asp-for="Carbohydrates" class="form-control num macro" type="text" />
                                 <div class="jednostka">g</div>
                             </div>
