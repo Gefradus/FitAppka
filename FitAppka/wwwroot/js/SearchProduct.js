@@ -5,7 +5,7 @@
 
 function showModalAddMeal() {
     prepareModalAddProduct();
-    $("#addModal").modal('show');
+    $("#addMealModal").modal('show');
 }
 
 function prepareModalAddProduct() {

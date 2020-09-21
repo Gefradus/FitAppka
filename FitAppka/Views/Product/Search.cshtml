@@ -38,7 +38,7 @@
             <div class="row no-gutters" id="navSearch">
                 <div class="col-12 col-md-4 cent">
                     <div>
-                        <form method="GET" class="flex">
+                        <form method="get" class="flex">
                             <input type="hidden" value="@false" name="onlyUserItem">
                             <input type="hidden" value="@ViewData["inWhich"]" name="inWhich">
                             <input type="hidden" value="@ViewData["dayID"]" name="dayID">
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-4 cent">
-                    <form method="GET">
+                    <form method="get">
                         <input type="hidden" value="@false" name="onlyUserItem">
                         <input type="hidden" value="@ViewData["inWhich"]" name="inWhich">
                         <input type="hidden" value="@ViewData["dayID"]" name="dayID">
@@ -66,9 +66,8 @@
         </nav>
     </header>
 
-
     <div class="container-fluid" id="container">
-        <div class="modal fade" tabindex="-1" id="addModal" data-keyboard="false" style="margin-top: 170px">
+        <div class="modal fade" tabindex="-1" id="addMealModal" data-keyboard="false" style="margin-top: 170px">
             <div class="modal-dialog" style="display: flex; justify-content: center">
                 <div class="modal-content" style="width: 300px;">
                     <div class="modal-header" style="height: 25px">
@@ -149,17 +148,15 @@
             {
                 <div class="row no-gutters tableRow">
                     <div class="col-4 acent">
-                        <div class="container" style="padding-left: 0px">
+                        <div class="container" style="padding-left: 0">
                             <div class="row no-gutters">
                                 <div class="d-none d-md-inline-block col-md-5 col-lg-6">
                                     @{ string photoPath;
-                                        if (item.PhotoPath != null)
-                                        {
+                                        if (item.PhotoPath != null) {
                                             photoPath = "~/photos/" + (item.PhotoPath);
                                             <script>pathArray.push('@item.PhotoPath');</script>
                                         }
-                                        else
-                                        {
+                                        else {
                                             photoPath = "~/img/miss.png";
                                             <script>pathArray.push('null');</script>
                                         }

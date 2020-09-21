@@ -148,7 +148,7 @@
                 <div id="breakfast" class="meal">
                     @foreach (var item in Model)
                     {
-                        @if (item.InWhichMealOfTheDay == 1 && item.Day.Breakfast == true)
+                        @if (item.Day.Breakfast == true && item.InWhichMealOfTheDay == 1)
                         {
 
                             <div class="product">
