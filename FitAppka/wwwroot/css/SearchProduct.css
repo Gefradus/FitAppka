@@ -1,51 +1,133 @@
-﻿body {
-    background: linear-gradient(0deg, rgb(175 218 230) 0%, rgb(255 219 125) 100%);
+﻿#navSearch {
+    margin-left: 0 !important;
+    width: 100%
 }
 
-#sumValid {
-    height: 24px;
-    padding-top: 10px;
-    margin-left: -20px;
-    font-size: 14px
+#mealAndDay {
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 5px;
+    width: 124px;
+    left: calc(50% - 62px)
 }
 
-#nwm {
-    float: left;
-    top: 30px;
-    padding-top: 15px"
+#mealName {
+    margin-top: 4px;
+    font-weight: 600;
+    justify-content: center;
+    display: flex;
 }
 
-#panelPrzyciskow {
+#dayBtn {
+    margin-top: 4px;
+    justify-content: center;
+    display: flex
+}
+
+.w100 {
+    width: 100%;
+}
+
+#srcPan {
+    position: fixed;
+    width: 100%;
+    height: 90px;
+    top: 80px;
+    left: 0;
+    z-index: 2;
+    background-color: rgb(44, 44, 44);
+    border-bottom: 1px solid #ebe7e7;
+}
+
+.navbar-fixed-top.scrolled {
+    background-color: #fff !important;
+    transition: background-color 200ms linear;
+}
+
+#submitSearch {
+    height: 38px;
+    width: 35px;
+    border: 1px solid darkgray;
+    border-bottom-right-radius: 15%;
+    border-top-right-radius: 15%;
+    background-color: #f2f2f2
+}
+
+#searchInput {
+    width: 190px;
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%
+}
+
+#searchIcon {
+    height: 20px;
+    width: 20px;
+    margin-top: -4px;
+    margin-right: -1px
+}
+
+#addIcon {
+    width: 20px;
+    margin-top: -4px;
+    margin-left: 2px
+}
+
+#addProduct {
+    width: 225px;
+    background-color: #444b53;
+    height: 37px;
+    margin-left: 5px;
+    background: none;
+    border: none
+}
+
+.addProductIcon {
+    height: 30px;
+    width: 30px
+}
+
+#showMyProducts {
+    background-color: #464162;
+    width: 225px;
+    height: 37px
+}
+
+#showMyProducts:hover, #addProduct:hover {
+    background-color: white;
+    color: black;
+}
+
+#container{
+    padding-top: 135px;
+    margin-bottom: 35px
+}
+
+.showModalAddProductBtn {
+    background: none;
+    border: none;
+}
+
+.addProductPanel {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.kolumna {
-    width: 200px;
-    float: left;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px
-}
-
-
-
-#wierszeTabeli {
+.tableRow {
     text-align: center;
     background-color: #fcfbfc;
     border-bottom: 1px solid #b4cfb2;
-    height: 110px;
+    height: 90px;
     font-size: 14px;
 }
 
-#naproHeader {
+#productNameHeader {
     display: flex;
     justify-content: center;
 }
 
-#nazwaProduktu {
+.productName {
     display: flex;
     justify-content: center;
     font-weight: 600;
@@ -53,10 +135,10 @@
     margin: auto;
 }
 
-#obrazek {
-    height: 100px;
-    width: 100px;
-    margin-top: 0px;
+#photo {
+    height: 80px;
+    width: 80px;
+    margin-top: 10px;
     border: 1px solid #dddddd;
     position: absolute;
     top: -40px;
@@ -67,7 +149,7 @@
     margin: auto;
 }
 
-#wierszNaglowkow {
+#headersRow {
     text-align: center;
     height: 60px;
     padding-top: 4px;
@@ -77,47 +159,39 @@
     font-size: 16px
 }
 
-.kolumnaHead {
-    width: 200px;
-    float: left;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px
-}
 
 @media(max-width: 991px) {
-    #wierszeTabeli {
+    .tableRow {
         height: 100px
     }
 }
 
 
 @media(max-width: 500px) {
-    #nazwaProduktu {
+    .productName {
         justify-content: left;
         padding-left: 15px
     }
 
-    #naproHeader {
+    #productNameHeader {
         justify-content: left
     }
 
-    #wierszeTabeli {
+    .tableRow {
         font-size: 12px;
     }
 
-    #wierszNaglowkow {
+    #headersRow {
         font-size: 14px;
     }
 }
 
 @media(max-width: 450px) {
-    #wierszeTabeli {
+    .tableRow {
         font-size: 10px;
     }
 
-    #wierszNaglowkow {
+    #headersRow {
         font-size: 12px;
     }
 }

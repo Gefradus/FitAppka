@@ -6,7 +6,6 @@ using FitAppka.Models;
 using Microsoft.AspNetCore.Authorization;
 using FitAppka.Repository;
 using FitAppka.Service;
-using System.Collections.Generic;
 
 namespace FitAppka.Controllers
 {
@@ -44,7 +43,7 @@ namespace FitAppka.Controllers
         public async Task<IActionResult> Search2(string search, int inWhich, int dayID)
         {
             SearchProductViewData(search, inWhich, dayID);
-            return View(await _context.Product.Where(p => p.ProductName.Contains(search)).ToListAsync());
+            return View(await _context.Product.Where(p => p.ProductName.Contains(search) || string.IsNullOrEmpty(search)).ToListAsync());
         }
 
 
