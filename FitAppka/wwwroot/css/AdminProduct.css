@@ -2,13 +2,6 @@
     padding-top: 25px !important;
 }
 
-
-.photo{
-    height: 78px;
-    width: 78px;
-    border: 1px solid #d1cfcf;
-}
-
 .button{
     background: none; border: none
 }
@@ -27,7 +20,7 @@
     margin-top: 0 !important;
 }
 
-#wierszeTabeli{
+.tableRows{
     height: 80px !important;
 }
 
@@ -46,3 +39,10 @@
 .btn-outline-dark:hover{
     background: #4ab542 !important
 }
+
+#productNotFound {
+    display: flex;
+    justify-content: center;
+    margin-top: 75px
+}
+

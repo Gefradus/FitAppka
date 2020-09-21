@@ -1,5 +1,6 @@
 ﻿function onload() {
     transparentWhenScrollDown();
+    colorEverySecondRow();
 }
 
 function showModalAddMeal() {

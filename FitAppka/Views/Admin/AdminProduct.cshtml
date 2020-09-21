@@ -7,9 +7,8 @@
     <link href="~/css/AllViews.css" rel="stylesheet" />
     <link href="~/css/AdminProduct.css" rel="stylesheet" />
     <script src="~/js/AllViews.js"></script>
-    
 </head>
-<body onload="kolorujCoDrugiWiersz()">
+<body onload="colorEverySecondRow()">
     <div class="container">
         <div class="row no-gutters">
             <a asp-action="AdminHome" style="width: inherit;">
@@ -36,9 +35,9 @@
                     </div>
                     <div class="modal-footer">
                         <form method="post">
-                            <div style="display:flex; justify-content: center">
-                                <button type="button" onclick="hideModal()" style="margin-right: 15px; border-radius:10%; background-color: #4d62d7; height: 32px; width: 100px; color: white">Anuluj</button>
-                                <button type="button" id="usun" style="border-radius:10%; background-color: #ce1a22; height: 32px; width: 100px; color: white">Tak, usuń</button>
+                            <div class="cent">
+                                <button type="button" onclick="hideModal()" class="cancelBtn">Anuluj</button>
+                                <button type="button" id="usun" class="deleteBtn">Tak, usuń</button>
                             </div>
                         </form>
                     </div>
@@ -49,7 +48,7 @@
 
         @if (Model.Count() != 0)
         {
-            <div id="wierszNaglowkow" class="row no-gutters mb-3">
+            <div id="headersRow" class="row no-gutters mb-3">
                 <div class="col-4" style="text-align:left">
                     <div class="container">
                         <div class="row no-gutters">
@@ -57,11 +56,10 @@
                                 Zdjęcie<br />
                                 produktu
                             </div>
-                            <div id="naproHeader" class="col-12 col-md-7 col-lg-6" style="margin-top:5px;">
-                                @using (Html.BeginForm("AdminProduct", "Admin", FormMethod.Get))
-                                {
-                                   @Html.TextBox("search", "", new { placeholder = "Nazwa produktu", @class = "form-control valid" })
-                                }
+                            <div id="productNameHeader" class="col-12 col-md-7 col-lg-6" style="margin-top:5px;">
+                            <form method="get">
+                                @Html.TextBox("search", "", new { placeholder = "Nazwa produktu", @class = "form-control" })
+                            </form>
                             </div>
                         </div>
                     </div>
@@ -89,23 +87,21 @@
             <div style="margin-top: -16px">
                 @foreach (var item in Model)
                 {
-                    <div id="wierszeTabeli" class="row no-gutters wieeersz">
+                    <div class="tableRow row no-gutters">
                         <div class="col-4" style="display: flex; align-items: center">
                             <div class="container" style="padding-left: 0px">
                                 <div class="row no-gutters">
                                     <div class="d-none d-md-inline-block col-md-5 col-lg-6">
                                         @{
                                             string photoPath;
-                                            if (item.PhotoPath != null)
-                                            {
+                                            if (item.PhotoPath != null) {
                                                 photoPath = "~/photos/" + (item.PhotoPath);
                                             }
-                                            else
-                                            {
+                                            else {
                                                 photoPath = "~/img/miss.png";
                                             }
                                         }
-                                        <img src="@photoPath" class="img-fluid photo" asp-append-version="true" />
+                                        <img src="@photoPath" class="photo" asp-append-version="true" />
                                     </div>
                                     <div class="col-12 col-md-7 col-lg-6" id="nazwaProduktu">
                                         @Html.DisplayFor(i => item.ProductName)
@@ -132,21 +128,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="panelPrzyciskow" class="col-1">
-                            <div>
-                                <a class="button" style="padding-right: 15px" asp-action="AdminEditProduct" asp-route-id="@item.ProductId"><img class="editBtnImg" src="~/img/pen.png"></a>
-                                <button class="button" onclick="showDeleteModal(@item.ProductId);"><img class="addBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>
-                            </div>
-                            <div style="clear:both"></div>
+                        <div class="cent acent col-1">
+                            <a class="button" style="padding-right: 15px" asp-action="AdminEditProduct" asp-route-id="@item.ProductId"><img class="editBtnImg" src="~/img/pen.png"></a>
+                            <button class="button" onclick="showDeleteModal(@item.ProductId);"><img class="addBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>                           
                         </div>
-
                     </div>
                 }
             </div>
         }
         else
         {
-            <div style="display: flex; justify-content: center; margin-top: 75px">
+            <div id="productNotFound">
                 Nie znaleziono produktów
             </div>
         }
