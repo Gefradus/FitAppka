@@ -30,6 +30,10 @@
     width: 100%;
 }
 
+.w225{
+    width: 225px
+}
+
 #srcPan {
     position: fixed;
     width: 100%;
@@ -41,6 +45,3 @@
     border-bottom: 1px solid #ebe7e7;
 }
 
-#searchInput{
-    width: 225px;
-}

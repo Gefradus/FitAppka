@@ -35,23 +35,28 @@
 
         <nav class="navbar navbar-expand-md mb-3 container-fluid" id="srcPan">
             <div class="row no-gutters" id="navSearch">
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-4 cent">
                     <div>
-                        @using (Html.BeginForm("Search", "Product", FormMethod.Get))
-                        {
+                        <form method="GET">
                             @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                            @Html.TextBox("search", "", new { placeholder="Szukaj produktu w bazie", @class="form-control valid", @data_val="true", @data_val_required="Należy wpisać nazwę produktu", @id="searchInput" })
+                            @Html.TextBox("search", "", new { placeholder="Szukaj produktu w bazie", @class="form-control valid w225", @data_val="true", @data_val_required="Należy wpisać nazwę produktu" })
                             @Html.Hidden("inWhich", ViewData["inWhich"])
                             @Html.Hidden("dayID", ViewData["dayID"])
-                        }
+                        </form>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-4 cent">
                     <div>
-                        <a class="btn btn-outline-dark" id="addProduct" asp-action="Create" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-isAdmin="0">
+                        <a class="btn btn-outline-dark w225" id="addProduct" asp-action="Create" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-isAdmin="0">
                             Dodaj nowy produkt
                         </a>
                     </div>
+                </div>
+                <div class="col-12 col-md-4 cent">
+                    <form method="GET">
+                        <button type="submit" class="btn btn-outline-dark w225">Pokaż moje produkty</button>
+                        @Html.Hidden("onlyUserItem", true)
+                    </form>
                 </div>
             </div>
         </nav>

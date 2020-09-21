@@ -6,6 +6,7 @@ using FitAppka.Models;
 using Microsoft.AspNetCore.Authorization;
 using FitAppka.Repository;
 using FitAppka.Service;
+using System.Collections.Generic;
 
 namespace FitAppka.Controllers
 {
@@ -24,12 +25,20 @@ namespace FitAppka.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Search(string search, int inWhich, int dayID) 
-        {
-            SearchProductViewData(search, inWhich, dayID);
-            return View(await _context.Product.Where(p => p.ProductName.Contains(search)).ToListAsync());
-        }
+        // [HttpGet]
+        // public async Task<IActionResult> Search(string search, int inWhich, int dayID, bool onlyUserItem) 
+        // {
+        //     SearchProductViewData(search, inWhich, dayID);
+        //     return View(FindProducts(search, onlyUserItem));
+        // }
+
+        // private List<Product> FindProducts(string search, bool onlyUserItem){
+        //     List<Product> products = _context.Product.Where(p => p.ProductName.Contains(search)).ToListAsync();
+        //     if(onlyUserItem){
+        //         return products.Where(p => p.ClientId == _clientRepository.GetLoggedInClientId());
+        //     }
+        //     return products;
+        // }
 
         [HttpGet]
         public async Task<IActionResult> Search2(string search, int inWhich, int dayID)
@@ -57,7 +66,7 @@ namespace FitAppka.Controllers
                     return RedirectToAction("AdminProduct", "Admin");
                 } 
                 else {
-                    return RedirectToAction(nameof(Search), new { dayID, inWhich, clientID });
+                    return RedirectToAction(nameof(Search2), new { dayID, inWhich, clientID });
                 }
             }
 
