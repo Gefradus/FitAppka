@@ -26,11 +26,10 @@ namespace FitAppka.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Search(string search, int inWhich, int dayID)
+        public async Task<IActionResult> Search(string search, int inWhich, int dayID, bool onlyUserItem)
         {
             SearchProductViewData(search, inWhich, dayID);
-            
-            return View(await _productManageService.SearchProduct(search));
+            return View(await _productManageService.SearchProduct(search, onlyUserItem));
         }
 
 

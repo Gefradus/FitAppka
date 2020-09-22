@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using FitAppka.Models;
 using FitAppka.Repository;
@@ -7,7 +6,6 @@ using FitAppka.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace FitAppka.Controllers
 {
@@ -59,7 +57,7 @@ namespace FitAppka.Controllers
         public async Task<IActionResult> AdminProduct(string search)
         {
             if (_clientRepository.IsLoggedInClientAdmin()) {
-                return View(await _productManageService.SearchProduct(search));
+                return View(await _productManageService.SearchProduct(search, false));
             }
             else {
                 return RedirectToAction("Logout", "Login");

@@ -9,10 +9,12 @@ namespace FitAppka.Repository.RepIfaceImpl
     public class SQLProductRepository : IProductRepository
     {
         private readonly FitAppContext _context;
+        private readonly IClientRepository _clientRepository;
 
-        public SQLProductRepository(FitAppContext context)
+        public SQLProductRepository(FitAppContext context, IClientRepository clientRepository)
         {
             _context = context;
+            _clientRepository = clientRepository;
         }
 
         public Product Add(Product product)
@@ -50,6 +52,11 @@ namespace FitAppka.Repository.RepIfaceImpl
         public async Task<List<Product>> SearchProducts(string search)
         {
             return await _context.Product.Where(p => p.ProductName.Contains(search) || string.IsNullOrEmpty(search)).ToListAsync();
+        }
+
+        public async Task<List<Product>> GetLoggedInClientProducts()
+        {
+            return await _context.Product.Where(p => p.ClientId == _clientRepository.GetLoggedInClientId()).ToListAsync();
         }
 
         public Product GetProduct(int id)

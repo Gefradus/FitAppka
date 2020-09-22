@@ -8,6 +8,7 @@ namespace FitAppka.Models
     {
         public int ProductId { get; set; }
 
+
         [Required(ErrorMessage = "Podaj nazwę produktu")]
         [MaxLength(25, ErrorMessage = "Maksymalna długość nazwy to 25 znaków")]
         public string ProductName { get; set; }

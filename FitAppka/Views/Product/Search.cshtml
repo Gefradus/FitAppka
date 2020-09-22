@@ -39,7 +39,6 @@
                 <div class="col-6 col-md-4 cent">
                     <div>
                         <form method="get" class="flex">
-                            <input type="hidden" value="@false" name="onlyUserItem">
                             <input type="hidden" value="@ViewData["inWhich"]" name="inWhich">
                             <input type="hidden" value="@ViewData["dayID"]" name="dayID">
                             @Html.TextBox("search", "", new { placeholder = "Szukaj produktu", @class = "form-control", @id = "searchInput" })
@@ -49,7 +48,8 @@
                 </div>
                 <div class="col-6 col-md-4 cent">
                     <form method="get">
-                        <input type="hidden" value="@false" name="onlyUserItem">
+                        <input type="hidden" value="true" name="onlyUserItem">
+                        @Html.Hidden("onlyUserItem", true)
                         <input type="hidden" value="@ViewData["inWhich"]" name="inWhich">
                         <input type="hidden" value="@ViewData["dayID"]" name="dayID">
                         <button type="submit" id="showMyProducts" class="btn btn-dark">Pokaż moje produkty</button>

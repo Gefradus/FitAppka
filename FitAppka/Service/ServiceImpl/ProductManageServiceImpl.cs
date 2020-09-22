@@ -85,9 +85,9 @@ namespace FitAppka.Service.ServiceImpl
             return uniqueFileName;
         }
 
-        public async Task<List<ProductDTO>> SearchProduct(string search)
+        public async Task<List<ProductDTO>> SearchProduct(string search, bool onlyUserItem)
         {
-            Task<List<Product>> products = _productRepository.SearchProducts(search);
+            Task<List<Product>> products = onlyUserItem ? _productRepository.GetLoggedInClientProducts() : _productRepository.SearchProducts(search);
             return await _mapper.Map<Task<List<Product>>, Task<List<ProductDTO>>>(products);
         }
 

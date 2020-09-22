@@ -12,6 +12,6 @@ namespace FitAppka.Service
         public void UpdateProduct(ProductDTO model, int id, int addOrEditPhoto);
         Product GetProduct(int id);
         Product Delete(int id);
-        Task<List<ProductDTO>> SearchProduct(string search);
+        Task<List<ProductDTO>> SearchProduct(string search, bool onlyUserItem);
     }
 }
