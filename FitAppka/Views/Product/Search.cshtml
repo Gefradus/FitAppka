@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FitAppka.Models.Product>
+﻿@model IEnumerable<FitAppka.Models.ProductDTO>
 
 <html>
 <head>
@@ -36,7 +36,7 @@
 
         <nav class="navbar navbar-expand-md mb-3 container-fluid navbar-fixed-top" id="srcPan">
             <div class="row no-gutters" id="navSearch">
-                <div class="col-12 col-md-4 cent">
+                <div class="col-6 col-md-4 cent">
                     <div>
                         <form method="get" class="flex">
                             <input type="hidden" value="@false" name="onlyUserItem">
@@ -47,7 +47,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 cent">
+                <div class="col-6 col-md-4 cent">
                     <form method="get">
                         <input type="hidden" value="@false" name="onlyUserItem">
                         <input type="hidden" value="@ViewData["inWhich"]" name="inWhich">
@@ -55,10 +55,10 @@
                         <button type="submit" id="showMyProducts" class="btn btn-dark">Pokaż moje produkty</button>
                     </form>
                 </div>
-                <div class="col-12 col-md-4 cent">
+                <div class="d-none d-md-flex col-md-4 cent">
                     <div>
                         <a class="btn btn-dark" id="addProduct" asp-action="Create" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-isAdmin="0">
-                            Dodaj nowy produkt <img src="~/img/add.png" id="addIcon" />
+                            Dodaj nowy produkt <img src="~/img/add.png" class="addIcon" />
                         </a>
                     </div>
                 </div>
@@ -196,10 +196,23 @@
         </div>
 
         @if ((bool)ViewData["wereSearched"] && Model.Count().Equals(0)) {
-            <div style="display: flex; justify-content: center; margin-top: 25px">
+            <div class="cent" style="margin-top: 25px">
                 Nie znaleziono produktów
             </div>
         }
     </div>
+    <nav class="navbar navbar-light border-top box-shadow mb d-md-none" id="footerNav">
+        <div class="container" style="padding:0;">
+            <div class="row no-gutters w-100">
+                <div class="col-12 cent">
+                    <div class="w-100 cent">
+                        <a class="btn btn-dark addProductFooter" asp-action="Create" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-isAdmin="0">
+                            Dodaj nowy produkt <img src="~/img/add.png" class="addIcon" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 </body>
 </html>

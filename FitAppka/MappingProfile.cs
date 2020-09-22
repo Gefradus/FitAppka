@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using FitAppka.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FitAppka
 {
@@ -28,7 +30,8 @@ namespace FitAppka
                 .ForMember(p => p.Client, opt => opt.MapFrom(p => p.Client))
                 .ForMember(p => p.VisibleToAll, opt => opt.MapFrom(p => p.VisibleToAll))
                 .ForAllOtherMembers(opt => opt.Ignore());
-                
+
+            CreateMap<Task<List<Product>>, Task<List<ProductDTO>>>();
         }
     }
 }

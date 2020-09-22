@@ -14,6 +14,8 @@ namespace FitAppka.Models
 
         public IFormFile Photo { get; set; }
 
+        public string PhotoPath { get; set; }
+
         [Required(ErrorMessage = "Podaj kaloryczność w 100g")]
         [Range(0, 900, ErrorMessage = "Ilość kcal musi wynosić max. 900")]
         public double? Calories { get; set; }

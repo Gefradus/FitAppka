@@ -3,7 +3,10 @@ using FitAppka.Models;
 using FitAppka.Repository;
 using Microsoft.AspNetCore.Hosting;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FitAppka.Service.ServiceImpl
 {
@@ -80,6 +83,12 @@ namespace FitAppka.Service.ServiceImpl
                 productDTO.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
             }
             return uniqueFileName;
+        }
+
+        public async Task<List<ProductDTO>> SearchProduct(string search)
+        {
+            Task<List<Product>> products = _productRepository.SearchProducts(search);
+            return await _mapper.Map<Task<List<Product>>, Task<List<ProductDTO>>>(products);
         }
 
         public void CreateProductFromModel(ProductDTO productDTO)

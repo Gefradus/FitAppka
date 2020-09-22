@@ -24,26 +24,13 @@ namespace FitAppka.Controllers
             _context = context;
         }
 
-        // [HttpGet]
-        // public async Task<IActionResult> Search(string search, int inWhich, int dayID, bool onlyUserItem) 
-        // {
-        //     SearchProductViewData(search, inWhich, dayID);
-        //     return View(FindProducts(search, onlyUserItem));
-        // }
-
-        // private List<Product> FindProducts(string search, bool onlyUserItem){
-        //     List<Product> products = _context.Product.Where(p => p.ProductName.Contains(search)).ToListAsync();
-        //     if(onlyUserItem){
-        //         return products.Where(p => p.ClientId == _clientRepository.GetLoggedInClientId());
-        //     }
-        //     return products;
-        // }
 
         [HttpGet]
         public async Task<IActionResult> Search(string search, int inWhich, int dayID)
         {
             SearchProductViewData(search, inWhich, dayID);
-            return View(await _context.Product.Where(p => p.ProductName.Contains(search) || string.IsNullOrEmpty(search)).ToListAsync());
+            
+            return View(await _productManageService.SearchProduct(search));
         }
 
 

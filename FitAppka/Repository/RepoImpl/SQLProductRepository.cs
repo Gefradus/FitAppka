@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FitAppka.Repository.RepIfaceImpl
 {
@@ -44,6 +45,11 @@ namespace FitAppka.Repository.RepIfaceImpl
         public IEnumerable<Product> GetAllProducts()
         {
             return _context.Product.ToList();
+        }
+
+        public async Task<List<Product>> SearchProducts(string search)
+        {
+            return await _context.Product.Where(p => p.ProductName.Contains(search) || string.IsNullOrEmpty(search)).ToListAsync();
         }
 
         public Product GetProduct(int id)
