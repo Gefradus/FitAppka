@@ -42,7 +42,7 @@
 }
 
 .navbar-fixed-top.scrolled {
-    background: rgba(44, 44, 44, 0.975) !important;
+    background: rgba(44, 44, 44, 0.94) !important;
     transition: background 350ms linear;
 }
 
@@ -178,7 +178,8 @@
     height: 60px;
     bottom: 0px;
     left: 0px;
-    background-color: whitesmoke
+    background-color: whitesmoke;
+    border: 1px solid darkgray !important;
 }
 
 @media(max-width: 991px) {
