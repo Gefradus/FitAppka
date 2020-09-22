@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using FitAppka.Models;
 using Microsoft.AspNetCore.Authorization;
 using FitAppka.Repository;
@@ -46,7 +44,8 @@ namespace FitAppka.Controllers
             if (ModelState.IsValid)
             {     
                 _productManageService.CreateProductFromModel(model);
-                
+
+
                 if(isAdmin == 1) {
                     return RedirectToAction("AdminProduct", "Admin");
                 } 
@@ -61,12 +60,10 @@ namespace FitAppka.Controllers
 
         private void SearchProductViewData(string search, int inWhich, int dayID)
         {
-            ViewData["wereSearched"] = false;
-            if (search != null) { ViewData["wereSearched"] = true; }
-
             ViewData["dayID"] = dayID;
             ViewData["inWhich"] = inWhich;
             ViewData["search"] = search;
+            ViewData["wereSearched"] = search != null;
             ViewData["day"] = _productManageService.DayPattern(dayID);
             ViewData["meal"] = _productManageService.MealName(inWhich);
         }
