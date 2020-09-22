@@ -45,9 +45,10 @@ function searchDay(searchType, htmlUrl) {
 }
 
 function onload() {
-    transparentWhenScrollDown();
-    $('#normalDropDown').chosen({ search_contains: true });
+    colorEverySecondRow();
     restoreState();
+    $('#normalDropDown').chosen({ search_contains: true });
+    transparentWhenScrollDown();  
 }
 
 function restore(searchType) {
@@ -62,14 +63,5 @@ function restore(searchType) {
         select.value = '3';
         hideEverything();
         document.getElementById("waterConsumption").hidden = false;
-    }
-}
-
-function colorEverySecondRow() {
-    var daysRows = document.getElementsByClassName("dayRow");
-    for (var i = 0; i < daysRows.length; i++) {
-        if (i % 2 == 0) {
-            daysRows[i].style.backgroundColor = "rgb(224, 221, 221)";
-        }
     }
 }

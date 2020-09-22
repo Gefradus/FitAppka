@@ -100,7 +100,7 @@
 }
 
 .navsearch, #navMain {
-    background: rgba(245, 245, 245, 0.1);
+    background: rgba(245, 245, 245, 0.2);
     backdrop-filter: blur(1px);
 }
 
