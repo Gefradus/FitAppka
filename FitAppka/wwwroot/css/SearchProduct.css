@@ -42,7 +42,7 @@
 }
 
 .navbar-fixed-top.scrolled {
-    background: rgba(55, 55, 55, 0.97) !important;
+    background: rgba(46, 46, 46, 0.97) !important;
     transition: background 350ms linear;
 }
 
@@ -74,10 +74,11 @@
     margin-left: 4px
 }
 
-.addProduct {
+#addProduct {
     width: 225px;
-    background-color: #444b53;
+    background-color: #1f1f1f;
     height: 38px;
+    border: 1px solid #6b6a6a !important
 }
 
 .addProductFooter {
