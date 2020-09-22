@@ -7,7 +7,7 @@ namespace FitAppka.Service
     {
         public void EditMeal(int id, int grammage);
         public void DeleteMeal(int id);
-        public void AddMeal(int inWhich, int dayID, int grammage, int productID);
+        public DateTime AddMeal(int inWhich, int dayID, int grammage, int productID);
         public void AddWater(int dayID, int addedWater);
         public void EditWater(int dayID, int editedWater);
         public bool IsItFirstLaunch();

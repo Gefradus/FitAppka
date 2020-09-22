@@ -102,8 +102,8 @@ namespace NowyDotnecik.Controllers
         [HttpPost]
         public JsonResult Meal(int atWhichMealOfTheDay, int dayID, int grammage, int productID)
         {
-            _homeService.AddMeal(atWhichMealOfTheDay, dayID, grammage, productID);
-            return Json(true);
+            DateTime daySelected = _homeService.AddMeal(atWhichMealOfTheDay, dayID, grammage, productID);
+            return Json(new { redirectToUrl = Url.Action("Start","Home", new { daySelected }) });
         }
 
         [HttpPut]

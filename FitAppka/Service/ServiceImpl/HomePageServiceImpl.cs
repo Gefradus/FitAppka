@@ -122,8 +122,9 @@ namespace FitAppka.Service.ServicesImpl
             }
         }
 
-        public void AddMeal(int inWhich, int dayID, int grammage, int productID)
+        public DateTime AddMeal(int inWhich, int dayID, int grammage, int productID)
         {
+            DateTime dateTime = _dayRepository.GetDayDateTime(dayID);
             if (_dayRepository.GetDay(dayID).ClientId == _clientRepository.GetLoggedInClientId())
             {
                 Meal meal = new Meal()
@@ -134,9 +135,10 @@ namespace FitAppka.Service.ServicesImpl
                     DayId = dayID,
                 };
 
-                SetTheMeal(meal, _dayRepository.GetDayDateTime(dayID));
+                SetTheMeal(meal, dateTime);
                 _mealRepository.Add(meal);
             }
+            return dateTime;
         }
 
         public decimal CountCalories(int whichMeal, DateTime daySelected)

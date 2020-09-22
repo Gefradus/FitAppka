@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models;
+using FitAppka.Service;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,8 @@ namespace FitAppka.Repository.RepIfaceImpl
 
         public async Task<List<Product>> SearchProducts(string search)
         {
-            return await _context.Product.Where(p => p.ProductName.Contains(search) || string.IsNullOrEmpty(search)).ToListAsync();
+            return await _context.Product.Where(p => (p.ProductName.Contains(search) || string.IsNullOrEmpty(search)) 
+                && (p.ClientId == _clientRepository.GetLoggedInClientId() || _clientRepository.IsLoggedInClientAdmin())).ToListAsync();
         }
 
         public async Task<List<Product>> GetLoggedInClientProducts()

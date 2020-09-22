@@ -43,8 +43,8 @@ function ajaxAddStrengthTrainingTypePost(url, dayID, name, sets, reps, weight) {
             reps: parseInt(reps),
             weight: parseInt(weight)
         },
-        success: function () {
-            location.reload();
+        success: function (response) {
+            window.location.href = response.redirectToUrl;
         }
     });
 }

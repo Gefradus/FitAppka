@@ -51,8 +51,8 @@ function addMealAjax(url, grammage) {
             dayID: $("#dayId").val(),
             atWhichMealOfTheDay: $("#atWhichMealOfTheDay").val()
         },
-        success: function () {
-            location.reload();
+        success: function (response) {
+            window.location.href = response.redirectToUrl;
         }
     });
 }
