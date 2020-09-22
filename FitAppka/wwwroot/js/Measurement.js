@@ -4,6 +4,15 @@ function showModalAddMeasurement(){
     document.getElementById("modal-title").innerHTML = "Tworzenie pomiaru";
 }
 
+function colorEverySecondRow() {
+    var rows = document.getElementsByClassName("rowM");
+    for (var i = 0; i < rows.length; i++) {
+        if (i % 2 == 1) {
+            rows[i].style.backgroundColor = "rgb(238 238 238)";
+        }
+    }
+}
+
 function showEditMeasurementModal(id, weight, waist){
     showModal(false);
     fillModalFields(id, weight, waist);

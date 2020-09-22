@@ -100,9 +100,9 @@ namespace NowyDotnecik.Controllers
         }
 
         [HttpPost]
-        public JsonResult Meal(int inWhich, int dayID, int grammage, int productID)
+        public JsonResult Meal(int atWhichMealOfTheDay, int dayID, int grammage, int productID)
         {
-            _homeService.AddMeal(inWhich, dayID, grammage, productID);
+            _homeService.AddMeal(atWhichMealOfTheDay, dayID, grammage, productID);
             return Json(true);
         }
 

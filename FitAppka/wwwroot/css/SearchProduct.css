@@ -12,6 +12,11 @@
     left: calc(50% - 62px)
 }
 
+#addMeal{
+    background: none;
+    border: none;
+}
+
 #mealName {
     margin-top: 4px;
     font-weight: 600;

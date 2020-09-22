@@ -7,16 +7,6 @@
     <script src="~/js/Validation.js"></script>
     <script src="~/js/Measurement.js"></script>
     <link href="~/css/Tooltip.css" rel="stylesheet" />
-    <script>
-        function colorEverySecondRow() {
-            var rows = document.getElementsByClassName("rowM");
-            for (var i = 0; i < rows.length; i++) {
-                if (i % 2 == 1) {
-                    rows[i].style.backgroundColor = "rgb(238 238 238)";
-                }
-            }
-        }
-    </script>
 </head>
 <body onload="colorEverySecondRow()">
     <div class="modal fade" tabindex="-1" id="addOrEditModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">

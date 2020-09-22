@@ -11,6 +11,10 @@
     <script src="~/js/SearchProduct.js"></script>
 </head>
 <body onload="onload()">
+    <input id="productId" type="hidden" />
+    <input id="dayId" type="hidden" value="@ViewData["dayID"]">
+    <input id="atWhichMealOfTheDay" type="hidden" value="@ViewData["inWhich"]"> 
+
     <header>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 blackNav">
             <div>
@@ -84,7 +88,7 @@
                                         <div class="row no-gutters cent" style="width: 170px; font-size: 13px; margin-left: 7px">
                                             <div id="proteins"></div>
                                             <div id="fats"></div>
-                                            <div id="wegle"></div>
+                                            <div id="carbs"></div>
                                         </div>
                                         <div class="row no-gutters cent" style="font-size: 13px; font-weight: 600">/100g</div>
                                     </div>
@@ -95,7 +99,7 @@
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 10px;">
                                 <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center" /><div style="font-weight: 600; margin-top: 2px">g</div>
-                                <button id="addProduct"><img style="height:30px; width: 30px" src="~/img/add.png"></button>
+                                <button id="addMeal" onclick="addMeal('@Url.Action("Meal", "Home")')"><img style="height:30px; width: 30px" src="~/img/add.png"></button>
                             </div>
                         </div>
                     </div>
@@ -151,11 +155,13 @@
                             <div class="row no-gutters">
                                 <div class="d-none d-md-inline-block col-md-5 col-lg-6">
                                     @{ string photoPath;
-                                        if (item.PhotoPath != null) {
+                                        if (item.PhotoPath != null)
+                                        {
                                             photoPath = "~/photos/" + (item.PhotoPath);
                                             <script>pathArray.push('@item.PhotoPath');</script>
                                         }
-                                        else {
+                                        else
+                                        {
                                             photoPath = "~/img/miss.png";
                                             <script>pathArray.push('null');</script>
                                         }
@@ -194,7 +200,8 @@
             }
         </div>
 
-        @if ((bool)ViewData["wereSearched"] && Model.Count().Equals(0)) {
+        @if ((bool)ViewData["wereSearched"] && Model.Count().Equals(0))
+        {
             <div class="cent" style="margin-top: 25px">
                 Nie znaleziono produktów
             </div>
