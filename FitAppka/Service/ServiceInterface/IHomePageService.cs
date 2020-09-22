@@ -13,7 +13,7 @@ namespace FitAppka.Service
         public bool IsItFirstLaunch();
         public int CountPercentageOfTarget(double var, double target);
         public decimal Round(double number);
-        public decimal CountCalories(int whichMeal, DateTime daySelected, int clientID);
+        public decimal CountCalories(int whichMeal, DateTime daySelected);
         public double SumAllListItems(List<double> list);
         public double SumAllKcalInDay(DateTime daySelected);
         public double SumAllProteinsInDay(DateTime daySelected);

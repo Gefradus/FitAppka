@@ -171,13 +171,12 @@ namespace NowyDotnecik.Controllers
 
         private void SendInfoAboutCaloriesInMeals(DateTime daySelected)
         {
-            int clientID = _clientRepository.GetLoggedInClientId();
-            ViewData["breakfastKcal"] = _homeService.CountCalories(1, daySelected, clientID);
-            ViewData["lunchKcal"] = _homeService.CountCalories(2, daySelected, clientID);
-            ViewData["dinnerKcal"] = _homeService.CountCalories(3, daySelected, clientID);
-            ViewData["dessertKcal"] = _homeService.CountCalories(4, daySelected, clientID);
-            ViewData["snackKcal"] = _homeService.CountCalories(5, daySelected, clientID);
-            ViewData["supperKcal"] = _homeService.CountCalories(6, daySelected, clientID);
+            ViewData["breakfastKcal"] = _homeService.CountCalories(1, daySelected);
+            ViewData["lunchKcal"] = _homeService.CountCalories(2, daySelected);
+            ViewData["dinnerKcal"] = _homeService.CountCalories(3, daySelected);
+            ViewData["dessertKcal"] = _homeService.CountCalories(4, daySelected);
+            ViewData["snackKcal"] = _homeService.CountCalories(5, daySelected);
+            ViewData["supperKcal"] = _homeService.CountCalories(6, daySelected);
         }
 
         private void SendInfoIfIsAdminClient()

@@ -44,14 +44,7 @@ namespace FitAppka.Controllers
             if (ModelState.IsValid)
             {     
                 _productManageService.CreateProductFromModel(model);
-
-
-                if(isAdmin == 1) {
-                    return RedirectToAction("AdminProduct", "Admin");
-                } 
-                else {
-                    return RedirectToAction(nameof(Search), new { dayID, inWhich, clientID });
-                }
+                return (isAdmin == 1 ? RedirectToAction("AdminProduct", "Admin") : RedirectToAction(nameof(Search), new { dayID, inWhich, clientID }));
             }
 
             CreateProductViewData(inWhich, dayID, isAdmin);

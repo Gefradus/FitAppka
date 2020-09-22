@@ -31,7 +31,7 @@ namespace FitAppka
                 .ForMember(p => p.VisibleToAll, opt => opt.MapFrom(p => p.VisibleToAll))
                 .ForAllOtherMembers(opt => opt.Ignore());
 
-            CreateMap<Task<List<Product>>, Task<List<SearchProductDTO>>>();
+            CreateMap<Task<List<Product>>, Task<List<ProductDTO>>>();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FitAppka.Models;
+using FitAppka.Models.Enum;
 using FitAppka.Repository;
 using Microsoft.AspNetCore.Hosting;
 using System;
@@ -29,45 +30,27 @@ namespace FitAppka.Service.ServiceImpl
             _dayRepository = dayRepository;
         }
 
-        public string MealName(int inWhichMeal)
+        public string MealName(int atWhichMealOfTheDay)
         {
-            if (inWhichMeal == 1) { return "Śniadanie"; }
-            if (inWhichMeal == 2) { return "II śniadanie"; }
-            if (inWhichMeal == 3) { return "Obiad"; }
-            if (inWhichMeal == 4) { return "Deser"; }
-            if (inWhichMeal == 5) { return "Przekąska"; }
-            return "Kolacja";
+            return ((MealOfTheDay)atWhichMealOfTheDay).ToString().Replace("_"," ");
         }
 
         public string DayPattern(int dayID)
         {
             DateTime daySelected = _dayRepository.GetDayDateTime(dayID);
-            string month = "";
+            DateTime today = DateTime.Now.Date;
 
-            if (daySelected.Month == 1) { month = "sty"; }
-            if (daySelected.Month == 2) { month = "lut"; }
-            if (daySelected.Month == 3) { month = "mar"; }
-            if (daySelected.Month == 4) { month = "kwi"; }
-            if (daySelected.Month == 5) { month = "maj"; }
-            if (daySelected.Month == 6) { month = "czer"; }
-            if (daySelected.Month == 7) { month = "lip"; }
-            if (daySelected.Month == 8) { month = "sie"; }
-            if (daySelected.Month == 9) { month = "wrz"; }
-            if (daySelected.Month == 10) { month = "paź"; }
-            if (daySelected.Month == 11) { month = "lis"; }
-            if (daySelected.Month == 12) { month = "gru"; }
-
-            if (daySelected == DateTime.Now.Date) {
+            if (daySelected == today) {
                 return "Dzisiaj";
             }
-            else if (daySelected == DateTime.Now.Date.AddDays(-1)) {
+            else if (daySelected == today.AddDays(-1)) {
                 return "Wczoraj";
             }
-            else if (daySelected == DateTime.Now.Date.AddDays(1)) {
+            else if (daySelected == today.AddDays(1)) {
                 return "Jutro";
             }
             else {
-                return daySelected.Day + " " + month;
+                return daySelected.Day + " " + (MonthEnum)daySelected.Month;
             } 
         }
 
@@ -86,8 +69,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public async Task<List<ProductDTO>> SearchProduct(string search, bool onlyUserItem)
         {
-            Task<List<Product>> products = onlyUserItem ? _productRepository.GetLoggedInClientProducts() : _productRepository.SearchProducts(search);
-            return await _mapper.Map<Task<List<Product>>, Task<List<ProductDTO>>>(products);
+            return await _mapper.Map<Task<List<Product>>, Task<List<ProductDTO>>>(onlyUserItem ? _productRepository.GetLoggedInClientProducts() : _productRepository.SearchProducts(search));
         }
 
         public void CreateProductFromModel(ProductDTO productDTO)

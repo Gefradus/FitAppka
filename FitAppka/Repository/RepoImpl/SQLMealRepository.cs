@@ -38,6 +38,11 @@ namespace FitAppka.Repository.RepIfaceImpl
             return _context.Meal.ToList();
         }
 
+        public IEnumerable<Meal> GetMealsOfTheDay(int dayId, int whichMealOfTheDay)
+        {
+            return _context.Meal.Where(m => m.DayId == dayId && m.InWhichMealOfTheDay == whichMealOfTheDay);
+        }
+
         public Meal GetMeal(int id)
         {
             return _context.Meal.Find(id);

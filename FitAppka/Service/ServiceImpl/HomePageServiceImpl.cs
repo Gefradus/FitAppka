@@ -1,11 +1,12 @@
 ﻿using FitAppka.Models;
+using FitAppka.Models.Enum;
 using FitAppka.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace FitAppka.Service.ServicesImpl
-{
+{ 
     public class HomePageServiceImpl : IHomePageService
     {
         private readonly IClientRepository _clientRepository;
@@ -14,12 +15,10 @@ namespace FitAppka.Service.ServicesImpl
         private readonly IMealRepository _mealRepository;
         private readonly IProductRepository _productRepository;
         private readonly IGoalsRepository _goalsRepository;
-        private readonly FitAppContext _context;
 
         public HomePageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository, IDayManageService dayManageService,
-            IMealRepository mealRepository, IProductRepository productRepository, IGoalsRepository goalsRepository, FitAppContext context)
+            IMealRepository mealRepository, IProductRepository productRepository, IGoalsRepository goalsRepository)
         {
-            _context = context;
             _productRepository = productRepository;
             _mealRepository = mealRepository;
             _dayRepository = dayRepository;
@@ -30,44 +29,23 @@ namespace FitAppka.Service.ServicesImpl
 
         public string DateFormat(DateTime daySelected)
         {
-            int dayOfWeek = (int)daySelected.DayOfWeek;
-            string day = "";
-            string month = "";
+            string day = ((DayOfWeekEnum)daySelected.DayOfWeek).ToString();
+            var today = DateTime.Now.Date;
 
-            if (dayOfWeek == 0) { day = "Niedziela, "; }
-            if (dayOfWeek == 1) { day = "Poniedziałek, "; }
-            if (dayOfWeek == 2) { day = "Wtorek, "; }
-            if (dayOfWeek == 3) { day = "Środa, "; }
-            if (dayOfWeek == 4) { day = "Czwartek, "; }
-            if (dayOfWeek == 5) { day = "Piątek, "; }
-            if (dayOfWeek == 6) { day = "Sobota, "; }
-            if (daySelected.Month == 1) { month = "sty, "; }
-            if (daySelected.Month == 2) { month = "lut, "; }
-            if (daySelected.Month == 3) { month = "mar, "; }
-            if (daySelected.Month == 4) { month = "kwi, "; }
-            if (daySelected.Month == 5) { month = "maj, "; }
-            if (daySelected.Month == 6) { month = "czer, "; }
-            if (daySelected.Month == 7) { month = "lip, "; }
-            if (daySelected.Month == 8) { month = "sie, "; }
-            if (daySelected.Month == 9) { month = "wrz, "; }
-            if (daySelected.Month == 10) { month = "paź, "; }
-            if (daySelected.Month == 11) { month = "lis, "; }
-            if (daySelected.Month == 12) { month = "gru, "; }
-            if (daySelected == DateTime.Now.Date) { day = "Dzisiaj, "; }
-            if (daySelected == DateTime.Now.Date.AddDays(-1)) { day = "Wczoraj, "; }
-            if (daySelected == DateTime.Now.Date.AddDays(1)) { day = "Jutro, "; }
+            if (daySelected == today) { day = "Dzisiaj"; }
+            if (daySelected == today.AddDays(-1)) { day = "Wczoraj"; }
+            if (daySelected == today.AddDays(1)) { day = "Jutro"; }
 
-            return day + daySelected.Day + " " + month + daySelected.Year;
+            return day + ", " + daySelected.Day + " " + (MonthEnum)daySelected.Month + " " + daySelected.Year;
         }
-
 
         public bool IsItFirstLaunch() 
         {
             return _goalsRepository.GetClientGoals(_clientRepository.GetLoggedInClientId()) == null;
         }
 
-        private IQueryable<Meal> GetMealsOfTheDay(DateTime dayDate){
-            return _context.Meal.Where(m => m.Day.ClientId == _clientRepository.GetLoggedInClientId() && m.Day.Date == dayDate);
+        private List<Meal> GetMealsOfTheDay(DateTime dayDate) {
+            return _mealRepository.GetAllMeals().Where(m => m.DayId == _dayManageService.GetDayIDByDate(dayDate)).ToList();
         }
 
         public double SumAllKcalInDay(DateTime daySelected){
@@ -161,10 +139,10 @@ namespace FitAppka.Service.ServicesImpl
             }
         }
 
-        public decimal CountCalories(int whichMeal, DateTime daySelected, int clientID)
+        public decimal CountCalories(int whichMeal, DateTime daySelected)
         {
             _dayManageService.AddDayIfNotExists(daySelected);
-            var meals = _context.Meal.Where(m => m.InWhichMealOfTheDay == whichMeal && m.Day.ClientId == clientID && m.Day.Date == daySelected);
+            var meals = _mealRepository.GetMealsOfTheDay(_dayManageService.GetDayIDByDate(daySelected), whichMeal);
             return Round((double) SumAllListItems(meals.Select(m => m.Calories).ToList()));
         }
 
