@@ -287,7 +287,7 @@
                         <div class="naglowek" style="margin-bottom: 10px">Zdjęcie produktu</div>
                         <div style="margin-bottom: 15px; padding-top: 15px; border-top: 1px solid #cacaca">
                             @{
-                                string photoPath = "~/photos/" + ViewData["path"];
+                                string photoPath = "~/photos/" + Model.PhotoPath;
                                 <img style="height: 100px; width: 100px; border: 1px dashed #6b6b6b; margin-bottom: 10px" src="@photoPath" class="img-fluid" asp-append-version="true" />
                             }
                         </div>

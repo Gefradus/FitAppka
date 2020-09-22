@@ -36,7 +36,7 @@
     top: 80px;
     left: 0;
     z-index: 2;
-    background: rgba(44, 44, 44, 0.24);
+    background: rgba(44, 44, 44, 0.6);
     border-bottom: 1px solid #ebe7e7;
     backdrop-filter: blur(1px);
 }
@@ -99,7 +99,7 @@
 }
 
 #showMyProducts {
-    background-color: #464162;
+    background-color: #564e80;
     width: 225px;
     height: 38px
 }
@@ -192,6 +192,12 @@
 
 }
 
+@media(max-width: 520px){
+    #showMyProducts{
+        width:auto
+    }
+}
+
 @media(max-width: 500px) {
     .productName {
         justify-content: left;
@@ -212,6 +218,10 @@
 }
 
 @media(max-width: 450px) {
+    #searchInput{
+        width: 150px;
+    }
+
     .tableRow {
         font-size: 10px;
     }

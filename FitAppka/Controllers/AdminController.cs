@@ -59,12 +59,7 @@ namespace FitAppka.Controllers
         public async Task<IActionResult> AdminProduct(string search)
         {
             if (_clientRepository.IsLoggedInClientAdmin()) {
-                if(search != null) {
-                    return View(await _context.Product.Where(p => p.ProductName.Contains(search)).ToListAsync());
-                } 
-                else {
-                    return View(await _context.Product.ToListAsync());
-                }
+                return View(await _productManageService.SearchProduct(search));
             }
             else {
                 return RedirectToAction("Logout", "Login");
