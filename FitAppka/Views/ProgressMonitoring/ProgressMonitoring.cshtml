@@ -14,25 +14,29 @@
             <div class="col-7">
                 <canvas id="myChart" class="px-2"></canvas>
             </div>
-            <div class="col-5 row no-gutters" style="padding-left: 25px">
-                <div class="col-12">
-                    <div>Pokaż wykres: </div>
-                    <select class="form-control" id="select">
-                        <option value="1">Pomiarów wagi</option>
-                        <option value="2">Spożytych kalorii</option>
-                        <option value="3">Spalonych kalorii</option>
-                    </select>
-                </div>
-                <div class="col-12 col-lg-auto">
-                    <div class="mr-lg-4">
-                        <div>Data od:</div>
-                        <input id="datepickerFrom" class="datepicker" readonly />
+            <div class="col-5 container-fluid" style="padding-left: 25px">
+                <div class="row no-gutters">
+                    <div class="col-12">
+                        <div>Pokaż wykres: </div>
+                        <select class="form-control" id="select">
+                            <option value="1">Pomiarów wagi</option>
+                            <option value="2">Spożytych kalorii</option>
+                            <option value="3">Spalonych kalorii</option>
+                        </select>
                     </div>
                 </div>
-                <div class="col-12 col-lg-auto">
-                    <div>
-                        <div>Data do:</div>
-                        <input id="datepickerTo" class="datepicker" readonly />
+                <div class="row no-gutters mt-5">
+                    <div class="col-12 col-lg-auto">
+                        <div class="mr-lg-4">
+                            <div>Data od:</div>
+                            <input id="datepickerFrom" class="datepicker" readonly />
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-auto">
+                        <div>
+                            <div>Data do:</div>
+                            <input id="datepickerTo" class="datepicker" readonly />
+                        </div>
                     </div>
                 </div>
             </div>
