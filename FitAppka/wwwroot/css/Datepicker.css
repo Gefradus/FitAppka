@@ -1,4 +1,4 @@
-#datepicker {
+.datepicker {
     width: 185px;
     height: 40px;
     padding-right: 15px;
@@ -10,6 +10,6 @@
     border-radius: .25rem;
 }
 
-#datepicker:hover{
+.datepicker:hover{
     cursor: pointer
 }

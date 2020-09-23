@@ -133,7 +133,7 @@
 }
 
 #choice {
-    border-radius: .25rem;
+    height: 27px !important;
     text-align-last: center;
     padding: 2px;
     padding-top: 0;

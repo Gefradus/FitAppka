@@ -112,7 +112,7 @@
 
         <div style="display: flex; margin-bottom: 12px">
             <div id="diary">Dziennik treningowy dla: </div>
-            <input id="datepicker" onchange="changeDay('@Url.Action("ChangeDay", "Training")');" type="text" style="margin-left: 10px; margin-right: 15px; margin-top: 2px; text-align: center" value="@ViewData["day"]" readonly="readonly" />
+            <input id="datepicker" class="datepicker" onchange="changeDay('@Url.Action("ChangeDay", "Training")');" type="text" style="margin-left: 10px; margin-right: 15px; margin-top: 2px; text-align: center" value="@ViewData["day"]" readonly />
         </div>
 
         <div style="display: flex">
@@ -271,27 +271,11 @@
     </div>
 
     <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
-    <script>
-        var $j = jQuery.noConflict();
-        $j("#datepicker").datepicker({
-            minDate: new Date(1900, 0, 0),
-            dateFormat: 'dd.mm.yy',
-            monthNames: ["Styczeń", "Luty", "Marzec", "Kwiecień",
-                "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
-                "Październik", "Listopad", "Grudzień"],
-            monthNamesShort: ["Sty", "Lut", "Mar", "Kwi",
-                "Maj", "Cze", "Lip", "Sie", "Wrz",
-                "Paź", "Lis", "Gru"],
-            dayNames: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
-            dayNamesShort: ['Ndz', 'Pon', 'Wto', 'Śro', 'Czw', 'Pt', 'Sob'],
-            dayNamesMin: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb'],
-            changeYear: true,
-            changeMonth: true
-        });
-    </script>
+    <script src="~/js/Datepicker.js"></script>
     <script src="~/js/Validation.js"></script>
     <script src="~/js/TrainingValidation.js"></script>
     <script src="~/js/TrainingPanel.js"></script>
     <script>setInputsValidation();</script>
+    <script>createDatePicker("#datepicker");</script>
 </body>
 </html>

@@ -5,16 +5,45 @@
     <link href="~/lib/chart.js/Chart.css" rel="stylesheet" />
     <script src="~/lib/chart.js/Chart.js"></script>
     <script src="~/js/ProgressMonitoring.js"></script>
+    <link href="~/css/ProgressMonitoring.css" rel="stylesheet" />
+    <link href="~/css/Datepicker.css" rel="stylesheet" />
 </head>
 <body onload="createChart()">
     <div class="container-fluid">
-        <div class="row no-gutters">
-            <div class="col-12">
-                <canvas id="myChart" width="400" height="400"></canvas>
+        <div class="row no-gutters mt-5">
+            <div class="col-7">
+                <canvas id="myChart" class="px-2"></canvas>
+            </div>
+            <div class="col-5 row no-gutters" style="padding-left: 25px">
+                <div class="col-12">
+                    <div>Pokaż wykres: </div>
+                    <select class="form-control" id="select">
+                        <option value="1">Pomiarów wagi</option>
+                        <option value="2">Spożytych kalorii</option>
+                        <option value="3">Spalonych kalorii</option>
+                    </select>
+                </div>
+                <div class="col-12 col-lg-auto">
+                    <div class="mr-lg-4">
+                        <div>Data od:</div>
+                        <input id="datepickerFrom" class="datepicker" readonly />
+                    </div>
+                </div>
+                <div class="col-12 col-lg-auto">
+                    <div>
+                        <div>Data do:</div>
+                        <input id="datepickerTo" class="datepicker" readonly />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="~/js/ShowNavbar.js"></script>
+    <link href="~/lib/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script src="~/js/Datepicker.js"></script>
+    <script>createDatePickers();</script>
 </body>
 </html>
