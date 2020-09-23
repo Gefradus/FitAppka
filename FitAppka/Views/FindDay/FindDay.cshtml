@@ -105,7 +105,7 @@
                                     {
                                         if (item.DayId == dayID)
                                         {
-                                            <div class="row no-gutters dayRow">
+                                            <div class="row no-gutters dayRow tableRow">
                                                 <div class="col-4 cent">
                                                     @{ var dayOfYear = item.Date.Value; }
                                                     @dayOfYear.ToString("dd/MM/yyyy")
@@ -186,7 +186,7 @@
                                     {
                                         if (item.DayId == dayID)
                                         {
-                                            <div class="row no-gutters dayRow">
+                                            <div class="row no-gutters dayRow tableRow">
                                                 <div class="col-4 cent">
                                                     @{ var dayOfYear = item.Date.Value; }
                                                     @dayOfYear.ToString("dd/MM/yyyy")
@@ -265,7 +265,7 @@
                                     {
                                         if (item.DayId == dayID)
                                         {
-                                            <div class="row no-gutters dayRow">
+                                            <div class="row no-gutters dayRow tableRow">
                                                 <div class="col-4 cent">
                                                     @{ var dayOfYear = item.Date.Value; }
                                                     @dayOfYear.ToString("dd/MM/yyyy")
@@ -293,6 +293,6 @@
         </div>
     </div>
     <script src="~/js/ShowNavbar.js"></script>
-    <script></script>
+    <script>colorEverySecondRow();</script>
 </body>
 
