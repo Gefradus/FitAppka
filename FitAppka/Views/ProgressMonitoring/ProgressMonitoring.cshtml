@@ -7,8 +7,22 @@
     <script src="~/js/ProgressMonitoring.js"></script>
     <link href="~/css/ProgressMonitoring.css" rel="stylesheet" />
     <link href="~/css/Datepicker.css" rel="stylesheet" />
+    <script>
+        function createWeightMeasurementsChart() {
+            createChart(weight, date);
+        }
+    </script>
 </head>
-<body onload="createChart()">
+<body onload="createWeightMeasurementsChart()">
+    @{ foreach (var item in (List<FitAppka.Models.WeightMeasurement>)ViewData["weightMeasurements"])
+        {
+            <script>
+                weight.push('@item.Weight');
+                date.push('@item.DateOfMeasurement.Value.ToString("dd.MM.yy")');
+            </script>
+        }
+    }
+
     <div class="container-fluid ml-lg-3 pl-md-0 pl-lg-3">
         <div class="row no-gutters mt-5">
             <div class="col-12 col-md-9 col-lg-8">
@@ -47,6 +61,15 @@
     <link href="~/lib/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script>
+        var $j = jQuery.noConflict();
+        function updateDates() {
+            var dateFrom = $j("#datepickerFrom").datepicker("getDate").toISOString();
+            var dateTo = $j("#datepickerTo").datepicker("getDate").toISOString();
+            window.location.href = '@Url.Action("ProgressMonitoring", "ProgressMonitoring")'
+                + "?dateFrom=" + dateFrom + "&dateTo=" + dateTo;
+        }
+    </script>
     <script src="~/js/Datepicker.js"></script>
     <script>createDatePickers();</script>
 </body>

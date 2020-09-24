@@ -58,6 +58,7 @@ namespace FitAppka
             services.AddScoped<IGoalsService, GoalsServiceImpl>();
             services.AddScoped<IDayManageService, DayServiceImpl>();
             services.AddScoped<IMeasurementsService, MeasurementsServiceImpl>();
+            services.AddScoped<IProgressMonitoringService, ProgressMonitoringServiceImpl>();
         }
 
         private void RepositoriesAddScoped(IServiceCollection services)

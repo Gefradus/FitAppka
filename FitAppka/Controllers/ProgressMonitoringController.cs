@@ -6,17 +6,26 @@ namespace FitAppka.Controllers
     public class ProgressMonitoringController : Controller
     {
         private readonly IDayManageService _dayService;
+        private readonly IProgressMonitoringService _progressMonitoringService;
 
-        public ProgressMonitoringController(IDayManageService dayService)
+        public ProgressMonitoringController(IProgressMonitoringService progressMonitoringService,
+            IDayManageService dayService)
         {
+            _progressMonitoringService = progressMonitoringService;
             _dayService = dayService;
         }
 
         [HttpGet]
-        public IActionResult ProgressMonitoring()
+        public IActionResult ProgressMonitoring(string dateFrom, string dateTo)
         {
             ViewData["dayID"] = _dayService.GetTodayId();
+            ViewData["weightMeasurements"] = _progressMonitoringService.GetWeightMeasurementListFromTo(dateFrom, dateTo);
+            ViewData["dateFrom"] = dateFrom;
+            ViewData["dateTo"] = dateTo;
             return View();
         }
+
+
+
     }
 }

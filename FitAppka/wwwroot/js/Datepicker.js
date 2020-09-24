@@ -3,14 +3,9 @@
     $j(selector).datepicker({
         minDate: new Date(1900, 1, 1),
         dateFormat: 'dd.mm.yy',
-        monthNames: ["Styczeń", "Luty", "Marzec", "Kwiecień",
-            "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
-            "Październik", "Listopad", "Grudzień"],
         monthNamesShort: ["Sty", "Lut", "Mar", "Kwi",
             "Maj", "Cze", "Lip", "Sie", "Wrz",
             "Paź", "Lis", "Gru"],
-        dayNames: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
-        dayNamesShort: ['Ndz', 'Pon', 'Wto', 'Śro', 'Czw', 'Pt', 'Sob'],
         dayNamesMin: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb'],
         changeYear: true,
         changeMonth: true
@@ -20,4 +15,47 @@
 function createDatePickers() {
     createDatePicker("#datepickerFrom");
     createDatePicker("#datepickerTo");
+    setMaxDate("#datepickerTo", new Date());
+    setMinDate("#datepickerTo", SubWeekFromToday());
+    setMaxDate("#datepickerFrom", new Date());
+    setDate("#datepickerTo", new Date());
+    setDate("#datepickerFrom", SubWeekFromToday());
+    setOnChange();
 }
+
+function setOnChange() {
+    var $j = jQuery.noConflict();
+    $j("#datepickerFrom").change(function () {
+        var date = $j("#datepickerFrom").datepicker("getDate");
+        $j("#datepickerTo").datepicker('option', 'minDate', date);
+        updateDates();
+    });
+
+    $j("#datepickerTo").change(function () {
+        var date = $j("#datepickerTo").datepicker("getDate");
+        $j("#datepickerFrom").datepicker('option', 'maxDate', date);
+        updateDates();
+    });
+}
+
+function setMaxDate(datepicker, max) {
+    var $j = jQuery.noConflict();
+    $j(datepicker).datepicker('option', 'maxDate', max);
+}
+
+function setDate(datepicker, date) {
+    var $j = jQuery.noConflict();
+    $j(datepicker).datepicker("setDate", date);
+}
+
+function setMinDate(datepicker, min) {
+    var $j = jQuery.noConflict();
+    $j(datepicker).datepicker('option', 'minDate', min);
+}
+
+function SubWeekFromToday() {
+    var oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    return oneWeekAgo;
+}
+
