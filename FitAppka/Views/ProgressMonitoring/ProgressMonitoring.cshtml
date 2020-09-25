@@ -61,16 +61,13 @@
     <link href="~/lib/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script src="~/js/Datepicker.js"></script>
     <script>
-        function updateDates() {
-            var $j = jQuery.noConflict();
-            var dateFrom = $j("#datepickerFrom").datepicker("getDate").toISOString();
-            var dateTo = $j("#datepickerTo").datepicker("getDate").toISOString();
+        function reloadPage(dateFrom, dateTo) {
             window.location.href = '@Url.Action("ProgressMonitoring", "ProgressMonitoring")'
                 + "?dateFrom=" + dateFrom + "&dateTo=" + dateTo;
         }
     </script>
-    <script src="~/js/Datepicker.js"></script>
     <script>createDatePickers('@ViewData["dateFrom"]', '@ViewData["dateTo"]');</script>
 </body>
 </html>

@@ -12,11 +12,10 @@
     });
 }
 
-function createDatePickers(dateFrom, dateTo)
-{
+function createDatePickers(dateFrom, dateTo) {
     createDatePicker("#datepickerFrom");
     createDatePicker("#datepickerTo");
-    setMaxDate("#datepickerTo", dateTo);
+    setMaxDate("#datepickerTo", new Date());
     setMinDate("#datepickerTo", dateFrom);
     setMaxDate("#datepickerFrom", dateTo);
     setDate("#datepickerTo", dateTo);
@@ -27,15 +26,15 @@ function createDatePickers(dateFrom, dateTo)
 function setOnChange() {
     var $j = jQuery.noConflict();
     $j("#datepickerFrom").change(function () {
-        //updateDates();
-        var date = $j("#datepickerFrom").datepicker("getDate");
-        $j("#datepickerTo").datepicker('option', 'minDate', date);
+        var dateFrom = $j("#datepickerFrom").datepicker("getDate").toISOString();
+        var dateTo = $j("#datepickerTo").datepicker("getDate").toISOString();
+        reloadPage(dateFrom, dateTo);
     });
 
     $j("#datepickerTo").change(function () {
-        //updateDates();
-        var date = $j("#datepickerTo").datepicker("getDate");
-        $j("#datepickerFrom").datepicker('option', 'maxDate', date);
+        var dateFrom = $j("#datepickerFrom").datepicker("getDate").toISOString();
+        var dateTo = $j("#datepickerTo").datepicker("getDate").toISOString();
+        reloadPage(dateFrom, dateTo);
     });
 }
 
@@ -59,4 +58,3 @@ function SubWeekFromToday() {
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
     return oneWeekAgo;
 }
-
