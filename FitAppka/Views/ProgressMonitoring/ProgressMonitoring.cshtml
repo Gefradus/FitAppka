@@ -71,6 +71,6 @@
         }
     </script>
     <script src="~/js/Datepicker.js"></script>
-    <script>createDatePickers();</script>
+    <script>createDatePickers('@ViewData["dateFrom"]', '@ViewData["dateTo"]');</script>
 </body>
 </html>
