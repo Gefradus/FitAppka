@@ -1,11 +1,9 @@
 ﻿using FitAppka.Models;
-using System.Collections.Generic;
 
 namespace FitAppka.Service
 {
     public interface IProgressMonitoringService
     {
-        List<WeightMeasurement> GetWeightMeasurementListFromTo(string dateFrom, string dateTo);
-        string ConvertToJSDate(string date, bool fromOrTo);
+        ProgressMonitoringDTO GetProgressMonitoringDTO(string dateFrom, string dateTo, int chartType);
     }
 }

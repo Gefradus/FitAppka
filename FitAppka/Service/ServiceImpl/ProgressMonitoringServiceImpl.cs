@@ -1,7 +1,8 @@
-﻿using FitAppka.Models;
+﻿using AutoMapper;
+using FitAppka.Models;
 using FitAppka.Repository;
-using System;
-using System.Collections.Generic;
+using FitAppka.Strategy.ChartTypeStrategyImpl;
+using FitAppka.Strategy.StrategyInterface;
 
 
 namespace FitAppka.Service.ServiceImpl
@@ -9,40 +10,37 @@ namespace FitAppka.Service.ServiceImpl
     public class ProgressMonitoringServiceImpl : IProgressMonitoringService
     {
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
+        private readonly IDayRepository _dayRepository;
+        private readonly IHomePageService _homePageService;
+        private readonly IGoalsService _goalsService;
+        private readonly IClientRepository _clientRepository;
+        private readonly IMapper _mapper;
+        private IChartTypeStrategy _chartTypeStrategy;
 
-        public ProgressMonitoringServiceImpl(IWeightMeasurementRepository weightMeasurementRepository)
+        public ProgressMonitoringServiceImpl(IWeightMeasurementRepository weightMeasurementRepository, IGoalsService goalsService,
+            IDayRepository dayRepository, IHomePageService homePageService, IClientRepository clientRepository, IMapper mapper)
         {
+            _goalsService = goalsService;
+            _dayRepository = dayRepository;
+            _homePageService = homePageService;
+            _clientRepository = clientRepository;
             _weightMeasurementRepository = weightMeasurementRepository;
+            _mapper = mapper;
         }
 
-        public List<WeightMeasurement> GetWeightMeasurementListFromTo(string dateFrom, string dateTo)
+        public ProgressMonitoringDTO GetProgressMonitoringDTO(string dateFrom, string dateTo, int chartType)
         {
-            var dateTimeFrom = ConvertToDateTimeAndPreventNull(dateFrom, true);
-            var dateTimeTo = ConvertToDateTimeAndPreventNull(dateTo, false);
-            var list = new List<WeightMeasurement>();
-
-            foreach(var measurement in _weightMeasurementRepository.GetLoggedInClientWeightMeasurements())
-            {
-                if(measurement.DateOfMeasurement.GetValueOrDefault().Date <= dateTimeTo && measurement.DateOfMeasurement.GetValueOrDefault().Date >= dateTimeFrom)
-                {
-                    list.Add(measurement);
-                }
+            if(chartType == 0) {
+                _chartTypeStrategy = new WeightMeasurementChartStrategy(_weightMeasurementRepository, _mapper);
             }
-            return list;
-        }
-
-        private DateTime ConvertToDateTimeAndPreventNull(string date, bool fromOrTo)
-        {
-            if(date == null) {
-                return fromOrTo ? DateTime.Now.AddDays(-7) : DateTime.Now;
+            if(chartType == 1) {
+                _chartTypeStrategy = new CaloriesConsumedChartStrategy(_dayRepository, _homePageService, _clientRepository);
+            }
+            if(chartType == 2) {
+                _chartTypeStrategy = new CaloriesBurnedChartStrategy(_clientRepository, _goalsService, _dayRepository);
             }
 
-            return Convert.ToDateTime(date);
-        }
-
-        public string ConvertToJSDate(string date, bool fromOrTo)
-        {
-            return ConvertToDateTimeAndPreventNull(date, fromOrTo).ToString("dd.MM.yyyy");
+            return _chartTypeStrategy.GetChartDataList(dateFrom, dateTo);
         }
     }
 }

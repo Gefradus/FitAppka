@@ -32,6 +32,8 @@ namespace FitAppka
                 .ForAllOtherMembers(opt => opt.Ignore());
 
             CreateMap<Task<List<Product>>, Task<List<ProductDTO>>>();
+
+            CreateMap<WeightMeasurement, WeightMeasurementDTO>();
         }
     }
 }

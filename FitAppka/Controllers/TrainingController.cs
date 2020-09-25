@@ -18,13 +18,13 @@ namespace FitAppka.Controllers
         private readonly IClientRepository _clientRepository;
         private readonly ICardioTrainingService _cardioServices;
         private readonly IStrengthTrainingService _strengthTrainingService;
-        private readonly IGoalsService _dietaryTargetsService;
+        private readonly IGoalsService _goalsService;
         private readonly IDayManageService _dayService;
 
         public TrainingController(IClientRepository clientRepository, ICardioTrainingService cardioTrainingServices, IGoalsService dietaryTargetsService,
             IStrengthTrainingService strengthTrainingServices, FitAppContext context, IDayManageService dayService) 
         {
-            _dietaryTargetsService = dietaryTargetsService;
+            _goalsService = dietaryTargetsService;
             _dayService = dayService;
             _context = context;
             _clientRepository = clientRepository;
@@ -38,7 +38,7 @@ namespace FitAppka.Controllers
             ViewData["dayID"] = dayID;
             ViewData["day"] = _dayService.GetDayDateTime(dayID).Date.ToString("dd.MM.yyyy");
             ViewData["clientID"] = _clientRepository.GetLoggedInClient().ClientId;
-            ViewData["burnedKcal"] = _dietaryTargetsService.CaloriesBurnedInDay(dayID);
+            ViewData["burnedKcal"] = _goalsService.CaloriesBurnedInDay(dayID);
             ViewData["cardioTime"] = _cardioServices.GetCardioTimeInDay(dayID);
             ViewData["kcalTarget"] = _cardioServices.GetKcalBurnedGoalInDay(dayID);
             ViewData["timeTarget"] = _cardioServices.GetTrainingTimeGoalInDay(dayID);
