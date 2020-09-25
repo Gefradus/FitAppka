@@ -290,5 +290,10 @@ namespace FitAppka.Service.ServiceImpl
             return model;
         }
 
+        public Goals GetDayGoals(int dayId)
+        {
+            return _goalsRepository.GetDayGoals(dayId);
+        }
+
     }
 }

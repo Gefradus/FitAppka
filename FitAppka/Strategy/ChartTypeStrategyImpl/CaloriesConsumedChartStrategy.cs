@@ -14,9 +14,12 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
         private readonly IDayRepository _dayRepository;
         private readonly IHomePageService _homePageService;
         private readonly IClientRepository _clientRepository;
+        private readonly IGoalsService _goalsService;
 
-        public CaloriesConsumedChartStrategy(IDayRepository dayRepository, IHomePageService homePageService, IClientRepository clientRepository)
+        public CaloriesConsumedChartStrategy(IDayRepository dayRepository, IHomePageService homePageService, 
+            IClientRepository clientRepository, IGoalsService goalsService)
         {
+            _goalsService = goalsService;
             _dayRepository = dayRepository;
             _homePageService = homePageService;
             _clientRepository = clientRepository;
@@ -29,7 +32,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
                 ChartType = '1',
-                CaloriesInDays = GetCaloriesConsumedInDaysFromTo(dateFrom, dateTo)
+                CaloriesInDays = GetCaloriesConsumedInDaysFromTo(dateFrom, dateTo),
             };
         }
 
@@ -47,7 +50,8 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                     list.Add(new CaloriesInDayDTO()
                     {
                         DateOfDay = day,
-                        Calories = (int)_homePageService.SumAllKcalInDay(day)
+                        Calories = (int)_homePageService.SumAllKcalInDay(day),
+                        CaloriesGoal = (int)_goalsService.GetDayGoals(item.DayId).Calories
                     });
                 }
             }

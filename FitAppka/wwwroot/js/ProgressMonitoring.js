@@ -69,18 +69,19 @@ function SubWeekFromToday() {
 
 
 function createWeightChart() {
-    defaultChart('Pomiar wagi [kg]', 'rgb(3, 202, 86)', "lightgreen");
+    defaultChart('Pomiar wagi [kg]', 'rgb(3, 202, 86)', "lightgreen", 'rgba(3, 202, 86, 0.12)', 'removeThisLabel');
 }
 
 function createKcalBurnedChart() {
-    defaultChart('Spalone kalorie [kcal]', 'rgba(191, 99, 8, 1)', "orange");
+    defaultChart('Spalone kalorie', 'rgb(191, 99, 8)', "orange", 'rgba(191, 99, 8, 0.12)', 'Cel spalonych kalorii');
 }
 
 function createKcalConsumedChart() {
-    defaultChart('Spożyte kalorie [kcal]', 'rgba(8, 87, 191, 1)', "lightblue");
+    defaultChart('Spożyte kalorie', 'rgb(8, 87, 191)', "lightblue", 'rgba(8, 87, 191, 0.12)', 'Cel spożycia kalorii');
 }
 
-function defaultChart(label, borderColor, pointBorderColor) {
+
+function defaultChart(label, borderColor, pointBorderColor, backgroundColor, labelGoal) {
     Chart.defaults.global.defaultFontColor = 'rgb(255, 255, 255)';
     Chart.defaults.global.elements.point.radius = 4;
     Chart.defaults.global.elements.point.borderWidth = 2;
@@ -90,25 +91,41 @@ function defaultChart(label, borderColor, pointBorderColor) {
         type: 'line',
         data: {
             labels: date,
-            datasets: [{
+            datasets: [
+            {
                 label: label,
                 data: data,
                 borderColor: borderColor,
                 color: 'rgb(0, 0, 0)',
+                backgroundColor: backgroundColor,
                 pointBorderColor: pointBorderColor,
             },
-            ]
+            {
+                label: labelGoal,
+                data: goals,
+                borderColor: 'pink',
+                color: 'rgb(0, 0, 0)',
+                pointBorderColor: 'pink',
+                backgroundColor: 'rgba(193,66,66,0.12)',
+            }]
         },
         options: {
             scales: {
                 xAxes: [{ gridLines: { color: 'rgba(197, 201, 206, 0.3)' } }],
                 yAxes: [{ gridLines: { color: 'rgba(197, 201, 206, 0.3)' } }]
+            },
+            legend: {
+                labels: {
+                    filter: function (item) {
+                        return !item.text.includes('removeThisLabel');
+                    }
+                }
             }
         }
     });
 }
 
 
-
 var data = [];
 var date = [];
+var goals = [];

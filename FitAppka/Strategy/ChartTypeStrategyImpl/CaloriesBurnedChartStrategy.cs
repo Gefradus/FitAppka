@@ -46,7 +46,8 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                     list.Add(new CaloriesInDayDTO()
                     {
                         DateOfDay = day,
-                        Calories = _goalsService.CaloriesBurnedInDay(item.DayId)
+                        Calories = _goalsService.CaloriesBurnedInDay(item.DayId),
+                        CaloriesGoal = _goalsService.GetDayGoals(item.DayId).KcalBurned.GetValueOrDefault()
                     });
                 }
             }

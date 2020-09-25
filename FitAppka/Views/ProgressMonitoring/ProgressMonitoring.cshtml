@@ -24,6 +24,7 @@
                 <script>
                     data.push('@item.Calories')
                     date.push('@item.DateOfDay.ToString("dd.MM.yy")');
+                    goals.push('@item.CaloriesGoal');
                 </script>
             }
         }
@@ -39,9 +40,9 @@
                     <div class="col-12">
                         <div>Pokaż wykres: </div>
                         <select class="form-control" id="select">
-                            <option value="0">Pomiarów wagi</option>
-                            <option value="1">Spożytych kalorii</option>
-                            <option value="2">Spalonych kalorii</option>
+                            <option value="0">Pomiary wagi</option>
+                            <option value="1">Spożyte kalorie</option>
+                            <option value="2">Spalone kalorie</option>
                         </select>
                     </div>
                 </div>

@@ -34,7 +34,7 @@ namespace FitAppka.Service.ServiceImpl
                 _chartTypeStrategy = new WeightMeasurementChartStrategy(_weightMeasurementRepository, _mapper);
             }
             if(chartType == 1) {
-                _chartTypeStrategy = new CaloriesConsumedChartStrategy(_dayRepository, _homePageService, _clientRepository);
+                _chartTypeStrategy = new CaloriesConsumedChartStrategy(_dayRepository, _homePageService, _clientRepository, _goalsService);
             }
             if(chartType == 2) {
                 _chartTypeStrategy = new CaloriesBurnedChartStrategy(_clientRepository, _goalsService, _dayRepository);
