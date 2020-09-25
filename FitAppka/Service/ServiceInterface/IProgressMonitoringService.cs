@@ -6,5 +6,6 @@ namespace FitAppka.Service
     public interface IProgressMonitoringService
     {
         List<WeightMeasurement> GetWeightMeasurementListFromTo(string dateFrom, string dateTo);
+        string ConvertToJSDate(string date, bool fromOrTo);
     }
 }

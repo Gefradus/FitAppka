@@ -39,5 +39,10 @@ namespace FitAppka.Service.ServiceImpl
 
             return Convert.ToDateTime(date);
         }
+
+        public string ConvertToJSDate(string date, bool fromOrTo)
+        {
+            return ConvertToDateTimeAndPreventNull(date, fromOrTo).ToString("dd.MM.yyyy");
+        }
     }
 }

@@ -25,16 +25,8 @@
         },
         options: { 
             scales: {
-                xAxes: [{
-                    gridLines: {
-                        color: 'rgba(197, 201, 206, 0.3)',
-                    }
-                }],
-                yAxes: [{
-                    gridLines: {
-                        color: 'rgba(197, 201, 206, 0.3)',
-                    }
-                }]
+                xAxes: [{ gridLines: { color: 'rgba(197, 201, 206, 0.3)' }}],
+                yAxes: [{ gridLines: { color: 'rgba(197, 201, 206, 0.3)' }}]
             }
         }
     });

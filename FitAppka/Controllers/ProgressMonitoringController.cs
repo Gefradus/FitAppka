@@ -20,8 +20,8 @@ namespace FitAppka.Controllers
         {
             ViewData["dayID"] = _dayService.GetTodayId();
             ViewData["weightMeasurements"] = _progressMonitoringService.GetWeightMeasurementListFromTo(dateFrom, dateTo);
-            ViewData["dateFrom"] = dateFrom;
-            ViewData["dateTo"] = dateTo;
+            ViewData["dateFrom"] = _progressMonitoringService.ConvertToJSDate(dateFrom, true);
+            ViewData["dateTo"] = _progressMonitoringService.ConvertToJSDate(dateTo, false);
             return View();
         }
 
