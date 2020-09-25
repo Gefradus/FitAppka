@@ -27,16 +27,12 @@
             scales: {
                 xAxes: [{
                     gridLines: {
-                        display: true,
                         color: 'rgba(197, 201, 206, 0.3)',
-                        lineWidth: 1
                     }
                 }],
                 yAxes: [{
                     gridLines: {
-                        display: true,
                         color: 'rgba(197, 201, 206, 0.3)',
-                        lineWidth: 1
                     }
                 }]
             }

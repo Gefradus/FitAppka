@@ -12,27 +12,28 @@
     });
 }
 
-function createDatePickers() {
+function createDatePickers(dateFrom, dateTo)
+{
     createDatePicker("#datepickerFrom");
     createDatePicker("#datepickerTo");
-    setMaxDate("#datepickerTo", new Date());
-    setMinDate("#datepickerTo", SubWeekFromToday());
-    setMaxDate("#datepickerFrom", new Date());
-    setDate("#datepickerTo", new Date());
-    setDate("#datepickerFrom", SubWeekFromToday());
+    setMaxDate("#datepickerTo", dateTo);
+    setMinDate("#datepickerTo", dateFrom);
+    setMaxDate("#datepickerFrom", dateTo);
+    setDate("#datepickerTo", dateTo);
+    setDate("#datepickerFrom", dateFrom);
     setOnChange();
 }
 
 function setOnChange() {
     var $j = jQuery.noConflict();
     $j("#datepickerFrom").change(function () {
-        updateDates();
+        //updateDates();
         var date = $j("#datepickerFrom").datepicker("getDate");
         $j("#datepickerTo").datepicker('option', 'minDate', date);
     });
 
     $j("#datepickerTo").change(function () {
-        updateDates();
+        //updateDates();
         var date = $j("#datepickerTo").datepicker("getDate");
         $j("#datepickerFrom").datepicker('option', 'maxDate', date);
     });
