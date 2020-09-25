@@ -16,5 +16,7 @@
 }
 
 #select {
-    width: 185px
+    width: 185px;
+    padding-left: 25px;
+    cursor: pointer;
 }

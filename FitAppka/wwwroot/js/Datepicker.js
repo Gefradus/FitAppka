@@ -26,15 +26,15 @@ function createDatePickers() {
 function setOnChange() {
     var $j = jQuery.noConflict();
     $j("#datepickerFrom").change(function () {
+        updateDates();
         var date = $j("#datepickerFrom").datepicker("getDate");
         $j("#datepickerTo").datepicker('option', 'minDate', date);
-        updateDates();
     });
 
     $j("#datepickerTo").change(function () {
+        updateDates();
         var date = $j("#datepickerTo").datepicker("getDate");
         $j("#datepickerFrom").datepicker('option', 'maxDate', date);
-        updateDates();
     });
 }
 

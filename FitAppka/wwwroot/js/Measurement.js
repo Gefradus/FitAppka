@@ -116,7 +116,7 @@ function deleteMeasurement(url){
             if (response == true) {
                 location.reload();
             } else {
-                validation("Należy pozostawić jeden pomiar wagi")
+                validation("Należy pozostawić jeden pomiar wagi");
             }
             
         }
