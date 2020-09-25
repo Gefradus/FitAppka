@@ -9,12 +9,9 @@ namespace FitAppka.Service.ServiceImpl
     public class ProgressMonitoringServiceImpl : IProgressMonitoringService
     {
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
-        private readonly IClientRepository _clientRepository;
 
-        public ProgressMonitoringServiceImpl(IWeightMeasurementRepository weightMeasurementRepository,
-            IClientRepository clientRepository)
+        public ProgressMonitoringServiceImpl(IWeightMeasurementRepository weightMeasurementRepository)
         {
-            _clientRepository = clientRepository;
             _weightMeasurementRepository = weightMeasurementRepository;
         }
 
@@ -24,7 +21,7 @@ namespace FitAppka.Service.ServiceImpl
             var dateTimeTo = ConvertToDateTimeAndPreventNull(dateTo, false);
             var list = new List<WeightMeasurement>();
 
-            foreach(var measurement in _weightMeasurementRepository.GetClientsWeightMeasurements(_clientRepository.GetLoggedInClientId()))
+            foreach(var measurement in _weightMeasurementRepository.GetLoggedInClientWeightMeasurements())
             {
                 if(measurement.DateOfMeasurement.GetValueOrDefault().Date <= dateTimeTo && measurement.DateOfMeasurement.GetValueOrDefault().Date >= dateTimeFrom)
                 {

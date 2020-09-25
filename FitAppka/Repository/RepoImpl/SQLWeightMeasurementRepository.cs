@@ -42,9 +42,9 @@ namespace FitAppka.Repository.RepIfaceImpl
             return _context.WeightMeasurement.ToList();
         }
 
-        public IEnumerable<WeightMeasurement> GetClientsWeightMeasurements(int clientId)
+        public List<WeightMeasurement> GetLoggedInClientWeightMeasurements()
         {
-            return _context.WeightMeasurement.Where(w => w.ClientId == clientId).ToList();
+            return _context.WeightMeasurement.Where(w => w.ClientId == _clientRepository.GetLoggedInClientId()).ToList();
         }
 
         public WeightMeasurement GetWeightMeasurement(int id)
@@ -59,9 +59,9 @@ namespace FitAppka.Repository.RepIfaceImpl
             return weightMeasurement;
         }
 
-        public short GetLastLoggedInClientWeightMeasurement()
+        public short GetLastLoggedInClientWeight()
         {
-            var measurementList = GetClientsWeightMeasurements(_clientRepository.GetLoggedInClientId());
+            var measurementList = GetLoggedInClientWeightMeasurements();
 
             short lastWeightMeasurement = 0;
             foreach (var item in measurementList)

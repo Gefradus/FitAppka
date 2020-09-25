@@ -38,7 +38,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public bool DeleteMeasurement(int id)
         {
-            if (_clientManageService.HasUserAccessToWeightMeasurement(id)) 
+            if (_clientManageService.HasUserAccessToWeightMeasurement(id) && _weightMeasurementRepository.GetLoggedInClientWeightMeasurements().Count > 1)
             {
                 int? relatedFatMeasurementId = _weightMeasurementRepository.GetWeightMeasurement(id).FatMeasurementId;
                 if (relatedFatMeasurementId != null) {

@@ -264,7 +264,7 @@ namespace FitAppka.Service.ServiceImpl
         public Goals SetClientGoalsIfAutoDietaryGoals(bool autoDietaryGoals)
         {
             Client c = _clientRepository.GetLoggedInClient();
-            short weight = _weightMeasurementRepository.GetLastLoggedInClientWeightMeasurement();
+            short weight = _weightMeasurementRepository.GetLastLoggedInClientWeight();
             if (autoDietaryGoals)
             {
                 int caloricDemand = CountCaloricDemand(c.Sex, c.DateOfBirth, c.Growth, weight, ActivityLevel(c.ActivityLevel));

@@ -112,8 +112,13 @@ function deleteMeasurement(url){
         data: { 
             id: parseInt($("#deleteMeasurementId").val())
         },
-        success: function () {
-            location.reload();
+        success: function (response) {
+            if (response == true) {
+                location.reload();
+            } else {
+                validation("Należy pozostawić jeden pomiar wagi")
+            }
+            
         }
     });
 }

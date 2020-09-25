@@ -40,7 +40,7 @@ namespace FitAppka.Controllers
             try {
                 Client client = _clientRepository.GetLoggedInClient();
                 ViewData["dateOfBirth"] = client.DateOfBirth.Value.ToString("yyyy-MM-dd");
-                ViewData["weight"] = _weightMeasurementRepository.GetLastLoggedInClientWeightMeasurement();
+                ViewData["weight"] = _weightMeasurementRepository.GetLastLoggedInClientWeight();
                 ViewData["growth"] = client.Growth;
                 ViewData["changeGoal"] = (int)client.WeightChangeGoal;
                 ViewData["activity"] = (int)client.ActivityLevel;
