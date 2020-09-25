@@ -36,22 +36,22 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             };
         }
 
-        private List<CaloriesInDayDTO> GetCaloriesConsumedInDaysFromTo(string dateFrom, string dateTo)
+        private List<ChartDataInDayDTO> GetCaloriesConsumedInDaysFromTo(string dateFrom, string dateTo)
         {
             var dateTimeFrom = DateConverter.ConvertToDateTimeAndPreventNull(dateFrom, true);
             var dateTimeTo = DateConverter.ConvertToDateTimeAndPreventNull(dateTo, false);
-            var list = new List<CaloriesInDayDTO>();
+            var list = new List<ChartDataInDayDTO>();
 
             foreach (var item in _dayRepository.GetClientDays(_clientRepository.GetLoggedInClientId()))
             {
                 DateTime day = item.Date.GetValueOrDefault().Date;
                 if (day <= dateTimeTo && day >= dateTimeFrom)
                 {
-                    list.Add(new CaloriesInDayDTO()
+                    list.Add(new ChartDataInDayDTO()
                     {
                         DateOfDay = day,
-                        Calories = (int)_homePageService.SumAllKcalInDay(day),
-                        CaloriesGoal = (int)_goalsService.GetDayGoals(item.DayId).Calories
+                        ChartData = (int)_homePageService.SumAllKcalInDay(day),
+                        ChartDataGoal = (int)_goalsService.GetDayGoals(item.DayId).Calories
                     });
                 }
             }

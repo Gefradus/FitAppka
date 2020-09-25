@@ -39,6 +39,9 @@ namespace FitAppka.Service.ServiceImpl
             if(chartType == 2) {
                 _chartTypeStrategy = new CaloriesBurnedChartStrategy(_clientRepository, _goalsService, _dayRepository);
             }
+            if(chartType == 3) {
+                _chartTypeStrategy = new WaterConsumptionChartStrategy(_dayRepository, _clientRepository, _goalsService);
+            }
 
             return _chartTypeStrategy.GetChartDataList(dateFrom, dateTo);
         }

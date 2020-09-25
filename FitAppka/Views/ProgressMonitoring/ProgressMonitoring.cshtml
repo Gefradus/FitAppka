@@ -19,12 +19,12 @@
                 </script>
             }
         } 
-        if (Model.ChartType == '1' || Model.ChartType == '2') {
+        if (Model.ChartType == '1' || Model.ChartType == '2' || Model.ChartType == '3') {
             foreach(var item in Model.CaloriesInDays) {
                 <script>
-                    data.push('@item.Calories')
+                    data.push('@item.ChartData')
                     date.push('@item.DateOfDay.ToString("dd.MM.yy")');
-                    goals.push('@item.CaloriesGoal');
+                    goals.push('@item.ChartDataGoal');
                 </script>
             }
         }
@@ -43,6 +43,7 @@
                             <option value="0">Pomiary wagi</option>
                             <option value="1">Spożyte kalorie</option>
                             <option value="2">Spalone kalorie</option>
+                            <option value="3">Spożyte płyny</option>
                         </select>
                     </div>
                 </div>

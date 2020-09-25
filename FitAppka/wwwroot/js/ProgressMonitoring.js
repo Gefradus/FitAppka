@@ -8,6 +8,9 @@
     if (chartType == 2) {
         createKcalBurnedChart();
     }
+    if (chartType == 3) {
+        createWaterConsumedChart();
+    }
 }
 
 function createDatePickers(dateFrom, dateTo, chartType) {
@@ -77,9 +80,12 @@ function createKcalBurnedChart() {
 }
 
 function createKcalConsumedChart() {
-    defaultChart('Spożyte kalorie', 'rgb(8, 87, 191)', "lightblue", 'rgba(8, 87, 191, 0.12)', 'Cel spożycia kalorii');
+    defaultChart('Spożyte kalorie', 'rgb(222, 209, 27)', "yellow", 'rgba(222, 209, 27, 0.2)', 'Cel spożycia kalorii');
 }
 
+function createWaterConsumedChart() {
+    defaultChart('Spożycie płynów', 'rgb(8, 87, 191)', "lightblue", 'rgba(8, 87, 191, 0.2)', 'Cel spożycia płynów');
+}
 
 function defaultChart(label, borderColor, pointBorderColor, backgroundColor, labelGoal) {
     Chart.defaults.global.defaultFontColor = 'rgb(255, 255, 255)';

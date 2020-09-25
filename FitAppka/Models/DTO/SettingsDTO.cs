@@ -23,7 +23,7 @@ namespace FitAppka.Models
         [Required(ErrorMessage = "Proszę podać wzrost [w cm]")]
         public int? Growth { get; set; }
 
-        [Display(Name = "Obecny cel")]
+        [Display(Name = "Obecny cel zmian wagi")]
         [Required]
         public short WeightChange_Goal { get; set; }
 

@@ -8,17 +8,18 @@ using System.Collections.Generic;
 
 namespace FitAppka.Strategy.ChartTypeStrategyImpl
 {
-    public class CaloriesBurnedChartStrategy : IChartTypeStrategy
+    public class WaterConsumptionChartStrategy : IChartTypeStrategy
     {
-        private readonly IGoalsService _goalsService;
-        private readonly IClientRepository _clientRepository;
-        private readonly IDayRepository _dayRepository;
 
-        public CaloriesBurnedChartStrategy(IClientRepository clientRepository, IGoalsService goalsService, IDayRepository dayRepository)
+        private readonly IDayRepository _dayRepository;
+        private readonly IClientRepository _clientRepository;
+        private readonly IGoalsService _goalsService;
+
+        public WaterConsumptionChartStrategy(IDayRepository dayRepository, IClientRepository clientRepository, IGoalsService goalsService)
         {
-            _goalsService = goalsService;
-            _clientRepository = clientRepository;
             _dayRepository = dayRepository;
+            _clientRepository = clientRepository;
+            _goalsService = goalsService;
         }
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
@@ -27,12 +28,12 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             {
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
-                ChartType = '2',
-                CaloriesInDays = GetCaloriesBurnedInDaysFromTo(dateFrom, dateTo)
+                ChartType = '3',
+                CaloriesInDays = GetWaterConsumedInDaysFromTo(dateFrom, dateTo),
             };
         }
 
-        private List<ChartDataInDayDTO> GetCaloriesBurnedInDaysFromTo(string dateFrom, string dateTo)
+        private List<ChartDataInDayDTO> GetWaterConsumedInDaysFromTo(string dateFrom, string dateTo)
         {
             var dateTimeFrom = DateConverter.ConvertToDateTimeAndPreventNull(dateFrom, true);
             var dateTimeTo = DateConverter.ConvertToDateTimeAndPreventNull(dateTo, false);
@@ -46,12 +47,13 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                     list.Add(new ChartDataInDayDTO()
                     {
                         DateOfDay = day,
-                        ChartData = _goalsService.CaloriesBurnedInDay(item.DayId),
-                        ChartDataGoal = _goalsService.GetDayGoals(item.DayId).KcalBurned.GetValueOrDefault()
+                        ChartData = item.WaterDrunk.GetValueOrDefault(),
+                        ChartDataGoal = (int)_goalsService.GetDayGoals(item.DayId).Calories
                     });
                 }
             }
             return list;
         }
+
     }
 }
