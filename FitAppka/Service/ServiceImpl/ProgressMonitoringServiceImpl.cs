@@ -2,7 +2,7 @@
 using FitAppka.Models;
 using FitAppka.Models.Enum;
 using FitAppka.Repository;
-using FitAppka.Strategy.ChartTypeStrategyImpl;
+using FitAppka.Strategy;
 using FitAppka.Strategy.StrategyInterface;
 
 
@@ -10,7 +10,6 @@ namespace FitAppka.Service.ServiceImpl
 {
     public class ProgressMonitoringServiceImpl : IProgressMonitoringService
     {
-        private IChartTypeStrategy _chartTypeStrategy;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
         private readonly IFatMeasurementRepository _fatMeasurementRepository;
         private readonly IDayRepository _dayRepository;
@@ -36,29 +35,10 @@ namespace FitAppka.Service.ServiceImpl
 
         public ProgressMonitoringDTO GetProgressMonitoringDTO(string dateFrom, string dateTo, int chartType)
         {
-            if (chartType == (int) ChartStrategyEnum.CaloriesConsumed) {
-                _chartTypeStrategy = new CaloriesConsumedChartStrategy(_dayRepository, _homePageService, _clientRepository, _goalsService);
-            }
-            if(chartType == (int) ChartStrategyEnum.CaloriesBurned) {
-                _chartTypeStrategy = new CaloriesBurnedChartStrategy(_clientRepository, _goalsService, _dayRepository);
-            }
-            if (chartType == (int) ChartStrategyEnum.WeightMeasurement) {
-                _chartTypeStrategy = new WeightMeasurementChartStrategy(_weightMeasurementRepository, _mapper);
-            }
-            if(chartType == (int) ChartStrategyEnum.WaistCircumference) {
-                _chartTypeStrategy = new WaistCircumferenceMeasurementChartStrategy(_fatMeasurementRepository, _weightMeasurementRepository);
-            }
-            if(chartType == (int) ChartStrategyEnum.WaterConsumption) {
-                _chartTypeStrategy = new WaterConsumptionChartStrategy(_dayRepository, _clientRepository, _goalsService);
-            } 
-            if(chartType == (int) ChartStrategyEnum.CardioTrainingTime) {
-                _chartTypeStrategy = new CardioTrainingTimeChartStrategy(_clientRepository, _cardioService, _dayRepository);
-            }
-            if(chartType == (int) ChartStrategyEnum.EstimatedBodyFat) {
-                _chartTypeStrategy = new EstimatedBodyFatChartStrategy(_fatMeasurementRepository, _weightMeasurementRepository);
-            }
+            new ChartTypeStrategyDictionary<IChartTypeStrategy>(_clientRepository, _goalsService, _dayRepository, _weightMeasurementRepository,
+                _homePageService, _mapper, _fatMeasurementRepository, _cardioService).TryGetValue((ChartStrategyEnum)chartType, out IChartTypeStrategy mapValue);
 
-            return _chartTypeStrategy.GetChartDataList(dateFrom, dateTo);
+            return mapValue.GetChartDataList(dateFrom, dateTo);
         }
     }
 }
