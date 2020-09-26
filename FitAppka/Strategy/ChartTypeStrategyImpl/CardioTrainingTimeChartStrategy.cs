@@ -8,15 +8,16 @@ using System.Collections.Generic;
 
 namespace FitAppka.Strategy.ChartTypeStrategyImpl
 {
-    public class CaloriesBurnedChartStrategy : IChartTypeStrategy
+    public class CardioTrainingTimeChartStrategy : IChartTypeStrategy
     {
-        private readonly IGoalsService _goalsService;
+        private readonly ICardioTrainingService _cardioService;
         private readonly IClientRepository _clientRepository;
         private readonly IDayRepository _dayRepository;
 
-        public CaloriesBurnedChartStrategy(IClientRepository clientRepository, IGoalsService goalsService, IDayRepository dayRepository)
+        public CardioTrainingTimeChartStrategy(IClientRepository clientRepository, ICardioTrainingService cardioService,
+            IDayRepository dayRepository)
         {
-            _goalsService = goalsService;
+            _cardioService = cardioService;
             _clientRepository = clientRepository;
             _dayRepository = dayRepository;
         }
@@ -27,7 +28,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             {
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
-                ChartType = ChartStrategyEnum.CaloriesBurned,
+                ChartType = ChartStrategyEnum.CardioTrainingTime,
                 CaloriesInDays = GetCaloriesBurnedInDaysFromTo(dateFrom, dateTo)
             };
         }
@@ -46,8 +47,8 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                     list.Add(new ChartDataInDayDTO()
                     {
                         DateOfDay = day,
-                        ChartData = _goalsService.CaloriesBurnedInDay(item.DayId),
-                        ChartDataGoal = _goalsService.GetDayGoals(item.DayId).KcalBurned.GetValueOrDefault()
+                        ChartData = _cardioService.GetCardioTimeInDay(item.DayId).GetValueOrDefault(),
+                        ChartDataGoal = _cardioService.GetTrainingTimeGoalInDay(item.DayId).GetValueOrDefault()
                     });
                 }
             }

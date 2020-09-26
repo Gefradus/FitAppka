@@ -1,15 +1,21 @@
 ﻿function createChart(chartType) {
     if (chartType == 0) {
-        createWeightChart();
+        createKcalConsumedChart();  
     }
     if (chartType == 1) {
-        createKcalConsumedChart();
-    }
-    if (chartType == 2) {
         createKcalBurnedChart();
     }
+    if (chartType == 2) {
+        createWeightChart();
+    }
     if (chartType == 3) {
+        createWaistCircumferenceChart();
+    }
+    if (chartType == 4) {
         createWaterConsumedChart();
+    }
+    if (chartType == 5) {
+        createTrainingTimeChart();
     }
 }
 
@@ -27,21 +33,7 @@ function createDatePickers(dateFrom, dateTo, chartType) {
 
 function setOnChange() {
     var $j = jQuery.noConflict();
-    $j("#select").change(function () {
-        var dateFrom = $j("#datepickerFrom").datepicker("getDate").toISOString();
-        var dateTo = $j("#datepickerTo").datepicker("getDate").toISOString();
-        var chartType = document.getElementById("select").options[select.selectedIndex].value;
-        reloadPage(dateFrom, dateTo, chartType);
-    });
-
-    $j("#datepickerFrom").change(function () {
-        var dateFrom = $j("#datepickerFrom").datepicker("getDate").toISOString();
-        var dateTo = $j("#datepickerTo").datepicker("getDate").toISOString();
-        var chartType = document.getElementById("select").options[select.selectedIndex].value;
-        reloadPage(dateFrom, dateTo, chartType);
-    });
-
-    $j("#datepickerTo").change(function () {
+    $j("#select, #datepickerFrom, #datepickerTo").change(function () {
         var dateFrom = $j("#datepickerFrom").datepicker("getDate").toISOString();
         var dateTo = $j("#datepickerTo").datepicker("getDate").toISOString();
         var chartType = document.getElementById("select").options[select.selectedIndex].value;
@@ -76,15 +68,23 @@ function createWeightChart() {
 }
 
 function createKcalBurnedChart() {
-    defaultChart('Spalone kalorie', 'rgb(191, 99, 8)', "orange", 'rgba(191, 99, 8, 0.12)', 'Cel spalonych kalorii');
+    defaultChart('Spalone kalorie [kcal]', 'rgb(191, 99, 8)', "orange", 'rgba(191, 99, 8, 0.12)', 'Cel spalonych kalorii [kcal]');
 }
 
 function createKcalConsumedChart() {
-    defaultChart('Spożyte kalorie', 'rgb(222, 209, 27)', "yellow", 'rgba(222, 209, 27, 0.2)', 'Cel spożycia kalorii');
+    defaultChart('Spożyte kalorie [kcal]', 'rgb(222, 209, 27)', "yellow", 'rgba(222, 209, 27, 0.2)', 'Cel spożycia kalorii [kcal]');
 }
 
 function createWaterConsumedChart() {
-    defaultChart('Spożycie płynów', 'rgb(8, 87, 191)', "lightblue", 'rgba(8, 87, 191, 0.2)', 'Cel spożycia płynów');
+    defaultChart('Spożycie płynów [ml]', 'rgb(8, 87, 191)', "lightblue", 'rgba(8, 87, 191, 0.2)', 'Cel spożycia płynów [ml]');
+}
+
+function createWaistCircumferenceChart() {
+    defaultChart('Pomiar obwodu talii [cm]', 'rgba(241, 239, 239, 1)', "white", 'rgba(241, 239, 239, 0.12)', 'removeThisLabel');
+}
+
+function createTrainingTimeChart() {
+    defaultChart('Czas treningów [min]', 'rgb(172, 46, 245)', "violet", 'rgba(172, 46, 245, 0.12)', 'Cel czasu treningów [min]');
 }
 
 function defaultChart(label, borderColor, pointBorderColor, backgroundColor, labelGoal) {

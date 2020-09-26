@@ -45,17 +45,15 @@ namespace FitAppka.Repository.RepIfaceImpl{
             return fatMeasurement;
         }
 
-        public IEnumerable<FatMeasurement> GetClientFatMeasurements()
+        public IEnumerable<FatMeasurement> GetLoggedInClientFatMeasurements()
         {
             var fatMeasurements = new List<FatMeasurement>();
             foreach (var fatMeasurement in GetAllFatMeasurements())
             {
-                if(fatMeasurement.WeightMeasurement != null)
+                if(_context.WeightMeasurement.FirstOrDefault(w => w.FatMeasurementId == fatMeasurement.FatMeasurementId)
+                    .ClientId  == _clientRepository.GetLoggedInClientId())
                 {
-                    if(fatMeasurement.WeightMeasurement.ClientId == _clientRepository.GetLoggedInClientId())
-                    {
-                        fatMeasurements.Add(fatMeasurement);
-                    }
+                    fatMeasurements.Add(fatMeasurement);
                 }
             }
 

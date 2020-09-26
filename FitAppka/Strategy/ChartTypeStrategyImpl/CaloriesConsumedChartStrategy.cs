@@ -1,5 +1,5 @@
 ﻿using FitAppka.Models;
-using FitAppka.Models.DTO;
+using FitAppka.Models.Enum;
 using FitAppka.Repository;
 using FitAppka.Service;
 using FitAppka.Strategy.StrategyInterface;
@@ -31,7 +31,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             {
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
-                ChartType = '1',
+                ChartType = ChartStrategyEnum.CaloriesConsumed,
                 CaloriesInDays = GetCaloriesConsumedInDaysFromTo(dateFrom, dateTo),
             };
         }

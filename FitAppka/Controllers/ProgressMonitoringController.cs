@@ -15,12 +15,11 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        public IActionResult ProgressMonitoring(string dateFrom, string dateTo, short chartType)//WeightMeasurements(string dateFrom, string dateTo)
+        public IActionResult ProgressMonitoring(string dateFrom, string dateTo, short chartType)
         {
             ViewData["dayID"] = _dayService.GetTodayId();
             return View(_progressMonitoringService.GetProgressMonitoringDTO(dateFrom, dateTo, chartType));
         }
-
 
     }
 }

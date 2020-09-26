@@ -12,7 +12,7 @@ namespace FitAppka.Models
         public int DayId { get; set; }
         [Column("Product_ID")]
         public int ProductId { get; set; }
-        [Column("In_which_meal_of_the_day")]
+        [Column("At_which_meal_of_the_day")]
         public int InWhichMealOfTheDay { get; set; }
         public int Grammage { get; set; }
         public double Calories { get; set; }

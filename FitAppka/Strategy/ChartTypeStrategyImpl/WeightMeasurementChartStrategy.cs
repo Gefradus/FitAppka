@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FitAppka.Models;
+using FitAppka.Models.Enum;
 using FitAppka.Repository;
 using FitAppka.Strategy.StrategyInterface;
 using System.Collections.Generic;
@@ -23,22 +24,22 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             {
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
-                ChartType = '0',
-                WeightMeasurements = GetWeightMeasurementListFromTo(dateFrom, dateTo)
+                ChartType = ChartStrategyEnum.WeightMeasurement,
+                Measurements = GetWeightMeasurementListFromTo(dateFrom, dateTo)
             };
         }
 
-        private List<WeightMeasurementDTO> GetWeightMeasurementListFromTo(string dateFrom, string dateTo)
+        private List<MeasurementDTO> GetWeightMeasurementListFromTo(string dateFrom, string dateTo)
         {
             var dateTimeFrom = DateConverter.ConvertToDateTimeAndPreventNull(dateFrom, true);
             var dateTimeTo = DateConverter.ConvertToDateTimeAndPreventNull(dateTo, false);
-            var list = new List<WeightMeasurementDTO>();
+            var list = new List<MeasurementDTO>();
 
             foreach (var measurement in _weightMeasurementRepository.GetLoggedInClientWeightMeasurements())
             {
                 if (measurement.DateOfMeasurement.GetValueOrDefault().Date <= dateTimeTo && measurement.DateOfMeasurement.GetValueOrDefault().Date >= dateTimeFrom)
                 {
-                    list.Add(_mapper.Map<WeightMeasurement, WeightMeasurementDTO>(measurement));
+                    list.Add(_mapper.Map<WeightMeasurement, MeasurementDTO>(measurement));
                 }
             }
             return list;

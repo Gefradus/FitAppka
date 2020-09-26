@@ -20,7 +20,7 @@ namespace FitAppka.Models
         public int? FatMeasurementId { get; set; }
         [Column("Client_ID")]
         public int ClientId { get; set; }
-        public short Weight { get; set; }
+        public double Weight { get; set; }
         [Column("Date_of_measurement", TypeName = "datetime")]
         public DateTime? DateOfMeasurement { get; set; }
 

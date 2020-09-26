@@ -11,6 +11,6 @@ namespace FitAppka.Repository
         WeightMeasurement Add(WeightMeasurement weightMeasurement);
         WeightMeasurement Update(WeightMeasurement weightMeasurement);
         WeightMeasurement Delete(int id);
-        short GetLastLoggedInClientWeight();
+        double GetLastLoggedInClientWeight();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FitAppka.Models.DTO
+namespace FitAppka.Models
 {
     public class ChartDataInDayDTO
     {

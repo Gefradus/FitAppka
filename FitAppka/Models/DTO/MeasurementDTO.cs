@@ -2,9 +2,9 @@
 
 namespace FitAppka.Models
 {
-    public class WeightMeasurementDTO
+    public class MeasurementDTO
     {
-        public short Weight { get; set; }
+        public double Measurement { get; set; }
         public DateTime? DateOfMeasurement { get; set; }
     }
 }

@@ -8,8 +8,7 @@ namespace FitAppka.Models
     [Table("Fat_measurement")]
     public partial class FatMeasurement
     {
-        public FatMeasurement()
-        {
+        public FatMeasurement() {
             WeightMeasurementNavigation = new HashSet<WeightMeasurement>();
         }
 

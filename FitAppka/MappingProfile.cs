@@ -33,7 +33,8 @@ namespace FitAppka
 
             CreateMap<Task<List<Product>>, Task<List<ProductDTO>>>();
 
-            CreateMap<WeightMeasurement, WeightMeasurementDTO>();
+            CreateMap<WeightMeasurement, MeasurementDTO>()
+                .ForMember(m => m.Measurement, opt => opt.MapFrom(m => m.Weight));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model FitAppka.Models.ProgressMonitoringDTO
+﻿@using FitAppka.Models.Enum 
+@model FitAppka.Models.ProgressMonitoringDTO
 <html>
 <head>
     <link href="~/css/Home.css" rel="stylesheet" />
@@ -9,17 +10,15 @@
     <link href="~/css/ProgressMonitoring.css" rel="stylesheet" />
     <link href="~/css/Datepicker.css" rel="stylesheet" />
 </head>
-<body onload="createChart(@Model.ChartType)">
-    @{
-        if (Model.ChartType == '0') {
-            foreach (var item in Model.WeightMeasurements) {
+<body onload="createChart('@((int)Model.ChartType)')">
+    @{ if (Model.ChartType == ChartStrategyEnum.WeightMeasurement || Model.ChartType == ChartStrategyEnum.WaistCircumference) {
+            foreach (var item in Model.Measurements) {
                 <script>
-                    data.push('@item.Weight');
+                    data.push('@item.Measurement');
                     date.push('@item.DateOfMeasurement.Value.ToString("dd.MM.yy")');
                 </script>
             }
-        } 
-        if (Model.ChartType == '1' || Model.ChartType == '2' || Model.ChartType == '3') {
+        } else { 
             foreach(var item in Model.CaloriesInDays) {
                 <script>
                     data.push('@item.ChartData')
@@ -40,10 +39,12 @@
                     <div class="col-12">
                         <div>Pokaż wykres: </div>
                         <select class="form-control" id="select">
-                            <option value="0">Pomiary wagi</option>
-                            <option value="1">Spożyte kalorie</option>
-                            <option value="2">Spalone kalorie</option>
-                            <option value="3">Spożyte płyny</option>
+                            <option value="0">Spożyte kalorie</option>
+                            <option value="1">Spalone kalorie</option>
+                            <option value="2">Pomiary wagi</option>
+                            <option value="3">Pomiary talii</option>
+                            <option value="4">Spożyte płyny</option>
+                            <option value="5">Czas treningów</option>
                         </select>
                     </div>
                 </div>
@@ -76,6 +77,6 @@
                 + "?dateFrom=" + dateFrom + "&dateTo=" + dateTo + "&chartType=" + chartType;
         }
     </script>
-    <script>createDatePickers('@Model.DateFrom', '@Model.DateTo', '@Model.ChartType');</script>
+    <script>createDatePickers('@Model.DateFrom', '@Model.DateTo', '@((int)Model.ChartType)');</script>
 </body>
 </html>

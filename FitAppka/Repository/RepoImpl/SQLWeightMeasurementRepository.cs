@@ -59,11 +59,11 @@ namespace FitAppka.Repository.RepIfaceImpl
             return weightMeasurement;
         }
 
-        public short GetLastLoggedInClientWeight()
+        public double GetLastLoggedInClientWeight()
         {
             var measurementList = GetLoggedInClientWeightMeasurements();
 
-            short lastWeightMeasurement = 0;
+            double lastWeightMeasurement = 0;
             foreach (var item in measurementList)
             {
                 if (GetLastMeasurementDate(measurementList) == item.DateOfMeasurement)
