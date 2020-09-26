@@ -13,7 +13,6 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
         private readonly IGoalsService _goalsService;
         private readonly IClientRepository _clientRepository;
         private readonly IDayRepository _dayRepository;
-
         public CaloriesBurnedChartStrategy(IClientRepository clientRepository, IGoalsService goalsService, IDayRepository dayRepository)
         {
             _goalsService = goalsService;

@@ -11,6 +11,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
     {
         private readonly IFatMeasurementRepository _fatMeasurementRepository;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
+        public ChartStrategyEnum ChartStrategyEnum { get; set; }
 
         public EstimatedBodyFatChartStrategy(IFatMeasurementRepository fatMeasurementRepository,
             IWeightMeasurementRepository weightMeasurementRepository)

@@ -15,6 +15,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
         private readonly IHomePageService _homePageService;
         private readonly IClientRepository _clientRepository;
         private readonly IGoalsService _goalsService;
+        public ChartStrategyEnum ChartStrategyEnum { get; set; }
 
         public CaloriesConsumedChartStrategy(IDayRepository dayRepository, IHomePageService homePageService, 
             IClientRepository clientRepository, IGoalsService goalsService)
@@ -23,6 +24,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             _dayRepository = dayRepository;
             _homePageService = homePageService;
             _clientRepository = clientRepository;
+            ChartStrategyEnum = ChartStrategyEnum.CaloriesConsumed;
         }
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
@@ -31,7 +33,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             {
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
-                ChartType = ChartStrategyEnum.CaloriesConsumed,
+                ChartType = ChartStrategyEnum,
                 ChartDataInDays = GetCaloriesConsumedInDaysFromTo(dateFrom, dateTo),
             };
         }

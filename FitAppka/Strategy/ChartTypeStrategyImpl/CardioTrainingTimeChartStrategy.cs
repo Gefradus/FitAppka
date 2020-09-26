@@ -13,6 +13,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
         private readonly ICardioTrainingService _cardioService;
         private readonly IClientRepository _clientRepository;
         private readonly IDayRepository _dayRepository;
+        public ChartStrategyEnum ChartStrategyEnum { get; set; }
 
         public CardioTrainingTimeChartStrategy(IClientRepository clientRepository, ICardioTrainingService cardioService,
             IDayRepository dayRepository)

@@ -11,12 +11,14 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
     {
         private readonly IFatMeasurementRepository _fatMeasurementRepository;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
+        public ChartStrategyEnum ChartStrategyEnum { get; set; }
 
         public WaistCircumferenceMeasurementChartStrategy(IFatMeasurementRepository fatMeasurementRepository,
             IWeightMeasurementRepository weightMeasurementRepository)
         {
             _weightMeasurementRepository = weightMeasurementRepository;
             _fatMeasurementRepository = fatMeasurementRepository;
+            ChartStrategyEnum = ChartStrategyEnum.WaistCircumference;
         }
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
