@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using FitAppka.Models;
+using FitAppka.Service.ServiceImpl;
+using FitAppka.Strategy.ChartTypeStrategyImpl;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -33,8 +35,13 @@ namespace FitAppka
 
             CreateMap<Task<List<Product>>, Task<List<ProductDTO>>>();
 
-            CreateMap<WeightMeasurement, MeasurementDTO>()
-                .ForMember(m => m.Measurement, opt => opt.MapFrom(m => m.Weight));
+            CreateMap<ProgressMonitoringServiceImpl, CaloriesConsumedChartStrategy>();
+            CreateMap<ProgressMonitoringServiceImpl, CaloriesBurnedChartStrategy>();
+            CreateMap<ProgressMonitoringServiceImpl, CardioTrainingTimeChartStrategy>();
+            CreateMap<ProgressMonitoringServiceImpl, EstimatedBodyFatChartStrategy>();
+            CreateMap<ProgressMonitoringServiceImpl, WaistCircumferenceMeasurementChartStrategy>();
+            CreateMap<ProgressMonitoringServiceImpl, WaterConsumptionChartStrategy>();
+            CreateMap<ProgressMonitoringServiceImpl, WeightMeasurementChartStrategy>();
         }
     }
 }

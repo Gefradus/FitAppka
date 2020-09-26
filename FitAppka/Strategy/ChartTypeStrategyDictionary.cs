@@ -1,31 +1,32 @@
 ﻿using FitAppka.Models.Enum;
 using FitAppka.Strategy.ChartTypeStrategyImpl;
 using System.Collections.Generic;
-using AutoMapper;
-using FitAppka.Repository;
-using FitAppka.Service;
 using System;
+using FitAppka.Service.ServiceImpl;
+using AutoMapper;
 
 namespace FitAppka.Strategy
 {
     public class ChartTypeStrategyDictionary<T> : Dictionary<ChartStrategyEnum, T>
     {
-        public ChartTypeStrategyDictionary(IClientRepository clientRepository, IGoalsService goalsService, IDayRepository dayRepository, 
-            IWeightMeasurementRepository weightMeasurementRepository,IHomePageService homePageService, IMapper mapper,
-            IFatMeasurementRepository fatMeasurementRepository, ICardioTrainingService cardioService)
+        private readonly ProgressMonitoringServiceImpl serviceImpl;
+        private readonly IMapper _mapper;
+
+        public ChartTypeStrategyDictionary(ProgressMonitoringServiceImpl service, IMapper mapper)
         {
-            Add(ChartStrategyEnum.CaloriesBurned, ConvertToT(new CaloriesBurnedChartStrategy(clientRepository, goalsService, dayRepository)));
-            Add(ChartStrategyEnum.CaloriesConsumed, ConvertToT(new CaloriesConsumedChartStrategy(dayRepository, homePageService, clientRepository, goalsService)));
-            Add(ChartStrategyEnum.CardioTrainingTime, ConvertToT(new CardioTrainingTimeChartStrategy(clientRepository, cardioService, dayRepository)));
-            Add(ChartStrategyEnum.EstimatedBodyFat, ConvertToT(new EstimatedBodyFatChartStrategy(fatMeasurementRepository, weightMeasurementRepository)));
-            Add(ChartStrategyEnum.WaistCircumference, ConvertToT(new WaistCircumferenceMeasurementChartStrategy(fatMeasurementRepository, weightMeasurementRepository)));
-            Add(ChartStrategyEnum.WaterConsumption, ConvertToT(new WaterConsumptionChartStrategy(dayRepository, clientRepository, goalsService)));
-            Add(ChartStrategyEnum.WeightMeasurement, ConvertToT(new WeightMeasurementChartStrategy(weightMeasurementRepository, mapper)));
+            _mapper = mapper;
+            serviceImpl = service;
+            Add(ChartStrategyEnum.CaloriesBurned, ConvertToT(new CaloriesBurnedChartStrategy()));
+            Add(ChartStrategyEnum.CaloriesConsumed, ConvertToT(new CaloriesConsumedChartStrategy()));
+            Add(ChartStrategyEnum.CardioTrainingTime, ConvertToT(new CardioTrainingTimeChartStrategy()));
+            Add(ChartStrategyEnum.EstimatedBodyFat, ConvertToT(new EstimatedBodyFatChartStrategy()));
+            Add(ChartStrategyEnum.WaistCircumference, ConvertToT(new WaistCircumferenceMeasurementChartStrategy()));
+            Add(ChartStrategyEnum.WaterConsumption, ConvertToT(new WaterConsumptionChartStrategy()));
+            Add(ChartStrategyEnum.WeightMeasurement, ConvertToT(new WeightMeasurementChartStrategy()));
         }
 
-        private static T ConvertToT<O>(O o)
-        {
-            return (T)Convert.ChangeType(o, typeof(O));
+        private T ConvertToT<O>(O o) {
+            return (T)Convert.ChangeType(_mapper.Map(serviceImpl, o), typeof(O));
         }
     }
 }

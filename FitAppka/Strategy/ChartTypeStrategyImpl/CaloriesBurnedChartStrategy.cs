@@ -10,15 +10,9 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
 {
     public class CaloriesBurnedChartStrategy : IChartTypeStrategy
     {
-        private readonly IGoalsService _goalsService;
-        private readonly IClientRepository _clientRepository;
-        private readonly IDayRepository _dayRepository;
-        public CaloriesBurnedChartStrategy(IClientRepository clientRepository, IGoalsService goalsService, IDayRepository dayRepository)
-        {
-            _goalsService = goalsService;
-            _clientRepository = clientRepository;
-            _dayRepository = dayRepository;
-        }
+        public IGoalsService GoalsService { get; set; }
+        public IClientRepository ClientRepository { get; set; }
+        public IDayRepository DayRepository { get; set; }
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
         {
@@ -37,7 +31,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             var dateTimeTo = DateConverter.ConvertToDateTimeAndPreventNull(dateTo, false);
             var list = new List<ChartDataInDayDTO>();
 
-            foreach (var item in _dayRepository.GetClientDays(_clientRepository.GetLoggedInClientId()))
+            foreach (var item in DayRepository.GetClientDays(ClientRepository.GetLoggedInClientId()))
             {
                 DateTime day = item.Date.GetValueOrDefault().Date;
                 if (day <= dateTimeTo && day >= dateTimeFrom)
@@ -45,8 +39,8 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                     list.Add(new ChartDataInDayDTO()
                     {
                         DateOfDay = day,
-                        ChartData = _goalsService.CaloriesBurnedInDay(item.DayId),
-                        ChartDataGoal = _goalsService.GetDayGoals(item.DayId).KcalBurned.GetValueOrDefault()
+                        ChartData = GoalsService.CaloriesBurnedInDay(item.DayId),
+                        ChartDataGoal = GoalsService.GetDayGoals(item.DayId).KcalBurned.GetValueOrDefault()
                     });
                 }
             }

@@ -10,18 +10,9 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
 {
     public class CardioTrainingTimeChartStrategy : IChartTypeStrategy
     {
-        private readonly ICardioTrainingService _cardioService;
-        private readonly IClientRepository _clientRepository;
-        private readonly IDayRepository _dayRepository;
-        public ChartStrategyEnum ChartStrategyEnum { get; set; }
-
-        public CardioTrainingTimeChartStrategy(IClientRepository clientRepository, ICardioTrainingService cardioService,
-            IDayRepository dayRepository)
-        {
-            _cardioService = cardioService;
-            _clientRepository = clientRepository;
-            _dayRepository = dayRepository;
-        }
+        public ICardioTrainingService CardioService { get; set; }
+        public IClientRepository ClientRepository { get; set; }
+        public IDayRepository DayRepository { get; set; }
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
         {
@@ -40,7 +31,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             var dateTimeTo = DateConverter.ConvertToDateTimeAndPreventNull(dateTo, false);
             var list = new List<ChartDataInDayDTO>();
 
-            foreach (var item in _dayRepository.GetClientDays(_clientRepository.GetLoggedInClientId()))
+            foreach (var item in DayRepository.GetClientDays(ClientRepository.GetLoggedInClientId()))
             {
                 DateTime day = item.Date.GetValueOrDefault().Date;
                 if (day <= dateTimeTo && day >= dateTimeFrom)
@@ -48,8 +39,8 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                     list.Add(new ChartDataInDayDTO()
                     {
                         DateOfDay = day,
-                        ChartData = _cardioService.GetCardioTimeInDay(item.DayId).GetValueOrDefault(),
-                        ChartDataGoal = _cardioService.GetTrainingTimeGoalInDay(item.DayId).GetValueOrDefault()
+                        ChartData = CardioService.GetCardioTimeInDay(item.DayId).GetValueOrDefault(),
+                        ChartDataGoal = CardioService.GetTrainingTimeGoalInDay(item.DayId).GetValueOrDefault()
                     });
                 }
             }

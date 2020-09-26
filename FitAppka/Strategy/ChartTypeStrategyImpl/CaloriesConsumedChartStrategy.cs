@@ -10,22 +10,11 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
 {
     public class CaloriesConsumedChartStrategy : IChartTypeStrategy
     {
+        public IDayRepository DayRepository { get; set; }
+        public IHomePageService HomePageService { get; set; }
+        public IClientRepository ClientRepository { get; set; }
+        public IGoalsService GoalsService { get; set; }
 
-        private readonly IDayRepository _dayRepository;
-        private readonly IHomePageService _homePageService;
-        private readonly IClientRepository _clientRepository;
-        private readonly IGoalsService _goalsService;
-        public ChartStrategyEnum ChartStrategyEnum { get; set; }
-
-        public CaloriesConsumedChartStrategy(IDayRepository dayRepository, IHomePageService homePageService, 
-            IClientRepository clientRepository, IGoalsService goalsService)
-        {
-            _goalsService = goalsService;
-            _dayRepository = dayRepository;
-            _homePageService = homePageService;
-            _clientRepository = clientRepository;
-            ChartStrategyEnum = ChartStrategyEnum.CaloriesConsumed;
-        }
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
         {
@@ -33,7 +22,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             {
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
-                ChartType = ChartStrategyEnum,
+                ChartType = ChartStrategyEnum.CaloriesConsumed,
                 ChartDataInDays = GetCaloriesConsumedInDaysFromTo(dateFrom, dateTo),
             };
         }
@@ -44,7 +33,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             var dateTimeTo = DateConverter.ConvertToDateTimeAndPreventNull(dateTo, false);
             var list = new List<ChartDataInDayDTO>();
 
-            foreach (var item in _dayRepository.GetClientDays(_clientRepository.GetLoggedInClientId()))
+            foreach (var item in DayRepository.GetClientDays(ClientRepository.GetLoggedInClientId()))
             {
                 DateTime day = item.Date.GetValueOrDefault().Date;
                 if (day <= dateTimeTo && day >= dateTimeFrom)
@@ -52,8 +41,8 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                     list.Add(new ChartDataInDayDTO()
                     {
                         DateOfDay = day,
-                        ChartData = (int)_homePageService.SumAllKcalInDay(day),
-                        ChartDataGoal = (int)_goalsService.GetDayGoals(item.DayId).Calories
+                        ChartData = (int)HomePageService.SumAllKcalInDay(day),
+                        ChartDataGoal = (int)GoalsService.GetDayGoals(item.DayId).Calories
                     });
                 }
             }

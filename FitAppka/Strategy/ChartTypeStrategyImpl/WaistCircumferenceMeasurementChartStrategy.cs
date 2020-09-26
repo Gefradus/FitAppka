@@ -9,17 +9,9 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
 {
     public class WaistCircumferenceMeasurementChartStrategy : IChartTypeStrategy
     {
-        private readonly IFatMeasurementRepository _fatMeasurementRepository;
-        private readonly IWeightMeasurementRepository _weightMeasurementRepository;
-        public ChartStrategyEnum ChartStrategyEnum { get; set; }
+        public IFatMeasurementRepository FatMeasurementRepository { get; set; }
+        public IWeightMeasurementRepository WeightMeasurementRepository { get; set; }
 
-        public WaistCircumferenceMeasurementChartStrategy(IFatMeasurementRepository fatMeasurementRepository,
-            IWeightMeasurementRepository weightMeasurementRepository)
-        {
-            _weightMeasurementRepository = weightMeasurementRepository;
-            _fatMeasurementRepository = fatMeasurementRepository;
-            ChartStrategyEnum = ChartStrategyEnum.WaistCircumference;
-        }
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
         {
@@ -38,7 +30,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             var dateTimeTo = DateConverter.ConvertToDateTimeAndPreventNull(dateTo, false);
 
             var list = new List<MeasurementDTO>();
-            foreach (var item in _fatMeasurementRepository.GetLoggedInClientFatMeasurements())
+            foreach (var item in FatMeasurementRepository.GetLoggedInClientFatMeasurements())
             {
                 var dateFromMeasurement = SelectDateFromFatMeasurement(item);
                 if (dateFromMeasurement <= dateTimeTo && dateFromMeasurement >= dateTimeFrom)
@@ -56,7 +48,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
 
         private DateTime SelectDateFromFatMeasurement(FatMeasurement measurement)
         {
-            return _weightMeasurementRepository.GetWeightMeasurement(measurement.WeightMeasurementId)
+            return WeightMeasurementRepository.GetWeightMeasurement(measurement.WeightMeasurementId)
                 .DateOfMeasurement.GetValueOrDefault().Date;
         }
 
