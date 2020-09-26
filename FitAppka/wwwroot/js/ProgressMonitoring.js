@@ -120,6 +120,7 @@ function defaultChart(label, borderColor, pointBorderColor, backgroundColor, lab
                 color: 'rgb(0, 0, 0)',
                 pointBorderColor: 'pink',
                 backgroundColor: 'rgba(193,66,66,0.12)',
+                pointRadius: 2
             }]
         },
         options: {

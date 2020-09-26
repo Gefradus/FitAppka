@@ -41,7 +41,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                     });
                 }
             }
-            return list;
+            return DateConverter.SortByMeasurementDate(list);
         }
 
 

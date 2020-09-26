@@ -2,6 +2,7 @@
 using FitAppka.Models.Enum;
 using FitAppka.Repository;
 using FitAppka.Strategy.StrategyInterface;
+using System;
 using System.Collections.Generic;
 
 namespace FitAppka.Strategy.ChartTypeStrategyImpl
@@ -29,15 +30,17 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
 
             foreach (var measurement in WeightMeasurementRepository.GetLoggedInClientWeightMeasurements())
             {
-                if (measurement.DateOfMeasurement.GetValueOrDefault().Date <= dateTimeTo && measurement.DateOfMeasurement.GetValueOrDefault().Date >= dateTimeFrom)
+                var measurementDate = measurement.DateOfMeasurement.GetValueOrDefault().Date;
+                if (measurementDate <= dateTimeTo && measurementDate >= dateTimeFrom)
                 {
                     list.Add(new MeasurementDTO() { 
-                        DateOfMeasurement = measurement.DateOfMeasurement,
+                        DateOfMeasurement = measurementDate,
                         Measurement = measurement.Weight
                     });
                 }
             }
-            return list;
+            
+            return DateConverter.SortByMeasurementDate(list);
         }
     }
 }

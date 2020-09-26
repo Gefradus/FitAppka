@@ -12,7 +12,6 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
         public IFatMeasurementRepository FatMeasurementRepository { get; set; }
         public IWeightMeasurementRepository WeightMeasurementRepository { get; set; }
 
-
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
         {
             return new ProgressMonitoringDTO()
@@ -42,7 +41,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                     });
                 }
             }
-            return list;
+            return DateConverter.SortByMeasurementDate(list);
         }
 
 

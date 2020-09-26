@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FitAppka.Models;
+using System;
+using System.Collections.Generic;
 
 namespace FitAppka.Strategy.ChartTypeStrategyImpl
 {
@@ -16,6 +18,18 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
         internal static string ConvertToJSDate(string date, bool fromOrTo)
         {
             return ConvertToDateTimeAndPreventNull(date, fromOrTo).ToString("dd.MM.yyyy");
+        }
+
+        internal static List<MeasurementDTO> SortByMeasurementDate(List<MeasurementDTO> list)
+        {
+            list.Sort((x, y) => x.DateOfMeasurement.CompareTo(y.DateOfMeasurement));
+            return list;
+        }
+
+        internal static List<ChartDataInDayDTO> SortChartDataByDate(List<ChartDataInDayDTO> list)
+        {
+            list.Sort((x, y) => x.DateOfDay.CompareTo(y.DateOfDay));
+            return list;
         }
     }
 }

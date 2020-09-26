@@ -1,5 +1,4 @@
-﻿@using FitAppka.Models.Enum 
-@model FitAppka.Models.ProgressMonitoringDTO
+﻿@model FitAppka.Models.ProgressMonitoringDTO
 <html>
 <head>
     <link href="~/css/Home.css" rel="stylesheet" />
@@ -11,13 +10,11 @@
     <link href="~/css/Datepicker.css" rel="stylesheet" />
 </head>
 <body onload="createChart('@((int)Model.ChartType)')">
-    @{ if (Model.ChartType == ChartStrategyEnum.WeightMeasurement 
-        || Model.ChartType == ChartStrategyEnum.WaistCircumference 
-        || Model.ChartType == ChartStrategyEnum.EstimatedBodyFat) {
+    @{ if ((int)Model.ChartType == 2 || (int)Model.ChartType == 3 || (int)Model.ChartType == 4) {
             foreach (var item in Model.Measurements) {
                 <script>
                     data.push(parseFloat('@item.Measurement.ToString().Replace(',','.')').toFixed(1));
-                    date.push('@item.DateOfMeasurement.Value.ToString("dd.MM.yy")');
+                    date.push('@item.DateOfMeasurement.ToString("dd.MM.yy")');
                 </script>
             }
         } else { 
