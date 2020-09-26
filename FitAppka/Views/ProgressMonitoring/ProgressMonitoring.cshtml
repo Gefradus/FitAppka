@@ -11,15 +11,17 @@
     <link href="~/css/Datepicker.css" rel="stylesheet" />
 </head>
 <body onload="createChart('@((int)Model.ChartType)')">
-    @{ if (Model.ChartType == ChartStrategyEnum.WeightMeasurement || Model.ChartType == ChartStrategyEnum.WaistCircumference) {
+    @{ if (Model.ChartType == ChartStrategyEnum.WeightMeasurement 
+        || Model.ChartType == ChartStrategyEnum.WaistCircumference 
+        || Model.ChartType == ChartStrategyEnum.EstimatedBodyFat) {
             foreach (var item in Model.Measurements) {
                 <script>
-                    data.push('@item.Measurement');
+                    data.push(parseFloat('@item.Measurement.ToString().Replace(',','.')').toFixed(1));
                     date.push('@item.DateOfMeasurement.Value.ToString("dd.MM.yy")');
                 </script>
             }
         } else { 
-            foreach(var item in Model.CaloriesInDays) {
+            foreach(var item in Model.ChartDataInDays) {
                 <script>
                     data.push('@item.ChartData')
                     date.push('@item.DateOfDay.ToString("dd.MM.yy")');
@@ -43,8 +45,9 @@
                             <option value="1">Spalone kalorie</option>
                             <option value="2">Pomiary wagi</option>
                             <option value="3">Pomiary talii</option>
-                            <option value="4">Spożyte płyny</option>
-                            <option value="5">Czas treningów</option>
+                            <option value="4">Pomiary tłuszczu</option>
+                            <option value="5">Spożyte płyny</option>
+                            <option value="6">Czas treningów</option>
                         </select>
                     </div>
                 </div>

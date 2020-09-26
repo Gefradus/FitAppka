@@ -29,7 +29,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
                 ChartType = ChartStrategyEnum.CardioTrainingTime,
-                CaloriesInDays = GetCaloriesBurnedInDaysFromTo(dateFrom, dateTo)
+                ChartDataInDays = GetCaloriesBurnedInDaysFromTo(dateFrom, dateTo)
             };
         }
 

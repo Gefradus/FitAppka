@@ -12,9 +12,12 @@
         createWaistCircumferenceChart();
     }
     if (chartType == 4) {
-        createWaterConsumedChart();
+        createBodyFatChart();
     }
     if (chartType == 5) {
+        createWaterConsumedChart();
+    }
+    if (chartType == 6) {
         createTrainingTimeChart();
     }
 }
@@ -85,6 +88,10 @@ function createWaistCircumferenceChart() {
 
 function createTrainingTimeChart() {
     defaultChart('Czas treningów [min]', 'rgb(172, 46, 245)', "violet", 'rgba(172, 46, 245, 0.12)', 'Cel czasu treningów [min]');
+}
+
+function createBodyFatChart() {
+    defaultChart('Szacowany poziom tłuszczu w organizmie[%]', 'rgb(144, 55, 39)', "brown", 'rgba(144, 55, 39, 0.12)', 'removeThisLabel');
 }
 
 function defaultChart(label, borderColor, pointBorderColor, backgroundColor, labelGoal) {

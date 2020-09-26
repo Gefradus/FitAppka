@@ -29,7 +29,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
                 ChartType = ChartStrategyEnum.WaterConsumption,
-                CaloriesInDays = GetWaterConsumedInDaysFromTo(dateFrom, dateTo),
+                ChartDataInDays = GetWaterConsumedInDaysFromTo(dateFrom, dateTo),
             };
         }
 

@@ -6,6 +6,7 @@
         CaloriesBurned,
         WeightMeasurement,
         WaistCircumference,
+        EstimatedBodyFat,
         WaterConsumption,
         CardioTrainingTime
     }

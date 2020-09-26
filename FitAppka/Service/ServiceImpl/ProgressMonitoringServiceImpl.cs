@@ -54,6 +54,9 @@ namespace FitAppka.Service.ServiceImpl
             if(chartType == (int) ChartStrategyEnum.CardioTrainingTime) {
                 _chartTypeStrategy = new CardioTrainingTimeChartStrategy(_clientRepository, _cardioService, _dayRepository);
             }
+            if(chartType == (int) ChartStrategyEnum.EstimatedBodyFat) {
+                _chartTypeStrategy = new EstimatedBodyFatChartStrategy(_fatMeasurementRepository, _weightMeasurementRepository);
+            }
 
             return _chartTypeStrategy.GetChartDataList(dateFrom, dateTo);
         }
