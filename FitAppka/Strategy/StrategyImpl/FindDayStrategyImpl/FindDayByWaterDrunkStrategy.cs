@@ -14,10 +14,10 @@ namespace FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl
             var list = new List<DayDTO>();
             foreach (var day in DayRepository.GetLoggedInClientDays())
             {
-                if(day.WaterDrunk <= dto.From && day.WaterDrunk >= dto.To &&
+                if(day.WaterDrunk <= dto.From && (day.WaterDrunk >= dto.To || dto.To == 0) &&
                 day.Date <= DateConverter.ConvertToDateTimeFrom(dto.DateFrom) && day.Date >= DateConverter.ConvertToDateTimeTo(dto.DateTo))
                 {
-                    list.Add(new DayDTO(){
+                    list.Add(new DayDTO() {
                         Date = day.Date.GetValueOrDefault(),
                         DataSearchedFor = day.WaterDrunk.GetValueOrDefault(),
                         DayId = day.DayId

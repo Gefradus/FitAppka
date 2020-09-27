@@ -12,6 +12,9 @@
     <script src="~/js/Validation.js"></script>
     <script type="text/javascript"></script>
     <script>
+        function search(searchType) {
+            findDays('@Url.Action("FindDay", "FindDay")', searchType);
+        }
         function restoreState() {
             restore(@Model.FindBy);
         }
@@ -25,9 +28,9 @@
                 <div id="findDayWhere">Szukaj dni gdzie:</div>
                 <div>
                     <select id="choice" onchange="choice()" class="form-control form-control-sm">
-                        <option value="1">Spożyto dany posiłek</option>
-                        <option value="2">Spożycie kalorii wyniosło</option>
-                        <option value="3">Spożycie płynów wyniosło</option>
+                        <option value="0">Spożyto dany posiłek</option>
+                        <option value="1">Spożycie kalorii wyniosło</option>
+                        <option value="2">Spożycie płynów wyniosło</option>
                     </select>
                 </div>
             </div>
@@ -35,83 +38,83 @@
     </header>
 
     <div class="container" style="margin-top: 100px">
-        <div class="row no-gutters">
-            <div class="container">
-                <div id="product" class="row no-gutters">
-                    <nav id="navProduct" class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top">
-                        <div id="panelek">
-                            <div id="chosenPanel">
-                                <div style="font-size: 12px">Wybierz produkt:</div>
-                                @Html.DropDownList("Product", Model.Products, new { id = "normalDropDown" })
-                            </div>
-                            <div id="panelGramatury">
-                                <div style="font-size: 12px">Przedział wagi produktu (*opcjonalne):</div>
-                                <div class="oddodiv">*Od: </div>
-                                <input id="from_product" value="@Model.From" class="oddo int" type="number" oninput="validity.valid||(value='')" />
-                                <div class="g1">g</div>
-                                <div class="oddodiv">*Do: </div>
-                                <input id="to_product" value="@Model.To" class="oddo int" type="number" oninput="validity.valid||(value='')" />
-                                <div class="g2">g</div>
-                                <div class="cb"></div>
-                            </div>
-                            <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(1)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
-                        </div>
-                    </nav>
+        <div id="product" class="row no-gutters">
+            <nav id="navProduct" class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top">
+                <div id="panelek">
+                    <div id="chosenPanel">
+                        <div style="font-size: 12px">Wybierz produkt:</div>
+                        @Html.DropDownList("Product", Model.Products, new { id = "normalDropDown" })
+                    </div>
+                    <div id="panelGramatury">
+                        <div style="font-size: 12px">Przedział wagi produktu (*opcjonalne):</div>
+                        <div class="oddodiv">*Od: </div>
+                        <input id="from_product" value="@Model.From" class="oddo int" type="number" oninput="validity.valid||(value='')" />
+                        <div class="g1">g</div>
+                        <div class="oddodiv">*Do: </div>
+                        <input id="to_product" value="@Model.To" class="oddo int" type="number" oninput="validity.valid||(value='')" />
+                        <div class="g2">g</div>
+                        <div class="cb"></div>
+                    </div>
+                    <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(0)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
                 </div>
-                <div id="calorie" class="row no-gutters" hidden>
-                    <nav class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top">
-                        <div>
-                            <div style="float: left; margin-right: 15px; margin-left:15px">
-                                <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych kalorii (*opcjonalne):</div>
-                                <div class="oddodiv">*Od: </div>
-                                <input id="from_calorie" class="oddo int" type="number" oninput="validity.valid||(value='')" />
-                                <div class="g1">kcal</div>
-                                <div class="oddodiv">*Do: </div>
-                                <input id="to_calorie" class="oddo int" type="number" oninput="validity.valid||(value='')" />
-                                <div class="g2">kcal</div>
-                                <div class="cb"></div>
-                            </div>
-                            <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(2)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
-                        </div>
-                    </nav>
+            </nav>
+        </div>
+        <div id="calorie" class="row no-gutters" hidden>
+            <nav class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top">
+                <div>
+                    <div style="float: left; margin-right: 15px; margin-left:15px">
+                        <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych kalorii (*opcjonalne):</div>
+                        <div class="oddodiv">*Od: </div>
+                        <input id="from_calorie" value="@Model.From" class="oddo int" type="number" oninput="validity.valid||(value='')" />
+                        <div class="g1">kcal</div>
+                        <div class="oddodiv">*Do: </div>
+                        <input id="to_calorie" value="@Model.To" class="oddo int" type="number" oninput="validity.valid||(value='')" />
+                        <div class="g2">kcal</div>
+                        <div class="cb"></div>
+                    </div>
+                    <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(1)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
                 </div>
-                <div id="waterConsumption" class="row no-gutters" hidden>
-                    <nav class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top">
-                        <div>
-                            <div style="float: left; margin-right: 15px; margin-left:15px">
-                                <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych płynów (*opcjonalne):</div>
-                                <div class="oddodiv">*Od: </div>
-                                <input id="from_water" class="oddo int" type="number" oninput="validity.valid||(value='')" />
-                                <div class="g1">ml</div>
-                                <div class="oddodiv">*Do: </div>
-                                <input id="to_water" class="oddo int" type="number" oninput="validity.valid||(value='')" />
-                                <div class="g2">ml</div>
-                                <div class="cb"></div>
-                            </div>
-                            <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(3)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
-                        </div>
-                    </nav>
+            </nav>
+        </div>
+        <div id="waterConsumption" class="row no-gutters" hidden>
+            <nav class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top">
+                <div>
+                    <div style="float: left; margin-right: 15px; margin-left:15px">
+                        <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych płynów (*opcjonalne):</div>
+                        <div class="oddodiv">*Od: </div>
+                        <input id="from_water" value="@Model.From" class="oddo int" type="number" oninput="validity.valid||(value='')" />
+                        <div class="g1">ml</div>
+                        <div class="oddodiv">*Do: </div>
+                        <input id="to_water" value="@Model.To" class="oddo int" type="number" oninput="validity.valid||(value='')" />
+                        <div class="g2">ml</div>
+                        <div class="cb"></div>
+                    </div>
+                    <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(2)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
                 </div>
-            </div>
+            </nav>
         </div>
 
-        <div class="row no-gutters" style="margin-top: 100px;">
-            <div class="container">
-                <div class="row no-gutters dayHeader">
-                    <div class="col-4 cent" style="margin-left: -17px; margin-right: 17px">
-                        Dzień
-                    </div>
-                    <div class="col-4 cent iloscPro">
-                        Spożyte płyny
-                    </div>
-                    <div class="col-4 cent">
-                        Przejdź do dnia
+        @if (Model.Days.Count() > 0)
+        {
+            <div class="row no-gutters" style="margin-top: 100px;">
+                <div class="container">
+                    <div class="row no-gutters dayHeader">
+                        <div class="col-4 cent" style="margin-left: -17px; margin-right: 17px">
+                            Dzień
+                        </div>
+                        <div class="col-4 cent iloscPro">
+                            Spożyte płyny
+                        </div>
+                        <div class="col-4 cent">
+                            Przejdź do dnia
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+
         <div class="row no-gutters" style="font-weight: 600">
-            @foreach(var item in Model.Days)
+            @foreach (var item in Model.Days)
             {
                 <div class="container" style="border-bottom: 1px solid darkgray">
                     <div class="row no-gutters dayRow tableRow">
@@ -127,16 +130,16 @@
                     </div>
                 </div>
             }
-            @if(Model.Products.Count == 0 && Model.FindBy != 0)
+            @if (Model.Products.Count == 0 && Model.FindBy != 0)
             {
                 <div class="cent" style="margin-top: 125px; width: 100%">Nie znaleziono dni</div>
             }
-
         </div>
-        <script src="~/js/ShowNavbar.js"></script>
-        <script>
-            colorEverySecondRow();
-            setInputsValidation();
-        </script>
+    </div>
+    <script src="~/js/ShowNavbar.js"></script>
+    <script>
+        colorEverySecondRow();
+        setInputsValidation();
+    </script>
 </body>
 

@@ -23,7 +23,7 @@ namespace FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl
                     sumOfGrammages += meal.Grammage;
                 }
 
-                if (sumOfGrammages >= dto.From && (sumOfGrammages <= dto.To || dto.To == 0) && sumOfGrammages != 0 &&
+                if ((sumOfGrammages >= dto.From) && (sumOfGrammages <= dto.To || dto.To == 0) && sumOfGrammages != 0 &&
                     day.Date >= DateConverter.ConvertToDateTimeFrom(dto.DateFrom) && day.Date <= DateConverter.ConvertToDateTimeTo(dto.DateTo))
                 {
                     list.Add(new DayDTO() {

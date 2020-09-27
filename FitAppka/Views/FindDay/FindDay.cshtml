@@ -12,7 +12,7 @@
     <script src="~/js/Validation.js"></script>
     <script type="text/javascript">
             function search(searchType) {
-                searchDay(searchType, '@Html.Raw(@Url.Action("FindDay", "FindDay", new { from = "_from_", productID = "_id_", to = "_to_", searchType = "_type_" }))');
+                searchDay(searchType, '@Url.Action("FindDay", "FindDay", new { from = "_from_", productID = "_id_", to = "_to_", searchType = "_type_" }))');
             }
 
             function home(dayID, clientID) {
@@ -34,9 +34,9 @@
                 <div id="findDayWhere">Szukaj dni gdzie:</div>
                 <div>
                     <select id="choice" onchange="choice()" class="form-control form-control-sm">
-                        <option value="1">Spożyto dany posiłek</option>
-                        <option value="2">Spożycie kalorii wyniosło</option>
-                        <option value="3">Spożycie płynów wyniosło</option>
+                        <option value="0">Spożyto dany posiłek</option>
+                        <option value="1">Spożycie kalorii wyniosło</option>
+                        <option value="2">Spożycie płynów wyniosło</option>
                     </select>
                 </div>
             </div>

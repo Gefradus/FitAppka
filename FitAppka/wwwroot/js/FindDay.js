@@ -4,13 +4,13 @@
 
     hideEverything();
 
-    if (selectedValue == 1) {
+    if (selectedValue == 0) {
         document.getElementById("product").hidden = false;
     }
-    if (selectedValue == 2) {
+    if (selectedValue == 1) {
         document.getElementById("calorie").hidden = false;
     }
-    if (selectedValue == 3) {
+    if (selectedValue == 2) {
         document.getElementById("waterConsumption").hidden = false;
     }
 }
@@ -21,28 +21,34 @@ function hideEverything() {
     document.getElementById("waterConsumption").hidden = true;
 }
 
-function searchDay(searchType, htmlUrl) {
+function findDays(url, searchType) {
     var select = document.getElementById("normalDropDown");
-    var selectedValue = select.options[select.selectedIndex].value;
+    var productId = select.options[select.selectedIndex].value;
     var from = 0;
     var to = 0;
 
+    if (searchType == 0) {
+        from = getValueFromInput("#from_product");
+        to = getValueFromInput("#to_product");
+    }
     if (searchType == 1) {
-        from = parseInt(document.getElementById("from_product").value, 10);
-        to = parseInt(document.getElementById("to_product").value, 10);
+        from = getValueFromInput("#from_calorie");
+        to = getValueFromInput("#to_calorie");
     }
     if (searchType == 2) {
-        from = parseInt(document.getElementById("from_calorie").value, 10);
-        to = parseInt(document.getElementById("to_calorie").value, 10);
-    }
-    if (searchType == 3) {
-        from = parseInt(document.getElementById("from_water").value, 10);
-        to = parseInt(document.getElementById("to_water").value, 10);
+        from = getValueFromInput("#from_water");
+        to = getValueFromInput("#to_water");
     }
 
-    var url = htmlUrl;
-    window.location.href = url.replace('_id_', selectedValue).replace('_from_', from).replace('_to_', to).replace('_type_', searchType);
+    url = url + "?findBy=" + searchType + "&from=" + from + "&to=" + to;
+    location.href = searchType == 0 ? url + "&productId=" + productId : url;
 }
+
+function getValueFromInput(selector) {
+    var value = $(selector).val();
+    return isNaN(value) ? 0 : value;
+}
+
 
 function onload() {
     colorEverySecondRow();
@@ -52,15 +58,13 @@ function onload() {
 }
 
 function restore(searchType) {
-    if (searchType == 2) {
-        var select = document.getElementById("choice");
-        select.value = '2';
+    if (searchType == 1) {
+        document.getElementById("choice").value = '1';
         hideEverything();
         document.getElementById("calorie").hidden = false;
     }
-    if (searchType == 3) {
-        var select = document.getElementById("choice");
-        select.value = '3';
+    if (searchType == 2) {
+        document.getElementById("choice").value = '2';
         hideEverything();
         document.getElementById("waterConsumption").hidden = false;
     }
