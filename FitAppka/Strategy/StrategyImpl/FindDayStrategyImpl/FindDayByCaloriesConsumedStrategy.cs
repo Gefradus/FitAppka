@@ -23,7 +23,7 @@ namespace FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl
                     }
                 }
 
-                if((sumOfCaloriesInDay >= dto.From) && (sumOfCaloriesInDay <= dto.To || dto.To == 0) && 
+                if((sumOfCaloriesInDay >= dto.From || dto.From == null) && (sumOfCaloriesInDay <= dto.To || dto.To == null) && 
                     day.Date >= DateConverter.ConvertToDateTimeFrom(dto.DateFrom) && day.Date <= DateConverter.ConvertToDateTimeTo(dto.DateTo)) 
                 {
                     list.Add(new DayDTO() {
