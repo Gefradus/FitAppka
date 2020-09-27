@@ -10,9 +10,11 @@ namespace FitAppka.Controllers
     public class FindDayController : Controller
     {
         private readonly IDayManageService _dayManageService;
+        private readonly IFindDayService _findDayService;
         
-        public FindDayController(IDayManageService dayManageService)
+        public FindDayController(IDayManageService dayManageService, IFindDayService findDayService)
         {
+            _findDayService = findDayService;
             _dayManageService = dayManageService;
         }
 
@@ -20,7 +22,7 @@ namespace FitAppka.Controllers
         public IActionResult FindDay(FindDayDTO findDayDTO)
         {
             ViewData["dayID"] = _dayManageService.GetTodayId();
-            return View("FindDay2");
+            return View("FindDay2", _findDayService.FindDays(findDayDTO));
         }
 
     }

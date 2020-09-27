@@ -28,7 +28,8 @@ namespace FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl
                 {
                     list.Add(new DayDTO() {
                         Date = day.Date.GetValueOrDefault(),
-                        DataSearchedFor = (int)sumOfCaloriesInDay
+                        DataSearchedFor = (int)sumOfCaloriesInDay,
+                        DayId = day.DayId
                     });
                 }
             }

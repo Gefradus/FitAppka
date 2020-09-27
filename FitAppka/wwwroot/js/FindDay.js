@@ -65,3 +65,11 @@ function restore(searchType) {
         document.getElementById("waterConsumption").hidden = false;
     }
 }
+
+function setInputsValidation() {
+    $(".int").on("change", function () {
+        this.value = changeToMaxIfGreaterInt(this.value, 10000);
+    });
+
+    $(".int").attr("max", 999999);
+}

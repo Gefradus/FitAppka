@@ -49,8 +49,6 @@ namespace FitAppka
                 .ForMember(p => p.VisibleToAll, opt => opt.MapFrom(p => p.VisibleToAll))
                 .ForAllOtherMembers(opt => opt.Ignore());
 
-            CreateMap<List<Product>, List<FindDayProductDTO>>();
-
             CreateMap<Task<List<Product>>, Task<List<ProductDTO>>>();
 
             CreateMap<ProgressMonitoringServiceImpl, CaloriesConsumedChartStrategy>();

@@ -24,21 +24,34 @@ namespace FitAppka.Service.ServiceImpl
             MealRepository = mealRepository;
         }
 
-        public List<DaysAndProductsDTO> FindDays(FindDayDTO findDayDTO)
+        public FindDayDTO FindDays(FindDayDTO dto)
         {
-            new FindDayStrategyDictionary<IFindDayStrategy>(this, _mapper).
-                TryGetValue((FindDayStrategyEnum)findDayDTO.FindBy, out IFindDayStrategy strategy);
+            new FindDayStrategyDictionary<IFindDayStrategy>(this, _mapper)
+                .TryGetValue((FindDayStrategyEnum)dto.FindBy, out IFindDayStrategy strategy);
 
-            return new DaysAndProductsDTO()
-            {
-                Days = strategy.FindDays(findDayDTO),
-                
-            };
+            dto.Days = strategy.FindDays(dto);
+            dto.Products = CreateProductsList(dto.ProductId);
+            return dto;
         }
 
-        public List<SelectListItem> CreateProductsList(int productID)
+        public List<SelectListItem> CreateProductsList(int productId)
         {
-            throw new System.NotImplementedException();
+            var list = new List<SelectListItem>();
+            foreach (var item in ProductRepository.GetAccessedToLoggedInClientProducts())
+            {
+                SelectListItem selectListItem = new SelectListItem() {
+                    Text = item.ProductName + ", " + (int)item.Calories + "kcal",
+                    Value = item.ProductId.ToString()
+                };
+
+                if (item.ProductId == productId) {
+                    selectListItem.Selected = true;
+                }
+
+                list.Add(selectListItem);
+            }
+
+            return list;
         }
     }
 }

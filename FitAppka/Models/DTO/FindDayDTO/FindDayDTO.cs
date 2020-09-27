@@ -1,7 +1,12 @@
-﻿namespace FitAppka.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+
+namespace FitAppka.Models
 {
     public class FindDayDTO
     {
+        public List<SelectListItem> Products { get; set; }
+        public List<DayDTO> Days { get; set; }
         public int FindBy { get; set; }
         public int ProductId { get; set; }
         public int From { get; set; }

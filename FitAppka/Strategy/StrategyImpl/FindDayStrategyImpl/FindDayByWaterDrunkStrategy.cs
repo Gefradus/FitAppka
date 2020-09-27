@@ -19,7 +19,8 @@ namespace FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl
                 {
                     list.Add(new DayDTO(){
                         Date = day.Date.GetValueOrDefault(),
-                        DataSearchedFor = day.WaterDrunk.GetValueOrDefault()
+                        DataSearchedFor = day.WaterDrunk.GetValueOrDefault(),
+                        DayId = day.DayId
                     });
                 }
             }

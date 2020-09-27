@@ -4,7 +4,8 @@
     {
         ByProductConsumed,
         ByCaloriesConsumed,
-        ByCaloriesBurned,
         ByWaterDrunk,
+        ByCaloriesBurned,
+        
     }
 }
