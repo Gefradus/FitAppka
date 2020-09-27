@@ -26,7 +26,7 @@ function findDays(url, searchType) {
         to = getValueFromInput("#to_water");
     }
 
-    url = url + "?findBy=" + searchType + "&from=" + from + "&to=" + to;
+    url = url + "?findBy=" + searchType + "&from=" + from + "&to=" + to + "&wasSearchedFor=true";
     location.href = searchType == 0 ? url + "&productId=" + select.options[select.selectedIndex].value : url;
 }
 
@@ -34,7 +34,6 @@ function getValueFromInput(selector) {
     var value = $(selector).val();
     return isNaN(value) ? 0 : value;
 }
-
 
 function onload() {
     colorEverySecondRow();

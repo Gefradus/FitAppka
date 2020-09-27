@@ -22,7 +22,7 @@ namespace FitAppka.Controllers
         public IActionResult FindDay(FindDayDTO dto)
         {
             ViewData["dayID"] = _dayManageService.GetTodayId();
-            return View("FindDay2", _findDayService.FindDays(dto));
+            return View(_findDayService.FindDays(dto));
         }
 
     }

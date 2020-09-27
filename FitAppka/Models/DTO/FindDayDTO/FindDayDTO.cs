@@ -7,6 +7,7 @@ namespace FitAppka.Models
     {
         public List<SelectListItem> Products { get; set; }
         public List<DayDTO> Days { get; set; }
+        public bool WasSearchedFor { get; set; }
         public int FindBy { get; set; }
         public int ProductId { get; set; }
         public int From { get; set; }
