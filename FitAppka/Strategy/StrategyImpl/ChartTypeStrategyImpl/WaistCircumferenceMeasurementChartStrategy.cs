@@ -18,7 +18,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             {
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
-                ChartType = ChartStrategyEnum.WaistCircumference,
+                ChartType = ChartTypeStrategyEnum.WaistCircumference,
                 Measurements = GetWaistCircumferenceMeasurementListFromTo(dateFrom, dateTo)
             };
         }

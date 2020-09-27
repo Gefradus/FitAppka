@@ -32,7 +32,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public string MealName(int atWhichMealOfTheDay)
         {
-            return ((MealOfTheDay)atWhichMealOfTheDay).ToString().Replace("_"," ");
+            return ((MealOfTheDayEnum)atWhichMealOfTheDay).ToString().Replace("_"," ");
         }
 
         public string DayPattern(int dayID)

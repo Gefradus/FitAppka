@@ -57,7 +57,7 @@ namespace FitAppka.Repository.RepIfaceImpl
 
         public Client GetClientByEmail(string email)
         {
-            return _context.Client.Where(k => k.Email.ToLower().Equals(email.ToLower())).FirstOrDefault();
+            return _context.Client.FirstOrDefault(k => k.Email.ToLower().Equals(email.ToLower()));
         }
 
         public Client GetClientById(int id)
@@ -67,12 +67,17 @@ namespace FitAppka.Repository.RepIfaceImpl
 
         public Client GetClientByLogin(string login)
         {
-            return _context.Client.Where(k => k.Login.ToLower().Equals(login.ToLower())).FirstOrDefault();
+            return _context.Client.FirstOrDefault(k => k.Login.ToLower().Equals(login.ToLower()));
         }
 
         public Client GetLoggedInClient()
         {
             return GetClientByLogin(_httpContextAccessor.HttpContext.User.Identity.Name);
+        }
+
+        public Client GetLoggedInClientAsNoTracking()
+        {
+            return _context.Client.AsNoTracking().FirstOrDefault(k => k.Login.ToLower().Equals(_httpContextAccessor.HttpContext.User.Identity.Name.ToLower()));
         }
 
         public int GetLoggedInClientId()

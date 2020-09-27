@@ -18,7 +18,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             {
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
-                ChartType = ChartStrategyEnum.EstimatedBodyFat,
+                ChartType = ChartTypeStrategyEnum.EstimatedBodyFat,
                 Measurements = EstimatedBodyFatListFromTo(dateFrom, dateTo)
             };
         }

@@ -10,6 +10,7 @@ namespace FitAppka.Repository
         IEnumerable<Goals> GetAllClientsGoals();
         IEnumerable<Goals> GetAllDaysGoals();
         Goals GetClientGoals(int clientId);
+        Goals GetClientGoalsAsNoTracking(int clientId);
         Goals GetDayGoals(int dayId);
         Goals Add(Goals goals);
         Goals Update(Goals goals);

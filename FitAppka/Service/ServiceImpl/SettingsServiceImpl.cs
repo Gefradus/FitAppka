@@ -22,7 +22,7 @@ namespace FitAppka.Service.ServiceImpl
         {
             Client client = _clientRepository.GetLoggedInClient();
             SetClientGoals(m, client);
-            MapDayMealsFromClientToDaysFromToday(m, client.ClientId);
+            MapDayMealsFromClientToDaysFromToday(m);
             _goalsService.UpdateGoalsInDaysFromToday();
             SetClientData(m, client);
             SetClientWeightMeasurement(m, isFirstLaunch);
@@ -46,9 +46,9 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-        private void MapDayMealsFromClientToDaysFromToday(SettingsDTO m, int clientId)
+        private void MapDayMealsFromClientToDaysFromToday(SettingsDTO m)
         {
-            foreach (var dayID in _goalsService.GetListOfDaysIDFromToday(clientId))
+            foreach (var dayID in _goalsService.GetListOfDaysIDFromToday())
             {
                 foreach (var day in _dayRepository.GetAllDays())
                 {

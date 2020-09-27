@@ -25,67 +25,21 @@ namespace FitAppka.Service.ServiceImpl
 
         public void AddDayIfNotExists(DateTime date)
         {
-            var client = _clientRepository.GetLoggedInClient();
-            int count = _dayRepository.GetClientDays(client.ClientId).Count(d => d.Date == date);
+            int count = _dayRepository.GetLoggedInClientDays().Count(d => d.Date == date);
             if (count == 0)
             {
-                Goals goals = MapGoalsFromClientToDay(client.ClientId);
-                Day day = _dayRepository.Add(new Day()
-                {
-                    Goals = goals,
-                    Date = date,
-                    ClientId = client.ClientId,
-                    Breakfast = client.Breakfast,
-                    Lunch = client.Lunch,
-                    Dinner = client.Dinner,
-                    Dessert = client.Dessert,
-                    Snack = client.Snack,
-                    Supper = client.Supper,
-                    WaterDrunk = 0
-                });
+                Client client = _clientRepository.GetLoggedInClientAsNoTracking();
+                Goals goals = _goalsRepository.Add(_mapper.Map<Goals, Goals>(_goalsRepository.GetClientGoalsAsNoTracking(client.ClientId)));
+
+                Day day = _mapper.Map<Client, Day>(_clientRepository.GetLoggedInClientAsNoTracking());
+                day.Date = date;
+                day.GoalsId = goals.GoalsId;
+                _dayRepository.Add(day);
 
                 goals.DayId = day.DayId;
                 _goalsRepository.Update(goals);
             }
         }
-
-        private Goals MapGoalsFromClientToDay(int clientId)
-        {
-            Goals clientGoals = _goalsRepository.GetClientGoals(clientId);
-            return new Goals()
-            {
-                Calories = clientGoals.Calories,
-                Proteins = clientGoals.Proteins,
-                Carbohydrates = clientGoals.Carbohydrates,
-                Fats = clientGoals.Fats,
-                KcalBurned = clientGoals.KcalBurned,
-                TrainingTime = clientGoals.TrainingTime,
-                VitaminA = clientGoals.VitaminA,
-                VitaminB1 = clientGoals.VitaminB1,
-                VitaminB2 = clientGoals.VitaminB2,
-                VitaminB5 = clientGoals.VitaminB5,
-                VitaminB6 = clientGoals.VitaminB6,
-                VitaminC = clientGoals.VitaminC,
-                VitaminD = clientGoals.VitaminD,
-                VitaminE = clientGoals.VitaminE,
-                VitaminK = clientGoals.VitaminK,
-                VitaminPp = clientGoals.VitaminPp,
-                Biotin = clientGoals.Biotin,
-                FolicAcid = clientGoals.FolicAcid,
-                VitaminB12 = clientGoals.VitaminB12,
-                Zinc = clientGoals.Zinc,
-                Phosphorus = clientGoals.Phosphorus,
-                Iodine = clientGoals.Iodine,
-                Magnesium = clientGoals.Magnesium,
-                Copper = clientGoals.Copper,
-                Potassium = clientGoals.Potassium,
-                Selenium = clientGoals.Selenium,
-                Sodium = clientGoals.Sodium,
-                Calcium = clientGoals.Calcium,
-                Iron = clientGoals.Iron
-            };
-        }
-
 
         public int GetDayIDByDate(DateTime day)
         {

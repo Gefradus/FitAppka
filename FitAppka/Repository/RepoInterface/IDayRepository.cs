@@ -8,7 +8,7 @@ namespace FitAppka.Repository
     {
         Day GetDay(int id);
         IEnumerable<Day> GetAllDays();
-        IEnumerable<Day> GetClientDays(int clientID);
+        IEnumerable<Day> GetLoggedInClientDays();
         Day Add(Day day);
         Day Update(Day day);
         Day Delete(int id);

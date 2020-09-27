@@ -1,6 +1,6 @@
 ﻿namespace FitAppka.Models.Enum
 {
-    public enum ChartStrategyEnum
+    public enum ChartTypeStrategyEnum
     {
         CaloriesConsumed,
         CaloriesBurned,

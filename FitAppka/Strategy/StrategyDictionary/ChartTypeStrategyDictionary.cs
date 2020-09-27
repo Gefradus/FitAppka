@@ -7,7 +7,7 @@ using AutoMapper;
 
 namespace FitAppka.Strategy
 {
-    public class ChartTypeStrategyDictionary<T> : Dictionary<ChartStrategyEnum, T>
+    public class ChartTypeStrategyDictionary<T> : Dictionary<ChartTypeStrategyEnum, T>
     {
         private readonly ProgressMonitoringServiceImpl serviceImpl;
         private readonly IMapper _mapper;
@@ -16,17 +16,17 @@ namespace FitAppka.Strategy
         {
             _mapper = mapper;
             serviceImpl = service;
-            Add(ChartStrategyEnum.CaloriesBurned, ConvertToT(new CaloriesBurnedChartStrategy()));
-            Add(ChartStrategyEnum.CaloriesConsumed, ConvertToT(new CaloriesConsumedChartStrategy()));
-            Add(ChartStrategyEnum.CardioTrainingTime, ConvertToT(new CardioTrainingTimeChartStrategy()));
-            Add(ChartStrategyEnum.EstimatedBodyFat, ConvertToT(new EstimatedBodyFatChartStrategy()));
-            Add(ChartStrategyEnum.WaistCircumference, ConvertToT(new WaistCircumferenceMeasurementChartStrategy()));
-            Add(ChartStrategyEnum.WaterConsumption, ConvertToT(new WaterConsumptionChartStrategy()));
-            Add(ChartStrategyEnum.WeightMeasurement, ConvertToT(new WeightMeasurementChartStrategy()));
+            Add(ChartTypeStrategyEnum.CaloriesBurned, ConvertToT(new CaloriesBurnedChartStrategy()));
+            Add(ChartTypeStrategyEnum.CaloriesConsumed, ConvertToT(new CaloriesConsumedChartStrategy()));
+            Add(ChartTypeStrategyEnum.CardioTrainingTime, ConvertToT(new CardioTrainingTimeChartStrategy()));
+            Add(ChartTypeStrategyEnum.EstimatedBodyFat, ConvertToT(new EstimatedBodyFatChartStrategy()));
+            Add(ChartTypeStrategyEnum.WaistCircumference, ConvertToT(new WaistCircumferenceMeasurementChartStrategy()));
+            Add(ChartTypeStrategyEnum.WaterConsumption, ConvertToT(new WaterConsumptionChartStrategy()));
+            Add(ChartTypeStrategyEnum.WeightMeasurement, ConvertToT(new WeightMeasurementChartStrategy()));
         }
 
-        private T ConvertToT<O>(O o) {
-            return (T)Convert.ChangeType(_mapper.Map(serviceImpl, o), typeof(O));
+        private T ConvertToT<Strategy>(Strategy s) {
+            return (T)Convert.ChangeType(_mapper.Map(serviceImpl, s), typeof(Strategy));
         }
     }
 }

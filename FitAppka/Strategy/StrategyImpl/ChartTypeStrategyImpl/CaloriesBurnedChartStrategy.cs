@@ -8,11 +8,10 @@ using System.Collections.Generic;
 
 namespace FitAppka.Strategy.ChartTypeStrategyImpl
 {
-    public class CardioTrainingTimeChartStrategy : IChartTypeStrategy
+    public class CaloriesBurnedChartStrategy : IChartTypeStrategy
     {
-        public ICardioTrainingService CardioService { get; set; }
-        public IClientRepository ClientRepository { get; set; }
-        public IDayRepository DayRepository { get; set; }
+        public IGoalsService GoalsService;
+        public IDayRepository DayRepository;
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
         {
@@ -20,7 +19,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             {
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
-                ChartType = ChartStrategyEnum.CardioTrainingTime,
+                ChartType = ChartTypeStrategyEnum.CaloriesBurned,
                 ChartDataInDays = GetCaloriesBurnedInDaysFromTo(dateFrom, dateTo)
             };
         }
@@ -31,7 +30,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             var dateTimeTo = DateConverter.ConvertToDateTimeAndPreventNull(dateTo, false);
             var list = new List<ChartDataInDayDTO>();
 
-            foreach (var item in DayRepository.GetClientDays(ClientRepository.GetLoggedInClientId()))
+            foreach (var item in DayRepository.GetLoggedInClientDays())
             {
                 DateTime day = item.Date.GetValueOrDefault().Date;
                 if (day <= dateTimeTo && day >= dateTimeFrom)
@@ -39,8 +38,8 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
                     list.Add(new ChartDataInDayDTO()
                     {
                         DateOfDay = day,
-                        ChartData = CardioService.GetCardioTimeInDay(item.DayId).GetValueOrDefault(),
-                        ChartDataGoal = CardioService.GetTrainingTimeGoalInDay(item.DayId).GetValueOrDefault()
+                        ChartData = GoalsService.CaloriesBurnedInDay(item.DayId),
+                        ChartDataGoal = GoalsService.GetDayGoals(item.DayId).KcalBurned.GetValueOrDefault()
                     });
                 }
             }

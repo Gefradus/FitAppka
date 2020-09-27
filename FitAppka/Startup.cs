@@ -52,7 +52,7 @@ namespace FitAppka
             services.AddScoped<IStrengthTrainingService, StrengthTrainingServiceImpl>();
             services.AddScoped<ICardioTrainingService, CardioTrainingServiceImpl>();
             services.AddScoped<IHomePageService, HomePageServiceImpl>();
-            services.AddScoped<IFindDayService, FindDayServiceImpl>();
+            //services.AddScoped<IFindDayService, FindDayServiceImpl>();
             services.AddScoped<IClientManageService, ClientManageServiceImpl>();
             services.AddScoped<IProductManageService, ProductManageServiceImpl>();
             services.AddScoped<IGoalsService, GoalsServiceImpl>();

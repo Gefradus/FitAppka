@@ -2,7 +2,6 @@
 using FitAppka.Models.Enum;
 using FitAppka.Repository;
 using FitAppka.Strategy.StrategyInterface;
-using System;
 using System.Collections.Generic;
 
 namespace FitAppka.Strategy.ChartTypeStrategyImpl
@@ -17,7 +16,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             {
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
-                ChartType = ChartStrategyEnum.WeightMeasurement,
+                ChartType = ChartTypeStrategyEnum.WeightMeasurement,
                 Measurements = GetWeightMeasurementListFromTo(dateFrom, dateTo)
             };
         }

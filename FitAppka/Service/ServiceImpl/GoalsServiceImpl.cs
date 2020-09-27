@@ -125,10 +125,10 @@ namespace FitAppka.Service.ServiceImpl
         }
 
 
-        public List<int> GetListOfDaysIDFromToday(int clientId)
+        public List<int> GetListOfDaysIDFromToday()
         {
             List<int> listOfIDDaysFromToday = new List<int>();
-            foreach (var item in _dayRepository.GetClientDays(clientId))
+            foreach (var item in _dayRepository.GetLoggedInClientDays())
             {
                 if (item.Date >= DateTime.Now.Date)
                 {
@@ -141,14 +141,13 @@ namespace FitAppka.Service.ServiceImpl
 
         public void UpdateGoalsInDaysFromToday()
         {
-            int clientId = _clientRepository.GetLoggedInClientId();
-            foreach (var dayID in GetListOfDaysIDFromToday(clientId))
+            foreach (var dayID in GetListOfDaysIDFromToday())
             {
-                foreach (var day in _dayRepository.GetClientDays(clientId))
+                foreach (var day in _dayRepository.GetLoggedInClientDays())
                 {
                     if (day.DayId == dayID)
                     {
-                        _goalsRepository.Update(MapGoalsFromClientToDay(day, clientId));
+                        _goalsRepository.Update(MapGoalsFromClientToDay(day, _clientRepository.GetLoggedInClientId()));
                     }
                 }
             }

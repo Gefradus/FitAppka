@@ -1,6 +1,6 @@
 ﻿namespace FitAppka.Models.Enum
 {
-    public enum MealOfTheDay
+    public enum MealOfTheDayEnum
     {
         Śniadanie = 1,
         II_Śniadanie = 2,

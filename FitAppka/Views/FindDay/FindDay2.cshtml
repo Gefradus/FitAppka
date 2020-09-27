@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FitAppka.Models.DayDTO>
+
+<head>
+    <link rel="stylesheet" href="~/css/Home.css" type="text/css">
+    <link href="~/css/AllViews.css" rel="stylesheet" />
+    <link href="~/css/FindDay.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="~/chosen/chosen.min.css" rel="stylesheet" />
+    <script src="~/js/chosen.jquery.min.js"></script>
+    <script src="~/js/AllViews.js"></script>
+    <script src="~/js/FindDay.js"></script>
+    <script src="~/js/Validation.js"></script>
+    <script type="text/javascript"></script>
+</head>
+
+<body onload="onload()">
+
+    <header>
+        <nav class="navbar navbar-expand-md cent border-bottom navbar-fixed-top" id="navMain">
+            <div style="margin-top: -15px">
+                <div id="findDayWhere">Szukaj dni gdzie:</div>
+                <div>
+                    <select id="choice" onchange="choice()" class="form-control form-control-sm">
+                        <option value="1">Spożyto dany posiłek</option>
+                        <option value="2">Spożycie kalorii wyniosło</option>
+                        <option value="3">Spożycie płynów wyniosło</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container" style="margin-top: 100px">
+        <div id="product" class="row no-gutters">
+            <div class="container">
+                <div class="row no-gutters">
+                    <nav id="navProduct" class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top">
+                        <div id="panelek">
+                            <div id="chosenPanel">
+                                <div style="font-size: 12px">Wybierz produkt:</div>
+                                @Html.DropDownList("Product", (List<SelectListItem>)ViewData["allProducts"], new { id = "normalDropDown" })
+                            </div>
+                            <div id="panelGramatury">
+                                <div style="font-size: 12px">Przedział wagi produktu (*opcjonalne):</div>
+                                <div class="oddodiv">*Od: </div>
+                                <input id="from_product" class="oddo" type="number" min="0" max="99999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 10000)" value="@ViewData["from"]" />
+                                <div class="g1">g</div>
+                                <div class="oddodiv">*Do: </div>
+                                <input id="to_product" class="oddo" type="number" min="0" max="99999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 10000)" value="@ViewData["to"]" />
+                                <div class="g2">g</div>
+                                <div class="cb"></div>
+                            </div>
+                            <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(1)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/ShowNavbar.js"></script>
+    <script>colorEverySecondRow();</script>
+</body>
+

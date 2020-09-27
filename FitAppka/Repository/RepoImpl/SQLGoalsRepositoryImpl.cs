@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -50,12 +51,17 @@ namespace FitAppka.Repository.RepIfaceImpl
 
         public Goals GetClientGoals(int clientId)
         {
-            return GetAllGoals().FirstOrDefault(c => c.ClientId == clientId);
+            return _context.Goals.FirstOrDefault(c => c.ClientId == clientId);
+        }
+
+        public Goals GetClientGoalsAsNoTracking(int clientId)
+        {
+            return _context.Goals.AsNoTracking().FirstOrDefault(c => c.ClientId == clientId);
         }
 
         public Goals GetDayGoals(int dayId)
         {
-            return GetAllGoals().FirstOrDefault(d => d.DayId == dayId);
+            return _context.Goals.FirstOrDefault(d => d.DayId == dayId);
         }
 
         public Goals GetGoals(int id)

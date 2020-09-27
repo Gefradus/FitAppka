@@ -9,7 +9,7 @@ namespace FitAppka.Models
         public List<ChartDataInDayDTO> ChartDataInDays { get; set; }
         public string DateFrom { get; set; }
         public string DateTo { get; set; }
-        public ChartStrategyEnum ChartType { get; set; }
+        public ChartTypeStrategyEnum ChartType { get; set; }
 
     }
 }

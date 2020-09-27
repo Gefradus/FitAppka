@@ -8,9 +8,11 @@ namespace FitAppka.Repository.RepIfaceImpl
     public class SQLDayRepository : IDayRepository
     {
         private readonly FitAppContext _context;
+        private readonly IClientRepository _clientRepository;
 
-        public SQLDayRepository(FitAppContext context)
+        public SQLDayRepository(FitAppContext context, IClientRepository clientRepository)
         {
+            _clientRepository = clientRepository;
             _context = context;
         }
 
@@ -44,9 +46,9 @@ namespace FitAppka.Repository.RepIfaceImpl
             return _context.Day.FirstOrDefault(d => d.Date == date && d.ClientId == clientID);
         }
 
-        public IEnumerable<Day> GetClientDays(int clientID)
+        public IEnumerable<Day> GetLoggedInClientDays()
         {
-            return _context.Day.Where(d => d.ClientId == clientID).ToList();
+            return _context.Day.Where(d => d.ClientId == _clientRepository.GetLoggedInClientId()).ToList();
         }
 
         public Day GetDay(int id)

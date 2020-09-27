@@ -11,7 +11,6 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
     public class WaterConsumptionChartStrategy : IChartTypeStrategy
     {
         public IDayRepository DayRepository { get; set; }
-        public IClientRepository ClientRepository { get; set; }
         public IGoalsService GoalsService { get; set; }
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
@@ -20,7 +19,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             {
                 DateFrom = DateConverter.ConvertToJSDate(dateFrom, true),
                 DateTo = DateConverter.ConvertToJSDate(dateTo, false),
-                ChartType = ChartStrategyEnum.WaterConsumption,
+                ChartType = ChartTypeStrategyEnum.WaterConsumption,
                 ChartDataInDays = GetWaterConsumedInDaysFromTo(dateFrom, dateTo),
             };
         }
@@ -31,7 +30,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             var dateTimeTo = DateConverter.ConvertToDateTimeAndPreventNull(dateTo, false);
             var list = new List<ChartDataInDayDTO>();
 
-            foreach (var item in DayRepository.GetClientDays(ClientRepository.GetLoggedInClientId()))
+            foreach (var item in DayRepository.GetLoggedInClientDays())
             {
                 DateTime day = item.Date.GetValueOrDefault().Date;
                 if (day <= dateTimeTo && day >= dateTimeFrom)

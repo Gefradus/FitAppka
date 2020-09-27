@@ -2,6 +2,7 @@
 using FitAppka.Models;
 using FitAppka.Service.ServiceImpl;
 using FitAppka.Strategy.ChartTypeStrategyImpl;
+using FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,6 +12,21 @@ namespace FitAppka
     {
         public MappingProfile()
         {
+            CreateMap<Goals, Goals>()
+                .ForMember(g => g.GoalsId, opt => opt.Ignore())
+                .ForMember(g => g.DayId, opt => opt.Ignore())
+                .ForMember(g => g.Day, opt => opt.Ignore())
+                .ForMember(g => g.DayNavigation, opt => opt.Ignore())
+                .ForMember(g => g.Client, opt => opt.Ignore())
+                .ForMember(g => g.ClientId, opt => opt.Ignore())
+                .ForMember(g => g.ClientNavigation, opt => opt.Ignore());
+
+            CreateMap<Client, Day>()
+                .ForMember(d => d.WaterDrunk, opt => opt.MapFrom(water => 0))
+                .ForMember(d => d.GoalsId, opt => opt.Ignore())
+                .ForMember(d => d.GoalsNavigation, opt => opt.Ignore())
+                .ForMember(d => d.Goals, opt => opt.Ignore()); 
+
             CreateMap<Goals, GoalsDTO>()
                 .ForMember(g => g.AutoDietaryGoals, opt => opt.Ignore())
                 .ForMember(g => g.IncludeCaloriesBurned, opt => opt.Ignore());
@@ -33,6 +49,8 @@ namespace FitAppka
                 .ForMember(p => p.VisibleToAll, opt => opt.MapFrom(p => p.VisibleToAll))
                 .ForAllOtherMembers(opt => opt.Ignore());
 
+            CreateMap<List<Product>, List<FindDayProductDTO>>();
+
             CreateMap<Task<List<Product>>, Task<List<ProductDTO>>>();
 
             CreateMap<ProgressMonitoringServiceImpl, CaloriesConsumedChartStrategy>();
@@ -42,6 +60,11 @@ namespace FitAppka
             CreateMap<ProgressMonitoringServiceImpl, WaistCircumferenceMeasurementChartStrategy>();
             CreateMap<ProgressMonitoringServiceImpl, WaterConsumptionChartStrategy>();
             CreateMap<ProgressMonitoringServiceImpl, WeightMeasurementChartStrategy>();
+
+            CreateMap<FindDayServiceImpl, FindDayByCaloriesConsumedStrategy>();
+            CreateMap<FindDayServiceImpl, FindDayByProductConsumedStrategy>();
+            CreateMap<FindDayServiceImpl, FindDayByWaterDrunkStrategy>();
+
         }
     }
 }

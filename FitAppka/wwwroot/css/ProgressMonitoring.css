@@ -19,7 +19,7 @@
 
 #select {
     width: 185px;
-    padding-left: 25px;
+    text-align-last: center;
     cursor: pointer;
     color: black 
 }
