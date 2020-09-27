@@ -15,7 +15,7 @@ namespace FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl
             foreach (var day in DayRepository.GetLoggedInClientDays())
             {
                 if((day.WaterDrunk <= dto.From || dto.From == null) && (day.WaterDrunk >= dto.To || dto.To == null) &&
-                day.Date <= DateConverter.ConvertToDateTimeFrom(dto.DateFrom) && day.Date >= DateConverter.ConvertToDateTimeTo(dto.DateTo))
+                day.Date >= DateConverter.ConvertToDateTimeFrom(dto.DateFrom) && day.Date <= DateConverter.ConvertToDateTimeTo(dto.DateTo))
                 {
                     list.Add(new DayDTO() {
                         Date = day.Date.GetValueOrDefault(),
