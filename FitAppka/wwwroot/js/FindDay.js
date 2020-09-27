@@ -2,28 +2,14 @@
     var select = document.getElementById("choice");
     var selectedValue = select.options[select.selectedIndex].value;
 
-    hideEverything();
-
-    if (selectedValue == 0) {
-        document.getElementById("product").hidden = false;
-    }
-    if (selectedValue == 1) {
-        document.getElementById("calorie").hidden = false;
-    }
-    if (selectedValue == 2) {
-        document.getElementById("waterConsumption").hidden = false;
-    }
+    document.getElementById("product").hidden = selectedValue != 0;
+    document.getElementById("calorie").hidden = selectedValue != 1;
+    document.getElementById("waterConsumption").hidden = selectedValue != 2;
 }
 
-function hideEverything() {
-    document.getElementById("product").hidden = true;
-    document.getElementById("calorie").hidden = true;
-    document.getElementById("waterConsumption").hidden = true;
-}
 
 function findDays(url, searchType) {
     var select = document.getElementById("normalDropDown");
-    var productId = select.options[select.selectedIndex].value;
     var from = 0;
     var to = 0;
 
@@ -41,7 +27,7 @@ function findDays(url, searchType) {
     }
 
     url = url + "?findBy=" + searchType + "&from=" + from + "&to=" + to;
-    location.href = searchType == 0 ? url + "&productId=" + productId : url;
+    location.href = searchType == 0 ? url + "&productId=" + select.options[select.selectedIndex].value : url;
 }
 
 function getValueFromInput(selector) {
@@ -58,15 +44,17 @@ function onload() {
 }
 
 function restore(searchType) {
+    if (searchType == 0) {
+        document.getElementById("choice").value = 0;
+        choice();
+    }
     if (searchType == 1) {
-        document.getElementById("choice").value = '1';
-        hideEverything();
-        document.getElementById("calorie").hidden = false;
+        document.getElementById("choice").value = 1;
+        choice();
     }
     if (searchType == 2) {
-        document.getElementById("choice").value = '2';
-        hideEverything();
-        document.getElementById("waterConsumption").hidden = false;
+        document.getElementById("choice").value = 2;
+        choice();
     }
 }
 
