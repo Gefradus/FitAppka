@@ -43,7 +43,7 @@
     <div class="container" style="margin-top: 100px">
         <div id="product" class="row no-gutters" hidden>
             <nav id="navProduct" class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top">
-                <div id="panel">
+                <div class="panel">
                     <div id="chosenPanel">
                         <div style="font-size: 12px">Wybierz produkt:</div>
                         @Html.DropDownList("Product", Model.Products, new { id = "normalDropDown" })
@@ -58,6 +58,8 @@
                         <div class="g2">g</div>
                         <div class="cb"></div>
                     </div>
+                    <div><input id="datepickerFrom" class="datepicker" readonly /></div>
+                    <div><input id="datepickerTo" class="datepicker" readonly /></div>
                     <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(0)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
                 </div>
             </nav>
@@ -111,7 +113,7 @@
         }
 
         <div class="row no-gutters" style="font-weight: 600">
-            @foreach (var item in Model.Days)
+            @foreach (var item in Model.Days) 
             {
                 <div class="container" style="border-bottom: 1px solid darkgray">
                     <div class="row no-gutters dayRow tableRow">
@@ -127,8 +129,7 @@
                     </div>
                 </div>
             }
-            @if (Model.Days.Count == 0 && Model.WasSearchedFor)
-            {
+            @if (Model.Days.Count == 0 && Model.WasSearchedFor) {
                 <div class="cent" style="margin-top: 125px; width: 100%">Nie znaleziono dni</div>
             }
         </div>

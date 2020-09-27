@@ -79,7 +79,7 @@
 }
 
 
-#panel {
+.panel {
     margin-bottom: 20px;
     padding-top: 15px
 }
@@ -148,7 +148,7 @@
 }
 
 @media(max-width: 767px) {
-    #panel {
+    .panel {
         padding-top: 0
     }
 }

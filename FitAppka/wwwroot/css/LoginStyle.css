@@ -11,6 +11,10 @@
     background: rgba(247, 247, 247, 0.6);
 }
 
+#navMenu{
+    margin-top: -5px !important
+}
+
 #logUpper {
     padding: 10px;
     border-radius: 15px;

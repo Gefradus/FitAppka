@@ -6,18 +6,6 @@
     <link href="~/css/AllViews.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-
-    <script type="text/javascript">
-        $(document).click(function (event) {
-            var clickover = $(event.target);
-            var $navbar = $(".navbar-collapse");
-            var _opened = $navbar.hasClass("in");
-            if (_opened === true && !clickover.hasClass("navbar-toggle")) {
-                $navbar.collapse('hide');
-            }
-        });
-    </script>
-
 </head>
 
 <body style="background-color: white;">
