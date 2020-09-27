@@ -11,7 +11,7 @@
     color: white
 }
 
-.oddo {
+.int {
     float: left;
     margin-right: 5px;
     margin-left: 5px;
@@ -19,7 +19,7 @@
     text-align: center;
 }
 
-.oddodiv {
+.fromto {
     margin-top: 2px;
     float: left;
 }
@@ -79,12 +79,12 @@
 }
 
 
-#panelek {
+#panel {
     margin-bottom: 20px;
     padding-top: 15px
 }
 
-#panelGramatury {
+#grammagePanel {
     float: left;
     margin-right: 15px;
     margin-left: 15px
@@ -120,6 +120,11 @@
     font-weight: 600
 }
 
+.dayCol {
+    margin-left: -17px;
+    margin-right: 17px
+}
+
 .dayRow {
     align-items: center;
     padding-top: 9px;
@@ -143,13 +148,13 @@
 }
 
 @media(max-width: 767px) {
-    #panelek {
+    #panel {
         padding-top: 0
     }
 }
 
 @media(max-width: 560px) {
-    #panelGramatury {
+    #grammagePanel {
         margin: 0 !important;
         padding-left: calc(50% - 108px);
         padding-top: 7px;
@@ -171,7 +176,7 @@
         font-size: 14px;
     }
 
-    .iloscPro {
+    .data {
         margin-left: -15px;
         margin-right: 5px
     }

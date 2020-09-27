@@ -52,15 +52,9 @@ namespace NowyDotnecik.Controllers
         [HttpGet]
         public IActionResult Return(int dayID)
         {
-            DateTime daySelected;
             DateTime day = _dayService.GetDayDateTime(dayID);
-            if (day != null && dayID != 0) { 
-                daySelected = day; 
-            }
-            else { 
-                daySelected = DateTime.Now.Date; 
-            }
-  
+            DateTime daySelected = day != null && dayID != 0 ? day : DateTime.Now.Date;
+
             return RedirectToAction(nameof(Home), new { daySelected });
         }
 
