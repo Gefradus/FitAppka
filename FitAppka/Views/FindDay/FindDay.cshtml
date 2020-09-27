@@ -16,7 +16,7 @@
             findDays('@Url.Action("FindDay", "FindDay")', searchType);
         }
         function restoreState() {
-            restore(@Model.FindBy);
+            restore('@Model.FindBy', '@Model.From', '@Model.To');
         }
     </script>
 </head>
@@ -48,10 +48,10 @@
                     <div id="panelGramatury">
                         <div style="font-size: 12px">Przedział wagi produktu (*opcjonalne):</div>
                         <div class="oddodiv">*Od: </div>
-                        <input id="from_product" value="@Model.From" class="oddo int" type="number" oninput="validity.valid||(value='')" />
+                        <input id="from_product" class="oddo int" type="number" oninput="validity.valid||(value='')" />
                         <div class="g1">g</div>
                         <div class="oddodiv">*Do: </div>
-                        <input id="to_product" value="@Model.To" class="oddo int" type="number" oninput="validity.valid||(value='')" />
+                        <input id="to_product" class="oddo int" type="number" oninput="validity.valid||(value='')" />
                         <div class="g2">g</div>
                         <div class="cb"></div>
                     </div>
@@ -65,10 +65,10 @@
                     <div style="float: left; margin-right: 15px; margin-left:15px">
                         <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych kalorii (*opcjonalne):</div>
                         <div class="oddodiv">*Od: </div>
-                        <input id="from_calorie" value="@Model.From" class="oddo int" type="number" oninput="validity.valid||(value='')" />
+                        <input id="from_calorie" class="oddo int" type="number" oninput="validity.valid||(value='')" />
                         <div class="g1">kcal</div>
                         <div class="oddodiv">*Do: </div>
-                        <input id="to_calorie" value="@Model.To" class="oddo int" type="number" oninput="validity.valid||(value='')" />
+                        <input id="to_calorie" class="oddo int" type="number" oninput="validity.valid||(value='')" />
                         <div class="g2">kcal</div>
                         <div class="cb"></div>
                     </div>
@@ -82,10 +82,10 @@
                     <div style="float: left; margin-right: 15px; margin-left:15px">
                         <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych płynów (*opcjonalne):</div>
                         <div class="oddodiv">*Od: </div>
-                        <input id="from_water" value="@Model.From" class="oddo int" type="number" oninput="validity.valid||(value='')" />
+                        <input id="from_water" class="oddo int" type="number" oninput="validity.valid||(value='')" />
                         <div class="g1">ml</div>
                         <div class="oddodiv">*Do: </div>
-                        <input id="to_water" value="@Model.To" class="oddo int" type="number" oninput="validity.valid||(value='')" />
+                        <input id="to_water" class="oddo int" type="number" oninput="validity.valid||(value='')" />
                         <div class="g2">ml</div>
                         <div class="cb"></div>
                     </div>

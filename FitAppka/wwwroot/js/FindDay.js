@@ -42,18 +42,31 @@ function onload() {
     transparentWhenScrollDown();  
 }
 
-function restore(searchType) {
+function restore(searchType, from, to)
+{
+    searchType = parseInt(searchType);
+    from = parseInt(from);
+    to = parseInt(to);
+
     if (searchType == 0) {
-        document.getElementById("choice").value = 0;
+        $("#choice").val(0);
         choice();
+        $("#from_product").val(from);
+        $("#to_product").val(to);
+        
     }
     if (searchType == 1) {
-        document.getElementById("choice").value = 1;
+        $("#choice").val(1);
         choice();
+        $("#from_calorie").val(from);
+        $("#to_calorie").val(to);
+        
     }
     if (searchType == 2) {
-        document.getElementById("choice").value = 2;
+        $("#choice").val(2);
         choice();
+        $("#from_water").val(from);
+        $("#to_water").val(to);
     }
 }
 
