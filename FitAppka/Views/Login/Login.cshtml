@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="~/css/Home.css" type="text/css" />
     <link rel="stylesheet" href="~/css/LoginStyle.css" type="text/css" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="~/lib/jquery-blockUI/jquery.blockUI.js"></script>
     <script type="text/javascript">
@@ -79,7 +79,7 @@
                 </li>
             </ul>
         </div>
-
+        <button class="btn" onclick="$.blockUI()">dasda</button>
     </header>
 
     <div class="container mt-5">
@@ -201,7 +201,6 @@
                                 <div style="float:left; margin-left: -10px"><a class="nav-link" asp-controller="Login" asp-action="Register">Zarejestruj się!</a></div>
                                 <div style="clear:both"></div>
                             </div>
-
                         </div>
                     </form>
                 </div>
