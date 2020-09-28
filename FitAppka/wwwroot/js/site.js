@@ -19,11 +19,12 @@ function siteLoad() {
         setTimeout(function () {
             $('body').addClass('loaded');
             $('h1').css('color', '#222222');
-        }, 250);
+        }, 200);
 
     });
 
     $(document).on('submit', function () {
         $('body').removeClass('loaded');
-    });   
+    });
+
 }
