@@ -58,7 +58,7 @@
                         <div id="divValidation">@Html.ValidationSummary(false, "", new { @class = "text-danger" })</div>
                         <div style="margin-top: -3px">
                             <div id="textboxDIV">@Html.TextBox("search", "", new { @class = "form-control valid", @data_val = "true", @data_val_required = "Należy wpisać nazwę ćwiczenia" })</div>
-                            <div style="float:left; padding-top:15px; margin-left: 10px"><input id="searchBtn" type="submit" value="Szukaj" /></div>
+                            <div style="float:left; padding-top:15px"><button id="submitSearch" type="submit"><img src="~/img/searchBlack.png" id="searchIcon"/></button></div>
                             <div style="clear:both"></div>
                         </div>
                         @Html.Hidden("dayID", ViewData["dayID"])

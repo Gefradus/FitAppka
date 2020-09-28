@@ -45,6 +45,10 @@ body{
     width: 100px
 }
 
+#submitSearch{
+    width: 40px !important
+}
+
 #addCardio {
     width: 115px;
     margin-top: 35px;
