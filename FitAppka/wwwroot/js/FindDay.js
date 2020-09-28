@@ -9,7 +9,7 @@
 
 function loadDatePickers(dateFrom, dateTo) {
     createDatePicker(".datepicker");
-    setMaxDate("#datepickerTo", new Date(9999, 12, 30));
+    setMaxDate("#datepickerTo", new Date(4000, 12, 30));
     setMinDate("#datepickerFrom", new Date(1900, 12, 30));
     setDate("#datepickerTo", dateTo);
     setDate("#datepickerFrom", dateFrom);
