@@ -46,6 +46,7 @@
     /*border-radius: 7%;*/
     border: 1px solid #797979;
     background-color: white !important;
+    background: url("https://icons.iconarchive.com/icons/paomedia/small-n-flat/24/calendar-icon.png") no-repeat scroll 99%;
     height: 28px;
     cursor: pointer
 }

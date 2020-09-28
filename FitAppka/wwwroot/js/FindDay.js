@@ -14,23 +14,28 @@ function loadDatePickers(dateFrom, dateTo) {
     setDate("#datepickerTo", dateTo);
     setDate("#datepickerFrom", dateFrom);
     changeDatePickers();
-    $(".datepicker").on("change", changeDatePickers());
+    var $j = jQuery.noConflict();
+    $j(".datepicker").on("change", changeDatePickers());
 }
 
 function changeDatePickers() {
-    setMinDate("#datepickerTo", $j("datepickerFrom").datepicker("getDate"));
-    setMaxDate("#datepickerFrom", $j("datepickerTo").datepicker("getDate"));
+    var $j = jQuery.noConflict();
+    setMinDate("#datepickerTo", $j("#datepickerFrom").datepicker("getDate"));
+    setMaxDate("#datepickerFrom", $j("#datepickerTo").datepicker("getDate"));
 }
 
 function findDays(url, searchType) {
-    $('body').removeClass('loaded');
     var select = document.getElementById("normalDropDown");
     var from = 0;
     var to = 0;
+    var dateFrom;
+    var dateTo;
 
     if (searchType == 0) {
         from = getValueFromInput("#from_product");
         to = getValueFromInput("#to_product");
+        dateFrom = $("#datepickerFrom").val();
+        dateTo = $("#datepickerTo").val();
     }
     if (searchType == 1) {
         from = getValueFromInput("#from_calorie");
@@ -41,7 +46,7 @@ function findDays(url, searchType) {
         to = getValueFromInput("#to_water");
     }
 
-    url = url + "?findBy=" + searchType + "&from=" + from + "&to=" + to + "&wasSearchedFor=true";
+    url = url + "?findBy=" + searchType + "&from=" + from + "&to=" + to + "&dateFrom=" + dateFrom + "&dateTo=" + dateTo + "&wasSearchedFor=true";
     location.href = searchType == 0 ? url + "&productId=" + select.options[select.selectedIndex].value : url;
 }
 
@@ -49,6 +54,7 @@ function getValueFromInput(selector) {
     var value = $(selector).val();
     return isNaN(value) ? 0 : value;
 }
+
 
 function onload() {
     colorEverySecondRow();

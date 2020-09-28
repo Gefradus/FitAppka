@@ -1,6 +1,7 @@
 ﻿$(document).click(function (event) {
-    var clickover = $(event.target);
-    var $navbar = $(".navbar-collapse");
+    var $j = jQuery.noConflict();
+    var clickover = $j(event.target);
+    var $navbar = $j(".navbar-collapse");
     var _opened = $navbar.hasClass("in");
     if (_opened === true && !clickover.hasClass("navbar-toggle") && !clickover.hasClass("in")) {
         $navbar.collapse('hide');
