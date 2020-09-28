@@ -11,6 +11,7 @@
     <script src="~/js/FindDay.js"></script>
     <script src="~/js/Validation.js"></script>
     <script type="text/javascript"></script>
+    <script src="~/js/Datepicker.js"></script>
     <script>
         function search(searchType) {
             findDays('@Url.Action("FindDay", "FindDay")', searchType);
@@ -44,19 +45,21 @@
         <div id="product" class="row no-gutters" hidden>
             <nav id="navProduct" class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top">
                 <div class="panelek">
-                    <div id="chosenPanel">
-                        <div style="font-size: 12px">Wybierz produkt:</div>
-                        @Html.DropDownList("Product", Model.Products, new { id = "normalDropDown" })
-                    </div>
-                    <div id="grammagePanel">
-                        <div style="font-size: 12px">Przedział wagi produktu (*opcjonalne):</div>
-                        <div class="fromto">*Od: </div>
-                        <input id="from_product" class="int" type="number" oninput="validity.valid||(value='')" />
-                        <div class="g1">g</div>
-                        <div class="fromto">*Do: </div>
-                        <input id="to_product" class="int" type="number" oninput="validity.valid||(value='')" />
-                        <div class="g2">g</div>
-                        <div class="cb"></div>
+                    <div>
+                        <div id="chosenPanel">
+                            <div style="font-size: 12px">Wybierz produkt:</div>
+                            @Html.DropDownList("Product", Model.Products, new { id = "normalDropDown" })
+                        </div>
+                        <div id="grammagePanel">
+                            <div style="font-size: 12px">Przedział wagi produktu (*opcjonalne):</div>
+                            <div class="fromto">*Od: </div>
+                            <input id="from_product" class="int" type="number" oninput="validity.valid||(value='')" />
+                            <div class="g1">g</div>
+                            <div class="fromto">*Do: </div>
+                            <input id="to_product" class="int" type="number" oninput="validity.valid||(value='')" />
+                            <div class="g2">g</div>
+                            <div class="cb"></div>
+                        </div>
                     </div>
                     <div>
                         <div class="fl" style="margin-right: 15px">
