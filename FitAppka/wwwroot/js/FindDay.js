@@ -9,6 +9,7 @@
 
 
 function findDays(url, searchType) {
+    $('body').removeClass('loaded');
     var select = document.getElementById("normalDropDown");
     var from = 0;
     var to = 0;
@@ -39,7 +40,8 @@ function onload() {
     colorEverySecondRow();
     restoreState();
     $('#normalDropDown').chosen({ search_contains: true });
-    transparentWhenScrollDown();  
+    transparentWhenScrollDown();
+    $(".datepicker, .int").addClass("form-control");
 }
 
 function restore(searchType, from, to)

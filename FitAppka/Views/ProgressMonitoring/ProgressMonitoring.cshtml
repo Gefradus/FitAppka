@@ -73,6 +73,7 @@
     <script src="~/js/Datepicker.js"></script>
     <script>
         function reloadPage(dateFrom, dateTo, chartType) {
+            $('body').removeClass('loaded');
             window.location.href = '@Url.Action("ProgressMonitoring", "ProgressMonitoring")'
                 + "?dateFrom=" + dateFrom + "&dateTo=" + dateTo + "&chartType=" + chartType;
         }

@@ -85,6 +85,7 @@ function addMeasurementAjax(url) {
             waist: parseInt($("#waist").val()) 
         },
         success: function () {
+            $('body').removeClass('loaded');
             location.reload();
         }
     });
@@ -100,6 +101,7 @@ function editMeasurementAjax(url){
             waist: parseInt($("#waist").val()) 
         },
         success: function () {
+            $('body').removeClass('loaded');
             location.reload();
         }
     });

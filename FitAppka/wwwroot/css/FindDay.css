@@ -3,10 +3,10 @@
 }
 
 .searchBtn {
-    width: 165px;
+    width: 160px;
     background-color: #202020;
     color: white;
-    margin-left: 32px;
+    margin-left: 25px;
     margin-top: 18px;
     border-radius: 7%;
     height: 29px
@@ -18,8 +18,8 @@
     margin-left: 5px;
     width: 50px;
     text-align: center;
-    border-radius: 7%;
-    border: 1px solid #797979
+    border: 1px solid #797979;
+    height: 30px
 }
 
 .fromto {
@@ -42,8 +42,11 @@
 
 .datepicker {
     width: 135px;
-    border-radius: 7%;
-    border: 1px solid #797979
+    /*border-radius: 7%;*/
+    border: 1px solid #797979;
+    background-color: white !important;
+    height: 28px;
+    cursor: pointer
 }
 
 
@@ -70,6 +73,10 @@
     margin-right: 10px;
     margin-bottom: 2px;
     margin-left: -10px
+}
+
+.chosen-single{
+    height: 28px !important
 }
 
 #navMain {

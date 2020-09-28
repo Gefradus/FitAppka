@@ -109,6 +109,7 @@ function editStrengthTraining(url) {
 }
 
 function setInputsValidation() {
+    $j = jQuery.noConflict();
     $j(".int1").on("change", function () {
         this.value = changeToMaxIfGreaterInt(this.value, 1000);
     });

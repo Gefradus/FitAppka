@@ -19,12 +19,14 @@ function siteLoad() {
         setTimeout(function () {
             $('body').addClass('loaded');
             $('h1').css('color', '#222222');
-        }, 250);
-
+        }, 225);
     });
 
     $(document).on('submit', function () {
         $('body').removeClass('loaded');
     });
 
+    $(window).on("beforeunload", function () {
+        $('body').removeClass('loaded');
+    });
 }
