@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/chosen/chosen.min.css" rel="stylesheet" />
     <link href="~/css/NavbarStyle.css" rel="stylesheet" />
+    <link href="~/lib/css3-preloader-transition-finish/css/main.css" rel="stylesheet" />
 </head>
 <body>
     <div id="allViewsNav" hidden>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 blackNav">
             <div id="left">
                 <div class="mr-auto mt-3">
-                    <a class="nav-link ml-sm-3 ml-md-4 ml-lg-5 mt-2 mt-md-0" asp-controller="Home" asp-action="Start"><img id="logoPink" src="~/img/logorozowe.png" title="Strona główna"/></a>
+                    <a class="nav-link ml-sm-3 ml-md-4 ml-lg-5 mt-2 mt-md-0" asp-controller="Home" asp-action="Start"><img id="logoPink" src="~/img/logorozowe.png" title="Strona główna" /></a>
                 </div>
             </div>
             <div>
@@ -23,26 +24,40 @@
                     </button>
 
                     <div class="d-none d-lg-inline-block mr-md-4">
-                        <div class="fl"><a class="nav-link text-light nava" asp-controller="Measurements" asp-action="Measurements">
-                            Pomiary <img class="navIcon" src="~/img/body.png" /></a> 
+                        <div class="fl">
+                            <a class="nav-link text-light nava" asp-controller="Measurements" asp-action="Measurements">
+                                Pomiary <img class="navIcon" src="~/img/body.png" />
+                            </a>
                         </div>
-                        <div class="fl"><a class="nav-link text-light nava" asp-controller="ProgressMonitoring" asp-action="ProgressMonitoring">
-                            Postępy <img class="navIcon" src="~/img/chart.png" /></a> 
+                        <div class="fl">
+                            <a class="nav-link text-light nava" asp-controller="ProgressMonitoring" asp-action="ProgressMonitoring">
+                                Postępy <img class="navIcon" src="~/img/chart.png" />
+                            </a>
                         </div>
-                        <div class="fl"><a class="nav-link text-light nava" asp-controller="Goals" asp-action="Goals">
-                            Cele <img id="goalImg" src="~/img/goal.png" /></a> 
+                        <div class="fl">
+                            <a class="nav-link text-light nava" asp-controller="Goals" asp-action="Goals">
+                                Cele <img id="goalImg" src="~/img/goal.png" />
+                            </a>
                         </div>
-                        <div class="fl"><a class="nav-link text-light nava" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">
-                            Treningi <img class="navIcon" src="~/img/dumbell.png" /></a>
+                        <div class="fl">
+                            <a class="nav-link text-light nava" asp-controller="Training" asp-action="TrainingPanel" asp-route-dayID="@ViewData["dayID"]">
+                                Treningi <img class="navIcon" src="~/img/dumbell.png" />
+                            </a>
                         </div>
-                        <div class="fl"><a class="nav-link text-light nava" asp-controller="FindDay" asp-action="FindDay">
-                            Szukaj dni <img class="navIcon" src="~/img/search.png" /> </a>
+                        <div class="fl">
+                            <a class="nav-link text-light nava" asp-controller="FindDay" asp-action="FindDay">
+                                Szukaj dni <img class="navIcon" src="~/img/search.png" />
+                            </a>
                         </div>
-                        <div class="fl"><a class="nav-link text-light nava" asp-controller="Settings" asp-action="Settings" id="settingsBtn">
-                            Ustawienia <img class="navIcon" src="~/img/settings.png" /></a>
+                        <div class="fl">
+                            <a class="nav-link text-light nava" asp-controller="Settings" asp-action="Settings" id="settingsBtn">
+                                Ustawienia <img class="navIcon" src="~/img/settings.png" />
+                            </a>
                         </div>
-                        <div class="fl"><a class="nav-link text-light" asp-controller="Login" asp-action="Logout">
-                            Wyloguj się <img class="navIcon" src="~/img/logout.png" /></a>
+                        <div class="fl">
+                            <a class="nav-link text-light" asp-controller="Login" asp-action="Logout">
+                                Wyloguj się <img class="navIcon" src="~/img/logout.png" />
+                            </a>
                         </div>
                         <div class="cb"></div>
                     </div>
@@ -55,7 +70,6 @@
                     <a class="nav-link text-dark" asp-controller="Measurements" asp-action="Measurements">Pomiary <img /></a>
                 </li>
                 <li>
-                    
                     <a class="nav-link text-dark" asp-controller="ProgressMonitoring" asp-action="ProgressMonitoring">Postępy <img /></a>
                 </li>
                 <li>
@@ -77,9 +91,13 @@
         </div>
     </div>
 
-    <div class="container">
+    <div id="content" class="container">
         <main role="main" class="pb-3" style="padding-top: 85px;">
-
+            <div id="loader-wrapper">
+                <div id="loader"></div>
+                <div class="loader-section section-left"></div>
+                <div class="loader-section section-right"></div>
+            </div>
             <div id="validationModal" class="modal fade" data-backdrop="static" role="dialog" style="z-index: 9999">
                 <div id="valDialog" class="modal-dialog cent">
                     <div class="modal-content" style="width: 300px">

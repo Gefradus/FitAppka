@@ -4,7 +4,6 @@
     word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
 a {
     color: #0366d6;
 }
@@ -82,4 +81,14 @@ html {
         font-size: 8px;
         font-weight: 600;
     }
+}
+
+#loader-wrapper .loader-section.section-left {
+    background: rgba(34, 34, 34, 0.72) !important;
+    width: 50% !important
+}
+
+#loader-wrapper .loader-section {
+    background: rgba(34, 34, 34, 0.72) !important;
+    width: 50% !important
 }

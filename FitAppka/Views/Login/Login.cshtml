@@ -6,42 +6,6 @@
     <link href="~/css/AllViews.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/lib/jquery-blockUI/jquery.blockUI.js"></script>
-    <script type="text/javascript">
-
-        function OnBeginRequest(sender, args) {
-            blockUI();
-        }
-        function endRequest(sender, args) {
-            $.unblockUI();
-        }
-
-        //Center the element
-        $.fn.center = function () {
-            this.css("position", "absolute");
-            this.css("top", ($(window).height() - this.height()) / 2 + $(window).scrollTop() + "px");
-            this.css("left", ($(window).width() - this.width()) / 2 + $(window).scrollLeft() + "px");
-            return this;
-        }
-
-        //blockUI
-        function blockUI() {
-            $.blockUI({
-                css: {
-                    backgroundColor: 'transparent',
-                    border: 'none'
-                },
-                message: '<div class="spinner"></div>',
-                baseZ: 1500,
-                overlayCSS: {
-                    backgroundColor: '#FFFFFF',
-                    opacity: 0.7,
-                    cursor: 'wait'
-                }
-            });
-            $('.blockUI.blockMsg').center();
-        }//end Blockui
-    </script>
 </head>
 
 <body style="background-color: white;">
