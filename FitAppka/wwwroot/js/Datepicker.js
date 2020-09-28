@@ -12,3 +12,17 @@
     });
 }
 
+function setMaxDate(datepicker, max) {
+    var $j = jQuery.noConflict();
+    $j(datepicker).datepicker('option', 'maxDate', max);
+}
+
+function setDate(datepicker, date) {
+    var $j = jQuery.noConflict();
+    $j(datepicker).datepicker("setDate", date);
+}
+
+function setMinDate(datepicker, min) {
+    var $j = jQuery.noConflict();
+    $j(datepicker).datepicker('option', 'minDate', min);
+}

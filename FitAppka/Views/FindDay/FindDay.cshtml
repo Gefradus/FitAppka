@@ -11,7 +11,6 @@
     <script src="~/js/FindDay.js"></script>
     <script src="~/js/Validation.js"></script>
     <script type="text/javascript"></script>
-    <script src="~/js/Datepicker.js"></script>
     <script>
         function search(searchType) {
             findDays('@Url.Action("FindDay", "FindDay")', searchType);
@@ -52,10 +51,10 @@
                         </div>
                         <div id="grammagePanel">
                             <div style="font-size: 12px">Przedział wagi produktu:</div>
-                            <div class="fromto">Od: </div>
+                            <div class="fromto">Od:</div>
                             <input id="from_product" class="int" type="number" oninput="validity.valid||(value='')" />
                             <div class="g1">g</div>
-                            <div class="fromto">Do: </div>
+                            <div class="fromto">Do:</div>
                             <input id="to_product" class="int" type="number" oninput="validity.valid||(value='')" />
                             <div class="g2">g</div>
                             <div class="cb"></div>
@@ -70,7 +69,11 @@
                             <div style="font-size: 12px">Data do:</div>
                             <input id="datepickerTo" class="datepicker" readonly />
                         </div>
-                        <div class="fl"><button class="searchBtn" type="button" onclick="search(0)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
+                        <div class="fl">
+                            <button class="searchBtn" type="button" onclick="search(0)">
+                                <div class="srcBtn">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></div>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -88,7 +91,11 @@
                         <div class="g2">kcal</div>
                         <div class="cb"></div>
                     </div>
-                    <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(1)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
+                    <div class="cent cb" style="padding-top: 20px">
+                        <button class="searchBtn" type="button" onclick="search(1)">
+                            <div class="srcBtn">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></div>
+                        </button>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -105,7 +112,11 @@
                         <div class="g2">ml</div>
                         <div class="cb"></div>
                     </div>
-                    <div class="cent cb" style="padding-top: 20px"><button class="searchBtn" type="button" onclick="search(2)">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></button></div>
+                    <div class="cent cb" style="padding-top: 20px">
+                        <button class="searchBtn" type="button" onclick="search(2)">
+                            <div class="srcBtn">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></div>
+                        </button>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -124,7 +135,8 @@
         }
 
         <div class="row no-gutters" style="font-weight: 600">
-            @foreach (var item in Model.Days) {
+            @foreach (var item in Model.Days)
+            {
                 <div class="container" style="border-bottom: 1px solid darkgray">
                     <div class="row no-gutters dayRow tableRow">
                         <div class="col-4 cent">
@@ -139,15 +151,21 @@
                     </div>
                 </div>
             }
-            @if (Model.Days.Count == 0 && Model.WasSearchedFor) {
+            @if (Model.Days.Count == 0 && Model.WasSearchedFor)
+            {
                 <div class="cent" style="margin-top: 125px; width: 100%">Nie znaleziono dni</div>
             }
         </div>
     </div>
     <script src="~/js/ShowNavbar.js"></script>
+    <link href="~/lib/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script src="~/js/Datepicker.js"></script>
     <script>
         colorEverySecondRow();
         setInputsValidation();
     </script>
+    <script>loadDatePickers('@Model.DateFrom', '@Model.DateTo');</script>
 </body>
 

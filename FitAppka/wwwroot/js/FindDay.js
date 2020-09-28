@@ -7,6 +7,20 @@
     document.getElementById("waterConsumption").hidden = selectedValue != 2;
 }
 
+function loadDatePickers(dateFrom, dateTo) {
+    createDatePicker(".datepicker");
+    setMaxDate("#datepickerTo", new Date(9999, 12, 30));
+    setMinDate("#datepickerFrom", new Date(1900, 12, 30));
+    setDate("#datepickerTo", dateTo);
+    setDate("#datepickerFrom", dateFrom);
+    changeDatePickers();
+    $(".datepicker").on("change", changeDatePickers());
+}
+
+function changeDatePickers() {
+    setMinDate("#datepickerTo", $j("datepickerFrom").datepicker("getDate"));
+    setMaxDate("#datepickerFrom", $j("datepickerTo").datepicker("getDate"));
+}
 
 function findDays(url, searchType) {
     $('body').removeClass('loaded');
@@ -79,3 +93,4 @@ function setInputsValidation() {
 
     $(".int").attr("max", 999999);
 }
+

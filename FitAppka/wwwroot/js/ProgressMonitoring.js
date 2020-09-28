@@ -23,8 +23,7 @@
 }
 
 function createDatePickers(dateFrom, dateTo, chartType) {
-    createDatePicker("#datepickerFrom");
-    createDatePicker("#datepickerTo");
+    createDatePicker("#datepickerFrom, #datepickerTo");
     setMaxDate("#datepickerTo", new Date());
     setMinDate("#datepickerTo", dateFrom);
     setMaxDate("#datepickerFrom", dateTo);
@@ -44,20 +43,6 @@ function setOnChange() {
     });
 }
 
-function setMaxDate(datepicker, max) {
-    var $j = jQuery.noConflict();
-    $j(datepicker).datepicker('option', 'maxDate', max);
-}
-
-function setDate(datepicker, date) {
-    var $j = jQuery.noConflict();
-    $j(datepicker).datepicker("setDate", date);
-}
-
-function setMinDate(datepicker, min) {
-    var $j = jQuery.noConflict();
-    $j(datepicker).datepicker('option', 'minDate', min);
-}
 
 function SubWeekFromToday() {
     var oneWeekAgo = new Date();
