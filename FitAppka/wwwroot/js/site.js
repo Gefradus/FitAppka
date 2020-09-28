@@ -22,4 +22,8 @@ function siteLoad() {
         }, 250);
 
     });
+
+    $(document).on('submit', function () {
+        $('body').removeClass('loaded');
+    });   
 }
