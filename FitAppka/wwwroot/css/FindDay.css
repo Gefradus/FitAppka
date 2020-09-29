@@ -209,14 +209,14 @@
     }
 }
 
-@media(min-width: 577px) and (max-width: 991px) {
+@media(min-width: 576px) and (max-width: 991px) {
     #oplaer{
         margin-right: 40px
     }
 }
 
 
-@media(max-width: 576px){
+@media(max-width: 575px){
     .jcontent-flex-end{
         justify-content: center !important
     }
