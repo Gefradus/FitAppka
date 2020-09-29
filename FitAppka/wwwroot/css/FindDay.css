@@ -234,38 +234,25 @@
         margin-bottom: 5px
     }
 
-    #ertyu{
-
+    #kolop{
+        margin-left: 15px
     }
 
-    #grammagePanel{
+    #grammagePanel {
         justify-content: center
     }
 
     #chosenPanel{
         margin-right: 0 !important
     }
+
+    #navProduct{
+        height: 240px
+    }
 }
 
 
-
-
-
 @media(max-width: 560px) {
-    #grammagePanel {
-        /*margin: 0 !important;*/
-        /*padding-left: calc(50% - 108px);*/
-        /*padding-top: 7px;*/
-    }
-
-/*    #chosenPanel {
-        margin-left: calc(50% - 125px)
-    }
-*/
-    /*#navProduct {
-        height: 160px
-    }*/
-
     #ctxProd {
         margin-top: 130px
     }
@@ -281,5 +268,10 @@
 
     #prodNotFound {
         margin-top: 175px
+    }
+
+    #navProduct {
+        margin-left: -15px;
+        width: calc(100% + 15px)
     }
 }
