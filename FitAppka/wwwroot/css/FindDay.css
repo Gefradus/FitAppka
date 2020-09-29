@@ -167,6 +167,10 @@
     border-right: 1px solid darkgray;
 }
 
+#ml35ml47 {
+    margin-left: -35px;
+}
+
 #grammagePanel{
     display: flex
 }
@@ -210,11 +214,14 @@
 }
 
 @media(min-width: 576px) and (max-width: 991px) {
-    #oplaer{
+    #oplaer {
         margin-right: 40px
     }
-}
 
+    #ml35ml47 {
+        margin-left: -47px !important
+    }
+}
 
 @media(max-width: 575px){
     .jcontent-flex-end{
