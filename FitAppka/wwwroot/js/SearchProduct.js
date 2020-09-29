@@ -9,7 +9,7 @@ function showModalAddMeal(id) {
 }
 
 function getWebRootPath(path) {
-    return path + '';
+    return path;
 }
 
 function prepareModalAddMeal(id) {
