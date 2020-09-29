@@ -10,7 +10,7 @@
     margin-right: -30px;
     margin-top: 18px;
     border-radius: .20rem;
-    height: 29px
+    height: 30px
 }
 
 .int {
@@ -47,7 +47,7 @@
     border: 1px solid #797979;
     background-color: white !important;
     background: url("https://icons.iconarchive.com/icons/paomedia/small-n-flat/24/calendar-icon.png") no-repeat scroll 99%;
-    height: 28px;
+    height: 30px;
     cursor: pointer
 }
 
@@ -178,16 +178,19 @@
 }
 
 @media(min-width: 1100px){
-.searchBtn{
-    margin-left: 60px;
-    margin-right: -60px;
-    width: 250px
-}
+    .searchBtn{
+        margin-left: 60px;
+        margin-right: -60px;
+        width: 250px
+    }
 
-#chosenPanel {
-    margin-left: -60px !important;
-    margin-right: 60px !important
-}
+    #chosenPanel {
+        margin-left: -60px !important;
+        margin-right: 60px !important
+    }
+    #grammagePanel{
+        margin-left: -25px
+    }
 }
 
 

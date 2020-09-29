@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link href="~/chosen/chosen.min.css" rel="stylesheet" />
+    <link href="~/lib/chosen/chosen.min.css" rel="stylesheet" />
     <link href="~/css/NavbarStyle.css" rel="stylesheet" />
     <link href="~/lib/css3-preloader-transition-finish/css/main.css" rel="stylesheet" />
 </head>
@@ -116,7 +116,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/chosen.jquery.min.js"></script>
+    @* <script src="~/js/chosen.jquery.min.js"></script>*@
+
+    <script src="~/lib/chosen/chosen.js"></script>
     <script>siteLoad();</script>
     @RenderSection("Scripts", required: false)
 </body>

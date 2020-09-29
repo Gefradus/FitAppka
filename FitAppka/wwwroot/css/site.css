@@ -4,6 +4,10 @@
     word-break: break-all;
 }
 
+#content{
+    width: 100% !important
+}
+
 a {
     color: #0366d6;
 }
