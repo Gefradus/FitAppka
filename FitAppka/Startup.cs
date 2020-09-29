@@ -22,6 +22,7 @@ namespace FitAppka
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //var contentRoot = configuration.GetValue<string>(WebHostDefaults.ContentRootKey);
         }
 
         public IConfiguration Configuration { get; }
@@ -61,6 +62,7 @@ namespace FitAppka
             services.AddScoped<IDayManageService, DayServiceImpl>();
             services.AddScoped<IMeasurementsService, MeasurementsServiceImpl>();
             services.AddScoped<IProgressMonitoringService, ProgressMonitoringServiceImpl>();
+            services.AddScoped<IContentRootPathHandlerService, ContentRootPathHandlerServiceImpl>();
         }
 
         private void RepositoriesAddScoped(IServiceCollection services)

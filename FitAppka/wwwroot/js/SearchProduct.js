@@ -8,13 +8,17 @@ function showModalAddMeal(id) {
     $("#addMealModal").modal('show');
 }
 
+function getWebRootPath(path) {
+    return path + '';
+}
+
 function prepareModalAddMeal(id) {
     var iter = giveIterFromID(id);
     if (pathArray[iter] == 'null') {
-        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="/FitAppka/img/miss.png" class="img-fluid" asp-append-version="true" />';
+        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + getRootPath() + '/img/miss.png" class="img-fluid" asp-append-version="true" />';
     }
     else {
-        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + "/FitAppka/photos/" + pathArray[iter] + '" class="img-fluid" asp-append-version="true" />';
+        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + getRootPath() + "/photos/" + pathArray[iter] + '" class="img-fluid" asp-append-version="true" />';
     }
 
     document.getElementById("productId").value = id;

@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FitAppka.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using FitAppka.Repository;
 using FitAppka.Service;
+using FitAppka.Service.ServiceImpl;
 
 namespace NowyDotnecik.Controllers
 {
@@ -16,19 +16,20 @@ namespace NowyDotnecik.Controllers
     public class HomeController : Controller
     {
         private readonly FitAppContext _context;
-        private readonly IWebHostEnvironment _env;
+        
         private readonly IDayManageService _dayService;
         private readonly IClientRepository _clientRepository;
         private readonly IHomePageService _homeService;
+        private readonly IContentRootPathHandlerService _contentRootService;
 
-        public HomeController(FitAppContext context, IWebHostEnvironment env, IHomePageService homePageService,
-            IDayManageService dayService, IClientRepository clientRepository)
+        public HomeController(FitAppContext context, IHomePageService homePageService, 
+            IDayManageService dayService, IClientRepository clientRepository, IContentRootPathHandlerService contentRootService)
         {
+            _contentRootService = contentRootService;
             _homeService = homePageService;
             _dayService = dayService;
             _clientRepository = clientRepository;
             _context = context;
-            _env = env;
         }
 
         [HttpGet]
@@ -117,7 +118,6 @@ namespace NowyDotnecik.Controllers
         private void SendAllDataToView(DateTime daySelected)
         {
             Day day = _dayService.GetLoggedInClientDayByDate(daySelected);
-
             SendBasicData(daySelected, day);
             SendInfoIfIsAdminClient();
             SendInfoAboutMacronutritions(day);
@@ -130,7 +130,7 @@ namespace NowyDotnecik.Controllers
             ViewData["day"] = daySelected;
             ViewData["date"] = _homeService.DateFormat(daySelected);
             ViewData["datepick"] = daySelected.ToString("yyyy-MM-dd");
-            ViewData["path"] = _env.WebRootPath.ToString();
+            ViewData["path"] = _contentRootService.GetContentRootFileName();
             ViewData["clientID"] = _clientRepository.GetLoggedInClientId();
             ViewData["dayID"] = day.DayId;
             ViewData["water"] = day.WaterDrunk;

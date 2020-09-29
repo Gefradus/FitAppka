@@ -51,24 +51,30 @@ function colorItRed(proteins, carbs, fats, calories) {
 
 function glass(water, caloriesTarget) {
     var percentage = (water) / (caloriesTarget);
+    var path = getRootPath();
+
     if (percentage < 0.005) {
-        document.getElementById("glass").src = "/FitAppka/img/00.png";
+        document.getElementById("glass").src = path + "/img/00.png";
     }
     if (percentage >= 0.005 && percentage < 0.20) {
-        document.getElementById("glass").src = "/FitAppka/img/10.png";
+        document.getElementById("glass").src = path + "/img/10.png";
     }
     if (percentage >= 0.20 && percentage < 0.5) {
-        document.getElementById("glass").src = "/FitAppka/img/35.png";
+        document.getElementById("glass").src = path + "/img/35.png";
     }
     if (percentage >= 0.5 && percentage < 0.75) {
-        document.getElementById("glass").src = "/FitAppka/img/50.png";
+        document.getElementById("glass").src = path + "/img/50.png";
     }
     if (percentage >= 0.75 && percentage < 0.97) {
-        document.getElementById("glass").src = "/FitAppka/img/75.png";
+        document.getElementById("glass").src = path + "/img/75.png";
     }
     if (percentage >= 0.97) {
-        document.getElementById("glass").src = "/FitAppka/img/100.png";
+        document.getElementById("glass").src = path + "/img/100.png";
     }
+}
+
+function getWebRootPath(path) {
+    return path;
 }
 
 
@@ -216,10 +222,10 @@ function prepareModalData(id) {
     var gram = gramArray[iter];
 
     if (photoPath == 'null') {
-        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="/FitAppka/img/miss.png" class="img-fluid" asp-append-version="true" />';
+        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + getRootPath() + '/img/miss.png" class="img-fluid" asp-append-version="true" />';
     }
     else {
-        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + "/FitAppka/photos/" + photoPath + '" class="img-fluid" asp-append-version="true" />';
+        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + getRootPath() + "/photos/" + photoPath + '" class="img-fluid" asp-append-version="true" />';
     }
 
     document.getElementById("mealID").value = id;

@@ -8,6 +8,11 @@
     <script src="~/js/AllViews.js"></script>
     <script src="~/js/Validation.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        function getRootPath() {
+            return getWebRootPath("@(((string) ViewData["path"]).Replace("\\","\\\\"))");
+        }
+    </script>
     <script src="~/js/SearchProduct.js"></script>
 </head>
 <body onload="onload()">

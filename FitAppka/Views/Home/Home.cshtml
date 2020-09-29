@@ -16,6 +16,9 @@
         function showEditModal(id) { showEditModalUrl(id, '@Url.Action("Meal","Home")'); }
         function createChart() { drawChart(@ViewData["proteins0"], @ViewData["carbs0"], @ViewData["fats0"]); }
         function hide() { hideChart(@ViewData["proteins0"], @ViewData["carbs0"], @ViewData["fats0"]); }
+        function getRootPath() {
+            return getWebRootPath("@(((string) ViewData["path"]).Replace("\\","\\\\"))");
+        }
     </script>
     <script src="~/js/Main.js"></script>
 </head>

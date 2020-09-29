@@ -4,6 +4,7 @@ using FitAppka.Models;
 using Microsoft.AspNetCore.Authorization;
 using FitAppka.Repository;
 using FitAppka.Service;
+using FitAppka.Service.ServiceImpl;
 
 namespace FitAppka.Controllers
 {
@@ -13,10 +14,13 @@ namespace FitAppka.Controllers
     {
         private readonly IClientRepository _clientRepository;
         private readonly IProductManageService _productManageService;
+        private readonly IContentRootPathHandlerService _contentRootService;
         private readonly FitAppContext _context;
 
-        public ProductController(FitAppContext context, IClientRepository clientRepository, IProductManageService productManageService)
+        public ProductController(FitAppContext context, IClientRepository clientRepository, 
+            IProductManageService productManageService, IContentRootPathHandlerService contentRootService)
         {
+            _contentRootService = contentRootService;
             _clientRepository = clientRepository;
             _productManageService = productManageService;
             _context = context;
@@ -59,6 +63,7 @@ namespace FitAppka.Controllers
             ViewData["wereSearched"] = search != null;
             ViewData["day"] = _productManageService.DayPattern(dayID);
             ViewData["meal"] = _productManageService.MealName(inWhich);
+            ViewData["path"] = _contentRootService.GetContentRootFileName();
         }
 
         private void CreateProductViewData(int inWhich, int dayID, int isAdmin) 
