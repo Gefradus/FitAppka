@@ -9,10 +9,10 @@
 
 function loadDatePickers(dateFrom, dateTo) {
     createDatePicker(".datepicker");
-    setMaxDate("#datepickerTo", new Date(4000, 12, 30));
-    setMinDate("#datepickerFrom", new Date(1900, 12, 30));
-    setDate("#datepickerTo", dateTo);
-    setDate("#datepickerFrom", dateFrom);
+    setMaxDate("#datepickerTo_product", new Date(4000, 12, 30));
+    setMinDate("#datepickerFrom_product", new Date(1900, 12, 30));
+    setDate("#datepickerTo_product", dateTo);
+    setDate("#datepickerFrom_product", dateFrom);
     changeDatePickers();
     var $j = jQuery.noConflict();
     $j(".datepicker").on("change", changeDatePickers());
@@ -20,8 +20,8 @@ function loadDatePickers(dateFrom, dateTo) {
 
 function changeDatePickers() {
     var $j = jQuery.noConflict();
-    setMinDate("#datepickerTo", $j("#datepickerFrom").datepicker("getDate"));
-    setMaxDate("#datepickerFrom", $j("#datepickerTo").datepicker("getDate"));
+    setMinDate("#datepickerTo_product", $j("#datepickerFrom_product").datepicker("getDate"));
+    setMaxDate("#datepickerFrom_product", $j("#datepickerTo_product").datepicker("getDate"));
 }
 
 function findDays(url, searchType) {
@@ -34,8 +34,8 @@ function findDays(url, searchType) {
     if (searchType == 0) {
         from = getValueFromInput("#from_product");
         to = getValueFromInput("#to_product");
-        dateFrom = $("#datepickerFrom").val();
-        dateTo = $("#datepickerTo").val();
+        dateFrom = $("#datepickerFrom_product").val();
+        dateTo = $("#datepickerTo_product").val();
     }
     if (searchType == 1) {
         from = getValueFromInput("#from_calorie");

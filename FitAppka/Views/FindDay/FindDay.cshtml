@@ -47,14 +47,14 @@
                             <div class="col-12 col-sm-6">
                                 <div id="chosenPanel" class="d-flex jcontent-flex-end justify-content-sm-center">
                                     <div id="oplaer">
-                                        <div class="ertyu">Wybierz produkt:</div>
+                                        <div class="fs12">Wybierz produkt:</div>
                                         @Html.DropDownList("Product", Model.Products, new { id = "normalDropDown" })
                                     </div>
                                 </div>
                             </div>
                             <div id="grammagePanel" class="col-12 col-sm-6">
                                 <div id="aderty">
-                                    <div class="ertyu">Przedział wagi produktu:</div>
+                                    <div class="fs12">Przedział wagi produktu:</div>
                                     <div class="fl">
                                         <div class="fromto">Od:</div>
                                         <input id="from_product" class="int" type="number" oninput="validity.valid||(value='')" />
@@ -70,21 +70,21 @@
                             </div>
                         </div>
                     </div>
-                    <div id="ml35ml47" class="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start" style="margin-left: -35px">
+                    <div id="ml35ml47" class="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
                         <div class="row no-gutters">
                             <div class="col-12 col-sm-8 col-lg-6 cent" id="kolop">
                                 <div class="fl" style="margin-right: 15px">
-                                    <div style="font-size: 12px">Data od:</div>
-                                    <input id="datepickerFrom" class="datepicker" readonly />
+                                    <div class="fs12">Data od:</div>
+                                    <input id="datepickerFrom_product" class="datepicker" readonly />
                                 </div>
                                 <div class="fl">
-                                    <div style="font-size: 12px">Data do:</div>
-                                    <input id="datepickerTo" class="datepicker" readonly />
+                                    <div class="fs12">Data do:</div>
+                                    <input id="datepickerTo_product"" class="datepicker" readonly />
                                 </div>
                             </div>
                             <div class="col-12 col-sm-4 col-lg-6 cent">
                                 <button class="searchBtn" type="button" onclick="search(0)">
-                                    <div class="srcBtn">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></div>
+                                    Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" />
                                 </button>
                             </div>
                         </div>
