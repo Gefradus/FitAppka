@@ -3,7 +3,7 @@
 }
 
 .searchBtn {
-    width: 160px;
+    width: 158px;
     background: repeating-linear-gradient(45deg, rgb(19 19 19), rgb(228 228 228 / 25%) 100%);
     color: white;
     margin-left: 25px;
@@ -62,12 +62,20 @@
     background: linear-gradient(#fff 20%,#f6f6f6 50%,#dbd3d33b 52%,#fff 100%);
     width: 250px;
     text-align: center;
-    padding-left: 30px;
+   padding-left: 30px;
+}
+
+.ertyu{
+    font-size: 12px
+}
+
+#oplaer{
+    margin-left: -15px
 }
 
 #chosenPanel {
-    float: left;
-    margin-right: 15px;
+    margin-left: -60px !important;
+    margin-right: 60px !important
 }
 
 #ctxProd {
@@ -106,14 +114,14 @@
 
 #grammagePanel {
     float: left;
-    margin-right: 15px;
-    margin-left: 15px;
+    /*margin-right: 15px;
+    margin-left: 15px;*/
    
     margin-bottom: 4px
 }
 
 .navsearch {
-    height: 125px;
+    height: 75px;
     position: fixed;
     left: 0;
     width: 100%;
@@ -159,14 +167,40 @@
     border-right: 1px solid darkgray;
 }
 
+#grammagePanel{
+    display: flex
+}
+
 #choice {
     height: 27px !important;
     text-align-last: center;
     padding: 2px;
     padding-top: 0;
     margin-left: -10px;
-    width: 225px;
+    width: 250px;
     border: 1px solid darkgray;
+}
+
+@media(max-width: 991px){
+    .navsearch {
+        height: 125px;
+    }
+
+    .jcontent-flex-end {
+        justify-content: flex-end !important
+    }
+
+    #chosenPanel {
+        margin-right: -20px !important
+    }
+
+    .panelek{
+        margin-right: -75px
+    }
+
+
+    .searchBtn {
+    }
 }
 
 @media(max-width: 767px) {
@@ -175,20 +209,55 @@
     }
 }
 
+@media(min-width: 577px) and (max-width: 991px) {
+    #oplaer{
+        margin-right: 40px
+    }
+}
+
+
+@media(max-width: 576px){
+    .jcontent-flex-end{
+        justify-content: center !important
+    }
+
+    #aderty{
+        margin-right: 125px;
+        margin-top: 5px;
+        margin-bottom: 5px
+    }
+
+    #ertyu{
+
+    }
+
+    #grammagePanel{
+        justify-content: center
+    }
+
+    #chosenPanel{
+        margin-right: 0 !important
+    }
+}
+
+
+
+
+
 @media(max-width: 560px) {
     #grammagePanel {
-        margin: 0 !important;
-        padding-left: calc(50% - 108px);
-        padding-top: 7px;
+        /*margin: 0 !important;*/
+        /*padding-left: calc(50% - 108px);*/
+        /*padding-top: 7px;*/
     }
 
-    #chosenPanel {
+/*    #chosenPanel {
         margin-left: calc(50% - 125px)
     }
-
-    #navProduct {
+*/
+    /*#navProduct {
         height: 160px
-    }
+    }*/
 
     #ctxProd {
         margin-top: 130px

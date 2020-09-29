@@ -64,29 +64,23 @@ function onload() {
     $(".datepicker, .int").addClass("form-control");
 }
 
-function restore(searchType, from, to)
-{
+function restore(searchType, from, to) {
     searchType = parseInt(searchType);
     from = parseInt(from);
     to = parseInt(to);
 
+    $("#choice").val(searchType);
+    choice();
+
     if (searchType == 0) {
-        $("#choice").val(0);
-        choice();
         $("#from_product").val(from);
-        $("#to_product").val(to);
-        
+        $("#to_product").val(to); 
     }
     if (searchType == 1) {
-        $("#choice").val(1);
-        choice();
         $("#from_calorie").val(from);
         $("#to_calorie").val(to);
-        
     }
     if (searchType == 2) {
-        $("#choice").val(2);
-        choice();
         $("#from_water").val(from);
         $("#to_water").val(to);
     }
