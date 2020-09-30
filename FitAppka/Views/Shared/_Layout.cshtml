@@ -25,6 +25,11 @@
 
                     <div class="d-none d-lg-inline-block mr-md-4">
                         <div class="fl">
+                            <a class="nav-link text-light nava" asp-controller="DietCreator" asp-action="DietCreator">
+                                Diety <img class="navIcon" src="~/img/body.png" />
+                            </a>
+                        </div>
+                        <div class="fl">
                             <a class="nav-link text-light nava" asp-controller="Measurements" asp-action="Measurements">
                                 Pomiary <img class="navIcon" src="~/img/body.png" />
                             </a>
@@ -66,6 +71,9 @@
         </nav>
         <div class="collapse navbar-collapse in d-lg-none" id="navMenu">
             <ul class="navbar-nav">
+                <li>
+                    <a class="nav-link text-dark" asp-controller="DietCreator" asp-action="DietCreator">Diety <img /></a>
+                </li>
                 <li>
                     <a class="nav-link text-dark" asp-controller="Measurements" asp-action="Measurements">Pomiary <img /></a>
                 </li>
