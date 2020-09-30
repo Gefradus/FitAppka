@@ -16,7 +16,7 @@ namespace FitAppka.Models
         public int DayId { get; set; }
         public short Repetitions { get; set; }
         public short Sets { get; set; }
-        public short? Weight { get; set; }
+        public short? Load { get; set; }
 
         [ForeignKey(nameof(DayId))]
         [InverseProperty("StrengthTraining")]

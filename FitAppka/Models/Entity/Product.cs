@@ -9,6 +9,7 @@ namespace FitAppka.Models
     {
         public Product()
         {
+            DietProduct = new HashSet<DietProduct>();
             Meal = new HashSet<Meal>();
         }
 
@@ -69,6 +70,8 @@ namespace FitAppka.Models
         [ForeignKey(nameof(ClientId))]
         [InverseProperty("Product")]
         public virtual Client Client { get; set; }
+        [InverseProperty("Product")]
+        public virtual ICollection<DietProduct> DietProduct { get; set; }
         [InverseProperty("Product")]
         public virtual ICollection<Meal> Meal { get; set; }
     }

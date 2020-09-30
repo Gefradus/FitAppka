@@ -11,6 +11,7 @@ namespace FitAppka.Models
         {
             CardioTrainingType = new HashSet<CardioTrainingType>();
             Day = new HashSet<Day>();
+            Diet = new HashSet<Diet>();
             GoalsNavigation = new HashSet<Goals>();
             Product = new HashSet<Product>();
             StrengthTrainingType = new HashSet<StrengthTrainingType>();
@@ -28,7 +29,7 @@ namespace FitAppka.Models
         
         [StringLength(50)]
         public string Login { get; set; }
-
+        
         [StringLength(50)]
         public string Password { get; set; }
         [Column("First_name")]
@@ -70,6 +71,8 @@ namespace FitAppka.Models
         public virtual ICollection<CardioTrainingType> CardioTrainingType { get; set; }
         [InverseProperty("Client")]
         public virtual ICollection<Day> Day { get; set; }
+        [InverseProperty("Client")]
+        public virtual ICollection<Diet> Diet { get; set; }
         [InverseProperty("ClientNavigation")]
         public virtual ICollection<Goals> GoalsNavigation { get; set; }
         [InverseProperty("Client")]

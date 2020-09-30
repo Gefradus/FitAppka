@@ -58,6 +58,10 @@
     float: left;
 }
 
+.mr35 {
+    margin-right: 35px
+}
+
 .datepicker {
     width: 135px;
     border: 1px solid #797979;
@@ -260,6 +264,12 @@
     }
 }
 
+@media(min-width: 515px) and (max-width: 900px){
+    .mr35{
+        margin-right: 15px
+    }
+}
+
 @media(max-width: 575px){
     .jcontent-flex-end{
         justify-content: center !important
@@ -288,6 +298,11 @@
         margin-top: -45px;
     }
 
+    .navProduct2 {
+        margin-top: -45px;
+        height: 175px
+    }
+
     #oplaer{
         margin-right: 25px
     }
@@ -301,9 +316,7 @@
         height: 60px;
         padding-top: 15px
     }
-
 }
-
 
 @media(max-width: 560px) {
     #ctxProd {
@@ -325,18 +338,6 @@
 
     #navProduct {
         margin-left: -15px;
-        width: calc(100% + 15px)
-    }
-}
-
-@media(max-width: 517px){
-    .navProduct2{
-        height: 175px
-    }
-}
-
-@media(max-width: 515px) {
-    .navProduct2 {
-        margin-top: -45px
+        width: calc(100% + 15px); margin-top: -45px
     }
 }

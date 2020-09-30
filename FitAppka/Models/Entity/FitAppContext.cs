@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitAppka.Models
 {
@@ -17,6 +18,8 @@ namespace FitAppka.Models
         public virtual DbSet<CardioTrainingType> CardioTrainingType { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Day> Day { get; set; }
+        public virtual DbSet<Diet> Diet { get; set; }
+        public virtual DbSet<DietProduct> DietProduct { get; set; }
         public virtual DbSet<FatMeasurement> FatMeasurement { get; set; }
         public virtual DbSet<Goals> Goals { get; set; }
         public virtual DbSet<Meal> Meal { get; set; }
@@ -30,7 +33,7 @@ namespace FitAppka.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-P22JPL7\\SQLEXPRESS;Initial Catalog=FitAppka;Integrated Security=True;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-P22JPL7\\SQLEXPRESS;Initial Catalog=FitAppDiet;Integrated Security=True;Trusted_Connection=True;");
             }
         }
 
@@ -110,6 +113,41 @@ namespace FitAppka.Models
                     .HasForeignKey(d => d.GoalsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DAY_R15_GOALS");
+            });
+
+            modelBuilder.Entity<Diet>(entity =>
+            {
+                entity.HasIndex(e => e.ClientId)
+                    .HasName("Relationship_17_FK");
+
+                entity.Property(e => e.DietName).IsUnicode(false);
+
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.Diet)
+                    .HasForeignKey(d => d.ClientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DIET_RELATIONS_CLIENT");
+            });
+
+            modelBuilder.Entity<DietProduct>(entity =>
+            {
+                entity.HasIndex(e => e.DietId)
+                    .HasName("Relationship_15_FK");
+
+                entity.HasIndex(e => e.ProductId)
+                    .HasName("Relationship_16_FK");
+
+                entity.HasOne(d => d.Diet)
+                    .WithMany(p => p.DietProduct)
+                    .HasForeignKey(d => d.DietId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DIETPROD_RELATIONS_DIET");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.DietProduct)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DIETPROD_RELATIONS_PRODUCT");
             });
 
             modelBuilder.Entity<FatMeasurement>(entity =>

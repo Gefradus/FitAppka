@@ -238,14 +238,14 @@
                 if (training.Day.DayId.Equals(ViewData["dayID"]))
                 {
                     <div class="row no-gutters trainingRow">
-                        <div class="col-5 cent trainingName" onclick="showEditStrengthModal(@training.StrengthTrainingId, @training.Sets, @training.Repetitions, @training.Weight, '@training.StrengthTrainingType.TrainingName')">
+                        <div class="col-5 cent trainingName" onclick="showEditStrengthModal(@training.StrengthTrainingId, @training.Sets, @training.Repetitions, @training.Load, '@training.StrengthTrainingType.TrainingName')">
                             @training.StrengthTrainingType.TrainingName
                         </div>
                         <div class="col-7 container">
                             <div class="row no-gutters">
                                 <div class="cent sHeadCol borl">@training.Sets</div>
                                 <div class="cent sHeadCol borl">@training.Repetitions</div>
-                                <div class="cent sHeadCol borl">@training.Weight</div>
+                                <div class="cent sHeadCol borl">@training.Load</div>
                                 <div class="cent btnArea borl">
                                     <button id="btnDelete" type="button" onclick="showDeleteStrengthModal(@training.StrengthTrainingId, '@training.StrengthTrainingType.TrainingName');">
                                         <img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png">

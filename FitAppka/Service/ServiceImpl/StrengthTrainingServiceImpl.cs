@@ -29,7 +29,7 @@ namespace FitAppka.Service.ServiceImpl
                     DayId = dayID,
                     Sets = sets,
                     Repetitions = reps,
-                    Weight = weight
+                    Load = weight
                 });
             }
         }
@@ -51,7 +51,7 @@ namespace FitAppka.Service.ServiceImpl
                     DayId = dayID,
                     Sets = sets,
                     Repetitions = reps,
-                    Weight = weight
+                    Load = weight
                 });
             }
         }
@@ -73,7 +73,7 @@ namespace FitAppka.Service.ServiceImpl
             {
                 training.Sets = sets;
                 training.Repetitions = reps;
-                training.Weight = weight;
+                training.Load = weight;
                 _strengthTrainingRepository.Update(training);
                 return true;
             }

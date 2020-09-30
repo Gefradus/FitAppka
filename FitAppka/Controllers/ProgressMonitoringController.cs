@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using FitAppka.Service;
 
 namespace FitAppka.Controllers
 {
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+    [Authorize]
     public class ProgressMonitoringController : Controller
     {
         private readonly IDayManageService _dayService;

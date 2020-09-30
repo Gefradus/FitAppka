@@ -5,9 +5,12 @@ using FitAppka.Repository;
 using FitAppka.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FitAppka.Controllers
 {
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+    [Authorize]
     public class MeasurementsController : Controller
     {
         private readonly IDayManageService _dayService;
