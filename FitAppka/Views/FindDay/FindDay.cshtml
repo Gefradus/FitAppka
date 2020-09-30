@@ -92,22 +92,36 @@
             </nav>
         </div>
         <div id="calorie" class="row no-gutters" hidden>
-            <nav class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top">
-                <div>
-                    <div style="float: left; margin-right: 15px; margin-left:15px">
-                        <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych kalorii:</div>
-                        <div class="fromto">Od: </div>
-                        <input id="from_calorie" class="int" type="number" oninput="validity.valid||(value='')" />
-                        <div class="g1">kcal</div>
-                        <div class="fromto">Do: </div>
-                        <input id="to_calorie" class="int" type="number" oninput="validity.valid||(value='')" />
-                        <div class="g2">kcal</div>
-                        <div class="cb"></div>
+            <nav class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-8 col-lg-6 cent">
+                        <div style="float: left; margin-right: 15px; margin-left:15px">
+                            <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych kalorii:</div>
+                            <div class="fromto">Od: </div>
+                            <input id="from_calorie" class="int" type="number" oninput="validity.valid||(value='')" />
+                            <div class="g1">kcal</div>
+                            <div class="fromto">Do: </div>
+                            <input id="to_calorie" class="int" type="number" oninput="validity.valid||(value='')" />
+                            <div class="g2">kcal</div>
+                            <div class="cb"></div>
+                        </div>
                     </div>
-                    <div class="cent cb" style="padding-top: 20px">
-                        <button class="searchBtn" type="button" onclick="search(1)">
-                            <div class="srcBtn">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></div>
-                        </button>
+                    <div class="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
+                        <div>
+                            <div class="fl" style="margin-right: 15px">
+                                <div class="fs12">Data od:</div>
+                                <input id="datepickerFrom_calorie" class="datepicker" readonly />
+                            </div>
+                            <div class="fl">
+                                <div class="fs12">Data do:</div>
+                                <input id="datepickerTo_calorie" class="datepicker" readonly />
+                            </div>
+                        </div>
+                        <div class="cent">
+                            <button class="searchBtn" type="button" onclick="search(1)">
+                                <div class="srcBtn">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></div>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -125,10 +139,22 @@
                         <div class="g2">ml</div>
                         <div class="cb"></div>
                     </div>
-                    <div class="cent cb" style="padding-top: 20px">
-                        <button class="searchBtn" type="button" onclick="search(2)">
-                            <div class="srcBtn">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></div>
-                        </button>
+                    <div class="">
+                        <div>
+                            <div class="fl" style="margin-right: 15px">
+                                <div class="fs12">Data od:</div>
+                                <input id="datepickerFrom_water" class="datepicker" readonly />
+                            </div>
+                            <div class="fl">
+                                <div class="fs12">Data do:</div>
+                                <input id="datepickerTo_water" class="datepicker" readonly />
+                            </div>
+                        </div>
+                        <div class="cent">
+                            <button class="searchBtn" type="button" onclick="search(2)">
+                                <div class="srcBtn">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></div>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -164,8 +190,7 @@
                     </div>
                 </div>
             }
-            @if (Model.Days.Count == 0 && Model.WasSearchedFor)
-            {
+            @if (Model.Days.Count == 0 && Model.WasSearchedFor) {
                 <div class="cent" style="margin-top: 125px; width: 100%">Nie znaleziono dni</div>
             }
         </div>
@@ -179,6 +204,6 @@
         colorEverySecondRow();
         setInputsValidation();
     </script>
-    <script>loadDatePickers('@Model.DateFrom', '@Model.DateTo');</script>
+    <script>loadDatePickers('@Model.DateFrom', '@Model.DateTo', '@Model.FindBy');</script>
 </body>
 

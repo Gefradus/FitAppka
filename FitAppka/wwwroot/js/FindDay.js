@@ -7,21 +7,36 @@
     document.getElementById("waterConsumption").hidden = selectedValue != 2;
 }
 
-function loadDatePickers(dateFrom, dateTo) {
+function loadDatePickers(dateFrom, dateTo, findBy) {
     createDatePicker(".datepicker");
-    setMaxDate("#datepickerTo_product", new Date(4000, 12, 30));
-    setMinDate("#datepickerFrom_product", new Date(1900, 12, 30));
-    setDate("#datepickerTo_product", dateTo);
-    setDate("#datepickerFrom_product", dateFrom);
-    changeDatePickers();
+
+    if (findBy == 0) {
+        changeDatePickers("#datepickerFrom_product", "#datepickerTo_product", dateFrom, dateTo);
+    }
+    if (findBy == 1) {
+        changeDatePickers("#datepickerFrom_calorie", "#datepickerTo_calorie", dateFrom, dateTo);
+    }
+    if (findBy == 2) {
+        changeDatePickers("#datepickerFrom_water", "#datepickerTo_water", dateFrom, dateTo);
+    }
+
     var $j = jQuery.noConflict();
-    $j(".datepicker").on("change", changeDatePickers());
+    $j(".datepicker").on("change", changeDatePickers(findBy));
 }
 
-function changeDatePickers() {
+
+function changeDatePickers(datepickerFrom, datepickerTo, dateFrom, dateTo) {
+    setMaxDate(datepickerFrom, new Date(4000, 12, 30));
+    setMinDate(datepickerFrom, new Date(1900, 12, 30));
+    setDate(datepickerTo, dateTo);
+    setDate(datepickerFrom, dateFrom);
+    updateDatePickers(datepickerFrom, datepickerTo);
+}
+
+function updateDatePickers(datepickerFrom, datepickerTo) {
     var $j = jQuery.noConflict();
-    setMinDate("#datepickerTo_product", $j("#datepickerFrom_product").datepicker("getDate"));
-    setMaxDate("#datepickerFrom_product", $j("#datepickerTo_product").datepicker("getDate"));
+    setMinDate(datepickerTo, $j(datepickerFrom).datepicker("getDate"));
+    setMaxDate(datepickerFrom, $j(datepickerTo).datepicker("getDate"));
 }
 
 function findDays(url, searchType) {
@@ -40,10 +55,14 @@ function findDays(url, searchType) {
     if (searchType == 1) {
         from = getValueFromInput("#from_calorie");
         to = getValueFromInput("#to_calorie");
+        dateFrom = $("#datepickerFrom_calorie").val();
+        dateTo = $("#datepickerTo_calorie").val();
     }
     if (searchType == 2) {
         from = getValueFromInput("#from_water");
         to = getValueFromInput("#to_water");
+        dateFrom = $("#datepickerFrom_water").val();
+        dateTo = $("#datepickerTo_water").val();
     }
 
     url = url + "?findBy=" + searchType + "&from=" + from + "&to=" + to + "&dateFrom=" + dateFrom + "&dateTo=" + dateTo + "&wasSearchedFor=true";
