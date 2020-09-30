@@ -18,6 +18,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
+        [Route("/ProgressMonitoring")]
         public IActionResult ProgressMonitoring(string dateFrom, string dateTo, short chartType)
         {
             ViewData["dayID"] = _dayService.GetTodayId();

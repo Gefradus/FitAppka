@@ -28,6 +28,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
+        [Route("/Measurements")]
         public async Task<IActionResult> Measurements()
         {
             ViewData["dayID"] = _dayService.GetTodayId();

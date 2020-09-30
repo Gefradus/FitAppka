@@ -27,6 +27,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
+        [Route("/Settings")]
         public IActionResult Settings()
         {
             FirstAppLaunch();

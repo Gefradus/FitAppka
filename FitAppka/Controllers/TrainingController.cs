@@ -33,6 +33,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
+        [Route("/Training")]
         public async Task<IActionResult> TrainingPanel(int dayID) {
 
             ViewData["dayID"] = dayID;

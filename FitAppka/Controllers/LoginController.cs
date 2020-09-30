@@ -23,6 +23,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
+        [Route("")]
         public IActionResult Login()
         {
             return View();
@@ -57,6 +58,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
+        [Route("/Register")]
         public IActionResult Register()
         {
             return View();

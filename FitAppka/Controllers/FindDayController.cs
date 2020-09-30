@@ -19,6 +19,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
+        [Route("/FindDay")]
         public IActionResult FindDay(FindDayDTO dto)
         {
             ViewData["dayID"] = _dayManageService.GetTodayId();

@@ -33,6 +33,7 @@ namespace NowyDotnecik.Controllers
         }
 
         [HttpGet]
+        [Route("/Home")]
         public async Task<IActionResult> Home(DateTime daySelected)
         {
             _dayService.AddDayIfNotExists(daySelected);
@@ -63,13 +64,7 @@ namespace NowyDotnecik.Controllers
         public IActionResult ChooseDay(int choice, int dayID)
         {
             DateTime daySelected = _dayService.GetDayDateTime(dayID);
-
-            if (choice == 1) {
-                return RedirectToAction(nameof(Home), new { daySelected = daySelected.AddDays(-1) });
-            }
-            else {
-                return RedirectToAction(nameof(Home), new { daySelected = daySelected.AddDays(1) });
-            }
+            return RedirectToAction(nameof(Home), new { daySelected = choice == 1 ? daySelected.AddDays(-1) : daySelected.AddDays(1) });
         }
 
         [HttpGet]

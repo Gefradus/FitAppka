@@ -18,6 +18,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
+        [Route("/Goals")]
         public IActionResult Goals()
         {
             ViewData["dayID"] = _dayService.GetTodayId();
