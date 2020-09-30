@@ -92,10 +92,10 @@
             </nav>
         </div>
         <div id="calorie" class="row no-gutters" hidden>
-            <nav class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top container-fluid">
-                <div class="row">
-                    <div class="col-12 col-sm-8 col-lg-6 cent">
-                        <div style="float: left; margin-right: 15px; margin-left:15px">
+            <nav class="navbar navbar-expand-md border-bottom cent navsearch navbar-fixed-top container-fluid navProduct2">
+                <div class="row w-100">
+                    <div class="col-12 col-sm-6 col-lg-4 cent justify-content-lg-end">
+                        <div class="oolla">
                             <div style="font-size:12px; margin-bottom: 2px">Przedział spożytych kalorii:</div>
                             <div class="fromto">Od: </div>
                             <input id="from_calorie" class="int" type="number" oninput="validity.valid||(value='')" />
@@ -106,22 +106,21 @@
                             <div class="cb"></div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
-                        <div>
-                            <div class="fl" style="margin-right: 15px">
-                                <div class="fs12">Data od:</div>
-                                <input id="datepickerFrom_calorie" class="datepicker" readonly />
-                            </div>
-                            <div class="fl">
-                                <div class="fs12">Data do:</div>
-                                <input id="datepickerTo_calorie" class="datepicker" readonly />
-                            </div>
+                    <div class="col-12 col-sm-6 col-lg-4 cent">
+                        <div class="fl" style="margin-right: 35px">
+                            <div class="fs12">Data od:</div>
+                            <input id="datepickerFrom_calorie" class="datepicker" readonly />
                         </div>
-                        <div class="cent">
-                            <button class="searchBtn" type="button" onclick="search(1)">
-                                <div class="srcBtn">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></div>
-                            </button>
+                        <div class="fl">
+                            <div class="fs12">Data do:</div>
+                            <input id="datepickerTo_calorie" class="datepicker" readonly />
                         </div>
+                        <div class="cb"></div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-lg-4 cent justify-content-lg-start">
+                        <button class="searchBtn2" type="button" onclick="search(1)">
+                            <div class="srcBtn">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></div>
+                        </button>
                     </div>
                 </div>
             </nav>
@@ -151,7 +150,7 @@
                             </div>
                         </div>
                         <div class="cent">
-                            <button class="searchBtn" type="button" onclick="search(2)">
+                            <button class="searchBtn2" type="button" onclick="search(2)">
                                 <div class="srcBtn">Szukaj <img style="height: 15px; width:15px" src="~/img/search.png" /></div>
                             </button>
                         </div>
