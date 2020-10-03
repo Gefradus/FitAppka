@@ -6,6 +6,15 @@ main{
     padding-bottom: 0 !important
 }
 
+.pb-3{
+    padding-bottom: 0 !important
+}
+
+ul{
+    margin: 0 !important;
+    padding: 0 !important
+}
+
 .container {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 13px;
