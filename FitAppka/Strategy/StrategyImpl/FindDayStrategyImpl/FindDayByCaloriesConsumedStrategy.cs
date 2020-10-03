@@ -7,8 +7,8 @@ namespace FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl
 {
     public class FindDayByCaloriesConsumedStrategy : IFindDayStrategy
     {
-        public IDayRepository DayRepository { get; set; }
-        public IMealRepository MealRepository { get; set; }
+        public IDayRepository DayRepository { private get; set; }
+        public IMealRepository MealRepository { private get; set; }
 
 
         public List<DayDTO> FindDays(FindDayDTO dto) {

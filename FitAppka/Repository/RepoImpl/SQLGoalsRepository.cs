@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace FitAppka.Repository.RepIfaceImpl
 {
-    public class SQLGoalsRepositoryImpl : IGoalsRepository
+    public class SQLGoalsRepository : IGoalsRepository
     {
         private readonly FitAppContext _context;
 
-        public SQLGoalsRepositoryImpl(FitAppContext context)
+        public SQLGoalsRepository(FitAppContext context)
         {
             _context = context;
         }

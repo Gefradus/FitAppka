@@ -44,6 +44,11 @@ namespace FitAppka.Repository.RepoImpl
             return _context.DietProduct.Find(id);
         }
 
+        public List<DietProduct> GetDietProducts(int dietId)
+        {
+            return _context.DietProduct.Where(p => p.DietId == dietId).ToList();
+        }
+
         public DietProduct Update(DietProduct dietProduct)
         {
             _context.Update(dietProduct);

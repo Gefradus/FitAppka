@@ -1,0 +1,70 @@
+﻿#table{
+    margin-top: 80px;
+    margin-left: 5px
+}
+
+#columnsHeader {
+    margin-top: 25px;
+    background: #2b2a2a;
+    height: 50px;
+    align-items: center;
+    color: white;
+    max-width: 1400px
+}
+
+.for-checkbox-tools {
+    height: 25px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.tableRow {
+    height: 50px;
+    background-color: #fdfdfd;
+}
+
+.checkbox-tools:not(:checked) + label {
+    background-color: #06474e !important
+}
+
+#navMain {
+    height: 70px;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    margin-top: -5px;
+    z-index: 99;
+    background: rgba(245, 245, 245, 0.2);
+    backdrop-filter: blur(1px);
+}
+
+#showMyDiets {
+    background-color: #564e80
+}
+
+#createDiet {
+    background-color: #1f1f1f
+}
+
+.addIcon {
+    width: 20px;
+    margin-top: -3px;
+    margin-left: 4px;
+    margin-right: -2px
+}
+
+.btn-dark{
+    width: 184px
+}
+
+#notfound {
+    font-family: MS UI Gothic;
+    font-size: 20px;
+    display:flex;
+    align-items: center;
+    margin-left: 1rem;
+}

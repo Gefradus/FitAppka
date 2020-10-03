@@ -10,8 +10,8 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
 {
     public class CardioTrainingTimeChartStrategy : IChartTypeStrategy
     {
-        public ICardioTrainingService CardioService { get; set; }
-        public IDayRepository DayRepository { get; set; }
+        public ICardioTrainingService CardioService { private get; set; }
+        public IDayRepository DayRepository { private get; set; }
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
         {

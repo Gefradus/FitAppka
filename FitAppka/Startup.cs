@@ -2,8 +2,11 @@ using AutoMapper;
 using FitAppka.Models;
 using FitAppka.Repository;
 using FitAppka.Repository.RepIfaceImpl;
+using FitAppka.Repository.RepoImpl;
+using FitAppka.Repository.RepoInterface;
 using FitAppka.Service;
 using FitAppka.Service.ServiceImpl;
+using FitAppka.Service.ServiceInterface;
 using FitAppka.Service.ServicesImpl;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -63,6 +66,7 @@ namespace FitAppka
             services.AddScoped<IMeasurementsService, MeasurementsServiceImpl>();
             services.AddScoped<IProgressMonitoringService, ProgressMonitoringServiceImpl>();
             services.AddScoped<IContentRootPathHandlerService, ContentRootPathHandlerServiceImpl>();
+            services.AddScoped<IDietCreatorService, DietCreatorServiceImpl>();
         }
 
         private void RepositoriesAddScoped(IServiceCollection services)
@@ -77,7 +81,9 @@ namespace FitAppka
             services.AddScoped<ICardioTrainingRepository, SQLCardioTrainingRepository>();
             services.AddScoped<IWeightMeasurementRepository, SQLWeightMeasurementRepository>();
             services.AddScoped<IFatMeasurementRepository, SQLFatMeasurementRepository>();
-            services.AddScoped<IGoalsRepository, SQLGoalsRepositoryImpl>();
+            services.AddScoped<IGoalsRepository, SQLGoalsRepository>();
+            services.AddScoped<IDietRepository, SQLDietRepository>();
+            services.AddScoped<IDietProductRepository, SQLDietProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

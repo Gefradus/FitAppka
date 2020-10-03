@@ -8,7 +8,7 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
 {
     public class WeightMeasurementChartStrategy : IChartTypeStrategy
     {
-        public IWeightMeasurementRepository WeightMeasurementRepository { get; set; }
+        public IWeightMeasurementRepository WeightMeasurementRepository { private get; set; }
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
         {

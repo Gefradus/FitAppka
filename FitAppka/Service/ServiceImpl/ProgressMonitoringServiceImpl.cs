@@ -9,12 +9,12 @@ namespace FitAppka.Service.ServiceImpl
 {
     public class ProgressMonitoringServiceImpl : IProgressMonitoringService
     {
-        public IWeightMeasurementRepository WeightMeasurementRepository { get; set; }
-        public IFatMeasurementRepository FatMeasurementRepository { get; set; }
-        public IDayRepository DayRepository { get; set; }
-        public IHomePageService HomePageService { get; set; }
-        public IGoalsService GoalsService { get; set; }
-        public ICardioTrainingService CardioService { get; set; }
+        public IWeightMeasurementRepository WeightMeasurementRepository { get; private set; }
+        public IFatMeasurementRepository FatMeasurementRepository { get; private set; }
+        public IDayRepository DayRepository { get; private set; }
+        public IHomePageService HomePageService { get; private set; }
+        public IGoalsService GoalsService { get; private set; }
+        public ICardioTrainingService CardioService { get; private set; }
         private readonly IMapper _mapper;
 
         public ProgressMonitoringServiceImpl(IWeightMeasurementRepository weightMeasurementRepository, IGoalsService goalsService,

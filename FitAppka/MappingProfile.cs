@@ -2,6 +2,7 @@
 using FitAppka.Models;
 using FitAppka.Service.ServiceImpl;
 using FitAppka.Strategy.ChartTypeStrategyImpl;
+using FitAppka.Strategy.StrategyImpl.DayOfWeekDietStrategyImpl;
 using FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -49,6 +50,13 @@ namespace FitAppka
                 .ForMember(p => p.VisibleToAll, opt => opt.MapFrom(p => p.VisibleToAll))
                 .ForAllOtherMembers(opt => opt.Ignore());
 
+            CreateMap<Diet, DietDTO>();
+            CreateMap<Product, DietProductDTO>()
+                .AfterMap((src, dest) => dest.Calories = dest.Grammage * src.Calories / 100)
+                .AfterMap((src, dest) => dest.Carbohydrates = dest.Grammage * src.Carbohydrates / 100)
+                .AfterMap((src, dest) => dest.Proteins = dest.Grammage * src.Proteins / 100)
+                .AfterMap((src, dest) => dest.Fats = dest.Grammage * src.Fats / 100);
+
             CreateMap<Task<List<Product>>, Task<List<ProductDTO>>>();
 
             CreateMap<ProgressMonitoringServiceImpl, CaloriesConsumedChartStrategy>();
@@ -63,6 +71,13 @@ namespace FitAppka
             CreateMap<FindDayServiceImpl, FindDayByProductConsumedStrategy>();
             CreateMap<FindDayServiceImpl, FindDayByWaterDrunkStrategy>();
 
+            CreateMap<DietCreatorServiceImpl, MondayDietStrategy>();
+            CreateMap<DietCreatorServiceImpl, TuesdayDietStrategy>();
+            CreateMap<DietCreatorServiceImpl, WednesdayDietStrategy>();
+            CreateMap<DietCreatorServiceImpl, ThursdayDietStrategy>();
+            CreateMap<DietCreatorServiceImpl, FridayDietStrategy>();
+            CreateMap<DietCreatorServiceImpl, SaturdayDietStrategy>();
+            CreateMap<DietCreatorServiceImpl, SundayDietStrategy>();
         }
     }
 }

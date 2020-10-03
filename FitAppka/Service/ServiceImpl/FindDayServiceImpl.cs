@@ -11,9 +11,9 @@ namespace FitAppka.Service.ServiceImpl
 {
     public class FindDayServiceImpl : IFindDayService
     {
-        public IMealRepository MealRepository { get; set; }
-        public IDayRepository DayRepository { get; set; }
-        public IProductRepository ProductRepository { get; set; }
+        public IMealRepository MealRepository { get; private set; }
+        public IDayRepository DayRepository { get; private set; }
+        public IProductRepository ProductRepository { get; private set; }
         private readonly IMapper _mapper;
 
         public FindDayServiceImpl(IMealRepository mealRepository, IDayRepository dayRepository, IProductRepository productRepository, IMapper mapper)

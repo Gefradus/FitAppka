@@ -6,6 +6,7 @@ namespace FitAppka.Repository.RepoInterface
     {
         DietProduct GetDietProduct(int id);
         IEnumerable<DietProduct> GetAllDietProducts();
+        List<DietProduct> GetDietProducts(int dietId);
         DietProduct Add(DietProduct dietProduct);
         DietProduct Update(DietProduct dietProduct);
         DietProduct Delete(int id);

@@ -31,5 +31,6 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
             list.Sort((x, y) => x.DateOfDay.CompareTo(y.DateOfDay));
             return list;
         }
+
     }
 }

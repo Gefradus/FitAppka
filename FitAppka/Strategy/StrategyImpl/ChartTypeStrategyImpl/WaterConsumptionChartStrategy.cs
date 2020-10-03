@@ -10,8 +10,8 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
 {
     public class WaterConsumptionChartStrategy : IChartTypeStrategy
     {
-        public IDayRepository DayRepository { get; set; }
-        public IGoalsService GoalsService { get; set; }
+        public IDayRepository DayRepository { private get; set; }
+        public IGoalsService GoalsService { private get; set; }
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
         {

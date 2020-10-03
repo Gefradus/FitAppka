@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using FitAppka.Service.ServiceInterface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitAppka.Controllers
@@ -7,9 +8,17 @@ namespace FitAppka.Controllers
     [Authorize]
     public class DietCreatorController : Controller
     {
-        public IActionResult DietCreator()
+        private readonly IDietCreatorService _dietCreatorSerivce;
+        public DietCreatorController(IDietCreatorService dietCreatorSerivce)
         {
-            return View();
+            _dietCreatorSerivce = dietCreatorSerivce;
+        }
+
+        [HttpGet]
+        [Route("/DietCreator")]
+        public IActionResult ActiveDiets(int dayOfWeek)
+        {
+            return View(_dietCreatorSerivce.GetActiveDiet(dayOfWeek));
         }
     }
 }

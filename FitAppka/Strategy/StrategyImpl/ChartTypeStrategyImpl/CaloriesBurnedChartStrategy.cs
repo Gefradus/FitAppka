@@ -10,8 +10,8 @@ namespace FitAppka.Strategy.ChartTypeStrategyImpl
 {
     public class CaloriesBurnedChartStrategy : IChartTypeStrategy
     {
-        public IGoalsService GoalsService;
-        public IDayRepository DayRepository;
+        public IGoalsService GoalsService { private get; set; }
+        public IDayRepository DayRepository { private get; set; }
 
         public ProgressMonitoringDTO GetChartDataList(string dateFrom, string dateTo)
         {
