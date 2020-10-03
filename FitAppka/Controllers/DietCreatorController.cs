@@ -20,5 +20,13 @@ namespace FitAppka.Controllers
         {
             return View(_dietCreatorSerivce.GetActiveDiet(dayOfWeek));
         }
+
+        [HttpGet]
+        public IActionResult CreateDiet()
+        {
+            return View();
+        }
+
+        
     }
 }

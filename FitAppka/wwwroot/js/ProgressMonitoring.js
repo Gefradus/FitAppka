@@ -116,7 +116,12 @@ function defaultChart(label, borderColor, pointBorderColor, backgroundColor, lab
             legend: {
                 labels: {
                     filter: function (item) {
-                        return !item.text.includes('removeThisLabel');
+                        try {
+                            return !item.text.includes('removeThisLabel');
+                        }
+                        catch (e) {
+                            return item.text.indexOf('removeThisLabel') === -1;
+                        }
                     }
                 }
             }

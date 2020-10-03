@@ -16,7 +16,6 @@ namespace NowyDotnecik.Controllers
     public class HomeController : Controller
     {
         private readonly FitAppContext _context;
-        
         private readonly IDayManageService _dayService;
         private readonly IClientRepository _clientRepository;
         private readonly IHomePageService _homeService;
