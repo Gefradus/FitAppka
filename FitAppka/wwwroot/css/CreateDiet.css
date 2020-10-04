@@ -133,12 +133,16 @@ li{
     background-color: #2b2a2a
 }
 
+#productsHeader{
+    height: 30px
+}
+
 #btnAddProduct {
     background: none;
     border: none
 }
 
-#100g {
+#stog {
     background-color: #717171;
     border-top-left-radius: 25rem;
     border-top-right-radius: 25rem;

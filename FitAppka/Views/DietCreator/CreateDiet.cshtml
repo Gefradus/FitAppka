@@ -30,9 +30,9 @@
                                     </div>
                                     <div class="row no-gutters acent pt-2">
                                         <div class="col-4"></div>
-                                        <div class="col-8 cent pb-1" id="100g">na 100g produktu</div>
+                                        <div class="col-8 cent pb-1" id="stog">na 100g produktu</div>
                                     </div>
-                                    <div class="row no-gutters acent pb-2" id="productsHeader">
+                                    <div class="row no-gutters cent acent" id="productsHeader">
                                         <div class="col-4 cent">Nazwa</div>
                                         <div class="col-2 cent">Kcal</div>
                                         <div class="col-2 cent">B</div>
@@ -46,17 +46,15 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-4 col-lg-6">
-                                    <div class="row no-gutters">
+                                    <div class="row no-gutters cent">
                                         <h6>Dodawane produkty:</h6>
                                     </div>
                                     <div class="row no-gutters">
-
+                                        <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center;" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 999999)" /><div style="font-weight: 600; margin-top: 2px">g</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row no-gutters cent" style="margin-top: 10px;">
-                                <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center;" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 999999)" /><div style="font-weight: 600; margin-top: 2px">g</div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
