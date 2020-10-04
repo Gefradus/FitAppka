@@ -153,7 +153,11 @@ li{
     width: 250px
 }
 
-.productRow {
+.searchProduct:hover{
+    background-color: lightgray
+}
+
+.productRow, .searchProduct {
     height: 40px;
     border-bottom: 1px solid #c2c2c2;
     border-left: 1px solid #c2c2c2;
