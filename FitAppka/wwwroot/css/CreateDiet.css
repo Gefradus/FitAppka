@@ -107,3 +107,17 @@ li{
         font-size: 9px
     }
 }
+
+.delete{
+    width: 17px;
+    height: 17px;
+}
+
+.btnDelete{
+    background: none;
+    border: none
+}
+
+#columnsHeader{
+    font-weight: 600
+}

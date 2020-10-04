@@ -15,7 +15,6 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        [Route("/DietCreator")]
         public IActionResult ActiveDiets(int dayOfWeek)
         {
             return View(_dietCreatorSerivce.GetActiveDiet(dayOfWeek));
