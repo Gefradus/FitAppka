@@ -138,7 +138,14 @@ li{
     border: none
 }
 
-#saveDiet{
+#100g {
+    background-color: #717171;
+    border-top-left-radius: 25rem;
+    border-top-right-radius: 25rem;
+    color: white;
+}
+
+#saveDiet {
     width: 250px
 }
 
