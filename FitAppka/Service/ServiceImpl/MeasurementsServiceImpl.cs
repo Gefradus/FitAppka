@@ -20,13 +20,13 @@ namespace FitAppka.Service.ServiceImpl
             _fatMeasurementRepository = fatMeasurementRepository;
         }
 
-        public void AddMeasurements(short weight, int? waist)
+        public void AddMeasurements(double weight, int? waist)
         {
             AddFatMeasurementAndUpdateWeightMeasurement(_weightMeasurementRepository.Add(CreateWeightMeasurement(weight)), weight, waist);
             UpdateGoals();
         }
 
-        public bool UpdateMeasurements(int id, short weight, int? waist)
+        public bool UpdateMeasurements(int id, double weight, int? waist)
         {
             WeightMeasurement weightMeasurement = _weightMeasurementRepository.GetWeightMeasurement(id);
             weightMeasurement.Weight = weight;
@@ -52,7 +52,7 @@ namespace FitAppka.Service.ServiceImpl
             return false;
         }
 
-        public double EstimateBodyFatLevel(short weight, int? waist)
+        public double EstimateBodyFatLevel(double weight, int? waist)
         {
             double var;
             if ((bool) _clientManageService.GetLoggedInClient().Sex) {
@@ -102,7 +102,7 @@ namespace FitAppka.Service.ServiceImpl
             return false;
         }
 
-        private WeightMeasurement CreateWeightMeasurement(short weight)
+        private WeightMeasurement CreateWeightMeasurement(double weight)
         {
             return new WeightMeasurement() {
                 ClientId = _clientManageService.GetLoggedInClientId(),
@@ -111,7 +111,7 @@ namespace FitAppka.Service.ServiceImpl
             };
         }
 
-        private FatMeasurement CreateFatMeasurementIfWaistNotZero(WeightMeasurement weightMeasurement, short weight, int? waist)
+        private FatMeasurement CreateFatMeasurementIfWaistNotZero(WeightMeasurement weightMeasurement, double weight, int? waist)
         {
             if (waist != 0 && waist != null) {
                 return new FatMeasurement() {
@@ -123,7 +123,7 @@ namespace FitAppka.Service.ServiceImpl
             return null;
         }
 
-        private void UpdateOrAddFatMeasurement(WeightMeasurement item, short weight, int? waist)
+        private void UpdateOrAddFatMeasurement(WeightMeasurement item, double weight, int? waist)
         {
             if (item.FatMeasurementId != 0)
             {
@@ -141,7 +141,7 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-        private FatMeasurement AddFatMeasurementIfWaistNotZero(WeightMeasurement weightMeasurement, short weight, int? waist)
+        private FatMeasurement AddFatMeasurementIfWaistNotZero(WeightMeasurement weightMeasurement, double weight, int? waist)
         {
             FatMeasurement fatMeasurement = CreateFatMeasurementIfWaistNotZero(weightMeasurement, weight, waist);
             if (fatMeasurement != null)
@@ -151,7 +151,7 @@ namespace FitAppka.Service.ServiceImpl
             return null;
         }
 
-        private void AddFatMeasurementAndUpdateWeightMeasurement(WeightMeasurement addedMeasurement, short weight, int? waist)
+        private void AddFatMeasurementAndUpdateWeightMeasurement(WeightMeasurement addedMeasurement, double weight, int? waist)
         {
             FatMeasurement fatMeasurement = AddFatMeasurementIfWaistNotZero(addedMeasurement, weight, waist);
             if (fatMeasurement != null) {

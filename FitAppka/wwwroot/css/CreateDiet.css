@@ -86,7 +86,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
     opacity: 0;
 }
 
-ul.ks-cboxtags li input[type="checkbox"]:focus + label {
+ul.ks-cboxtags li input[type="checkbox"]:hover + label {
     border: 2px solid lightgreen;
 }
 
@@ -118,6 +118,44 @@ li{
     border: none
 }
 
-#columnsHeader{
+#addProductModal {
+    margin-top: 75px;
+}
+
+.modal-dialog {
+    max-width: 95% !important;
+    height: calc(93% - 75px);
+    display: flex;
+    justify-content: center
+}
+
+#columnsHeader {
+    font-weight: 600;
+}
+
+#btnAddProduct {
+    background: none;
+    border: none
+}
+
+.productRow {
+    height: 40px;
+    border-bottom: 1px solid #c2c2c2;
+    border-left: 1px solid #c2c2c2;
+    border-right: 1px solid #c2c2c2;
+}
+
+#productsPanel {
+    max-height: 282px;
+    border-top: 1px solid #c2c2c2;
+    overflow: auto;
+    background-color: white;
+    align-items: center;
+}
+
+.productRow:hover {
+    background-color: lightgray;
+    cursor: pointer;
+    color: #f3590f;
     font-weight: 600
 }

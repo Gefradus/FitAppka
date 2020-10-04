@@ -5,16 +5,16 @@
     <script src="~/js/ShowNavbar.js"></script>
     <link href="~/css/CreateDiet.css" rel="stylesheet" />
     <script src="~/js/CreateDiet.js"></script>
+
 </head>
 <body>
     <div class="container">
-        <div class="modal fade" tabindex="-1" id="addProductModal" data-keyboard="false" style="margin-top: 100px">
-            <div class="modal-dialog" style="display: flex; justify-content: center">
+        <div class="modal fade" tabindex="-1" id="addProductModal" data-keyboard="false">
+            <div class="modal-dialog">
                 <div class="modal-content" style="width: 90%">
                     <div class="modal-header" style="height: 25px">
                         <button type="button" style="margin-top: -30px" class="close" data-dismiss="modal">×</button>
                     </div>
-
                     <div class="modal-body">
                         <div class="container">
                             <div class="row no-gutters" style="height: 90%">
@@ -54,29 +54,44 @@
                     </div>
                     <div class="form-group">
                         <label>Produkty:</label>
-                        <button style="background: none; border: none"><img style="height:30px; width: 30px" src="~/img/add.png"></button>
+                        <button type="button" data-target="#addProductModal" data-toggle="modal" id="btnAddProduct"><img style="height:30px; width: 30px" src="~/img/add.png"></button>
                     </div>
                     <div class="form-group">
                         <div class="row no-gutters acent mt-1 pb-2" id="columnsHeader">
                             <div class="col-2 col-lg-3 h-100">Nazwa</div>
                             <div class="col-9 col-lg-8 container h-100">
                                 <div class="row no-gutters">
-                                    <div class="col-3">Ilość</div>
+                                    <div class="col-3 cent">Ilość</div>
                                     <div class="col-9 container row no-gutters">
-                                        <div class="col-3">Kcal</div>
-                                        <div class="col-3">B</div>
-                                        <div class="col-3">T</div>
-                                        <div class="col-3">W</div>
+                                        <div class="col-3 cent">Kcal</div>
+                                        <div class="col-3 cent">B</div>
+                                        <div class="col-3 cent">T</div>
+                                        <div class="col-3 cent">W</div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-1">
-                                <button type="button" class="btnDelete"><img class="delete" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
-                            </div>
+                            </div><div class="col-1"></div>
                         </div>
-                        <div class="row no-gutters">
 
+                        <div id="productsPanel">
+                            <div class="row no-gutters productRow">
+                                <div class="col-2 col-lg-3 h-100 acent cent">Banan</div>
+                                <div class="col-9 col-lg-8 container h-100">
+                                    <div class="row no-gutters h-100">
+                                        <div class="col-3 acent cent">100</div>
+                                        <div class="col-9 container row no-gutters acent">
+                                            <div class="col-3 cent">100</div>
+                                            <div class="col-3 cent">1</div>
+                                            <div class="col-3 cent">0</div>
+                                            <div class="col-3 cent">21</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                    <button type="button" class="btnDelete"><img class="delete" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </form>
             </div>

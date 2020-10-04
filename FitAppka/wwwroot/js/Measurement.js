@@ -80,8 +80,8 @@ function addMeasurementAjax(url) {
     $.ajax({
         type: 'POST',
         url: url,
-        data: { 
-            weight: parseInt($("#weight").val()), 
+        data: {
+            weight: $("#weight").val(), 
             waist: parseInt($("#waist").val()) 
         },
         success: function () {

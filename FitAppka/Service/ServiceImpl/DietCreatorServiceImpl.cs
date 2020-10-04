@@ -49,7 +49,6 @@ namespace FitAppka.Service.ServiceImpl
             return list;
         }
 
-
         private List<DietProductDTO> MapDietProductsToDTO(List<DietProduct> dietProducts)
         {
             var list = new List<DietProductDTO>();
