@@ -50,36 +50,33 @@ ul.ks-cboxtags li label {
     cursor: pointer;
 }
 
-    ul.ks-cboxtags li label::before {
-        display: inline-block;
-        font-style: normal;
-        font-variant: normal;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        font-size: 12px;
-        padding: 2px 6px 2px 2px;
-        content: "✖";
-        transition: transform .3s ease-in-out;
-    }
-
-    ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
-        content: "✓";
-        transform: rotate(-360deg);
-        transition: transform .3s ease-in-out;
-    }
-
-    ul.ks-cboxtags li input[type="checkbox"]:checked + label {
-        border: 2px solid #d2d2d2a3;
-        background: linear-gradient(45deg, #6ab452, #6bec6b);
-        color: #fff;
-        transition: all .2s;
-    }
-
-ul.ks-cboxtags li input[type="checkbox"] {
-    display: absolute;
+ul.ks-cboxtags li label::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    padding: 2px 6px 2px 2px;
+    content: "✖";
+    transition: transform .3s ease-in-out;
 }
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+    content: "✓";
+    transform: rotate(-360deg);
+    transition: transform .3s ease-in-out;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+    border: 2px solid #d2d2d2a3;
+    background: linear-gradient(45deg, #6ab452, #6bec6b);
+    color: #fff;
+    transition: all .2s;
+}
+
 
 ul.ks-cboxtags li input[type="checkbox"] {
     position: absolute;
@@ -115,7 +112,8 @@ li{
 
 .btnDelete{
     background: none;
-    border: none
+    border: none;
+    margin-top: -2px
 }
 
 #addProductModal {
@@ -129,8 +127,10 @@ li{
     justify-content: center
 }
 
-#columnsHeader {
+#columnsHeader, #productsHeader {
     font-weight: 600;
+    color: white;
+    background-color: #2b2a2a
 }
 
 #btnAddProduct {
@@ -138,11 +138,24 @@ li{
     border: none
 }
 
+#saveDiet{
+    width: 250px
+}
+
 .productRow {
     height: 40px;
     border-bottom: 1px solid #c2c2c2;
     border-left: 1px solid #c2c2c2;
     border-right: 1px solid #c2c2c2;
+}
+
+.searchPanel {
+    height: 350px;
+    border-top: 1px solid #c2c2c2;
+    overflow: auto;
+    background-color: white;
+    align-items: center;
+    width: 100%
 }
 
 #productsPanel {

@@ -55,9 +55,8 @@
                 <div id="searchArea" class="col-12 col-md-6">
                     @using (Html.BeginForm("Cardio", "Training", FormMethod.Get))
                     {
-                        <div id="divValidation">@Html.ValidationSummary(false, "", new { @class = "text-danger" })</div>
                         <div style="margin-top: -3px">
-                            <div id="textboxDIV">@Html.TextBox("search", "", new { @class = "form-control valid", @data_val = "true", @data_val_required = "Należy wpisać nazwę ćwiczenia" })</div>
+                            <div id="textboxDIV">@Html.TextBox("search", "", new { @class = "form-control" })</div>
                             <div style="float:left; padding-top:15px"><button id="submitSearch" type="submit"><img src="~/img/searchBlack.png" id="searchIcon"/></button></div>
                             <div style="clear:both"></div>
                         </div>
