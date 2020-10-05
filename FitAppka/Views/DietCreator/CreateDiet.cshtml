@@ -16,9 +16,9 @@
                         <button type="button" style="margin-top: -30px" class="close" data-dismiss="modal">×</button>
                     </div>
                     <div class="modal-body">
-                        <div class="container" id="tableContainer">
+                        <div id="tableContainer">
                             <div class="row no-gutters" style="height: 90%">
-                                <div class="col-12 col-md-8 col-lg-6">
+                                <div class="col-12">
                                     <div class="row no-gutters mb-4">
                                         <form method="get">
                                             <div style="margin-top: -3px">
@@ -42,6 +42,8 @@
                                     </div>
                                     <div class="row no-gutters">
                                         <div class="searchPanel">
+                                            @for (int i = 0; i < 8; i++)
+                                            {
                                             <div class="row no-gutters cent acent searchProduct">
                                                 <div class="col-3 cent">
                                                     <div>Super produkt</div>
@@ -54,19 +56,11 @@
                                                     <img class="imgBtnAdd" src="~/img/add.png">
                                                 </button></div>
                                             </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-4 col-lg-6">
-                                    <div class="row no-gutters cent">
-                                        <h6>Dodawane produkty:</h6>
-                                    </div>
-                                    <div class="row no-gutters">
-                                        <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center;" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 999999)" /><div style="font-weight: 600; margin-top: 2px">g</div>
-                                    </div>
-                                </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>

@@ -121,9 +121,15 @@ li{
     margin-top: 75px;
 }
 
+/* Important part */
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+
 .modal-dialog {
     max-width: 95% !important;
-    height: calc(93% - 75px);
+    /*min-height: calc(93% - 75px);*/
     display: flex;
     justify-content: center
 }
@@ -167,7 +173,7 @@ li{
 
 .searchPanel {
     height: 282px;
-    border-top: 1px solid #c2c2c2;
+    /*//border-top: 1px solid #c2c2c2;*/
     overflow: auto;
     overflow-x: hidden;
     background-color: white;
