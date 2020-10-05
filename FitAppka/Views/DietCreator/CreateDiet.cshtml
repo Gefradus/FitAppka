@@ -7,7 +7,7 @@
     <script src="~/js/ShowNavbar.js"></script>
     <script src="~/js/CreateDiet.js"></script>
 </head>
-<body>
+<body onload="onload()">
     <div class="container">
         <div class="modal fade" tabindex="-1" id="addProductModal" data-keyboard="false">
             <div class="modal-dialog">
@@ -22,7 +22,7 @@
                                     <div class="row no-gutters mb-4">
                                         <form method="get">
                                             <div style="margin-top: -3px">
-                                                <div id="textboxDIV">@Html.TextBox("search", "", new { @class = "form-control" })</div>
+                                                <div id="textboxDIV">@Html.TextBox("search", "", new { @class = "form-control", @placeholder = "Szukaj produktu" })</div>
                                                 <div style="float:left; padding-top:15px"><button id="submitSearch" type="submit"><img src="~/img/searchBlack.png" id="searchIcon" /></button></div>
                                                 <div style="clear:both"></div>
                                             </div>
@@ -35,9 +35,9 @@
                                     <div class="row no-gutters cent acent" id="productsHeader">
                                         <div class="col-3 cent">Nazwa</div>
                                         <div class="col-2 cent">Kcal</div>
-                                        <div class="col-2 cent">B</div>
-                                        <div class="col-2 cent">T</div>
-                                        <div class="col-2 cent">W</div>
+                                        <div class="col-2 cent" id="protein">B</div>
+                                        <div class="col-2 cent" id="fat">T</div>
+                                        <div class="col-2 cent" id="carbs">W</div>
                                         <div class="col-1"></div>
                                     </div>
                                     <div class="row no-gutters">

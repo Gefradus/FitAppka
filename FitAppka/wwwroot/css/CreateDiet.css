@@ -224,7 +224,6 @@ li{
 @media(max-width: 575px){
     .modal-dialog {
         max-width: 100% !important;
-        height: calc(98% - 75px)
     }
 }
 
@@ -269,3 +268,5 @@ li{
         margin-left: -2px
     }
 }
+
+
