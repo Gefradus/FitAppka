@@ -198,6 +198,15 @@ li{
     margin: initial !important
 }
 
+#btnAddProduct {
+    background: none;
+    border: none
+}
+
+#imgBtnAdd {
+    height: 24px;
+    width: 24px
+}
 
 @media(max-width: 600px) {
     .modal-content {
@@ -208,6 +217,7 @@ li{
 @media(max-width: 575px){
     .modal-dialog {
         max-width: 100% !important;
+        height: calc(98% - 75px)
     }
 }
 
@@ -236,9 +246,19 @@ li{
 
 }
 
-
 @media(max-width: 381px){
     #submitSearch{
         height: 35px
+    }
+}
+
+@media(max-width: 368px) {
+    #imgBtnAdd {
+        height: 22px;
+        width: 22px;
+    }
+
+    #btnAddProduct {
+        margin-left: -2px
     }
 }
