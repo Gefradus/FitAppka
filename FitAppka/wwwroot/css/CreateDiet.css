@@ -198,12 +198,12 @@ li{
     margin: initial !important
 }
 
-#btnAddProduct {
+.btnAddProduct {
     background: none;
     border: none
 }
 
-#imgBtnAdd {
+.imgBtnAdd {
     height: 24px;
     width: 24px
 }
@@ -253,12 +253,12 @@ li{
 }
 
 @media(max-width: 368px) {
-    #imgBtnAdd {
+    .imgBtnAdd {
         height: 22px;
         width: 22px;
     }
 
-    #btnAddProduct {
+    .btnAddProduct {
         margin-left: -2px
     }
 }
