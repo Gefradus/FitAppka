@@ -118,7 +118,7 @@ li{
 
 #addProductModal {
     padding: 0 !important;
-    margin-top: 75px;
+    padding-top: 75px !important;
 }
 
 /* Important part */
@@ -130,6 +130,7 @@ li{
 .modal-dialog {
     max-width: 95% !important;
     /*min-height: calc(93% - 75px);*/
+    
     display: flex;
     justify-content: center
 }
