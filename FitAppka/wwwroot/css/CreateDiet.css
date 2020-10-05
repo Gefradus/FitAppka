@@ -117,6 +117,7 @@ li{
 }
 
 #addProductModal {
+    padding: 0 !important;
     margin-top: 75px;
 }
 
@@ -165,9 +166,10 @@ li{
 }
 
 .searchPanel {
-    height: 350px;
+    height: 282px;
     border-top: 1px solid #c2c2c2;
     overflow: auto;
+    overflow-x: hidden;
     background-color: white;
     align-items: center;
     width: 100%
@@ -186,4 +188,57 @@ li{
     cursor: pointer;
     color: #f3590f;
     font-weight: 600
+}
+
+.modal-content {
+    width: 90% !important
+}
+
+#tableContainer{
+    margin: initial !important
+}
+
+
+@media(max-width: 600px) {
+    .modal-content {
+        width: 100% !important
+    }
+}
+
+@media(max-width: 575px){
+    .modal-dialog {
+        max-width: 100% !important;
+    }
+}
+
+@media(max-width: 500px){
+    .modal-body {
+        padding-right: 2px !important;
+        padding-left: 2px !important
+    }
+
+    #tableContainer {
+        padding-right: 3px !important;
+        padding-left: 5px !important
+    }
+
+    .searchProduct{
+        font-size: 11px
+    }
+}
+
+@media(max-width: 415px){
+    .modal-dialog {
+        margin: 2px !important;
+        margin-top: 7px !important
+    }
+
+
+}
+
+
+@media(max-width: 381px){
+    #submitSearch{
+        height: 35px
+    }
 }
