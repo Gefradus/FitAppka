@@ -68,22 +68,13 @@ namespace FitAppka.Service.ServiceImpl
             List<Product> products = _productRepository.GetAccessedToLoggedInClientProducts().
                     Where(p => string.IsNullOrEmpty(search) || p.ProductName.ToLower().Contains(search.ToLower())).ToList();
 
-            var searchdto = new List<SearchProductDTO>();
-            foreach (var item in products)
-            {
-                searchdto.Add(new SearchProductDTO() {
-                    Calories = item.Calories,
-                    Carbohydrates = item.Carbohydrates,
-                    ProductId = item.ProductId,
-                    Fats = item.Fats,
-                    ProductName = item.ProductName,
-                    Proteins = item.Proteins
-                });
+            var searchProducts = new List<SearchProductDTO>();
+            foreach (var item in products) {
+                searchProducts.Add(_mapper.Map<Product, SearchProductDTO>(item));
             }
 
             return new CreateDietDTO(){
-                SearchProducts = searchdto,
-
+                SearchProducts = searchProducts,
                 AddedProducts = addedProducts
             };
         }

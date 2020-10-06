@@ -58,8 +58,9 @@ namespace FitAppka
                 .AfterMap((src, dest) => dest.Proteins = dest.Grammage * src.Proteins / 100)
                 .AfterMap((src, dest) => dest.Fats = dest.Grammage * src.Fats / 100);
 
+            CreateMap<Product, SearchProductDTO>();
+
             CreateMap<Task<List<Product>>, Task<List<ProductDTO>>>();
-            CreateMap<List<Product>, List<SearchProductDTO>>();
 
             CreateMap<ProgressMonitoringServiceImpl, CaloriesConsumedChartStrategy>();
             CreateMap<ProgressMonitoringServiceImpl, CaloriesBurnedChartStrategy>();

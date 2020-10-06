@@ -45,3 +45,36 @@ function addProduct(url, id, grammage) {
     });
 }
 
+function getWebRootPath(path) {
+    return path;
+}
+
+function showAddOrEditModal(id) {
+    prepareModalData(id);
+    $("#addOrEditModal").modal('show');
+}
+
+function prepareModalData(id) {
+    var iter = giveIterFromID(id);
+    if (pathArray[iter] == 'null') {
+        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + getRootPath() + '/img/miss.png" class="img-fluid" asp-append-version="true" />';
+    }
+    else {
+        document.getElementById("photoArea").innerHTML = '<img id="zdjecie" src="' + getRootPath() + "/photos/" + pathArray[iter] + '" class="img-fluid" asp-append-version="true" />';
+    }
+
+    document.getElementById("productId").value = id;
+    document.getElementById("name").innerHTML = nameArray[iter];
+    document.getElementById("kcal").innerHTML = kcalArray[iter] + ' kcal';
+    document.getElementById("proteins").innerHTML = 'Białko: ' + proteinsArray[iter] + ' g,';
+    document.getElementById("fats").innerHTML = 'Tł.: ' + fatsArray[iter] + ' g,';
+    document.getElementById("carbs").innerHTML = 'Węgl.: ' + carbsArray[iter] + ' g';
+}
+
+var IDarray = [];
+var nameArray = [];
+var pathArray = [];
+var kcalArray = [];
+var proteinsArray = [];
+var fatsArray = [];
+var carbsArray = [];
