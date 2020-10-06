@@ -10,26 +10,32 @@
         }
     }
 
-    $('#addProductModal').on('hide.bs.modal', function (e) {
+    $('#addProductModal').on('hide.bs.modal', function () {
         window.history.replaceState(null, null, window.location.pathname);
     });
 }
 
 function onResizeEvent() {
-    if (document.getElementsByTagName("body")[0].offsetWidth < 500) {
-        document.getElementById("protein").innerHTML = "B";
-        document.getElementById("fat").innerHTML = "T";
-        document.getElementById("carbs").innerHTML = "W";
+    var protein = document.getElementById("proteinHeader");
+    var fats = document.getElementById("fatHeader");
+    var carbs = document.getElementById("carbsHeader");
+
+    if (document.getElementsByTagName("body")[0].offsetWidth < 500)
+    {
+        protein.innerHTML = "B";
+        fats.innerHTML = "T";
+        carbs.innerHTML = "W";
     }
-    else if (document.getElementsByTagName("body")[0].offsetWidth < 800) {
-        document.getElementById("protein").innerHTML = "Białko";
-        document.getElementById("fat").innerHTML = "Tłuszcze";
-        document.getElementById("carbs").innerHTML = "Węgl.";
+    else if (document.getElementsByTagName("body")[0].offsetWidth < 800)
+    {
+        protein.innerHTML = "Białko";
+        fats.innerHTML = "Tłuszcze";
+        carbs.innerHTML = "Węgl.";
     }
     else {
-        document.getElementById("protein").innerHTML = "Białko";
-        document.getElementById("fat").innerHTML = "Tłuszcze";
-        document.getElementById("carbs").innerHTML = "Węglowodany";
+        protein.innerHTML = "Białko";
+        fats.innerHTML = "Tłuszcze";
+        carbs.innerHTML = "Węglowodany";
     }
 }
 
