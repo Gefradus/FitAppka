@@ -141,8 +141,9 @@ li{
     background-color: #2b2a2a
 }
 
-#productsHeader{
-    height: 30px
+#productsHeader {
+    height: 30px;
+    border-top-left-radius: 5px
 }
 
 #btnAddProduct {
