@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models;
+using FitAppka.Service;
 using FitAppka.Service.ServiceImpl;
 using FitAppka.Service.ServiceInterface;
 using Microsoft.AspNetCore.Authorization;
@@ -11,10 +12,12 @@ namespace FitAppka.Controllers
     [Authorize]
     public class DietCreatorController : Controller
     {
+        private readonly IDayManageService _dayManageService;
         private readonly IContentRootPathHandlerService _contentRootService;
         private readonly IDietCreatorService _dietCreatorSerivce;
-        public DietCreatorController(IDietCreatorService dietCreatorSerivce, IContentRootPathHandlerService contentRootService)
+        public DietCreatorController(IDietCreatorService dietCreatorSerivce, IContentRootPathHandlerService contentRootService, IDayManageService dayManageService)
         {
+            _dayManageService = dayManageService;
             _contentRootService = contentRootService;
             _dietCreatorSerivce = dietCreatorSerivce;
         }
@@ -22,12 +25,14 @@ namespace FitAppka.Controllers
         [HttpGet]
         public IActionResult ActiveDiets(int dayOfWeek)
         {
+            ViewData["dayID"] = _dayManageService.GetTodayId();
             return View(_dietCreatorSerivce.GetActiveDiet(dayOfWeek));
         }
 
         [HttpGet]
         public IActionResult CreateDiet(List<DietProductDTO> addedProducts, string search, bool searched)
         {
+            ViewData["dayID"] = _dayManageService.GetTodayId();
             ViewData["path"] = _contentRootService.GetContentRootFileName();
             ViewData["wasSearched"] = searched;
             return View(_dietCreatorSerivce.SearchProducts(addedProducts, search));
