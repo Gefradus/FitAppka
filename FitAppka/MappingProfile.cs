@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FitAppka.Models;
+using FitAppka.Models.DTO.DietCreatorDTO;
 using FitAppka.Service.ServiceImpl;
 using FitAppka.Strategy.ChartTypeStrategyImpl;
 using FitAppka.Strategy.StrategyImpl.DayOfWeekDietStrategyImpl;
@@ -58,6 +59,7 @@ namespace FitAppka
                 .AfterMap((src, dest) => dest.Fats = dest.Grammage * src.Fats / 100);
 
             CreateMap<Task<List<Product>>, Task<List<ProductDTO>>>();
+            CreateMap<List<Product>, List<SearchProductDTO>>();
 
             CreateMap<ProgressMonitoringServiceImpl, CaloriesConsumedChartStrategy>();
             CreateMap<ProgressMonitoringServiceImpl, CaloriesBurnedChartStrategy>();

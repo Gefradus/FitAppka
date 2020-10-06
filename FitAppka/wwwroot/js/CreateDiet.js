@@ -1,4 +1,5 @@
 ﻿function onload() {
+    checkIfModalWasOpen();
     onResizeEvent();
 
     if (window.addEventListener) {
@@ -8,6 +9,10 @@
             window.attachEvent("onresize", onResizeEvent);
         }
     }
+
+    $('#addProductModal').on('hide.bs.modal', function (e) {
+        window.history.replaceState(null, null, window.location.pathname);
+    });
 }
 
 function onResizeEvent() {
@@ -27,3 +32,16 @@ function onResizeEvent() {
         document.getElementById("carbs").innerHTML = "Węglowodany";
     }
 }
+
+function addProduct(url, id, grammage) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: {
+            id: id,
+            grammage: grammage
+        },
+        success: function () {}
+    });
+}
+

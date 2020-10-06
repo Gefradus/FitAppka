@@ -1,4 +1,5 @@
-﻿<html>
+﻿@model FitAppka.Models.DTO.DietCreatorDTO.CreateDietDTO 
+<html>
 <head>
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
@@ -6,6 +7,15 @@
     <link href="~/css/CreateDiet.css" rel="stylesheet" />
     <script src="~/js/ShowNavbar.js"></script>
     <script src="~/js/CreateDiet.js"></script>
+    <script>
+        function checkIfModalWasOpen() {
+            if ('@(((bool)ViewData["wasSearched"]) ? "true" : "false")' == 'true') {
+                $("#addProductModal").removeClass('fade');
+                $("#addProductModal").modal('show');
+                $("#addProductModal").addClass('fade');
+            }
+        }
+    </script>
 </head>
 <body onload="onload()">
     <div class="container">
@@ -25,6 +35,7 @@
                                                 <div id="textboxDIV">@Html.TextBox("search", "", new { @class = "form-control", @placeholder = "Szukaj produktu" })</div>
                                                 <div style="float:left; padding-top:15px"><button id="submitSearch" type="submit"><img src="~/img/searchBlack.png" id="searchIcon" /></button></div>
                                                 <div style="clear:both"></div>
+                                                @Html.Hidden("searched", true)
                                             </div>
                                         </form>
                                     </div>
@@ -42,20 +53,25 @@
                                     </div>
                                     <div class="row no-gutters">
                                         <div class="searchPanel">
-                                            @for (int i = 0; i < 12; i++)
+                                            @foreach(var item in Model.SearchProducts)
                                             {
-                                            <div class="row no-gutters cent acent searchProduct">
-                                                <div class="col-3 cent">
-                                                    <div>Super produkt</div>
+                                                <div class="row no-gutters cent acent searchProduct">
+                                                    <div class="col-3 cent">
+                                                        <div>@item.ProductName</div>
+                                                    </div>
+                                                    <div class="col-2 cent">@item.Calories</div>
+                                                    <div class="col-2 cent">@item.Proteins</div>
+                                                    <div class="col-2 cent">@item.Fats</div>
+                                                    <div class="col-2 cent">@item.Carbohydrates</div>
+                                                    <div class="col-1"><button type="button" class="btnAddProduct">
+                                                        <img class="imgBtnAdd" src="~/img/add.png">
+                                                    </button></div>
                                                 </div>
-                                                <div class="col-2 cent">100</div>
-                                                <div class="col-2 cent">1</div>
-                                                <div class="col-2 cent">0</div>
-                                                <div class="col-2 cent">24</div>
-                                                <div class="col-1"><button type="button" class="btnAddProduct">
-                                                    <img class="imgBtnAdd" src="~/img/add.png">
-                                                </button></div>
-                                            </div>
+                                            }
+                                            @if (Model.SearchProducts.Count.Equals(0)) {
+                                                <div class="cent mt-5">
+                                                    Nie znaleziono produktu o podanej nazwie
+                                                </div>
                                             }
                                         </div>
                                     </div>
@@ -67,7 +83,7 @@
             </div>
         </div>
 
-
+        <script>checkIfModalWasOpen();</script>
 
         <div class="row no-gutters cent h-100">
             <div class="col-12 col-sm-11 col-lg-8 col-xl-7 cent" style="background-color: white; margin-top: -5px; height: unset">
@@ -109,23 +125,26 @@
                         </div>
 
                         <div id="productsPanel">
-                            <div class="row no-gutters productRow">
-                                <div class="col-2 col-lg-3 h-100 acent cent">Banan</div>
-                                <div class="col-9 col-lg-8 container h-100">
-                                    <div class="row no-gutters h-100">
-                                        <div class="col-3 acent cent">100</div>
-                                        <div class="col-9 container row no-gutters acent">
-                                            <div class="col-3 cent">100</div>
-                                            <div class="col-3 cent">1</div>
-                                            <div class="col-3 cent">0</div>
-                                            <div class="col-3 cent">21</div>
+                            @foreach (var item in Model.AddedProducts)
+                            {
+                                <div class="row no-gutters productRow">
+                                    <div class="col-2 col-lg-3 h-100 acent cent">@item.ProductName</div>
+                                    <div class="col-9 col-lg-8 container h-100">
+                                        <div class="row no-gutters h-100">
+                                            <div class="col-3 acent cent">100</div>
+                                            <div class="col-9 container row no-gutters acent">
+                                                <div class="col-3 cent">@item.Calories</div>
+                                                <div class="col-3 cent">@item.Proteins</div>
+                                                <div class="col-3 cent">@item.Fats</div>
+                                                <div class="col-3 cent">@item.Carbohydrates</div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="col-1 acent cent">
+                                        <button type="button" class="btnDelete"><img class="delete" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
+                                    </div>
                                 </div>
-                                <div class="col-1 acent cent">
-                                    <button type="button" class="btnDelete"><img class="delete" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
-                                </div>
-                            </div>
+                            }
                         </div>
 
                     </div>

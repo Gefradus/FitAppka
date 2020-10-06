@@ -1,6 +1,8 @@
-﻿using FitAppka.Service.ServiceInterface;
+﻿using FitAppka.Models;
+using FitAppka.Service.ServiceInterface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace FitAppka.Controllers
 {
@@ -21,11 +23,16 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateDiet()
+        public IActionResult CreateDiet(List<DietProductDTO> addedProducts, string search, bool searched)
         {
-            return View();
+            ViewData["wasSearched"] = searched;
+            return View(_dietCreatorSerivce.SearchProducts(addedProducts, search));
         }
 
-        
+        [HttpPost]
+        public IActionResult CreateDiet(List<DietProductDTO> addedProducts, int productId, int grammage)
+        {
+            return View(_dietCreatorSerivce.AddProduct(addedProducts, productId, grammage));
+        }
     }
 }
