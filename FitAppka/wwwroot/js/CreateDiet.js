@@ -39,12 +39,12 @@ function onResizeEvent() {
     }
 }
 
-function addProduct(url, id, grammage) {
+function addProduct(url, grammage) {
     $.ajax({
         type: 'POST',
         url: url,
         data: {
-            id: id,
+            id: $("#productId").val(),
             grammage: grammage
         },
         success: function () {}
@@ -55,9 +55,27 @@ function getWebRootPath(path) {
     return path;
 }
 
+function closeAddModal() {
+    $("#addOrEditModal").modal('hide');
+    $("#grammage").val("");
+}
+
+function tryAddProduct(url) {
+    let grammage = $("#grammage").val();
+
+    if (isNumeric(grammage)) {
+        addProduct(url, grammage);
+    } else {
+        if (isEmpty(grammage)) {
+            validation("Należy")
+        }
+    }
+}
+
 function showAddOrEditModal(id) {
     prepareModalData(id);
     $("#addOrEditModal").modal('show');
+    $("")
 }
 
 function prepareModalData(id) {
