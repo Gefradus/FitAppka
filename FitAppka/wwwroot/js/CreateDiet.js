@@ -54,7 +54,7 @@ function tryAddProduct(url) {
     let grammage = $("#grammage").val();
 
     if (isNumeric(grammage)) {
-        addProduct(url, grammage,);
+        addProduct(url, grammage);
     } else {
         if (isEmpty(grammage)) {
             validation("Podaj ilość produktu");
@@ -62,54 +62,56 @@ function tryAddProduct(url) {
     }
 }
 
-function addProduct(url, grammage)
-{
+function addProduct(url, grammage) {
     $.ajax({
         type: 'POST',
         url: url,
         data: {
-            addedProducts: JSON.parse(localStorage.products),
-            productId: $("#productId").val(),
+            addedProducts: localStorage.getItem("products") === null ? null : JSON.parse(localStorage.products),
+            productId: document.getElementById("productId").value,
             grammage: grammage
         },
         success: function (response) {
             localStorage.setItem("products", JSON.stringify(response.addedProducts));
+            location.reload();
         }
     });
 }
 
 function showAddedProducts() {
-    let products = JSON.parse(localStorage.products);
-    for (var i = 0; i < products.length; i++)
-    {
-        let name = products[i].productName;
-        let grammage = products[i].grammage;
-        let kcal = products[i].calories;
-        let proteins = products[i].proteins;
-        let carbs = products[i].carbohydrates;
-        let fats = products[i].fats;
-        let panel = document.getElementById("productsPanel");
+    if (localStorage.products != null) {
+        let products = JSON.parse(localStorage.products);
+        for (var i = 0; i < products.length; i++) {
+            let name = products[i].productName;
+            let grammage = products[i].grammage;
+            let kcal = products[i].calories;
+            let proteins = products[i].proteins;
+            let carbs = products[i].carbohydrates;
+            let fats = products[i].fats;
+            let panel = document.getElementById("productsPanel");
 
-        panel.innerHTML = panel.innerHTML +
-            '<div class="row no-gutters productRow">' +
-            '<div class="col-2 col-lg-3 h-100 acent cent">'+ name +'</div>' +
-            '<div class="col-9 col-lg-8 container h-100">' +
+            panel.innerHTML = panel.innerHTML +
+                '<div class="row no-gutters productRow">' +
+                '<div class="col-2 col-lg-3 h-100 acent cent">' + name + '</div>' +
+                '<div class="col-9 col-lg-8 container h-100">' +
                 '<div class="row no-gutters h-100">' +
-                    '<div class="col-3 acent cent">' + grammage + '</div>' +
-                        '<div class="col-9 container row no-gutters acent">' +
-                            '<div class="col-3 cent">'+ kcal +'</div>' +
-                            '<div class="col-3 cent">'+ proteins +'</div>' +
-                            '<div class="col-3 cent">'+ fats +'</div>' +
-                            '<div class="col-3 cent">'+ carbs +'</div>' +
-                        '</div>' +
-                    '</div>' +
+                '<div class="col-3 acent cent">' + grammage + '</div>' +
+                '<div class="col-9 container row no-gutters acent">' +
+                '<div class="col-3 cent">' + kcal + '</div>' +
+                '<div class="col-3 cent">' + parseFloat(proteins).toFixed(1).replace('.0', '') + '</div>' +
+                '<div class="col-3 cent">' + parseFloat(fats).toFixed(1).replace('.0', '') + '</div>' +
+                '<div class="col-3 cent">' + parseFloat(carbs).toFixed(1).replace('.0', '') + '</div>' +
+                '</div>' +
+                '</div>' +
                 '</div>' +
                 '<div class="col-1 acent cent">' +
-                    '<button type="button" class="btnDelete"><img class="delete" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>' +
+                '<button type="button" class="btnDelete"><img class="delete" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>' +
                 '</div>' +
-            '</div>' + 
-            '</div>';
+                '</div>' +
+                '</div>';
+        }
     }
+
 }
 
 
