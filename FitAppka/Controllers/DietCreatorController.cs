@@ -13,12 +13,10 @@ namespace FitAppka.Controllers
     public class DietCreatorController : Controller
     {
         private readonly IDayManageService _dayManageService;
-        private readonly IContentRootPathHandlerService _contentRootService;
         private readonly IDietCreatorService _dietCreatorSerivce;
-        public DietCreatorController(IDietCreatorService dietCreatorSerivce, IContentRootPathHandlerService contentRootService, IDayManageService dayManageService)
+        public DietCreatorController(IDietCreatorService dietCreatorSerivce, IDayManageService dayManageService)
         {
             _dayManageService = dayManageService;
-            _contentRootService = contentRootService;
             _dietCreatorSerivce = dietCreatorSerivce;
         }
 
@@ -30,18 +28,17 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateDiet(List<DietProductDTO> addedProducts, string search, bool searched)
+        public IActionResult CreateDiet(string search, bool searched)
         {
             ViewData["dayID"] = _dayManageService.GetTodayId();
-            ViewData["path"] = _contentRootService.GetContentRootFileName();
-            ViewData["wasSearched"] = searched;
-            return View(_dietCreatorSerivce.SearchProducts(addedProducts, search));
+            return View(_dietCreatorSerivce.SearchProducts(search, searched));
         }
 
         [HttpPost]
-        public IActionResult CreateDiet(List<DietProductDTO> addedProducts, int productId, int grammage)
+        public JsonResult CreateDiet2(List<DietProductDTO> addedProducts, int productId, int grammage)
         {
-            return View(_dietCreatorSerivce.AddProduct(addedProducts, productId, grammage));
+            ViewData["dayID"] = _dayManageService.GetTodayId();
+            return Json(_dietCreatorSerivce.AddProduct(addedProducts, productId, grammage, false));
         }
     }
 }

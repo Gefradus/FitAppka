@@ -11,15 +11,16 @@
     <script src="~/js/Validation.js"></script>
     <script>
         function getRootPath() {
-            return getWebRootPath("@(((string) ViewData["path"]).Replace("\\","\\\\"))");
+            return getWebRootPath("@((Model.RootPath).Replace("\\","\\\\"))");
         }
         function checkIfModalWasOpen() {
-            if ('@(((bool)ViewData["wasSearched"]) ? "true" : "false")' == 'true') {
+            if (@(Model.WasSearched ? 1 : 0) == 1) {
                 $("#addProductModal").removeClass('fade');
                 $("#addProductModal").modal('show');
                 $("#addProductModal").addClass('fade');
             }
         }
+
     </script>
 </head>
 <body onload="onload()">
@@ -79,7 +80,7 @@
                                                 </script>
 
                                                 <div class="row no-gutters cent acent searchProduct">
-                                                    <div class="col-3 cent">
+                                                    <div class="col-3 cent h-100 acent">
                                                         <div>@item.ProductName</div>
                                                     </div>
                                                     <div class="col-2 cent">@item.Calories</div>
@@ -90,11 +91,10 @@
                                                         <button type="button" class="btnAddProduct" onclick="showAddOrEditModal(@item.ProductId)">
                                                             <img class="imgBtnAdd" src="~/img/add.png">
                                                         </button>
-                                                    </div>.
+                                                    </div>
                                                 </div>
                                             }
-                                            @if (Model.SearchProducts.Count.Equals(0))
-                                            {
+                                            @if (Model.SearchProducts.Count.Equals(0)) {
                                                 <div class="cent mt-5">
                                                     Nie znaleziono produktu o podanej nazwie
                                                 </div>
@@ -138,7 +138,9 @@
 
                             <div class="row no-gutters cent" style="margin-top: 10px;">
                                 <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center;" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 999999)" /><div style="font-weight: 600; margin-top: 2px">g</div>
-                                <button onclick="tryAddProduct()" style="margin-left: 5px; background:none; border:none"><img style="width:30px; height:30px" src="~/img/add.png" /></button>
+                                <button onclick="tryAddProduct('@Url.Action("CreateDiet2", "DietCreator")')" style="margin-left: 5px; background:none; border:none">
+                                    <img style="width:30px; height:30px" src="~/img/add.png" />
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -187,26 +189,7 @@
                         </div>
 
                         <div id="productsPanel">
-                            @foreach (var item in Model.AddedProducts)
-                            {
-                                <div class="row no-gutters productRow">
-                                    <div class="col-2 col-lg-3 h-100 acent cent">@item.ProductName</div>
-                                    <div class="col-9 col-lg-8 container h-100">
-                                        <div class="row no-gutters h-100">
-                                            <div class="col-3 acent cent">100</div>
-                                            <div class="col-9 container row no-gutters acent">
-                                                <div class="col-3 cent">@item.Calories</div>
-                                                <div class="col-3 cent">@item.Proteins</div>
-                                                <div class="col-3 cent">@item.Fats</div>
-                                                <div class="col-3 cent">@item.Carbohydrates</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-1 acent cent">
-                                        <button type="button" class="btnDelete"><img class="delete" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
-                                    </div>
-                                </div>
-                            }
+                            
                         </div>
 
                     </div>

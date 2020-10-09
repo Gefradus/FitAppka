@@ -17,12 +17,14 @@ namespace FitAppka.Service.ServiceImpl
         public IDietRepository DietRepository { get; private set; }
         private readonly IProductRepository _productRepository;
         private readonly IDietProductRepository _dietProductRepository;
+        private readonly IContentRootPathHandlerService _contentRootService;
         private readonly IMapper _mapper;
 
-        public DietCreatorServiceImpl(IDietRepository dietRepository, IMapper mapper, 
+        public DietCreatorServiceImpl(IDietRepository dietRepository, IMapper mapper, IContentRootPathHandlerService contentRootService,
             IDietProductRepository dietProductRepository, IProductRepository productRepository)
         {
             DietRepository = dietRepository;
+            _contentRootService = contentRootService;
             _dietProductRepository = dietProductRepository;
             _productRepository = productRepository;
             _mapper = mapper;
@@ -63,30 +65,38 @@ namespace FitAppka.Service.ServiceImpl
             return list;
         }
 
-        public CreateDietDTO SearchProducts(List<DietProductDTO> addedProducts, string search)
+        public CreateDietDTO SearchProducts(string search, bool wasSearched)
         {
-            var searchProducts = new List<SearchProductDTO>();
-            foreach (var item in _productRepository.GetAccessedToLoggedInClientProducts(). 
-                Where(p => string.IsNullOrEmpty(search) || p.ProductName.ToLower().Contains(search.ToLower())).ToList()) {
-                searchProducts.Add(_mapper.Map<Product, SearchProductDTO>(item));
-            }
-
-            return new CreateDietDTO(){
-                SearchProducts = searchProducts,
-                AddedProducts = addedProducts
+            return new CreateDietDTO() {
+                SearchProducts = SearchOrGetProducts(search),
+                RootPath = _contentRootService.GetContentRootFileName(),
+                WasSearched = wasSearched
             };
         }
 
-        public CreateDietDTO AddProduct(List<DietProductDTO> addedProducts, int productId, int grammage)
+        public CreateDietDTO AddProduct(List<DietProductDTO> addedProducts, int productId, int grammage, bool wasSearched)
         {
             DietProductDTO dto = new DietProductDTO() { Grammage = grammage };
             addedProducts.Add(_mapper.Map(_productRepository.GetProduct(productId), dto));
 
-            return new CreateDietDTO()
-            {
-                SearchProducts = new List<SearchProductDTO>(),
-                AddedProducts = addedProducts
+            return new CreateDietDTO() {
+                SearchProducts = SearchOrGetProducts(null),
+                AddedProducts = addedProducts,
+                RootPath = _contentRootService.GetContentRootFileName(),
+                WasSearched = wasSearched
             };
+        }
+
+
+        private List<SearchProductDTO> SearchOrGetProducts(string search)
+        {
+            var searchProducts = new List<SearchProductDTO>();
+            foreach (var item in _productRepository.GetAccessedToLoggedInClientProducts().
+                Where(p => string.IsNullOrEmpty(search) || p.ProductName.ToLower().Contains(search.ToLower())).ToList())
+            {
+                searchProducts.Add(_mapper.Map<Product, SearchProductDTO>(item));
+            }
+            return searchProducts;
         }
     }
 }
