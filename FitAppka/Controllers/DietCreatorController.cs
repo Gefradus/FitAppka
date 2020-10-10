@@ -48,9 +48,9 @@ namespace FitAppka.Controllers
         }
 
         [HttpDelete]
-        public JsonResult DeleteProduct(List<DietProductDTO> addedProducts, int productId)
+        public JsonResult DeleteProduct(List<DietProductDTO> addedProducts, int tempId)
         {
-
+            return Json(_dietCreatorSerivce.DeleteProduct(addedProducts, tempId));
         }
 
     }

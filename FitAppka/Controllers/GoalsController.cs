@@ -26,6 +26,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
+        [Route("/Goals")]
         public IActionResult Goals(GoalsDTO model)
         {
             if (ModelState.IsValid) {

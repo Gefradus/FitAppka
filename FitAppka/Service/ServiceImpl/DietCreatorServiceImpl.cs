@@ -78,7 +78,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public CreateDietDTO AddProduct(List<DietProductDTO> addedProducts, int productId, int grammage, bool wasSearched)
         {
-            DietProductDTO dto = new DietProductDTO() { Grammage = grammage };
+            DietProductDTO dto = new DietProductDTO() { Grammage = grammage, TempId = FindMaxValue(addedProducts) };
             addedProducts.Add(_mapper.Map(_productRepository.GetProduct(productId), dto));
 
             return new CreateDietDTO() {
@@ -89,6 +89,31 @@ namespace FitAppka.Service.ServiceImpl
             };
         }
 
+        private int FindMaxValue(List<DietProductDTO> list)
+        {
+            if(list.Count > 0) {
+              return list.OrderByDescending(p => p.TempId).First().TempId + 1;
+            }
+            return 0;
+        }
+
+        public CreateDietDTO DeleteProduct(List<DietProductDTO> addedProducts, int tempId)
+        {
+            for(int i = 0; i < addedProducts.Count; i++) {
+                if(addedProducts.ElementAt(i).TempId == tempId) {
+                    addedProducts.RemoveAt(i);
+                    break;
+                }
+            }
+
+            return new CreateDietDTO()
+            {
+                SearchProducts = SearchOrGetProducts(null),
+                AddedProducts = addedProducts,
+                RootPath = _contentRootService.GetContentRootFileName(),
+                WasSearched = false
+            };
+        }
 
         private List<SearchProductDTO> SearchOrGetProducts(string search)
         {
@@ -157,5 +182,6 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
+        
     }
 }

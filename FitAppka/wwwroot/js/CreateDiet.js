@@ -1,7 +1,7 @@
-﻿function onload() {
+﻿function onload(deleteUrl) {
     checkIfModalWasOpen();
     checkIfParamsWasSaved();
-    showAddedProducts();
+    showAddedProducts(deleteUrl);
     onResizeEvent();
 
     if (window.addEventListener) {
@@ -80,8 +80,19 @@ function addProduct(url, grammage) {
     });
 }
 
-function deleteProduct() {
-
+function deleteProduct(id, url) {
+    $.ajax({
+        type: 'DELETE',
+        url: url,
+        data: {
+            addedProducts: JSON.parse(localStorage.products),
+            tempId: id
+        },
+        success: function (response) {
+            localStorage.setItem("products", JSON.stringify(response.addedProducts));
+            location.reload();
+        }
+    });
 }
 
 function saveParamsInLocalStorage() {
@@ -112,11 +123,11 @@ function checkIfParamsWasSaved() {
     }
 }
 
-function showAddedProducts() {
+function showAddedProducts(deleteUrl) {
     if (localStorage.getItem("products") != null) {
         let products = JSON.parse(localStorage.products);
         for (var i = 0; i < products.length; i++) {
-            let id = products[i].productId;
+            let tempId = products[i].tempId;
             let name = products[i].productName;
             let grammage = products[i].grammage;
             let kcal = products[i].calories;
@@ -140,7 +151,8 @@ function showAddedProducts() {
                 '</div>' +
                 '</div>' +
                 '<div class="col-1 acent cent">' +
-                '<button type="button" class="btnDelete" onclick="delete('+ id +')"><img class="delete" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>' +
+                '<button type="button" class="btnDelete" onclick="deleteProduct(' + tempId + ', \'' + deleteUrl + '\')">' +
+                '<img class="delete" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>' +
                 '</div>' +
                 '</div>' +
                 '</div>';

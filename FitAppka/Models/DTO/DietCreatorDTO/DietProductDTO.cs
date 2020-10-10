@@ -3,6 +3,7 @@
     public class DietProductDTO
     {
         public int ProductId { get; set; }
+        public int TempId { get; set; }
         public string ProductName { get; set; }
         public string PhotoPath { get; set; }
         public int Grammage { get; set; }
