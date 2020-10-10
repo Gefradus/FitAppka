@@ -15,6 +15,10 @@
     $('#addProductModal').on('hide.bs.modal', function () {
         window.history.replaceState(null, null, window.location.pathname);
     });
+
+    $("input:checkbox, #ProductName").on("change", function () {
+        saveParamsInLocalStorage();
+    });
 }
 
 function onResizeEvent() {
@@ -169,33 +173,41 @@ function savediet(url, redirect) {
     var saturday = document.getElementById("Saturday").checked;
     var sunday = document.getElementById("Sunday").checked;
     var name = document.getElementById("ProductName").value;
-    
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: {
-            products: localStorage.getItem("products") === null ? null : JSON.parse(localStorage.products),
-            dietDTO: {
-                DietName: name,
-                Active: 'true',
-                Monday: monday,
-                Tuesday: tuesday,
-                Wednesday: wednesday,
-                Thursday: thursday,
-                Friday: friday,
-                Saturday: saturday,
-                Sunday: sunday
-            }
-        },
-        success: function (response) {
-            if (response == false) {
-                validation("Istnieje konflikt");
-            } else {
-                localStorage.clear();
-                location.href = redirect;
-            }
+
+    if (!isEmpty(name)) {
+        if (monday || tuesday || wednesday || thursday || friday || saturday || sunday) {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    products: localStorage.getItem("products") === null ? null : JSON.parse(localStorage.products),
+                    dietDTO: {
+                        DietName: name,
+                        Active: 'true',
+                        Monday: monday,
+                        Tuesday: tuesday,
+                        Wednesday: wednesday,
+                        Thursday: thursday,
+                        Friday: friday,
+                        Saturday: saturday,
+                        Sunday: sunday
+                    }
+                },
+                success: function (response) {
+                    if (response == false) {
+                        validation("Istnieje konflikt");
+                    } else {
+                        localStorage.clear();
+                        location.href = redirect;
+                    }
+                }
+            });
+        } else {
+            validation("Wybierz dni obowiązywania diety");
         }
-    });
+    } else {
+        validation("Podaj nazwę diety");
+    }
 }
 
 

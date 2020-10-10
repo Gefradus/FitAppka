@@ -15,6 +15,14 @@ ul{
     padding: 0 !important
 }
 
+#valContent{
+    width: 300px !important
+}
+
+#valDialog{
+    margin-top: 180px!important 
+}
+
 .container {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 13px;
