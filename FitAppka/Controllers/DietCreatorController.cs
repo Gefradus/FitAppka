@@ -44,8 +44,14 @@ namespace FitAppka.Controllers
         [HttpPost]
         public JsonResult AddProduct(List<DietProductDTO> addedProducts, int productId, int grammage)
         {
-            ViewData["dayID"] = _dayManageService.GetTodayId();
             return Json(_dietCreatorSerivce.AddProduct(addedProducts, productId, grammage, false));
         }
+
+        [HttpDelete]
+        public JsonResult DeleteProduct(List<DietProductDTO> addedProducts, int productId)
+        {
+
+        }
+
     }
 }

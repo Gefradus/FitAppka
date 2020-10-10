@@ -80,6 +80,10 @@ function addProduct(url, grammage) {
     });
 }
 
+function deleteProduct() {
+
+}
+
 function saveParamsInLocalStorage() {
     localStorage.setItem("params", JSON.stringify({
         monday: document.getElementById("Monday").checked,
@@ -112,6 +116,7 @@ function showAddedProducts() {
     if (localStorage.getItem("products") != null) {
         let products = JSON.parse(localStorage.products);
         for (var i = 0; i < products.length; i++) {
+            let id = products[i].productId;
             let name = products[i].productName;
             let grammage = products[i].grammage;
             let kcal = products[i].calories;
@@ -135,7 +140,7 @@ function showAddedProducts() {
                 '</div>' +
                 '</div>' +
                 '<div class="col-1 acent cent">' +
-                '<button type="button" class="btnDelete"><img class="delete" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>' +
+                '<button type="button" class="btnDelete" onclick="delete('+ id +')"><img class="delete" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
