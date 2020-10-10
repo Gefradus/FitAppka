@@ -22,8 +22,12 @@
 
 }
 
+.photo{
+    height: 60px
+}
+
 .tableRow {
-    height: 50px;
+    height: 60px;
     background-color: #fdfdfd;
 }
 

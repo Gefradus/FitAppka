@@ -1,5 +1,6 @@
 ﻿function onload() {
     checkIfModalWasOpen();
+    checkIfParamsWasSaved();
     showAddedProducts();
     onResizeEvent();
 
@@ -63,6 +64,7 @@ function tryAddProduct(url) {
 }
 
 function addProduct(url, grammage) {
+    saveParamsInLocalStorage();
     $.ajax({
         type: 'POST',
         url: url,
@@ -78,8 +80,36 @@ function addProduct(url, grammage) {
     });
 }
 
+function saveParamsInLocalStorage() {
+    localStorage.setItem("params", JSON.stringify({
+        monday: document.getElementById("Monday").checked,
+        tuesday: document.getElementById("Tuesday").checked,
+        wednesday: document.getElementById("Wednesday").checked,
+        thursday: document.getElementById("Thursday").checked,
+        friday: document.getElementById("Friday").checked,
+        saturday: document.getElementById("Saturday").checked,
+        sunday: document.getElementById("Sunday").checked,
+        name: document.getElementById("ProductName").value
+    }));
+}
+
+function checkIfParamsWasSaved() {
+    var params = localStorage.getItem("params");
+    if (params != null) {
+        var parsedParams = JSON.parse(params);
+        document.getElementById("Monday").checked = parsedParams.monday;
+        document.getElementById("Tuesday").checked = parsedParams.tuesday;
+        document.getElementById("Wednesday").checked = parsedParams.wednesday;
+        document.getElementById("Thursday").checked = parsedParams.thursday;
+        document.getElementById("Friday").checked = parsedParams.friday;
+        document.getElementById("Saturday").checked = parsedParams.saturday;
+        document.getElementById("Sunday").checked = parsedParams.sunday;
+        document.getElementById("ProductName").value = parsedParams.name;
+    }
+}
+
 function showAddedProducts() {
-    if (localStorage.products != null) {
+    if (localStorage.getItem("products") != null) {
         let products = JSON.parse(localStorage.products);
         for (var i = 0; i < products.length; i++) {
             let name = products[i].productName;
@@ -111,7 +141,44 @@ function showAddedProducts() {
                 '</div>';
         }
     }
+}
 
+function savediet(url, redirect) {
+    var monday = document.getElementById("Monday").checked;
+    var tuesday = document.getElementById("Tuesday").checked;
+    var wednesday = document.getElementById("Wednesday").checked;
+    var thursday = document.getElementById("Thursday").checked;
+    var friday = document.getElementById("Friday").checked;
+    var saturday = document.getElementById("Saturday").checked;
+    var sunday = document.getElementById("Sunday").checked;
+    var name = document.getElementById("ProductName").value;
+    
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: {
+            products: localStorage.getItem("products") === null ? null : JSON.parse(localStorage.products),
+            dietDTO: {
+                DietName: name,
+                Active: 'true',
+                Monday: monday,
+                Tuesday: tuesday,
+                Wednesday: wednesday,
+                Thursday: thursday,
+                Friday: friday,
+                Saturday: saturday,
+                Sunday: sunday
+            }
+        },
+        success: function (response) {
+            if (response == false) {
+                validation("Istnieje konflikt");
+            } else {
+                localStorage.clear();
+                location.href = redirect;
+            }
+        }
+    });
 }
 
 

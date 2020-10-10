@@ -24,6 +24,7 @@ namespace FitAppka.Controllers
         public IActionResult ActiveDiets(int dayOfWeek)
         {
             ViewData["dayID"] = _dayManageService.GetTodayId();
+            ViewData["dayOfWeek"] = dayOfWeek;
             return View(_dietCreatorSerivce.GetActiveDiet(dayOfWeek));
         }
 
@@ -35,7 +36,13 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateDiet2(List<DietProductDTO> addedProducts, int productId, int grammage)
+        public JsonResult CreateDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding)
+        {
+            return Json(_dietCreatorSerivce.CreateDiet(products, dietDTO, overriding));
+        }
+
+        [HttpPost]
+        public JsonResult AddProduct(List<DietProductDTO> addedProducts, int productId, int grammage)
         {
             ViewData["dayID"] = _dayManageService.GetTodayId();
             return Json(_dietCreatorSerivce.AddProduct(addedProducts, productId, grammage, false));

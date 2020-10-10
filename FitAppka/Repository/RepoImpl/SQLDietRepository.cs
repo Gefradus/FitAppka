@@ -8,9 +8,11 @@ namespace FitAppka.Repository.RepoImpl
     public class SQLDietRepository : IDietRepository
 
     {
+        private readonly IClientRepository _clientRepository;
         private readonly FitAppContext _context;
-        public SQLDietRepository(FitAppContext context)
+        public SQLDietRepository(FitAppContext context, IClientRepository clientRepository)
         {
+            _clientRepository = clientRepository;
             _context = context;
         }
 
@@ -42,6 +44,11 @@ namespace FitAppka.Repository.RepoImpl
         public Diet GetDiet(int id)
         {
             return _context.Diet.Find(id);
+        }
+
+        public List<Diet> GetLoggedInClientDiets()
+        {
+            return _context.Diet.Where(d => d.ClientId == _clientRepository.GetLoggedInClientId()).ToList();
         }
 
         public Diet Update(Diet diet)

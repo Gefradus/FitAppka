@@ -5,6 +5,7 @@ using FitAppka.Service.ServiceImpl;
 using FitAppka.Strategy.ChartTypeStrategyImpl;
 using FitAppka.Strategy.StrategyImpl.DayOfWeekDietStrategyImpl;
 using FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -53,10 +54,14 @@ namespace FitAppka
 
             CreateMap<Diet, DietDTO>();
             CreateMap<Product, DietProductDTO>()
-                .AfterMap((src, dest) => dest.Calories = dest.Grammage * src.Calories / 100)
-                .AfterMap((src, dest) => dest.Carbohydrates = dest.Grammage * src.Carbohydrates / 100)
-                .AfterMap((src, dest) => dest.Proteins = dest.Grammage * src.Proteins / 100)
-                .AfterMap((src, dest) => dest.Fats = dest.Grammage * src.Fats / 100);
+                .AfterMap((src, dest) => dest.Calories = (double)Math.Round((decimal)(dest.Grammage * src.Calories / 100), 1, MidpointRounding.AwayFromZero))
+                .AfterMap((src, dest) => dest.Carbohydrates = (double)Math.Round((decimal)(dest.Grammage * src.Carbohydrates / 100), 1, MidpointRounding.AwayFromZero))
+                .AfterMap((src, dest) => dest.Proteins = (double)Math.Round((decimal)(dest.Grammage * src.Proteins / 100), 1, MidpointRounding.AwayFromZero))
+                .AfterMap((src, dest) => dest.Fats = (double)Math.Round((decimal)(dest.Grammage * src.Fats / 100), 1, MidpointRounding.AwayFromZero));
+
+            CreateMap<DietProductDTO, DietProduct>();
+
+            CreateMap<DietDTO, Diet>().ForMember(d => d.DietId, opt => opt.Ignore());
 
             CreateMap<Product, SearchProductDTO>();
 

@@ -18,12 +18,14 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IProductRepository _productRepository;
         private readonly IDietProductRepository _dietProductRepository;
         private readonly IContentRootPathHandlerService _contentRootService;
+        private readonly IClientRepository _clientRepository;
         private readonly IMapper _mapper;
 
         public DietCreatorServiceImpl(IDietRepository dietRepository, IMapper mapper, IContentRootPathHandlerService contentRootService,
-            IDietProductRepository dietProductRepository, IProductRepository productRepository)
+            IDietProductRepository dietProductRepository, IProductRepository productRepository, IClientRepository clientRepository)
         {
             DietRepository = dietRepository;
+            _clientRepository = clientRepository;
             _contentRootService = contentRootService;
             _dietProductRepository = dietProductRepository;
             _productRepository = productRepository;
@@ -98,5 +100,62 @@ namespace FitAppka.Service.ServiceImpl
             }
             return searchProducts;
         }
+
+        public bool CreateDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding)
+        {
+            if(overriding || CheckIfDietsHaveNoConflict(dietDTO))
+            {
+                int clientId = _clientRepository.GetLoggedInClientId();
+                Diet diet = _mapper.Map<DietDTO, Diet>(dietDTO);
+                diet.ClientId = clientId;
+                SetDietsToNotActiveIfDaysConflict(diet);
+                DietRepository.Add(diet);
+
+                foreach (var item in products)
+                {
+                    DietProduct product = _mapper.Map<DietProductDTO, DietProduct>(item);
+                    product.DietId = diet.DietId;
+                    _dietProductRepository.Add(product);
+                }
+
+                return true;
+            }
+            return false;
+        }
+
+        private bool CheckIfDietsHaveNoConflict(DietDTO diet) {
+            if (diet.Active) {
+                foreach(var item in DietRepository.GetLoggedInClientDiets()) {
+                    if(item.Active) {
+                        if(item.Monday && diet.Monday || item.Tuesday && diet.Tuesday || item.Wednesday && diet.Wednesday 
+                            || item.Thursday && diet.Thursday || item.Friday && diet.Friday 
+                            || item.Saturday && diet.Saturday || item.Sunday && diet.Sunday) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+
+
+        private void SetDietsToNotActiveIfDaysConflict(Diet diet)
+        {
+            if (diet.Active) {
+                foreach(var item in DietRepository.GetLoggedInClientDiets()) {
+                    if(item.Active) {
+                        if(item.Monday && diet.Monday || item.Tuesday && diet.Tuesday || item.Wednesday && diet.Wednesday 
+                            || item.Thursday && diet.Thursday || item.Friday && diet.Friday 
+                            || item.Saturday && diet.Saturday || item.Sunday && diet.Sunday) 
+                        {
+                            item.Active = false;
+                            DietRepository.Update(item);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }

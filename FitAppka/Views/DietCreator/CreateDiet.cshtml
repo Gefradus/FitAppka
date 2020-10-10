@@ -139,7 +139,7 @@
 
                             <div class="row no-gutters cent" style="margin-top: 10px;">
                                 <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center;" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 999999)" /><div style="font-weight: 600; margin-top: 2px">g</div>
-                                <button onclick="tryAddProduct('@Url.Action("CreateDiet2", "DietCreator")')" style="margin-left: 5px; background:none; border:none">
+                                <button onclick="tryAddProduct('@Url.Action("AddProduct", "DietCreator")')" style="margin-left: 5px; background:none; border:none">
                                     <img style="width:30px; height:30px" src="~/img/add.png" />
                                 </button>
                             </div>
@@ -156,18 +156,18 @@
                     <div class="form-group">
                         <div class="my-2">Stwórz dietę dla:</div>
                         <ul class="ks-cboxtags">
-                            <li><input type="checkbox" id="checkboxOne" value="Monday"><label for="checkboxOne">Pon</label></li>
-                            <li><input type="checkbox" id="checkboxTwo" value="Tuesday"><label for="checkboxTwo">Wto</label></li>
-                            <li><input type="checkbox" id="checkboxThree" value="Wednesday"><label for="checkboxThree">Śro</label></li>
-                            <li><input type="checkbox" id="checkboxFour" value="Thursday"><label for="checkboxFour">Czw</label></li>
-                            <li><input type="checkbox" id="checkboxFive" value="Friday"><label for="checkboxFive" style="width: 65px">Pt</label></li>
-                            <li><input type="checkbox" id="checkboxSix" value="Saturday"><label for="checkboxSix">Sob</label></li>
-                            <li><input type="checkbox" id="checkboxSeven" value="Sunday"><label for="checkboxSeven">Ndz</label></li>
+                            <li><input type="checkbox" id="Monday"><label for="Monday">Pon</label></li>
+                            <li><input type="checkbox" id="Tuesday"><label for="Tuesday">Wto</label></li>
+                            <li><input type="checkbox" id="Wednesday"><label for="Wednesday">Śro</label></li>
+                            <li><input type="checkbox" id="Thursday"><label for="Thursday">Czw</label></li>
+                            <li><input type="checkbox" id="Friday"><label for="Friday" style="width: 65px">Pt</label></li>
+                            <li><input type="checkbox" id="Saturday"><label for="Saturday">Sob</label></li>
+                            <li><input type="checkbox" id="Sunday"><label for="Sunday">Ndz</label></li>
                         </ul>
                     </div>
                     <div class="form-group">
                         <label>Nazwa diety:</label>
-                        <input class="form-control" style="border-radius: .15rem !important" />
+                        <input id="ProductName" class="form-control" style="border-radius: .15rem !important" />
                     </div>
                     <div class="form-group">
                         <label>Produkty:</label>
@@ -195,7 +195,7 @@
 
                     </div>
                     <div class="form-group cent mt-5">
-                        <button id="saveDiet" type="button" class="btn btn-primary mt-4">Zapisz dietę</button>
+                        <button id="saveDiet" onclick="savediet('@Url.Action("CreateDiet", "DietCreator")', '@Url.Action("ActiveDiets", "DietCreator")')" type="button" class="btn btn-primary mt-4">Zapisz dietę</button>
                     </div>
                 </form>
             </div>

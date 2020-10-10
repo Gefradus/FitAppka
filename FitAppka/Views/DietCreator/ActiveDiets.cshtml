@@ -6,8 +6,23 @@
     <script src="~/js/ShowNavbar.js"></script>
     <link href="~/css/DietCreator.css" rel="stylesheet" />
     <link href="~/css/RadioButtons.css" rel="stylesheet" />
+    <script>
+        function changeDietDayOfWeek(dayOfWeek) {
+            location.href = "@Url.Action("ActiveDiets", "DietCreator")" + "?dayOfWeek=" + dayOfWeek;
+        }
+        function restoreDay() {
+            var dayOfWeek = parseInt('@ViewData["dayOfWeek"]');
+            if (dayOfWeek == 0) { $("#monday").attr("checked", true); }
+            if (dayOfWeek == 1) { $("#tuesday").attr("checked", true); }
+            if (dayOfWeek == 2) { $("#wednesday").attr("checked", true); }
+            if (dayOfWeek == 3) { $("#thursday").attr("checked", true); }
+            if (dayOfWeek == 4) { $("#friday").attr("checked", true); }
+            if (dayOfWeek == 5) { $("#saturday").attr("checked", true); }
+            if (dayOfWeek == 6) { $("#sunday").attr("checked", true); }
+        }
+    </script>
 </head>
-<body>
+<body onload="restoreDay()">
     <header>
         <nav class="navbar navbar-expand-md cent border-bottom navbar-fixed-top" id="navMain">
             <div class="row w-100">
@@ -26,34 +41,33 @@
 
     <div class="container" id="table">
         <div class="row no-gutters cent" style="margin-top: 10px">
-            @*<div class="col-12" style="font-size: 14px">Pokaż aktywną dietę dla:</div>*@
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="tool-1">
-                <label class="for-checkbox-tools" for="tool-1">Pon</label>
+                <input class="checkbox-tools" type="radio" name="tools" id="monday" onclick="changeDietDayOfWeek(0)">
+                <label class="for-checkbox-tools" for="monday">Pon</label>
             </div>
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="tool-2">
-                <label class="for-checkbox-tools" for="tool-2">Wto</label>
+                <input class="checkbox-tools" type="radio" name="tools" id="tuesday" onclick="changeDietDayOfWeek(1)">
+                <label class="for-checkbox-tools" for="tuesday">Wto</label>
             </div>
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="tool-3">
-                <label class="for-checkbox-tools" for="tool-3">Śro</label>
+                <input class="checkbox-tools" type="radio" name="tools" id="wednesday" onclick="changeDietDayOfWeek(2)">
+                <label class="for-checkbox-tools" for="wednesday">Śro</label>
             </div>
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="tool-4">
-                <label class="for-checkbox-tools" for="tool-4">Czw</label>
+                <input class="checkbox-tools" type="radio" name="tools" id="thursday" onclick="changeDietDayOfWeek(3)">
+                <label class="for-checkbox-tools" for="thursday">Czw</label>
             </div>
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="tool-5">
-                <label class="for-checkbox-tools" for="tool-5">Pt</label>
+                <input class="checkbox-tools" type="radio" name="tools" id="friday" onclick="changeDietDayOfWeek(4)">
+                <label class="for-checkbox-tools" for="friday">Pt</label>
             </div>
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="tool-6">
-                <label class="for-checkbox-tools" for="tool-6">Sob</label>
+                <input class="checkbox-tools" type="radio" name="tools" id="saturday" onclick="changeDietDayOfWeek(5)">
+                <label class="for-checkbox-tools" for="saturday">Sob</label>
             </div>
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="tool-7">
-                <label class="for-checkbox-tools" for="tool-7">Ndz</label>
+                <input class="checkbox-tools" type="radio" name="tools" id="sunday" onclick="changeDietDayOfWeek(6)">
+                <label class="for-checkbox-tools" for="sunday">Ndz</label>
             </div>
         </div>
 
@@ -79,7 +93,17 @@
             @foreach (var product in Model.Products)
             {
                 <div class="row no-gutters tableRow">
-                    <div class="d-none d-lg-inline-flex col-lg-2 cent"></div>
+                    <div class="d-none d-lg-inline-flex col-lg-2 cent" id="photoArea">
+                        @{ string photoPath;
+                            if (product.PhotoPath != null){
+                                photoPath = "~/photos/" + (product.PhotoPath);
+                            }
+                            else{
+                                photoPath = "~/img/miss.png";
+                            }
+                        }
+                        <img src="@photoPath" class="photo" asp-append-version="true" />
+                    </div>
                     <div class="col-4 col-lg-3 cent acent" style="font-weight: 600">@product.ProductName</div>
                     <div class="col-8 col-lg-7 container">
                         <div class="row no-gutters" style="height: 100%">
@@ -95,7 +119,8 @@
                 </div>
             }
         }
-        else {
+        else
+        {
             <div class="row cent mt-5 ">
                 <img src="~/img/not_found.png" style="width: 35px; height: 35px" />
                 <div id="notfound">Aktualnie brak diety w tym dniu ;(</div>
