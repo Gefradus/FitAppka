@@ -23,6 +23,18 @@ ul{
     margin-top: 180px!important 
 }
 
+#validationModal{
+    z-index: 9999 !important
+}
+
+#yesActivate {
+    background-color: #36c208 !important
+}
+
+.cancelBtn {
+    background-color: #979192 !important
+}
+
 .container {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 13px;

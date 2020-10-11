@@ -63,11 +63,13 @@
                                             @foreach (var item in Model.SearchProducts)
                                             {
                                                 string photoPath;
-                                                if (item.PhotoPath != null) {
+                                                if (item.PhotoPath != null)
+                                                {
                                                     photoPath = "~/photos/" + (item.PhotoPath);
                                                     <script>pathArray.push('@item.PhotoPath');</script>
                                                 }
-                                                else {
+                                                else
+                                                {
                                                     photoPath = "~/img/miss.png";
                                                     <script>pathArray.push('null');</script>
                                                 }
@@ -95,7 +97,8 @@
                                                     </div>
                                                 </div>
                                             }
-                                            @if (Model.SearchProducts.Count.Equals(0)) {
+                                            @if (Model.SearchProducts.Count.Equals(0))
+                                            {
                                                 <div class="cent mt-5">
                                                     Nie znaleziono produktu o podanej nazwie
                                                 </div>
@@ -149,6 +152,51 @@
             </div>
         </div>
 
+        <div class="modal fade" tabindex="-1" id="activateModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
+            <div class="modal-dialog" style="display: flex; justify-content: center;">
+                <div class="modal-content" style="width: 350px !important">
+                    <div class="modal-header" style="height: 20px">
+                        <button type="button" class="close" data-dismiss="modal" style="margin-top: -30px">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="margin-top: -10px;">
+                            <div>Dieta zapisana pomyślnie ✅</div>
+                            <div>Czy chcesz aktywować zapisaną dietę?</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div style="display:flex; justify-content: center">
+                            <button type="button" data-dismiss="modal" class="cancelBtn">Nie</button>
+                            <button type="button" id="yesActivate" class="deleteBtn">Tak, aktywuj</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="overrideModal" style="margin-top: 170px" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content" style="width: 375px !important">
+                    <div class="modal-header flex-column">
+                        <h6 class="modal-title w-100">Czy chcesz podmienić aktywną dietę?</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="padding: 0rem 1rem; margin-top: -25px; padding-bottom: 15px">×</button>
+                    </div>
+                    <div class="modal-body" style="color: #5e5e5e; font-size: 14px;">
+                        <p>
+                            Istnieje już inna aktywna dieta, obowiązująca w zadane dni tygodnia.
+                            Czy chcesz ją dezaktywować, na rzecz nowej?.
+                        </p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                        <button type="button" class="btn btn-danger" id="yesOverride">Tak, podmień</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <div class="row no-gutters cent h-100">
             <div class="col-12 col-sm-11 col-lg-8 col-xl-7 cent" style="background-color: white; margin-top: -5px; height: unset">
                 <form method="post" class="mx-3">
@@ -189,7 +237,7 @@
                         </div>
 
                         <div id="productsPanel">
-                            
+
                         </div>
 
                     </div>

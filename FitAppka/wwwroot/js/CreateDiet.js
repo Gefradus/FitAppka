@@ -173,35 +173,50 @@ function savediet(url, redirect) {
     var saturday = document.getElementById("Saturday").checked;
     var sunday = document.getElementById("Sunday").checked;
     var name = document.getElementById("ProductName").value;
+    var products = localStorage.getItem("products") === null ? null : JSON.parse(localStorage.products)
 
     if (!isEmpty(name)) {
         if (monday || tuesday || wednesday || thursday || friday || saturday || sunday) {
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: {
-                    products: localStorage.getItem("products") === null ? null : JSON.parse(localStorage.products),
-                    dietDTO: {
-                        DietName: name,
-                        Active: 'true',
-                        Monday: monday,
-                        Tuesday: tuesday,
-                        Wednesday: wednesday,
-                        Thursday: thursday,
-                        Friday: friday,
-                        Saturday: saturday,
-                        Sunday: sunday
+            if (products != null && products.length != 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: {
+                        products: products,
+                        dietDTO: {
+                            DietName: name,
+                            Active: 'true',
+                            Monday: monday,
+                            Tuesday: tuesday,
+                            Wednesday: wednesday,
+                            Thursday: thursday,
+                            Friday: friday,
+                            Saturday: saturday,
+                            Sunday: sunday
+                        }
+                    },
+                    success: function (response) {
+                        if (response == false) {
+                            $("#overrideModal").modal("show");
+                            $("#yesOverride").click(function () {
+
+                            });
+                            
+                        } else {
+                            localStorage.clear();
+
+                            $("#activateModal").modal("show");
+                            $("#yesActivate").click(function () {
+
+                                location.href = redirect;
+                            });
+                            
+                        }
                     }
-                },
-                success: function (response) {
-                    if (response == false) {
-                        validation("Istnieje konflikt");
-                    } else {
-                        localStorage.clear();
-                        location.href = redirect;
-                    }
-                }
-            });
+                });
+            } else {
+                validation("Dodaj produkty do diety");
+            }
         } else {
             validation("Wybierz dni obowiązywania diety");
         }
