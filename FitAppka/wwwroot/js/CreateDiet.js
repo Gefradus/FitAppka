@@ -178,39 +178,45 @@ function savediet(url, redirect) {
     if (!isEmpty(name)) {
         if (monday || tuesday || wednesday || thursday || friday || saturday || sunday) {
             if (products != null && products.length != 0) {
+                dietDTO = {
+                    DietName: name,
+                    Active: 'true',
+                    Monday: monday,
+                    Tuesday: tuesday,
+                    Wednesday: wednesday,
+                    Thursday: thursday,
+                    Friday: friday,
+                    Saturday: saturday,
+                    Sunday: sunday
+                };
+
                 $.ajax({
                     type: 'POST',
                     url: url,
                     data: {
                         products: products,
-                        dietDTO: {
-                            DietName: name,
-                            Active: 'true',
-                            Monday: monday,
-                            Tuesday: tuesday,
-                            Wednesday: wednesday,
-                            Thursday: thursday,
-                            Friday: friday,
-                            Saturday: saturday,
-                            Sunday: sunday
-                        }
+                        dietDTO: dietDTO
                     },
                     success: function (response) {
                         if (response == false) {
                             $("#overrideModal").modal("show");
                             $("#yesOverride").click(function () {
-
+                                $.ajax({
+                                    type: 'POST',
+                                    url: url,
+                                    data: {
+                                        products: products,
+                                        dietDTO: dietDTO,
+                                        overriding: true
+                                    },
+                                    success: function () {
+                                        successSaved(redirect);
+                                    }
+                                });
                             });
                             
                         } else {
-                            localStorage.clear();
-
-                            $("#activateModal").modal("show");
-                            $("#yesActivate").click(function () {
-
-                                location.href = redirect;
-                            });
-                            
+                            successSaved(redirect);
                         }
                     }
                 });
@@ -223,6 +229,17 @@ function savediet(url, redirect) {
     } else {
         validation("Podaj nazwę diety");
     }
+}
+
+function successSaved(redirect) {
+    localStorage.clear();
+    validation("Dieta zapisana pomyślnie ✅");
+    $('#validationModal').on('hidden.bs.modal', function () {
+        location.href = redirect;
+    });
+    setTimeout(function () {
+        location.href = redirect;
+    }, 3000);
 }
 
 

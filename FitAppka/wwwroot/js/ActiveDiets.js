@@ -1,7 +1,6 @@
 ﻿function restoreDay() {
-    // new Date().getDay()
     var dayOfWeek = new URL(location.href).searchParams.get("dayOfWeek");
-    dayOfWeek = dayOfWeek == null ? new Date().getDay() : dayOfWeek;
+    if (dayOfWeek == null) { dayOfWeek = new Date().getDay() };
     if (dayOfWeek == 1) { $("#monday").attr("checked", true); }
     if (dayOfWeek == 2) { $("#tuesday").attr("checked", true); }
     if (dayOfWeek == 3) { $("#wednesday").attr("checked", true); }
