@@ -67,7 +67,7 @@ namespace FitAppka.Service.ServiceImpl
                 proteins += (double)Math.Round((decimal)
                 (_productRepository.GetProduct(product.ProductId).Proteins * product.Grammage / 100), 1, MidpointRounding.AwayFromZero);
             }
-            return proteins;
+            return ((double)Math.Round((decimal)proteins, 1, MidpointRounding.AwayFromZero));
         }
 
         private double CountFatsSum(List<DietProduct> list)
@@ -77,7 +77,7 @@ namespace FitAppka.Service.ServiceImpl
                 fats += (double)Math.Round((decimal)
                 (_productRepository.GetProduct(product.ProductId).Fats * product.Grammage / 100), 1, MidpointRounding.AwayFromZero);
             }
-            return fats;
+            return ((double)Math.Round((decimal)fats, 1, MidpointRounding.AwayFromZero));
         }
 
         private double CountCarbsSum(List<DietProduct> list)
@@ -87,7 +87,7 @@ namespace FitAppka.Service.ServiceImpl
                 carbs += (double)Math.Round((decimal)
                 (_productRepository.GetProduct(product.ProductId).Carbohydrates * product.Grammage / 100), 1, MidpointRounding.AwayFromZero);
             }
-            return carbs;
+            return ((double)Math.Round((decimal)carbs, 1, MidpointRounding.AwayFromZero)); 
         }
 
 
