@@ -119,10 +119,10 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddStrengthTrainingType(int dayID, string name, short sets, short reps, short weight)
+        public JsonResult AddStrengthTrainingType(int dayID, string name, short sets, short reps, short weight)
         {
             _strengthTrainingService.AddStrengthTrainingType(dayID, name, sets, reps, weight);
-            return RedirectToAction(nameof(TrainingPanel), new { dayID });
+            return Json(new { redirect = Url.Action("TrainingPanel", "Training", new { dayID })});
         }
 
     }
