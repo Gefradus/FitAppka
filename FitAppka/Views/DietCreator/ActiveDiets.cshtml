@@ -18,7 +18,8 @@
         <nav class="navbar navbar-expand-md cent border-bottom navbar-fixed-top" id="navMain">
             <div class="row w-100">
                 <div class="col-6 d-flex justify-content-end">
-                    <button class="btn btn-dark mr-sm-3 mr-md-4 mr-lg-5" id="showMyDiets">Pokaż moje diety</button>
+                    <a class="btn btn-dark mr-sm-3 mr-md-4 mr-lg-5" id="showMyDiets" asp-controller="DietCreator" asp-action="MyDiets">
+                        Pokaż moje diety</a>
                 </div>
                 <div class="col-6">
                     <a class="btn btn-dark ml-sm-3 ml-md-4 ml-lg-5" id="createDiet" asp-controller="DietCreator" asp-action="CreateDiet">

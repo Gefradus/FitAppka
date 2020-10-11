@@ -1,6 +1,5 @@
 ﻿using FitAppka.Models;
 using FitAppka.Service;
-using FitAppka.Service.ServiceImpl;
 using FitAppka.Service.ServiceInterface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +31,11 @@ namespace FitAppka.Controllers
         {
             ViewData["dayID"] = _dayManageService.GetTodayId();
             return View(_dietCreatorSerivce.SearchProducts(search, searched));
+        }
+
+        [HttpGet]
+        public IActionResult MyDiets() {
+            return View();
         }
 
         [HttpPost]
