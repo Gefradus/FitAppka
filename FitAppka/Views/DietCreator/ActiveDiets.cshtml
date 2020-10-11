@@ -99,17 +99,34 @@
                     <div class="col-4 col-lg-3 cent acent" style="font-weight: 600">@product.ProductName</div>
                     <div class="col-8 col-lg-7 container">
                         <div class="row no-gutters" style="height: 100%">
-                            <div class="col-3 cent acent">@product.Grammage</div>
+                            <div class="col-3 cent acent">@product.Grammage g</div>
                             <div class="col-9 container row no-gutters">
-                                <div class="col-3 cent acent">@product.Calories</div>
-                                <div class="col-3 cent acent">@product.Proteins</div>
-                                <div class="col-3 cent acent">@product.Fats</div>
-                                <div class="col-3 cent acent">@product.Carbohydrates</div>
+                                <div class="col-3 cent acent">@product.Calories </div>
+                                <div class="col-3 cent acent">@product.Proteins g</div>
+                                <div class="col-3 cent acent">@product.Fats g</div>
+                                <div class="col-3 cent acent">@product.Carbohydrates g</div>
                             </div>
                         </div>
                     </div>
                 </div>
             }
+
+            <div class="row no-gutters">
+                <div class="d-none d-lg-inline-flex col-lg-2 cent">Zdjęcie produktu</div>
+                <div class="col-4 col-lg-3 cent"></div>
+                <div class="col-8 col-lg-7 container">
+                    <div class="row no-gutters acent">
+                        <div class="col-3 cent"></div>
+                        <div class="col-9 container row no-gutters">
+                            <div class="col-3 cent">@Model.CaloriesSum</div>
+                            <div class="col-3 cent">@Model.ProteinsSum</div>
+                            <div class="col-3 cent">@Model.FatsSum</div>
+                            <div class="col-3 cent">@Model.CarbohydratesSum</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         }
         else
         {

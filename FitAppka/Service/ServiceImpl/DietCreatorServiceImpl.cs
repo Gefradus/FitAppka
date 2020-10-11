@@ -5,7 +5,6 @@ using FitAppka.Repository;
 using FitAppka.Repository.RepoInterface;
 using FitAppka.Service.ServiceInterface;
 using FitAppka.Strategy.StrategyDictionary;
-using FitAppka.Strategy.StrategyEnum;
 using FitAppka.Strategy.StrategyInterface;
 using System;
 using System.Collections.Generic;
@@ -39,11 +38,56 @@ namespace FitAppka.Service.ServiceImpl
                 TryGetValue((DayOfWeek)dayOfWeek, out IDayOfWeekDietStrategy mapValue);
 
             DietDTO dietDTO = _mapper.Map<Diet, DietDTO>(mapValue.GetActiveDiet());
+            var dietProducts = _dietProductRepository.GetDietProducts(dietDTO.DietId);
 
             return dietDTO == null ? null : new ActiveDietDTO() {
                 Diet = dietDTO,
-                Products = MapProductsToDietProductsDTO(MapDietProductsToDTO(_dietProductRepository.GetDietProducts(dietDTO.DietId)))
+                Products = MapProductsToDietProductsDTO(MapDietProductsToDTO(dietProducts)),
+                CaloriesSum = CountCaloriesSum(dietProducts),
+                ProteinsSum = CountProteinsSum(dietProducts),
+                FatsSum = CountFatsSum(dietProducts),
+                CarbohydratesSum = CountCarbsSum(dietProducts)
             };
+        }
+
+
+        private int CountCaloriesSum(List<DietProduct> list)
+        {
+            double kcal = 0;
+            foreach(var product in list) {
+                kcal += (_productRepository.GetProduct(product.ProductId).Calories * product.Grammage / 100);
+            }
+            return (int)kcal;
+        }
+
+        private double CountProteinsSum(List<DietProduct> list)
+        {
+            double proteins = 0;
+            foreach (var product in list) {
+                proteins += (double)Math.Round((decimal)
+                (_productRepository.GetProduct(product.ProductId).Proteins * product.Grammage / 100), 1, MidpointRounding.AwayFromZero);
+            }
+            return proteins;
+        }
+
+        private double CountFatsSum(List<DietProduct> list)
+        {
+            double fats = 0;
+            foreach (var product in list) {
+                fats += (double)Math.Round((decimal)
+                (_productRepository.GetProduct(product.ProductId).Fats * product.Grammage / 100), 1, MidpointRounding.AwayFromZero);
+            }
+            return fats;
+        }
+
+        private double CountCarbsSum(List<DietProduct> list)
+        {
+            double carbs = 0;
+            foreach (var product in list) {
+                carbs += (double)Math.Round((decimal)
+                (_productRepository.GetProduct(product.ProductId).Carbohydrates * product.Grammage / 100), 1, MidpointRounding.AwayFromZero);
+            }
+            return carbs;
         }
 
 
