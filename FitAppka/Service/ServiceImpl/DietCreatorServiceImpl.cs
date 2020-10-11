@@ -38,9 +38,13 @@ namespace FitAppka.Service.ServiceImpl
                 TryGetValue((DayOfWeek)dayOfWeek, out IDayOfWeekDietStrategy mapValue);
 
             DietDTO dietDTO = _mapper.Map<Diet, DietDTO>(mapValue.GetActiveDiet());
+            
+            if(dietDTO == null) {
+                return null;
+            } 
+            
             var dietProducts = _dietProductRepository.GetDietProducts(dietDTO.DietId);
-
-            return dietDTO == null ? null : new ActiveDietDTO() {
+            return new ActiveDietDTO() {
                 Diet = dietDTO,
                 Products = MapProductsToDietProductsDTO(MapDietProductsToDTO(dietProducts)),
                 CaloriesSum = CountCaloriesSum(dietProducts),
@@ -48,6 +52,7 @@ namespace FitAppka.Service.ServiceImpl
                 FatsSum = CountFatsSum(dietProducts),
                 CarbohydratesSum = CountCarbsSum(dietProducts)
             };
+            
         }
 
 
@@ -67,7 +72,7 @@ namespace FitAppka.Service.ServiceImpl
                 proteins += (double)Math.Round((decimal)
                 (_productRepository.GetProduct(product.ProductId).Proteins * product.Grammage / 100), 1, MidpointRounding.AwayFromZero);
             }
-            return ((double)Math.Round((decimal)proteins, 1, MidpointRounding.AwayFromZero));
+            return (double)Math.Round((decimal)proteins, 1, MidpointRounding.AwayFromZero);
         }
 
         private double CountFatsSum(List<DietProduct> list)
@@ -77,7 +82,7 @@ namespace FitAppka.Service.ServiceImpl
                 fats += (double)Math.Round((decimal)
                 (_productRepository.GetProduct(product.ProductId).Fats * product.Grammage / 100), 1, MidpointRounding.AwayFromZero);
             }
-            return ((double)Math.Round((decimal)fats, 1, MidpointRounding.AwayFromZero));
+            return (double)Math.Round((decimal)fats, 1, MidpointRounding.AwayFromZero);
         }
 
         private double CountCarbsSum(List<DietProduct> list)
@@ -87,9 +92,10 @@ namespace FitAppka.Service.ServiceImpl
                 carbs += (double)Math.Round((decimal)
                 (_productRepository.GetProduct(product.ProductId).Carbohydrates * product.Grammage / 100), 1, MidpointRounding.AwayFromZero);
             }
-            return ((double)Math.Round((decimal)carbs, 1, MidpointRounding.AwayFromZero)); 
+            return (double)Math.Round((decimal)carbs, 1, MidpointRounding.AwayFromZero); 
         }
 
+        
 
         private List<DietProductDTO> MapProductsToDietProductsDTO(List<DietProductDTO> productsDTO)
         {
