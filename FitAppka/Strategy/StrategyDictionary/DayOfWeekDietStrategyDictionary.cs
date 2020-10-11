@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace FitAppka.Strategy.StrategyDictionary
 {
-    public class DayOfWeekDietStrategyDictionary<T> : Dictionary<DayOfWeekDietStrategyEnum, T>
+    public class DayOfWeekDietStrategyDictionary<T> : Dictionary<DayOfWeek, T>
     {
         private readonly DietCreatorServiceImpl serviceImpl;
         private readonly IMapper _mapper;
@@ -16,13 +16,13 @@ namespace FitAppka.Strategy.StrategyDictionary
         {
             serviceImpl = service;
             _mapper = mapper;
-            Add(DayOfWeekDietStrategyEnum.Monday, ConvertToT(new MondayDietStrategy()));
-            Add(DayOfWeekDietStrategyEnum.Tuesday, ConvertToT(new TuesdayDietStrategy()));
-            Add(DayOfWeekDietStrategyEnum.Wednesday, ConvertToT(new WednesdayDietStrategy()));
-            Add(DayOfWeekDietStrategyEnum.Thursday, ConvertToT(new ThursdayDietStrategy()));
-            Add(DayOfWeekDietStrategyEnum.Friday, ConvertToT(new FridayDietStrategy()));
-            Add(DayOfWeekDietStrategyEnum.Saturday, ConvertToT(new SaturdayDietStrategy()));
-            Add(DayOfWeekDietStrategyEnum.Sunday, ConvertToT(new SundayDietStrategy()));
+            Add(DayOfWeek.Monday, ConvertToT(new MondayDietStrategy()));
+            Add(DayOfWeek.Tuesday, ConvertToT(new TuesdayDietStrategy()));
+            Add(DayOfWeek.Wednesday, ConvertToT(new WednesdayDietStrategy()));
+            Add(DayOfWeek.Thursday, ConvertToT(new ThursdayDietStrategy()));
+            Add(DayOfWeek.Friday, ConvertToT(new FridayDietStrategy()));
+            Add(DayOfWeek.Saturday, ConvertToT(new SaturdayDietStrategy()));
+            Add(DayOfWeek.Sunday, ConvertToT(new SundayDietStrategy()));
         }
 
         private T ConvertToT<Strategy>(Strategy s)

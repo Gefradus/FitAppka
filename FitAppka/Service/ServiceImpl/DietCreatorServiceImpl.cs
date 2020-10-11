@@ -7,6 +7,7 @@ using FitAppka.Service.ServiceInterface;
 using FitAppka.Strategy.StrategyDictionary;
 using FitAppka.Strategy.StrategyEnum;
 using FitAppka.Strategy.StrategyInterface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,7 +36,7 @@ namespace FitAppka.Service.ServiceImpl
         public ActiveDietDTO GetActiveDiet(int dayOfWeek)
         {
             new DayOfWeekDietStrategyDictionary<IDayOfWeekDietStrategy>(this, _mapper).
-                TryGetValue((DayOfWeekDietStrategyEnum)dayOfWeek, out IDayOfWeekDietStrategy mapValue);
+                TryGetValue((DayOfWeek)dayOfWeek, out IDayOfWeekDietStrategy mapValue);
 
             DietDTO dietDTO = _mapper.Map<Diet, DietDTO>(mapValue.GetActiveDiet());
 

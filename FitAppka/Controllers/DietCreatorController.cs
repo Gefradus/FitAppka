@@ -24,7 +24,6 @@ namespace FitAppka.Controllers
         public IActionResult ActiveDiets(int dayOfWeek)
         {
             ViewData["dayID"] = _dayManageService.GetTodayId();
-            ViewData["dayOfWeek"] = dayOfWeek;
             return View(_dietCreatorSerivce.GetActiveDiet(dayOfWeek));
         }
 

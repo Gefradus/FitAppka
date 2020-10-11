@@ -6,19 +6,10 @@
     <script src="~/js/ShowNavbar.js"></script>
     <link href="~/css/DietCreator.css" rel="stylesheet" />
     <link href="~/css/RadioButtons.css" rel="stylesheet" />
+    <script src="~/js/ActiveDiets.js"></script>
     <script>
         function changeDietDayOfWeek(dayOfWeek) {
             location.href = "@Url.Action("ActiveDiets", "DietCreator")" + "?dayOfWeek=" + dayOfWeek;
-        }
-        function restoreDay() {
-            var dayOfWeek = parseInt('@ViewData["dayOfWeek"]');
-            if (dayOfWeek == 0) { $("#monday").attr("checked", true); }
-            if (dayOfWeek == 1) { $("#tuesday").attr("checked", true); }
-            if (dayOfWeek == 2) { $("#wednesday").attr("checked", true); }
-            if (dayOfWeek == 3) { $("#thursday").attr("checked", true); }
-            if (dayOfWeek == 4) { $("#friday").attr("checked", true); }
-            if (dayOfWeek == 5) { $("#saturday").attr("checked", true); }
-            if (dayOfWeek == 6) { $("#sunday").attr("checked", true); }
         }
     </script>
 </head>
@@ -42,31 +33,31 @@
     <div class="container" id="table">
         <div class="row no-gutters cent" style="margin-top: 10px">
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="monday" onclick="changeDietDayOfWeek(0)">
+                <input class="checkbox-tools" type="radio" name="tools" id="monday" onclick="changeDietDayOfWeek(1)">
                 <label class="for-checkbox-tools" for="monday">Pon</label>
             </div>
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="tuesday" onclick="changeDietDayOfWeek(1)">
+                <input class="checkbox-tools" type="radio" name="tools" id="tuesday" onclick="changeDietDayOfWeek(2)">
                 <label class="for-checkbox-tools" for="tuesday">Wto</label>
             </div>
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="wednesday" onclick="changeDietDayOfWeek(2)">
+                <input class="checkbox-tools" type="radio" name="tools" id="wednesday" onclick="changeDietDayOfWeek(3)">
                 <label class="for-checkbox-tools" for="wednesday">Śro</label>
             </div>
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="thursday" onclick="changeDietDayOfWeek(3)">
+                <input class="checkbox-tools" type="radio" name="tools" id="thursday" onclick="changeDietDayOfWeek(4)">
                 <label class="for-checkbox-tools" for="thursday">Czw</label>
             </div>
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="friday" onclick="changeDietDayOfWeek(4)">
+                <input class="checkbox-tools" type="radio" name="tools" id="friday" onclick="changeDietDayOfWeek(5)">
                 <label class="for-checkbox-tools" for="friday">Pt</label>
             </div>
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="saturday" onclick="changeDietDayOfWeek(5)">
+                <input class="checkbox-tools" type="radio" name="tools" id="saturday" onclick="changeDietDayOfWeek(6)">
                 <label class="for-checkbox-tools" for="saturday">Sob</label>
             </div>
             <div>
-                <input class="checkbox-tools" type="radio" name="tools" id="sunday" onclick="changeDietDayOfWeek(6)">
+                <input class="checkbox-tools" type="radio" name="tools" id="sunday" onclick="changeDietDayOfWeek(0)">
                 <label class="for-checkbox-tools" for="sunday">Ndz</label>
             </div>
         </div>
