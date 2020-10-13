@@ -80,6 +80,7 @@ namespace FitAppka.Controllers
 
         [Authorize]
         [HttpPost]
+        [Route("/Settings")]
         public IActionResult Settings(SettingsDTO m, int isFirstLaunch)
         {
             if (ModelState.IsValid)

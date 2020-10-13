@@ -1,5 +1,6 @@
 ﻿using FitAppka.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FitAppka.Repository.RepoInterface
 {
@@ -8,6 +9,7 @@ namespace FitAppka.Repository.RepoInterface
         Diet GetDiet(int id);
         IEnumerable<Diet> GetAllDiets();
         List<Diet> GetLoggedInClientDiets();
+        Task<List<Diet>> GetActiveDiets();
         Diet Add(Diet diet);
         Diet Update(Diet diet);
         Diet Delete(int id);

@@ -1,6 +1,7 @@
 ﻿using FitAppka.Models;
 using FitAppka.Models.DTO.DietCreatorDTO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FitAppka.Service.ServiceInterface
 {
@@ -10,6 +11,7 @@ namespace FitAppka.Service.ServiceInterface
         public CreateDietDTO SearchProducts(string search, bool wasSearched);
         public CreateDietDTO AddProduct(List<DietProductDTO> addedProducts, int productId, int grammage, bool wasSearched);
         public CreateDietDTO DeleteProduct(List<DietProductDTO> addedProducts, int tempId);
+        public List<ActiveDietDTO> GetActiveDiets();
         public bool CreateDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding);
     }
 }

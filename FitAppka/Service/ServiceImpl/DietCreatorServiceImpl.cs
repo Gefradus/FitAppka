@@ -9,6 +9,7 @@ using FitAppka.Strategy.StrategyInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FitAppka.Service.ServiceImpl
 {
@@ -233,6 +234,25 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-        
+        public List<ActiveDietDTO> GetActiveDiets()
+        {
+            var list = new List<DietDTO>();
+            foreach(var item in DietRepository.GetAllDiets()){
+                list.Add(_mapper.Map<Diet, DietDTO>(item));
+            }
+
+            var listOfActiveDiets = new List<ActiveDietDTO>();
+            foreach(var item in list)
+            {
+                var dietProducts = _dietProductRepository.GetDietProducts(item.DietId);
+                listOfActiveDiets.Add(new ActiveDietDTO()
+                {
+                    Diet = item,
+                    Products = MapProductsToDietProductsDTO(MapDietProductsToDTO(dietProducts)),
+                    CaloriesSum = CountCaloriesSum(dietProducts)
+                });
+            }
+            return listOfActiveDiets;
+        }
     }
 }

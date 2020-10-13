@@ -35,7 +35,8 @@ namespace FitAppka.Controllers
 
         [HttpGet]
         public IActionResult MyDiets() {
-            return View();
+            ViewData["dayID"] = _dayManageService.GetTodayId();
+            return View(_dietCreatorSerivce.GetActiveDiets());
         }
 
         [HttpPost]

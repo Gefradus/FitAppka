@@ -1,7 +1,9 @@
 ﻿using FitAppka.Models;
 using FitAppka.Repository.RepoInterface;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FitAppka.Repository.RepoImpl
 {
@@ -34,6 +36,11 @@ namespace FitAppka.Repository.RepoImpl
             }
 
             return diet;
+        }
+
+        public Task<List<Diet>> GetActiveDiets()
+        {
+            return _context.Diet.ToListAsync();
         }
 
         public IEnumerable<Diet> GetAllDiets()

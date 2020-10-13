@@ -1,11 +1,59 @@
-﻿<html>
+﻿@model List<FitAppka.Models.ActiveDietDTO>
+<html>
 <head>
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
+    <link href="~/css/MyDiets.css" rel="stylesheet" />
     <script src="~/js/AllViews.js"></script>
     <script src="~/js/ShowNavbar.js"></script>
 </head>
-<body>
+<body onload="colorEverySecondRow();">
+    <div class="container">
+        <div class="row no-gutters" id="columnsHeader">
+            <div class="col-10 row no-gutters">
+                <div class="col-4 acent pl-2 pl-md-3 pl-md-4 pl-lg-5">Nazwa diety</div>
+                <div class="col-2 cent acent">Aktywna</div>
+                <div class="col-2 cent acent">Łączna kaloryczność</div>
+                <div class="col-4 cent acent">Zaplanowane dni</div>
+            </div>
+        </div>
 
+        @foreach (var item in Model)
+        {
+            var d = item.Diet;
+            <div class="row no-gutters tableRow">
+                <div class="col-10 row no-gutters">
+                    <div class="col-4 acent pl-2 pl-md-3 pl-md-4 pl-lg-5">@d.DietName</div>
+                    <div class="col-2 cent acent">@(d.Active ? "TAK" : "NIE")</div>
+                    <div class="col-2 cent acent">@item.CaloriesSum</div>
+                    <div class="col-4 cent acent">
+                        @{
+                            int i = 0;
+                            string days = "";
+                            if(d.Monday && d.Tuesday && d.Wednesday && d.Friday && d.Saturday && d.Sunday){
+                                days = "Pn - Nd";
+                            }
+                            else {
+                                if (d.Monday) { days += "Pn"; i++; }
+                                if (d.Tuesday) { days += i == 0 ?  "Wt" : ", Wt"; i++; }
+                                if (d.Wednesday) { days += i == 0 ? "Śr" : ", Śr"; i++; }
+                                if (d.Thursday) { days += i == 0 ? "Cz" : ", Cz"; i++; }
+                                if (d.Friday) { days += i == 0 ? "Pt" : ", Pt"; i++; }
+                                if (d.Saturday) { days += i == 0 ? "Sb" : ", Sb"; i++; }
+                                if (d.Sunday) { days += i == 0 ? "Nd" : ", Nd"; i++; }
+                            }
+                        }
+                        @days
+                    </div>
+                </div>
+                <div class="col-1 cent acent">
+                    <img class="btnImg" src="~/img/pen.png" onclick="" />
+                </div>
+                <div class="col-1 cent acent">
+                    <img class="btnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" onclick="" />
+                </div>
+            </div>
+        }
+    </div>
 </body>
 </html>

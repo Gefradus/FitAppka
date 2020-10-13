@@ -6,6 +6,7 @@
     <script src="~/js/ShowNavbar.js"></script>
     <link href="~/css/DietCreator.css" rel="stylesheet" />
     <link href="~/css/RadioButtons.css" rel="stylesheet" />
+    <script src="~/js/AllViews.js"></script>
     <script src="~/js/ActiveDiets.js"></script>
     <script>
         function changeDietDayOfWeek(dayOfWeek) {
@@ -13,7 +14,7 @@
         }
     </script>
 </head>
-<body onload="restoreDay()">
+<body onload="restoreDay(); colorEverySecondRow();">
     <header>
         <nav class="navbar navbar-expand-md cent border-bottom navbar-fixed-top" id="navMain">
             <div class="row w-100">
