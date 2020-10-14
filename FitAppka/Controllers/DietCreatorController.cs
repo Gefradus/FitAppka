@@ -39,6 +39,13 @@ namespace FitAppka.Controllers
             return View(_dietCreatorSerivce.GetActiveDiets());
         }
 
+        [HttpGet]
+        public IActionResult EditDiet(int id, string search, bool searched)
+        {
+            ViewData["dayID"] = _dayManageService.GetTodayId();
+            return View(_dietCreatorSerivce.EditDietSearchProduct(id, search, searched));
+        }
+
         [HttpPost]
         public JsonResult CreateDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding)
         {
@@ -55,6 +62,12 @@ namespace FitAppka.Controllers
         public JsonResult DeleteProduct(List<DietProductDTO> addedProducts, int tempId)
         {
             return Json(_dietCreatorSerivce.DeleteProduct(addedProducts, tempId));
+        }
+
+        [HttpDelete]
+        public JsonResult DeleteDiet(int id)
+        {
+            return Json(_dietCreatorSerivce.DeleteDiet(id));
         }
 
     }

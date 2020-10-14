@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FitAppka.Models;
 using FitAppka.Models.DTO.DietCreatorDTO;
+using FitAppka.Models.DTO.EditDietDTO;
 using FitAppka.Repository;
 using FitAppka.Repository.RepoInterface;
 using FitAppka.Service.ServiceInterface;
@@ -9,23 +10,25 @@ using FitAppka.Strategy.StrategyInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FitAppka.Service.ServiceImpl
 {
     public class DietCreatorServiceImpl : IDietCreatorService
     {
         public IDietRepository DietRepository { get; private set; }
+        private readonly IClientManageService _clientManageService;
         private readonly IProductRepository _productRepository;
         private readonly IDietProductRepository _dietProductRepository;
         private readonly IContentRootPathHandlerService _contentRootService;
         private readonly IClientRepository _clientRepository;
         private readonly IMapper _mapper;
 
-        public DietCreatorServiceImpl(IDietRepository dietRepository, IMapper mapper, IContentRootPathHandlerService contentRootService,
+        public DietCreatorServiceImpl(IDietRepository dietRepository, IMapper mapper, 
+            IContentRootPathHandlerService contentRootService, IClientManageService clientManageService,
             IDietProductRepository dietProductRepository, IProductRepository productRepository, IClientRepository clientRepository)
         {
             DietRepository = dietRepository;
+            _clientManageService = clientManageService;
             _clientRepository = clientRepository;
             _contentRootService = contentRootService;
             _dietProductRepository = dietProductRepository;
@@ -253,6 +256,47 @@ namespace FitAppka.Service.ServiceImpl
                 });
             }
             return listOfActiveDiets;
+        }
+
+        public EditDietDTO EditDietSearchProduct(int id, string search, bool wasSearched)
+        {
+            return new EditDietDTO()
+            {
+                Id = id,
+                SearchProducts = SearchOrGetProducts(search),
+                RootPath = _contentRootService.GetContentRootFileName(),
+                WasSearched = wasSearched
+            };
+        }
+
+        public bool DeleteDiet(int id)
+        {
+            try {
+                if (_clientManageService.HasUserAccessToDiet(id) && DeleteProductsAssignedToDiet(id)) {
+                    DietRepository.Delete(id);
+                    return true;
+                } 
+                return false;
+            }
+            catch {
+                return false;
+            }
+        }
+
+        private bool DeleteProductsAssignedToDiet(int id)
+        {
+            try {
+                foreach (var item in _dietProductRepository.GetAllDietProducts()) {
+                    if (item.DietId == id) {
+                        _dietProductRepository.Delete(item.DietProductId);
+                    }
+                }
+                return true;
+            } 
+            catch {
+                return false;
+            }
+
         }
     }
 }

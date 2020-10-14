@@ -1,5 +1,6 @@
 ﻿using FitAppka.Models;
 using FitAppka.Repository;
+using FitAppka.Repository.RepoInterface;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,10 +13,12 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IDayRepository _dayRepository;
         private readonly IProductRepository _productRepository;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
+        private readonly IDietRepository _dietRepository;
 
-        public ClientManageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository,
+        public ClientManageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository, IDietRepository dietRepository,
             IProductRepository productRepository, IWeightMeasurementRepository weightMeasurementRepository)
         {
+            _dietRepository = dietRepository;
             _weightMeasurementRepository = weightMeasurementRepository;
             _productRepository = productRepository;
             _dayRepository = dayRepository;
@@ -68,6 +71,11 @@ namespace FitAppka.Service.ServiceImpl
         public bool HasUserAccessToWeightMeasurement(int id)
         {
             return HasUserAccess(_weightMeasurementRepository.GetWeightMeasurement(id).ClientId);
+        }
+
+        public bool HasUserAccessToDiet(int id)
+        {
+            return HasUserAccess(_dietRepository.GetDiet(id).ClientId);
         }
 
         private bool HasUserAccess(int clientID)

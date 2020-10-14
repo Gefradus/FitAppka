@@ -34,7 +34,7 @@ namespace FitAppka.Repository.RepoImpl
             return dietProduct;
         }
 
-        public IEnumerable<DietProduct> GetAllDietProducts()
+        public List<DietProduct> GetAllDietProducts()
         {
             return _context.DietProduct.ToList();
         }

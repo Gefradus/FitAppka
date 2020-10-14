@@ -10,6 +10,7 @@ namespace FitAppka.Service
         bool CheckIfPassCorrect(Client model);
         bool HasUserAccessToDay(int dayID);
         bool HasUserAccessToProduct(int productID);
+        bool HasUserAccessToDiet(int dietID);
         bool HasUserAccessToWeightMeasurement(int id);
         bool IsLoggedInClientAdmin();
         int GetLoggedInClientId();

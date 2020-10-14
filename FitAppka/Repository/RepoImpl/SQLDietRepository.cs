@@ -58,6 +58,7 @@ namespace FitAppka.Repository.RepoImpl
             return _context.Diet.Where(d => d.ClientId == _clientRepository.GetLoggedInClientId()).ToList();
         }
 
+
         public Diet Update(Diet diet)
         {
             _context.Update(diet);
