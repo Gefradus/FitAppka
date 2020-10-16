@@ -15,6 +15,10 @@
     border-left: 1px dotted #6b6b6b;
 }
 
+.tableRow.selected {
+    background-color: #b0cdf2 !important;
+}
+
 .navbar-fixed-top.scrolled {
     background: rgba(46, 46, 46, 0.97) !important;
     transition: background 350ms linear;

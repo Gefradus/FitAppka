@@ -14,4 +14,12 @@ function onload() {
     restoreDay();
     colorEverySecondRow();
     transparentWhenScrollDown();
+    $(".tableRow").click(function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected').siblings().removeClass("selected");
+        } else {
+            $(this).addClass('selected').siblings().removeClass("selected");
+        }
+        colorEverySecondRow();
+    });
 }

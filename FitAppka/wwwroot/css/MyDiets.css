@@ -18,3 +18,8 @@
     width: 18px;
     cursor: pointer
 }
+
+.tableRow:target{
+    background-color: aqua !important
+}
+
