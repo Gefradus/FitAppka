@@ -106,7 +106,8 @@ function saveParamsInLocalStorage() {
         friday: document.getElementById("Friday").checked,
         saturday: document.getElementById("Saturday").checked,
         sunday: document.getElementById("Sunday").checked,
-        name: document.getElementById("EditedDiet_DietName").value
+        name: document.getElementById("EditedDiet_DietName").value,
+        active: document.getElementById("active").checked
     }));
 }
 
@@ -122,6 +123,7 @@ function checkIfParamsWasSaved(wasSearched) {
         document.getElementById("Saturday").checked = parsedParams.saturday;
         document.getElementById("Sunday").checked = parsedParams.sunday;
         document.getElementById("EditedDiet_DietName").value = parsedParams.name;
+        document.getElementById("active").checked = parsedParams.active;
     }
 }
 
