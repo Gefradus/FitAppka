@@ -164,7 +164,7 @@ function showAddedProducts(deleteUrl) {
     }
 }
 
-function savediet(url, redirect) {
+function savediet(url, redirect, id) {
     var monday = document.getElementById("Monday").checked;
     var tuesday = document.getElementById("Tuesday").checked;
     var wednesday = document.getElementById("Wednesday").checked;
@@ -179,6 +179,7 @@ function savediet(url, redirect) {
         if (monday || tuesday || wednesday || thursday || friday || saturday || sunday) {
             if (products != null && products.length != 0) {
                 dietDTO = {
+                    DietId: id,
                     DietName: name,
                     Active: document.getElementById("active").checked,
                     Monday: monday,

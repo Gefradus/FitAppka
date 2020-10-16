@@ -204,27 +204,31 @@ namespace FitAppka.Service.ServiceImpl
 
         public bool EditDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding)
         {
-            if (overriding || CheckIfDietsHaveNoConflict(dietDTO))
-            {
-                int clientId = _clientRepository.GetLoggedInClientId();
-                Diet diet = _mapper.Map<DietDTO, Diet>(dietDTO);
-                diet.ClientId = clientId;
-                SetDietsToNotActiveIfDaysConflict(diet);
-                DietRepository.Update(diet);
-
-                RemoveAllDietProductsAssignedToDiet(diet.DietId);
-                foreach (var item in products)
+            if (_clientManageService.HasUserAccessToDiet(dietDTO.DietId)) {
+                if (overriding || CheckIfDietsHaveNoConflict(dietDTO)) 
                 {
-                    DietProduct product = _mapper.Map<DietProductDTO, DietProduct>(item);
-                    product.DietId = diet.DietId; 
-                    _dietProductRepository.Add(product);
-                }
+                    Diet diet = UpdateDiet(dietDTO);
+                    RemoveAllDietProductsAssignedToDiet(diet.DietId);
+                    foreach (var item in products)
+                    {
+                        DietProduct product = _mapper.Map<DietProductDTO, DietProduct>(item);
+                        product.DietId = diet.DietId;
+                        _dietProductRepository.Add(product);
+                    }
 
-                return true;
+                    return true;
+                }
             }
             return false;
         }
 
+        private Diet UpdateDiet(DietDTO dietDTO)
+        {
+            Diet diet = _mapper.Map(dietDTO, DietRepository.GetDiet(dietDTO.DietId));
+            SetDietsToNotActiveIfDaysConflict(diet);
+            diet.Active = dietDTO.Active;
+            return DietRepository.Update(diet);
+        }
         private void RemoveAllDietProductsAssignedToDiet(int dietId)
         {
             foreach(var item in _dietProductRepository.GetAllDietProducts())
@@ -235,8 +239,6 @@ namespace FitAppka.Service.ServiceImpl
                 }
             }
         }
-
-
 
         private bool CheckIfDietsHaveNoConflict(DietDTO diet) {
             if (diet.Active) {
@@ -252,8 +254,6 @@ namespace FitAppka.Service.ServiceImpl
             }
             return true;
         }
-
-
 
         private void SetDietsToNotActiveIfDaysConflict(Diet diet)
         {
