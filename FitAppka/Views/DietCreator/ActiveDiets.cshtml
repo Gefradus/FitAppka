@@ -10,7 +10,7 @@
     <script src="~/js/ActiveDiets.js"></script>
     <script>
         function changeDietDayOfWeek(dayOfWeek) {
-            location.href = "@Url.Action("ActiveDiets", "DietCreator")" + "?dayOfWeek=" + dayOfWeek;
+            location.href = "@Url.Action("ActiveDiets", "DietCreator")" + "?dayOfWeek=" + dayOfWeek + "?wasDayChanged=true";
         }
     </script>
 </head>

@@ -20,10 +20,10 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        public IActionResult ActiveDiets(int dayOfWeek)
+        public IActionResult ActiveDiets(int dayOfWeek, bool wasDayChanged)
         {
             ViewData["dayID"] = _dayManageService.GetTodayId();
-            return View(_dietCreatorSerivce.GetActiveDiet(dayOfWeek));
+            return View(_dietCreatorSerivce.GetActiveDiet(dayOfWeek, wasDayChanged));
         }
 
         [HttpGet]

@@ -36,10 +36,10 @@ namespace FitAppka.Service.ServiceImpl
             _mapper = mapper;
         }
 
-        public ActiveDietDTO GetActiveDiet(int dayOfWeek)
+        public ActiveDietDTO GetActiveDiet(int dayOfWeek, bool wasDayChanged)
         {
             new DayOfWeekDietStrategyDictionary<IDayOfWeekDietStrategy>(this, _mapper).
-                TryGetValue((DayOfWeek)dayOfWeek, out IDayOfWeekDietStrategy mapValue);
+                TryGetValue(wasDayChanged ? (DayOfWeek)dayOfWeek : DateTime.Now.DayOfWeek, out IDayOfWeekDietStrategy mapValue);
 
             DietDTO dietDTO = _mapper.Map<Diet, DietDTO>(mapValue.GetActiveDiet());
             
@@ -55,8 +55,7 @@ namespace FitAppka.Service.ServiceImpl
                 ProteinsSum = CountProteinsSum(dietProducts),
                 FatsSum = CountFatsSum(dietProducts),
                 CarbohydratesSum = CountCarbsSum(dietProducts)
-            };
-            
+            };   
         }
 
 
