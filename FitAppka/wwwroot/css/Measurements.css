@@ -35,6 +35,10 @@
     align-items: center;
 }
 
+.rowM.selected {
+    background-color: #b0cdf2 !important;
+}
+
 #btnAddMeasurement, #btnEditMeasurement {
     background: #52ad3c;
     color: white;

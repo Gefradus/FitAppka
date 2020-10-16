@@ -81,6 +81,17 @@ function onload() {
     $('#normalDropDown').chosen({ search_contains: true });
     transparentWhenScrollDown();
     $(".datepicker, .int").addClass("form-control");
+    $(".dayRow").click(function () {
+        if ($(this).hasClass('selected'))
+        {
+            $(this).removeClass('selected').siblings().removeClass("selected");
+        }
+        else
+        {
+            $(this).addClass('selected').siblings().removeClass("selected");
+        }
+        colorEverySecondRow();
+    });
 }
 
 function restore(searchType, from, to) {
