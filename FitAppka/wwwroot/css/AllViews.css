@@ -15,6 +15,10 @@
     border-left: 1px dotted #6b6b6b;
 }
 
+.training.selected {
+    background-color: #b0cdf2 !important;
+}
+
 .tableRow.selected {
     background-color: #b0cdf2 !important;
 }

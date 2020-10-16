@@ -72,3 +72,14 @@ function changeCalorie() {
     var burnedKcal = parseInt(minutes * kcalPerMin);
     document.getElementById("burnedKcal").value = burnedKcal;
 }
+
+function onload() {
+    $(".training").click(function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected').siblings().removeClass("selected");
+        } else {
+            $(this).addClass('selected').siblings().removeClass("selected");
+        }
+        colorEverySecondRow();
+    });
+}

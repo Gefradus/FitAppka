@@ -87,3 +87,14 @@ function setParams(name, typeId, dayID) {
         document.getElementById("add").hidden = false;
     } 
 }
+
+function onload() {
+    $(".training").click(function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected').siblings().removeClass("selected");
+        } else {
+            $(this).addClass('selected').siblings().removeClass("selected");
+        }
+        colorEverySecondRow();
+    });
+}
