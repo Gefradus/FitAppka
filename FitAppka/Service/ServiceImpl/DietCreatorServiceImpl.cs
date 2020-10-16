@@ -228,13 +228,14 @@ namespace FitAppka.Service.ServiceImpl
             diet.Active = dietDTO.Active;
             return DietRepository.Update(diet);
         }
+
         private void RemoveAllDietProductsAssignedToDiet(int dietId)
         {
             foreach(var item in _dietProductRepository.GetAllDietProducts())
             {
                 if(item.DietId == dietId)
                 {
-                    _dietProductRepository.Delete(dietId);
+                    _dietProductRepository.Delete(item.DietProductId);
                 }
             }
         }

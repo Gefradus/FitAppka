@@ -15,6 +15,11 @@
     border-left: 1px dotted #6b6b6b;
 }
 
+.navbar-fixed-top.scrolled {
+    background: rgba(46, 46, 46, 0.97) !important;
+    transition: background 350ms linear;
+}
+
 .deleteBtn {
     border-radius:10%; 
     background-color: #ce1a22; 

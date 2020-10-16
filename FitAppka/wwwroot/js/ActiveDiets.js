@@ -9,3 +9,9 @@
     if (dayOfWeek == 6) { $("#saturday").attr("checked", true); }
     if (dayOfWeek == 0) { $("#sunday").attr("checked", true); }
 }
+
+function onload() {
+    restoreDay();
+    colorEverySecondRow();
+    transparentWhenScrollDown();
+}
