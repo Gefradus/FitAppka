@@ -164,7 +164,7 @@ function showAddedProducts(deleteUrl) {
     }
 }
 
-function savediet(url, redirect, id) {
+function savediet(url, id) {
     var monday = document.getElementById("Monday").checked;
     var tuesday = document.getElementById("Tuesday").checked;
     var wednesday = document.getElementById("Wednesday").checked;
@@ -211,13 +211,13 @@ function savediet(url, redirect, id) {
                                         overriding: true
                                     },
                                     success: function () {
-                                        successSaved(redirect);
+                                        successSaved(url);
                                     }
                                 });
                             });
 
                         } else {
-                            successSaved(redirect);
+                            successSaved(url);
                         }
                     }
                 });

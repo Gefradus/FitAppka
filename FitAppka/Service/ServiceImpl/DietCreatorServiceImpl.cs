@@ -290,8 +290,16 @@ namespace FitAppka.Service.ServiceImpl
                     CaloriesSum = CountCaloriesSum(dietProducts)
                 });
             }
-            return listOfActiveDiets;
+            return SortListOfActiveDiets(listOfActiveDiets);
         }
+
+        private List<ActiveDietDTO> SortListOfActiveDiets(List<ActiveDietDTO> list)
+        {
+            return list.OrderBy(l => !l.Diet.Active).ThenBy(l => !l.Diet.Monday).ThenBy(l => !l.Diet.Tuesday).ThenBy(l => !l.Diet.Wednesday)
+                .ThenBy(l => !l.Diet.Thursday).ThenBy(l => !l.Diet.Friday).ThenBy(l => !l.Diet.Saturday).ThenBy(l => !l.Diet.Sunday)
+                .ThenBy(l => l.CaloriesSum).ToList();
+        }
+
 
         public EditDietDTO EditDietSearchProduct(int id, string search, bool wasSearched)
         {

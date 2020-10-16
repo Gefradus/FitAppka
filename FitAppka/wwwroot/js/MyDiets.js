@@ -15,3 +15,19 @@
         });
     });
 }
+
+function onload() {
+    colorEverySecondRow();
+    yesNoActive();
+}
+
+function yesNoActive() {
+    var yesNoActive = document.getElementsByClassName("yesNoActive");
+    for (var i = 0; i < yesNoActive.length; i++) {
+        if (yesNoActive[i].innerHTML == 'TAK') {
+            yesNoActive[i].style.color = '#31c131';
+        } else {
+            yesNoActive[i].style.color = 'rgb(224 102 102)';
+        }
+    }
+}

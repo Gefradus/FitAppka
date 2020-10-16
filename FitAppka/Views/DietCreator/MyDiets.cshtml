@@ -8,7 +8,7 @@
     <script src="~/js/ShowNavbar.js"></script>
     <script src="~/js/MyDiets.js"></script>
 </head>
-<body onload="colorEverySecondRow();">
+<body onload="onload()">
     <div class="container">
         <div class="modal fade" tabindex="-1" id="deleteModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
             <div class="modal-dialog cent">
@@ -47,7 +47,7 @@
             <div class="row no-gutters tableRow">
                 <div class="col-10 row no-gutters">
                     <div class="col-4 acent pl-2 pl-md-3 pl-md-4 pl-lg-5">@d.DietName</div>
-                    <div class="col-2 cent acent">@(d.Active ? "TAK" : "NIE")</div>
+                    <div class="col-2 cent acent yesNoActive">@(d.Active ? "TAK" : "NIE")</div>
                     <div class="col-2 cent acent">@item.CaloriesSum</div>
                     <div class="col-4 cent acent">
                         @{
