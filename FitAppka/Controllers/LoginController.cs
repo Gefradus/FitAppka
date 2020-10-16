@@ -66,6 +66,7 @@ namespace FitAppka.Controllers
 
 
         [HttpPost]
+        [Route("/Register")]
         public async Task<IActionResult> Register(RegisterDTO model)
         {
             if (ModelState.IsValid)

@@ -47,6 +47,12 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
+        public JsonResult EditDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding)
+        {
+            return Json(_dietCreatorSerivce.EditDiet(products, dietDTO, overriding));
+        }
+
+        [HttpPost]
         public JsonResult CreateDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding)
         {
             return Json(_dietCreatorSerivce.CreateDiet(products, dietDTO, overriding));

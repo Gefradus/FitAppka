@@ -5,7 +5,7 @@ namespace FitAppka.Models.DTO.EditDietDTO
 {
     public class EditDietDTO
     {
-        public int Id { get; set; }
+        public DietDTO EditedDiet { get; set; }
         public List<SearchProductDTO> SearchProducts { get; set; }
         public List<DietProductDTO> AddedProducts { get; set; }
         public string RootPath { get; set; }

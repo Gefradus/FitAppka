@@ -1,8 +1,10 @@
-﻿namespace FitAppka.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace FitAppka.Models
 {
     public class DietDTO
     {
         public int DietId { get; set; }
+        [MaxLength(25)]
         public string DietName { get; set; }
         public bool Active { get; set; }
         public bool Monday { get; set; }

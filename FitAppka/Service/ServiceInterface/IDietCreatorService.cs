@@ -15,5 +15,6 @@ namespace FitAppka.Service.ServiceInterface
         public EditDietDTO EditDietSearchProduct(int id, string search, bool wasSearched);
         public List<ActiveDietDTO> GetActiveDiets();
         public bool CreateDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding);
+        public bool EditDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding);
     }
 }

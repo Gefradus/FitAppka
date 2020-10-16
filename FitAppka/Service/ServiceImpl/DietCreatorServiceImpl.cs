@@ -191,8 +191,7 @@ namespace FitAppka.Service.ServiceImpl
                 SetDietsToNotActiveIfDaysConflict(diet);
                 DietRepository.Add(diet);
 
-                foreach (var item in products)
-                {
+                foreach (var item in products) {
                     DietProduct product = _mapper.Map<DietProductDTO, DietProduct>(item);
                     product.DietId = diet.DietId;
                     _dietProductRepository.Add(product);
@@ -202,6 +201,42 @@ namespace FitAppka.Service.ServiceImpl
             }
             return false;
         }
+
+        public bool EditDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding)
+        {
+            if (overriding || CheckIfDietsHaveNoConflict(dietDTO))
+            {
+                int clientId = _clientRepository.GetLoggedInClientId();
+                Diet diet = _mapper.Map<DietDTO, Diet>(dietDTO);
+                diet.ClientId = clientId;
+                SetDietsToNotActiveIfDaysConflict(diet);
+                DietRepository.Update(diet);
+
+                RemoveAllDietProductsAssignedToDiet(diet.DietId);
+                foreach (var item in products)
+                {
+                    DietProduct product = _mapper.Map<DietProductDTO, DietProduct>(item);
+                    product.DietId = diet.DietId; 
+                    _dietProductRepository.Add(product);
+                }
+
+                return true;
+            }
+            return false;
+        }
+
+        private void RemoveAllDietProductsAssignedToDiet(int dietId)
+        {
+            foreach(var item in _dietProductRepository.GetAllDietProducts())
+            {
+                if(item.DietId == dietId)
+                {
+                    _dietProductRepository.Delete(dietId);
+                }
+            }
+        }
+
+
 
         private bool CheckIfDietsHaveNoConflict(DietDTO diet) {
             if (diet.Active) {
@@ -262,7 +297,7 @@ namespace FitAppka.Service.ServiceImpl
         {
             return new EditDietDTO()
             {
-                Id = id,
+                EditedDiet = _mapper.Map<Diet, DietDTO>(DietRepository.GetDiet(id)),
                 SearchProducts = SearchOrGetProducts(search),
                 RootPath = _contentRootService.GetContentRootFileName(),
                 WasSearched = wasSearched
@@ -298,5 +333,7 @@ namespace FitAppka.Service.ServiceImpl
             }
 
         }
+
+        
     }
 }

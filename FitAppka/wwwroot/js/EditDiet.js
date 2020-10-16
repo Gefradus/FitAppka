@@ -26,14 +26,12 @@ function onResizeEvent() {
     var fats = document.getElementById("fatHeader");
     var carbs = document.getElementById("carbsHeader");
 
-    if (document.getElementsByTagName("body")[0].offsetWidth < 500)
-    {
+    if (document.getElementsByTagName("body")[0].offsetWidth < 500) {
         protein.innerHTML = "B";
         fats.innerHTML = "T";
         carbs.innerHTML = "W";
     }
-    else if (document.getElementsByTagName("body")[0].offsetWidth < 800)
-    {
+    else if (document.getElementsByTagName("body")[0].offsetWidth < 800) {
         protein.innerHTML = "Białko";
         fats.innerHTML = "Tłuszcze";
         carbs.innerHTML = "Węgl.";
@@ -73,12 +71,12 @@ function editProduct(url, grammage) {
         type: 'POST',
         url: url,
         data: {
-            addedProducts: localStorage.getItem("products") === null ? null : JSON.parse(localStorage.products),
+            addedProducts: localStorage.getItem("productsEdit") === null ? null : JSON.parse(localStorage.productsEdit),
             productId: document.getElementById("productId").value,
             grammage: grammage
         },
         success: function (response) {
-            localStorage.setItem("products", JSON.stringify(response.addedProducts));
+            localStorage.setItem("productsEdit", JSON.stringify(response.addedProducts));
             location.reload();
         }
     });
@@ -89,18 +87,18 @@ function deleteProduct(id, url) {
         type: 'DELETE',
         url: url,
         data: {
-            addedProducts: JSON.parse(localStorage.products),
+            addedProducts: JSON.parse(localStorage.productsEdit),
             tempId: id
         },
         success: function (response) {
-            localStorage.setItem("products", JSON.stringify(response.addedProducts));
+            localStorage.setItem("productsEdit", JSON.stringify(response.addedProducts));
             location.reload();
         }
     });
 }
 
 function saveParamsInLocalStorage() {
-    localStorage.setItem("params", JSON.stringify({
+    localStorage.setItem("paramsEdit", JSON.stringify({
         monday: document.getElementById("Monday").checked,
         tuesday: document.getElementById("Tuesday").checked,
         wednesday: document.getElementById("Wednesday").checked,
@@ -113,7 +111,7 @@ function saveParamsInLocalStorage() {
 }
 
 function checkIfParamsWasSaved() {
-    var params = localStorage.getItem("params");
+    var params = localStorage.getItem("paramsEdit");
     if (params != null) {
         var parsedParams = JSON.parse(params);
         document.getElementById("Monday").checked = parsedParams.monday;
@@ -128,8 +126,8 @@ function checkIfParamsWasSaved() {
 }
 
 function showAddedProducts(deleteUrl) {
-    if (localStorage.getItem("products") != null) {
-        let products = JSON.parse(localStorage.products);
+    if (localStorage.getItem("productsEdit") != null) {
+        let products = JSON.parse(localStorage.productsEdit);
         for (var i = 0; i < products.length; i++) {
             let tempId = products[i].tempId;
             let name = products[i].productName;
@@ -173,14 +171,14 @@ function savediet(url, redirect) {
     var saturday = document.getElementById("Saturday").checked;
     var sunday = document.getElementById("Sunday").checked;
     var name = document.getElementById("ProductName").value;
-    var products = localStorage.getItem("products") === null ? null : JSON.parse(localStorage.products)
+    var products = localStorage.getItem("productsEdit") === null ? null : JSON.parse(localStorage.productsEdit)
 
     if (!isEmpty(name)) {
         if (monday || tuesday || wednesday || thursday || friday || saturday || sunday) {
             if (products != null && products.length != 0) {
                 dietDTO = {
                     DietName: name,
-                    Active: document.getElementById("active").checked,
+                    Active: 'true',
                     Monday: monday,
                     Tuesday: tuesday,
                     Wednesday: wednesday,
@@ -214,7 +212,7 @@ function savediet(url, redirect) {
                                     }
                                 });
                             });
-                            
+
                         } else {
                             successSaved(redirect);
                         }
@@ -232,8 +230,7 @@ function savediet(url, redirect) {
 }
 
 function successSaved(redirect) {
-    localStorage.removeItem("products");
-    localStorage.removeItem("params");
+    localStorage.removeItem("paramsEdit")
     validation("Dieta zapisana pomyślnie ✅");
     $('#validationModal').on('hidden.bs.modal', function () {
         location.href = redirect;
