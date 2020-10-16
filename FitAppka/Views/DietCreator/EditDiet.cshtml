@@ -7,11 +7,10 @@
     <link href="~/css/CreateDiet.css" rel="stylesheet" />
     <link href="~/css/EditDiet.css" rel="stylesheet" />
     <link href="~/css/SwitchCheckbox.css" rel="stylesheet" />
-    <script src="~/js/EditDiet.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/js/AllViews.js"></script>
     <script src="~/js/ShowNavbar.js"></script>
-    <script src="~/js/CreateDiet.js"></script>
+    <script src="~/js/EditDiet.js"></script>
     <script src="~/js/Validation.js"></script>
     <script>
         function getRootPath() {
@@ -27,7 +26,7 @@
 
     </script>
 </head>
-<body onload="onload('@Url.Action("DeleteProduct","DietCreator")')">
+<body onload="onload('@Url.Action("DeleteProduct","DietCreator")', ('@(Model.WasSearched ? 1 : 0)' == 1))">
     <div class="container">
         <div class="modal fade" tabindex="-1" id="addProductModal" data-keyboard="false">
             <div class="modal-dialog">
@@ -144,7 +143,7 @@
 
                             <div class="row no-gutters cent" style="margin-top: 10px;">
                                 <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center;" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 999999)" /><div style="font-weight: 600; margin-top: 2px">g</div>
-                                <button onclick="tryAddProduct('@Url.Action("EditProduct", "DietCreator")')" style="margin-left: 5px; background:none; border:none">
+                                <button onclick="tryAddProduct('@Url.Action("AddProduct", "DietCreator")')" style="margin-left: 5px; background:none; border:none">
                                     <img style="width:30px; height:30px" src="~/img/add.png" />
                                 </button>
                             </div>
@@ -193,18 +192,18 @@
                     <div class="form-group">
                         <div class="my-2">Stwórz dietę dla:</div>
                         <ul class="ks-cboxtags">
-                            <li><input type="checkbox" id="Monday"><label for="Monday">Pon</label></li>
-                            <li><input type="checkbox" id="Tuesday"><label for="Tuesday">Wto</label></li>
-                            <li><input type="checkbox" id="Wednesday"><label for="Wednesday">Śro</label></li>
-                            <li><input type="checkbox" id="Thursday"><label for="Thursday">Czw</label></li>
-                            <li><input type="checkbox" id="Friday"><label for="Friday" style="width: 65px">Pt</label></li>
-                            <li><input type="checkbox" id="Saturday"><label for="Saturday">Sob</label></li>
-                            <li><input type="checkbox" id="Sunday"><label for="Sunday">Ndz</label></li>
+                            <li><input type="checkbox" id="Monday" value="@Model.EditedDiet.Monday"><label for="Monday">Pon</label></li>
+                            <li><input type="checkbox" id="Tuesday" value="@Model.EditedDiet.Tuesday"><label for="Tuesday">Wto</label></li>
+                            <li><input type="checkbox" id="Wednesday" value="@Model.EditedDiet.Wednesday"><label for="Wednesday">Śro</label></li>
+                            <li><input type="checkbox" id="Thursday" value="@Model.EditedDiet.Thursday"><label for="Thursday">Czw</label></li>
+                            <li><input type="checkbox" id="Friday" value="@Model.EditedDiet.Friday"><label for="Friday" style="width: 65px">Pt</label></li>
+                            <li><input type="checkbox" id="Saturday" value="@Model.EditedDiet.Saturday"><label for="Saturday">Sob</label></li>
+                            <li><input type="checkbox" id="Sunday" value="@Model.EditedDiet.Sunday"><label for="Sunday">Ndz</label></li>
                         </ul>
                     </div>
                     <div class="form-group">
                         <label>Nazwa diety:</label>
-                        @Html.TextBoxFor(model => model.EditedDiet.DietName, new { @class = "form-control", @style = "border-radius: .15rem !important", @id = "ProductName" })
+                        @Html.TextBoxFor(model => model.EditedDiet.DietName, new { @class = "form-control", @style = "border-radius: .15rem !important" })
                     </div>
                     <div class="form-group">
                         <label>Produkty:</label>

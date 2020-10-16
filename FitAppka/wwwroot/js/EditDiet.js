@@ -1,6 +1,6 @@
-﻿function onload(deleteUrl) {
+﻿function onload(deleteUrl, wasSearched) {
     checkIfModalWasOpen();
-    checkIfParamsWasSaved();
+    checkIfParamsWasSaved(wasSearched);
     showAddedProducts(deleteUrl);
     onResizeEvent();
 
@@ -16,7 +16,7 @@
         window.history.replaceState(null, null, window.location.pathname);
     });
 
-    $("input:checkbox, #ProductName").on("change", function () {
+    $("input:checkbox, #EditedDiet_DietName").on("change", function () {
         saveParamsInLocalStorage();
     });
 }
@@ -106,13 +106,13 @@ function saveParamsInLocalStorage() {
         friday: document.getElementById("Friday").checked,
         saturday: document.getElementById("Saturday").checked,
         sunday: document.getElementById("Sunday").checked,
-        name: document.getElementById("ProductName").value
+        name: document.getElementById("EditedDiet_DietName").value
     }));
 }
 
-function checkIfParamsWasSaved() {
+function checkIfParamsWasSaved(wasSearched) {
     var params = localStorage.getItem("paramsEdit");
-    if (params != null) {
+    if (params != null && wasSearched) {
         var parsedParams = JSON.parse(params);
         document.getElementById("Monday").checked = parsedParams.monday;
         document.getElementById("Tuesday").checked = parsedParams.tuesday;
@@ -121,7 +121,7 @@ function checkIfParamsWasSaved() {
         document.getElementById("Friday").checked = parsedParams.friday;
         document.getElementById("Saturday").checked = parsedParams.saturday;
         document.getElementById("Sunday").checked = parsedParams.sunday;
-        document.getElementById("ProductName").value = parsedParams.name;
+        document.getElementById("EditedDiet_DietName").value = parsedParams.name;
     }
 }
 
@@ -170,7 +170,7 @@ function savediet(url, redirect) {
     var friday = document.getElementById("Friday").checked;
     var saturday = document.getElementById("Saturday").checked;
     var sunday = document.getElementById("Sunday").checked;
-    var name = document.getElementById("ProductName").value;
+    var name = document.getElementById("EditedDiet_DietName").value;
     var products = localStorage.getItem("productsEdit") === null ? null : JSON.parse(localStorage.productsEdit)
 
     if (!isEmpty(name)) {
@@ -178,7 +178,7 @@ function savediet(url, redirect) {
             if (products != null && products.length != 0) {
                 dietDTO = {
                     DietName: name,
-                    Active: 'true',
+                    Active: document.getElementById("active").checked,
                     Monday: monday,
                     Tuesday: tuesday,
                     Wednesday: wednesday,
