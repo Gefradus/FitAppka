@@ -210,6 +210,12 @@ li{
     width: 100%
 }
 
+#backToDiets {
+    margin-bottom: 2.5rem !important;
+    margin-top: 2.5rem !important;
+    font-size: 16px
+}
+
 #productsPanel {
     max-height: 282px;
     border-top: 1px solid #c2c2c2;
