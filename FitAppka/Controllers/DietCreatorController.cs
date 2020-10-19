@@ -62,14 +62,12 @@ namespace FitAppka.Controllers
         [HttpPost]
         public JsonResult AddProduct(List<DietProductDTO> addedProducts, int productId, int grammage)
         {
-            ViewData["change"] = true;
             return Json(_dietCreatorSerivce.AddProduct(addedProducts, productId, grammage, false));
         }
 
         [HttpDelete]
         public JsonResult DeleteProduct(List<DietProductDTO> addedProducts, int tempId)
         {
-            ViewData["change"] = true;
             return Json(_dietCreatorSerivce.DeleteProduct(addedProducts, tempId));
         }
 

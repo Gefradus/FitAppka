@@ -31,7 +31,6 @@ function lol(deleteUrl, changed) {
 function refreshStorage()
 {
     localStorage.removeItem("paramsEdit");
-    //localStorage.removeItem("productsEdit");
     localStorage.setItem("productsEdit", JSON.stringify(listOfProducts));
 }
 

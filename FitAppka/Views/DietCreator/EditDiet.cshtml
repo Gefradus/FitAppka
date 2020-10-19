@@ -14,7 +14,7 @@
     <script src="~/js/Validation.js"></script>
     <script>
         function getRootPath() {
-            return getWebRootPath("@((Model.RootPath).Replace("\\","\\\\"))");
+            return getWebRootPath("@((Model.RootPath).Replace("\\", "\\\\"))");
         }
         function checkIfModalWasOpen() {
             if (@(Model.WasSearched ? 1 : 0) == 1) {
@@ -226,21 +226,23 @@
                         </div>
 
                         <div id="productsPanel">
-                            @foreach (var item in Model.AddedProducts)
-                            {
-                                <script>
-                                    listOfProducts.push({
-                                        tempId: '@item.TempId',
-                                        productId: '@item.ProductId',
-                                        productName: '@item.ProductName',
-                                        photoPath: '@item.PhotoPath',
-                                        grammage: '@item.Grammage',
-                                        calories: '@item.Calories',
-                                        proteins: '@item.Proteins',
-                                        fats: '@item.Fats',
-                                        carbohydrates: '@item.Carbohydrates'
-                                    });
-                                </script>
+                            @{ int i = 0;
+                               foreach (var item in Model.AddedProducts){
+                                    i++;
+                                    <script>
+                                        listOfProducts.push({
+                                            tempId: '@i',
+                                            productId: '@item.ProductId',
+                                            productName: '@item.ProductName',
+                                            photoPath: '@item.PhotoPath',
+                                            grammage: '@item.Grammage',
+                                            calories: '@item.Calories',
+                                            proteins: '@item.Proteins',
+                                            fats: '@item.Fats',
+                                            carbohydrates: '@item.Carbohydrates'
+                                        });
+                                    </script>
+                               }
                             }
                         </div>
                     </div>
