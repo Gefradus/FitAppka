@@ -40,8 +40,9 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditDiet(int id, string search, bool searched)
+        public IActionResult EditDiet(int id, string search, bool searched, bool change)
         {
+            ViewData["change"] = change;
             ViewData["dayID"] = _dayManageService.GetTodayId();
             return View(_dietCreatorSerivce.EditDietSearchProduct(id, search, searched));
         }
@@ -61,12 +62,14 @@ namespace FitAppka.Controllers
         [HttpPost]
         public JsonResult AddProduct(List<DietProductDTO> addedProducts, int productId, int grammage)
         {
+            ViewData["change"] = true;
             return Json(_dietCreatorSerivce.AddProduct(addedProducts, productId, grammage, false));
         }
 
         [HttpDelete]
         public JsonResult DeleteProduct(List<DietProductDTO> addedProducts, int tempId)
         {
+            ViewData["change"] = true;
             return Json(_dietCreatorSerivce.DeleteProduct(addedProducts, tempId));
         }
 

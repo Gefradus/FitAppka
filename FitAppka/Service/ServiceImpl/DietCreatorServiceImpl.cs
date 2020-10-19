@@ -305,6 +305,7 @@ namespace FitAppka.Service.ServiceImpl
         {
             return new EditDietDTO()
             {
+                AddedProducts = MapProductsToDietProductsDTO(MapDietProductsToDTO(_dietProductRepository.GetDietProducts(id))),
                 EditedDiet = _mapper.Map<Diet, DietDTO>(DietRepository.GetDiet(id)),
                 SearchProducts = SearchOrGetProducts(search),
                 RootPath = _contentRootService.GetContentRootFileName(),

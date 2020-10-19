@@ -1,7 +1,5 @@
-﻿function onload(deleteUrl, wasSearched) {
+﻿function onload() {
     checkIfModalWasOpen();
-    checkIfParamsWasSaved(wasSearched);
-    showAddedProducts(deleteUrl);
     onResizeEvent();
 
     if (window.addEventListener) {
@@ -20,6 +18,23 @@
         saveParamsInLocalStorage();
     });
 }
+
+function lol(deleteUrl, changed) {
+    if (!changed) {
+        refreshStorage();
+    } 
+    checkIfParamsWasSaved();
+    showAddedProducts(deleteUrl);
+}
+
+
+function refreshStorage()
+{
+    localStorage.removeItem("paramsEdit");
+    //localStorage.removeItem("productsEdit");
+    localStorage.setItem("productsEdit", JSON.stringify(listOfProducts));
+}
+
 
 function onResizeEvent() {
     var protein = document.getElementById("proteinHeader");
@@ -57,7 +72,7 @@ function tryAddProduct(url) {
     let grammage = $("#grammage").val();
 
     if (isNumeric(grammage)) {
-        editProduct(url, grammage);
+        addProduct(url, grammage);
     } else {
         if (isEmpty(grammage)) {
             validation("Podaj ilość produktu");
@@ -65,7 +80,7 @@ function tryAddProduct(url) {
     }
 }
 
-function editProduct(url, grammage) {
+function addProduct(url, grammage) {
     saveParamsInLocalStorage();
     $.ajax({
         type: 'POST',
@@ -77,7 +92,7 @@ function editProduct(url, grammage) {
         },
         success: function (response) {
             localStorage.setItem("productsEdit", JSON.stringify(response.addedProducts));
-            location.reload();
+            insertParam("change", "true");
         }
     });
 }
@@ -92,10 +107,11 @@ function deleteProduct(id, url) {
         },
         success: function (response) {
             localStorage.setItem("productsEdit", JSON.stringify(response.addedProducts));
-            location.reload();
+            insertParam("change", "true");
         }
     });
 }
+
 
 function saveParamsInLocalStorage() {
     localStorage.setItem("paramsEdit", JSON.stringify({
@@ -111,9 +127,9 @@ function saveParamsInLocalStorage() {
     }));
 }
 
-function checkIfParamsWasSaved(wasSearched) {
+function checkIfParamsWasSaved() {
     var params = localStorage.getItem("paramsEdit");
-    if (params != null && wasSearched) {
+    if (params != null) {
         var parsedParams = JSON.parse(params);
         document.getElementById("Monday").checked = parsedParams.monday;
         document.getElementById("Tuesday").checked = parsedParams.tuesday;
@@ -127,8 +143,11 @@ function checkIfParamsWasSaved(wasSearched) {
     }
 }
 
-function showAddedProducts(deleteUrl) {
+function showAddedProducts(deleteUrl)
+{
     if (localStorage.getItem("productsEdit") != null) {
+        let panel = document.getElementById("productsPanel");
+        
         let products = JSON.parse(localStorage.productsEdit);
         for (var i = 0; i < products.length; i++) {
             let tempId = products[i].tempId;
@@ -138,8 +157,7 @@ function showAddedProducts(deleteUrl) {
             let proteins = products[i].proteins;
             let carbs = products[i].carbohydrates;
             let fats = products[i].fats;
-            let panel = document.getElementById("productsPanel");
-
+            
             panel.innerHTML = panel.innerHTML +
                 '<div class="row no-gutters productRow">' +
                 '<div class="col-2 col-lg-3 h-100 acent cent">' + name + '</div>' +
@@ -266,6 +284,7 @@ function prepareModalData(id) {
     document.getElementById("carbs").innerHTML = 'Węgl.: ' + carbsArray[iter] + ' g';
 }
 
+var listOfProducts = [];
 var IDarray = [];
 var nameArray = [];
 var pathArray = [];

@@ -26,7 +26,7 @@
 
     </script>
 </head>
-<body onload="onload('@Url.Action("DeleteProduct","DietCreator")', ('@(Model.WasSearched ? 1 : 0)' == '1'))">
+<body onload="onload()">
     <div class="container">
         <div class="modal fade" tabindex="-1" id="addProductModal" data-keyboard="false">
             <div class="modal-dialog">
@@ -228,25 +228,19 @@
                         <div id="productsPanel">
                             @foreach (var item in Model.AddedProducts)
                             {
-                                <div class="row no-gutters productRow">
-                                    <div class="col-2 col-lg-3 h-100 acent cent"></div>
-                                    <div class="col-9 col-lg-8 container h-100">
-                                        <div class="row no-gutters h-100">
-                                            <div class="col-3 acent cent">@item.ProductName</div>
-                                            <div class="col-9 container row no-gutters acent">
-                                                <div class="col-3 cent">@item.Calories</div>
-                                                <div class="col-3 cent">@item.Proteins</div>
-                                                <div class="col-3 cent">@item.Fats</div>
-                                                <div class="col-3 cent">@item.Carbohydrates</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-1 acent cent">
-                                        <button type="button" class="btnDelete" onclick="deleteProduct('@item.TempId','@Url.Action("DeleteProduct","DietCreator")')">
-                                            <img class="delete" src="https://cdn.onlinewebfonts.com/svg/img_416864.png">
-                                        </button>
-                                    </div>
-                                </div>
+                                <script>
+                                    listOfProducts.push({
+                                        tempId: '@item.TempId',
+                                        productId: '@item.ProductId',
+                                        productName: '@item.ProductName',
+                                        photoPath: '@item.PhotoPath',
+                                        grammage: '@item.Grammage',
+                                        calories: '@item.Calories',
+                                        proteins: '@item.Proteins',
+                                        fats: '@item.Fats',
+                                        carbohydrates: '@item.Carbohydrates'
+                                    });
+                                </script>
                             }
                         </div>
                     </div>
@@ -260,5 +254,8 @@
             </div>
         </div>
     </div>
+    <script>
+        lol('@Url.Action("DeleteProduct","DietCreator")', '@((bool)ViewData["change"] ? 1 : 0)' == '1');
+    </script>
 </body>
 </html>
