@@ -14,10 +14,11 @@ namespace FitAppka.Repository
         Client Add(Client client);
         Task<Client> AddAsync(Client client);
         Client Update(Client client);
-        Client Delete(int id);
+        Client Ban(int id);
         Client GetLoggedInClient();
         Client GetLoggedInClientAsNoTracking();
         int GetLoggedInClientId();
         bool IsLoggedInClientAdmin();
+        public bool IsClientBanned(int clientId);
     }
 }

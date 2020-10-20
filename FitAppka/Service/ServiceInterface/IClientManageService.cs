@@ -7,6 +7,7 @@ namespace FitAppka.Service
     {
         Task AddNewClient(RegisterDTO model);
         string GetClientLoginFromModel(Client model);
+        bool CheckIfClientFromModelIsBanned(Client model);
         bool CheckIfPassCorrect(Client model);
         bool HasUserAccessToDay(int dayID);
         bool HasUserAccessToProduct(int productID);

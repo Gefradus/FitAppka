@@ -78,6 +78,7 @@ namespace FitAppka.Service.ServiceImpl
             product.ClientId = _clientRepository.GetLoggedInClientId();
             product.VisibleToAll = _clientRepository.IsLoggedInClientAdmin();
             product.PhotoPath = CreatePathToPhoto(productDTO);
+            product.IsDeleted = false;
             _productRepository.Add(product);
         }
 

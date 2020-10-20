@@ -27,22 +27,16 @@ namespace FitAppka.Repository.RepIfaceImpl
         public Product Delete(int id)
         {
             Product product = GetProduct(id);
-            DeleteRelatedMeals(id);
 
             if (product != null)
             {
-                _context.Product.Remove(product);
+                product.IsDeleted = true;
                 _context.SaveChanges();
             }
 
             return product;
         }
 
-        private void DeleteRelatedMeals(int productID)
-        { 
-            _context.Meal.RemoveRange(_context.Meal.Where(p => p.ProductId == productID).ToList());
-            _context.SaveChanges();
-        }
 
         public IEnumerable<Product> GetAllProducts()
         {
@@ -53,18 +47,18 @@ namespace FitAppka.Repository.RepIfaceImpl
         {
             return await _context.Product.Where(p => (p.ProductName.Contains(search) || string.IsNullOrEmpty(search)) 
                 && (p.ClientId == _clientRepository.GetLoggedInClientId() || _clientRepository.IsLoggedInClientAdmin()
-                || p.VisibleToAll)).ToListAsync();
+                || p.VisibleToAll) && p.IsDeleted == false).ToListAsync();
         }
 
         public List<Product> GetAccessedToLoggedInClientProducts()
         {
-            return _context.Product.Where(p => p.ClientId == _clientRepository.GetLoggedInClientId() || 
-                _clientRepository.IsLoggedInClientAdmin() || p.VisibleToAll).ToList();
+            return _context.Product.Where(p => (p.ClientId == _clientRepository.GetLoggedInClientId() || 
+                _clientRepository.IsLoggedInClientAdmin() || p.VisibleToAll) && p.IsDeleted == false).ToList();
         }
 
         public async Task<List<Product>> GetLoggedInClientProducts()
         {
-            return await _context.Product.Where(p => p.ClientId == _clientRepository.GetLoggedInClientId()).ToListAsync();
+            return await _context.Product.Where(p => p.ClientId == _clientRepository.GetLoggedInClientId() && p.IsDeleted == false).ToListAsync();
         }
 
         public Product GetProduct(int id)

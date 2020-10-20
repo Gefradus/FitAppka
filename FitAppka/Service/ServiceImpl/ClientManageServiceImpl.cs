@@ -37,6 +37,7 @@ namespace FitAppka.Service.ServiceImpl
                 IsAdmin = false,
                 AutoDietaryGoals = true,
                 IncludeCaloriesBurned = false,
+                IsBanned = false,
                 DateOfJoining = DateTime.Now
             });
         }
@@ -50,6 +51,11 @@ namespace FitAppka.Service.ServiceImpl
         public string GetClientLoginFromModel(Client model)
         {
             return GetClientFromModel(model).Login;
+        }
+
+        public bool CheckIfClientFromModelIsBanned(Client model)
+        {
+            return GetClientFromModel(model).IsBanned == true;
         }
 
         public bool CheckIfPassCorrect(Client model)
@@ -97,5 +103,7 @@ namespace FitAppka.Service.ServiceImpl
         {
             return _clientRepository.IsLoggedInClientAdmin();
         }
+
+        
     }
 }

@@ -57,7 +57,7 @@ namespace FitAppka.Controllers
         public async Task<IActionResult> Cardio(string search, int dayID) {
             ViewData["dayID"] = dayID;
             ViewData["wasSearched"] = search != null;
-            return View(await _context.CardioTrainingType.Where(c => c.TrainingName.Contains(search)).ToListAsync());
+            return View(await _cardioServices.GetCardioTrainingTypes(search));
         }
 
         [HttpPost]
@@ -86,7 +86,7 @@ namespace FitAppka.Controllers
         public async Task<IActionResult> StrengthTraining(string search, int dayID) {
             ViewData["dayID"] = dayID;
             ViewData["wasSearched"] = search != null;
-            return View(await _context.StrengthTrainingType.Where(s => s.TrainingName.Contains(search)).ToListAsync());
+            return View(await _strengthTrainingService.GetStrengthTrainingTypes(search));
         }
 
         [HttpPost]

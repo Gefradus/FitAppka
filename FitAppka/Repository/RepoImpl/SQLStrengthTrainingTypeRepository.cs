@@ -40,9 +40,9 @@ namespace FitAppka.Repository.RepIfaceImpl
             return _context.StrengthTrainingType.ToList();
         }
 
-        public async Task<List<StrengthTrainingType>> GetAllStrengthTypesAsync()
+        public async Task<List<StrengthTrainingType>> GetAllStrengthTypesAsync(string search)
         {
-            return await _context.StrengthTrainingType.ToListAsync();
+            return await _context.StrengthTrainingType.Where(c => c.TrainingName.Contains(search) && c.IsDeleted == false).ToListAsync();
         }
 
         public StrengthTrainingType GetStrengthTrainingType(int id)

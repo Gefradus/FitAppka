@@ -12,7 +12,7 @@ namespace FitAppka.Strategy.StrategyImpl.DayOfWeekDietStrategyImpl
 
         public Diet GetActiveDiet()
         {
-            return DietRepository.GetAllDiets().FirstOrDefault(d => d.Active && d.Thursday);
+            return DietRepository.GetAllDiets().FirstOrDefault(d => d.Active && d.Thursday && d.IsDeleted == false);
         }
     }
 }

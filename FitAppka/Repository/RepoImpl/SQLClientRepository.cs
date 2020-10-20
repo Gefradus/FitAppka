@@ -32,17 +32,22 @@ namespace FitAppka.Repository.RepIfaceImpl
             return client;
         }
 
-        public Client Delete(int id)
+        public Client Ban(int id)
         {
             Client client = GetClientById(id);
 
             if (client != null)
             {
-                _context.Client.Remove(client);
+                client.IsBanned = true;
                 _context.SaveChanges();
             }
 
             return client;
+        }
+
+        public bool IsClientBanned(int clientId)
+        {
+            return GetClientById(clientId).IsBanned == true;
         }
 
         public IEnumerable<Client> GetAllClients()

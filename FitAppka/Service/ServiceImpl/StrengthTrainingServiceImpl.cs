@@ -1,5 +1,7 @@
 ﻿using FitAppka.Models;
 using FitAppka.Repository;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FitAppka.Service.ServiceImpl
 {
@@ -42,7 +44,8 @@ namespace FitAppka.Service.ServiceImpl
                 {
                     VisibleToAll = _clientRepository.IsLoggedInClientAdmin(),
                     ClientId = _clientRepository.GetLoggedInClientId(),
-                    TrainingName = name
+                    TrainingName = name,
+                    IsDeleted = false
                 });
 
                 _strengthTrainingRepository.Add(new StrengthTraining()
@@ -80,5 +83,9 @@ namespace FitAppka.Service.ServiceImpl
             return false;
         }
 
+        public Task<List<StrengthTrainingType>> GetStrengthTrainingTypes(string search)
+        {
+            return _strengthTrainingTypeRepository.GetAllStrengthTypesAsync(search);
+        }
     }
 }

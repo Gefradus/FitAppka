@@ -48,7 +48,13 @@ namespace FitAppka.Controllers
                 if (ModelState.IsValid)
                 {
                     if (_clientManageService.CheckIfPassCorrect(model)) {
-                        return await SignInAndStart(_clientManageService.GetClientLoginFromModel(model));
+                        if (_clientManageService.CheckIfClientFromModelIsBanned(model)) {
+                            ModelState.AddModelError(string.Empty, "Konto użytkownika za decyzją administracji zostało zablokowane");
+                        } 
+                        else
+                        {
+                            return await SignInAndStart(_clientManageService.GetClientLoginFromModel(model));
+                        }
                     }
                     else { ModelState.AddModelError(string.Empty, "Nieprawidłowy login i/lub hasło"); }
                 }

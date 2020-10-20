@@ -187,6 +187,7 @@ namespace FitAppka.Service.ServiceImpl
                 int clientId = _clientRepository.GetLoggedInClientId();
                 Diet diet = _mapper.Map<DietDTO, Diet>(dietDTO);
                 diet.ClientId = clientId;
+                diet.IsDeleted = false;
                 SetDietsToNotActiveIfDaysConflict(diet);
                 DietRepository.Add(diet);
 
@@ -275,7 +276,7 @@ namespace FitAppka.Service.ServiceImpl
         public List<ActiveDietDTO> GetActiveDiets()
         {
             var list = new List<DietDTO>();
-            foreach(var item in DietRepository.GetAllDiets()){
+            foreach(var item in DietRepository.GetAllDiets().Where(d => d.IsDeleted == false)){
                 list.Add(_mapper.Map<Diet, DietDTO>(item));
             }
 
@@ -316,7 +317,7 @@ namespace FitAppka.Service.ServiceImpl
         public bool DeleteDiet(int id)
         {
             try {
-                if (_clientManageService.HasUserAccessToDiet(id) && DeleteProductsAssignedToDiet(id)) {
+                if (_clientManageService.HasUserAccessToDiet(id)/* && DeleteProductsAssignedToDiet(id)*/) {
                     DietRepository.Delete(id);
                     return true;
                 } 
@@ -327,7 +328,7 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-        private bool DeleteProductsAssignedToDiet(int id)
+        /*private bool DeleteProductsAssignedToDiet(int id)
         {
             try {
                 foreach (var item in _dietProductRepository.GetAllDietProducts()) {
@@ -341,7 +342,7 @@ namespace FitAppka.Service.ServiceImpl
                 return false;
             }
 
-        }
+        }*/
 
         
     }

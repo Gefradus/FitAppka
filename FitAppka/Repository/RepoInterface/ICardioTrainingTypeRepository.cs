@@ -8,7 +8,7 @@ namespace FitAppka.Repository
     {
         CardioTrainingType GetCardioType(int id);
         IEnumerable<CardioTrainingType> GetAllCardioTypes();
-        Task<List<CardioTrainingType>> GetAllCardioTypesAsync();
+        Task<List<CardioTrainingType>> GetAllCardioTypesAsync(string search);
         CardioTrainingType Add(CardioTrainingType cardioType);
         CardioTrainingType Update(CardioTrainingType cardioType);
         CardioTrainingType Delete(int id);

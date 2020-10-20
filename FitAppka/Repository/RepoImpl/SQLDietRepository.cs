@@ -31,7 +31,7 @@ namespace FitAppka.Repository.RepoImpl
 
             if (diet != null)
             {
-                _context.Diet.Remove(diet);
+                diet.IsDeleted = true;
                 _context.SaveChanges();
             }
 
@@ -55,7 +55,7 @@ namespace FitAppka.Repository.RepoImpl
 
         public List<Diet> GetLoggedInClientDiets()
         {
-            return _context.Diet.Where(d => d.ClientId == _clientRepository.GetLoggedInClientId()).ToList();
+            return _context.Diet.Where(d => d.ClientId == _clientRepository.GetLoggedInClientId() && d.IsDeleted == false).ToList();
         }
 
 

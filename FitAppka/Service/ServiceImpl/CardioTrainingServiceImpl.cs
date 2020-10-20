@@ -1,6 +1,8 @@
 ﻿using FitAppka.Models;
 using FitAppka.Repository;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FitAppka.Service.ServiceImpl
 {
@@ -69,7 +71,8 @@ namespace FitAppka.Service.ServiceImpl
                     TrainingName = name,
                     KcalPerMin = kcalPerMin,
                     ClientId = _clientManageService.GetLoggedInClientId(),
-                    VisibleToAll = _clientManageService.IsLoggedInClientAdmin()
+                    VisibleToAll = _clientManageService.IsLoggedInClientAdmin(),
+                    IsDeleted = false
                 });
             }
         }
@@ -106,6 +109,11 @@ namespace FitAppka.Service.ServiceImpl
             }
 
             return time;
-        }  
+        }
+
+        public Task<List<CardioTrainingType>> GetCardioTrainingTypes(string search)
+        {
+            return _cardioTypeRepository.GetAllCardioTypesAsync(search);
+        }
     }
 }

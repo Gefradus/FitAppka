@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -66,6 +65,7 @@ namespace FitAppka.Models
         public double? Sodium { get; set; }
         public double? Calcium { get; set; }
         public double? Iron { get; set; }
+        public bool? IsDeleted { get; set; }
 
         [ForeignKey(nameof(ClientId))]
         [InverseProperty("Product")]

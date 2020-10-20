@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,6 +24,7 @@ namespace FitAppka.Models
         public int KcalPerMin { get; set; }
         [Column("Visible_to_all")]
         public bool VisibleToAll { get; set; }
+        public bool? IsDeleted { get; set; }
 
         [ForeignKey(nameof(ClientId))]
         [InverseProperty("CardioTrainingType")]

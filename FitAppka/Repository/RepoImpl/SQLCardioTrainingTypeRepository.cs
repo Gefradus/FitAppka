@@ -28,7 +28,7 @@ namespace FitAppka.Repository.RepIfaceImpl
 
             if (cardioType != null)
             {
-                _context.CardioTrainingType.Remove(cardioType);
+                GetCardioType(id).IsDeleted = true;
                 _context.SaveChanges();
             }
 
@@ -40,9 +40,9 @@ namespace FitAppka.Repository.RepIfaceImpl
             return _context.CardioTrainingType.ToList();
         }
 
-        public async Task<List<CardioTrainingType>> GetAllCardioTypesAsync()
+        public async Task<List<CardioTrainingType>> GetAllCardioTypesAsync(string search)
         {
-            return await _context.CardioTrainingType.ToListAsync();
+            return await _context.CardioTrainingType.Where(s => s.TrainingName.Contains(search) && s.IsDeleted == false).ToListAsync();
         }
 
         public CardioTrainingType GetCardioType(int id)

@@ -63,6 +63,7 @@ namespace FitAppka.Models
         public bool? IncludeCaloriesBurned { get; set; }
         [Column("Auto_dietary_goals")]
         public bool? AutoDietaryGoals { get; set; }
+        public bool? IsBanned { get; set; }
 
         [ForeignKey(nameof(GoalsId))]
         [InverseProperty("Client")]
