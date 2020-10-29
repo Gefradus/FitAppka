@@ -90,7 +90,12 @@ function blockWeightInput() {
     let weight = document.getElementById("weight");
     setNotAllowedCursor(weight);
     setDisabled(weight);
-    document.getElementById("weightTip").hidden = false;
+}
+
+function blockLoginInput() {
+    let login = document.getElementById("login");
+    setNotAllowedCursor(login);
+    setDisabled(login);
 }
 
 function setTitle(element1, element2, title) {

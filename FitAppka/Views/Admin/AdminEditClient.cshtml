@@ -17,6 +17,7 @@
             setPace('@(Model.SettingsDTO.PaceOfChanges == null ? "0.4" : Model.SettingsDTO.PaceOfChanges.ToString().Replace(',', '.'))');
             setDatepickerValue('@Model.SettingsDTO.DateOfBirth.GetValueOrDefault().ToString("yyyy-MM-dd")');
             blockWeightInput();
+            blockLoginInput();
             blockPace();
         }
     </script>
@@ -44,15 +45,15 @@
                     </div>
                     <div class="form-group" style="margin-right: 25px;">
                         <label asp-for="RegisterDTO.Login"></label>
-                        <input asp-for="RegisterDTO.Login" class="form-control" />
+                        <input id="login" asp-for="RegisterDTO.Login" class="form-control" />
                         <span asp-validation-for="RegisterDTO.Login" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <div>
                             <label asp-for="SettingsDTO.Sex" class="label"></label>
                         </div>
-                        <label><input type="radio" id="women" name="sex" checked="@(Model.SettingsDTO.Sex == false)" value=false style="margin-right: 10px" />Kobieta</label>
-                        <label><input type="radio" id="men" name="sex" checked="@Model.SettingsDTO.Sex" value=true style="margin-left: 15px; margin-right: 10px" />Mężczyzna</label>
+                        <label><input type="radio" id="women" name="SettingsDTO.Sex" checked="@(Model.SettingsDTO.Sex == false)" value=false style="margin-right: 10px" />Kobieta</label>
+                        <label><input type="radio" id="men" name="SettingsDTO.Sex" checked="@Model.SettingsDTO.Sex" value=true style="margin-left: 15px; margin-right: 10px" />Mężczyzna</label>
                     </div>
                     <div style="padding-bottom: 5px">
                         <div style="margin-bottom: 15px">
@@ -85,27 +86,27 @@
                         </div>
                     </div>
                     <label asp-for="SettingsDTO.WeightChangeGoal" style="font-weight: 600; padding-top: 15px"></label>
-                    <div><label><input id="loseWeight" type="radio" name="WeightChangeGoal" value="1" checked='@(Model.SettingsDTO.WeightChangeGoal == 1)' onclick="blockPace()" style="margin-right: 10px" />Chcę schudnąć</label></div>
-                    <div><label><input id="maintenance" type="radio" name="WeightChangeGoal" value="2" checked='@(Model.SettingsDTO.WeightChangeGoal == 2)' onclick="blockPace()" style="margin-right: 10px" />Chcę utrzymać wagę</label></div>
-                    <div style="border-bottom: 1px solid darkgray; padding-bottom: 15px;"><label><input id="gainWeight" type="radio" name="WeightChangeGoal" checked='@(Model.SettingsDTO.WeightChangeGoal == 3)' value="3" onclick="blockPace()" style="margin-right: 10px" />Chcę przytyć</label></div>
+                    <div><label><input id="loseWeight" type="radio" name="SettingsDTO.WeightChangeGoal" value="1" checked='@(Model.SettingsDTO.WeightChangeGoal == 1)' onclick="blockPace()" style="margin-right: 10px" />Chcę schudnąć</label></div>
+                    <div><label><input id="maintenance" type="radio" name="SettingsDTO.WeightChangeGoal" value="2" checked='@(Model.SettingsDTO.WeightChangeGoal == 2)' onclick="blockPace()" style="margin-right: 10px" />Chcę utrzymać wagę</label></div>
+                    <div style="border-bottom: 1px solid darkgray; padding-bottom: 15px;"><label><input id="gainWeight" type="radio" name="SettingsDTO.WeightChangeGoal" checked='@(Model.SettingsDTO.WeightChangeGoal == 3)' value="3" onclick="blockPace()" style="margin-right: 10px" />Chcę przytyć</label></div>
 
                     <label style="font-weight: 600; padding-top: 15px">Aktywność w ciągu doby</label>
-                    <div style="padding-top: 5px"><label><input type="radio" name="ActivityLevel" checked="@(Model.SettingsDTO.ActivityLevel == 1)" value=1 style="margin-right: 10px" />Brak aktywności, praca siedząca</label></div>
-                    <div><label><input type="radio" name="ActivityLevel" checked="@(Model.SettingsDTO.ActivityLevel == 2)" value=2 style="margin-right: 10px" />Niska (praca siedząca, 1-2 treningi/tydz.)</label></div>
-                    <div><label><input type="radio" name="ActivityLevel" checked="@(Model.SettingsDTO.ActivityLevel == 3)" value=3 style="margin-right: 10px" />Średnia (praca siedząca, 3-4 treningi/tydz.)</label></div>
-                    <div><label><input type="radio" name="ActivityLevel" checked="@(Model.SettingsDTO.ActivityLevel == 4)" value=4 style="margin-right: 10px" />Wysoka (praca fizyczna, 3-4 treningi/tydz.)</label></div>
-                    <div style="padding-bottom: 1rem; border-bottom: 1px solid darkgray;"><label><input type="radio" name="ActivityLevel" checked="@(Model.SettingsDTO.ActivityLevel == 5)" value=5 style="margin-right: 10px" />B. wysoka (zawodowi sportowcy, osoby codziennie trenujące)</label></div>
+                    <div style="padding-top: 5px"><label><input type="radio" name="SettingsDTO.ActivityLevel" checked="@(Model.SettingsDTO.ActivityLevel == 1)" value=1 style="margin-right: 10px" />Brak aktywności, praca siedząca</label></div>
+                    <div><label><input type="radio" name="SettingsDTO.ActivityLevel" checked="@(Model.SettingsDTO.ActivityLevel == 2)" value=2 style="margin-right: 10px" />Niska (praca siedząca, 1-2 treningi/tydz.)</label></div>
+                    <div><label><input type="radio" name="SettingsDTO.ActivityLevel" checked="@(Model.SettingsDTO.ActivityLevel == 3)" value=3 style="margin-right: 10px" />Średnia (praca siedząca, 3-4 treningi/tydz.)</label></div>
+                    <div><label><input type="radio" name="SettingsDTO.ActivityLevel" checked="@(Model.SettingsDTO.ActivityLevel == 4)" value=4 style="margin-right: 10px" />Wysoka (praca fizyczna, 3-4 treningi/tydz.)</label></div>
+                    <div style="padding-bottom: 1rem; border-bottom: 1px solid darkgray;"><label><input type="radio" name="SettingsDTO.ActivityLevel" checked="@(Model.SettingsDTO.ActivityLevel == 5)" value=5 style="margin-right: 10px" />B. wysoka (zawodowi sportowcy, osoby codziennie trenujące)</label></div>
 
                     <label style="font-weight: 600; padding-top: 15px">Posiłki dnia</label>
                     <div>
-                        <div><label><input id="breakfast" type="checkbox" name="Breakfast" checked="@Model.SettingsDTO.Breakfast" value="true" style="margin-right: 10px" />Śniadanie</label></div>
-                        <div><label><input id="lunch" type="checkbox" name="Lunch" checked="@Model.SettingsDTO.Lunch" value="true" style="margin-right: 10px" />II śniadanie</label></div>
-                        <div><label><input id="dinner" type="checkbox" name="Dinner" checked="@Model.SettingsDTO.Dinner" value="true" style="margin-right: 10px" />Obiad</label></div>
+                        <div><label><input id="breakfast" type="checkbox" name="SettingsDTO.Breakfast" checked="@Model.SettingsDTO.Breakfast" value="true" style="margin-right: 10px" />Śniadanie</label></div>
+                        <div><label><input id="lunch" type="checkbox" name="SettingsDTO.Lunch" checked="@Model.SettingsDTO.Lunch" value="true" style="margin-right: 10px" />II śniadanie</label></div>
+                        <div><label><input id="dinner" type="checkbox" name="SettingsDTO.Dinner" checked="@Model.SettingsDTO.Dinner" value="true" style="margin-right: 10px" />Obiad</label></div>
                     </div>
                     <div style="border-bottom: 1px solid darkgray">
-                        <div><label><input id="dessert" type="checkbox" name="Dessert" checked="@Model.SettingsDTO.Dessert" value="true" style="margin-right: 10px" />Deser</label></div>
-                        <div><label><input id="snack" type="checkbox" name="Snack" checked="@Model.SettingsDTO.Snack" value="true" style="margin-right: 10px" />Przekąska</label></div>
-                        <div style="padding-bottom: 15px"><label><input id="supper" type="checkbox" name="Supper" checked="@Model.SettingsDTO.Supper" value="true" style="margin-right: 10px" />Kolacja</label></div>
+                        <div><label><input id="dessert" type="checkbox" name="SettingsDTO.Dessert" checked="@Model.SettingsDTO.Dessert" value="true" style="margin-right: 10px" />Deser</label></div>
+                        <div><label><input id="snack" type="checkbox" name="SettingsDTO.Snack" checked="@Model.SettingsDTO.Snack" value="true" style="margin-right: 10px" />Przekąska</label></div>
+                        <div style="padding-bottom: 15px"><label><input id="supper" type="checkbox" name="SettingsDTO.Supper" checked="@Model.SettingsDTO.Supper" value="true" style="margin-right: 10px" />Kolacja</label></div>
                     </div>
 
                     <label asp-for="SettingsDTO.PaceOfChanges" class="centering" style="padding-top: 15px"></label>
