@@ -55,11 +55,6 @@ namespace FitAppka.Repository.RepIfaceImpl
             return _context.Client.ToList();
         }
 
-        public Task<List<Client>> GetAllClientsAsync()
-        {
-            return _context.Client.ToListAsync();
-        }
-
         public Client GetClientByEmail(string email)
         {
             return _context.Client.FirstOrDefault(k => k.Email.ToLower().Equals(email.ToLower()));
@@ -114,5 +109,9 @@ namespace FitAppka.Repository.RepIfaceImpl
             _context.SaveChanges();
         }
 
+        public List<Client> GetAllClientsAndSortByAdminAndBanned()
+        {
+            return _context.Client.OrderBy(c => !c.IsAdmin).ThenBy(c => !c.IsBanned).ThenBy(c => c.DateOfJoining).ToList();
+        }
     }
 }

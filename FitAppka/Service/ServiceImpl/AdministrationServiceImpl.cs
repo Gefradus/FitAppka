@@ -2,20 +2,29 @@
 using FitAppka.Repository;
 using FitAppka.Models;
 using AutoMapper;
+using FitAppka.Models.DTO;
+using System.Linq;
 
 namespace FitAppka.Service.ServiceImpl
 {
     public class AdministrationServiceImpl : IAdministrationService
     {
         private readonly IClientRepository _clientRepository;
+        private readonly ICardioTrainingTypeRepository _cardioRepository;
+        private readonly IStrengthTrainingTypeRepository _strengthTrainingRepository;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
         private readonly ISettingsService _settingsService;
         private readonly IMapper _mapper;
 
+        
+
         public AdministrationServiceImpl(IClientRepository clientRepository, IMapper mapper,
-            IWeightMeasurementRepository weightMeasurementRepository, ISettingsService settingsService)
+            ICardioTrainingTypeRepository cardioRepository, IWeightMeasurementRepository weightMeasurementRepository, 
+            ISettingsService settingsService, IStrengthTrainingTypeRepository strengthTrainingRepository)
         {
             _settingsService = settingsService;
+            _strengthTrainingRepository = strengthTrainingRepository;
+            _cardioRepository = cardioRepository;
             _mapper = mapper;
             _clientRepository = clientRepository;
             _weightMeasurementRepository = weightMeasurementRepository;
@@ -31,8 +40,11 @@ namespace FitAppka.Service.ServiceImpl
         }
 
         public void EditClient(ClientAdministrationDTO dto, int id)
-        {      
-            _settingsService.ChangeSettings(dto.SettingsDTO, 0, id);
+        {
+            try {
+                _settingsService.ChangeSettings(dto.SettingsDTO, 0, id);
+            }
+            catch {}
             EditRegisterDTO(dto.RegisterDTO, id);
         }
 
@@ -65,6 +77,15 @@ namespace FitAppka.Service.ServiceImpl
                 return true;
             }
             return false;
+        }
+
+        public TrainingsDTO GetTrainingsDTO()
+        {
+            return new TrainingsDTO()
+            {
+                CardioTrainings = _cardioRepository.GetAllCardioTypes().ToList(),
+                StrengthTrainings = _strengthTrainingRepository.GetAllStrengthTrainingTypes().ToList()
+            };
         }
     }
 }

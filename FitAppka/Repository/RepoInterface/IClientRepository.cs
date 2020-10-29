@@ -10,7 +10,7 @@ namespace FitAppka.Repository
         Client GetClientByEmail(string email);
         Client GetClientByLogin(string login);
         IEnumerable<Client> GetAllClients();
-        Task<List<Client>> GetAllClientsAsync();
+        List<Client> GetAllClientsAndSortByAdminAndBanned();
         Client Add(Client client);
         Task<Client> AddAsync(Client client);
         Client Update(Client client);

@@ -27,6 +27,11 @@
         <div class="row cent">
             <div class="col-9 col-sm-8 col-lg-7 col-xl-6 cent" style="background-color: white; margin-top: -5px; height: unset">
                 <form id="form" method="post" onsubmit="return checkForm()" style="font-size: 18px">
+                    <div class="row no-gutters pt-3">
+                        <a asp-action="AdminClient" style="width: inherit;">
+                            <img id="btnBackImg" src="~/img/back.png" />
+                        </a>
+                    </div>
                     <label style="font-weight: 600; margin-top: 15px; padding-bottom: 10px">Podstawowe dane</label>
                     <div class="form-group" style="margin-right: 25px;">
                         <label asp-for="RegisterDTO.FirstName"></label>

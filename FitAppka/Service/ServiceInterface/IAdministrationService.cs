@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models;
+using FitAppka.Models.DTO;
 
 namespace FitAppka.Service.ServiceInterface
 {
@@ -7,6 +8,7 @@ namespace FitAppka.Service.ServiceInterface
         public bool UnbanClient(int id);
         public bool BanClient(int id);
         public void EditClient(ClientAdministrationDTO dto, int id);
-        public ClientAdministrationDTO GetClientAdministrationDTO(int id); 
+        public ClientAdministrationDTO GetClientAdministrationDTO(int id);
+        public TrainingsDTO GetTrainingsDTO();
     }
 }

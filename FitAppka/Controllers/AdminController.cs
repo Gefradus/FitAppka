@@ -50,16 +50,17 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        public IActionResult AdminSettings()
+        public IActionResult AdminTraining()
         {
             if (_clientRepository.IsLoggedInClientAdmin()) {
-                return View();
+                return View(_administrationService.GetTrainingsDTO());
             }
             else {
                 return RedirectToAction("Logout", "Login");
             }
         }
 
+      
 
         [HttpGet]
         public async Task<IActionResult> AdminProduct(string search)
@@ -124,10 +125,10 @@ namespace FitAppka.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> AdminClient()
+        public IActionResult AdminClient()
         {
             if (_clientRepository.IsLoggedInClientAdmin()) {
-                return View(await _clientRepository.GetAllClientsAsync());
+                return View(_clientRepository.GetAllClientsAndSortByAdminAndBanned());
             }
             else {
                 return RedirectToAction("Logout", "Login");
