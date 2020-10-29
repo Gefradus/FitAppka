@@ -38,7 +38,7 @@ function setWeightAndGrowth(weight, growth) {
 }
 
 function setActivityLevel(activity) {
-    var activityList = document.getElementsByName("LevelOfActivity");
+    var activityList = document.getElementsByName("ActivityLevel");
     for (let i = 0; i < activityList.length; i++) {
         if (activityList[i].value == activity) {
             activityList[i].checked = true;
@@ -56,7 +56,7 @@ function setSex(sex) {
 }
 
 function setPace(pace) {
-    document.getElementById("pace").value = parseFloat(pace).toFixed(1)
+    document.getElementById("pace").value = parseFloat(pace).toFixed(1);
 }
 
 function setWeightChangeGoal(changeGoal) {

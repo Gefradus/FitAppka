@@ -125,10 +125,10 @@ namespace FitAppka.Service.ServiceImpl
         }
 
 
-        public List<int> GetListOfDaysIDFromToday()
+        public List<int> GetListOfDaysIDFromToday(int clientId)
         {
             List<int> listOfIDDaysFromToday = new List<int>();
-            foreach (var item in _dayRepository.GetLoggedInClientDays())
+            foreach (var item in _dayRepository.GetClientDays(clientId))
             {
                 if (item.Date >= DateTime.Now.Date)
                 {
@@ -139,15 +139,20 @@ namespace FitAppka.Service.ServiceImpl
             return listOfIDDaysFromToday;
         }
 
-        public void UpdateGoalsInDaysFromToday()
+        public void UpdateGoalsInLoggedInClientDaysFromToday()
         {
-            foreach (var dayID in GetListOfDaysIDFromToday())
+            UpdateGoalsInDaysFromToday(_clientRepository.GetLoggedInClientId());
+        }
+
+        public void UpdateGoalsInDaysFromToday(int clientId)
+        {
+            foreach (var dayID in GetListOfDaysIDFromToday(clientId))
             {
-                foreach (var day in _dayRepository.GetLoggedInClientDays())
+                foreach (var day in _dayRepository.GetClientDays(clientId))
                 {
                     if (day.DayId == dayID)
                     {
-                        _goalsRepository.Update(MapGoalsFromClientToDay(day, _clientRepository.GetLoggedInClientId()));
+                        _goalsRepository.Update(MapGoalsFromClientToDay(day, clientId));
                     }
                 }
             }
@@ -209,7 +214,7 @@ namespace FitAppka.Service.ServiceImpl
         public void UpdateGoals(GoalsDTO m)
         {
             SetClientPreferences(m, SetClientGoalsIfAutoDietaryGoals(m.AutoDietaryGoals));
-            UpdateGoalsInDaysFromToday();
+            UpdateGoalsInLoggedInClientDaysFromToday();
         }
 
         private void SetClientPreferences(GoalsDTO m, Goals clientGoals)
@@ -294,5 +299,6 @@ namespace FitAppka.Service.ServiceImpl
             return _goalsRepository.GetDayGoals(dayId);
         }
 
+        
     }
 }

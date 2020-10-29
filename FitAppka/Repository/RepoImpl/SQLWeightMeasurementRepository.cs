@@ -61,7 +61,12 @@ namespace FitAppka.Repository.RepIfaceImpl
 
         public double GetLastLoggedInClientWeight()
         {
-            var measurementList = GetLoggedInClientWeightMeasurements();
+            return GetLastClientWeight(_clientRepository.GetLoggedInClientId());
+        }
+
+        public double GetLastClientWeight(int clientId)
+        {
+            var measurementList = GetClientWeightMeasurements(clientId);
 
             double lastWeightMeasurement = 0;
             foreach (var item in measurementList)
@@ -74,6 +79,11 @@ namespace FitAppka.Repository.RepIfaceImpl
             }
 
             return lastWeightMeasurement;
+        }
+
+        public List<WeightMeasurement> GetClientWeightMeasurements(int clientId)
+        {
+            return _context.WeightMeasurement.Where(w => w.ClientId == clientId).ToList();
         }
 
         private DateTime? GetLastMeasurementDate(IEnumerable<WeightMeasurement> measurementList)
@@ -90,5 +100,7 @@ namespace FitAppka.Repository.RepIfaceImpl
 
             return dateOfMeasurement;
         }
+
+        
     }
 }

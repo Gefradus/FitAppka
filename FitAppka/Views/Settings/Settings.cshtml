@@ -60,9 +60,9 @@
                     </div>
                     <div style="padding-bottom: 5px">
                         <div style="margin-bottom: 15px">
-                            <label asp-for="Date_of_birth" class="label"></label>
-                            <input id="datepicker" class="datepicker" asp-for="Date_of_birth" type="text" style="margin-top: -10px; width: calc(100% - 25px); margin-left: -1px; padding-left: 11px" readonly />
-                            <span asp-validation-for="Date_of_birth" class="text-danger" style="font-size: 16px"></span>
+                            <label asp-for="DateOfBirth" class="label"></label>
+                            <input id="datepicker" class="datepicker" asp-for="DateOfBirth" type="text" style="margin-top: -10px; width: calc(100% - 25px); margin-left: -1px; padding-left: 11px" readonly />
+                            <span asp-validation-for="DateOfBirth" class="text-danger" style="font-size: 16px"></span>
                         </div>
                         <div>
                             <label id="invalidDate" class="text-danger" hidden style="margin-top: -15px; margin-bottom: 15px; display: block">Podaj datę urodzenia</label>
@@ -91,17 +91,17 @@
                             <label id="invalidGrowth" class="text-danger" hidden style="position: absolute; left: calc(50% + 5px)">Podaj wzrost [cm]</label>
                         </div>
                     </div>
-                    <label asp-for="WeightChange_Goal" style="font-weight: 600; padding-top: 15px"></label>
-                    <div><label><input id="loseWeight" type="radio" name="WeightChange_Goal" value="1" checked onclick="blockPace()" style="margin-right: 10px" />Chcę schudnąć</label></div>
-                    <div><label><input id="maintenance" type="radio" name="WeightChange_Goal" value="2" onclick="blockPace()" style="margin-right: 10px" />Chcę utrzymać wagę</label></div>
-                    <div style="border-bottom: 1px solid darkgray; padding-bottom: 15px;"><label><input id="gainWeight" type="radio" name="WeightChange_Goal" value="3" onclick="blockPace()" style="margin-right: 10px" />Chcę przytyć</label></div>
+                    <label asp-for="WeightChangeGoal" style="font-weight: 600; padding-top: 15px"></label>
+                    <div><label><input id="loseWeight" type="radio" name="WeightChangeGoal" value="1" checked onclick="blockPace()" style="margin-right: 10px" />Chcę schudnąć</label></div>
+                    <div><label><input id="maintenance" type="radio" name="WeightChangeGoal" value="2" onclick="blockPace()" style="margin-right: 10px" />Chcę utrzymać wagę</label></div>
+                    <div style="border-bottom: 1px solid darkgray; padding-bottom: 15px;"><label><input id="gainWeight" type="radio" name="WeightChangeGoal" value="3" onclick="blockPace()" style="margin-right: 10px" />Chcę przytyć</label></div>
 
                     <label style="font-weight: 600; padding-top: 15px">Aktywność w ciągu doby</label>
-                    <div style="padding-top: 5px"><label><input type="radio" name="LevelOfActivity" value=1 style="margin-right: 10px" />Brak aktywności, praca siedząca</label></div>
-                    <div><label><input type="radio" name="LevelOfActivity" value=2 style="margin-right: 10px" />Niska (praca siedząca, 1-2 treningi/tydz.)</label></div>
-                    <div><label><input type="radio" name="LevelOfActivity" value=3 checked style="margin-right: 10px" />Średnia (praca siedząca, 3-4 treningi/tydz.)</label></div>
-                    <div><label><input type="radio" name="LevelOfActivity" value=4 style="margin-right: 10px" />Wysoka (praca fizyczna, 3-4 treningi/tydz.)</label></div>
-                    <div style="padding-bottom: 1rem; border-bottom: 1px solid darkgray;"><label><input type="radio" name="LevelOfActivity" value=5 style="margin-right: 10px" />B. wysoka (zawodowi sportowcy, osoby codziennie trenujące)</label></div>
+                    <div style="padding-top: 5px"><label><input type="radio" name="ActivityLevel" value=1 style="margin-right: 10px" />Brak aktywności, praca siedząca</label></div>
+                    <div><label><input type="radio" name="ActivityLevel" value=2 style="margin-right: 10px" />Niska (praca siedząca, 1-2 treningi/tydz.)</label></div>
+                    <div><label><input type="radio" name="ActivityLevel" value=3 checked style="margin-right: 10px" />Średnia (praca siedząca, 3-4 treningi/tydz.)</label></div>
+                    <div><label><input type="radio" name="ActivityLevel" value=4 style="margin-right: 10px" />Wysoka (praca fizyczna, 3-4 treningi/tydz.)</label></div>
+                    <div style="padding-bottom: 1rem; border-bottom: 1px solid darkgray;"><label><input type="radio" name="ActivityLevel" value=5 style="margin-right: 10px" />B. wysoka (zawodowi sportowcy, osoby codziennie trenujące)</label></div>
 
                     <label style="font-weight: 600; padding-top: 15px">Posiłki dnia</label>
                     <div>
@@ -115,13 +115,13 @@
                         <div style="padding-bottom: 15px"><label><input id="supper" type="checkbox" checked name="Supper" value="true" style="margin-right: 10px" />Kolacja</label></div>
                     </div>
 
-                    <label asp-for="PaceOfChange" class="centering" style="padding-top: 15px"></label>
+                    <label asp-for="PaceOfChanges" class="centering" style="padding-top: 15px"></label>
                     <div class="form-group centering">
                         <div class="tooltip2">
                             <button type="button" class="button" onclick="decrementPace()" id="decBtn"><img class="img-fluid" src="~/img/minus.png"></button>
                             <span id="decTip" class="tooltiptext" hidden>Zmiany zablokowane gdyż celem jest utrzymanie wagi</span>
                         </div>
-                        <input id="pace" asp-for="PaceOfChange" type="number" step="0.1" value="0.4" /><span style="margin-left: -33px; float:right; margin-top: 4px; font-size:16px; z-index: 99">kg</span>
+                        <input id="pace" asp-for="PaceOfChanges" type="number" step="0.1" value="0.4" /><span style="margin-left: -33px; float:right; margin-top: 4px; font-size:16px; z-index: 99">kg</span>
                         <div class="tooltip2">
                             <button type="button" class="button" onclick="incrementPace()" id="incBtn"><img class="img-fluid" src="~/img/add.png"></button>
                             <span id="incTip" class="tooltiptext" hidden>Zmiany zablokowane gdyż celem jest utrzymanie wagi</span>

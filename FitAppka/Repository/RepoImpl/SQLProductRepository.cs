@@ -28,8 +28,7 @@ namespace FitAppka.Repository.RepIfaceImpl
         {
             Product product = GetProduct(id);
 
-            if (product != null)
-            {
+            if (product != null) {
                 product.IsDeleted = true;
                 _context.SaveChanges();
             }

@@ -28,7 +28,11 @@ namespace FitAppka
                 .ForMember(d => d.WaterDrunk, opt => opt.MapFrom(water => 0))
                 .ForMember(d => d.GoalsId, opt => opt.Ignore())
                 .ForMember(d => d.GoalsNavigation, opt => opt.Ignore())
-                .ForMember(d => d.Goals, opt => opt.Ignore()); 
+                .ForMember(d => d.Goals, opt => opt.Ignore());
+
+            CreateMap<Client, SettingsDTO>();
+
+            CreateMap<Client, RegisterDTO>();
 
             CreateMap<Goals, GoalsDTO>()
                 .ForMember(g => g.AutoDietaryGoals, opt => opt.Ignore())

@@ -4,10 +4,85 @@
 <head>
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
+    <link href="~/css/MyDiets.css" rel="stylesheet" />
+    <link href="~/css/AdminClient.css" rel="stylesheet" />
+    <script src="~/js/AllViews.js"></script>
+    <script src="~/js/AdminClient.js"></script>
 </head>
-<body>
-    <div class="container">
+<body onload="onload()">
+    <div class="px-md-3" style="max-width: 1200px; width: 100%; align-content: center">
+        <div class="modal fade" tabindex="-1" id="deleteModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
+            <div class="modal-dialog cent">
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 20px">
+                        <button type="button" class="close" data-dismiss="modal" style="margin-top: -30px">×</button>
+                    </div>
 
+                    <div class="modal-body">
+                        <div style="margin-top: -10px;">
+                            <div id="message"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="cent">
+                            <button type="button" data-dismiss="modal" class="cancelBtn">Nie</button>
+                            <button type="button" id="banOrUnban" class="deleteBtn">Tak</button>
+                            <input id="userId" type="hidden">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row no-gutters pb-2 pl-3">
+            <a asp-action="AdminHome" style="width: inherit;">
+                <img id="btnBackImg" src="~/img/back.png" />
+            </a>
+        </div>
+
+        <div>
+            <div class="row no-gutters" id="columnsHeader">
+                <div class="row no-gutters col-10">
+                    <div class="col-2 acent pl-3">E-mail</div>
+                    <div class="col-2 acent cent">Login</div>
+                    <div class="col-2 acent cent">Imię</div>
+                    <div class="col-2 acent cent">Nazwisko</div>
+                    <div class="col-2 acent cent">Data dołączenia</div>
+                    <div class="col-1 acent cent">Admin</div>
+                    <div class="col-1 acent cent">Ban</div>
+                </div>
+            </div>
+
+            @foreach (var item in Model)
+            {
+                <div class="row no-gutters tableRow">
+                    <div class="row no-gutters col-10">
+                        <div class="col-2 acent pl-3">@item.Email</div>
+                        <div class="col-2 acent cent">@item.Login</div>
+                        <div class="col-2 acent cent">@item.FirstName</div>
+                        <div class="col-2 acent cent">@item.SecondName</div>
+                        <div class="col-2 acent cent">@item.DateOfJoining.GetValueOrDefault().ToString("dd.MM.yy")</div>
+                        <div class="col-1 acent cent yesNoActive">@(item.IsAdmin ? "TAK" : "NIE")</div>
+                        <div class="col-1 acent cent noYesActive">@(item.IsBanned ? "TAK" : "NIE")</div>
+                    </div>
+                    <div class="row no-gutters col-2">
+                        <div class="col-6 acent cent">
+                            <a asp-action="AdminEditClient" asp-controller="Admin" asp-route-id="@item.ClientId">
+                                <img class="btnImg" src="~/img/pen.png" />
+                            </a>
+                        </div>
+                        <div class="col-6 acent cent">
+                            @if (item.IsBanned) {
+                                <img class="btnImg" src="~/img/unban.png" onclick="unbanUser('@Url.Action("UnbanClient", "Admin")', '@item.ClientId', '@item.Login')" />
+                            }
+                            else {
+                                <img class="btnImg" src="~/img/ban.png" onclick="banUser('@Url.Action("BanClient", "Admin")', '@item.ClientId', '@item.Login')" />
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </body>
 </html>

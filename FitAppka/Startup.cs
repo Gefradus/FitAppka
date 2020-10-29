@@ -67,6 +67,7 @@ namespace FitAppka
             services.AddScoped<IProgressMonitoringService, ProgressMonitoringServiceImpl>();
             services.AddScoped<IContentRootPathHandlerService, ContentRootPathHandlerServiceImpl>();
             services.AddScoped<IDietCreatorService, DietCreatorServiceImpl>();
+            services.AddScoped<IAdministrationService, AdministrationServiceImpl>();
         }
 
         private void RepositoriesAddScoped(IServiceCollection services)

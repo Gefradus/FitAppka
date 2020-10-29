@@ -35,7 +35,7 @@ namespace FitAppka.Service.ServiceImpl
             });
 
 
-            _goalsService.UpdateGoalsInDaysFromToday();
+            _goalsService.UpdateGoalsInLoggedInClientDaysFromToday();
         }
 
         public bool EditCardio(int id, int time, int burnedKcal)
@@ -46,7 +46,7 @@ namespace FitAppka.Service.ServiceImpl
                 cardio.TimeInMinutes = time;
                 cardio.CaloriesBurned = burnedKcal;
                 _cardioRepository.Update(cardio);
-                _goalsService.UpdateGoalsInDaysFromToday();
+                _goalsService.UpdateGoalsInLoggedInClientDaysFromToday();
                 return true;
             }
             return false;
@@ -56,7 +56,7 @@ namespace FitAppka.Service.ServiceImpl
         {
             if(_clientManageService.HasUserAccessToDay(_cardioRepository.GetCardioTraining(id).DayId)){
                 _cardioRepository.Delete(id);
-                _goalsService.UpdateGoalsInDaysFromToday();
+                _goalsService.UpdateGoalsInLoggedInClientDaysFromToday();
                 return true;
             }
             return false;

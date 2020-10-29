@@ -48,7 +48,12 @@ namespace FitAppka.Repository.RepIfaceImpl
 
         public IEnumerable<Day> GetLoggedInClientDays()
         {
-            return _context.Day.Where(d => d.ClientId == _clientRepository.GetLoggedInClientId()).ToList();
+            return GetClientDays(_clientRepository.GetLoggedInClientId());
+        }
+
+        public IEnumerable<Day> GetClientDays(int clientId)
+        {
+            return _context.Day.Where(d => d.ClientId == clientId).ToList();
         }
 
         public Day GetDay(int id)
@@ -68,5 +73,6 @@ namespace FitAppka.Repository.RepIfaceImpl
             return day;
         }
 
+        
     }
 }

@@ -18,6 +18,8 @@ namespace FitAppka.Repository
         Client GetLoggedInClient();
         Client GetLoggedInClientAsNoTracking();
         int GetLoggedInClientId();
+        public void BanClient(int id);
+        public void UnbanClient(int id);
         bool IsLoggedInClientAdmin();
         public bool IsClientBanned(int clientId);
     }

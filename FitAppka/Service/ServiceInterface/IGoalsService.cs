@@ -13,8 +13,9 @@ namespace FitAppka.Service
         int CountCarbsTarget(int kcalTarget, int proteinsTarget, int fatsTarget);
         double ActivityLevel(short? activity);
         int CountAge(DateTime birthDate);
-        List<int> GetListOfDaysIDFromToday();
-        void UpdateGoalsInDaysFromToday();
+        List<int> GetListOfDaysIDFromToday(int clientId);
+        void UpdateGoalsInLoggedInClientDaysFromToday();
+        void UpdateGoalsInDaysFromToday(int clientId);
         int CaloriesBurnedInDay(int dayID);
         void UpdateGoals(GoalsDTO createGoalsModel);
         Goals AddOrUpdateClientGoals(Client client, int calorieTarget, int proteinTarget, int fatTarget, int carbsTarget);

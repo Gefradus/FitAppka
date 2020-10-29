@@ -55,7 +55,7 @@ namespace FitAppka.Service.ServiceImpl
 
         public bool CheckIfClientFromModelIsBanned(Client model)
         {
-            return GetClientFromModel(model).IsBanned == true;
+            return GetClientFromModel(model).IsBanned;
         }
 
         public bool CheckIfPassCorrect(Client model)

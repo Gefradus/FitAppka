@@ -163,7 +163,7 @@ namespace FitAppka.Service.ServiceImpl
         private void UpdateGoals()
         {
             _goalsService.SetClientGoalsIfAutoDietaryGoals((bool)_clientManageService.GetLoggedInClient().AutoDietaryGoals);
-            _goalsService.UpdateGoalsInDaysFromToday();
+            _goalsService.UpdateGoalsInLoggedInClientDaysFromToday();
         }
 
 

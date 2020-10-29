@@ -83,15 +83,12 @@ namespace FitAppka.Controllers
         [Route("/Settings")]
         public IActionResult Settings(SettingsDTO m, int isFirstLaunch)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _settingsService.ChangeSettings(m, isFirstLaunch);
+            if (ModelState.IsValid) {
+                try {
+                    _settingsService.ChangeSettings(m, isFirstLaunch, _clientRepository.GetLoggedInClientId());
                     return RedirectToAction("Start", "Home");
                 }
-                catch
-                {
+                catch {
                     ModelState.AddModelError("", "Data urodzenia nie może być mniejsza niż 01.01.1900r.");
                     return View(m);
                 }

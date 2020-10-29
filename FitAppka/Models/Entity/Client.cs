@@ -24,13 +24,13 @@ namespace FitAppka.Models
         [Column("Goals_ID")]
         public int? GoalsId { get; set; }
         
-        [StringLength(50)]
+        [MaxLength(35)]
         public string Email { get; set; }
         
-        [StringLength(50)]
+        [MaxLength(35)]
         public string Login { get; set; }
         
-        [StringLength(50)]
+        //[StringLength(50)]
         public string Password { get; set; }
         [Column("First_name")]
         [StringLength(50)]
@@ -63,7 +63,7 @@ namespace FitAppka.Models
         public bool? IncludeCaloriesBurned { get; set; }
         [Column("Auto_dietary_goals")]
         public bool? AutoDietaryGoals { get; set; }
-        public bool? IsBanned { get; set; }
+        public bool IsBanned { get; set; }
 
         [ForeignKey(nameof(GoalsId))]
         [InverseProperty("Client")]

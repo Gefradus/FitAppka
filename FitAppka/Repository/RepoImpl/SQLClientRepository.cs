@@ -47,7 +47,7 @@ namespace FitAppka.Repository.RepIfaceImpl
 
         public bool IsClientBanned(int clientId)
         {
-            return GetClientById(clientId).IsBanned == true;
+            return GetClientById(clientId).IsBanned;
         }
 
         public IEnumerable<Client> GetAllClients()
@@ -101,5 +101,18 @@ namespace FitAppka.Repository.RepIfaceImpl
             _context.SaveChanges();
             return client;
         }
+
+        public void BanClient(int id)
+        {
+            GetClientById(id).IsBanned = true;
+            _context.SaveChanges();
+        }
+
+        public void UnbanClient(int id)
+        {
+            GetClientById(id).IsBanned = false;
+            _context.SaveChanges();
+        }
+
     }
 }

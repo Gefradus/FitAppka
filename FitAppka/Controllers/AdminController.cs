@@ -6,6 +6,7 @@ using FitAppka.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using FitAppka.Service.ServiceInterface;
 
 namespace FitAppka.Controllers
 {
@@ -15,14 +16,21 @@ namespace FitAppka.Controllers
     public class AdminController : Controller
     {
         private readonly IProductManageService _productManageService;
+        private readonly IAdministrationService _administrationService;
+        private readonly IWeightMeasurementRepository _weightMeasurementRepository;
+        private readonly IDayManageService _dayManageService;
         private readonly IClientRepository _clientRepository;
         private readonly FitAppContext _context;
         private readonly IWebHostEnvironment _env;
         private readonly IMapper _mapper;
 
         public AdminController(FitAppContext context, IWebHostEnvironment env, IClientRepository clientRepository, 
-            IProductManageService productManageService, IMapper mapper)
+            IProductManageService productManageService, IMapper mapper, IAdministrationService administrationService,
+            IWeightMeasurementRepository weightMeasurementRepository, IDayManageService dayManageService)
         {
+            _dayManageService = dayManageService;
+            _weightMeasurementRepository = weightMeasurementRepository;
+            _administrationService = administrationService;
             _mapper = mapper;
             _productManageService = productManageService;
             _clientRepository = clientRepository;
@@ -104,7 +112,7 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
-        public JsonResult Delete(int productID)
+        public JsonResult DeleteProduct(int productID)
         {
             if (_clientRepository.IsLoggedInClientAdmin())
             {
@@ -118,17 +126,45 @@ namespace FitAppka.Controllers
         [HttpGet]
         public async Task<IActionResult> AdminClient()
         {
-            if (_clientRepository.IsLoggedInClientAdmin())
-            {
+            if (_clientRepository.IsLoggedInClientAdmin()) {
                 return View(await _clientRepository.GetAllClientsAsync());
             }
-            else
-            {
+            else {
                 return RedirectToAction("Logout", "Login");
             }
         }
 
+        [HttpGet]
+        public IActionResult AdminEditClient(int id)
+        {
+            if (_clientRepository.IsLoggedInClientAdmin()) {
+                ViewData["id"] = id;
+                return View(_administrationService.GetClientAdministrationDTO(id));
+            }
+            else {
+                return RedirectToAction("Logout", "Login");
+            }
+        }
 
-        
+        [HttpPost]
+        public IActionResult AdminEditClient(ClientAdministrationDTO dto, int id)
+        {
+            _administrationService.EditClient(dto, id);
+            return RedirectToAction(nameof(AdminEditClient));
+        }
+
+
+        [HttpPost]
+        public JsonResult UnbanClient(int id)
+        {
+            return Json(_administrationService.UnbanClient(id));
+        }
+
+        [HttpPost]
+        public JsonResult BanClient(int id)
+        {
+            return Json(_administrationService.BanClient(id));
+        }
+
     }
 }
