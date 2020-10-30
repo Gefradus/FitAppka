@@ -10,8 +10,8 @@ namespace FitAppka.Service.ServiceImpl
     public class AdministrationServiceImpl : IAdministrationService
     {
         private readonly IClientRepository _clientRepository;
-        private readonly ICardioTrainingTypeRepository _cardioRepository;
-        private readonly IStrengthTrainingTypeRepository _strengthTrainingRepository;
+        private readonly ICardioTrainingTypeRepository _cardioTypeRepository;
+        private readonly IStrengthTrainingTypeRepository _strengthTrainingTypeRepository;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
         private readonly ISettingsService _settingsService;
         private readonly IMapper _mapper;
@@ -23,8 +23,8 @@ namespace FitAppka.Service.ServiceImpl
             ISettingsService settingsService, IStrengthTrainingTypeRepository strengthTrainingRepository)
         {
             _settingsService = settingsService;
-            _strengthTrainingRepository = strengthTrainingRepository;
-            _cardioRepository = cardioRepository;
+            _strengthTrainingTypeRepository = strengthTrainingRepository;
+            _cardioTypeRepository = cardioRepository;
             _mapper = mapper;
             _clientRepository = clientRepository;
             _weightMeasurementRepository = weightMeasurementRepository;
@@ -83,9 +83,28 @@ namespace FitAppka.Service.ServiceImpl
         {
             return new TrainingsDTO()
             {
-                CardioTrainings = _cardioRepository.GetAllCardioTypes().ToList(),
-                StrengthTrainings = _strengthTrainingRepository.GetAllStrengthTrainingTypes().ToList()
+                CardioTrainings = _cardioTypeRepository.GetAllCardioTypes().ToList(),
+                StrengthTrainings = _strengthTrainingTypeRepository.GetAllStrengthTrainingTypes().ToList()
             };
+        }
+
+        public bool DeleteCardioType(int id)
+        {
+            if (_clientRepository.IsLoggedInClientAdmin()) {
+                _cardioTypeRepository.Delete(id);
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteStrengthTrainingType(int id)
+        {
+            if (_clientRepository.IsLoggedInClientAdmin())
+            {
+                _strengthTrainingTypeRepository.Delete(id);
+                return true;
+            }
+            return false;
         }
     }
 }

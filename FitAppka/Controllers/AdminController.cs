@@ -154,7 +154,6 @@ namespace FitAppka.Controllers
             return RedirectToAction(nameof(AdminEditClient));
         }
 
-
         [HttpPost]
         public JsonResult UnbanClient(int id)
         {
@@ -167,5 +166,16 @@ namespace FitAppka.Controllers
             return Json(_administrationService.BanClient(id));
         }
 
+        [HttpDelete]
+        public JsonResult DeleteCardioType(int id)
+        {
+            return Json(_administrationService.DeleteCardioType(id));
+        }
+
+        [HttpDelete]
+        public JsonResult DeleteStrengthTrainingType(int id)
+        {
+            return Json(_administrationService.DeleteStrengthTrainingType(id));
+        }
     }
 }

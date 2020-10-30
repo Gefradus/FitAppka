@@ -3,16 +3,121 @@
 <head>
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
+    <link href="~/css/AdminTraining.css" rel="stylesheet" />
+    <script src="~/js/AllViews.js"></script>
+    <script src="~/js/AdminTraining.js"></script>
 </head>
-<body>
+<body onload="onload()">
     <div class="container">
-        <div class="row no-gutters">       
-            <div class="col-4">Nazwa</div>
-            <div class="col-4"></div>
-            <div class="col-3">Autor</div>
+        <div class="modal fade" tabindex="-1" id="deleteModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
+            <div class="modal-dialog" style="display: flex; justify-content: center;">
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 20px">
+                        <button type="button" class="close" data-dismiss="modal" style="margin-top: -30px">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="margin-top: -10px;">
+                            <label>Czy na pewno chcesz usunąć trening</label><label id="deletingTrainingName"></label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div id="formDeleteCardio" hidden>
+                            <div style="display:flex; justify-content: center">
+                                <button type="button" data-dismiss="modal" class="cancelBtn">Anuluj</button>
+                                <button type="button" class="deleteBtn" onclick="deleteCardio('@Url.Action("DeleteCardioType", "Admin")')">Tak, usuń</button>
+                                <input id="deletingCardioID" type="hidden" />
+                            </div>
+                        </div>
+                        <div id="formDeleteStrength" hidden>
+                            <div style="display:flex; justify-content: center">
+                                <button type="button" data-dismiss="modal" class="cancelBtn">Anuluj</button>
+                                <button type="button" class="deleteBtn" onclick="deleteStrengthTraining('@Url.Action("DeleteStrengthTrainingType", "Admin")')">Tak, usuń</button>
+                                <input id="deletingStrengthTrainingID" type="hidden" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-       
+        <div style="display: flex" class="mb-3">
+            <a asp-action="AdminHome" asp-controller="Admin" style="width: inherit;">
+                <img id="btnBackImg" src="~/img/back.png" />
+            </a>
+        </div>
+
+        <div id="cardioArea">
+            <div style="display: flex; margin-bottom: 15px">
+                <div class="header">Treningi cardio:</div>
+                <button type="button" class="btn acent" id="btnAddCardio">Dodaj trening cardio</button>
+            </div>
+
+            <div id="cardioTable">
+                <div class="row no-gutters container" id="columnsHeader">
+                    <div class="row no-gutters col-10">
+                        <div class="col-3 acent cent">Nazwa</div>
+                        <div class="col-3 acent cent">ID autora</div>
+                        <div class="col-3 acent cent">Kcal / min</div>
+                        <div class="col-3 acent cent">Widoczność</div>
+                    </div>
+                </div>
+
+                @foreach (var item in Model.CardioTrainings)
+                {
+                    <div class="row no-gutters tableRow">
+                        <div class="row no-gutters col-10">
+                            <div class="col-3 acent cent">@item.TrainingName</div>
+                            <div class="col-3 acent cent">@item.ClientId</div>
+                            <div class="col-3 acent cent">@item.KcalPerMin</div>
+                            <div class="col-3 acent cent">@(item.VisibleToAll ? "Wszyscy" : "Autor")</div>
+                        </div>
+                        <div class="row no-gutters col-2">
+                            <div class="col-6 acent cent">
+                                <button type="button" onclick="showEditCardioModal('@item.CardioTrainingTypeId', '@item.TrainingName', '@item.KcalPerMin')"><img class="editBtnImg" src="~/img/pen.png"></button>
+                            </div>
+                            <div class="col-6 acent cent">
+                                <button type="button" onclick="showDeleteCardioModal('@item.CardioTrainingTypeId', '@item.TrainingName');"><img class="deleteBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div id="strengthArea">
+            <div style="display: flex; margin-bottom: 15px">
+                <div class="header">Treningi siłowe:</div>
+                <button type="button" class="btn acent" id="btnAddStrength">Dodaj trening siłowy</button>
+            </div>
+
+            <div id="strengthTable">
+                <div class="row no-gutters" id="columnsHeader">
+                    <div class="col-3 acent cent">Nazwa</div>
+                    <div class="col-3 acent cent">ID autora</div>
+                    <div class="col-3 acent cent">Widoczność</div>        
+                </div>
+
+                @foreach (var item in Model.StrengthTrainings)
+                {
+                    <div class="row no-gutters tableRow">
+                        <div class="col-3 acent cent">@item.TrainingName</div>
+                        <div class="col-3 acent cent">@item.ClientId</div>
+                        <div class="col-3 acent cent">@(item.VisibleToAll ? "Wszyscy" : "Autor")</div>
+                        <div class="col-3 row no-gutters">
+                            <div class="col-6 acent cent">
+                                <button type="button" onclick="showEditStrengthModal('@item.StrengthTrainingTypeId', '@item.TrainingName')"><img class="editBtnImg" src="~/img/pen.png"></button>
+                            </div>
+                            <div class="col-6 acent cent">
+                                <button type="button" onclick="showDeleteStrengthModal('@item.StrengthTrainingTypeId', '@item.TrainingName');"><img class="deleteBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+
+
     </div>
 </body>
 </html>

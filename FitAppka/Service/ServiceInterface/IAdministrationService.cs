@@ -9,6 +9,8 @@ namespace FitAppka.Service.ServiceInterface
         public bool BanClient(int id);
         public void EditClient(ClientAdministrationDTO dto, int id);
         public ClientAdministrationDTO GetClientAdministrationDTO(int id);
+        public bool DeleteCardioType(int id);
+        public bool DeleteStrengthTrainingType(int id);
         public TrainingsDTO GetTrainingsDTO();
     }
 }
