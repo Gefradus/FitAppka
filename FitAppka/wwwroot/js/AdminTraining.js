@@ -18,6 +18,49 @@ function textboxresize() {
     });
 }
 
+function showAddCardioModal() {
+    clearAllCardioModalData();
+    $("#addTrainingType").modal('show');
+}
+
+
+function showEditCardioModal(id, name, kcal, visible) {
+    setAllCardioModalData(id, name, kcal, visible);
+    $("#addTrainingType").modal('show');
+}
+
+function clearAllCardioModalData() {
+    document.getElementById("addOrEditCardioTitle").innerHTML = "Tworzenie ćwiczenia";
+    document.getElementById("cardioTypeName").value = '';
+    document.getElementById("expenditure").value = '';
+    document.getElementById("visible").checked = true;
+}
+
+function setAllCardioModalData(id, name, kcal, visible) {
+    document.getElementById("addOrEditCardioTitle").innerHTML = "Edycja ćwiczenia";
+    $("#cardioTypeId").val(id);
+    $("#cardioTypeName").val(name);
+    $("#expenditure").val(kcal);
+    document.getElementById("visible").checked = visible;
+}
+
+
+function addCardioType(url) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: {
+            name: $("#cardioTypeName").val(),
+            kcal: $("#expenditure").val(),
+            visible: document.getElementById("visible").checked
+        },
+        success: function () {
+            location.reload();
+        }
+    });
+}
+
+
 function showDeleteStrengthModal(id, name) {
     document.getElementById("formDeleteStrength").hidden = false;
     document.getElementById("formDeleteCardio").hidden = true;
