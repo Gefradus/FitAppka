@@ -35,14 +35,14 @@ namespace FitAppka.Repository.RepIfaceImpl
             return cardioType;
         }
 
-        public IEnumerable<CardioTrainingType> GetAllCardioTypes()
+        public IEnumerable<CardioTrainingType> GetAllCardioTypes(string search)
         {
-            return _context.CardioTrainingType.ToList();
+            return _context.CardioTrainingType.Where(s => s.IsDeleted == false && (s.TrainingName.Contains(search) || string.IsNullOrWhiteSpace(search))).ToList();
         }
 
         public async Task<List<CardioTrainingType>> GetAllCardioTypesAsync(string search)
         {
-            return await _context.CardioTrainingType.Where(s => s.TrainingName.Contains(search) && s.IsDeleted == false).ToListAsync();
+            return await _context.CardioTrainingType.Where(s => s.IsDeleted == false && s.TrainingName.Contains(search)).ToListAsync();
         }
 
         public CardioTrainingType GetCardioType(int id)

@@ -18,6 +18,7 @@ namespace FitAppka.Controllers
         private readonly IProductManageService _productManageService;
         private readonly IAdministrationService _administrationService;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
+        private readonly ICardioTrainingService _cardioServices;
         private readonly IDayManageService _dayManageService;
         private readonly IClientRepository _clientRepository;
         private readonly FitAppContext _context;
@@ -50,10 +51,10 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        public IActionResult AdminTraining()
+        public IActionResult AdminTraining(string searchCardio, string searchStrength)
         {
             if (_clientRepository.IsLoggedInClientAdmin()) {
-                return View(_administrationService.GetTrainingsDTO());
+                return View(_administrationService.GetTrainingsDTO(searchCardio, searchStrength));
             }
             else {
                 return RedirectToAction("Logout", "Login");
@@ -152,6 +153,18 @@ namespace FitAppka.Controllers
         {
             _administrationService.EditClient(dto, id);
             return RedirectToAction(nameof(AdminEditClient));
+        }
+
+        [HttpPost]
+        public JsonResult AddCardioType(string name, int kcalPerMin, bool visibleToAll)
+        {
+           return Json(_administrationService.AddCardioType(name, kcalPerMin, visibleToAll));
+        }
+
+        [HttpPost]
+        public JsonResult AddStrengthTrainingType(string name, bool visibleToAll)
+        {
+            return Json(_administrationService.AddStrengthTrainingType(name, visibleToAll));
         }
 
         [HttpPost]

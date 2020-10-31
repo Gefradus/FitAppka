@@ -35,14 +35,14 @@ namespace FitAppka.Repository.RepIfaceImpl
             return strengthTrainingType;
         }
 
-        public IEnumerable<StrengthTrainingType> GetAllStrengthTrainingTypes()
+        public IEnumerable<StrengthTrainingType> GetAllStrengthTrainingTypes(string search)
         {
-            return _context.StrengthTrainingType.ToList();
+            return _context.StrengthTrainingType.Where(s => s.IsDeleted == false && (s.TrainingName.Contains(search) || string.IsNullOrWhiteSpace(search))).ToList();
         }
 
         public async Task<List<StrengthTrainingType>> GetAllStrengthTypesAsync(string search)
         {
-            return await _context.StrengthTrainingType.Where(c => c.TrainingName.Contains(search) && c.IsDeleted == false).ToListAsync();
+            return await _context.StrengthTrainingType.Where(c => c.IsDeleted == false && c.TrainingName.Contains(search)).ToListAsync();
         }
 
         public StrengthTrainingType GetStrengthTrainingType(int id)

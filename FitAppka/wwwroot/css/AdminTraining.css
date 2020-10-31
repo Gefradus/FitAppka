@@ -60,6 +60,11 @@ main{
     padding-top: 15px !important
 }
 
+.textbox {
+    left: 10px;
+    position: absolute
+}
+
 #strengthArea{
     margin-top: 25px
 }

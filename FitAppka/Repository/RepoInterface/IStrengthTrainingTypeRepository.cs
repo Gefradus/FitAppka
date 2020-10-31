@@ -7,7 +7,7 @@ namespace FitAppka.Repository
     public interface IStrengthTrainingTypeRepository
     {
         StrengthTrainingType GetStrengthTrainingType(int id);
-        IEnumerable<StrengthTrainingType> GetAllStrengthTrainingTypes();
+        IEnumerable<StrengthTrainingType> GetAllStrengthTrainingTypes(string search);
         Task<List<StrengthTrainingType>> GetAllStrengthTypesAsync(string search);
         StrengthTrainingType Add(StrengthTrainingType strengthTrainingType);
         StrengthTrainingType Update(StrengthTrainingType strengthTrainingType);

@@ -11,11 +11,18 @@
 }
 
 
+function textboxresize() {
+    $("#searchStrength").width($("#searchCardio").width());
+    window.addEventListener('resize', function () {
+        $("#searchStrength").width($("#searchCardio").width());
+    });
+}
+
 function showDeleteStrengthModal(id, name) {
     document.getElementById("formDeleteStrength").hidden = false;
     document.getElementById("formDeleteCardio").hidden = true;
     document.getElementById("deletingTrainingName").innerHTML = ": " + name + " ?";
-    document.getElementById("deletingCardioID").value = id;
+    document.getElementById("deletingStrengthTrainingID").value = id;
     $("#deleteModal").modal("show");
 }
 
@@ -23,7 +30,7 @@ function showDeleteCardioModal(id, name) {
     document.getElementById("formDeleteCardio").hidden = false;
     document.getElementById("formDeleteStrength").hidden = true
     document.getElementById("deletingTrainingName").innerHTML = ": " + name + " ?";
-    document.getElementById("deletingStrengthTrainingID").value = id;
+    document.getElementById("deletingCardioID").value = id;
     $("#deleteModal").modal("show");
 }
 

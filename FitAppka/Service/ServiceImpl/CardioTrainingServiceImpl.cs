@@ -77,6 +77,8 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
+        
+
         public int? GetKcalBurnedGoalInDay(int dayID)
         {
             int? kcalBurnedGoal = _goalsRepository.GetDayGoals(dayID).KcalBurned;
@@ -115,5 +117,7 @@ namespace FitAppka.Service.ServiceImpl
         {
             return _cardioTypeRepository.GetAllCardioTypesAsync(search);
         }
+
+        
     }
 }

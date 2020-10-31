@@ -40,84 +40,122 @@
             </div>
         </div>
 
+        <div class="modal fade" tabindex="-1" id="addTrainingType" data-keyboard="false" style="margin-top: 170px">
+            <div class="modal-dialog" style="display: flex; justify-content: center">
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 35px">
+                        <div style="margin-top: -10px">
+                            Tworzenie ćwiczenia
+                        </div>
+                        <button type="button" style="margin-top: -29px" class="close" data-dismiss="modal">×</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row no-gutters cent">
+                                <div style="margin-left: -58px">Nazwa ćwiczenia: </div>
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 3px;">
+                                <input id="cardioTypeName" type="text" maxlength="50" oninput="validity.valid || (value = '')" />
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 15px;">
+                                <div style="margin-left: -50px">Wydatek kcal/min: </div>
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 3px;">
+                                <input id="expenditure" type="number" max="99999" onkeypress="return onlyInt(event)" onchange="this.value = changeToMaxIfGreaterInt(this.value, 10000)" />
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
+                                <button type="button" onclick="addCardioType(@ViewData["dayID"], '@Url.Action("AddCardioType", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div style="display: flex" class="mb-3">
             <a asp-action="AdminHome" asp-controller="Admin" style="width: inherit;">
                 <img id="btnBackImg" src="~/img/back.png" />
             </a>
         </div>
 
-        <div id="cardioArea">
-            <div style="display: flex; margin-bottom: 15px">
-                <div class="header">Treningi cardio:</div>
-                <button type="button" class="btn acent" id="btnAddCardio">Dodaj trening cardio</button>
+        <form method="get">
+            <div id="cardioArea">
+                <div style="display: flex; margin-bottom: 15px">
+                    <div class="header">Treningi cardio:</div>
+                    <button type="button" class="btn acent" id="btnAddCardio">Dodaj trening cardio</button>
+                </div>
+
+                <div id="cardioTable">
+                    <div class="row no-gutters container" id="columnsHeader">
+                        <div class="row no-gutters col-10">
+                            <div class="col-3 acent cent"><div class="textbox">@Html.TextBox("searchCardio", "", new { placeholder = "Nazwa", @class = "form-control" })</div></div>
+                            <div class="col-3 acent cent">ID autora</div>
+                            <div class="col-3 acent cent">Kcal / min</div>
+                            <div class="col-3 acent cent">Widoczność</div>
+                        </div>
+                    </div>
+
+                    @foreach (var item in Model.CardioTrainings)
+                    {
+                        <div class="row no-gutters tableRow">
+                            <div class="row no-gutters col-10">
+                                <div class="col-3 acent cent">@item.TrainingName</div>
+                                <div class="col-3 acent cent">@item.ClientId</div>
+                                <div class="col-3 acent cent">@item.KcalPerMin</div>
+                                <div class="col-3 acent cent">@(item.VisibleToAll ? "Wszyscy" : "Autor")</div>
+                            </div>
+                            <div class="row no-gutters col-2">
+                                <div class="col-6 acent cent">
+                                    <button type="button" onclick="showEditCardioModal('@item.CardioTrainingTypeId', '@item.TrainingName', '@item.KcalPerMin')"><img class="editBtnImg" src="~/img/pen.png"></button>
+                                </div>
+                                <div class="col-6 acent cent">
+                                    <button type="button" onclick="showDeleteCardioModal('@item.CardioTrainingTypeId', '@item.TrainingName');"><img class="deleteBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
 
-            <div id="cardioTable">
-                <div class="row no-gutters container" id="columnsHeader">
-                    <div class="row no-gutters col-10">
-                        <div class="col-3 acent cent">Nazwa</div>
+            <div id="strengthArea">
+                <div style="display: flex; margin-bottom: 15px">
+                    <div class="header">Treningi siłowe:</div>
+                    <button type="button" class="btn acent" id="btnAddStrength">Dodaj trening siłowy</button>
+                </div>
+
+                <div id="strengthTable">
+                    <div class="row no-gutters" id="columnsHeader">
+                        <div class="col-3 acent cent"><div class="textbox">@Html.TextBox("searchStrength", "", new { placeholder = "Nazwa", @class = "form-control" })</div></div>
                         <div class="col-3 acent cent">ID autora</div>
-                        <div class="col-3 acent cent">Kcal / min</div>
                         <div class="col-3 acent cent">Widoczność</div>
                     </div>
-                </div>
 
-                @foreach (var item in Model.CardioTrainings)
-                {
-                    <div class="row no-gutters tableRow">
-                        <div class="row no-gutters col-10">
+                    @foreach (var item in Model.StrengthTrainings)
+                    {
+                        <div class="row no-gutters tableRow">
                             <div class="col-3 acent cent">@item.TrainingName</div>
                             <div class="col-3 acent cent">@item.ClientId</div>
-                            <div class="col-3 acent cent">@item.KcalPerMin</div>
                             <div class="col-3 acent cent">@(item.VisibleToAll ? "Wszyscy" : "Autor")</div>
-                        </div>
-                        <div class="row no-gutters col-2">
-                            <div class="col-6 acent cent">
-                                <button type="button" onclick="showEditCardioModal('@item.CardioTrainingTypeId', '@item.TrainingName', '@item.KcalPerMin')"><img class="editBtnImg" src="~/img/pen.png"></button>
+                            <div class="col-3 row no-gutters">
+                                <div class="col-6 acent cent">
+                                    <button type="button" onclick="showEditStrengthModal('@item.StrengthTrainingTypeId', '@item.TrainingName')"><img class="editBtnImg" src="~/img/pen.png"></button>
+                                </div>
+                                <div class="col-6 acent cent">
+                                    <button type="button" onclick="showDeleteStrengthModal('@item.StrengthTrainingTypeId', '@item.TrainingName');"><img class="deleteBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>
+                                </div>
                             </div>
-                            <div class="col-6 acent cent">
-                                <button type="button" onclick="showDeleteCardioModal('@item.CardioTrainingTypeId', '@item.TrainingName');"><img class="deleteBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>
-                            </div>
                         </div>
-                    </div>
-                }
-            </div>
-        </div>
-
-        <div id="strengthArea">
-            <div style="display: flex; margin-bottom: 15px">
-                <div class="header">Treningi siłowe:</div>
-                <button type="button" class="btn acent" id="btnAddStrength">Dodaj trening siłowy</button>
-            </div>
-
-            <div id="strengthTable">
-                <div class="row no-gutters" id="columnsHeader">
-                    <div class="col-3 acent cent">Nazwa</div>
-                    <div class="col-3 acent cent">ID autora</div>
-                    <div class="col-3 acent cent">Widoczność</div>        
+                    }
                 </div>
 
-                @foreach (var item in Model.StrengthTrainings)
-                {
-                    <div class="row no-gutters tableRow">
-                        <div class="col-3 acent cent">@item.TrainingName</div>
-                        <div class="col-3 acent cent">@item.ClientId</div>
-                        <div class="col-3 acent cent">@(item.VisibleToAll ? "Wszyscy" : "Autor")</div>
-                        <div class="col-3 row no-gutters">
-                            <div class="col-6 acent cent">
-                                <button type="button" onclick="showEditStrengthModal('@item.StrengthTrainingTypeId', '@item.TrainingName')"><img class="editBtnImg" src="~/img/pen.png"></button>
-                            </div>
-                            <div class="col-6 acent cent">
-                                <button type="button" onclick="showDeleteStrengthModal('@item.StrengthTrainingTypeId', '@item.TrainingName');"><img class="deleteBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>
-                            </div>
-                        </div>
-                    </div>
-                }
             </div>
-
-        </div>
-
+            <button type="submit" hidden></button>
+        </form>
 
     </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>textboxresize();</script>
 </body>
 </html>

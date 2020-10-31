@@ -79,13 +79,30 @@ namespace FitAppka.Service.ServiceImpl
             return false;
         }
 
-        public TrainingsDTO GetTrainingsDTO()
+        public TrainingsDTO GetTrainingsDTO(string searchCardio, string searchStrength)
         {
             return new TrainingsDTO()
             {
-                CardioTrainings = _cardioTypeRepository.GetAllCardioTypes().ToList(),
-                StrengthTrainings = _strengthTrainingTypeRepository.GetAllStrengthTrainingTypes().ToList()
+                CardioTrainings = _cardioTypeRepository.GetAllCardioTypes(searchCardio).ToList(),
+                StrengthTrainings = _strengthTrainingTypeRepository.GetAllStrengthTrainingTypes(searchStrength).ToList()
             };
+        }
+
+        public bool AddCardioType(string name, int kcalPerMin, bool visibleToAll)
+        {
+            if (_clientRepository.IsLoggedInClientAdmin())
+            {
+                _cardioTypeRepository.Add(new CardioTrainingType()
+                {
+                    TrainingName = name,
+                    KcalPerMin = kcalPerMin,
+                    ClientId = _clientRepository.GetLoggedInClientId(),
+                    VisibleToAll = visibleToAll,
+                    IsDeleted = false
+                });
+                return true;
+            }
+            return false;
         }
 
         public bool DeleteCardioType(int id)
@@ -102,6 +119,22 @@ namespace FitAppka.Service.ServiceImpl
             if (_clientRepository.IsLoggedInClientAdmin())
             {
                 _strengthTrainingTypeRepository.Delete(id);
+                return true;
+            }
+            return false;
+        }
+
+        public bool AddStrengthTrainingType(string name, bool visibleToAll)
+        {
+            if (_clientRepository.IsLoggedInClientAdmin())
+            {
+                _strengthTrainingTypeRepository.Add(new StrengthTrainingType()
+                {
+                    ClientId = _clientRepository.GetLoggedInClientId(),
+                    VisibleToAll = visibleToAll,
+                    TrainingName = name,
+                    IsDeleted = false
+                });
                 return true;
             }
             return false;
