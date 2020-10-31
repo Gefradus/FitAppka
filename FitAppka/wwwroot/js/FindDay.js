@@ -101,18 +101,22 @@ function restore(searchType, from, to) {
 
     $("#choice").val(searchType);
     choice();
+    var data = document.getElementById("data");
 
     if (searchType == 0) {
         $("#from_product").val(from);
-        $("#to_product").val(to); 
+        $("#to_product").val(to);
+        if(data != null) data.innerHTML = "Spożyto gram";
     }
     if (searchType == 1) {
         $("#from_calorie").val(from);
         $("#to_calorie").val(to);
+        if (data != null) data.innerHTML = "Spożyte kalorie";
     }
     if (searchType == 2) {
         $("#from_water").val(from);
         $("#to_water").val(to);
+        if (data != null) data.innerHTML = "Wypite ml";
     }
 }
 

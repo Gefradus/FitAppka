@@ -18,7 +18,6 @@ namespace FitAppka.Controllers
         private readonly IProductManageService _productManageService;
         private readonly IAdministrationService _administrationService;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
-        private readonly ICardioTrainingService _cardioServices;
         private readonly IDayManageService _dayManageService;
         private readonly IClientRepository _clientRepository;
         private readonly FitAppContext _context;
