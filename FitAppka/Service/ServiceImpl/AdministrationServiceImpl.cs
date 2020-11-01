@@ -139,5 +139,19 @@ namespace FitAppka.Service.ServiceImpl
             }
             return false;
         }
+
+        public bool EditCardioType(int id, string name, int kcalPerMin, bool visibleToAll)
+        {
+            if (_clientRepository.IsLoggedInClientAdmin())
+            {
+                var type = _cardioTypeRepository.GetCardioType(id);
+                type.TrainingName = name;
+                type.KcalPerMin = kcalPerMin;
+                type.VisibleToAll = visibleToAll;
+                _cardioTypeRepository.Update(type);
+                return true;
+            }
+            return false;
+        }
     }
 }

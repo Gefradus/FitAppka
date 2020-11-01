@@ -24,14 +24,14 @@
                         <div id="formDeleteCardio" hidden>
                             <div style="display:flex; justify-content: center">
                                 <button type="button" data-dismiss="modal" class="cancelBtn">Anuluj</button>
-                                <button type="button" class="deleteBtn" onclick="deleteCardio('@Url.Action("DeleteCardioType", "Admin")')">Tak, usuń</button>
+                                <button type="button" class="deleteBtn" onclick="deleteCardio('@Url.Action("CardioType", "Admin")')">Tak, usuń</button>
                                 <input id="deletingCardioID" type="hidden" />
                             </div>
                         </div>
                         <div id="formDeleteStrength" hidden>
                             <div style="display:flex; justify-content: center">
                                 <button type="button" data-dismiss="modal" class="cancelBtn">Anuluj</button>
-                                <button type="button" class="deleteBtn" onclick="deleteStrengthTraining('@Url.Action("DeleteStrengthTrainingType", "Admin")')">Tak, usuń</button>
+                                <button type="button" class="deleteBtn" onclick="deleteStrengthTraining('@Url.Action("StrengthTrainingType", "Admin")')">Tak, usuń</button>
                                 <input id="deletingStrengthTrainingID" type="hidden" />
                             </div>
                         </div>
@@ -66,9 +66,12 @@
                                 <input id="visible" type="checkbox" checked />
                                 <label for="visible" style="font-size: 15px">Widoczne dla wszystkich</label>
                             </div>
-                            <div class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
+                            <div hidden id="addCardioArea" class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
+                                <button type="button" onclick="addCardioType('@Url.Action("CardioType", "Admin")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
+                            </div>
+                            <div hidden id="editCardioArea" class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
                                 <input type="hidden" id="cardioTypeId">
-                                <button type="button" onclick="addCardioType('@Url.Action("AddCardioType", "Admin")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
+                                <button type="button" onclick="editCardioType('@Url.Action("CardioType", "Admin")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Zapisz zmiany</button>
                             </div>
                         </div>
                     </div>
@@ -111,7 +114,7 @@
                             </div>
                             <div class="row no-gutters col-2">
                                 <div class="col-6 acent cent">
-                                    <button type="button" onclick="showEditCardioModal('@item.CardioTrainingTypeId', '@item.TrainingName', '@item.KcalPerMin')"><img class="editBtnImg" src="~/img/pen.png"></button>
+                                    <button type="button" onclick="showEditCardioModal('@item.CardioTrainingTypeId', '@item.TrainingName', '@item.KcalPerMin', '@(item.VisibleToAll ? "true" : "false")')"><img class="editBtnImg" src="~/img/pen.png"></button>
                                 </div>
                                 <div class="col-6 acent cent">
                                     <button type="button" onclick="showDeleteCardioModal('@item.CardioTrainingTypeId', '@item.TrainingName');"><img class="deleteBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>

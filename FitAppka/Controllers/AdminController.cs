@@ -155,15 +155,32 @@ namespace FitAppka.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddCardioType(string name, int kcalPerMin, bool visibleToAll)
+        public JsonResult CardioType(string name, int kcalPerMin, bool visibleToAll)
         {
            return Json(_administrationService.AddCardioType(name, kcalPerMin, visibleToAll));
         }
 
+        [HttpPut]
+        public JsonResult CardioType(int id, string name, int kcalPerMin, bool visibleToAll) {
+            return Json(_administrationService.EditCardioType(id, name, kcalPerMin, visibleToAll));
+        }
+
+        [HttpDelete]
+        public JsonResult CardioType(int id)
+        {
+            return Json(_administrationService.DeleteCardioType(id));
+        }
+
         [HttpPost]
-        public JsonResult AddStrengthTrainingType(string name, bool visibleToAll)
+        public JsonResult StrengthTrainingType(string name, bool visibleToAll)
         {
             return Json(_administrationService.AddStrengthTrainingType(name, visibleToAll));
+        }
+
+        [HttpDelete]
+        public JsonResult StrengthTrainingType(int id)
+        {
+            return Json(_administrationService.DeleteStrengthTrainingType(id));
         }
 
         [HttpPost]
@@ -177,17 +194,6 @@ namespace FitAppka.Controllers
         {
             return Json(_administrationService.BanClient(id));
         }
-
-        [HttpDelete]
-        public JsonResult DeleteCardioType(int id)
-        {
-            return Json(_administrationService.DeleteCardioType(id));
-        }
-
-        [HttpDelete]
-        public JsonResult DeleteStrengthTrainingType(int id)
-        {
-            return Json(_administrationService.DeleteStrengthTrainingType(id));
-        }
+ 
     }
 }

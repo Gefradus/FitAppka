@@ -31,6 +31,7 @@ function showEditCardioModal(id, name, kcal, visible) {
 
 function clearAllCardioModalData() {
     document.getElementById("addOrEditCardioTitle").innerHTML = "Tworzenie ćwiczenia";
+    document.getElementById("")
     document.getElementById("cardioTypeName").value = '';
     document.getElementById("expenditure").value = '';
     document.getElementById("visible").checked = true;
@@ -41,18 +42,19 @@ function setAllCardioModalData(id, name, kcal, visible) {
     $("#cardioTypeId").val(id);
     $("#cardioTypeName").val(name);
     $("#expenditure").val(kcal);
-    document.getElementById("visible").checked = visible;
+    document.getElementById("visible").checked = visible == "true";
 }
 
 
 function addCardioType(url) {
+    var visible = document.getElementById("visible").checked;
     $.ajax({
         type: 'POST',
         url: url,
         data: {
             name: $("#cardioTypeName").val(),
             kcal: $("#expenditure").val(),
-            visible: document.getElementById("visible").checked
+            visible: visible
         },
         success: function () {
             location.reload();
