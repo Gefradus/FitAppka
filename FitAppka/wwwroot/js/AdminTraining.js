@@ -50,34 +50,50 @@ function setAllCardioModalData(id, name, kcal, visible) {
 
 
 function addCardioType(url) {
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: {
-            name: $("#cardioTypeName").val(),
-            kcalPerMin: $("#expenditure").val(),
-            visibleToAll: document.getElementById("visible").checked
-        },
-        success: function () {
-            location.reload();
-        }
-    });
+    if (checkIfCardioModalValid()) {
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                name: $("#cardioTypeName").val(),
+                kcalPerMin: $("#expenditure").val(),
+                visibleToAll: document.getElementById("visible").checked
+            },
+            success: function () {
+                location.reload();
+            }
+        });
+    }
 }
 
 function editCardioType(url) {
-    $.ajax({
-        type: 'PUT',
-        url: url,
-        data: {
-            id: $("#cardioTypeId").val(),
-            name: $("#cardioTypeName").val(),
-            kcalPerMin: $("#expenditure").val(),
-            visibleToAll: document.getElementById("visible").checked
-        },
-        success: function () {
-            location.reload();
-        }
-    });
+    if (checkIfCardioModalValid()) {
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            data: {
+                id: $("#cardioTypeId").val(),
+                name: $("#cardioTypeName").val(),
+                kcalPerMin: $("#expenditure").val(),
+                visibleToAll: document.getElementById("visible").checked
+            },
+            success: function () {
+                location.reload();
+            }
+        });
+    }
+}
+
+function checkIfCardioModalValid() {
+    if (isEmpty($("#cardioTypeName").val())) {
+        validation("Podaj nazwę cardio");
+        return false;
+    }
+    else if (isEmpty($("#expenditure").val())) {
+        validation("Podaj kcal/min");
+        return false;
+    } 
+    return true; 
 }
 
 
