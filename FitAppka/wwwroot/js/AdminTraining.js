@@ -31,7 +31,8 @@ function showEditCardioModal(id, name, kcal, visible) {
 
 function clearAllCardioModalData() {
     document.getElementById("addOrEditCardioTitle").innerHTML = "Tworzenie ćwiczenia";
-    document.getElementById("")
+    document.getElementById("addCardioArea").hidden = false;
+    document.getElementById("editCardioArea").hidden = true;
     document.getElementById("cardioTypeName").value = '';
     document.getElementById("expenditure").value = '';
     document.getElementById("visible").checked = true;
@@ -39,6 +40,8 @@ function clearAllCardioModalData() {
 
 function setAllCardioModalData(id, name, kcal, visible) {
     document.getElementById("addOrEditCardioTitle").innerHTML = "Edycja ćwiczenia";
+    document.getElementById("addCardioArea").hidden = true;
+    document.getElementById("editCardioArea").hidden = false;
     $("#cardioTypeId").val(id);
     $("#cardioTypeName").val(name);
     $("#expenditure").val(kcal);
@@ -47,14 +50,29 @@ function setAllCardioModalData(id, name, kcal, visible) {
 
 
 function addCardioType(url) {
-    var visible = document.getElementById("visible").checked;
     $.ajax({
         type: 'POST',
         url: url,
         data: {
             name: $("#cardioTypeName").val(),
-            kcal: $("#expenditure").val(),
-            visible: visible
+            kcalPerMin: $("#expenditure").val(),
+            visibleToAll: document.getElementById("visible").checked
+        },
+        success: function () {
+            location.reload();
+        }
+    });
+}
+
+function editCardioType(url) {
+    $.ajax({
+        type: 'PUT',
+        url: url,
+        data: {
+            id: $("#cardioTypeId").val(),
+            name: $("#cardioTypeName").val(),
+            kcalPerMin: $("#expenditure").val(),
+            visibleToAll: document.getElementById("visible").checked
         },
         success: function () {
             location.reload();
