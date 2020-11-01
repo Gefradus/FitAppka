@@ -77,10 +77,12 @@ function clearAllStrengthModalData() {
 
 function showAddStrengthModal() {
     clearAllStrengthModalData()
+    $("addOrEditStrengthTrainingType").modal('show');
 }
 
 function showEditStrengthModal(id, name, visible) {
     setAllStrengthModalData(id, name, visible);
+    $("addOrEditStrengthTrainingType").modal('show');
 }
 
 function setAllStrengthModalData(id, name, visible) {

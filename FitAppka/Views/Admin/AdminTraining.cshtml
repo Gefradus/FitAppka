@@ -163,7 +163,7 @@
             <div id="strengthArea">
                 <div style="display: flex; margin-bottom: 15px">
                     <div class="header">Treningi siłowe:</div>
-                    <button type="button" class="btn acent" id="btnAddStrength">Dodaj trening siłowy</button>
+                    <button type="button" class="btn acent" id="btnAddStrength" onclick="showAddStrengthModal()">Dodaj trening siłowy</button>
                 </div>
 
                 <div id="strengthTable">
@@ -181,7 +181,7 @@
                             <div class="col-3 acent cent">@(item.VisibleToAll ? "Wszyscy" : "Autor")</div>
                             <div class="col-3 row no-gutters">
                                 <div class="col-6 acent cent">
-                                    <button type="button" onclick="showEditStrengthModal('@item.StrengthTrainingTypeId', '@item.TrainingName')"><img class="editBtnImg" src="~/img/pen.png"></button>
+                                    <button type="button" onclick="showEditStrengthModal('@item.StrengthTrainingTypeId', '@item.TrainingName', '@(item.VisibleToAll ? "true" : "false")')"><img class="editBtnImg" src="~/img/pen.png"></button>
                                 </div>
                                 <div class="col-6 acent cent">
                                     <button type="button" onclick="showDeleteStrengthModal('@item.StrengthTrainingTypeId', '@item.TrainingName');"><img class="deleteBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>
