@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        <div class="modal fade" tabindex="-1" id="addTrainingType" data-keyboard="false" style="margin-top: 170px">
+        <div class="modal fade" tabindex="-1" id="addOrEditCardioTrainingType" data-keyboard="false" style="margin-top: 170px">
             <div class="modal-dialog" style="display: flex; justify-content: center">
                 <div class="modal-content">
                     <div class="modal-header" style="height: 35px">
@@ -79,6 +79,40 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" tabindex="-1" id="addOrEditStrengthTrainingType" data-keyboard="false" style="margin-top: 100px">
+            <div class="modal-dialog" style="display: flex; justify-content: center">
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 35px">
+                        <div id="strengthModalTitle" style="margin-top: -10px"></div>
+                        <button type="button" style="margin-top: -29px" class="close" data-dismiss="modal">×</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row no-gutters cent">
+                                <div style="margin-left: -58px">Nazwa ćwiczenia:</div><div class="star">*</div>
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 3px;">
+                                <input id="strengthTrainingTypeName" type="text" maxlength="50" oninput="validity.valid || (value = '')" />
+                            </div>
+                            <div class="row no-gutters cent" style="margin-top: 25px">
+                                <input id="visibleStrength" type="checkbox" checked />
+                                <label for="visibleStrength" style="font-size: 15px">Widoczne dla wszystkich</label>
+                            </div>
+                            <div id="addStrengthArea" hidden class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
+                                <button type="button" onclick="addStrengthTrainingType('@Url.Action("StrengthTrainingType", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
+                            </div>
+                            <div id="editStrengthArea" hidden class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
+                                <input type="hidden" id="strengthTypeId">
+                                <button type="button" onclick="addStrengthTrainingType('@Url.Action("StrengthTrainingType", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Zapisz zmiany ćwiczenia</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
         <div style="display: flex" class="mb-3">

@@ -20,13 +20,13 @@ function textboxresize() {
 
 function showAddCardioModal() {
     clearAllCardioModalData();
-    $("#addTrainingType").modal('show');
+    $("#addOrEditCardioTrainingType").modal('show');
 }
 
 
 function showEditCardioModal(id, name, kcal, visible) {
     setAllCardioModalData(id, name, kcal, visible);
-    $("#addTrainingType").modal('show');
+    $("#addOrEditCardioTrainingType").modal('show');
 }
 
 function clearAllCardioModalData() {
@@ -66,6 +66,33 @@ function addCardioType(url) {
     }
 }
 
+function clearAllStrengthModalData() {
+    document.getElementById("editStrengthArea").hidden = true;
+    document.getElementById("addStrengthArea").hidden = false;
+    document.getElementById("strengthModalTitle").innerHTML = "Tworzenie ćwiczenia";
+    document.getElementById("strengthTrainingTypeName").value = '';
+    document.getElementById("visibleStrength").checked = true;
+}
+
+
+function showAddStrengthModal() {
+    clearAllStrengthModalData()
+}
+
+function showEditStrengthModal(id, name, visible) {
+    setAllStrengthModalData(id, name, visible);
+}
+
+function setAllStrengthModalData(id, name, visible) {
+    document.getElementById("editStrengthArea").hidden = false;
+    document.getElementById("addStrengthArea").hidden = true;
+    document.getElementById("strengthModalTitle").innerHTML = "Edycja ćwiczenia";
+    document.getElementById("strengthTypeId").value = id;
+    document.getElementById("strengthTrainingTypeName").value = name;
+    document.getElementById("visibleStrength").checked = visible == 'true';
+}
+
+
 function editCardioType(url) {
     if (checkIfCardioModalValid()) {
         $.ajax({
@@ -82,6 +109,49 @@ function editCardioType(url) {
             }
         });
     }
+}
+
+function addStrengthTrainingType(url) {
+    if (checkIfStrengthModalValid()) {
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                name: $("#strengthTrainingTypeName").val(),
+                visibleToAll: document.getElementById("visible").checked
+            },
+            success: function () {
+                location.reload();
+            }
+        });
+    }
+}
+
+function editStrengthTrainingType(url) {
+    if (checkIfStrengthModalValid()) {
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            data: {
+                id: $("#strengthTypeId").val(),
+                name: $("#strengthTrainingTypeName").val(),
+                visibleToAll: document.getElementById("visible").checked
+            },
+            success: function () {
+                location.reload();
+            }
+        });
+    }
+}
+
+
+
+function checkIfStrengthModalValid() {
+    if (isEmpty($("#strengthTrainingTypeName").val())) {
+        validation("Podaj nazwę treningu");
+        return false;
+    }
+    return true;
 }
 
 function checkIfCardioModalValid() {
