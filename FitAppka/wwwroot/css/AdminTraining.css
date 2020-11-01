@@ -68,3 +68,10 @@ main{
 #strengthArea{
     margin-top: 25px
 }
+
+#visible{
+    width: 15px;
+    height: 15px;
+    margin-top: 3px;
+    margin-right: 7px
+}
