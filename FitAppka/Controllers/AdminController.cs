@@ -177,6 +177,12 @@ namespace FitAppka.Controllers
             return Json(_administrationService.AddStrengthTrainingType(name, visibleToAll));
         }
 
+        [HttpPut]
+        public JsonResult StrengthTrainingType(int id, string name, bool visibleToAll)
+        {
+            return Json(_administrationService.EditStrengthTrainingType(id, name, visibleToAll));
+        }
+
         [HttpDelete]
         public JsonResult StrengthTrainingType(int id)
         {

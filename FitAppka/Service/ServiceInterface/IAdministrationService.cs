@@ -12,6 +12,7 @@ namespace FitAppka.Service.ServiceInterface
         public bool AddCardioType(string name, int kcalPerMin, bool visibleToAll);
         public bool EditCardioType(int id, string name, int kcalPerMin, bool visibleToAll);
         public bool AddStrengthTrainingType(string name, bool visibleToAll);
+        public bool EditStrengthTrainingType(int id, string name, bool visibleToAll);
         public bool DeleteCardioType(int id);
         public bool DeleteStrengthTrainingType(int id);
         public TrainingsDTO GetTrainingsDTO(string searchCardio, string searchStrength);

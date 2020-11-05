@@ -69,7 +69,7 @@ main{
     margin-top: 25px
 }
 
-#visible{
+#visible, #visibleStrength{
     width: 15px;
     height: 15px;
     margin-top: 3px;

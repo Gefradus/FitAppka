@@ -77,12 +77,12 @@ function clearAllStrengthModalData() {
 
 function showAddStrengthModal() {
     clearAllStrengthModalData()
-    $("addOrEditStrengthTrainingType").modal('show');
+    $("#addOrEditStrengthTrainingType").modal('show');
 }
 
 function showEditStrengthModal(id, name, visible) {
     setAllStrengthModalData(id, name, visible);
-    $("addOrEditStrengthTrainingType").modal('show');
+    $("#addOrEditStrengthTrainingType").modal('show');
 }
 
 function setAllStrengthModalData(id, name, visible) {
@@ -120,7 +120,7 @@ function addStrengthTrainingType(url) {
             url: url,
             data: {
                 name: $("#strengthTrainingTypeName").val(),
-                visibleToAll: document.getElementById("visible").checked
+                visibleToAll: document.getElementById("visibleStrength").checked
             },
             success: function () {
                 location.reload();
@@ -137,7 +137,7 @@ function editStrengthTrainingType(url) {
             data: {
                 id: $("#strengthTypeId").val(),
                 name: $("#strengthTrainingTypeName").val(),
-                visibleToAll: document.getElementById("visible").checked
+                visibleToAll: document.getElementById("visibleStrength").checked
             },
             success: function () {
                 location.reload();

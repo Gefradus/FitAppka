@@ -91,7 +91,7 @@
                     <div class="modal-body">
                         <div class="container">
                             <div class="row no-gutters cent">
-                                <div style="margin-left: -58px">Nazwa ćwiczenia:</div><div class="star">*</div>
+                                <div style="margin-left: -47px">Nazwa ćwiczenia:</div><div class="star">*</div>
                             </div>
                             <div class="row no-gutters cent" style="margin-top: 3px;">
                                 <input id="strengthTrainingTypeName" type="text" maxlength="50" oninput="validity.valid || (value = '')" />
@@ -101,11 +101,11 @@
                                 <label for="visibleStrength" style="font-size: 15px">Widoczne dla wszystkich</label>
                             </div>
                             <div id="addStrengthArea" hidden class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
-                                <button type="button" onclick="addStrengthTrainingType('@Url.Action("StrengthTrainingType", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
+                                <button type="button" onclick="addStrengthTrainingType('@Url.Action("StrengthTrainingType", "Admin")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Utwórz nowe ćwiczenie</button>
                             </div>
                             <div id="editStrengthArea" hidden class="row no-gutters cent" style="margin-top: 33px; margin-bottom: 5px">
                                 <input type="hidden" id="strengthTypeId">
-                                <button type="button" onclick="addStrengthTrainingType('@Url.Action("StrengthTrainingType", "Training")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Zapisz zmiany ćwiczenia</button>
+                                <button type="button" onclick="editStrengthTrainingType('@Url.Action("StrengthTrainingType", "Admin")');" class="btn btn-dark" style="background:#52ad3c; color:white; height: 37px">Zapisz zmiany ćwiczenia</button>
                             </div>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                     <button type="button" class="btn acent" id="btnAddStrength" onclick="showAddStrengthModal()">Dodaj trening siłowy</button>
                 </div>
 
-                <div id="strengthTable">
+                <div id="strengthTable" class="mb-4">
                     <div class="row no-gutters" id="columnsHeader">
                         <div class="col-3 acent cent"><div class="textbox">@Html.TextBox("searchStrength", "", new { placeholder = "Nazwa", @class = "form-control" })</div></div>
                         <div class="col-3 acent cent">ID autora</div>

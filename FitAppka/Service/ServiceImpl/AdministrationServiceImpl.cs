@@ -153,5 +153,18 @@ namespace FitAppka.Service.ServiceImpl
             }
             return false;
         }
+
+        public bool EditStrengthTrainingType(int id, string name, bool visibleToAll)
+        {
+            if (_clientRepository.IsLoggedInClientAdmin())
+            {
+                var type = _strengthTrainingTypeRepository.GetStrengthTrainingType(id);
+                type.TrainingName = name;
+                type.VisibleToAll = visibleToAll;
+                _strengthTrainingTypeRepository.Update(type);
+                return true;
+            }
+            return false;
+        }
     }
 }
