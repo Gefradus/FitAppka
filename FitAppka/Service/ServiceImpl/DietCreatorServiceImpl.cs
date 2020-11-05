@@ -16,11 +16,11 @@ namespace FitAppka.Service.ServiceImpl
     public class DietCreatorServiceImpl : IDietCreatorService
     {
         public IDietRepository DietRepository { get; private set; }
+        public IClientRepository ClientRepository { get; private set; }
         private readonly IClientManageService _clientManageService;
         private readonly IProductRepository _productRepository;
         private readonly IDietProductRepository _dietProductRepository;
         private readonly IContentRootPathHandlerService _contentRootService;
-        private readonly IClientRepository _clientRepository;
         private readonly IMapper _mapper;
 
         public DietCreatorServiceImpl(IDietRepository dietRepository, IMapper mapper, 
@@ -29,7 +29,7 @@ namespace FitAppka.Service.ServiceImpl
         {
             DietRepository = dietRepository;
             _clientManageService = clientManageService;
-            _clientRepository = clientRepository;
+            ClientRepository = clientRepository;
             _contentRootService = contentRootService;
             _dietProductRepository = dietProductRepository;
             _productRepository = productRepository;
@@ -59,7 +59,7 @@ namespace FitAppka.Service.ServiceImpl
         }
 
 
-        private int CountCaloriesSum(List<DietProduct> list)
+        public int CountCaloriesSum(List<DietProduct> list)
         {
             double kcal = 0;
             foreach(var product in list) {
@@ -100,7 +100,7 @@ namespace FitAppka.Service.ServiceImpl
 
         
 
-        private List<DietProductDTO> MapProductsToDietProductsDTO(List<DietProductDTO> productsDTO)
+        public List<DietProductDTO> MapProductsToDietProductsDTO(List<DietProductDTO> productsDTO)
         {
             List<DietProductDTO> list = new List<DietProductDTO>();
             foreach(var dietProduct in productsDTO) {
@@ -109,7 +109,7 @@ namespace FitAppka.Service.ServiceImpl
             return list;
         }
 
-        private List<DietProductDTO> MapDietProductsToDTO(List<DietProduct> dietProducts)
+        public List<DietProductDTO> MapDietProductsToDTO(List<DietProduct> dietProducts)
         {
             var list = new List<DietProductDTO>();
             foreach(var item in dietProducts) {
@@ -184,7 +184,7 @@ namespace FitAppka.Service.ServiceImpl
         {
             if(overriding || CheckIfDietsHaveNoConflict(dietDTO))
             {
-                int clientId = _clientRepository.GetLoggedInClientId();
+                int clientId = _clientManageService.GetLoggedInClientId();
                 Diet diet = _mapper.Map<DietDTO, Diet>(dietDTO);
                 diet.ClientId = clientId;
                 diet.IsDeleted = false;
@@ -273,10 +273,10 @@ namespace FitAppka.Service.ServiceImpl
             }
         }
 
-        public List<ActiveDietDTO> GetActiveDiets()
+        public List<ActiveDietDTO> GetLoggedInClientActiveDiets()
         {
             var list = new List<DietDTO>();
-            foreach(var item in DietRepository.GetAllDiets().Where(d => d.IsDeleted == false)){
+            foreach(var item in DietRepository.GetLoggedInClientDiets()){
                 list.Add(_mapper.Map<Diet, DietDTO>(item));
             }
 
@@ -294,7 +294,7 @@ namespace FitAppka.Service.ServiceImpl
             return SortListOfActiveDiets(listOfActiveDiets);
         }
 
-        private List<ActiveDietDTO> SortListOfActiveDiets(List<ActiveDietDTO> list)
+        public List<ActiveDietDTO> SortListOfActiveDiets(List<ActiveDietDTO> list)
         {
             return list.OrderBy(l => !l.Diet.Active).ThenBy(l => !l.Diet.Monday).ThenBy(l => !l.Diet.Tuesday).ThenBy(l => !l.Diet.Wednesday)
                 .ThenBy(l => !l.Diet.Thursday).ThenBy(l => !l.Diet.Friday).ThenBy(l => !l.Diet.Saturday).ThenBy(l => !l.Diet.Sunday)
@@ -317,7 +317,7 @@ namespace FitAppka.Service.ServiceImpl
         public bool DeleteDiet(int id)
         {
             try {
-                if (_clientManageService.HasUserAccessToDiet(id)/* && DeleteProductsAssignedToDiet(id)*/) {
+                if (_clientManageService.HasUserAccessToDiet(id)) {
                     DietRepository.Delete(id);
                     return true;
                 } 
@@ -327,23 +327,6 @@ namespace FitAppka.Service.ServiceImpl
                 return false;
             }
         }
-
-        /*private bool DeleteProductsAssignedToDiet(int id)
-        {
-            try {
-                foreach (var item in _dietProductRepository.GetAllDietProducts()) {
-                    if (item.DietId == id) {
-                        _dietProductRepository.Delete(item.DietProductId);
-                    }
-                }
-                return true;
-            } 
-            catch {
-                return false;
-            }
-
-        }*/
-
         
     }
 }

@@ -1035,3 +1035,4 @@ C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\DietCreator\MyDiets.cshtml.g.cs
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\DietCreator\EditDiet.cshtml.g.cs
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminEditClient.cshtml.g.cs
+C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminDiet.cshtml.g.cs

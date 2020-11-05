@@ -86,6 +86,19 @@ namespace FitAppka.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult AdminDiet()
+        {
+            if (_clientRepository.IsLoggedInClientAdmin()) 
+            {
+                return View();
+            } 
+            else
+            {
+                return RedirectToAction("Logout", "Login");
+            }
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AdminEditProduct(ProductDTO model, int productID, int addOrEditPhoto)

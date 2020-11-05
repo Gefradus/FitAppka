@@ -13,8 +13,13 @@ namespace FitAppka.Service.ServiceInterface
         public CreateDietDTO DeleteProduct(List<DietProductDTO> addedProducts, int tempId);
         public bool DeleteDiet(int id);
         public EditDietDTO EditDietSearchProduct(int id, string search, bool wasSearched);
-        public List<ActiveDietDTO> GetActiveDiets();
+        public List<ActiveDietDTO> GetLoggedInClientActiveDiets();
         public bool CreateDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding);
         public bool EditDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding);
+        public int CountCaloriesSum(List<DietProduct> list);
+        public List<ActiveDietDTO> SortListOfActiveDiets(List<ActiveDietDTO> list);
+        public List<DietProductDTO> MapDietProductsToDTO(List<DietProduct> dietProducts);
+        public List<DietProductDTO> MapProductsToDietProductsDTO(List<DietProductDTO> productsDTO);
+
     }
 }

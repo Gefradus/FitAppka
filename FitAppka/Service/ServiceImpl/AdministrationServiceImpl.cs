@@ -4,24 +4,33 @@ using FitAppka.Models;
 using AutoMapper;
 using FitAppka.Models.DTO;
 using System.Linq;
+using System.Collections.Generic;
+using FitAppka.Repository.RepoInterface;
 
 namespace FitAppka.Service.ServiceImpl
 {
     public class AdministrationServiceImpl : IAdministrationService
     {
         private readonly IClientRepository _clientRepository;
+        private readonly IDietRepository _dietRepository;
+        private readonly IDietProductRepository _dietProductRepository;
         private readonly ICardioTrainingTypeRepository _cardioTypeRepository;
         private readonly IStrengthTrainingTypeRepository _strengthTrainingTypeRepository;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
         private readonly ISettingsService _settingsService;
+        private readonly IDietCreatorService _dietService;
         private readonly IMapper _mapper;
 
         
 
-        public AdministrationServiceImpl(IClientRepository clientRepository, IMapper mapper,
-            ICardioTrainingTypeRepository cardioRepository, IWeightMeasurementRepository weightMeasurementRepository, 
-            ISettingsService settingsService, IStrengthTrainingTypeRepository strengthTrainingRepository)
+        public AdministrationServiceImpl(IClientRepository clientRepository, IMapper mapper, IDietRepository dietRepository, 
+            IDietCreatorService dietCreatorService, ICardioTrainingTypeRepository cardioRepository, 
+            IWeightMeasurementRepository weightMeasurementRepository, ISettingsService settingsService, 
+            IStrengthTrainingTypeRepository strengthTrainingRepository, IDietProductRepository dietProductRepository)
         {
+            _dietService = dietCreatorService;
+            _dietProductRepository = dietProductRepository;
+            _dietRepository = dietRepository;
             _settingsService = settingsService;
             _strengthTrainingTypeRepository = strengthTrainingRepository;
             _cardioTypeRepository = cardioRepository;
@@ -166,5 +175,28 @@ namespace FitAppka.Service.ServiceImpl
             }
             return false;
         }
+
+        public List<ActiveDietDTO> GetActiveDiets()
+        {
+            var list = new List<DietDTO>();
+            foreach (var item in _dietRepository.GetAllDiets().Where(d => d.IsDeleted == false))
+            {
+                list.Add(_mapper.Map<Diet, DietDTO>(item));
+            }
+
+            var listOfActiveDiets = new List<ActiveDietDTO>();
+            foreach (var item in list)
+            {
+                var dietProducts = _dietProductRepository.GetDietProducts(item.DietId);
+                listOfActiveDiets.Add(new ActiveDietDTO()
+                {
+                    Diet = item,
+                    Products = _dietService.MapProductsToDietProductsDTO(_dietService.MapDietProductsToDTO(dietProducts)),
+                    CaloriesSum = _dietService.CountCaloriesSum(dietProducts)
+                });
+            }
+            return _dietService.SortListOfActiveDiets(listOfActiveDiets);
+        }
+
     }
 }
