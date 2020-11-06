@@ -1,5 +1,7 @@
 ﻿using FitAppka.Models;
 using FitAppka.Models.DTO;
+using FitAppka.Models.DTO.DietCreatorDTO;
+using System.Collections.Generic;
 
 namespace FitAppka.Service.ServiceInterface
 {
@@ -16,5 +18,6 @@ namespace FitAppka.Service.ServiceInterface
         public bool DeleteCardioType(int id);
         public bool DeleteStrengthTrainingType(int id);
         public TrainingsDTO GetTrainingsDTO(string searchCardio, string searchStrength);
+        public List<AdminDietDTO> GetAdminDiets();
     }
 }

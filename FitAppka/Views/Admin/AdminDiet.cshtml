@@ -1,12 +1,15 @@
-﻿@model List<FitAppka.Models.ActiveDietDTO>
+﻿@model List<FitAppka.Models.DTO.DietCreatorDTO.AdminDietDTO>
 <html>
 <head>
     <link href="~/css/AllViews.css" rel="stylesheet" />
     <link href="~/css/Home.css" rel="stylesheet" />
+    <link href="~/css/AdminProduct.css" rel="stylesheet" />
+    <link href="~/css/MyDiets.css" rel="stylesheet" />
+    <script src="~/js/MyDiets.js"></script>
     <script src="~/js/AllViews.js"></script>
     <script src="~/js/Validation.js"></script>
 </head>
-<body>
+<body onload="onload()">
     <div class="container">
         <div class="modal fade" tabindex="-1" id="deleteModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
             <div class="modal-dialog cent">
@@ -29,26 +32,40 @@
                 </div>
             </div>
         </div>
+
+        <div class="row no-gutters">
+            <a asp-action="AdminHome" style="width: inherit;">
+                <img id="btnBackImg" src="~/img/back.png" />
+            </a>
+        </div>
+        <div class="row no-gutters">
+            <a class="btn btn-outline-dark" asp-action="CreateDiet" asp-controller="DietCreator" asp-route-isAdmin="1">
+                Dodaj nową dietę
+            </a>
+        </div>
+
         @if (Model.Count > 0)
         {
             <div class="row no-gutters" id="columnsHeader">
                 <div class="col-10 row no-gutters">
-                    <div class="col-4 acent pl-2 pl-md-3 pl-md-4 pl-lg-5">Nazwa diety</div>
+                    <div class="col-3 acent pl-2 pl-md-3 pl-md-4 pl-lg-5">Nazwa diety</div>
+                    <div class="col-2 cent acent">ID klienta</div>
                     <div class="col-2 cent acent">Aktywna</div>
                     <div class="col-2 cent acent">Łączna kaloryczność</div>
-                    <div class="col-4 cent acent">Zaplanowane dni</div>
+                    <div class="col-3 cent acent">Zaplanowane dni</div>
                 </div>
             </div>
 
             @foreach (var item in Model)
             {
-                var d = item.Diet;
+                var d = item.Diets.Diet;
                 <div class="row no-gutters tableRow">
                     <div class="col-10 row no-gutters">
-                        <div class="col-4 acent pl-2 pl-md-3 pl-md-4 pl-lg-5">@d.DietName</div>
+                        <div class="col-3 acent pl-2 pl-md-3 pl-md-4 pl-lg-5">@d.DietName</div>
+                        <div class="col-2 cent acent">@item.ClientId</div>
                         <div class="col-2 cent acent yesNoActive">@(d.Active ? "TAK" : "NIE")</div>
-                        <div class="col-2 cent acent">@item.CaloriesSum</div>
-                        <div class="col-4 cent acent">
+                        <div class="col-2 cent acent">@item.Diets.CaloriesSum</div>
+                        <div class="col-3 cent acent">
                             @{
                                 int i = 0;
                                 string days = "";
@@ -71,7 +88,7 @@
                         </div>
                     </div>
                     <div class="col-1 cent acent">
-                        <a asp-action="EditDiet" asp-controller="DietCreator" asp-route-id="@d.DietId">
+                        <a asp-action="EditDiet" asp-controller="DietCreator" asp-route-id="@d.DietId" asp-route-isAdmin="1">
                             <img class="btnImg" src="~/img/pen.png" />
                         </a>
                     </div>

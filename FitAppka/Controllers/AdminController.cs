@@ -91,7 +91,7 @@ namespace FitAppka.Controllers
         {
             if (_clientRepository.IsLoggedInClientAdmin()) 
             {
-                return View();
+                return View(_administrationService.GetAdminDiets());
             } 
             else
             {

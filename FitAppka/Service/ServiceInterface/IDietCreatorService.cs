@@ -17,7 +17,6 @@ namespace FitAppka.Service.ServiceInterface
         public bool CreateDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding);
         public bool EditDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding);
         public int CountCaloriesSum(List<DietProduct> list);
-        public List<ActiveDietDTO> SortListOfActiveDiets(List<ActiveDietDTO> list);
         public List<DietProductDTO> MapDietProductsToDTO(List<DietProduct> dietProducts);
         public List<DietProductDTO> MapProductsToDietProductsDTO(List<DietProductDTO> productsDTO);
 

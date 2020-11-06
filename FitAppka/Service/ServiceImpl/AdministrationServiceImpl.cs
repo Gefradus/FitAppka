@@ -6,6 +6,7 @@ using FitAppka.Models.DTO;
 using System.Linq;
 using System.Collections.Generic;
 using FitAppka.Repository.RepoInterface;
+using FitAppka.Models.DTO.DietCreatorDTO;
 
 namespace FitAppka.Service.ServiceImpl
 {
@@ -176,7 +177,7 @@ namespace FitAppka.Service.ServiceImpl
             return false;
         }
 
-        public List<ActiveDietDTO> GetActiveDiets()
+        public List<AdminDietDTO> GetAdminDiets()
         {
             var list = new List<DietDTO>();
             foreach (var item in _dietRepository.GetAllDiets().Where(d => d.IsDeleted == false))
@@ -184,18 +185,30 @@ namespace FitAppka.Service.ServiceImpl
                 list.Add(_mapper.Map<Diet, DietDTO>(item));
             }
 
-            var listOfActiveDiets = new List<ActiveDietDTO>();
+            var listOfAdminDiets = new List<AdminDietDTO>();
             foreach (var item in list)
             {
                 var dietProducts = _dietProductRepository.GetDietProducts(item.DietId);
-                listOfActiveDiets.Add(new ActiveDietDTO()
+                listOfAdminDiets.Add(new AdminDietDTO()
                 {
-                    Diet = item,
-                    Products = _dietService.MapProductsToDietProductsDTO(_dietService.MapDietProductsToDTO(dietProducts)),
-                    CaloriesSum = _dietService.CountCaloriesSum(dietProducts)
-                });
+                    Diets = new ActiveDietDTO()
+                    {
+                        Diet = item,
+                        Products = _dietService.MapProductsToDietProductsDTO(_dietService.MapDietProductsToDTO(dietProducts)),
+                        CaloriesSum = _dietService.CountCaloriesSum(dietProducts)
+                    },
+                    ClientId = _dietRepository.GetDiet(item.DietId).ClientId
+                });   
             }
-            return _dietService.SortListOfActiveDiets(listOfActiveDiets);
+            return SortListOfActiveDiets(listOfAdminDiets);
+        }
+
+
+        public List<AdminDietDTO> SortListOfActiveDiets(List<AdminDietDTO> list)
+        {
+            return list.OrderBy(l => !l.Diets.Diet.Active).ThenBy(l => !l.Diets.Diet.Monday).ThenBy(l => !l.Diets.Diet.Tuesday).ThenBy(l => !l.Diets.Diet.Wednesday)
+                .ThenBy(l => !l.Diets.Diet.Thursday).ThenBy(l => !l.Diets.Diet.Friday).ThenBy(l => !l.Diets.Diet.Saturday).ThenBy(l => !l.Diets.Diet.Sunday)
+                .ThenBy(l => l.Diets.CaloriesSum).ToList();
         }
 
     }
