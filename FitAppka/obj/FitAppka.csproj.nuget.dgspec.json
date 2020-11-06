@@ -76,6 +76,10 @@
               "target": "Package",
               "version": "[3.1.4, )"
             },
+            "iTextSharp.LGPLv2.Core": {
+              "target": "Package",
+              "version": "[1.6.9, )"
+            },
             "jQuery.UI.Combined": {
               "target": "Package",
               "version": "[1.12.1, )"

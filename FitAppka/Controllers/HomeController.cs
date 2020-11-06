@@ -50,6 +50,7 @@ namespace NowyDotnecik.Controllers
             return RedirectToAction(nameof(Home), new { daySelected = DateTime.Now.Date});
         }
 
+
         [HttpGet]
         public IActionResult Return(int dayID)
         {

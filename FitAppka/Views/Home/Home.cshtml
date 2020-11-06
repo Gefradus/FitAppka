@@ -24,11 +24,14 @@
 </head>
 
 <body onload="onload()">
-    @foreach (var item in Model) {
-        if (item.Product.PhotoPath != null) {
+    @foreach (var item in Model)
+    {
+        if (item.Product.PhotoPath != null)
+        {
             <script>pathArray.push('@item.Product.PhotoPath');</script>
         }
-        else {
+        else
+        {
             <script>pathArray.push('null');</script>
         }
         <script>
@@ -119,7 +122,7 @@
                             </div>
 
                             <div class="row no-gutters cent" style="margin-top: 10px;">
-                                <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center;" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 999999)"/><div style="font-weight: 600; margin-top: 2px">g</div>
+                                <input id="grammage" type="number" min="1" max="9999" style="width: 60px; margin-right: 3px; text-align:center;" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 999999)" /><div style="font-weight: 600; margin-top: 2px">g</div>
                                 <button id="editMeal" style="margin-left: 5px; background:none; border:none"><img style="width:30px; height:30px" src="~/img/save.png" /></button>
                             </div>
                         </div>
@@ -416,10 +419,13 @@
             </div>
 
 
-            <div id="boczny" class="col-lg-4 ml-lg-0 my-1 my-lg-0"> 
+            <div id="boczny" class="col-lg-4 ml-lg-0 my-1 my-lg-0">
                 <div id="admin" hidden>
                     <button id="adminBtn" class="btn btn-dark">PANEL ADMINISTRATORA</button>
-                </div> 
+                </div>
+                <div id="export">
+                    <button type="button" onclick="generatePdf()"></button>
+                </div>
                 <div id="chartArea">
                     <h6 style="padding-top: 5px; font-weight:600">Proporcje energetyczne</h6>
                     <div id="piechart" style="padding-bottom: 10px"></div>
@@ -441,7 +447,7 @@
                         <div class="container">
                             <div class="row" style="margin-bottom: 10px">
                                 <div id="editingWater">
-                                    <input id="EditedWater" name="EditedWater" type="number" min="0" max="99999999" value="@ViewData["water"]" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 100000)" oninput="validity.valid || (value = '')"/>
+                                    <input id="EditedWater" name="EditedWater" type="number" min="0" max="99999999" value="@ViewData["water"]" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 100000)" oninput="validity.valid || (value = '')" />
                                 </div>
                                 <div class="divDodEdyWode">
                                     <button type="button" class="button" onclick="editWater('@Url.Action("Water", "Home")', @ViewData["dayID"], @ViewData["caloriesTarget"])">
@@ -449,21 +455,21 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>    
+                        </div>
                     </div>
 
                     <div style="clear:both" id="target">Celuj dziś w wypicie przynajmniej @ViewData["caloriesTarget"] mililitrów wody.</div>
-                        <div class="container">
-                            <div style="padding-bottom: 30px" class="row">
-                                <div id="addingWater">
-                                    <input id="AddedWater" name="AddedWater" type="number" min="1" max="9999999" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 10000)" oninput="validity.valid || (value = '')"/>
-                                </div>
-                                <div id="ml">ml</div>
-                                <div class="divDodEdyWode">
-                                    <button id="dodajWode" type="button" class="btn" onclick="addWater('@Url.Action("Water", "Home")', @ViewData["dayID"], @ViewData["caloriesTarget"])" value="dodajWode">Dodaj</button>
-                                </div>
+                    <div class="container">
+                        <div style="padding-bottom: 30px" class="row">
+                            <div id="addingWater">
+                                <input id="AddedWater" name="AddedWater" type="number" min="1" max="9999999" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 10000)" oninput="validity.valid || (value = '')" />
+                            </div>
+                            <div id="ml">ml</div>
+                            <div class="divDodEdyWode">
+                                <button id="dodajWode" type="button" class="btn" onclick="addWater('@Url.Action("Water", "Home")', @ViewData["dayID"], @ViewData["caloriesTarget"])" value="dodajWode">Dodaj</button>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
 

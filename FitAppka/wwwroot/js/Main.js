@@ -49,6 +49,10 @@ function colorItRed(proteins, carbs, fats, calories) {
     }
 }
 
+function generatePdf() {
+    window.open("../Reports/GenerateDaysReport");
+}
+
 function glass(water, caloriesTarget) {
     var percentage = (water) / (caloriesTarget);
     var path = getRootPath();
