@@ -236,7 +236,7 @@
 
                     </div>
                     <div class="form-group cent mt-4">
-                        <button id="saveDiet" onclick="savediet('@Url.Action("CreateDiet", "DietCreator")', '@Url.Action("ActiveDiets", "DietCreator")')" type="button" class="btn btn-primary mt-4">Zapisz dietę</button>
+                        <button id="saveDiet" onclick="savediet('@Url.Action("CreateDiet", "DietCreator")', '@Url.Action("ActiveDiets", "DietCreator")', '@((bool)ViewData["admin"] ? "true" : "false")', '@Url.Action("AdminDiet", "Admin")')" type="button" class="btn btn-primary mt-4">Zapisz dietę</button>
                     </div>
                     <div class="form-group cent" id="backToDiets">
                         @if ((bool)ViewData["admin"]) {

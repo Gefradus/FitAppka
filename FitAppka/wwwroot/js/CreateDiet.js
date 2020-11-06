@@ -168,7 +168,7 @@ function showAddedProducts(deleteUrl) {
     }
 }
 
-function savediet(url, redirect) {
+function savediet(url, redirect, isAdmin, adminurl) {
     var monday = document.getElementById("Monday").checked;
     var tuesday = document.getElementById("Tuesday").checked;
     var wednesday = document.getElementById("Wednesday").checked;
@@ -214,13 +214,13 @@ function savediet(url, redirect) {
                                         overriding: true
                                     },
                                     success: function () {
-                                        successSaved(redirect);
+                                        successSaved(redirect, adminurl, isAdmin);
                                     }
                                 });
                             });
                             
                         } else {
-                            successSaved(redirect);
+                            successSaved(redirect, adminurl, isAdmin);
                         }
                     }
                 });
@@ -235,15 +235,15 @@ function savediet(url, redirect) {
     }
 }
 
-function successSaved(redirect) {
+function successSaved(redirect, adminUrl, isAdmin) {
     localStorage.removeItem("products");
     localStorage.removeItem("params");
     validation("Dieta zapisana pomyślnie ✅");
     $('#validationModal').on('hidden.bs.modal', function () {
-        location.href = redirect;
+        location.href = isAdmin == 'true' ? adminUrl : redirect;
     });
     setTimeout(function () {
-        location.href = redirect;
+        location.href = isAdmin == 'true' ? adminUrl : redirect;
     }, 3000);
 }
 
