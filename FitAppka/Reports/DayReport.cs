@@ -1,4 +1,4 @@
-﻿using FitAppka.Models;
+﻿using FitAppka.Models.DTO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Hosting;
@@ -18,14 +18,14 @@ namespace FitAppka.Reports
         #region Declaration
         readonly int _maxColumn = 3;
         Document _document;
-        Font _fontStyle;
+        iTextSharp.text.Font _fontStyle;
         readonly PdfPTable _pdfTable = new PdfPTable(3);
         PdfPCell _pdfCell;
         readonly MemoryStream _memoryStream = new MemoryStream();
-        List<Day> _days = new List<Day>();
+        List<DaySummaryDTO> _days = new List<DaySummaryDTO>();
         #endregion
 
-        public byte[] Report(List<Day> days)
+        public byte[] Report(List<DaySummaryDTO> days)
         {
             _days = days;
             _document = new Document();
@@ -58,7 +58,6 @@ namespace FitAppka.Reports
                 Border = 0
             };
             _pdfTable.AddCell(_pdfCell);
-            //_pdfTable.CompleteRow();
 
             _pdfCell = new PdfPCell(SetPageTitle())
             {
@@ -126,22 +125,15 @@ namespace FitAppka.Reports
 
         private void CreateTableBody() {
             _fontStyle = FontFactory.GetFont("Tahoma", 12f, 0);
+            _pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            _pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            _pdfCell.BackgroundColor = BaseColor.LightGray;
+
             foreach (var item in _days)
             {
-                _pdfCell = new PdfPCell(new Phrase(item.Date.Value.ToString("dd.MM.yyyy") + "r.", _fontStyle))
-                {
-                    HorizontalAlignment = Element.ALIGN_CENTER,
-                    VerticalAlignment = Element.ALIGN_MIDDLE,
-                    BackgroundColor = BaseColor.LightGray
-                };
-                _pdfTable.AddCell(_pdfCell);
-
-                _pdfCell.Phrase = new Phrase("0", _fontStyle);
-                _pdfTable.AddCell(_pdfCell);
-
-                _pdfCell.Phrase = new Phrase(item.WaterDrunk.ToString(), _fontStyle);
-                _pdfTable.AddCell(_pdfCell);
-
+                AddCellPhrase(item.Date.ToString("dd.MM.yyyy") + "r.");
+                AddCellPhrase(item.KcalConsumed.ToString());
+                AddCellPhrase(item.WaterDrunk.ToString());
                 _pdfTable.CompleteRow();
             }
         }
@@ -167,7 +159,11 @@ namespace FitAppka.Reports
             _pdfTable.CompleteRow();
         }
 
-
+        private void AddCellPhrase(string s)
+        {
+            _pdfCell.Phrase = new Phrase(s, _fontStyle);
+            _pdfTable.AddCell(_pdfCell);
+        }
 
     }
 }
