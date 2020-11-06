@@ -181,7 +181,7 @@ function showAddedProducts(deleteUrl)
     }
 }
 
-function savediet(url, id) {
+function savediet(url, id, adminurl, isAdmin) {
     var monday = document.getElementById("Monday").checked;
     var tuesday = document.getElementById("Tuesday").checked;
     var wednesday = document.getElementById("Wednesday").checked;
@@ -228,13 +228,13 @@ function savediet(url, id) {
                                         overriding: true
                                     },
                                     success: function () {
-                                        successSaved(url);
+                                        successSaved(url, adminurl, isAdmin);
                                     }
                                 });
                             });
 
                         } else {
-                            successSaved(url);
+                            successSaved(url, adminurl, isAdmin);
                         }
                     }
                 });
@@ -249,14 +249,14 @@ function savediet(url, id) {
     }
 }
 
-function successSaved(redirect) {
+function successSaved(redirect, adminUrl, isAdmin) {
     localStorage.removeItem("paramsEdit")
     validation("Dieta zapisana pomyślnie ✅");
     $('#validationModal').on('hidden.bs.modal', function () {
-        location.href = redirect;
+        location.href = isAdmin == 'true' ? adminUrl : redirect;
     });
     setTimeout(function () {
-        location.href = redirect;
+        location.href = isAdmin == 'true' ? adminUrl : redirect;
     }, 3000);
 }
 

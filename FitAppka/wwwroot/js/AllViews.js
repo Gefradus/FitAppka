@@ -37,6 +37,11 @@ function giveIterFromID(id) {
     return iter;
 }
 
+function hideNavbarIfAdmin() {
+    document.getElementsByClassName("blackNav")[0].hidden = true;
+    document.getElementsByTagName("main")[0].style.paddingTop = "0px";
+}
+
 function colorEverySecondRow() {
     var rows = document.getElementsByClassName("tableRow");
     for (var i = 0; i < rows.length; i++) {

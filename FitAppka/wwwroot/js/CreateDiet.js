@@ -22,6 +22,7 @@
 }
 
 
+
 function onResizeEvent() {
     var protein = document.getElementById("proteinHeader");
     var fats = document.getElementById("fatHeader");

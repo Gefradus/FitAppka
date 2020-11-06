@@ -27,6 +27,11 @@
     </script>
 </head>
 <body onload="onload()">
+
+    @if ((bool)ViewData["admin"]) {
+        <script>hideNavbarIfAdmin();</script>
+    }
+
     <div class="container">
         <div class="modal fade" tabindex="-1" id="addProductModal" data-keyboard="false">
             <div class="modal-dialog">
@@ -247,10 +252,15 @@
                         </div>
                     </div>
                     <div class="form-group cent mt-4">
-                        <button id="saveDiet" onclick="savediet('@Url.Action("EditDiet", "DietCreator")', '@Model.EditedDiet.DietId')" type="button" class="btn btn-primary mt-4">Zapisz dietę</button>
+                        <button id="saveDiet" onclick="savediet('@Url.Action("EditDiet", "DietCreator")', '@Model.EditedDiet.DietId', '@((bool)ViewData["admin"] ? "true" : "false")', '@Url.Action("AdminDiet", "Diet")')" type="button" class="btn btn-primary mt-4">Zapisz dietę</button>
                     </div>
                     <div class="form-group cent" id="backToDiets">
-                        <a asp-action="MyDiets" asp-controller="DietCreator">Wróć do moich diet</a>
+                        @if ((bool)ViewData["admin"]) {
+                            <a asp-action="AdminDiet" asp-controller="Admin">Wróć do diet</a>
+                        }
+                        else {
+                            <a asp-action="MyDiets" asp-controller="DietCreator">Wróć do moich diet</a>
+                        }
                     </div>
                 </form>
             </div>

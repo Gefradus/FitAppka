@@ -27,8 +27,9 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateDiet(string search, bool searched)
+        public IActionResult CreateDiet(string search, bool searched, short isAdmin)
         {
+            ViewData["admin"] = isAdmin == 1;
             ViewData["dayID"] = _dayManageService.GetTodayId();
             return View(_dietCreatorSerivce.SearchProducts(search, searched));
         }
@@ -40,8 +41,9 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditDiet(int id, string search, bool searched, bool change)
+        public IActionResult EditDiet(int id, string search, bool searched, bool change, short isAdmin)
         {
+            ViewData["admin"] = isAdmin == 1;
             ViewData["change"] = change;
             ViewData["dayID"] = _dayManageService.GetTodayId();
             return View(_dietCreatorSerivce.EditDietSearchProduct(id, search, searched));
