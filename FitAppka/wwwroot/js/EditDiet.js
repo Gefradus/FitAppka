@@ -181,7 +181,7 @@ function showAddedProducts(deleteUrl)
     }
 }
 
-function savediet(url, id, adminurl, isAdmin) {
+function savediet(url, id, isAdmin, adminurl) {
     var monday = document.getElementById("Monday").checked;
     var tuesday = document.getElementById("Tuesday").checked;
     var wednesday = document.getElementById("Wednesday").checked;

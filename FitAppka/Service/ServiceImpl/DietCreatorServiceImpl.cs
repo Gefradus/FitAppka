@@ -244,7 +244,7 @@ namespace FitAppka.Service.ServiceImpl
         private bool CheckIfDietsHaveNoConflict(DietDTO diet) {
             if (diet.Active) {
                 foreach(var item in DietRepository.GetLoggedInClientDiets()) {
-                    if(item.Active) {
+                    if(item.Active && item.DietId != diet.DietId) {
                         if(item.Monday && diet.Monday || item.Tuesday && diet.Tuesday || item.Wednesday && diet.Wednesday 
                             || item.Thursday && diet.Thursday || item.Friday && diet.Friday 
                             || item.Saturday && diet.Saturday || item.Sunday && diet.Sunday) {
