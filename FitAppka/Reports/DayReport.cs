@@ -2,11 +2,8 @@
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Hosting;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FitAppka.Reports
 {
@@ -33,17 +30,15 @@ namespace FitAppka.Reports
             _days = days;
             _document = new Document();
             _document.SetPageSize(PageSize.A4);
-            _document.SetMargins(5f, 5f, 20f, 5f);
+            _document.SetMargins(20f, 20f, 40f, 20f);
             _pdfTable.WidthPercentage = 100;
             _pdfTable.HorizontalAlignment = Element.ALIGN_LEFT;
             _fontStyle = FontFactory.GetFont("Tahoma", 8f, 1);
-            PdfWriter pdfWriter = PdfWriter.GetInstance(_document, _memoryStream);
+            PdfWriter.GetInstance(_document, _memoryStream);
             _document.Open();
             float[] sizes = new float[_maxColumn];
-            for(int i = 0; i < _maxColumn; i++) 
-            {
-                if(i == 0) sizes[i] = 20;
-                else sizes[i] = 100; 
+            for(int i = 0; i < _maxColumn; i++) {
+                sizes[i] = 100; 
             }
             _pdfTable.SetWidths(sizes);
             ReportHeader();
@@ -63,11 +58,11 @@ namespace FitAppka.Reports
                 Border = 0
             };
             _pdfTable.AddCell(_pdfCell);
-            _pdfTable.CompleteRow();
+            //_pdfTable.CompleteRow();
 
             _pdfCell = new PdfPCell(SetPageTitle())
             {
-                Colspan = _maxColumn - 1,
+                Colspan = 2,
                 Border = 0
             };
             _pdfTable.AddCell(_pdfCell);
@@ -76,13 +71,12 @@ namespace FitAppka.Reports
 
         private PdfPTable AddLogo()
         {
-            int maxColumn = 1;
+            int maxColumn = 3;
             PdfPTable pdfPTable = new PdfPTable(maxColumn);
-            string path = _webHostEnvironment.WebRootPath + "/img";
-            string imgCombine = Path.Combine(path, "logo.png");
-            Image img = Image.GetInstance(imgCombine);
-            _pdfCell = new PdfPCell(img) {
-                Colspan = maxColumn,
+            Image img = Image.GetInstance(Path.Combine(_webHostEnvironment.WebRootPath + "/img", "logo.png"));
+            _pdfCell = new PdfPCell(img) 
+            {
+                Colspan = 3,
                 HorizontalAlignment = Element.ALIGN_LEFT,
                 Border = 0,
                 ExtraParagraphSpace = 0
@@ -97,9 +91,9 @@ namespace FitAppka.Reports
             int maxColumn = 3;
             PdfPTable pdfPTable = new PdfPTable(maxColumn);
             _fontStyle = FontFactory.GetFont("Tahoma",18f,1);
-            _pdfCell = new PdfPCell(new Phrase("Raport z postępów prowadzenia diety"))
+            _pdfCell = new PdfPCell(new Phrase("Raport z prowadzonej diety"))
             {
-                Colspan = maxColumn,
+                Colspan = 3,
                 HorizontalAlignment = Element.ALIGN_CENTER,
                 Border = 0,
                 ExtraParagraphSpace = 0
@@ -111,13 +105,13 @@ namespace FitAppka.Reports
 
         private void EmptyRow(int count)
         {
-            for(int i = 1; i < count; i++)
+            for(int i = 0; i < count; i++)
             {
-                _pdfCell = new PdfPCell(new Phrase("Raport z postępów prowadzenia diety"))
+                _pdfCell = new PdfPCell(new Phrase(""))
                 {
                     Colspan = _maxColumn,
                     Border = 0,
-                    ExtraParagraphSpace = 0
+                    ExtraParagraphSpace = 10
                 };
                 _pdfTable.AddCell(_pdfCell);
                 _pdfTable.CompleteRow();
@@ -126,33 +120,19 @@ namespace FitAppka.Reports
 
         private void ReportBody()
         {
-            var fontStyleBold = FontFactory.GetFont("Tahoma", 9f, 1);
-            _fontStyle = FontFactory.GetFont("Tahoma", 9f, 0);
-            #region Detail table header
-            _pdfCell = new PdfPCell(new Phrase("Date", fontStyleBold))
+            CreateTableHeader();
+            CreateTableBody();
+        }
+
+        private void CreateTableBody() {
+            _fontStyle = FontFactory.GetFont("Tahoma", 12f, 0);
+            foreach (var item in _days)
             {
-                HorizontalAlignment = Element.ALIGN_CENTER,
-                VerticalAlignment = Element.ALIGN_MIDDLE,
-                BackgroundColor = BaseColor.Gray
-            };
-            _pdfTable.AddCell(_pdfCell);
-
-            _pdfCell.Phrase = new Phrase("Kcal", fontStyleBold);
-            _pdfTable.AddCell(_pdfCell);
-
-            _pdfCell.Phrase = new Phrase("Plyny", fontStyleBold);
-            _pdfTable.AddCell(_pdfCell);
-
-            _pdfTable.CompleteRow();
-            #endregion
-
-            #region Detail table body
-            foreach (var item in _days) {
-                _pdfCell = new PdfPCell(new Phrase(item.Date.Value.ToString("dd-MM-yyyy"), _fontStyle))
+                _pdfCell = new PdfPCell(new Phrase(item.Date.Value.ToString("dd.MM.yyyy") + "r.", _fontStyle))
                 {
                     HorizontalAlignment = Element.ALIGN_CENTER,
                     VerticalAlignment = Element.ALIGN_MIDDLE,
-                    BackgroundColor = BaseColor.Gray
+                    BackgroundColor = BaseColor.LightGray
                 };
                 _pdfTable.AddCell(_pdfCell);
 
@@ -164,7 +144,30 @@ namespace FitAppka.Reports
 
                 _pdfTable.CompleteRow();
             }
-            #endregion
         }
+
+        private void CreateTableHeader()
+        {
+            _fontStyle = FontFactory.GetFont("Tahoma", 12f, 1, BaseColor.White);
+            
+            _pdfCell = new PdfPCell(new Phrase("Dzien", _fontStyle))
+            {
+                HorizontalAlignment = Element.ALIGN_CENTER,
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                BackgroundColor = BaseColor.DarkGray
+            };
+            _pdfTable.AddCell(_pdfCell);
+
+            _pdfCell.Phrase = new Phrase("Spozycie kcal", _fontStyle);
+            _pdfTable.AddCell(_pdfCell);
+
+            _pdfCell.Phrase = new Phrase("Spozycie wody [ml]", _fontStyle);
+            _pdfTable.AddCell(_pdfCell);
+
+            _pdfTable.CompleteRow();
+        }
+
+
+
     }
 }
