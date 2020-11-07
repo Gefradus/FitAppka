@@ -119,6 +119,7 @@ namespace FitAppka.Reports
 
         private void ReportBody()
         {
+            CreateTableHeaderTip();
             CreateTableHeader();
             CreateTableBody();
         }
@@ -141,21 +142,27 @@ namespace FitAppka.Reports
             }
         }
 
+        private void CreateTableHeaderTip()
+        {
+            _fontStyle = FontFactory.GetFont("Tahoma", BaseFont.CP1250, 12f, 1, BaseColor.White);
+            _pdfCell = new PdfPCell { Border = 0 };
+            AddCellPhrase(string.Empty);
+            _pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            _pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            _pdfCell.BackgroundColor = BaseColor.DarkGray;
+            _pdfCell.Border = 1;
+            _pdfCell.Colspan = 5;
+            AddCellPhrase("Spożycie / cel");
+            _pdfCell.Colspan = 1;
+        }
+
         private void CreateTableHeader()
         {
-            _fontStyle = FontFactory.GetFont("Tahoma","UTF-8", 12f, 1, BaseColor.White);
-            _pdfCell = new PdfPCell
-            {
-                HorizontalAlignment = Element.ALIGN_CENTER,
-                VerticalAlignment = Element.ALIGN_MIDDLE,
-                BackgroundColor = BaseColor.DarkGray
-            };
-
             AddCellPhrase("Dzień");
             AddCellPhrase("Kalorie [kcal]");
-            AddCellPhrase("Bialko [g]");
-            AddCellPhrase("Tluszcze [g]");
-            AddCellPhrase("Wegl.[g]");
+            AddCellPhrase("Białko [g]");
+            AddCellPhrase("Tłuszcze [g]");
+            AddCellPhrase("Węgl. [g]");
             AddCellPhrase("Woda [ml]");
 
             _pdfTable.CompleteRow();
