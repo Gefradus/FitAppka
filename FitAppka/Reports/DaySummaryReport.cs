@@ -89,8 +89,7 @@ namespace FitAppka.Reports
         {
             int maxColumn = 4;
             PdfPTable pdfPTable = new PdfPTable(maxColumn);
-            _fontStyle = FontFactory.GetFont(BaseFont.COURIER, 22f, 1);
-            _pdfCell = new PdfPCell(new Phrase("RAPORT PROWADZONEJ DIETY"))
+            _pdfCell = new PdfPCell(new Phrase("DZIENNY RAPORT PROWADZONEJ DIETY"))
             {
                 Colspan = maxColumn,
                 HorizontalAlignment = Element.ALIGN_CENTER,
@@ -121,10 +120,17 @@ namespace FitAppka.Reports
         {
             ReportHeader();
             EmptyRow(6);
+            CreateDayRow();
             CreateTableHeader();
             CreateTableBody();
         }
 
+        private void CreateDayRow()
+        {
+            EmptyRow(5);
+            _fontStyle = FontFactory.GetFont(BaseFont.HELVETICA, BaseFont.CP1257, 18f, 0);
+            AddCellPhrase("Dzień: " + _daySummary.DaySummaryDTO.Date.ToString("dd.MM.yyyy")+"r.");
+        }
        
         private void CreateTableBody()
         {
@@ -147,7 +153,7 @@ namespace FitAppka.Reports
             AddBasicCellPhrase(s.FatsGoal.ToString());
             AddBasicCellPhrase((s.FatsConsumed - s.FatsGoal).ToString());
 
-            AddFirstColumnCellPhrase("Węgl. [g]: ");
+            AddFirstColumnCellPhrase("Węglowodany [g]: ");
             AddBasicCellPhrase(s.CarbohydratesConsumed.ToString());
             AddBasicCellPhrase(s.CarbohydratesGoal.ToString());
             AddBasicCellPhrase((s.CarbohydratesConsumed - s.CarbohydratesGoal).ToString());
