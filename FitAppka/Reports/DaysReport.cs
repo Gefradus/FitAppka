@@ -147,11 +147,13 @@ namespace FitAppka.Reports
             _fontStyle = FontFactory.GetFont("Tahoma", BaseFont.CP1250, 12f, 1, BaseColor.White);
             _pdfCell = new PdfPCell { Border = 0 };
             AddCellPhrase(string.Empty);
-            _pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
-            _pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-            _pdfCell.BackgroundColor = BaseColor.DarkGray;
-            _pdfCell.Border = 1;
-            _pdfCell.Colspan = 5;
+            _pdfCell = new PdfPCell
+            {
+                HorizontalAlignment = Element.ALIGN_CENTER,
+                VerticalAlignment = Element.ALIGN_MIDDLE,
+                BackgroundColor = BaseColor.DarkGray,
+                Colspan = 5
+            };
             AddCellPhrase("Spożycie / cel");
             _pdfCell.Colspan = 1;
         }
