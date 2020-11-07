@@ -42,7 +42,7 @@ namespace FitAppka.Reports
             }
             _pdfTable.SetWidths(sizes);
             ReportHeader();
-            EmptyRow(2);
+            EmptyRow(6);
             ReportBody();
             _pdfTable.HeaderRows = 2;
             _document.Add(_pdfTable);
@@ -125,7 +125,7 @@ namespace FitAppka.Reports
         }
 
         private void CreateTableBody() {
-            _fontStyle = FontFactory.GetFont("Tahoma", 12f, 0);
+            _fontStyle = FontFactory.GetFont("Tahoma", 10f, 0);
             _pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             _pdfCell.BackgroundColor = BaseColor.LightGray;
@@ -133,18 +133,18 @@ namespace FitAppka.Reports
             foreach (var item in _days)
             {
                 AddCellPhrase(item.Date.ToString("dd.MM.yyyy") + "r.");
-                AddCellPhrase(item.KcalConsumed.ToString());
-                AddCellPhrase(item.ProteinsConsumed.ToString());
-                AddCellPhrase(item.FatsConsumed.ToString());
-                AddCellPhrase(item.CarbohydratesConsumed.ToString());
-                AddCellPhrase(item.WaterDrunk.ToString());
+                AddCellPhrase(item.KcalConsumed + " / " + item.KcalGoal);
+                AddCellPhrase(item.ProteinsConsumed + " / " + item.ProteinsGoal);
+                AddCellPhrase(item.FatsConsumed + " / " + item.FatsGoal);
+                AddCellPhrase(item.CarbohydratesConsumed + " / " + item.CarbohydratesGoal);
+                AddCellPhrase(item.WaterDrunk + " / " + item.KcalGoal);
                 _pdfTable.CompleteRow();
             }
         }
 
         private void CreateTableHeaderTip()
         {
-            _fontStyle = FontFactory.GetFont("Tahoma", BaseFont.CP1250, 12f, 1, BaseColor.White);
+            _fontStyle = FontFactory.GetFont(BaseFont.HELVETICA, BaseFont.CP1257, 12f, 1, BaseColor.White);
             _pdfCell = new PdfPCell { Border = 0 };
             AddCellPhrase(string.Empty);
             _pdfCell = new PdfPCell
