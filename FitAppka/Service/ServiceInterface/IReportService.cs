@@ -7,6 +7,6 @@ namespace FitAppka.Service.ServiceInterface
     public interface IReportService
     {
         public DaysSummaryDTO GetDaysSummary();
-        public DaySummaryWithDetailsDTO GetDayWithDetails();
+        public DaySummaryWithDetailsDTO GetDayWithDetails(int dayId);
     }
 }

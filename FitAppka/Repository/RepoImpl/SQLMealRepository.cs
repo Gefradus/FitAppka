@@ -43,6 +43,11 @@ namespace FitAppka.Repository.RepIfaceImpl
             return _context.Meal.Where(m => m.DayId == dayId && m.InWhichMealOfTheDay == whichMealOfTheDay);
         }
 
+        public List<Meal> GetAllDayMeals(int dayId)
+        {
+            return _context.Meal.Where(m => m.DayId == dayId).ToList();
+        }
+
         public Meal GetMeal(int id)
         {
             return _context.Meal.Find(id);

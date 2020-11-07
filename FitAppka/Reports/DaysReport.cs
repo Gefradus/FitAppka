@@ -3,7 +3,6 @@ using FitAppka.Models.DTO.DaySummaryDTO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Hosting;
-using System.Collections.Generic;
 using System.IO;
 
 namespace FitAppka.Reports
@@ -42,8 +41,7 @@ namespace FitAppka.Reports
                 sizes[i] = 100; 
             }
             _pdfTable.SetWidths(sizes);
-            ReportHeader();
-            EmptyRow(6);
+
             ReportBody();
             _pdfTable.HeaderRows = 2;
             _document.Add(_pdfTable);
@@ -121,6 +119,8 @@ namespace FitAppka.Reports
 
         private void ReportBody()
         {
+            ReportHeader();
+            EmptyRow(6);
             CreateTableHeaderTip();
             CreateTableHeader();
             CreateTableBody();
@@ -130,15 +130,37 @@ namespace FitAppka.Reports
 
         private void CreateSummaryRows()
         {
-            AddCellPhrase("Suma:");
-            //AddCellPhrase()
+            _pdfCell = new PdfPCell { ExtraParagraphSpace = 4 };
+            CreateBasicPdfPCell();
+            _fontStyle = FontFactory.GetFont(BaseFont.HELVETICA, BaseFont.CP1257, 10f);
+
+            AddCellPhrase("Suma spożycia: ");
+            AddCellPhrase(_daysSummary.SumOfKcalConsumed.ToString());
+            AddCellPhrase(_daysSummary.SumOfProteinsConsumed.ToString());
+            AddCellPhrase(_daysSummary.SumOfFatsConsumed.ToString());
+            AddCellPhrase(_daysSummary.SumOfCarbsConsumed.ToString());
+            AddCellPhrase(_daysSummary.SumOfWaterDrunk.ToString());
+            _pdfTable.CompleteRow();
+
+            AddCellPhrase("Suma celów: ");
+            AddCellPhrase(_daysSummary.SumOfKcalGoals.ToString());
+            AddCellPhrase(_daysSummary.SumOfProteinsGoals.ToString());
+            AddCellPhrase(_daysSummary.SumOfFatsGoals.ToString());
+            AddCellPhrase(_daysSummary.SumOfCarbsGoals.ToString());
+            AddCellPhrase(_daysSummary.SumOfKcalGoals.ToString());
+            _pdfTable.CompleteRow();
+
+            AddCellPhrase("-");
+            AddCellPhrase((_daysSummary.SumOfKcalConsumed - _daysSummary.SumOfKcalGoals).ToString());
+            AddCellPhrase((_daysSummary.SumOfProteinsConsumed - _daysSummary.SumOfProteinsGoals).ToString());
+            AddCellPhrase((_daysSummary.SumOfFatsConsumed - _daysSummary.SumOfFatsGoals).ToString());
+            AddCellPhrase((_daysSummary.SumOfCarbsConsumed - _daysSummary.SumOfCarbsGoals).ToString());
+            AddCellPhrase((_daysSummary.SumOfWaterDrunk - _daysSummary.SumOfKcalGoals).ToString());
         }
 
         private void CreateTableBody() {
             _fontStyle = FontFactory.GetFont("Tahoma", 10f, 0);
-            _pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
-            _pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-            _pdfCell.BackgroundColor = BaseColor.White;
+            CreateBasicPdfPCell();
 
             foreach (var item in _daysSummary.Days)
             {
@@ -152,6 +174,14 @@ namespace FitAppka.Reports
             }
         }
 
+        private void CreateBasicPdfPCell()
+        {
+            _pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            _pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            _pdfCell.BackgroundColor = BaseColor.White;
+        }
+
+
         private void CreateTableHeaderTip()
         {
             _fontStyle = FontFactory.GetFont(BaseFont.HELVETICA, BaseFont.CP1257, 12f, 1, BaseColor.White);
@@ -163,7 +193,7 @@ namespace FitAppka.Reports
                 VerticalAlignment = Element.ALIGN_MIDDLE,
                 BackgroundColor = BaseColor.DarkGray,
                 Colspan = 5,
-                ExtraParagraphSpace = 5
+                ExtraParagraphSpace = 4
             };
             AddCellPhrase("Spożyto / cel");
             _pdfCell.Colspan = 1;
@@ -177,7 +207,6 @@ namespace FitAppka.Reports
             AddCellPhrase("Tłuszcze [g]");
             AddCellPhrase("Węgl. [g]");
             AddCellPhrase("Woda [ml]");
-
             _pdfTable.CompleteRow();
         }
 

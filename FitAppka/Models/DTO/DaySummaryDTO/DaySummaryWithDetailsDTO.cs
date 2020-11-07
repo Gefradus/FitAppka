@@ -1,8 +1,8 @@
-﻿namespace FitAppka.Models.DTO
+﻿namespace FitAppka.Models.DTO.DaySummaryDTO
 {
     public class DaySummaryWithDetailsDTO
     {
-        DayDTO DaySummaryDTO { get; set; }
-        DaySummaryDetailsDTO DetailsDTO { get; set; }
+        public DayDTO DaySummaryDTO { get; set; }
+        public DaySummaryDetailsDTO DetailsDTO { get; set; }
     }
 }

@@ -49,8 +49,8 @@ function colorItRed(proteins, carbs, fats, calories) {
     }
 }
 
-function generatePdf() {
-    window.open("../Reports/GenerateDaysReport");
+function generatePdf(id) {
+    window.open("../Reports/GenerateDaySummaryReport/" + id);
 }
 
 function glass(water, caloriesTarget) {
