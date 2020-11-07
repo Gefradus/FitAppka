@@ -50,6 +50,7 @@ namespace FitAppka.Service.ServiceImpl
 
             return new DaysSummaryDTO()
             {
+                Days = list,
                 SumOfKcalConsumed = list.Sum(d => d.KcalConsumed),
                 SumOfCarbsConsumed = list.Sum(d => d.CarbohydratesConsumed),
                 SumOfFatsConsumed = list.Sum(d => d.FatsConsumed),
