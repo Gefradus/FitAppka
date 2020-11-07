@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models.DTO;
+using FitAppka.Models.DTO.DaySummaryDTO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Hosting;
@@ -22,12 +23,12 @@ namespace FitAppka.Reports
         readonly PdfPTable _pdfTable = new PdfPTable(6);
         PdfPCell _pdfCell;
         readonly MemoryStream _memoryStream = new MemoryStream();
-        List<DaySummaryDTO> _days = new List<DaySummaryDTO>();
+        DaysSummaryDTO _daysSummary = new DaysSummaryDTO();
         #endregion
 
-        public byte[] Report(List<DaySummaryDTO> days)
+        public byte[] Report(DaysSummaryDTO daysSummary)
         {
-            _days = days;
+            _daysSummary = daysSummary;
             _document = new Document();
             _document.SetPageSize(PageSize.A4);
             _document.SetMargins(20f, 20f, 40f, 20f);
@@ -62,7 +63,8 @@ namespace FitAppka.Reports
             _pdfCell = new PdfPCell(SetPageTitle())
             {
                 Colspan = 4,
-                Border = 0
+                Border = 0,
+                VerticalAlignment = Element.ALIGN_BOTTOM,
             };
             _pdfTable.AddCell(_pdfCell);
             _pdfTable.CompleteRow();
@@ -89,8 +91,8 @@ namespace FitAppka.Reports
         {
             int maxColumn = 6;
             PdfPTable pdfPTable = new PdfPTable(maxColumn);
-            _fontStyle = FontFactory.GetFont("Tahoma",18f,1);
-            _pdfCell = new PdfPCell(new Phrase("Raport z prowadzonej diety"))
+            _fontStyle = FontFactory.GetFont(BaseFont.COURIER,22f,1);
+            _pdfCell = new PdfPCell(new Phrase("RAPORT PROWADZONEJ DIETY"))
             {
                 Colspan = maxColumn,
                 HorizontalAlignment = Element.ALIGN_CENTER,
@@ -122,6 +124,14 @@ namespace FitAppka.Reports
             CreateTableHeaderTip();
             CreateTableHeader();
             CreateTableBody();
+            EmptyRow(5);
+            CreateSummaryRows();
+        }
+
+        private void CreateSummaryRows()
+        {
+            AddCellPhrase("Suma:");
+            //AddCellPhrase()
         }
 
         private void CreateTableBody() {
@@ -130,7 +140,7 @@ namespace FitAppka.Reports
             _pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             _pdfCell.BackgroundColor = BaseColor.White;
 
-            foreach (var item in _days)
+            foreach (var item in _daysSummary.Days)
             {
                 AddCellPhrase(item.Date.ToString("dd.MM.yyyy") + "r.");
                 AddCellPhrase(item.KcalConsumed + " / " + item.KcalGoal);
@@ -155,7 +165,7 @@ namespace FitAppka.Reports
                 Colspan = 5,
                 ExtraParagraphSpace = 5
             };
-            AddCellPhrase("Spożycie / cel");
+            AddCellPhrase("Spożyto / cel");
             _pdfCell.Colspan = 1;
         }
 

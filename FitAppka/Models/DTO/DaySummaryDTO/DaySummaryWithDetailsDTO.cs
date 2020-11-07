@@ -2,7 +2,7 @@
 {
     public class DaySummaryWithDetailsDTO
     {
-        DaySummaryDTO DaySummaryDTO { get; set; }
+        DayDTO DaySummaryDTO { get; set; }
         DaySummaryDetailsDTO DetailsDTO { get; set; }
     }
 }

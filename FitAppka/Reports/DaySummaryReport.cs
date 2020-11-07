@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models.DTO;
+using FitAppka.Models.DTO.DaySummaryDTO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Hosting;
@@ -22,12 +23,12 @@ namespace FitAppka.Reports
         readonly PdfPTable _pdfTable = new PdfPTable(3);
         PdfPCell _pdfCell;
         readonly MemoryStream _memoryStream = new MemoryStream();
-        List<DaySummaryDTO> _days = new List<DaySummaryDTO>();
+        DaysSummaryDTO _daysSummaryDTO = new DaysSummaryDTO();
         #endregion
 
-        public byte[] Report(List<DaySummaryDTO> days)
+        public byte[] Report(DaysSummaryDTO daysSummaryDTO)
         {
-            _days = days;
+            _daysSummaryDTO = daysSummaryDTO;
             _document = new Document();
             _document.SetPageSize(PageSize.A4);
             _document.SetMargins(20f, 20f, 40f, 20f);
@@ -131,7 +132,7 @@ namespace FitAppka.Reports
             _pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             _pdfCell.BackgroundColor = BaseColor.LightGray;
 
-            foreach (var item in _days)
+            foreach (var item in _daysSummaryDTO.Days)
             {
                 AddCellPhrase(item.Date.ToString("dd.MM.yyyy") + "r.");
                 AddCellPhrase(item.KcalConsumed.ToString());

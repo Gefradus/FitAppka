@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models.DTO;
+using FitAppka.Models.DTO.DaySummaryDTO;
 using FitAppka.Repository;
 using FitAppka.Service.ServiceInterface;
 using System;
@@ -20,21 +21,21 @@ namespace FitAppka.Service.ServiceImpl
             _goalsRepository = goalsRepository;
         }
 
-        public List<DaySummaryDTO> GetDays()
+        private List<DayDTO> GetDays()
         {
-            var days = new List<DaySummaryDTO>();
+            var days = new List<DayDTO>();
             foreach (var item in _dayRepository.GetLoggedInClientDays())
             {
                 var goal = _goalsRepository.GetDayGoals(item.DayId);
                 DateTime dateTime = _dayRepository.GetDayDateTime(item.DayId);
-                days.Add(new DaySummaryDTO()
+                days.Add(new DayDTO()
                 {
                     Date = item.Date.GetValueOrDefault(),
-                    KcalConsumed = (int)_homePageService.SumAllKcalInDay(dateTime),
+                    KcalConsumed = _homePageService.SumAllKcalInDay(dateTime),
                     ProteinsConsumed = _homePageService.SumAllProteinsInDay(dateTime),
                     FatsConsumed = _homePageService.SumAllFatsInDay(dateTime),
                     CarbohydratesConsumed = _homePageService.SumAllCarbsInDay(dateTime),
-                    KcalGoal = (int)goal.Calories,
+                    KcalGoal = goal.Calories,
                     ProteinsGoal = goal.Proteins,
                     FatsGoal = goal.Fats,
                     CarbohydratesGoal = goal.Carbohydrates,
@@ -43,6 +44,23 @@ namespace FitAppka.Service.ServiceImpl
             }
             return days.OrderBy(d => d.Date).ToList();
         }
+
+        public DaysSummaryDTO GetDaysSummary() {
+            var list = GetDays();
+
+            return new DaysSummaryDTO()
+            {
+                SumOfKcalConsumed = list.Sum(d => d.KcalConsumed),
+                SumOfCarbsConsumed = list.Sum(d => d.CarbohydratesConsumed),
+                SumOfFatsConsumed = list.Sum(d => d.FatsConsumed),
+                SumOfProteinsConsumed = list.Sum(d => d.ProteinsConsumed),
+                SumOfKcalGoals = list.Sum(d => d.KcalGoal),
+                SumOfProteinsGoals = list.Sum(d => d.ProteinsGoal),
+                SumOfCarbsGoals = list.Sum(d => d.CarbohydratesGoal),
+                SumOfFatsGoals = list.Sum(d => d.FatsGoal)
+            };
+        }
+
 
         public DaySummaryWithDetailsDTO GetDayWithDetails()
         {
