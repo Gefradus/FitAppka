@@ -128,7 +128,7 @@ namespace FitAppka.Reports
             _fontStyle = FontFactory.GetFont("Tahoma", 10f, 0);
             _pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-            _pdfCell.BackgroundColor = BaseColor.LightGray;
+            _pdfCell.BackgroundColor = BaseColor.White;
 
             foreach (var item in _days)
             {
@@ -152,7 +152,8 @@ namespace FitAppka.Reports
                 HorizontalAlignment = Element.ALIGN_CENTER,
                 VerticalAlignment = Element.ALIGN_MIDDLE,
                 BackgroundColor = BaseColor.DarkGray,
-                Colspan = 5
+                Colspan = 5,
+                ExtraParagraphSpace = 5
             };
             AddCellPhrase("Spożycie / cel");
             _pdfCell.Colspan = 1;
