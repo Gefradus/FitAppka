@@ -1,12 +1,10 @@
-﻿using FitAppka.Models.DTO;
-using FitAppka.Models.DTO.DaySummaryDTO;
-using System.Collections.Generic;
+﻿using FitAppka.Models.DTO.DaySummaryDTO;
 
 namespace FitAppka.Service.ServiceInterface
 {
     public interface IReportService
     {
-        public DaysSummaryDTO GetDaysSummary();
+        public DaysSummaryDTO GetMonthSummary(int dayId);
         public DaySummaryWithDetailsDTO GetDayWithDetails(int dayId);
     }
 }

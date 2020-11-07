@@ -7,10 +7,10 @@ using System.IO;
 
 namespace FitAppka.Reports
 {
-    public class DaysReport
+    public class MonthSummaryReport
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public DaysReport(IWebHostEnvironment webHostEnvironment)
+        public MonthSummaryReport(IWebHostEnvironment webHostEnvironment)
         {
             _webHostEnvironment = webHostEnvironment;
         }
@@ -90,7 +90,7 @@ namespace FitAppka.Reports
             int maxColumn = 6;
             PdfPTable pdfPTable = new PdfPTable(maxColumn);
             _fontStyle = FontFactory.GetFont(BaseFont.COURIER,22f,1);
-            _pdfCell = new PdfPCell(new Phrase("RAPORT PROWADZONEJ DIETY"))
+            _pdfCell = new PdfPCell(new Phrase("MIESIĘCZNY RAPORT PROWADZONEJ DIETY"))
             {
                 Colspan = maxColumn,
                 HorizontalAlignment = Element.ALIGN_CENTER,

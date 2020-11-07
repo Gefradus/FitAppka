@@ -18,10 +18,10 @@ namespace FitAppka.Controllers
             _reportService = reportService;
         }
 
-        public ActionResult GenerateDaysReport()
+        public ActionResult GenerateMonthSummaryReport(int id)
         {
-            DaysReport dayReport = new DaysReport(_hostEnvironment);
-            return File(dayReport.Report(_reportService.GetDaysSummary()), "application/pdf");
+            MonthSummaryReport dayReport = new MonthSummaryReport(_hostEnvironment);
+            return File(dayReport.Report(_reportService.GetMonthSummary(id)), "application/pdf");
         }
 
         public ActionResult GenerateDaySummaryReport(int id)

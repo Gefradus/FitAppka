@@ -53,6 +53,10 @@ function generatePdf(id) {
     window.open("../Reports/GenerateDaySummaryReport/" + id);
 }
 
+function generateMonthPdf(id) {
+    window.open("../Reports/GenerateMonthSummaryReport/" + id);
+}
+
 function glass(water, caloriesTarget) {
     var percentage = (water) / (caloriesTarget);
     var path = getRootPath();

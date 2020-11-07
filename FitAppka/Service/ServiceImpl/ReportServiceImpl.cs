@@ -25,10 +25,10 @@ namespace FitAppka.Service.ServiceImpl
             _goalsRepository = goalsRepository;
         }
 
-        private List<DayDTO> GetDays()
+        private List<DayDTO> GetDays(int dayId)
         {
             var days = new List<DayDTO>();
-            foreach (var item in _dayRepository.GetLoggedInClientDays())
+            foreach (var item in GetMonthDays(dayId))
             {
                 var goal = _goalsRepository.GetDayGoals(item.DayId);
                 DateTime dateTime = _dayRepository.GetDayDateTime(item.DayId);
@@ -49,8 +49,21 @@ namespace FitAppka.Service.ServiceImpl
             return days.OrderBy(d => d.Date).ToList();
         }
 
-        public DaysSummaryDTO GetDaysSummary() {
-            var list = GetDays();
+        private List<Models.Day> GetMonthDays(int dayId)
+        {
+            var date = _dayRepository.GetDay(dayId).Date.GetValueOrDefault();
+            var list = new List<Models.Day>();
+            foreach(var day in _dayRepository.GetLoggedInClientDays())
+            {
+                if(day.Date.GetValueOrDefault().Year == date.Year && day.Date.GetValueOrDefault().Month == date.Month) {
+                    list.Add(day);
+                }
+            }
+            return list;
+        }
+
+        public DaysSummaryDTO GetMonthSummary(int dayId) {
+            var list = GetDays(dayId);
 
             return new DaysSummaryDTO()
             {
