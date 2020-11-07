@@ -20,8 +20,13 @@ namespace FitAppka.Controllers
 
         public ActionResult GenerateDaysReport()
         {
-            DayReport dayReport = new DayReport(_hostEnvironment);
+            DaysReport dayReport = new DaysReport(_hostEnvironment);
             return File(dayReport.Report(_reportService.GetDays()), "application/pdf");
         }
+
+        /*public ActionResult GenerateDaySummaryReport()
+        {
+
+        }*/
     }
 }

@@ -7,10 +7,10 @@ using System.IO;
 
 namespace FitAppka.Reports
 {
-    public class DayReport
+    public class DaySummaryReport
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public DayReport(IWebHostEnvironment webHostEnvironment)
+        public DaySummaryReport(IWebHostEnvironment webHostEnvironment)
         {
             _webHostEnvironment = webHostEnvironment;
         }
@@ -18,7 +18,7 @@ namespace FitAppka.Reports
         #region Declaration
         readonly int _maxColumn = 3;
         Document _document;
-        iTextSharp.text.Font _fontStyle;
+        Font _fontStyle;
         readonly PdfPTable _pdfTable = new PdfPTable(3);
         PdfPCell _pdfCell;
         readonly MemoryStream _memoryStream = new MemoryStream();
@@ -37,8 +37,9 @@ namespace FitAppka.Reports
             PdfWriter.GetInstance(_document, _memoryStream);
             _document.Open();
             float[] sizes = new float[_maxColumn];
-            for(int i = 0; i < _maxColumn; i++) {
-                sizes[i] = 100; 
+            for (int i = 0; i < _maxColumn; i++)
+            {
+                sizes[i] = 100;
             }
             _pdfTable.SetWidths(sizes);
             ReportHeader();
@@ -73,7 +74,7 @@ namespace FitAppka.Reports
             int maxColumn = 3;
             PdfPTable pdfPTable = new PdfPTable(maxColumn);
             Image img = Image.GetInstance(Path.Combine(_webHostEnvironment.WebRootPath + "/img", "logo.png"));
-            _pdfCell = new PdfPCell(img) 
+            _pdfCell = new PdfPCell(img)
             {
                 Colspan = 3,
                 HorizontalAlignment = Element.ALIGN_LEFT,
@@ -89,7 +90,7 @@ namespace FitAppka.Reports
         {
             int maxColumn = 3;
             PdfPTable pdfPTable = new PdfPTable(maxColumn);
-            _fontStyle = FontFactory.GetFont("Tahoma",18f,1);
+            _fontStyle = FontFactory.GetFont("Tahoma", 18f, 1);
             _pdfCell = new PdfPCell(new Phrase("Raport z prowadzonej diety"))
             {
                 Colspan = 3,
@@ -104,7 +105,7 @@ namespace FitAppka.Reports
 
         private void EmptyRow(int count)
         {
-            for(int i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 _pdfCell = new PdfPCell(new Phrase(""))
                 {
@@ -123,7 +124,8 @@ namespace FitAppka.Reports
             CreateTableBody();
         }
 
-        private void CreateTableBody() {
+        private void CreateTableBody()
+        {
             _fontStyle = FontFactory.GetFont("Tahoma", 12f, 0);
             _pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -141,7 +143,7 @@ namespace FitAppka.Reports
         private void CreateTableHeader()
         {
             _fontStyle = FontFactory.GetFont("Tahoma", 12f, 1, BaseColor.White);
-            
+
             _pdfCell = new PdfPCell(new Phrase("Dzien", _fontStyle))
             {
                 HorizontalAlignment = Element.ALIGN_CENTER,
@@ -164,6 +166,5 @@ namespace FitAppka.Reports
             _pdfCell.Phrase = new Phrase(s, _fontStyle);
             _pdfTable.AddCell(_pdfCell);
         }
-
     }
 }
