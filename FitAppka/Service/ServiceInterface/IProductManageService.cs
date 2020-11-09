@@ -1,6 +1,5 @@
 ﻿using FitAppka.Models;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace FitAppka.Service
 {
@@ -12,6 +11,6 @@ namespace FitAppka.Service
         public void UpdateProduct(ProductDTO model, int id, int addOrEditPhoto);
         Product GetProduct(int id);
         Product Delete(int id);
-        Task<List<ProductDTO>> SearchProduct(string search, bool onlyUserItem);
+        List<ProductDTO> SearchProduct(string search, bool onlyUserItem, int dayId, bool onlyFromDiet);
     }
 }

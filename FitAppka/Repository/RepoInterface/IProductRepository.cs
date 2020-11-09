@@ -10,8 +10,8 @@ namespace FitAppka.Repository
         Product GetProductAsNoTracking(int id);
         IEnumerable<Product> GetAllProducts();
         List<Product> GetAccessedToLoggedInClientProducts();
-        Task<List<Product>> SearchProducts(string search);
-        Task<List<Product>> GetLoggedInClientProducts();
+        List<Product> SearchProducts(string search);
+        List<Product> GetLoggedInClientProducts();
         Product Add(Product produkt);
         Product Update(Product produkt);
         Product Delete(int id);

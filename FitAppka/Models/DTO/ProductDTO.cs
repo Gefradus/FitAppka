@@ -78,5 +78,6 @@ namespace FitAppka.Models
         public double? Calcium { get; set; }
         [Range(0, 10000, ErrorMessage = "Żelazo może wynosić max. 10000")]
         public double? Iron { get; set; }
+        public bool Eaten { get; set; }
     }
 }

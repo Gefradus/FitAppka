@@ -89,8 +89,8 @@ namespace FitAppka.Reports
         {
             int maxColumn = 6;
             PdfPTable pdfPTable = new PdfPTable(maxColumn);
-            _fontStyle = FontFactory.GetFont(BaseFont.COURIER,22f,1);
-            _pdfCell = new PdfPCell(new Phrase("MIESIĘCZNY RAPORT PROWADZONEJ DIETY"))
+            _fontStyle = FontFactory.GetFont(BaseFont.HELVETICA, BaseFont.CP1257, 14f, 0);
+            _pdfCell = new PdfPCell(new Phrase("MIESIĘCZNY RAPORT PROWADZONEJ DIETY", _fontStyle))
             {
                 Colspan = maxColumn,
                 HorizontalAlignment = Element.ALIGN_CENTER,
@@ -120,7 +120,7 @@ namespace FitAppka.Reports
         private void ReportBody()
         {
             ReportHeader();
-            EmptyRow(6);
+            EmptyRow(12);
             CreateTableHeaderTip();
             CreateTableHeader();
             CreateTableBody();

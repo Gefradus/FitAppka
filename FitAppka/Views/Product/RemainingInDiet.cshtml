@@ -18,7 +18,7 @@
 <body onload="onload()">
     <input id="productId" type="hidden" />
     <input id="dayId" type="hidden" value="@ViewData["dayID"]">
-    <input id="atWhichMealOfTheDay" type="hidden" value="@ViewData["inWhich"]"> 
+    <input id="atWhichMealOfTheDay" type="hidden" value="@ViewData["inWhich"]">
 
     <header>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 blackNav">
@@ -162,106 +162,54 @@
         <div style="margin-top: -16px">
             @foreach (var item in Model)
             {
-                @if (item.Eaten) 
-                { 
-                    <div class="row no-gutters tableRowEaten">
-                        <div class="col-4 acent">
-                            <div class="container" style="padding-left: 0">
-                                <div class="row no-gutters">
-                                    <div class="d-none d-md-inline-block col-md-5 col-lg-6">
-                                        @{ string photoPath;
-                                            if (item.PhotoPath != null)
-                                            {
-                                                photoPath = "~/photos/" + (item.PhotoPath);
-                                                <script>pathArray.push('@item.PhotoPath');</script>
-                                            }
-                                            else
-                                            {
-                                                photoPath = "~/img/miss.png";
-                                                <script>pathArray.push('null');</script>
-                                            }
-                                            <script>
-                                                IDarray.push('@item.ProductId');
-                                                nameArray.push('@item.ProductName');
-                                                kcalArray.push('@item.Calories');
-                                                proteinsArray.push('@item.Proteins');
-                                                fatsArray.push('@item.Fats');
-                                                carbsArray.push('@item.Carbohydrates');
-                                            </script>
+                <div class="row no-gutters tableRow">
+                    <div class="col-4 acent">
+                        <div class="container" style="padding-left: 0">
+                            <div class="row no-gutters">
+                                <div class="d-none d-md-inline-block col-md-5 col-lg-6">
+                                    @{ string photoPath;
+                                        if (item.PhotoPath != null)
+                                        {
+                                            photoPath = "~/photos/" + (item.PhotoPath);
+                                            <script>pathArray.push('@item.PhotoPath');</script>
                                         }
-                                        <img src="@photoPath" class="photo" asp-append-version="true" />
-                                    </div>
-                                    <div class="col-12 col-md-7 col-lg-6 productName">
-                                        @Html.DisplayFor(i => item.ProductName)
-                                    </div>
+                                        else
+                                        {
+                                            photoPath = "~/img/miss.png";
+                                            <script>pathArray.push('null');</script>
+                                        }
+                                        <script>
+                                            IDarray.push('@item.ProductId');
+                                            nameArray.push('@item.ProductName');
+                                            kcalArray.push('@item.Calories');
+                                            proteinsArray.push('@item.Proteins');
+                                            fatsArray.push('@item.Fats');
+                                            carbsArray.push('@item.Carbohydrates');
+                                        </script>
+                                    }
+                                    <img src="@photoPath" class="photo" asp-append-version="true" />
+                                </div>
+                                <div class="col-12 col-md-7 col-lg-6 productName">
+                                    @Html.DisplayFor(i => item.ProductName)
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-7 marauto">
-                            <div class="container">
-                                <div class="row no-gutters">
-                                    <div class="col-3">@Html.DisplayFor(i => item.Calories)kcal</div>
-                                    <div class="col-3">@Html.DisplayFor(i => item.Proteins)g</div>
-                                    <div class="col-3">@Html.DisplayFor(i => item.Fats)g</div>
-                                    <div class="col-3">@Html.DisplayFor(i => item.Carbohydrates)g</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-1 addMealPanel">
-                            <button class="showModalAddMealBtn" onclick="showModalAddMeal(@item.ProductId)"><img class="addMealIcon" src="~/img/add.png"></button>
                         </div>
                     </div>
-                } else { 
-                    <div class="row no-gutters tableRow">
-                        <div class="col-4 acent">
-                            <div class="container" style="padding-left: 0">
-                                <div class="row no-gutters">
-                                    <div class="d-none d-md-inline-block col-md-5 col-lg-6">
-                                        @{ string photoPath;
-                                            if (item.PhotoPath != null)
-                                            {
-                                                photoPath = "~/photos/" + (item.PhotoPath);
-                                                <script>pathArray.push('@item.PhotoPath');</script>
-                                            }
-                                            else
-                                            {
-                                                photoPath = "~/img/miss.png";
-                                                <script>pathArray.push('null');</script>
-                                            }
-                                            <script>
-                                                        IDarray.push('@item.ProductId');
-                                                        nameArray.push('@item.ProductName');
-                                                        kcalArray.push('@item.Calories');
-                                                        proteinsArray.push('@item.Proteins');
-                                                        fatsArray.push('@item.Fats');
-                                                        carbsArray.push('@item.Carbohydrates');
-                                            </script>
-                                        }
-                                        <img src="@photoPath" class="photo" asp-append-version="true" />
-                                    </div>
-                                    <div class="col-12 col-md-7 col-lg-6 productName">
-                                        @Html.DisplayFor(i => item.ProductName)
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-7 marauto">
-                            <div class="container">
-                                <div class="row no-gutters">
-                                    <div class="col-3">@Html.DisplayFor(i => item.Calories)kcal</div>
-                                    <div class="col-3">@Html.DisplayFor(i => item.Proteins)g</div>
-                                    <div class="col-3">@Html.DisplayFor(i => item.Fats)g</div>
-                                    <div class="col-3">@Html.DisplayFor(i => item.Carbohydrates)g</div>
-                                </div>
+                    <div class="col-7 marauto">
+                        <div class="container">
+                            <div class="row no-gutters">
+                                <div class="col-3">@Html.DisplayFor(i => item.Calories)kcal</div>
+                                <div class="col-3">@Html.DisplayFor(i => item.Proteins)g</div>
+                                <div class="col-3">@Html.DisplayFor(i => item.Fats)g</div>
+                                <div class="col-3">@Html.DisplayFor(i => item.Carbohydrates)g</div>
                             </div>
-                        </div>
-                        <div class="col-1 addMealPanel">
-                            <button class="showModalAddMealBtn" onclick="showModalAddMeal(@item.ProductId)"><img class="addMealIcon" src="~/img/add.png"></button>
                         </div>
                     </div>
-                }
+                    <div class="col-1 addMealPanel">
+                        <button class="showModalAddMealBtn" onclick="showModalAddMeal(@item.ProductId)"><img class="addMealIcon" src="~/img/add.png"></button>
+                    </div>
+                </div>
             }
         </div>
 

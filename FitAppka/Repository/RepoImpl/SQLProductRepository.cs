@@ -1,4 +1,5 @@
 ﻿using FitAppka.Models;
+using FitAppka.Repository.RepoInterface;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,11 +43,11 @@ namespace FitAppka.Repository.RepIfaceImpl
             return _context.Product.ToList();
         }
 
-        public async Task<List<Product>> SearchProducts(string search)
+        public List<Product> SearchProducts(string search)
         {
-            return await _context.Product.Where(p => (p.ProductName.Contains(search) || string.IsNullOrEmpty(search)) 
+            return _context.Product.Where(p => (p.ProductName.Contains(search) || string.IsNullOrEmpty(search)) 
                 && (p.ClientId == _clientRepository.GetLoggedInClientId() || _clientRepository.IsLoggedInClientAdmin()
-                || p.VisibleToAll) && p.IsDeleted == false).ToListAsync();
+                || p.VisibleToAll) && p.IsDeleted == false).ToList();
         }
 
         public List<Product> GetAccessedToLoggedInClientProducts()
@@ -55,11 +56,12 @@ namespace FitAppka.Repository.RepIfaceImpl
                 _clientRepository.IsLoggedInClientAdmin() || p.VisibleToAll) && p.IsDeleted == false).ToList();
         }
 
-        public async Task<List<Product>> GetLoggedInClientProducts()
+        public List<Product> GetLoggedInClientProducts()
         {
-            return await _context.Product.Where(p => p.ClientId == _clientRepository.GetLoggedInClientId() && p.IsDeleted == false).ToListAsync();
+            return _context.Product.Where(p => p.ClientId == _clientRepository.GetLoggedInClientId() && p.IsDeleted == false).ToList();
         }
 
+       
         public Product GetProduct(int id)
         {
             return _context.Product.Find(id);
@@ -76,5 +78,7 @@ namespace FitAppka.Repository.RepIfaceImpl
         {
             return _context.Product.AsNoTracking().FirstOrDefault(p => p.ProductId == id);
         }
+
+        
     }
 }

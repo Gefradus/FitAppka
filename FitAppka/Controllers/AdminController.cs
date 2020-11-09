@@ -63,10 +63,10 @@ namespace FitAppka.Controllers
       
 
         [HttpGet]
-        public async Task<IActionResult> AdminProduct(string search)
+        public IActionResult AdminProduct(string search)
         {
             if (_clientRepository.IsLoggedInClientAdmin()) {
-                return View(await _productManageService.SearchProduct(search, false));
+                return View(_productManageService.SearchProduct(search, false, 0, false));
             }
             else {
                 return RedirectToAction("Logout", "Login");

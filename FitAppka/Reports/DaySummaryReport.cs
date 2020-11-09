@@ -89,7 +89,8 @@ namespace FitAppka.Reports
         {
             int maxColumn = 4;
             PdfPTable pdfPTable = new PdfPTable(maxColumn);
-            _pdfCell = new PdfPCell(new Phrase("DZIENNY RAPORT PROWADZONEJ DIETY"))
+            _fontStyle = FontFactory.GetFont(BaseFont.HELVETICA, BaseFont.CP1257, 14f, 0);
+            _pdfCell = new PdfPCell(new Phrase("DZIENNY RAPORT PROWADZONEJ DIETY", _fontStyle))
             {
                 Colspan = maxColumn,
                 HorizontalAlignment = Element.ALIGN_CENTER,

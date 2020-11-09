@@ -2,11 +2,13 @@
 using FitAppka.Models;
 using FitAppka.Models.Enum;
 using FitAppka.Repository;
+using FitAppka.Repository.RepoInterface;
+using FitAppka.Service.ServiceInterface;
 using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace FitAppka.Service.ServiceImpl
 {
@@ -17,15 +19,21 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IProductRepository _productRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IClientManageService _clientManageService;
+        private readonly IDietCreatorService _dietCreatorService;
+        private readonly IDietProductRepository _dietProductRepository;
+        private readonly IMealRepository _mealRepository;
         private readonly IMapper _mapper;
 
-        public ProductManageServiceImpl(IDayRepository dayRepository, IWebHostEnvironment hostEnvironment, IMapper mapper,
-            IProductRepository productRepository, IClientRepository clientRepository, IClientManageService clientManageService)
+        public ProductManageServiceImpl(IDayRepository dayRepository, IWebHostEnvironment hostEnvironment, IMapper mapper, IDietCreatorService dietCreatorService, IMealRepository mealRepository,
+            IProductRepository productRepository, IClientRepository clientRepository, IClientManageService clientManageService, IDietProductRepository dietProductRepository)
         {
             _mapper = mapper;
+            _dietCreatorService = dietCreatorService;
+            _dietProductRepository = dietProductRepository;
             _clientManageService = clientManageService;
             _clientRepository = clientRepository;
             _productRepository = productRepository;
+            _mealRepository = mealRepository;
             _hostEnvironment = hostEnvironment;
             _dayRepository = dayRepository;
         }
@@ -67,9 +75,55 @@ namespace FitAppka.Service.ServiceImpl
             return uniqueFileName;
         }
 
-        public async Task<List<ProductDTO>> SearchProduct(string search, bool onlyUserItem)
+        public List<ProductDTO> SearchProduct(string search, bool onlyUserItem, int dayId, bool onlyFromDiet)
         {
-            return await _mapper.Map<Task<List<Product>>, Task<List<ProductDTO>>>(onlyUserItem ? _productRepository.GetLoggedInClientProducts() : _productRepository.SearchProducts(search));
+            List<ProductDTO> list = _mapper.Map<List<Product>, List<ProductDTO>>(onlyUserItem ? _productRepository.GetLoggedInClientProducts() :
+                onlyFromDiet ? GetProductsFromDiet(dayId) : _productRepository.SearchProducts(search));
+
+            return onlyFromDiet ? CheckIfEaten(list, dayId) : list;
+        }
+
+
+        private List<ProductDTO> CheckIfEaten(List<ProductDTO> list, int dayId)
+        {
+            var activeDiet = _dietCreatorService.GetActiveDiet((int)_dayRepository.GetDay(dayId).Date.GetValueOrDefault().DayOfWeek, true);
+            if (activeDiet != null)
+            {
+                foreach (var meal in _mealRepository.GetAllDayMeals(dayId))
+                {
+                    foreach (var product in list)
+                    {
+                        foreach (var diet in _dietProductRepository.GetDietProducts(activeDiet.Diet.DietId))
+                        {
+                            if (diet.ProductId == product.ProductId && product.ProductId == meal.ProductId
+                                && diet.Grammage <= _mealRepository.GetAllDayMeals(dayId).Where(m => m.ProductId == product.ProductId).Sum(m => m.Grammage))
+                            {
+                                product.Eaten = true;
+                            }
+                        }
+                    }
+                }
+            }
+            return list.OrderBy(p => p.Eaten).ToList();
+        }
+
+
+        private List<Product> GetProductsFromDiet(int dayId)
+        {
+            var diet = _dietCreatorService.GetActiveDiet((int)_dayRepository.GetDay(dayId).Date.GetValueOrDefault().DayOfWeek, true);
+            
+            var list = new List<Product>();
+            var idList = new List<int>();
+            if (diet != null) {
+                foreach (var item in _dietProductRepository.GetDietProducts(diet.Diet.DietId))
+                {
+                    if (!idList.Contains(item.ProductId)) {
+                        idList.Add(item.ProductId);
+                        list.Add(_productRepository.GetProduct(item.ProductId));
+                    }
+                }
+            }
+            return list;
         }
 
         public void CreateProductFromModel(ProductDTO productDTO)

@@ -57,7 +57,14 @@
     border-bottom-right-radius: 0%
 }
 
-
+.tableRowEaten {
+    text-decoration: line-through;
+    background-color: rgba(204, 147, 147, 0.58) !important;
+    backdrop-filter: blur(1px);
+    text-align: center;
+    height: 90px;
+    font-size: 14px;
+}
 
 .addIcon {
     width: 20px;
@@ -90,14 +97,18 @@
     width: 30px
 }
 
-#showMyProducts {
+#showMyProducts, #showFromDiet {
     background-color: #564e80;
     width: 225px;
     height: 38px;
     border: 1px solid #6b6a6a !important
 }
 
-#showMyProducts:hover, #addProduct:hover {
+#showFromDiet {
+    background-color: #c76565
+}
+
+#showMyProducts:hover, #addProduct:hover, #showFromDiet:hover {
     background-color: white;
     color: black;
 }

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using FitAppka.Models;
 using Microsoft.AspNetCore.Authorization;
 using FitAppka.Repository;
@@ -28,10 +27,10 @@ namespace FitAppka.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Search(string search, int inWhich, int dayID, bool onlyUserItem)
+        public IActionResult Search(string search, int inWhich, int dayID, bool onlyUserItem, bool onlyFromDiet)
         {
             SearchProductViewData(search, inWhich, dayID);
-            return View(await _productManageService.SearchProduct(search, onlyUserItem));
+            return View(_productManageService.SearchProduct(search, onlyUserItem, dayID, onlyFromDiet));
         }
 
 
