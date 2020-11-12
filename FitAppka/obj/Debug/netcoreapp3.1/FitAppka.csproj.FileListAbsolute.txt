@@ -1040,4 +1040,3 @@ C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\System.Tex
 C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.csproj.CoreCompileInputs.cache
 C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\FitAppka.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\fader\source\repos\FitAppka\FitAppka\obj\Debug\netcoreapp3.1\Razor\Views\Product\RemainingInDiet.cshtml.g.cs

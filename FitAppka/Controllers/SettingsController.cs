@@ -13,15 +13,13 @@ namespace FitAppka.Controllers
         private readonly IClientRepository _clientRepository;
         private readonly ISettingsService _settingsService;
         private readonly IDayManageService _dayService;
-        private readonly IMeasurementsService _measurementsService;
         private readonly IWeightMeasurementRepository _weightMeasurementRepository;
 
         public SettingsController(IClientRepository clientRepository, ISettingsService settingsService, 
-            IDayManageService dayService, IMeasurementsService measurementsService, IWeightMeasurementRepository weightMeasurementRepository)
+            IDayManageService dayService, IWeightMeasurementRepository weightMeasurementRepository)
         {
             _weightMeasurementRepository = weightMeasurementRepository;
             _dayService = dayService;
-            _measurementsService = measurementsService;
             _clientRepository = clientRepository;
             _settingsService = settingsService;
         }

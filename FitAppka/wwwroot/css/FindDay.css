@@ -119,6 +119,9 @@
     width: 100%
 }
 
+#headerRow{
+    margin-top: 100px
+}
 
 .panelek {
     margin-top: -5px
@@ -271,6 +274,9 @@
 }
 
 @media(max-width: 575px){
+    #headerRow{
+        margin-top: 180px
+    }
     .jcontent-flex-end{
         justify-content: center !important
     }

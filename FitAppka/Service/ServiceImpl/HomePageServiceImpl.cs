@@ -150,12 +150,36 @@ namespace FitAppka.Service.ServicesImpl
 
         private void SetTheMeal(Meal meal, DateTime daySelected)
         {
-            Product product = _productRepository.GetProduct(meal.ProductId);
+            Product p = _productRepository.GetProduct(meal.ProductId);
 
-            meal.Calories = RoundDouble(meal.Grammage * product.Calories / 100);
-            meal.Proteins = RoundDouble(meal.Grammage * product.Proteins / 100);
-            meal.Carbohydrates = RoundDouble(meal.Grammage * product.Carbohydrates / 100);
-            meal.Fats = RoundDouble(meal.Grammage * product.Fats / 100);
+            int gram = meal.Grammage;
+            meal.Calories = RoundDouble(gram * p.Calories / 100);
+            meal.Proteins = RoundDouble(gram * p.Proteins / 100);
+            meal.Carbohydrates = RoundDouble(gram * p.Carbohydrates / 100);
+            meal.Fats = RoundDouble(gram * p.Fats / 100);
+            meal.Biotin = RoundDoubleMicro(gram, p.Biotin);
+            meal.Calcium = RoundDoubleMicro(gram, p.Calcium);
+            meal.Copper = RoundDoubleMicro(gram, p.Copper);
+            meal.FolicAcid = RoundDoubleMicro(gram, p.FolicAcid);
+            meal.Iodine = RoundDoubleMicro(gram, p.Iodine);
+            meal.Iron = RoundDoubleMicro(gram, p.Iron);
+            meal.Magnesium = RoundDoubleMicro(gram, p.Magnesium);
+            meal.Phosphorus = RoundDoubleMicro(gram, p.Phosphorus);
+            meal.Potassium = RoundDoubleMicro(gram, p.Potassium);
+            meal.Selenium = RoundDoubleMicro(gram, p.Selenium);
+            meal.Sodium = RoundDoubleMicro(gram, p.Sodium);
+            meal.VitaminA = RoundDoubleMicro(gram, p.VitaminA);
+            meal.VitaminB1 = RoundDoubleMicro(gram, p.VitaminB1);
+            meal.VitaminB12 = RoundDoubleMicro(gram, p.VitaminB12);
+            meal.VitaminB2 = RoundDoubleMicro(gram, p.VitaminB2);
+            meal.VitaminB5 = RoundDoubleMicro(gram, p.VitaminB5);
+            meal.VitaminB6 = RoundDoubleMicro(gram, p.VitaminB6);
+            meal.VitaminC = RoundDoubleMicro(gram, p.VitaminC);
+            meal.VitaminD = RoundDoubleMicro(gram, p.VitaminD);
+            meal.VitaminE = RoundDoubleMicro(gram, p.VitaminE);
+            meal.VitaminK = RoundDoubleMicro(gram, p.VitaminK);
+            meal.VitaminPp = RoundDoubleMicro(gram, p.VitaminPp);
+            meal.Zinc = RoundDoubleMicro(gram, p.Zinc);
 
             _dayManageService.AddDayIfNotExists(daySelected);
             meal.DayId = _dayRepository.GetClientDayByDate(daySelected, _clientRepository.GetLoggedInClientId()).DayId;
@@ -169,6 +193,11 @@ namespace FitAppka.Service.ServicesImpl
         private double RoundDouble(double? number)
         {
             return (double)Math.Round((decimal)number, 1, MidpointRounding.AwayFromZero);
+        }
+
+        private double RoundDoubleMicro(int gram, double? number)
+        {
+            return gram * (number == null ? 0 : (double)Math.Round((decimal)number, 4, MidpointRounding.AwayFromZero)) / 100;
         }
 
         public double SumAllListItems(List<double> list)

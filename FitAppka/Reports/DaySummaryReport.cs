@@ -2,6 +2,7 @@
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Hosting;
+using System;
 using System.IO;
 
 namespace FitAppka.Reports
@@ -139,145 +140,155 @@ namespace FitAppka.Reports
             var d = _daySummary.DetailsDTO;
 
             AddFirstColumnCellPhrase("Kalorie [kcal]: ");
-            AddBasicCellPhrase(s.KcalConsumed.ToString());
-            AddBasicCellPhrase(s.KcalGoal.ToString());
-            AddBasicCellPhrase((s.KcalConsumed - s.KcalGoal).ToString());
+            AddBasicCellPhrase(RoundDouble(s.KcalConsumed));
+            AddBasicCellPhrase(RoundDouble(s.KcalGoal));
+            AddBasicCellPhrase(RoundDouble(s.KcalConsumed - s.KcalGoal));
             _pdfTable.CompleteRow();
 
             AddFirstColumnCellPhrase("Białko [g]: ");
-            AddBasicCellPhrase(s.ProteinsConsumed.ToString());
-            AddBasicCellPhrase(s.ProteinsGoal.ToString());
-            AddBasicCellPhrase((s.ProteinsConsumed - s.ProteinsGoal).ToString());
+            AddBasicCellPhrase(RoundDouble(s.ProteinsConsumed));
+            AddBasicCellPhrase(RoundDouble(s.ProteinsGoal));
+            AddBasicCellPhrase(RoundDouble(s.ProteinsConsumed - s.ProteinsGoal));
 
             AddFirstColumnCellPhrase("Tłuszcze [g]: ");
-            AddBasicCellPhrase(s.FatsConsumed.ToString());
-            AddBasicCellPhrase(s.FatsGoal.ToString());
-            AddBasicCellPhrase((s.FatsConsumed - s.FatsGoal).ToString());
+            AddBasicCellPhrase(RoundDouble(s.FatsConsumed));
+            AddBasicCellPhrase(RoundDouble(s.FatsGoal));
+            AddBasicCellPhrase(RoundDouble(s.FatsConsumed - s.FatsGoal));
 
             AddFirstColumnCellPhrase("Węglowodany [g]: ");
-            AddBasicCellPhrase(s.CarbohydratesConsumed.ToString());
-            AddBasicCellPhrase(s.CarbohydratesGoal.ToString());
-            AddBasicCellPhrase((s.CarbohydratesConsumed - s.CarbohydratesGoal).ToString());
+            AddBasicCellPhrase(RoundDouble(s.CarbohydratesConsumed));
+            AddBasicCellPhrase(RoundDouble(s.CarbohydratesGoal));
+            AddBasicCellPhrase(RoundDouble(s.CarbohydratesConsumed - s.CarbohydratesGoal));
 
             AddFirstColumnCellPhrase("Woda [ml]: ");
             AddBasicCellPhrase(s.WaterDrunk.ToString());
-            AddBasicCellPhrase(s.KcalGoal.ToString());
-            AddBasicCellPhrase((s.WaterDrunk - s.KcalGoal).ToString());
+            AddBasicCellPhrase(RoundDouble(s.KcalGoal));
+            AddBasicCellPhrase(RoundDouble(s.WaterDrunk - s.KcalGoal));
 
             AddFirstColumnCellPhrase("Wit. A [µg]: ");
-            AddBasicCellPhrase(d.VitaminA_Consumed.ToString());
-            AddBasicCellPhrase(d.VitaminA_Goal.ToString());
-            AddBasicCellPhrase((d.VitaminA_Consumed - d.VitaminA_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminA_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminA_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminA_Consumed - d.VitaminA_Goal));
 
             AddFirstColumnCellPhrase("Wit. C [mg]: ");
-            AddBasicCellPhrase(d.VitaminC_Consumed.ToString());
-            AddBasicCellPhrase(d.VitaminC_Goal.ToString());
-            AddBasicCellPhrase((d.VitaminC_Consumed - d.VitaminC_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminC_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminC_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminC_Consumed - d.VitaminC_Goal));
 
             AddFirstColumnCellPhrase("Wit. D [µg]: ");
-            AddBasicCellPhrase(d.VitaminD_Consumed.ToString());
-            AddBasicCellPhrase(d.VitaminD_Goal.ToString());
-            AddBasicCellPhrase((d.VitaminD_Consumed - d.VitaminD_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminD_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminD_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminD_Consumed - d.VitaminD_Goal));
 
             AddFirstColumnCellPhrase("Wit. K [µg]: ");
-            AddBasicCellPhrase(d.VitaminK_Consumed.ToString());
-            AddBasicCellPhrase(d.VitaminK_Goal.ToString());
-            AddBasicCellPhrase((d.VitaminK_Consumed - d.VitaminK_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminK_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminK_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminK_Consumed - d.VitaminK_Goal));
 
             AddFirstColumnCellPhrase("Wit. E [mg]: ");
-            AddBasicCellPhrase(d.VitaminE_Consumed.ToString());
-            AddBasicCellPhrase(d.VitaminE_Goal.ToString());
-            AddBasicCellPhrase((d.VitaminE_Consumed - d.VitaminE_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminE_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminE_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminE_Consumed - d.VitaminE_Goal));
 
             AddFirstColumnCellPhrase("Wit. B1 [mg]: ");
-            AddBasicCellPhrase(d.VitaminB1_Consumed.ToString());
-            AddBasicCellPhrase(d.VitaminB1_Goal.ToString());
-            AddBasicCellPhrase((d.VitaminB1_Consumed - d.VitaminB1_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB1_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB1_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB1_Consumed - d.VitaminB1_Goal));
 
             AddFirstColumnCellPhrase("Wit. B2 [mg]: ");
-            AddBasicCellPhrase(d.VitaminB2_Consumed.ToString());
-            AddBasicCellPhrase(d.VitaminB2_Goal.ToString());
-            AddBasicCellPhrase((d.VitaminB2_Consumed - d.VitaminB2_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB2_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB2_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB2_Consumed - d.VitaminB2_Goal));
 
             AddFirstColumnCellPhrase("Wit. B5 [mg]: ");
-            AddBasicCellPhrase(d.VitaminB5_Consumed.ToString());
-            AddBasicCellPhrase(d.VitaminB5_Goal.ToString());
-            AddBasicCellPhrase((d.VitaminB5_Consumed - d.VitaminB5_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB5_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB5_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB5_Consumed - d.VitaminB5_Goal));
 
             AddFirstColumnCellPhrase("Wit. B6 [mg]: ");
-            AddBasicCellPhrase(d.VitaminB6_Consumed.ToString());
-            AddBasicCellPhrase(d.VitaminB6_Goal.ToString());
-            AddBasicCellPhrase((d.VitaminB6_Consumed - d.VitaminB6_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB6_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB6_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB6_Consumed - d.VitaminB6_Goal));
 
             AddFirstColumnCellPhrase("Kwas foliowy [µg]: ");
-            AddBasicCellPhrase(d.FolicAcid_Consumed.ToString());
-            AddBasicCellPhrase(d.FolicAcid_Goal.ToString());
-            AddBasicCellPhrase((d.FolicAcid_Consumed - d.FolicAcid_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.FolicAcid_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.FolicAcid_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.FolicAcid_Consumed - d.FolicAcid_Goal));
 
             AddFirstColumnCellPhrase("Wit. B12 [µg]: ");
-            AddBasicCellPhrase(d.VitaminB12_Consumed.ToString());
-            AddBasicCellPhrase(d.VitaminB12_Goal.ToString());
-            AddBasicCellPhrase((d.VitaminB12_Consumed - d.VitaminB12_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB12_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB12_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminB12_Consumed - d.VitaminB12_Goal));
 
             AddFirstColumnCellPhrase("Wit. PP [mg]: ");
-            AddBasicCellPhrase(d.VitaminPp_Consumed.ToString());
-            AddBasicCellPhrase(d.VitaminPp_Goal.ToString());
-            AddBasicCellPhrase((d.VitaminPp_Consumed - d.VitaminPp_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminPp_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminPp_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.VitaminPp_Consumed - d.VitaminPp_Goal));
 
             AddFirstColumnCellPhrase("Biotyna [µg]: ");
-            AddBasicCellPhrase(d.Biotin_Consumed.ToString());
-            AddBasicCellPhrase(d.Biotin_Goal.ToString());
-            AddBasicCellPhrase((d.Biotin_Consumed - d.Biotin_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.Biotin_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Biotin_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Biotin_Consumed - d.Biotin_Goal));
 
             AddFirstColumnCellPhrase("Cynk [mg]: ");
-            AddBasicCellPhrase(d.Zinc_Consumed.ToString());
-            AddBasicCellPhrase(d.Zinc_Goal.ToString());
-            AddBasicCellPhrase((d.Zinc_Consumed - d.Zinc_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.Zinc_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Zinc_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Zinc_Consumed - d.Zinc_Goal));
 
             AddFirstColumnCellPhrase("Fosfor [mg]: ");
-            AddBasicCellPhrase(d.Phosphorus_Consumed.ToString());
-            AddBasicCellPhrase(d.Phosphorus_Goal.ToString());
-            AddBasicCellPhrase((d.Phosphorus_Consumed - d.Phosphorus_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.Phosphorus_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Phosphorus_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Phosphorus_Consumed - d.Phosphorus_Goal));
 
             AddFirstColumnCellPhrase("Jod [µg]: ");
-            AddBasicCellPhrase(d.Iodine_Consumed.ToString());
-            AddBasicCellPhrase(d.Iodine_Goal.ToString());
-            AddBasicCellPhrase((d.Iodine_Consumed - d.Iodine_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.Iodine_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Iodine_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Iodine_Consumed - d.Iodine_Goal));
 
             AddFirstColumnCellPhrase("Magnez [mg]: ");
-            AddBasicCellPhrase(d.Magnesium_Consumed.ToString());
-            AddBasicCellPhrase(d.Magnesium_Goal.ToString());
-            AddBasicCellPhrase((d.Magnesium_Consumed - d.Magnesium_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.Magnesium_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Magnesium_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Magnesium_Consumed - d.Magnesium_Goal));
 
             AddFirstColumnCellPhrase("Miedź [mg]: ");
-            AddBasicCellPhrase(d.Copper_Consumed.ToString());
-            AddBasicCellPhrase(d.Copper_Goal.ToString());
-            AddBasicCellPhrase((d.Copper_Consumed - d.Copper_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.Copper_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Copper_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Copper_Consumed - d.Copper_Goal));
 
             AddFirstColumnCellPhrase("Potas [mg]: ");
-            AddBasicCellPhrase(d.Potassium_Consumed.ToString());
-            AddBasicCellPhrase(d.Potassium_Goal.ToString());
-            AddBasicCellPhrase((d.Potassium_Consumed - d.Potassium_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.Potassium_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Potassium_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Potassium_Consumed - d.Potassium_Goal));
 
             AddFirstColumnCellPhrase("Selen [µg]: ");
-            AddBasicCellPhrase(d.Selenium_Consumed.ToString());
-            AddBasicCellPhrase(d.Selenium_Goal.ToString());
-            AddBasicCellPhrase((d.Selenium_Consumed - d.Selenium_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.Selenium_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Selenium_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Selenium_Consumed - d.Selenium_Goal));
 
             AddFirstColumnCellPhrase("Sód [mg]: ");
-            AddBasicCellPhrase(d.Sodium_Consumed.ToString());
-            AddBasicCellPhrase(d.Sodium_Goal.ToString());
-            AddBasicCellPhrase((d.Sodium_Consumed - d.Sodium_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.Sodium_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Sodium_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Sodium_Consumed - d.Sodium_Goal));
 
             AddFirstColumnCellPhrase("Wapń [mg]: ");
-            AddBasicCellPhrase(d.Calcium_Consumed.ToString());
-            AddBasicCellPhrase(d.Calcium_Goal.ToString());
-            AddBasicCellPhrase((d.Calcium_Consumed - d.Calcium_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.Calcium_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Calcium_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Calcium_Consumed - d.Calcium_Goal));
 
             AddFirstColumnCellPhrase("Żelazo [mg]: ");
-            AddBasicCellPhrase(d.Iron_Consumed.ToString());
-            AddBasicCellPhrase(d.Iron_Goal.ToString());
-            AddBasicCellPhrase((d.Iron_Consumed - d.Iron_Goal).ToString());
+            AddBasicCellPhrase(RoundDoubleMicro(d.Iron_Consumed));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Iron_Goal));
+            AddBasicCellPhrase(RoundDoubleMicro(d.Iron_Consumed - d.Iron_Goal));
+        }
+
+        private string RoundDouble(double? number)
+        {
+            return ((double)Math.Round((decimal)number, 1, MidpointRounding.AwayFromZero)).ToString();
+        }
+
+        private string RoundDoubleMicro(double? number)
+        {
+            return ((double)Math.Round((decimal)number, 3, MidpointRounding.AwayFromZero)).ToString();
         }
 
 

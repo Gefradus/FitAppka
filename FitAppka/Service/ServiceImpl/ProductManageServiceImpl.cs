@@ -80,7 +80,7 @@ namespace FitAppka.Service.ServiceImpl
             List<ProductDTO> list = _mapper.Map<List<Product>, List<ProductDTO>>(onlyUserItem ? _productRepository.GetLoggedInClientProducts() :
                 onlyFromDiet ? GetProductsFromDiet(dayId) : _productRepository.SearchProducts(search));
 
-            return onlyFromDiet ? CheckIfEaten(list, dayId) : list;
+            return onlyFromDiet ? CheckIfEaten(list, dayId) : list.OrderBy(p => p.ProductName).ToList();
         }
 
 
@@ -104,7 +104,7 @@ namespace FitAppka.Service.ServiceImpl
                     }
                 }
             }
-            return list.OrderBy(p => p.Eaten).ToList();
+            return list.OrderBy(p => p.Eaten).ThenBy(p => p.ProductName).ToList();
         }
 
 
@@ -146,7 +146,9 @@ namespace FitAppka.Service.ServiceImpl
                     product.PhotoPath = photoPath;
                 }
 
-                _productRepository.Update(_mapper.Map(product, _mapper.Map<ProductDTO, Product>(productDTO)));
+                product = _mapper.Map(product, _mapper.Map<ProductDTO, Product>(productDTO));
+                product.IsDeleted = false;
+                _productRepository.Update(product);
             }            
         }
 
