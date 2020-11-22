@@ -22,8 +22,6 @@ namespace FitAppka.Service.ServiceImpl
         private readonly IDietCreatorService _dietService;
         private readonly IMapper _mapper;
 
-        
-
         public AdministrationServiceImpl(IClientRepository clientRepository, IMapper mapper, IDietRepository dietRepository, 
             IDietCreatorService dietCreatorService, ICardioTrainingTypeRepository cardioRepository, 
             IWeightMeasurementRepository weightMeasurementRepository, ISettingsService settingsService, 

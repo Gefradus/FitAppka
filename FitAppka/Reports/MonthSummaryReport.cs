@@ -3,6 +3,7 @@ using FitAppka.Models.DTO.DaySummaryDTO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Hosting;
+using System;
 using System.IO;
 
 namespace FitAppka.Reports
@@ -135,27 +136,27 @@ namespace FitAppka.Reports
             _fontStyle = FontFactory.GetFont(BaseFont.HELVETICA, BaseFont.CP1257, 10f);
 
             AddCellPhrase("Suma spożycia: ");
-            AddCellPhrase(_daysSummary.SumOfKcalConsumed.ToString());
-            AddCellPhrase(_daysSummary.SumOfProteinsConsumed.ToString());
-            AddCellPhrase(_daysSummary.SumOfFatsConsumed.ToString());
-            AddCellPhrase(_daysSummary.SumOfCarbsConsumed.ToString());
-            AddCellPhrase(_daysSummary.SumOfWaterDrunk.ToString());
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfKcalConsumed));
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfProteinsConsumed));
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfFatsConsumed));
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfCarbsConsumed));
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfWaterDrunk));
             _pdfTable.CompleteRow();
 
             AddCellPhrase("Suma celów: ");
-            AddCellPhrase(_daysSummary.SumOfKcalGoals.ToString());
-            AddCellPhrase(_daysSummary.SumOfProteinsGoals.ToString());
-            AddCellPhrase(_daysSummary.SumOfFatsGoals.ToString());
-            AddCellPhrase(_daysSummary.SumOfCarbsGoals.ToString());
-            AddCellPhrase(_daysSummary.SumOfKcalGoals.ToString());
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfKcalGoals));
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfProteinsGoals));
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfFatsGoals));
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfCarbsGoals));
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfKcalGoals));
             _pdfTable.CompleteRow();
 
             AddCellPhrase("-");
-            AddCellPhrase((_daysSummary.SumOfKcalConsumed - _daysSummary.SumOfKcalGoals).ToString());
-            AddCellPhrase((_daysSummary.SumOfProteinsConsumed - _daysSummary.SumOfProteinsGoals).ToString());
-            AddCellPhrase((_daysSummary.SumOfFatsConsumed - _daysSummary.SumOfFatsGoals).ToString());
-            AddCellPhrase((_daysSummary.SumOfCarbsConsumed - _daysSummary.SumOfCarbsGoals).ToString());
-            AddCellPhrase((_daysSummary.SumOfWaterDrunk - _daysSummary.SumOfKcalGoals).ToString());
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfKcalConsumed - _daysSummary.SumOfKcalGoals));
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfProteinsConsumed - _daysSummary.SumOfProteinsGoals));
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfFatsConsumed - _daysSummary.SumOfFatsGoals));
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfCarbsConsumed - _daysSummary.SumOfCarbsGoals));
+            AddCellPhrase(RoundDouble(_daysSummary.SumOfWaterDrunk - _daysSummary.SumOfKcalGoals));
         }
 
         private void CreateTableBody() {
@@ -214,6 +215,11 @@ namespace FitAppka.Reports
         {
             _pdfCell.Phrase = new Phrase(s, _fontStyle);
             _pdfTable.AddCell(_pdfCell);
+        }
+
+        private string RoundDouble(double? number)
+        {
+            return ((double)Math.Round((decimal)number, 1, MidpointRounding.AwayFromZero)).ToString();
         }
 
     }
