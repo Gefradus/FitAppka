@@ -1,5 +1,4 @@
-﻿using FitAppka.Models.DTO;
-using FitAppka.Models.DTO.DaySummaryDTO;
+﻿using FitAppka.Models.DTO.DaySummaryDTO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Hosting;
