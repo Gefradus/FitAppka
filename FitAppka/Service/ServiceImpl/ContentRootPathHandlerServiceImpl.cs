@@ -14,8 +14,17 @@ namespace FitAppka.Service.ServiceImpl
 
         public string GetContentRootFileName()
         {
-            bool isExpress = string.Compare(Process.GetCurrentProcess().ProcessName, "iisexpress") == 0;
-            return isExpress ? string.Empty : "/" + Path.GetFileName(_env.WebRootPath.Replace("\\wwwroot", ""));
+            try {
+                Process process = Process.GetCurrentProcess();
+                if (process != null) {
+                    bool isExpress = string.Compare(process.ProcessName, "iisexpress") == 0;
+                    return isExpress ? string.Empty : "/" + Path.GetFileName(_env.WebRootPath.Replace("\\wwwroot", ""));
+                }
+                return "";
+            }
+            catch {
+                return string.Empty;
+            }
         }
     }
 }

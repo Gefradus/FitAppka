@@ -65,6 +65,14 @@ namespace FitAppka.Service.ServiceImpl
             return (int)(BMR * activity);
         }
 
+        public int CountAge(DateTime birthDate)
+        {
+            int age = DateTime.Today.Year - birthDate.Year;
+            if (birthDate.Date > DateTime.Today.AddYears(-age)) age--;
+            return age;
+        }
+
+
         public int CountProteinTarget(double? weight, int kcalTarget, short? activity)
         {
             int proteins;
@@ -117,12 +125,7 @@ namespace FitAppka.Service.ServiceImpl
             return 1.5;
         }
 
-        public int CountAge(DateTime birthDate)
-        {
-            int age = DateTime.Today.Year - birthDate.Year;
-            if (birthDate.Date > DateTime.Today.AddYears(-age)) age--;
-            return age;
-        }
+        
 
 
         public List<int> GetListOfDaysIDFromToday(int clientId)

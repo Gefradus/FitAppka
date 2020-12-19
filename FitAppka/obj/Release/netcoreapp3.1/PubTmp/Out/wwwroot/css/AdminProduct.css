@@ -1,0 +1,48 @@
+﻿main{
+    padding-top: 25px !important;
+}
+
+.button{
+    background: none; border: none
+}
+
+.editBtnImg {
+    height: 18px;
+    width: 18px;
+}
+
+.addBtnImg{
+    height: 20px;
+    width: 20px;
+}
+
+.img-fluid{
+    margin-top: 0 !important;
+}
+
+.tableRows{
+    height: 80px !important;
+}
+
+.btn-outline-dark {
+   width: 275px; 
+   background: #5fb259 !important; 
+   color: white;
+   margin-bottom: 15px;
+   margin-left: auto;
+   justify-content: center;
+   align-items: center;
+   display: flex;
+   height: 45px;
+}
+
+.btn-outline-dark:hover{
+    background: #4ab542 !important
+}
+
+#productNotFound {
+    display: flex;
+    justify-content: center;
+    margin-top: 75px
+}
+

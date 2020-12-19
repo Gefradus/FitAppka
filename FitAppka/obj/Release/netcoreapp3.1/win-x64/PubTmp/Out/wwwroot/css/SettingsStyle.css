@@ -1,0 +1,74 @@
+﻿html, body, main, .container {
+    height: 100% !important
+}
+
+
+body {
+    background: radial-gradient(#b2ffed, #808080);
+    line-height: 1.4;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.label {
+    font-size: 16px;
+    color: gray
+}
+
+#pace {
+    text-align: center;
+    width: 75px;
+    padding-right: 15px;
+    pointer-events: none;
+    border-radius: 10%;
+}
+
+#incBtn {
+    margin-left: 17px;
+}
+
+.unit {
+    margin-top: 37px; margin-left: 5px; font-family: initial
+}
+
+#saveBtn {
+    margin-left: 10%;
+    width: 80%;
+    height: 50px;
+    margin-bottom: 35px;
+    margin-top: 25px;
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    margin-top: 3px;
+}
+
+.centering {
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: center
+}
+
+.img-fluid {
+    height: 31px;
+    width: 31px;
+    margin-top: -8px
+}
+
+#decTip, #incTip{
+    width: 320px;
+    left: calc(50% - 160px);
+    margin-top: 35px;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

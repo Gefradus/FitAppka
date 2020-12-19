@@ -1,0 +1,43 @@
+﻿main{
+    padding-top: 30px !important;
+    justify-content: center;
+    display: flex
+}
+
+body{
+    font-family: inherit;
+    font-size: 12px
+}
+
+#content{
+    max-width: 100%
+}
+
+#columnsHeader{
+    max-width: none
+}
+
+@media(max-width: 1100px){
+    body{
+        font-size: 10px
+    }
+}
+
+@media(max-width: 900px){
+    body{
+        font-size: 8px
+    }
+}
+
+@media(max-width: 750px){
+    body{
+        font-size: 7px
+    }
+}
+
+@media(max-width: 650px){
+    body{
+        font-size: 6px;
+        font-weight: 600
+    }
+}

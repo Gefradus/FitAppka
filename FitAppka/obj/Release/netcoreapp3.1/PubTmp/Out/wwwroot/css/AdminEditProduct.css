@@ -1,0 +1,7 @@
+﻿main {
+    padding-top: 0 !important
+}
+
+html, body, main, .container {
+    height: 100% !important;
+}

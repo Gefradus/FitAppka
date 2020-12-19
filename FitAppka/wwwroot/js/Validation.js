@@ -47,10 +47,7 @@ function changeToNumeric(value, intMaxLength)
 }
 
 function removeNonNumericChars(string){
-    var newString = '';
-    var commaCount = 0;
-    var numbersCount = 0;
-    var zerosCount = 0;
+    var newString = ''; var commaCount = 0; var numbersCount = 0; var zerosCount = 0;
 
     for(var i = 0; i < string.length; i++){
         let char = string[i];
@@ -90,6 +87,15 @@ function countCommaInString(string) {
     return counter;
 }
 
+function isCommaOrDot(char) {
+    return char == ',' || char == '.';
+}
+
+function isNumeric(s) {
+    return !isNaN(s - parseFloat(s));
+}
+
+
 function changeToMaxIfGreaterFloat(value, maxLength, max) {
     if (parseFloat(changeToNumeric(value, maxLength).replace(',', '.'), 2) > max) {
         return max;
@@ -108,13 +114,6 @@ function changeToMaxIfGreaterInt(value, max) {
     }
 }
 
-function isCommaOrDot(char){
-    return char == ',' || char == '.';
-}
-
-function isNumeric(s) {
-    return !isNaN(s - parseFloat(s));
-}
 
 function isEmpty(string) {
     return string.length == 0;

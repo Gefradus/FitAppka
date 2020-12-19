@@ -1,0 +1,236 @@
+﻿#navSearch {
+    margin-left: 0 !important;
+    width: 100%
+}
+
+#mealAndDay {
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 5px;
+    width: 124px;
+    left: calc(50% - 62px)
+}
+
+#addMeal{
+    background: none;
+    border: none;
+}
+
+#mealName {
+    margin-top: 4px;
+    font-weight: 600;
+    justify-content: center;
+    display: flex;
+}
+
+#dayBtn {
+    margin-top: 4px;
+    justify-content: center;
+    display: flex
+}
+
+.w100 {
+    width: 100%;
+}
+
+#srcPan {
+    position: fixed;
+    width: 100%;
+    height: 90px;
+    top: 80px;
+    left: 0;
+    z-index: 2;
+    background: rgba(44, 44, 44, 0.4);
+    border-bottom: 1px solid #ebe7e7;
+    backdrop-filter: blur(1px);
+}
+
+.navbar-fixed-top.scrolled {
+    background: rgba(46, 46, 46, 0.97) !important;
+    transition: background 350ms linear;
+}
+
+#searchInput {
+    width: 190px;
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%
+}
+
+.tableRowEaten {
+    text-decoration: line-through;
+    background-color: rgba(204, 147, 147, 0.58) !important;
+    backdrop-filter: blur(1px);
+    text-align: center;
+    height: 90px;
+    font-size: 14px;
+}
+
+.addIcon {
+    width: 20px;
+    margin-top: -5px;
+    margin-left: 4px
+}
+
+#addProduct {
+    width: 225px;
+    background-color: #1f1f1f;
+    height: 38px;
+    border: 1px solid #6b6a6a !important
+}
+
+.addProductFooter {
+    width: 90%;
+    background: #343a40;
+    color: white; 
+    border: 1px solid #bdbdbd;
+    height: 38px
+}
+
+    .addProductFooter:hover {
+        background: none;
+        color: black;
+    }
+
+.addMealIcon {
+    height: 30px;
+    width: 30px
+}
+
+#showMyProducts, #showFromDiet {
+    background-color: #564e80;
+    width: 225px;
+    height: 38px;
+    border: 1px solid #6b6a6a !important
+}
+
+#showFromDiet {
+    background-color: #c76565
+}
+
+#showMyProducts:hover, #addProduct:hover, #showFromDiet:hover {
+    background-color: white;
+    color: black;
+}
+
+#container{
+    padding-top: 135px;
+    margin-bottom: 35px;
+    padding-left: 0 !important;
+    padding-right: 0 !important
+}
+
+.showModalAddMealBtn {
+    background: none;
+    border: none;
+}
+
+.addMealPanel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tableRow {
+    text-align: center;
+    background-color: #fcfbfc;
+    height: 90px;
+    font-size: 14px;
+}
+
+#productNameHeader {
+    display: flex;
+    justify-content: center;
+}
+
+.productName {
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    text-align: left;
+    margin: auto;
+}
+
+.photo {
+    height: 80px;
+    width: 80px;
+    margin-top: 10px;
+    border: 1px solid #dddddd;
+    position: absolute;
+    top: -40px;
+    left: 15px
+}
+
+.marauto {
+    margin: auto;
+}
+
+#headersRow {
+    text-align: center;
+    height: 60px;
+    padding-top: 4px;
+    background-color: #f7f7f7;
+    border-bottom: 2px solid #e0e0e0;
+    font-weight: 600;
+    font-size: 16px
+}
+
+#footerNav {
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    bottom: 0px;
+    left: 0px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray !important;
+}
+
+@media(max-width: 991px) {
+    .tableRow {
+        height: 100px
+    }
+}
+
+@media(max-width: 768px){
+    #srcPan{ height: 75px}
+
+}
+
+@media(max-width: 520px){
+    #showMyProducts{
+        width:auto
+    }
+}
+
+@media(max-width: 500px) {
+    .productName {
+        justify-content: left;
+        padding-left: 15px
+    }
+
+    #productNameHeader {
+        justify-content: left
+    }
+
+    .tableRow {
+        font-size: 12px;
+    }
+
+    #headersRow {
+        font-size: 14px;
+    }
+}
+
+@media(max-width: 450px) {
+    #searchInput{
+        width: 150px;
+    }
+
+    .tableRow {
+        font-size: 10px;
+    }
+
+    #headersRow {
+        font-size: 12px;
+    }
+}

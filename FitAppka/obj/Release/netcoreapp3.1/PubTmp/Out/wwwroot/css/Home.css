@@ -1,0 +1,454 @@
+﻿body {
+    background: radial-gradient(#b2ffed, #808080);
+}
+
+.modal {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+#glowna {
+    margin-left: -1px;
+    margin-right: 1px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+#admin, #export, #monthReport {
+    background: #f5f5f5;
+    margin-bottom: 1px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+
+.params {
+    font-size: 14px;
+}
+
+.meal {
+    background-color: white;
+}
+
+.addButton {
+    float: right;
+    padding-right: 15px;
+}
+
+.data {
+    font-weight: 600;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+.button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.product {
+    padding-left: 7px;
+    background-color: #fbf9fb00;
+    border-bottom: 1px dotted darkgray;
+    
+}
+
+.panelWithoutBtn {
+    float: left;
+    width: calc(100% - 60px);
+    border-right: 1px dotted darkgray;
+}
+
+.buttonPanel {
+    padding-left: 15px
+}
+
+.napro {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.nazwapos {
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.panel {
+    width: 100%;
+    padding-left: 7px;
+    background-color: #f5f5f5;
+    border-bottom: 1px dotted darkgray;
+}
+
+
+.chowanko {
+    width: auto
+}
+
+.kcal {
+    clear: both;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.dzien {
+    background-color: #828282;
+    display: inline-block;
+}
+
+.btnUsuEdy {
+    margin-right: 17px;
+    border: none;
+    background: none;
+}
+
+.productWithoutBtn {
+    float: left;
+    margin-top: 2px;
+    width: calc(100% - 64px);
+}
+
+.btnDiv {
+    float: right;
+    display: flex;
+    height: 68px;
+    align-items: center;
+}
+
+#target {
+    font-size: 15px;
+    padding-bottom: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+#dziennik {
+    padding-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+#navbarDzien {
+    width: 100%;
+    height: 60px;
+    z-index: 9000;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #d6d6d6;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    
+}
+
+#water {
+    font-size: 20px;
+    font-weight: 600;
+    display: block;
+    position: relative;
+    /*margin-left: calc(50% - 27px)*/
+}
+
+
+
+#glass {
+    height: 100px;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#piechart {
+    width: auto;
+    height: 250px;
+    margin: 0 auto !important;
+    display: block;
+    text-align: center !important;
+}
+
+#boczny {
+    text-align: center !important;
+    /*font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif*/
+}
+
+#addingWater {
+    margin-right: 5px;
+    margin-left: auto;
+    display: block
+}
+
+#adminBtn, #exportBtn, #exportMonthBtn {
+    width: 95%;
+    background-color: #8197d4 !important;
+    color: white;
+    border: none;
+}
+
+#adminBtn {
+    background-color: #d46666 !important
+}
+
+#exportBtn:hover {
+    background-color: #4f6ec3 !important
+}
+
+#exportMonthBtn {
+    background-color: #c08fd0 !important
+}
+
+    #exportMonthBtn:hover {
+        background-color: #bd6ad8 !important
+    }
+
+.ui-datepicker-trigger {
+    border: 0 !important;
+    margin-top: 7px !important;
+    width: 30px !important;
+}
+
+.ui-datepicker-trigger:hover{
+    cursor: pointer
+}
+
+#editingWater {
+    display: block;
+    position: relative;
+    margin-left: calc(50% - 27px)
+}
+
+#ml {
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 15px;
+}
+
+#chartArea {
+    display: none;
+    background: #f5f5f5;
+    margin-bottom: 1px;
+}
+
+#pasekDnia {
+    background-color: #efefef;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 18px;
+}
+
+#AddedWater {
+    width: 60px;
+    height: 37px;
+    text-align: center
+}
+
+#EditedWater {
+    width: 60px;
+    height: 30px;
+    text-align: center
+}
+
+#dodajWode {
+    background-color: #4CAF50;
+    color: white;
+    height: 37px;
+}
+
+
+#waterHeader {
+    font-weight: 600;
+    padding-top: 5px;
+}
+
+#divShowWater {
+    display: block;
+    margin-top: 2px;
+    margin-right: -27px
+}
+
+#name {
+    margin-top: -10px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.divDodEdyWode {
+    margin-right: auto;
+    display: block
+}
+
+
+.img-fluid {
+    margin-top: 12px;
+    margin-left: -1px;
+    height: 30px;
+    width: 30px;
+}
+
+.prev-next {
+    height: 30px;
+    width: 30px;
+}
+
+.naglowek {
+    font-weight: 600;
+}
+
+
+
+.cancel {
+    height: 15px;
+    width: 15px;
+}
+
+.pen {
+    height: 15px;
+    width: 15px;
+}
+
+
+@media(max-height: 500px) {
+    .params {
+        font-size: 12px;
+    }
+
+    .nazwapos {
+        font-size: 18px;
+    }
+
+    .kcal {
+        font-size: 15px;
+    }
+
+    .napro {
+        font-size: 13px;
+    }
+
+    #target {
+        font-size: 13px;
+    }
+
+    #water {
+        font-size: 18px;
+    }
+
+    #ml {
+        padding-top: 2px;
+        font-size: 18px;
+    }
+
+    #glass {
+        height: 75px;
+    }
+
+    #pasekDnia {
+        font-size: 16px;
+    }
+}
+
+@media(max-height: 450px) {
+    .params {
+        font-size: 10px;
+    }
+
+    .nazwapos {
+        font-size: 16px;
+    }
+
+    .kcal {
+        font-size: 13px;
+    }
+
+    .napro {
+        font-size: 11px;
+    }
+
+    #target {
+        font-size: 11px;
+    }
+
+    #water {
+        font-size: 16px;
+    }
+
+    #ml {
+        padding-top: 5px;
+        font-size: 16px;
+    }
+
+    #glass {
+        height: 65px;
+    }
+
+    #pasekDnia {
+        font-size: 14px;
+    }
+}
+
+
+@media(max-width: 300px) {
+    .params {
+        font-size: 10px;
+    }
+
+    .nazwapos {
+        font-size: 16px;
+    }
+
+    .kcal {
+        font-size: 13px;
+    }
+
+    .napro {
+        font-size: 11px;
+    }
+
+    #target {
+        font-size: 11px;
+    }
+
+    #water {
+        font-size: 16px;
+    }
+
+    #ml {
+        padding-top: 5px;
+        font-size: 16px;
+    }
+
+    #glass {
+        height: 65px;
+    }
+}
+
+@media(max-width: 350px) {
+    #pasekDnia {
+        font-size: 14px;
+    }
+}
+
+#adminBtn:hover {
+    background-color: #f36767 !important;
+}
+
+.panel:hover {
+    color: #1c2e97 
+}
+
+.product:hover{
+    color: orangered;
+}
+
+.panelWithoutBtn:hover {
+    cursor: pointer;
+}
+
+.productWithoutBtn:hover {
+    cursor: pointer;
+}
+

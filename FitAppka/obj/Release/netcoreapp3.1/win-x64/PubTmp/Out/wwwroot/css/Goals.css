@@ -1,0 +1,25 @@
+﻿body {
+    background: radial-gradient(#b2ffed, #808080);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+
+html{
+    height: 100%;
+}
+
+#mainRow {
+    height: unset;
+    padding-top: 20px;
+    background: white
+}
+
+.flexcb{
+    display: flex;
+    clear: both;
+}
+
+.mt7px{
+    margin-top: 7px;
+}
+

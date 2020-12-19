@@ -1,0 +1,15 @@
+.datepicker {
+    width: 185px;
+    height: 40px;
+    padding-right: 15px;
+    font-size: 1rem;
+    color: #495057;
+    background: url("https://icons.iconarchive.com/icons/paomedia/small-n-flat/24/calendar-icon.png") no-repeat scroll 95%;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+.datepicker:hover{
+    cursor: pointer
+}

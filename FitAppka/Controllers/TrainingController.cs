@@ -33,6 +33,35 @@ namespace FitAppka.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Cardio(string search, int dayID)
+        {
+            ViewData["dayID"] = dayID;
+            ViewData["wasSearched"] = search != null;
+            return View(await _cardioServices.GetCardioTrainingTypes(search));
+        }
+
+        [HttpPost]
+        public IActionResult Cardio(int cardioTypeId, int dayID, int timeInMinutes, int burnedKcal)
+        {
+            try {
+                _cardioServices.AddCardio(cardioTypeId, dayID, timeInMinutes, burnedKcal);
+                return RedirectToAction(nameof(TrainingPanel), new { dayID });
+            }
+            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = _dayService.GetTodayId() }); }
+        }
+
+        [HttpPut]
+        public JsonResult Cardio(int id, int time, int burnedKcal) {
+            return Json(_cardioServices.EditCardio(id, time, burnedKcal));
+        }
+
+        [HttpDelete]
+        public JsonResult Cardio(int id) {
+            return Json(_cardioServices.DeleteCardio(id));
+        }
+
+
+        [HttpGet]
         [Route("/Training")]
         public async Task<IActionResult> TrainingPanel(int dayID) {
 
@@ -53,34 +82,7 @@ namespace FitAppka.Controllers
             return RedirectToAction(nameof(TrainingPanel), new { dayID = _dayService.GetDayIDByDate(Convert.ToDateTime(day)) });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Cardio(string search, int dayID) {
-            ViewData["dayID"] = dayID;
-            ViewData["wasSearched"] = search != null;
-            return View(await _cardioServices.GetCardioTrainingTypes(search));
-        }
-
-        [HttpPost]
-        public IActionResult Cardio(int cardioTypeId, int dayID, int timeInMinutes, int burnedKcal) {
-            try 
-            {
-                _cardioServices.AddCardio(cardioTypeId, dayID, timeInMinutes, burnedKcal);
-                return RedirectToAction(nameof(TrainingPanel), new { dayID });
-            }
-            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = _dayService.GetTodayId() }); } 
-        }
-
-        [HttpPut]
-        public JsonResult Cardio(int id, int time, int burnedKcal)
-        {
-            return Json(_cardioServices.EditCardio(id, time, burnedKcal));
-        }
-
-        [HttpDelete]
-        public JsonResult Cardio(int id)
-        {
-            return Json(_cardioServices.DeleteCardio(id));
-        }
+        
 
         [HttpGet]
         public async Task<IActionResult> StrengthTraining(string search, int dayID) {

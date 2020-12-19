@@ -29,7 +29,7 @@ namespace FitAppka.Models
         public double? Fats { get; set; }
 
         [Required(ErrorMessage = "Podaj węglowodany w 100g")]
-        [Range(0, 100, ErrorMessage = "Ilośćść węgl. musi wynosić max. 100g")]
+        [Range(0, 100, ErrorMessage = "Ilość węgl. musi wynosić max. 100g")]
         public double? Carbohydrates { get; set; }
 
         [Range(0, 10000, ErrorMessage = "Wit. A może wynosić max. 10000")]

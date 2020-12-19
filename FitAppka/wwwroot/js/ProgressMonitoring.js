@@ -24,7 +24,9 @@
 
 function createDatePickers(dateFrom, dateTo, chartType) {
     createDatePicker("#datepickerFrom, #datepickerTo");
-    setMaxDate("#datepickerTo", new Date());
+    var oneYearFromNow = new Date();
+    oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+    setMaxDate("#datepickerTo", oneYearFromNow);
     setMinDate("#datepickerTo", dateFrom);
     setMaxDate("#datepickerFrom", dateTo);
     setDate("#datepickerTo", dateTo);

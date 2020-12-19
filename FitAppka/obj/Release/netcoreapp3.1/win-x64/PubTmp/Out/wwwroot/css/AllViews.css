@@ -1,0 +1,149 @@
+﻿.fl{
+    float:left
+}
+
+.cb{
+    clear:both
+}
+
+.flex{
+    display: flex;
+}
+
+.nava {
+    width: 130px;
+    border-left: 1px dotted #6b6b6b;
+}
+
+.training.selected {
+    background-color: #b0cdf2 !important;
+}
+
+.tableRow.selected {
+    background-color: #b0cdf2 !important;
+}
+
+.navbar-fixed-top.scrolled {
+    background: rgba(46, 46, 46, 0.97) !important;
+    transition: background 350ms linear;
+}
+
+.deleteBtn {
+    border-radius:10%; 
+    background-color: #ce1a22; 
+    height: 32px; 
+    width: 100px; 
+    color: white
+}
+
+.cancelBtn{
+    margin-right: 15px; 
+    border-radius:10%; 
+    background-color: #4d62d7; 
+    height: 32px; 
+    width: 100px; 
+    color: white
+}
+
+#btnBackImg {
+    height: 67px;
+    width: 68px;
+    margin-top: 1px;
+}
+
+#zdjecie {
+    height: 100px;
+    width: 100px;
+    margin-top: -10px;
+    margin-left: -15px;
+    border: 1px solid #dddddd
+}
+
+.cent {
+    justify-content: center;
+    display: flex;
+}
+
+.acent{
+    align-items: center;
+    display: flex;
+}
+
+.star{
+    color:red;
+    margin-left: 3px;
+}
+
+#submitSearch {
+    height: 38px;
+    width: 35px;
+    border: 1px solid darkgray;
+    border-bottom-right-radius: 15%;
+    border-top-right-radius: 15%;
+    background-color: #f2f2f2
+}
+
+#searchIcon {
+    height: 20px;
+    width: 20px;
+    margin-top: -4px;
+    margin-right: -1px
+}
+
+#validatMsg{
+    align-items: center;
+}
+
+#valDialog{
+    height: 225px;
+    margin-top: 180px;
+    font-size: 17px;
+    text-align: center;
+}
+
+#closeVal{
+    border: 1px solid darkgray;
+    width: 100px;
+}
+
+#name {
+    text-align: center;
+    margin-top: -10px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.chosen-container{
+    width: auto !important;
+    max-width: 400px;
+}
+
+.custom-file-input ~ .custom-file-label::after {
+    content: "Przeglądaj";
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+button:focus {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}
+
+a::-moz-focus-inner {
+    border: 0;
+}
+

@@ -57,7 +57,7 @@ namespace FitAppka.Service.ServicesImpl
         }
 
         public double SumAllCarbsInDay(DateTime daySelected){
-            return SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Calories).ToList());
+            return SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Carbohydrates).ToList());
         }
 
         public double SumAllFatsInDay(DateTime daySelected){

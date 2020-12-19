@@ -1,0 +1,265 @@
+#searchHeader
+{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+#trainingPanel {
+    border: 1px solid dimgray;
+    overflow: auto;
+    height: 300px;
+    background-color: white;
+    align-items: center;
+}
+
+#trainingName
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+#time {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    margin-left: calc(50% - 57.5px);
+}
+
+#setsArea {
+    margin-top: 25px;
+    margin-bottom: 40px;
+    margin-left: calc(50% - 57.5px);
+}
+
+#searchBtn
+{
+    height: 38px; 
+    border-radius: 10%; 
+    background-color:rgb(46, 44, 44); 
+    color: white; 
+    width: 100px
+}
+
+#submitSearch{
+    width: 40px !important
+}
+
+#addCardio {
+    width: 115px;
+    margin-top: 35px;
+    height: 35px;
+    font-size: 14px
+}
+
+#kcal
+{
+    margin-left: calc(50% - 57.5px);
+}
+
+.param {
+    margin-left: calc(50% - 57.5px);
+    margin-bottom:40px;
+}
+
+#paramsPanel {
+    background-color: #f3f3f3;
+    border-radius: .15rem;
+    height: 300px;
+}
+
+
+.form-control {
+    border-radius: .35rem !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+#timeInMinutes, #burnedKcal, #sets, #reps, #weight
+{
+    width: 115px; 
+    float:left;
+    margin-right: 5px
+}
+
+
+#textboxDIV
+{
+    width: 250px;
+    float:left; 
+    top:30px; 
+    padding-top:15px
+}
+
+.training
+{
+    display: flex;
+    height: 40px; 
+    border-bottom: 1px solid darkgray; 
+    align-items: center; 
+    padding-left: 15px;
+    color: blue;
+}
+
+#createTrainingDiv {
+    justify-content: center;
+    display: flex;
+    width: 50%
+}
+
+#createTraining {
+    align-items: center;
+    display: flex;
+    font-size: 18px;
+    width: 93%;
+    max-width: 350px;
+    justify-content: center;
+    color: #fbff00;
+    border: 1px solid #eee5e58f
+}
+
+#panelek {
+    display: block;
+    background: #44444430;
+    padding-top: 7px;
+    border-bottom: 1px solid #f7f7f7;
+}
+
+#createTraining:hover {
+    background: #425a9085;
+}
+
+
+/*#trainingName:hover
+{
+    margin-left: 10px;
+    color: orange;
+}*/
+
+.training:hover{
+    background-color: lightgray;
+    cursor: pointer;
+    color: orange;
+}
+
+#searchArea{
+    width: 50%; border-right: 1px dotted #f7f7f7
+}
+
+#searchAreaRow{
+    margin-left: 20px
+}
+
+@media(max-width: 991px){
+    #createTraining{
+        margin-left: 30px;
+        margin-right: 20px;
+    }
+
+    #textboxDIV{
+        width: 205px;
+    }
+
+    #searchArea{
+        border-right: 0
+    }
+    #searchBtn{
+        float: initial;
+        width: 90px;
+        
+    }
+}
+
+
+@media(max-width: 768px){
+    #createTraining{
+        margin: 0
+    }
+
+    #textboxDIV{
+        width: 250px;
+    }
+
+    #searchArea{
+        border-right: 0;
+        justify-content: center;
+        display: flex;
+        margin-top: -5px;
+        margin-bottom: 20px;
+    }
+
+    #searchBtn{
+        float: left;
+        width: 100px;
+    }
+    #searchAreaRow{
+        margin-left: 0;
+    }
+}
+
+@media(max-width: 475px){
+    #textboxDIV{
+        width: 225px;
+    }
+}
+
+@media(max-width: 442px){
+    #textboxDIV{
+        width: 200px;
+    }
+}
+
+@media(max-width: 424px){
+    #textboxDIV{
+        width: 190px;
+    }
+    #searchBtn{
+        width: 90px;
+    }
+}
+
+@media(max-width: 397px){
+    #textboxDIV{
+        width: 175px;
+    }
+}
+
+@media(max-width: 382px){
+    #textboxDIV{
+        width: 165px;
+    }
+    #searchBtn{
+        width: 70px;
+        font-size: 14px;
+        height: 35px;
+    }
+    #searchHeader{
+        font-size: 16px
+    }
+    #createTraining{
+        font-size: 16px;
+    }
+    .form-control{
+        font-size: 14px;
+    }
+}
+
+@media(max-width: 352px){
+    #searchHeader{
+        font-size: 14px
+    }
+    #createTraining{
+        font-size: 14px;
+    }
+    #textboxDIV{
+        width: 145px;
+    }
+    #searchBtn{
+        width: 65px;
+        font-size: 13px;
+    }
+    .form-control{
+        font-size: 13px;
+    }
+
+}

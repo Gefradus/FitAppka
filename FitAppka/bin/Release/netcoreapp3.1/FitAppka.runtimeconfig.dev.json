@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\fader\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\fader\\.nuget\\packages"
+    ]
+  }
+}

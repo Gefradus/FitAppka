@@ -24,12 +24,13 @@ namespace FitAppka.Models
         [Column("Photo_path")]
         [StringLength(512)]
         public string PhotoPath { get; set; }
-        [Column("Visible_to_all")]
-        public bool VisibleToAll { get; set; }
         public double Calories { get; set; }
         public double Proteins { get; set; }
         public double Fats { get; set; }
         public double Carbohydrates { get; set; }
+
+        [Column("Visible_to_all")]
+        public bool VisibleToAll { get; set; }
         [Column("Vitamin_A")]
         public double? VitaminA { get; set; }
         [Column("Vitamin_C")]

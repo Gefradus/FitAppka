@@ -1,0 +1,312 @@
+﻿html, body, main, .container {
+    height: 100% !important
+}
+
+main{
+    padding-bottom: 0 !important
+}
+
+.pb-3{
+    padding-bottom: 0 !important
+}
+
+ul{
+    margin: 0 !important;
+    padding: 0 !important
+}
+
+#valContent{
+    width: 300px !important
+}
+
+#valDialog{
+    margin-top: 180px!important 
+}
+
+#validationModal{
+    z-index: 9999 !important
+}
+
+#yesActivate {
+    background-color: #36c208 !important
+}
+
+.cancelBtn {
+    background-color: #979192 !important
+}
+
+.container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
+
+ul.ks-cboxtags {
+    list-style: none;
+}
+
+ul.ks-cboxtags li {
+display: inline;
+}
+
+ul.ks-cboxtags li label {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(139, 139, 139, .3);
+    color: #adadad;
+    border-radius: 25px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all .2s;
+}
+
+ul.ks-cboxtags li label {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+ul.ks-cboxtags li label::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    padding: 2px 6px 2px 2px;
+    content: "✖";
+    transition: transform .3s ease-in-out;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+    content: "✓";
+    transform: rotate(-360deg);
+    transition: transform .3s ease-in-out;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+    border: 2px solid #d2d2d2a3;
+    background: linear-gradient(45deg, #6ab452, #6bec6b);
+    color: #fff;
+    transition: all .2s;
+}
+
+
+ul.ks-cboxtags li input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:hover + label {
+    border: 2px solid lightgreen;
+}
+
+li{
+    margin-right: 10px
+}
+
+@media(max-width: 405px){
+    li{
+        font-size: 11px;
+        margin-right: 5px;
+    }
+}
+
+@media(max-width: 372px){
+    li{
+        margin-right: 0;
+        font-size: 9px
+    }
+}
+
+.delete{
+    width: 17px;
+    height: 17px;
+}
+
+.btnDelete{
+    background: none;
+    border: none;
+    margin-top: -2px
+}
+
+#addProductModal {
+    padding: 0 !important;
+    padding-top: 75px !important;
+}
+
+/* Important part */
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+
+.modal-dialog {
+    max-width: 95% !important;
+    /*min-height: calc(93% - 75px);*/
+    
+    display: flex;
+    justify-content: center
+}
+
+#columnsHeader, #productsHeader {
+    font-weight: 600;
+    color: white;
+    background-color: #2b2a2a
+}
+
+#productsHeader {
+    height: 30px;
+    border-top-left-radius: 5px
+}
+
+#btnAddProduct {
+    background: none;
+    border: none
+}
+
+#stog {
+    background-color: #717171;
+    border-top-left-radius: 25rem;
+    border-top-right-radius: 25rem;
+    color: white;
+}
+
+#saveDiet {
+    width: 250px
+}
+
+#labelForActive {
+    padding-top: 6px;
+    padding-left: 10px;
+    font-size: 14px;
+    cursor: pointer
+}
+
+.searchProduct:hover{
+    background-color: lightgray
+}
+
+.productRow, .searchProduct {
+    height: 40px;
+    border-bottom: 1px solid #c2c2c2;
+    border-left: 1px solid #c2c2c2;
+    border-right: 1px solid #c2c2c2;
+}
+
+.searchPanel {
+    height: 360px;
+    /*//border-top: 1px solid #c2c2c2;*/
+    overflow: auto;
+    overflow-x: hidden;
+    background-color: white;
+    align-items: center;
+    width: 100%
+}
+
+#backToDiets {
+    margin-bottom: 2.5rem !important;
+    margin-top: 2.5rem !important;
+    font-size: 16px
+}
+
+#productsPanel {
+    max-height: 282px;
+    border-top: 1px solid #c2c2c2;
+    overflow: auto;
+    background-color: white;
+    align-items: center;
+}
+
+.productRow:hover {
+    background-color: lightgray;
+    cursor: pointer;
+    color: #f3590f;
+    font-weight: 600
+}
+
+.modal-content {
+    width: 90% !important
+}
+
+#tableContainer{
+    margin: initial !important
+}
+
+.btnAddProduct {
+    background: none;
+    border: none
+}
+
+.imgBtnAdd {
+    height: 24px;
+    width: 24px
+}
+
+@media(max-width: 600px) {
+    .modal-content {
+        width: 100% !important
+    }
+}
+
+@media(max-width: 575px){
+    .modal-dialog {
+        max-width: 100% !important;
+    }
+}
+
+@media(max-width: 500px){
+    .modal-body {
+        padding-right: 2px !important;
+        padding-left: 2px !important
+    }
+
+    #tableContainer {
+        padding-right: 3px !important;
+        padding-left: 5px !important
+    }
+
+    .searchProduct{
+        font-size: 11px
+    }
+}
+
+@media(max-width: 415px){
+    .modal-dialog {
+        margin: 2px !important;
+        margin-top: 7px !important
+    }
+
+
+}
+
+@media(max-width: 381px){
+    #submitSearch{
+        height: 35px
+    }
+}
+
+@media(max-width: 368px) {
+    .imgBtnAdd {
+        height: 22px;
+        width: 22px;
+    }
+
+    .btnAddProduct {
+        margin-left: -2px
+    }
+}
+
+.modal:nth-of-type(even) {
+    z-index: 1052 !important;
+}
+
+.modal-backdrop.show:nth-of-type(even) {
+    z-index: 1051 !important;
+}

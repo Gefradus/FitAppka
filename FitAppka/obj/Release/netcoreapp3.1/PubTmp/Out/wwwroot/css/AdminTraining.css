@@ -1,0 +1,77 @@
+﻿body {
+}
+
+.editBtnImg {
+    height: 18px;
+    width: 18px;
+}
+
+.deleteBtnImg {
+    height: 20px;
+    width: 20px;
+}
+
+button{
+    background: none;
+    border: none;
+}
+
+.tableRow {
+    height: 45px;
+    background-color: #fdfdfd
+}
+
+#cardioTable, #strengthTable{
+    max-height: 275px;
+    overflow-y: auto
+}
+
+#columnsHeader {
+    background: #2b2a2a;
+    height: 50px;
+    align-items: center;
+    color: white;
+    padding: 0 !important;
+}
+
+.header {
+    font-size: 1.2rem;
+    margin-top: 7px;
+    color: white;
+    font-weight: 600;
+    font-family: Bahnschrift;
+}
+
+#btnAddStrength, #btnAddCardio {
+    margin-left: auto;
+    font-size: 18px;
+    color: white;
+    background: #72c27a;
+    font-family: Corbel;
+    justify-content: center;
+    width: 180px;
+}
+
+    #btnAddStrength:hover, #btnAddCardio:hover {
+        background: #da706a
+    }
+
+main{
+    padding-top: 15px !important
+}
+
+.textbox {
+    left: 10px;
+    position: absolute
+}
+
+#strengthArea{
+    margin-top: 25px
+}
+
+#visible, #visibleStrength{
+    width: 15px;
+    height: 15px;
+    margin-top: 3px;
+    margin-right: 7px
+}

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FitAppka.Service.ServiceImpl;
-using FitAppka.Strategy.StrategyEnum;
 using FitAppka.Strategy.StrategyImpl.DayOfWeekDietStrategyImpl;
 using System;
 using System.Collections.Generic;

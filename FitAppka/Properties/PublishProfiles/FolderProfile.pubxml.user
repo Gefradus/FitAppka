@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\fader\source\repos\FitAppka\FitAppka\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnectionString">
+      <Value>Data Source=DESKTOP-P22JPL7\SQLEXPRESS%3bInitial Catalog=FitApp2%3bIntegrated Security=True%3bTrusted_Connection=True%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="FitAppka.Models.FitAppContext">
+      <Value>Data Source=DESKTOP-P22JPL7\SQLEXPRESS%3bInitial Catalog=FitApp2%3bIntegrated Security=True%3bTrusted_Connection=True%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

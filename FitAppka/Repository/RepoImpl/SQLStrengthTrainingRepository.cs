@@ -9,20 +9,17 @@ namespace FitAppka.Repository.RepIfaceImpl
     {
         private readonly FitAppContext _context;
 
-        public SQLStrengthTrainingRepository(FitAppContext context)
-        {
+        public SQLStrengthTrainingRepository(FitAppContext context) {
             _context = context;
         }
 
-        public StrengthTraining Add(StrengthTraining strengthTraining)
-        {
+        public StrengthTraining Add(StrengthTraining strengthTraining) {
             _context.Add(strengthTraining);
             _context.SaveChanges();
             return strengthTraining;
         }
 
-        public StrengthTraining Delete(int id)
-        {
+        public StrengthTraining Delete(int id) {
             StrengthTraining strengthTraining = GetStrengthTraining(id);
 
             if (strengthTraining != null)
