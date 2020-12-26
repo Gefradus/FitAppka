@@ -1,9 +1,7 @@
 ﻿using FitAppka.Reports;
-using FitAppka.Repository;
 using FitAppka.Service.ServiceInterface;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 namespace FitAppka.Controllers
 {
