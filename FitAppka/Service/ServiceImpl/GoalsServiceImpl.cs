@@ -230,8 +230,12 @@ namespace FitAppka.Service.ServiceImpl
             clientGoals.KcalBurned = m.KcalBurned;
 
             if (!m.AutoDietaryGoals) {
-                UpdateClientGoals(clientGoals, (int)m.Calories, (int)m.Proteins, (int)m.Fats, (int)m.Carbohydrates);
+                MapFromDtoToClientGoals(clientGoals, m);
             }
+        }
+
+        private Goals MapFromDtoToClientGoals(Goals clientGoals, GoalsDTO dto) {
+            return _goalsRepository.Update(_mapper.Map(dto, clientGoals));
         }
 
         public Goals AddOrUpdateClientGoals(Client client, int calorieTarget, int proteinTarget, int fatTarget, int carbsTarget)

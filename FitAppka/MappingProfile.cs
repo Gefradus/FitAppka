@@ -38,6 +38,8 @@ namespace FitAppka
                 .ForMember(g => g.AutoDietaryGoals, opt => opt.Ignore())
                 .ForMember(g => g.IncludeCaloriesBurned, opt => opt.Ignore());
 
+            CreateMap<GoalsDTO, Goals>();
+
             CreateMap<Product, ProductDTO>()
                 .ForMember(p => p.Photo, opt => opt.Ignore());
 
