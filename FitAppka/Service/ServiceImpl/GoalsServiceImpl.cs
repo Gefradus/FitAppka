@@ -206,6 +206,8 @@ namespace FitAppka.Service.ServiceImpl
                 dayGoals.Carbohydrates = clientGoals.Carbohydrates;
             }
 
+            MapMicronutrionsInfoFromClientGoalsToDay(dayGoals, clientGoals);
+
             dayGoals.KcalBurned = clientGoals.KcalBurned;
             dayGoals.TrainingTime = clientGoals.TrainingTime;
             return dayGoals;
@@ -323,6 +325,34 @@ namespace FitAppka.Service.ServiceImpl
 
             return _goalsRepository.GetClientGoals(c.ClientId);
         }
+
+        private void MapMicronutrionsInfoFromClientGoalsToDay(Goals d, Goals c)
+        {
+            d.Biotin = c.Biotin;
+            d.Calcium = c.Calcium;
+            d.Copper = c.Copper;
+            d.FolicAcid = c.FolicAcid;
+            d.Iodine = c.Iodine;
+            d.Iron = c.Iron;
+            d.Magnesium = c.Magnesium;
+            d.Phosphorus = c.Phosphorus;
+            d.Potassium = c.Potassium;
+            d.Selenium = c.Selenium;
+            d.Sodium = c.Sodium;
+            d.VitaminA = c.VitaminA;
+            d.VitaminB1 = c.VitaminB1;
+            d.VitaminB12 = c.VitaminB12;
+            d.VitaminB2 = c.VitaminB2;
+            d.VitaminB5 = c.VitaminB5;
+            d.VitaminB6 = c.VitaminB6;
+            d.VitaminC = c.VitaminC;
+            d.VitaminD = c.VitaminD;
+            d.VitaminE = c.VitaminE;
+            d.VitaminK = c.VitaminK;
+            d.VitaminPp = c.VitaminPp;
+            d.Zinc = c.Zinc;
+        }
+
 
         public GoalsDTO MapClientGoalsToCreateGoalsModel()
         {

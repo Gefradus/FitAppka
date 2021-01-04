@@ -19,7 +19,7 @@
                         Cele dziennego spożycia:
                     </div>
                     <div class="my-4" style="display: flex">
-                        @Html.CheckBoxFor(m => m.AutoDietaryGoals, new { @class= "mx-2 mt7px", @onchange= "blockIfAutoChecked()", @id="auto" })
+                        @Html.CheckBoxFor(m => m.AutoDietaryGoals, new { @class = "mx-2 mt7px", @onchange = "blockIfAutoChecked()", @id = "auto" })
                         <label for="auto">Cele dietetyczne ustawiane automatycznie</label>
                     </div>
                     <div class="form-group cent">
@@ -86,49 +86,31 @@
                             <div class="leftCol">
                                 <label class="control-label">Witamina B2</label>
                                 <div style="display: flex">
-                                    @Html.TextBoxFor(m => m.VitaminB1, new { @class = "form-control num micro" })
-                                    <div class="jednostka">mg</div>
-                                </div>
-                                <span asp-validation-for="VitaminB1" class="text-danger" />
-                            </div>
-                            <div class="rightCol">
-                                <label class="control-label">Witamina B5</label>
-                                <div style="display: flex">
-                                    @Html.TextBoxFor(m => m.VitaminB1, new { @class = "form-control num micro" })
-                                    <div class="jednostka">mg</div>
-                                </div>
-                                <span asp-validation-for="VitaminB1" class="text-danger" />
-                            </div>
-                        </div>
-                        <div class="form-group cent">
-                            <div class="leftCol">
-                                <label class="control-label">Witamina B6</label>
-                                <div style="display: flex">
                                     @Html.TextBoxFor(m => m.VitaminB2, new { @class = "form-control num micro" })
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="VitaminB2" class="text-danger" />
                             </div>
                             <div class="rightCol">
-                                <label class="control-label">Biotyna</label>
+                                <label class="control-label">Witamina B5</label>
                                 <div style="display: flex">
                                     @Html.TextBoxFor(m => m.VitaminB5, new { @class = "form-control num micro" })
-                                    <div class="jednostka">µg</div>
+                                    <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="VitaminB5" class="text-danger" />
                             </div>
                         </div>
                         <div class="form-group cent">
                             <div class="leftCol">
-                                <label class="control-label">Kwas foliowy</label>
+                                <label class="control-label">Witamina B6</label>
                                 <div style="display: flex">
                                     @Html.TextBoxFor(m => m.VitaminB6, new { @class = "form-control num micro" })
-                                    <div class="jednostka">µg</div>
+                                    <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="VitaminB6" class="text-danger" />
                             </div>
                             <div class="rightCol">
-                                <label class="control-label">Witamina B12</label>
+                                <label class="control-label">Biotyna</label>
                                 <div style="display: flex">
                                     @Html.TextBoxFor(m => m.Biotin, new { @class = "form-control num micro" })
                                     <div class="jednostka">µg</div>
@@ -138,15 +120,15 @@
                         </div>
                         <div class="form-group cent">
                             <div class="leftCol">
-                                <label class="control-label">Witamina C</label>
+                                <label class="control-label">Kwas foliowy</label>
                                 <div style="display: flex">
                                     @Html.TextBoxFor(m => m.FolicAcid, new { @class = "form-control num micro" })
-                                    <div class="jednostka">mg</div>
+                                    <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="FolicAcid" class="text-danger" />
                             </div>
                             <div class="rightCol">
-                                <label class="control-label">Witamina D</label>
+                                <label class="control-label">Witamina B12</label>
                                 <div style="display: flex">
                                     @Html.TextBoxFor(m => m.VitaminB12, new { @class = "form-control num micro" })
                                     <div class="jednostka">µg</div>
@@ -156,7 +138,7 @@
                         </div>
                         <div class="form-group cent">
                             <div class="leftCol">
-                                <label class="control-label">Witamina E</label>
+                                <label class="control-label">Witamina C</label>
                                 <div style="display: flex">
                                     @Html.TextBoxFor(m => m.VitaminC, new { @class = "form-control num micro" })
                                     <div class="jednostka">mg</div>
@@ -164,22 +146,40 @@
                                 <span asp-validation-for="VitaminC" class="text-danger" />
                             </div>
                             <div class="rightCol">
-                                <label class="control-label">Witamina PP</label>
+                                <label class="control-label">Witamina D</label>
                                 <div style="display: flex">
                                     @Html.TextBoxFor(m => m.VitaminD, new { @class = "form-control num micro" })
-                                    <div class="jednostka">mg</div>
+                                    <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="VitaminD" class="text-danger" />
+                            </div>
+                        </div>
+                        <div class="form-group cent">
+                            <div class="leftCol">
+                                <label class="control-label">Witamina E</label>
+                                <div style="display: flex">
+                                    @Html.TextBoxFor(m => m.VitaminE, new { @class = "form-control num micro" })
+                                    <div class="jednostka">mg</div>
+                                </div>
+                                <span asp-validation-for="VitaminE" class="text-danger" />
+                            </div>
+                            <div class="rightCol">
+                                <label class="control-label">Witamina PP</label>
+                                <div style="display: flex">
+                                    @Html.TextBoxFor(m => m.VitaminPp, new { @class = "form-control num micro" })
+                                    <div class="jednostka">mg</div>
+                                </div>
+                                <span asp-validation-for="VitaminPp" class="text-danger" />
                             </div>
                         </div>
                         <div style="margin-bottom: 2rem">
                             <div class="leftCol" style="margin-right: 0 !important">
                                 <label class="control-label">Witamina K</label>
                                 <div style="display: flex; margin-right: 10px">
-                                    @Html.TextBoxFor(m => m.VitaminE, new { @class = "form-control num micro" })
+                                    @Html.TextBoxFor(m => m.VitaminK, new { @class = "form-control num micro" })
                                     <div class="jednostka">µg</div>
                                 </div>
-                                <span asp-validation-for="VitaminE" class="text-danger" />
+                                <span asp-validation-for="VitaminK" class="text-danger" />
                             </div>
                         </div>
 
@@ -189,32 +189,13 @@
                             <div class="leftCol">
                                 <label class="control-label">Cynk</label>
                                 <div style="display: flex">
-                                    @Html.TextBoxFor(m => m.VitaminPp, new { @class = "form-control num micro" })
-                                    <div class="jednostka">mg</div>
-                                </div>
-                                <span asp-validation-for="VitaminPp" class="text-danger" />
-                            </div>
-                            <div class="rightCol">
-                                <label class="control-label">Fosfor</label>
-                                <div style="display: flex">
-                                    @Html.TextBoxFor(m => m.VitaminK, new { @class = "form-control num micro" })
-                                    <div class="jednostka">mg</div>
-                                </div>
-                                <span asp-validation-for="VitaminK" class="text-danger" />
-                            </div>
-                        </div>
-
-                        <div class="form-group cent">
-                            <div class="leftCol">
-                                <label class="control-label">Jod</label>
-                                <div style="display: flex">
                                     @Html.TextBoxFor(m => m.Zinc, new { @class = "form-control num micro" })
-                                    <div class="jednostka">µg</div>
+                                    <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Zinc" class="text-danger" />
                             </div>
                             <div class="rightCol">
-                                <label class="control-label">Magnez</label>
+                                <label class="control-label">Fosfor</label>
                                 <div style="display: flex">
                                     @Html.TextBoxFor(m => m.Phosphorus, new { @class = "form-control num micro" })
                                     <div class="jednostka">mg</div>
@@ -225,56 +206,75 @@
 
                         <div class="form-group cent">
                             <div class="leftCol">
-                                <label class="control-label">Miedź</label>
+                                <label class="control-label">Jod</label>
                                 <div style="display: flex">
                                     @Html.TextBoxFor(m => m.Iodine, new { @class = "form-control num micro" })
-                                    <div class="jednostka">mg</div>
+                                    <div class="jednostka">µg</div>
                                 </div>
                                 <span asp-validation-for="Iodine" class="text-danger" />
                             </div>
                             <div class="rightCol">
-                                <label class="control-label">Potas</label>
-                                <div style="display: flex">
-                                    @Html.TextBoxFor(m => m.Iodine, new { @class = "form-control num micro" })
-                                    <div class="jednostka">mg</div>
-                                </div>
-                                <span asp-validation-for="Iodine" class="text-danger" />
-                            </div>
-                        </div>
-                        <div class="form-group cent">
-                            <div class="leftCol">
-                                <label class="control-label">Selen</label>
+                                <label class="control-label">Magnez</label>
                                 <div style="display: flex">
                                     @Html.TextBoxFor(m => m.Magnesium, new { @class = "form-control num micro" })
-                                    <div class="jednostka">µg</div>
+                                    <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Magnesium" class="text-danger" />
                             </div>
-                            <div class="rightCol">
-                                <label class="control-label">Sód</label>
+                        </div>
+
+                        <div class="form-group cent">
+                            <div class="leftCol">
+                                <label class="control-label">Miedź</label>
                                 <div style="display: flex">
                                     @Html.TextBoxFor(m => m.Copper, new { @class = "form-control num micro" })
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Copper" class="text-danger" />
                             </div>
-                        </div>
-                        <div class="form-group cent">
-                            <div class="leftCol">
-                                <label class="control-label">Wapń</label>
+                            <div class="rightCol">
+                                <label class="control-label">Potas</label>
                                 <div style="display: flex">
                                     @Html.TextBoxFor(m => m.Potassium, new { @class = "form-control num micro" })
                                     <div class="jednostka">mg</div>
                                 </div>
                                 <span asp-validation-for="Potassium" class="text-danger" />
                             </div>
+                        </div>
+                        <div class="form-group cent">
+                            <div class="leftCol">
+                                <label class="control-label">Selen</label>
+                                <div style="display: flex">
+                                    @Html.TextBoxFor(m => m.Selenium, new { @class = "form-control num micro" })
+                                    <div class="jednostka">µg</div>
+                                </div>
+                                <span asp-validation-for="Selenium" class="text-danger" />
+                            </div>
+                            <div class="rightCol">
+                                <label class="control-label">Sód</label>
+                                <div style="display: flex">
+                                    @Html.TextBoxFor(m => m.Sodium, new { @class = "form-control num micro" })
+                                    <div class="jednostka">mg</div>
+                                </div>
+                                <span asp-validation-for="Sodium" class="text-danger" />
+                            </div>
+                        </div>
+                        <div class="form-group cent">
+                            <div class="leftCol">
+                                <label class="control-label">Wapń</label>
+                                <div style="display: flex">
+                                    @Html.TextBoxFor(m => m.Calcium, new { @class = "form-control num micro" })
+                                    <div class="jednostka">mg</div>
+                                </div>
+                                <span asp-validation-for="Calcium" class="text-danger" />
+                            </div>
                             <div class="rightCol">
                                 <label class="control-label">Żelazo</label>
                                 <div style="display: flex">
-                                    @Html.TextBoxFor(m => m.Selenium, new { @class = "form-control num micro" })
+                                    @Html.TextBoxFor(m => m.Iron, new { @class = "form-control num micro" })
                                     <div class="jednostka">mg</div>
                                 </div>
-                                <span asp-validation-for="Selenium" class="text-danger" />
+                                <span asp-validation-for="Iron" class="text-danger" />
                             </div>
                         </div>
 
@@ -286,20 +286,20 @@
                         <div class="leftCol">
                             <label class="control-label">Cel spalonych kalorii:</label>
                             <div style="display: flex; margin-right: 25px">
-                                @Html.TextBoxFor(m => m.KcalBurned, new { @class = "form-control int", @id="burnGoal" })
+                                @Html.TextBoxFor(m => m.KcalBurned, new { @class = "form-control int", @id = "burnGoal" })
                             </div>
                             <span asp-validation-for="KcalBurned" class="text-danger" />
                         </div>
                         <div class="rightCol">
                             <label class="control-label">Cel minut treningów:</label>
                             <div style="display: flex; margin-right: 14px">
-                                @Html.TextBoxFor(m => m.TrainingTime, new { @class = "form-control int", @id="timeGoal" })
+                                @Html.TextBoxFor(m => m.TrainingTime, new { @class = "form-control int", @id = "timeGoal" })
                             </div>
                             <span asp-validation-for="TrainingTime" class="text-danger" />
                         </div>
                     </div>
                     <div class="my-4" style="display: flex">
-                        @Html.CheckBoxFor(m => m.IncludeCaloriesBurned, new { @class = "mx-2 mt7px", @id="include" })
+                        @Html.CheckBoxFor(m => m.IncludeCaloriesBurned, new { @class = "mx-2 mt7px", @id = "include" })
                         <label for="include">Uwzględniaj spalone kalorie w dziennym celu spożycia</label>
                     </div>
 
