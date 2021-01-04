@@ -24,6 +24,7 @@ namespace FitAppka
                 .ForMember(g => g.ClientId, opt => opt.Ignore())
                 .ForMember(g => g.ClientNavigation, opt => opt.Ignore());
 
+
             CreateMap<Client, Day>()
                 .ForMember(d => d.WaterDrunk, opt => opt.MapFrom(water => 0))
                 .ForMember(d => d.GoalsId, opt => opt.Ignore())

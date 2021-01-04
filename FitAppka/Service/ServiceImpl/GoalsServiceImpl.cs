@@ -150,8 +150,6 @@ namespace FitAppka.Service.ServiceImpl
         }
 
 
-
-
         public List<int> GetListOfDaysIDFromToday(int clientId)
         {
             List<int> listOfIDDaysFromToday = new List<int>();
@@ -207,9 +205,6 @@ namespace FitAppka.Service.ServiceImpl
             }
 
             MapMicronutrionsInfoFromClientGoalsToDay(dayGoals, clientGoals);
-
-            dayGoals.KcalBurned = clientGoals.KcalBurned;
-            dayGoals.TrainingTime = clientGoals.TrainingTime;
             return dayGoals;
         }
 
@@ -234,12 +229,10 @@ namespace FitAppka.Service.ServiceImpl
         private Goals CreateIfNotExistsAndGetDayGoals(int dayID)
         {
             Goals dayGoals = _goalsRepository.GetDayGoals(dayID);
-            if (dayGoals == null)
-            {
+            if (dayGoals == null) {
                 return _goalsRepository.Add(new Goals() { DayId = dayID });
             }
-            else
-            {
+            else {
                 return dayGoals;
             }
         }
@@ -259,9 +252,15 @@ namespace FitAppka.Service.ServiceImpl
             clientGoals.TrainingTime = m.TrainingTime;
             clientGoals.KcalBurned = m.KcalBurned;
 
-            if (!m.AutoDietaryGoals)
-            {
-                MapFromDtoToClientGoals(clientGoals, m);
+            _goalsRepository.Update(MapFromDtoToClientGoalsOrReduce(clientGoals, m));
+        }
+
+        private Goals MapFromDtoToClientGoalsOrReduce(Goals clientGoals, GoalsDTO dto) {
+            if (dto.AutoDietaryGoals) {
+                return ReduceClientGoals(clientGoals);
+            } 
+            else {
+                return MapFromDtoToClientGoals(clientGoals, dto);
             }
         }
 
@@ -273,12 +272,10 @@ namespace FitAppka.Service.ServiceImpl
         public Goals AddOrUpdateClientGoals(Client client, int calorieTarget, int proteinTarget, int fatTarget, int carbsTarget)
         {
             Goals clientGoals = _goalsRepository.GetClientGoals(client.ClientId);
-            if (clientGoals != null)
-            {
+            if (clientGoals != null) {
                 return UpdateClientGoals(clientGoals, calorieTarget, proteinTarget, fatTarget, carbsTarget);
             }
-            else
-            {
+            else {
                 return AddClientGoals(client, calorieTarget, proteinTarget, fatTarget, carbsTarget);
             }
         }
@@ -353,6 +350,33 @@ namespace FitAppka.Service.ServiceImpl
             d.Zinc = c.Zinc;
         }
 
+        private Goals ReduceClientGoals(Goals g)
+        {
+            g.Biotin = null;
+            g.Calcium = null;
+            g.Copper = null;
+            g.FolicAcid = null;
+            g.Iodine = null;
+            g.Iron = null;
+            g.Magnesium = null;
+            g.Phosphorus = null;
+            g.Potassium = null;
+            g.Selenium = null;
+            g.Sodium = null;
+            g.VitaminA = null;
+            g.VitaminB1 = null;
+            g.VitaminB12 = null;
+            g.VitaminB2 = null;
+            g.VitaminB5 = null;
+            g.VitaminB6 = null;
+            g.VitaminC = null;
+            g.VitaminD = null;
+            g.VitaminE = null;
+            g.VitaminK = null;
+            g.VitaminPp = null;
+            g.Zinc = null;
+            return g;
+        }
 
         public GoalsDTO MapClientGoalsToCreateGoalsModel()
         {

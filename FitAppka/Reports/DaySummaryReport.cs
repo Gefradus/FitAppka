@@ -288,7 +288,7 @@ namespace FitAppka.Reports
 
         private string RoundDoubleMicro(double? number)
         {
-            return ((double)Math.Round((decimal)number, 3, MidpointRounding.AwayFromZero)).ToString();
+            return ((double)Math.Round((decimal)number, 2, MidpointRounding.AwayFromZero)).ToString();
         }
 
 

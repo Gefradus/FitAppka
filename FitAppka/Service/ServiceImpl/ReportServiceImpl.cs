@@ -169,7 +169,7 @@ namespace FitAppka.Service.ServiceImpl
 
         private double MultiplyByTheFactor(double var)
         {
-            return (int)(var * ((double)_clientRepository.GetLoggedInClient().CaloricDemand / 2000d));
+            return (var * ((double)_clientRepository.GetLoggedInClient().CaloricDemand / 2000d));
         }
     }
 }
