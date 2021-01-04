@@ -27,26 +27,38 @@ namespace FitAppka.Service.ServiceImpl
             _clientRepository = clientRepository;
         }
 
-        public int CountCalorieTarget(int demand, short? changeGoal, double pace) {
-            if (changeGoal == 1) {
+        public int CountCalorieTarget(int demand, short? changeGoal, double pace)
+        {
+            if (changeGoal == 1)
+            {
                 int kcalTarget = (int)(demand - (pace * 1100));
-                if (kcalTarget <= 1000) {
+                if (kcalTarget <= 1000)
+                {
                     return 1000;
-                } else {
+                }
+                else
+                {
                     return kcalTarget;
                 }
             }
-            if (changeGoal == 3) {
+            if (changeGoal == 3)
+            {
                 int kcalTarget = (int)(demand + (pace * 1100));
-                if (kcalTarget <= 1000) {
+                if (kcalTarget <= 1000)
+                {
                     return 1000;
-                } else {
+                }
+                else
+                {
                     return kcalTarget;
                 }
             }
-            if (demand < 1000) {
+            if (demand < 1000)
+            {
                 return 1000;
-            } else {
+            }
+            else
+            {
                 return demand;
             }
         }
@@ -55,10 +67,13 @@ namespace FitAppka.Service.ServiceImpl
         {
             int BMR;
             int age = CountAge((DateTime)birthDate);
-            
-            if ((bool)sex) { //Harris-Benedict's method   
+
+            if ((bool)sex)
+            { //Harris-Benedict's method   
                 BMR = (int)(66 + (13.7 * weight) + (5 * growth) - (6.76 * age));
-            } else {
+            }
+            else
+            {
                 BMR = (int)(655 + (9.6 * weight) + (1.85 * growth) - (4.7 * age));
             }
 
@@ -76,30 +91,39 @@ namespace FitAppka.Service.ServiceImpl
         public int CountProteinTarget(double? weight, int kcalTarget, short? activity)
         {
             int proteins;
-            if (activity < 3) {
+            if (activity < 3)
+            {
                 proteins = (int)weight;
-                if (proteins < kcalTarget) {
+                if (proteins < kcalTarget)
+                {
                     return proteins;
                 }
-                else {
+                else
+                {
                     return (int)(0.3 * kcalTarget);
                 }
             }
-            else if (activity == 3 || activity == 4) {
+            else if (activity == 3 || activity == 4)
+            {
                 proteins = (int)(1.5 * weight);
-                if (proteins < kcalTarget) {
+                if (proteins < kcalTarget)
+                {
                     return proteins;
                 }
-                else {
+                else
+                {
                     return (int)(0.5 * kcalTarget);
                 }
             }
-            else {
+            else
+            {
                 proteins = (int)(2 * weight);
-                if (proteins < kcalTarget) {
+                if (proteins < kcalTarget)
+                {
                     return proteins;
                 }
-                else {
+                else
+                {
                     return (int)(0.65 * kcalTarget);
                 }
             }
@@ -125,7 +149,7 @@ namespace FitAppka.Service.ServiceImpl
             return 1.5;
         }
 
-        
+
 
 
         public List<int> GetListOfDaysIDFromToday(int clientId)
@@ -133,7 +157,7 @@ namespace FitAppka.Service.ServiceImpl
             List<int> listOfIDDaysFromToday = new List<int>();
             foreach (var item in _dayRepository.GetClientDays(clientId))
             {
-                if (item.Date >= DateTime.Now.Date)
+                if (item.Date.GetValueOrDefault().Date >= DateTime.Now.Date)
                 {
                     listOfIDDaysFromToday.Add(item.DayId);
                 }
@@ -187,6 +211,7 @@ namespace FitAppka.Service.ServiceImpl
             return dayGoals;
         }
 
+
         private int CountTargetWithBurnedKcal(int kcalBurned, double target, int multiplier, double kcalGoal)
         {
             double proportion = ((double)(target * multiplier)) / (double)kcalGoal;
@@ -196,7 +221,8 @@ namespace FitAppka.Service.ServiceImpl
         public int CaloriesBurnedInDay(int dayID)
         {
             int? kcal = 0;
-            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID))) {
+            foreach (CardioTraining cardio in _cardioRepository.GetAllCardioTrainings().Where(t => t.DayId.Equals(dayID)))
+            {
                 kcal += cardio.CaloriesBurned;
             }
 
@@ -206,10 +232,12 @@ namespace FitAppka.Service.ServiceImpl
         private Goals CreateIfNotExistsAndGetDayGoals(int dayID)
         {
             Goals dayGoals = _goalsRepository.GetDayGoals(dayID);
-            if (dayGoals == null) {
+            if (dayGoals == null)
+            {
                 return _goalsRepository.Add(new Goals() { DayId = dayID });
             }
-            else {
+            else
+            {
                 return dayGoals;
             }
         }
@@ -229,22 +257,26 @@ namespace FitAppka.Service.ServiceImpl
             clientGoals.TrainingTime = m.TrainingTime;
             clientGoals.KcalBurned = m.KcalBurned;
 
-            if (!m.AutoDietaryGoals) {
+            if (!m.AutoDietaryGoals)
+            {
                 MapFromDtoToClientGoals(clientGoals, m);
             }
         }
 
-        private Goals MapFromDtoToClientGoals(Goals clientGoals, GoalsDTO dto) {
+        private Goals MapFromDtoToClientGoals(Goals clientGoals, GoalsDTO dto)
+        {
             return _goalsRepository.Update(_mapper.Map(dto, clientGoals));
         }
 
         public Goals AddOrUpdateClientGoals(Client client, int calorieTarget, int proteinTarget, int fatTarget, int carbsTarget)
         {
             Goals clientGoals = _goalsRepository.GetClientGoals(client.ClientId);
-            if (clientGoals != null) {
+            if (clientGoals != null)
+            {
                 return UpdateClientGoals(clientGoals, calorieTarget, proteinTarget, fatTarget, carbsTarget);
-            } 
-            else {
+            }
+            else
+            {
                 return AddClientGoals(client, calorieTarget, proteinTarget, fatTarget, carbsTarget);
             }
         }
@@ -306,6 +338,6 @@ namespace FitAppka.Service.ServiceImpl
             return _goalsRepository.GetDayGoals(dayId);
         }
 
-        
+
     }
 }

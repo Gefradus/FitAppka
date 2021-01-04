@@ -53,16 +53,18 @@ namespace FitAppka.Service.ServiceImpl
         {
             var date = _dayRepository.GetDay(dayId).Date.GetValueOrDefault();
             var list = new List<Models.Day>();
-            foreach(var day in _dayRepository.GetLoggedInClientDays())
+            foreach (var day in _dayRepository.GetLoggedInClientDays())
             {
-                if(day.Date.GetValueOrDefault().Year == date.Year && day.Date.GetValueOrDefault().Month == date.Month) {
+                if (day.Date.GetValueOrDefault().Year == date.Year && day.Date.GetValueOrDefault().Month == date.Month)
+                {
                     list.Add(day);
                 }
             }
             return list;
         }
 
-        public DaysSummaryDTO GetMonthSummary(int dayId) {
+        public DaysSummaryDTO GetMonthSummary(int dayId)
+        {
             var list = GetDays(dayId);
 
             return new DaysSummaryDTO()
@@ -128,34 +130,42 @@ namespace FitAppka.Service.ServiceImpl
                     Selenium_Consumed = meals.Sum(m => m.Selenium),
                     Sodium_Consumed = meals.Sum(m => m.Sodium),
                     Zinc_Consumed = meals.Sum(m => m.Zinc),
-                    VitaminA_Goal = MultiplyByTheFactor(800d),
-                    VitaminB1_Goal = MultiplyByTheFactor(1.1),
-                    VitaminB2_Goal = MultiplyByTheFactor(1.4),
-                    VitaminB5_Goal = MultiplyByTheFactor(7d),
-                    VitaminB6_Goal = MultiplyByTheFactor(1.4),
-                    VitaminB12_Goal = MultiplyByTheFactor(12d),
-                    VitaminC_Goal = MultiplyByTheFactor(80d),
-                    VitaminD_Goal = MultiplyByTheFactor(5d),
-                    VitaminE_Goal = MultiplyByTheFactor(12d),
-                    VitaminK_Goal = MultiplyByTheFactor(75d),
-                    VitaminPp_Goal = MultiplyByTheFactor(16d),
-                    FolicAcid_Goal = MultiplyByTheFactor(200d),
-                    Biotin_Goal = MultiplyByTheFactor(50d),
-                    Calcium_Goal = MultiplyByTheFactor(800d),
-                    Copper_Goal = MultiplyByTheFactor(1d),
-                    Iodine_Goal = MultiplyByTheFactor(150d),
-                    Iron_Goal = MultiplyByTheFactor(14d),
-                    Magnesium_Goal = MultiplyByTheFactor(375d),
-                    Phosphorus_Goal = MultiplyByTheFactor(700d),
-                    Potassium_Goal = MultiplyByTheFactor(2000d),
-                    Selenium_Goal = MultiplyByTheFactor(55d),
-                    Sodium_Goal = MultiplyByTheFactor(155d),
-                    Zinc_Goal = MultiplyByTheFactor(10d)
+                    VitaminA_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.VitaminA, 800d),
+                    VitaminB1_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.VitaminB1, 1.1),
+                    VitaminB2_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.VitaminB2, 1.4),
+                    VitaminB5_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.VitaminB5, 7d),
+                    VitaminB6_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.VitaminB6, 1.4),
+                    VitaminB12_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.VitaminB12, 12d),
+                    VitaminC_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.VitaminC, 80d),
+                    VitaminD_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.VitaminD, 5d),
+                    VitaminE_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.VitaminE, 12d),
+                    VitaminK_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.VitaminK, 75d),
+                    VitaminPp_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.VitaminPp, 16d),
+                    FolicAcid_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.FolicAcid, 200d),
+                    Biotin_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.Biotin, 50d),
+                    Calcium_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.Calcium, 800d),
+                    Copper_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.Copper, 1d),
+                    Iodine_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.Iodine, 150d),
+                    Iron_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.Iron, 14d),
+                    Magnesium_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.Magnesium, 375d),
+                    Phosphorus_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.Phosphorus, 700d),
+                    Potassium_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.Potassium, 2000d),
+                    Selenium_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.Selenium, 55d),
+                    Sodium_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.Sodium, 155d),
+                    Zinc_Goal = ReturnIfNotNullOrMultiplyByTheFactor(goal.Zinc, 10d)
                 }
             };
         }
 
+        private double ReturnIfNotNullOrMultiplyByTheFactor(double? value, double var)
+        {
+            return ReturnIfNotNull(value, MultiplyByTheFactor(var));
+        }
 
+        private double ReturnIfNotNull(double? value, double valueIfNull)
+        {
+            return (double)(value == null ? valueIfNull : value);
+        }
 
         private double MultiplyByTheFactor(double var)
         {
