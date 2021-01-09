@@ -1,9 +1,9 @@
-﻿using FitAppka.Reports;
-using FitAppka.Service.ServiceInterface;
+﻿using FitnessApp.Reports;
+using FitnessApp.Service.ServiceInterface;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FitAppka.Controllers
+namespace FitnessApp.Controllers
 {
     public class ReportsController : Controller
     {

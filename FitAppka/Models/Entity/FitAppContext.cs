@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace FitAppka.Models
+namespace FitnessApp.Models
 {
     public partial class FitAppContext : DbContext
     {

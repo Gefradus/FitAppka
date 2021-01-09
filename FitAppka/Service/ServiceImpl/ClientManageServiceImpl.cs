@@ -1,11 +1,11 @@
-﻿using FitAppka.Models;
-using FitAppka.Repository;
-using FitAppka.Repository.RepoInterface;
+﻿using FitnessApp.Models;
+using FitnessApp.Repository;
+using FitnessApp.Repository.RepoInterface;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class ClientManageServiceImpl : IClientManageService
     {

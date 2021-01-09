@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace FitAppka.Models
+namespace FitnessApp.Models
 {
     public class ProductDTO
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FitAppka.Models.DTO.DietCreatorDTO
+namespace FitnessApp.Models.DTO.DietCreatorDTO
 {
     public class CreateDietDTO
     {

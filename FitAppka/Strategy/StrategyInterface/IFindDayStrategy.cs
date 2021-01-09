@@ -1,7 +1,7 @@
-﻿using FitAppka.Models;
+﻿using FitnessApp.Models;
 using System.Collections.Generic;
 
-namespace FitAppka.Strategy.StrategyInterface
+namespace FitnessApp.Strategy.StrategyInterface
 {
     public interface IFindDayStrategy
     {

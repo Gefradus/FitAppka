@@ -1,4 +1,4 @@
-﻿namespace FitAppka.Service.ServiceImpl
+﻿namespace FitnessApp.Service.ServiceImpl
 {
     public interface IContentRootPathHandlerService
     {

@@ -1,4 +1,4 @@
-﻿namespace FitAppka.Service
+﻿namespace FitnessApp.Service
 {
     public interface IMeasurementsService
     {

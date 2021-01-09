@@ -3,11 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using FitAppka.Models;
+using FitnessApp.Models;
 using Microsoft.AspNetCore.Authorization;
-using FitAppka.Repository;
-using FitAppka.Service;
-using FitAppka.Service.ServiceImpl;
+using FitnessApp.Repository;
+using FitnessApp.Service;
+using FitnessApp.Service.ServiceImpl;
 
 namespace NowyDotnecik.Controllers
 {

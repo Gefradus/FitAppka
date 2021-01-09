@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using FitAppka.Models;
-using FitAppka.Repository.RepoInterface;
-using FitAppka.Strategy.StrategyInterface;
-using FitAppka.Repository;
+using FitnessApp.Models;
+using FitnessApp.Repository.RepoInterface;
+using FitnessApp.Strategy.StrategyInterface;
+using FitnessApp.Repository;
 
-namespace FitAppka.Strategy.StrategyImpl.DayOfWeekDietStrategyImpl
+namespace FitnessApp.Strategy.StrategyImpl.DayOfWeekDietStrategyImpl
 {
     public class WednesdayDietStrategy : IDayOfWeekDietStrategy
     {

@@ -1,4 +1,4 @@
-﻿namespace FitAppka.Strategy.StrategyEnum
+﻿namespace FitnessApp.Strategy.StrategyEnum
 {
     public enum FindDayStrategyEnum
     {

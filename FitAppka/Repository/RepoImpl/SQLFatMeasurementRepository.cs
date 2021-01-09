@@ -1,9 +1,9 @@
-using FitAppka.Models;
+using FitnessApp.Models;
 using System.Collections.Generic;
 using System.Linq;
 
 
-namespace FitAppka.Repository.RepIfaceImpl{
+namespace FitnessApp.Repository.RepIfaceImpl{
     public class SQLFatMeasurementRepository : IFatMeasurementRepository
     {
         private readonly FitAppContext _context;

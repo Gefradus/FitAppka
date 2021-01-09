@@ -1,9 +1,9 @@
-﻿using FitAppka.Models;
-using FitAppka.Models.DTO;
-using FitAppka.Models.DTO.DietCreatorDTO;
+﻿using FitnessApp.Models;
+using FitnessApp.Models.DTO;
+using FitnessApp.Models.DTO.DietCreatorDTO;
 using System.Collections.Generic;
 
-namespace FitAppka.Service.ServiceInterface
+namespace FitnessApp.Service.ServiceInterface
 {
     public interface IAdministrationService
     {

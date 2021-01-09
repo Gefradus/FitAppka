@@ -1,6 +1,6 @@
-﻿using FitAppka.Models;
+﻿using FitnessApp.Models;
 
-namespace FitAppka.Strategy.StrategyInterface
+namespace FitnessApp.Strategy.StrategyInterface
 {
     public interface IChartTypeStrategy
     {

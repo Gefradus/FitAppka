@@ -1,7 +1,7 @@
-﻿using FitAppka.Models.Enum;
+﻿using FitnessApp.Models.Enum;
 using System.Collections.Generic;
 
-namespace FitAppka.Models
+namespace FitnessApp.Models
 {
     public class ProgressMonitoringDTO
     {

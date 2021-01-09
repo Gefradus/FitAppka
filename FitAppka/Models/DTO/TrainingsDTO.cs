@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FitAppka.Models.DTO
+namespace FitnessApp.Models.DTO
 {
     public class TrainingsDTO
     {

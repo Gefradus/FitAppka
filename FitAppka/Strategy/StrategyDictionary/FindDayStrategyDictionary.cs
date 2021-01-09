@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using FitAppka.Service.ServiceImpl;
-using FitAppka.Strategy.StrategyEnum;
-using FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl;
+using FitnessApp.Service.ServiceImpl;
+using FitnessApp.Strategy.StrategyEnum;
+using FitnessApp.Strategy.StrategyImpl.FindDayStrategyImpl;
 using System;
 using System.Collections.Generic;
 
-namespace FitAppka.Strategy.StrategyDictionary
+namespace FitnessApp.Strategy.StrategyDictionary
 {
     public class FindDayStrategyDictionary<T> : Dictionary<FindDayStrategyEnum, T>
     {

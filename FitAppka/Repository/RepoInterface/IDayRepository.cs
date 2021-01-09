@@ -1,8 +1,8 @@
-﻿using FitAppka.Models;
+﻿using FitnessApp.Models;
 using System;
 using System.Collections.Generic;
 
-namespace FitAppka.Repository
+namespace FitnessApp.Repository
 {
     public interface IDayRepository
     {

@@ -1,7 +1,7 @@
-﻿using FitAppka.Models;
+﻿using FitnessApp.Models;
 using System.Collections.Generic;
 
-namespace FitAppka.Service
+namespace FitnessApp.Service
 {
     public interface IProductManageService
     {

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using FitAppka.Service.ServiceImpl;
-using FitAppka.Strategy.StrategyImpl.DayOfWeekDietStrategyImpl;
+using FitnessApp.Service.ServiceImpl;
+using FitnessApp.Strategy.StrategyImpl.DayOfWeekDietStrategyImpl;
 using System;
 using System.Collections.Generic;
 
-namespace FitAppka.Strategy.StrategyDictionary
+namespace FitnessApp.Strategy.StrategyDictionary
 {
     public class DayOfWeekDietStrategyDictionary<T> : Dictionary<DayOfWeek, T>
     {

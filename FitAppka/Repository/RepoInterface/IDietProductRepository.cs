@@ -1,6 +1,6 @@
-﻿using FitAppka.Models;
+﻿using FitnessApp.Models;
 using System.Collections.Generic;
-namespace FitAppka.Repository.RepoInterface
+namespace FitnessApp.Repository.RepoInterface
 {
     public interface IDietProductRepository
     {

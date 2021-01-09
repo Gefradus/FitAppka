@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-namespace FitAppka.Service
+namespace FitnessApp.Service
 {
     public interface IStrengthTrainingService
     {

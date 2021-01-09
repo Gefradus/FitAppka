@@ -1,6 +1,6 @@
-﻿using FitAppka.Models;
+﻿using FitnessApp.Models;
 
-namespace FitAppka.Service
+namespace FitnessApp.Service
 {
     public interface ISettingsService
     {

@@ -1,11 +1,11 @@
-﻿using FitAppka.Models;
-using FitAppka.Models.Enum;
-using FitAppka.Repository;
+﻿using FitnessApp.Models;
+using FitnessApp.Models.Enum;
+using FitnessApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FitAppka.Service.ServicesImpl
+namespace FitnessApp.Service.ServicesImpl
 { 
     public class HomePageServiceImpl : IHomePageService
     {

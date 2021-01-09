@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using FitAppka.Models;
-using FitAppka.Models.Enum;
-using FitAppka.Repository;
-using FitAppka.Strategy;
-using FitAppka.Strategy.StrategyInterface;
+using FitnessApp.Models;
+using FitnessApp.Models.Enum;
+using FitnessApp.Repository;
+using FitnessApp.Strategy;
+using FitnessApp.Strategy.StrategyInterface;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class ProgressMonitoringServiceImpl : IProgressMonitoringService
     {

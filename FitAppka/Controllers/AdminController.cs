@@ -1,14 +1,14 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using FitAppka.Models;
-using FitAppka.Repository;
-using FitAppka.Service;
+using FitnessApp.Models;
+using FitnessApp.Repository;
+using FitnessApp.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using FitAppka.Service.ServiceInterface;
+using FitnessApp.Service.ServiceInterface;
 
-namespace FitAppka.Controllers
+namespace FitnessApp.Controllers
 {
 
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]

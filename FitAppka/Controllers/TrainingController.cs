@@ -1,6 +1,6 @@
-﻿using FitAppka.Models;
-using FitAppka.Repository;
-using FitAppka.Service;
+﻿using FitnessApp.Models;
+using FitnessApp.Repository;
+using FitnessApp.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FitAppka.Controllers
+namespace FitnessApp.Controllers
 {
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     [Authorize]

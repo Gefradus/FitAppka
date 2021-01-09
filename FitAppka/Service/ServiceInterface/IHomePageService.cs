@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FitAppka.Service
+namespace FitnessApp.Service
 {
     public interface IHomePageService
     {

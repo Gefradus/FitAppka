@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl
+namespace FitnessApp.Strategy.StrategyImpl.FindDayStrategyImpl
 {
     public class DateConverter
     {

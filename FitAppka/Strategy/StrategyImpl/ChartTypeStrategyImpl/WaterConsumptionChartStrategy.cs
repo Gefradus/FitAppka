@@ -1,12 +1,12 @@
-﻿using FitAppka.Models;
-using FitAppka.Models.Enum;
-using FitAppka.Repository;
-using FitAppka.Service;
-using FitAppka.Strategy.StrategyInterface;
+﻿using FitnessApp.Models;
+using FitnessApp.Models.Enum;
+using FitnessApp.Repository;
+using FitnessApp.Service;
+using FitnessApp.Strategy.StrategyInterface;
 using System;
 using System.Collections.Generic;
 
-namespace FitAppka.Strategy.ChartTypeStrategyImpl
+namespace FitnessApp.Strategy.ChartTypeStrategyImpl
 {
     public class WaterConsumptionChartStrategy : IChartTypeStrategy
     {

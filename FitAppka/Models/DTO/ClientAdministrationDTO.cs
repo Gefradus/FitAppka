@@ -1,4 +1,4 @@
-﻿namespace FitAppka.Models
+﻿namespace FitnessApp.Models
 {
     public class ClientAdministrationDTO
     {

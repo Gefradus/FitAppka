@@ -1,11 +1,11 @@
-﻿using FitAppka.Models.Enum;
-using FitAppka.Strategy.ChartTypeStrategyImpl;
+﻿using FitnessApp.Models.Enum;
+using FitnessApp.Strategy.ChartTypeStrategyImpl;
 using System.Collections.Generic;
 using System;
-using FitAppka.Service.ServiceImpl;
+using FitnessApp.Service.ServiceImpl;
 using AutoMapper;
 
-namespace FitAppka.Strategy
+namespace FitnessApp.Strategy
 {
     public class ChartTypeStrategyDictionary<T> : Dictionary<ChartTypeStrategyEnum, T>
     {

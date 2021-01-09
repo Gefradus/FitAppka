@@ -1,12 +1,12 @@
-﻿using FitAppka.Models.DTO;
-using FitAppka.Models.DTO.DaySummaryDTO;
-using FitAppka.Repository;
-using FitAppka.Service.ServiceInterface;
+﻿using FitnessApp.Models.DTO;
+using FitnessApp.Models.DTO.DaySummaryDTO;
+using FitnessApp.Repository;
+using FitnessApp.Service.ServiceInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class ReportServiceImpl : IReportService
     {

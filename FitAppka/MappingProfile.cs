@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using FitAppka.Models;
-using FitAppka.Models.DTO.DietCreatorDTO;
-using FitAppka.Service.ServiceImpl;
-using FitAppka.Strategy.ChartTypeStrategyImpl;
-using FitAppka.Strategy.StrategyImpl.DayOfWeekDietStrategyImpl;
-using FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl;
+using FitnessApp.Models;
+using FitnessApp.Models.DTO.DietCreatorDTO;
+using FitnessApp.Service.ServiceImpl;
+using FitnessApp.Strategy.ChartTypeStrategyImpl;
+using FitnessApp.Strategy.StrategyImpl.DayOfWeekDietStrategyImpl;
+using FitnessApp.Strategy.StrategyImpl.FindDayStrategyImpl;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace FitAppka
+namespace FitnessApp
 {
     public class MappingProfile : Profile
     {

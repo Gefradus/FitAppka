@@ -1,10 +1,10 @@
-﻿using FitAppka.Models;
+﻿using FitnessApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FitAppka.Repository.RepIfaceImpl
+namespace FitnessApp.Repository.RepIfaceImpl
 {
     public class SQLCardioTrainingRepository : ICardioTrainingRepository
     {

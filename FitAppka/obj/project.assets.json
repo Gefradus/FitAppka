@@ -9216,9 +9216,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\FitAppka.csproj",
-      "projectName": "FitAppka",
-      "projectPath": "C:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\FitAppka.csproj",
+      "projectUniqueName": "C:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\FitnessApp.csproj",
+      "projectName": "FitnessApp",
+      "projectPath": "C:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\FitnessApp.csproj",
       "packagesPath": "C:\\Users\\fader\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,14 +1,14 @@
-﻿using FitAppka.Service.ServiceInterface;
-using FitAppka.Repository;
-using FitAppka.Models;
+﻿using FitnessApp.Service.ServiceInterface;
+using FitnessApp.Repository;
+using FitnessApp.Models;
 using AutoMapper;
-using FitAppka.Models.DTO;
+using FitnessApp.Models.DTO;
 using System.Linq;
 using System.Collections.Generic;
-using FitAppka.Repository.RepoInterface;
-using FitAppka.Models.DTO.DietCreatorDTO;
+using FitnessApp.Repository.RepoInterface;
+using FitnessApp.Models.DTO.DietCreatorDTO;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class AdministrationServiceImpl : IAdministrationService
     {

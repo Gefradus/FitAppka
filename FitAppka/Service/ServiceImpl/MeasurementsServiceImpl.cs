@@ -1,8 +1,8 @@
-﻿using FitAppka.Models;
-using FitAppka.Repository;
+﻿using FitnessApp.Models;
+using FitnessApp.Repository;
 using System;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class MeasurementsServiceImpl : IMeasurementsService
     {

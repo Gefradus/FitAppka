@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-namespace FitAppka.Models
+namespace FitnessApp.Models
 {
     public class DietDTO
     {

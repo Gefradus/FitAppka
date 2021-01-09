@@ -1,8 +1,8 @@
-﻿using FitAppka.Models;
+﻿using FitnessApp.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace FitAppka.Repository.RepoInterface
+namespace FitnessApp.Repository.RepoInterface
 {
     public interface IDietRepository
     {

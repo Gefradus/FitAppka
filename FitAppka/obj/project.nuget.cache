@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "y0VGarq54Ie7cAnZ/jsaY7t799XlPJvWe+He2QOwKvUJm+4UjGlHSmsRGlnEeLoiUUcBHoh+Agzcp5vSMlncBQ==",
+  "dgSpecHash": "1TI23Pj2XhW+qxmD9mxblpgCedQH56lIcQ6UAHWj6GrEMmjR0AoB31QWd+Q+aFVQRKt5qU0OSjYCbrVPn5XJlQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\FitAppka.csproj",
+  "projectFilePath": "C:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\FitnessApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fader\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
     "C:\\Users\\fader\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.0.1\\automapper.extensions.microsoft.dependencyinjection.8.0.1.nupkg.sha512",

@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using FitAppka.Models;
-using FitAppka.Models.DTO.DietCreatorDTO;
-using FitAppka.Models.DTO.EditDietDTO;
-using FitAppka.Repository;
-using FitAppka.Repository.RepoInterface;
-using FitAppka.Service.ServiceInterface;
-using FitAppka.Strategy.StrategyDictionary;
-using FitAppka.Strategy.StrategyInterface;
+using FitnessApp.Models;
+using FitnessApp.Models.DTO.DietCreatorDTO;
+using FitnessApp.Models.DTO.EditDietDTO;
+using FitnessApp.Repository;
+using FitnessApp.Repository.RepoInterface;
+using FitnessApp.Service.ServiceInterface;
+using FitnessApp.Strategy.StrategyDictionary;
+using FitnessApp.Strategy.StrategyInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class DietCreatorServiceImpl : IDietCreatorService
     {

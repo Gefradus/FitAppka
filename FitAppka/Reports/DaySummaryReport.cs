@@ -1,11 +1,11 @@
-﻿using FitAppka.Models.DTO.DaySummaryDTO;
+﻿using FitnessApp.Models.DTO.DaySummaryDTO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Hosting;
 using System;
 using System.IO;
 
-namespace FitAppka.Reports
+namespace FitnessApp.Reports
 {
     public class DaySummaryReport
     {

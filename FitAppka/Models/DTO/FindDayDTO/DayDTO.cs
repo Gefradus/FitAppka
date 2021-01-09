@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FitAppka.Models
+namespace FitnessApp.Models
 {
     public class DayDTO
     {

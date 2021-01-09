@@ -1,10 +1,10 @@
-﻿using FitAppka.Models;
-using FitAppka.Models.Enum;
-using FitAppka.Repository;
-using FitAppka.Strategy.StrategyInterface;
+﻿using FitnessApp.Models;
+using FitnessApp.Models.Enum;
+using FitnessApp.Repository;
+using FitnessApp.Strategy.StrategyInterface;
 using System.Collections.Generic;
 
-namespace FitAppka.Strategy.ChartTypeStrategyImpl
+namespace FitnessApp.Strategy.ChartTypeStrategyImpl
 {
     public class WeightMeasurementChartStrategy : IChartTypeStrategy
     {

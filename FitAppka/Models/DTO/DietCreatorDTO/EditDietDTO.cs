@@ -1,7 +1,7 @@
-﻿using FitAppka.Models.DTO.DietCreatorDTO;
+﻿using FitnessApp.Models.DTO.DietCreatorDTO;
 using System.Collections.Generic;
 
-namespace FitAppka.Models.DTO.EditDietDTO
+namespace FitnessApp.Models.DTO.EditDietDTO
 {
     public class EditDietDTO
     {

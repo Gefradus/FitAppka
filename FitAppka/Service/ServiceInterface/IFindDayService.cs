@@ -1,5 +1,5 @@
-﻿using FitAppka.Models;
-namespace FitAppka.Service
+﻿using FitnessApp.Models;
+namespace FitnessApp.Service
 {
     public interface IFindDayService
     {

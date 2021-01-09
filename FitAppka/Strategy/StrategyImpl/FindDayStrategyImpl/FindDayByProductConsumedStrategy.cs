@@ -1,10 +1,10 @@
-﻿using FitAppka.Models;
-using FitAppka.Repository;
-using FitAppka.Strategy.StrategyInterface;
+﻿using FitnessApp.Models;
+using FitnessApp.Repository;
+using FitnessApp.Strategy.StrategyInterface;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FitAppka.Strategy.StrategyImpl.FindDayStrategyImpl
+namespace FitnessApp.Strategy.StrategyImpl.FindDayStrategyImpl
 {
     public class FindDayByProductConsumedStrategy : IFindDayStrategy
     {

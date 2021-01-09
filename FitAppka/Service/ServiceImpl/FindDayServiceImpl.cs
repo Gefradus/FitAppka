@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using FitAppka.Models;
-using FitAppka.Repository;
-using FitAppka.Strategy.StrategyDictionary;
-using FitAppka.Strategy.StrategyEnum;
-using FitAppka.Strategy.StrategyInterface;
+using FitnessApp.Models;
+using FitnessApp.Repository;
+using FitnessApp.Strategy.StrategyDictionary;
+using FitnessApp.Strategy.StrategyEnum;
+using FitnessApp.Strategy.StrategyInterface;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class FindDayServiceImpl : IFindDayService
     {

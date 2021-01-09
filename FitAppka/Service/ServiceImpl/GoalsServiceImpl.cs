@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using FitAppka.Models;
-using FitAppka.Repository;
+using FitnessApp.Models;
+using FitnessApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class GoalsServiceImpl : IGoalsService
     {
@@ -260,13 +260,8 @@ namespace FitAppka.Service.ServiceImpl
                 return ReduceClientGoals(clientGoals);
             } 
             else {
-                return MapFromDtoToClientGoals(clientGoals, dto);
+                return _mapper.Map(dto, clientGoals);
             }
-        }
-
-        private Goals MapFromDtoToClientGoals(Goals clientGoals, GoalsDTO dto)
-        {
-            return _goalsRepository.Update(_mapper.Map(dto, clientGoals));
         }
 
         public Goals AddOrUpdateClientGoals(Client client, int calorieTarget, int proteinTarget, int fatTarget, int carbsTarget)

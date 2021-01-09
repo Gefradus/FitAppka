@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
-namespace FitAppka.Models
+namespace FitnessApp.Models
 {
     public class FindDayDTO
     {

@@ -1,9 +1,9 @@
-﻿using FitAppka.Models;
-using FitAppka.Repository;
+﻿using FitnessApp.Models;
+using FitnessApp.Repository;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class StrengthTrainingServiceImpl : IStrengthTrainingService
     {

@@ -1,13 +1,13 @@
 using AutoMapper;
-using FitAppka.Models;
-using FitAppka.Repository;
-using FitAppka.Repository.RepIfaceImpl;
-using FitAppka.Repository.RepoImpl;
-using FitAppka.Repository.RepoInterface;
-using FitAppka.Service;
-using FitAppka.Service.ServiceImpl;
-using FitAppka.Service.ServiceInterface;
-using FitAppka.Service.ServicesImpl;
+using FitnessApp.Models;
+using FitnessApp.Repository;
+using FitnessApp.Repository.RepIfaceImpl;
+using FitnessApp.Repository.RepoImpl;
+using FitnessApp.Repository.RepoInterface;
+using FitnessApp.Service;
+using FitnessApp.Service.ServiceImpl;
+using FitnessApp.Service.ServiceInterface;
+using FitnessApp.Service.ServicesImpl;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,7 +18,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System.IO;
 
-namespace FitAppka
+namespace FitnessApp
 {
     public class Startup
     {

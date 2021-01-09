@@ -1,7 +1,7 @@
-using FitAppka.Models;
-using FitAppka.Repository;
+using FitnessApp.Models;
+using FitnessApp.Repository;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class SettingsServiceImpl : ISettingsService {
         private readonly IDayRepository _dayRepository;

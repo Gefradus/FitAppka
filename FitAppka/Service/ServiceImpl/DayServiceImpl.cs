@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using FitAppka.Models;
-using FitAppka.Repository;
+using FitnessApp.Models;
+using FitnessApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class DayServiceImpl : IDayManageService
     {

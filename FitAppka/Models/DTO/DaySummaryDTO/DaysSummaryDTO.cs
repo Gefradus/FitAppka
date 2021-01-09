@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FitAppka.Models.DTO.DaySummaryDTO
+namespace FitnessApp.Models.DTO.DaySummaryDTO
 {
     public class DaysSummaryDTO
     {

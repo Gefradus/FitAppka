@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class ContentRootPathHandlerServiceImpl : IContentRootPathHandlerService
     {

@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
-using FitAppka.Models;
-using FitAppka.Models.Enum;
-using FitAppka.Repository;
-using FitAppka.Repository.RepoInterface;
-using FitAppka.Service.ServiceInterface;
+using FitnessApp.Models;
+using FitnessApp.Models.Enum;
+using FitnessApp.Repository;
+using FitnessApp.Repository.RepoInterface;
+using FitnessApp.Service.ServiceInterface;
 using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace FitAppka.Service.ServiceImpl
+namespace FitnessApp.Service.ServiceImpl
 {
     public class ProductManageServiceImpl : IProductManageService
     {

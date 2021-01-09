@@ -1,11 +1,11 @@
-﻿using FitAppka.Models;
-using FitAppka.Repository.RepoInterface;
+﻿using FitnessApp.Models;
+using FitnessApp.Repository.RepoInterface;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FitAppka.Repository.RepIfaceImpl
+namespace FitnessApp.Repository.RepIfaceImpl
 {
     public class SQLProductRepository : IProductRepository
     {

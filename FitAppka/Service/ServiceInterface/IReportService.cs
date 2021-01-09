@@ -1,6 +1,6 @@
-﻿using FitAppka.Models.DTO.DaySummaryDTO;
+﻿using FitnessApp.Models.DTO.DaySummaryDTO;
 
-namespace FitAppka.Service.ServiceInterface
+namespace FitnessApp.Service.ServiceInterface
 {
     public interface IReportService
     {

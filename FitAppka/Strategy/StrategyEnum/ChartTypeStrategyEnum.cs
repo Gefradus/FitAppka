@@ -1,4 +1,4 @@
-﻿namespace FitAppka.Models.Enum
+﻿namespace FitnessApp.Models.Enum
 {
     public enum ChartTypeStrategyEnum
     {

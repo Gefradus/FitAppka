@@ -1,4 +1,4 @@
-﻿namespace FitAppka.Models.DTO
+﻿namespace FitnessApp.Models.DTO
 {
     public class DaySummaryDetailsDTO
     {
