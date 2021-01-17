@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FitnessApp.Models.DTO;
+using System;
 
 namespace FitnessApp.Service
 {
@@ -14,12 +14,12 @@ namespace FitnessApp.Service
         public int CountPercentageOfTarget(double var, double target);
         public decimal Round(double number);
         public decimal CountCalories(int whichMeal, DateTime daySelected);
-        public double SumAllListItems(List<double> list);
         public double SumAllKcalInDay(DateTime daySelected);
         public double SumAllProteinsInDay(DateTime daySelected);
         public double SumAllCarbsInDay(DateTime daySelected);
         public double SumAllFatsInDay(DateTime daySelected);
         public string DateFormat(DateTime daySelected);
+        public HomeDTO CreateHomeDTO(DateTime daySelected);
         
     }
 }

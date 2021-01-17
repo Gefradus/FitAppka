@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using FitnessApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using FitnessApp.Repository;
@@ -33,12 +30,12 @@ namespace NowyDotnecik.Controllers
 
         [HttpGet]
         [Route("/Home")]
-        public async Task<IActionResult> Home(DateTime daySelected)
+        public IActionResult Home(DateTime daySelected)
         {
             _dayService.AddDayIfNotExists(daySelected);
-            SendAllDataToView(daySelected);
-            return View(await _context.Meal.Include(m => m.Day).Include(p => p.Product).
-                Where(m => m.DayId == _dayService.GetLoggedInClientDayByDate(daySelected).DayId).ToListAsync());
+            SendInfoAboutMacronutritions(_dayService.GetLoggedInClientDayByDate(daySelected));
+
+            return View(_homeService.CreateHomeDTO(daySelected));
         }
 
         [HttpGet]
@@ -110,27 +107,7 @@ namespace NowyDotnecik.Controllers
             return Json(true);
         }
 
-        private void SendAllDataToView(DateTime daySelected)
-        {
-            Day day = _dayService.GetLoggedInClientDayByDate(daySelected);
-            SendBasicData(daySelected, day);
-            SendInfoIfIsAdminClient();
-            SendInfoAboutMacronutritions(day);
-            SendInfoAboutMealsOfTheDay(day);
-            SendInfoAboutCaloriesInMeals(daySelected);
-        }
-
-        private void SendBasicData(DateTime daySelected, Day day)
-        {
-            ViewData["day"] = daySelected;
-            ViewData["date"] = _homeService.DateFormat(daySelected);
-            ViewData["datepick"] = daySelected.ToString("yyyy-MM-dd");
-            ViewData["path"] = _contentRootService.GetContentRootFileName();
-            ViewData["clientID"] = _clientRepository.GetLoggedInClientId();
-            ViewData["dayID"] = day.DayId;
-            ViewData["water"] = day.WaterDrunk;
-        }
-
+       
         private void SendInfoAboutMacronutritions(Day day)
         {
             Goals dayGoals = _dayService.GetDayGoals(day.DayId);
@@ -146,36 +123,6 @@ namespace NowyDotnecik.Controllers
             ViewData[name + "0"] = _homeService.Round(sumOfMacronutrion);
             ViewData[name + "Target"] = target;
             ViewData["%" + name] = _homeService.CountPercentageOfTarget(sumOfMacronutrion, target);
-        }
-
-        private void SendInfoAboutMealsOfTheDay(Day day)
-        {
-            ViewData["breakfast"] = day.Breakfast;
-            ViewData["lunch"] = day.Lunch;
-            ViewData["dinner"] = day.Dinner;
-            ViewData["dessert"] = day.Dessert;
-            ViewData["snack"] = day.Snack;
-            ViewData["supper"] = day.Supper;
-        }
-
-        private void SendInfoAboutCaloriesInMeals(DateTime daySelected)
-        {
-            ViewData["breakfastKcal"] = _homeService.CountCalories(1, daySelected);
-            ViewData["lunchKcal"] = _homeService.CountCalories(2, daySelected);
-            ViewData["dinnerKcal"] = _homeService.CountCalories(3, daySelected);
-            ViewData["dessertKcal"] = _homeService.CountCalories(4, daySelected);
-            ViewData["snackKcal"] = _homeService.CountCalories(5, daySelected);
-            ViewData["supperKcal"] = _homeService.CountCalories(6, daySelected);
-        }
-
-        private void SendInfoIfIsAdminClient()
-        {
-            if (_clientRepository.IsLoggedInClientAdmin()) {
-                ViewData["admin"] = 1;
-            }
-            else {
-                ViewData["admin"] = 0;
-            }
         }
 
     }

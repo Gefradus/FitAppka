@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FitnessApp.Models.Meal>
+﻿@model FitnessApp.Models.DTO.HomeDTO
 
 <head>
     <link rel="stylesheet" href="~/css/Home.css" type="text/css">
@@ -10,21 +10,21 @@
     <script src="~/js/Validation.js"></script>
     <script src="~/js/AllViews.js"></script>
     <script type="text/javascript">
-        function showWater() { glass(@ViewData["water"], @ViewData["caloriesTarget"]); }
+        function showWater() { glass(@Model.Water, @ViewData["caloriesTarget"]); }
         function overflow() { colorItRed(@ViewData["%proteins"], @ViewData["%carbs"], @ViewData["%fats"], @ViewData["%calories"]); }
         function deleteMeal(id) { deleteMealUrl(id, '@Url.Action("Meal","Home")'); }
         function showEditModal(id) { showEditModalUrl(id, '@Url.Action("Meal","Home")'); }
         function createChart() { drawChart(@ViewData["proteins0"], @ViewData["carbs0"], @ViewData["fats0"]); }
         function hide() { hideChart(@ViewData["proteins0"], @ViewData["carbs0"], @ViewData["fats0"]); }
         function getRootPath() {
-            return getWebRootPath("@(((string) ViewData["path"]).Replace("\\","\\\\"))");
+            return getWebRootPath("@(((string) Model.Path).Replace("\\","\\\\"))");
         }
     </script>
     <script src="~/js/Main.js"></script>
 </head>
 
 <body onload="onload()">
-    @foreach (var item in Model)
+    @foreach (var item in Model.Meals)
     {
         if (item.Product.PhotoPath != null)
         {
@@ -46,24 +46,24 @@
     }
 
     <input id="mealID" type="hidden">
-    <input id="waterCount" type="hidden" value="@ViewData["water"]" />
+    <input id="waterCount" type="hidden" value="@Model.Water" />
 
     <div class="navbar-light box-shadow mb-3" id="navbarDzien">
         <div class="mx-auto">
             <div>
                 <div id="dziennik">
                     <div style="background-color: transparent; display: inline-block">
-                        <div class="data"><a asp-action="ChooseDay" asp-route-choice="1" asp-route-dayID="@ViewData["dayID"]"><img class="prev-next" src="~/img/prev.png" /></a></div>
+                        <div class="data"><a asp-action="ChooseDay" asp-route-choice="1" asp-route-dayID="@Model.DayID"><img class="prev-next" src="~/img/prev.png" /></a></div>
                     </div>
 
                     <div style="display: inline-block;">
                         <div class="data">
-                            @ViewData["date"]
+                            @Model.Date
                         </div>
                     </div>
 
                     <div style="background-color: transparent; display: inline-block;">
-                        <div class="data"><a asp-action="ChooseDay" asp-route-choice="2" asp-route-dayID="@ViewData["dayID"]"><img class="prev-next" src="~/img/next.png" /></a></div>
+                        <div class="data"><a asp-action="ChooseDay" asp-route-choice="2" asp-route-dayID="@Model.DayID"><img class="prev-next" src="~/img/next.png" /></a></div>
                     </div>
                     <div>
                         <input id="dateBtn" type="text" hidden />
@@ -133,18 +133,19 @@
 
         <div class="row no-gutters">
             <div id="glowna" class="col-lg-8">
-                @if ((bool)ViewData["breakfast"])
+                @if (Model.Breakfast)
                 {
                     <div class="panel">
                         <div onclick="hidePanel('breakfast')" class="panelWithoutBtn">
                             <div class="nazwapos">Śniadanie</div>
                             <div class="kcal">
-                                @ViewData["breakfastKcal"]kcal
+                                @Model.BreakfastKcal
+                                kcal
                             </div>
                         </div>
 
                         <div style="float:right; width: 60px" class="addButton">
-                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="1" asp-route-dayID="@ViewData["dayID"]">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="1" asp-route-dayID="@Model.DayID">
                                 <img class="img-fluid" src="~/img/add.png">
                             </a>
                         </div>
@@ -153,7 +154,7 @@
                 }
 
                 <div id="breakfast" class="meal">
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Meals)
                     {
                         @if (item.Day.Breakfast == true && item.InWhichMealOfTheDay == 1)
                         {
@@ -179,7 +180,7 @@
                     }
                 </div>
 
-                @if ((bool)ViewData["lunch"])
+                @if (Model.Lunch)
                 {
                     <div class="panel">
                         <div onclick="hidePanel('lunch')" class="panelWithoutBtn">
@@ -187,11 +188,12 @@
                                 <div class="nazwapos">II śniadanie</div>
                             </div>
                             <div class="kcal">
-                                @ViewData["lunchKcal"]kcal
+                                @Model.LunchKcal
+                                kcal
                             </div>
                         </div>
                         <div style="float:right; width: 60px" class="addButton">
-                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="2" asp-route-dayID="@ViewData["dayID"]">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="2" asp-route-dayID="@Model.DayID">
                                 <img class="img-fluid" src="~/img/add.png">
                             </a>
                         </div>
@@ -200,7 +202,7 @@
                 }
 
                 <div id="lunch" class="meal">
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Meals)
                     {
                         @if (item.Day.Lunch == true && item.InWhichMealOfTheDay == 2)
                         {
@@ -227,7 +229,7 @@
                 </div>
 
 
-                @if ((bool)ViewData["dinner"])
+                @if (Model.Dinner)
                 {
                     <div class="panel">
                         <div onclick="hidePanel('dinner')" class="panelWithoutBtn">
@@ -235,11 +237,12 @@
                                 <div class="nazwapos">Obiad</div>
                             </div>
                             <div class="kcal">
-                                @ViewData["dinnerKcal"]kcal
+                                @Model.DinnerKcal
+                                kcal
                             </div>
                         </div>
                         <div style="float:right; width: 60px" class="addButton">
-                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="3" asp-route-dayID="@ViewData["dayID"]">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="3" asp-route-dayID="@Model.DayID">
                                 <img class="img-fluid" src="~/img/add.png">
                             </a>
                         </div>
@@ -248,7 +251,7 @@
                 }
 
                 <div id="dinner" class="meal">
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Meals)
                     {
                         @if (item.Day.Dinner == true && item.InWhichMealOfTheDay == 3)
                         {
@@ -274,18 +277,19 @@
                 </div>
 
 
-                @if ((bool)ViewData["dessert"])
+                @if (Model.Dessert)
                 {
                     <div class="panel">
                         <div onclick="hidePanel('dessert')" class="panelWithoutBtn">
                             <div class="nazwapos">Deser</div>
 
                             <div class="kcal">
-                                @ViewData["dessertKcal"]kcal
+                                @Model.DessertKcal
+                                kcal
                             </div>
                         </div>
                         <div style="float:right; width: 60px" class="addButton">
-                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="4" asp-route-dayID="@ViewData["dayID"]">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="4" asp-route-dayID="@Model.DayID">
                                 <img class="img-fluid" src="~/img/add.png">
                             </a>
                         </div>
@@ -294,7 +298,7 @@
                 }
 
                 <div id="dessert" class="meal">
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Meals)
                     {
                         @if (item.Day.Dessert == true && item.InWhichMealOfTheDay == 4)
                         {
@@ -322,18 +326,19 @@
 
 
 
-                @if ((bool)ViewData["snack"])
+                @if (Model.Snack)
                 {
                     <div class="panel">
                         <div onclick="hidePanel('snack')" class="panelWithoutBtn">
                             <div class="nazwapos">Przekąska</div>
 
                             <div class="kcal">
-                                @ViewData["snackKcal"]kcal
+                                @Model.SnackKcal
+                                kcal
                             </div>
                         </div>
                         <div style="float:right; width: 60px" class="addButton">
-                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="5" asp-route-dayID="@ViewData["dayID"]">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="5" asp-route-dayID="@Model.DayID">
                                 <img class="img-fluid" src="~/img/add.png">
                             </a>
                         </div>
@@ -342,7 +347,7 @@
                 }
 
                 <div id="snack" class="meal">
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Meals)
                     {
                         @if (item.Day.Snack == true && item.InWhichMealOfTheDay == 5)
                         {
@@ -369,18 +374,19 @@
                 </div>
 
 
-                @if ((bool)ViewData["supper"])
+                @if (Model.Supper)
                 {
                     <div class="panel">
                         <div onclick="hidePanel('supper')" class="panelWithoutBtn">
                             <div class="nazwapos">Kolacja</div>
 
                             <div class="kcal">
-                                @ViewData["supperKcal"]kcal
+                                @Model.SupperKcal
+                                kcal
                             </div>
                         </div>
                         <div style="float:right; width: 60px" class="addButton">
-                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="6" asp-route-dayID="@ViewData["dayID"]">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="6" asp-route-dayID="@Model.DayID">
                                 <img class="img-fluid" src="~/img/add.png">
                             </a>
                         </div>
@@ -389,7 +395,7 @@
                 }
 
                 <div id="supper" class="meal">
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Meals)
                     {
                         @if (item.Day.Supper == true && item.InWhichMealOfTheDay == 6)
                         {
@@ -424,10 +430,10 @@
                     <button id="adminBtn" class="btn btn-dark">PANEL ADMINISTRATORA</button>
                 </div>
                 <div id="export">
-                    <button id="exportBtn" type="button" onclick="generatePdf(@ViewData["dayID"])" class="btn btn-dark">PODSUMOWANIE DNIA</button>
+                    <button id="exportBtn" type="button" onclick="generatePdf(@Model.DayID)" class="btn btn-dark">PODSUMOWANIE DNIA</button>
                 </div>
                 <div id="monthReport">
-                    <button id="exportMonthBtn" type="button" onclick="generateMonthPdf(@ViewData["dayID"])" class="btn btn-dark">PODSUMOWANIE MIESIĄCA</button>
+                    <button id="exportMonthBtn" type="button" onclick="generateMonthPdf(@Model.DayID)" class="btn btn-dark">PODSUMOWANIE MIESIĄCA</button>
                 </div>
                 <div id="chartArea">
                     <h6 style="padding-top: 5px; font-weight:600">Proporcje energetyczne</h6>
@@ -439,7 +445,7 @@
                     <img id="glass" class="my-3 my-sm-4 my-lg-5" src="~/img/00.png">
                     <div id="showWater" class="container">
                         <div class="row cent" style="margin-bottom: 10px">
-                            <div id="water">@ViewData["water"] ml</div>
+                            <div id="water">@Model.Water ml</div>
                             <div id="divShowWater">
                                 <button class="button" onclick="editingWater()"><img style="height:15px; width:15px;" src="~/img/pen.png"></button>
                             </div>
@@ -450,10 +456,10 @@
                         <div class="container">
                             <div class="row" style="margin-bottom: 10px">
                                 <div id="editingWater">
-                                    <input id="EditedWater" name="EditedWater" type="number" min="0" max="99999999" value="@ViewData["water"]" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 100000)" oninput="validity.valid || (value = '')" />
+                                    <input id="EditedWater" name="EditedWater" type="number" min="0" max="99999999" value="@Model.Water" class="int" onchange="this.value = changeToMaxIfGreaterInt(this.value, 100000)" oninput="validity.valid || (value = '')" />
                                 </div>
                                 <div class="divDodEdyWode">
-                                    <button type="button" class="button" onclick="editWater('@Url.Action("Water", "Home")', @ViewData["dayID"], @ViewData["caloriesTarget"])">
+                                    <button type="button" class="button" onclick="editWater('@Url.Action("Water", "Home")', @Model.DayID, @ViewData["caloriesTarget"])">
                                         <img style="height:20px; width:20px;" src="~/img/save.png">
                                     </button>
                                 </div>
@@ -469,7 +475,7 @@
                             </div>
                             <div id="ml">ml</div>
                             <div class="divDodEdyWode">
-                                <button id="dodajWode" type="button" class="btn" onclick="addWater('@Url.Action("Water", "Home")', @ViewData["dayID"], @ViewData["caloriesTarget"])" value="dodajWode">Dodaj</button>
+                                <button id="dodajWode" type="button" class="btn" onclick="addWater('@Url.Action("Water", "Home")', @Model.DayID, @ViewData["caloriesTarget"])" value="dodajWode">Dodaj</button>
                             </div>
                         </div>
                     </div>
@@ -539,14 +545,14 @@
     <script>
         var $j = jQuery.noConflict();
         changeDayDatepicker();
-        $j("#dateBtn").datepicker("setDate", new Date('@ViewData["datepick"]'));
+        $j("#dateBtn").datepicker("setDate", new Date('@Model.Datepick'));
 
         $j("#dateBtn").change(function () {
             var date = $j("#dateBtn").datepicker("getDate").toISOString();
             window.location.href = '@Url.Action("ChangeDay", "Home")' + "?day=" + date;
         });
 
-        if ('@ViewData["admin"]' == 1) {
+        if ('@Model.IsAdmin' == 1) {
             document.getElementById("admin").hidden = false;
         }
 

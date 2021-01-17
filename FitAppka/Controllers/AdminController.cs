@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using FitnessApp.Models;
 using FitnessApp.Repository;
 using FitnessApp.Service;

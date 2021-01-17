@@ -1,6 +1,9 @@
 ﻿using FitnessApp.Models;
+using FitnessApp.Models.DTO;
 using FitnessApp.Models.Enum;
 using FitnessApp.Repository;
+using FitnessApp.Service.ServiceImpl;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +18,12 @@ namespace FitnessApp.Service.ServicesImpl
         private readonly IMealRepository _mealRepository;
         private readonly IProductRepository _productRepository;
         private readonly IGoalsRepository _goalsRepository;
+        private readonly IDayManageService _dayService;
+        private readonly IContentRootPathHandlerService _contentRootService;
+        private readonly FitAppContext _context;
 
-        public HomePageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository, IDayManageService dayManageService,
-            IMealRepository mealRepository, IProductRepository productRepository, IGoalsRepository goalsRepository)
+        public HomePageServiceImpl(IClientRepository clientRepository, IDayRepository dayRepository, IDayManageService dayManageService, FitAppContext context,
+            IMealRepository mealRepository, IProductRepository productRepository, IGoalsRepository goalsRepository, IContentRootPathHandlerService contentRootService)
         {
             _productRepository = productRepository;
             _mealRepository = mealRepository;
@@ -25,6 +31,9 @@ namespace FitnessApp.Service.ServicesImpl
             _dayManageService = dayManageService;
             _clientRepository = clientRepository;
             _goalsRepository = goalsRepository;
+            _contentRootService = contentRootService;
+            _dayService = dayManageService;
+            _context = context;
         }
 
         public string DateFormat(DateTime daySelected)
@@ -49,19 +58,19 @@ namespace FitnessApp.Service.ServicesImpl
         }
 
         public double SumAllKcalInDay(DateTime daySelected){
-            return SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Calories).ToList());
+            return GetMealsOfTheDay(daySelected).Select(m => m.Calories).ToList().Sum();
         }
 
         public double SumAllProteinsInDay(DateTime daySelected){
-            return SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Proteins).ToList());
+            return GetMealsOfTheDay(daySelected).Select(m => m.Proteins).ToList().Sum();
         }
 
         public double SumAllCarbsInDay(DateTime daySelected){
-            return SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Carbohydrates).ToList());
+            return GetMealsOfTheDay(daySelected).Select(m => m.Carbohydrates).ToList().Sum();
         }
 
         public double SumAllFatsInDay(DateTime daySelected){
-            return SumAllListItems(GetMealsOfTheDay(daySelected).Select(m => m.Fats).ToList());
+            return GetMealsOfTheDay(daySelected).Select(m => m.Fats).ToList().Sum();
         }
 
         public int CountPercentageOfTarget(double var, double target){
@@ -145,7 +154,7 @@ namespace FitnessApp.Service.ServicesImpl
         {
             _dayManageService.AddDayIfNotExists(daySelected);
             var meals = _mealRepository.GetMealsOfTheDay(_dayManageService.GetDayIDByDate(daySelected), whichMeal);
-            return Round((double) SumAllListItems(meals.Select(m => m.Calories).ToList()));
+            return Round(meals.Select(m => m.Calories).ToList().Sum());
         }
 
         private void SetTheMeal(Meal meal, DateTime daySelected)
@@ -200,11 +209,35 @@ namespace FitnessApp.Service.ServicesImpl
             return gram * (number == null ? 0 : (double)Math.Round((decimal)number, 4, MidpointRounding.AwayFromZero)) / 100;
         }
 
-        public double SumAllListItems(List<double> list)
+       
+        public HomeDTO CreateHomeDTO(DateTime daySelected)
         {
-            double var = 0;
-            foreach (var item in list) { var += item; }
-            return var;
+            Day day = _dayService.GetLoggedInClientDayByDate(daySelected);
+
+            return new HomeDTO()
+            {
+                Meals = _context.Meal.Include(m => m.Day).Include(p => p.Product).Where(m => m.DayId == _dayService.GetLoggedInClientDayByDate(daySelected).DayId).ToList(),
+                BreakfastKcal = CountCalories(1, daySelected),
+                LunchKcal = CountCalories(2, daySelected),
+                DinnerKcal = CountCalories(3, daySelected),
+                DessertKcal = CountCalories(4, daySelected),
+                SnackKcal = CountCalories(5, daySelected),
+                SupperKcal = CountCalories(6, daySelected),
+                Day = daySelected,
+                Date = DateFormat(daySelected),
+                Datepick = daySelected.ToString("yyyy-MM-dd"),
+                Path = _contentRootService.GetContentRootFileName(),
+                ClientID = _clientRepository.GetLoggedInClientId(),
+                DayID = day.DayId,
+                Water = day.WaterDrunk,
+                IsAdmin = _clientRepository.IsLoggedInClientAdmin() ? 1 : 0,
+                Breakfast = (bool)day.Breakfast,
+                Lunch = (bool)day.Lunch,
+                Dinner = (bool)day.Dinner,
+                Dessert = (bool)day.Dinner,
+                Snack = (bool)day.Snack,
+                Supper = (bool)day.Supper,
+            };
         }
     }
 }
