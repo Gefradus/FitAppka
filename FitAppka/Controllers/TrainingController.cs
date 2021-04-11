@@ -15,19 +15,17 @@ namespace FitnessApp.Controllers
     public class TrainingController : Controller
     {
         private readonly FitAppContext _context;
-        private readonly IClientRepository _clientRepository;
         private readonly ICardioTrainingService _cardioServices;
         private readonly IStrengthTrainingService _strengthTrainingService;
-        private readonly IGoalsService _goalsService;
+        private readonly ITrainingPanelService _trainingPanelService;
+        //private readonly IGoalsService _goalsService;
         private readonly IDayManageService _dayService;
 
-        public TrainingController(IClientRepository clientRepository, ICardioTrainingService cardioTrainingServices, IGoalsService dietaryTargetsService,
-            IStrengthTrainingService strengthTrainingServices, FitAppContext context, IDayManageService dayService) 
+        public TrainingController(ICardioTrainingService cardioTrainingServices, IStrengthTrainingService strengthTrainingServices, 
+            IDayManageService dayService, ITrainingPanelService trainingPanelService) 
         {
-            _goalsService = dietaryTargetsService;
+            _trainingPanelService = trainingPanelService;
             _dayService = dayService;
-            _context = context;
-            _clientRepository = clientRepository;
             _cardioServices = cardioTrainingServices;
             _strengthTrainingService = strengthTrainingServices;
         }
@@ -63,18 +61,18 @@ namespace FitnessApp.Controllers
 
         [HttpGet]
         [Route("/Training")]
-        public async Task<IActionResult> TrainingPanel(int dayID) {
+        public IActionResult TrainingPanel(int dayID) {
 
-            ViewData["dayID"] = dayID;
-            ViewData["day"] = _dayService.GetDayDateTime(dayID).Date.ToString("dd.MM.yyyy");
-            ViewData["clientID"] = _clientRepository.GetLoggedInClient().ClientId;
-            ViewData["burnedKcal"] = _goalsService.CaloriesBurnedInDay(dayID);
-            ViewData["cardioTime"] = _cardioServices.GetCardioTimeInDay(dayID);
-            ViewData["kcalTarget"] = _cardioServices.GetKcalBurnedGoalInDay(dayID);
-            ViewData["timeTarget"] = _cardioServices.GetTrainingTimeGoalInDay(dayID);
-            ViewData["strengthTrainings"] = _context.StrengthTraining.Include(s => s.StrengthTrainingType).Include(s => s.Day).ToList();
+            //  ViewData["dayID"] = dayID;
+            //  ViewData["day"] = _dayService.GetDayDateTime(dayID).Date.ToString("dd.MM.yyyy");
+            //  ViewData["clientID"] = _clientRepository.GetLoggedInClient().ClientId;
+            //  ViewData["burnedKcal"] = _goalsService.CaloriesBurnedInDay(dayID);
+            //  ViewData["cardioTime"] = _cardioServices.GetCardioTimeInDay(dayID);
+            //  ViewData["kcalTarget"] = _cardioServices.GetKcalBurnedGoalInDay(dayID);
+            //  ViewData["timeTarget"] = _cardioServices.GetTrainingTimeGoalInDay(dayID);
+            //  ViewData["strengthTrainings"] = _context.StrengthTraining.Include(s => s.StrengthTrainingType).Include(s => s.Day).ToList();
 
-            return View(await _context.CardioTraining.Include(c => c.CardioTrainingType).Include(c => c.Day).ToListAsync());
+            return View(_trainingPanelService.Dto(dayID));//await _context.CardioTraining.Include(c => c.CardioTrainingType).Include(c => c.Day).ToListAsync());
         }
 
         [HttpGet]

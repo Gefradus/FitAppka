@@ -69,6 +69,7 @@ namespace FitnessApp
             services.AddScoped<IDietCreatorService, DietCreatorServiceImpl>();
             services.AddScoped<IAdministrationService, AdministrationServiceImpl>();
             services.AddScoped<IReportService, ReportServiceImpl>();
+            services.AddScoped<ITrainingPanelService, TrainingPanelServiceImpl>();
         }
 
         private void RepositoriesAddScoped(IServiceCollection services)

@@ -62,7 +62,7 @@ namespace FitnessApp.Service.ServiceImpl
                 var = 76.76;
             }
 
-            return FormatBodyFatLevel((double)(((1.634 * waist) - (1.804 * weight) - var) / (weight * 2.2) * 100));   //YMCA Method
+            return FormatBodyFatLevel((double)(((4.15 * waist / 2.54) - (0.082 * weight * 2.2) - var) / (weight * 2.2) * 100));   //YMCA Method
         }
 
         private double FormatBodyFatLevel(double fatLevel){

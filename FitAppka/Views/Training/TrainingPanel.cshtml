@@ -1,5 +1,5 @@
-﻿@using FitnessApp.Models 
-@model IEnumerable<FitnessApp.Models.CardioTraining>
+﻿@using FitnessApp.Models
+@model FitnessApp.Models.DTO.TrainingPanelDTO
 <html lang="pl">
 
 <head>
@@ -64,7 +64,7 @@
                         </div>
                         <div id="kcal" class="param">
                             <div>Spalone kalorie:</div>
-                            <input id="burnedKcal" type="number" max="9999999" name="burnedKcal" class="int" oninput="validity.valid || (value = '')"/>
+                            <input id="burnedKcal" type="number" max="9999999" name="burnedKcal" class="int" oninput="validity.valid || (value = '')" />
                             <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kcal</div>
                         </div>
                         <div id="saveCardio" class="cent cb">
@@ -95,11 +95,11 @@
                             <div class="acent">
                                 <div>Powtórzenia:</div><div class="star">*</div>
                             </div>
-                            <input class="cb int int1" id="reps" type="number" name="reps" max="999999" oninput="validity.valid || (value = '')"/>
+                            <input class="cb int int1" id="reps" type="number" name="reps" max="999999" oninput="validity.valid || (value = '')" />
                         </div>
                         <div id="weightArea" class="param">
                             <div>Ciężar:</div>
-                            <input id="weight" type="number" max="999999" name="weight" class="int int1" oninput="validity.valid || (value = '')"/>
+                            <input id="weight" type="number" max="999999" name="weight" class="int int1" oninput="validity.valid || (value = '')" />
                             <div style="font-size: 13px; margin-top: 5px; font-weight: 600">kg.</div>
                         </div>
                         <div id="saveStrength" class="cent cb">
@@ -113,12 +113,12 @@
 
         <div style="display: flex; margin-bottom: 12px">
             <div id="diary">Dziennik treningowy dla: </div>
-            <input id="datepicker" class="datepicker" onchange="changeDay('@Url.Action("ChangeDay", "Training")');" type="text" style="margin-left: 10px; margin-right: 15px; margin-top: 2px; text-align: center" value="@ViewData["day"]" readonly />
+            <input id="datepicker" class="datepicker" onchange="changeDay('@Url.Action("ChangeDay", "Training")');" type="text" style="margin-left: 10px; margin-right: 15px; margin-top: 2px; text-align: center" value="@Model.Day" readonly />
         </div>
 
         <div style="display: flex">
             <div class="trainTypeHeader">Treningi cardio:</div>
-            <a class="btn acent" id="btnAddCardio" asp-controller="Training" asp-action="Cardio" asp-route-dayID="@ViewData["dayID"]">Dodaj trening cardio</a>
+            <a class="btn acent" id="btnAddCardio" asp-controller="Training" asp-action="Cardio" asp-route-dayID="@Model.DayId">Dodaj trening cardio</a>
         </div>
 
         <div id="all">
@@ -137,9 +137,9 @@
 
         @{
             int cardioCount = 0;
-            foreach (var training in Model)
+            foreach (var training in Model.CardioTrainings)
             {
-                if (training.Day.DayId.Equals(ViewData["dayID"]))
+                if (training.Day.DayId.Equals(Model.DayId))
                 {
                     <div class="row no-gutters trainingRow">
                         <div class="col-5 cent trainingName" onclick="showEditCardioModal(@training.CardioTrainingId,@training.TimeInMinutes,@training.CaloriesBurned,'@training.CardioTrainingType.TrainingName','@training.CardioTrainingType.KcalPerMin')">
@@ -181,10 +181,10 @@
             <div class="col-7 container">
                 <div class="row no-gutters">
                     <div class="col py-1 column">
-                        @ViewData["cardioTime"]
+                        @Model.CardioTime
                     </div>
                     <div class="col py-1 column">
-                        @ViewData["burnedKcal"]
+                        @Model.BurnedKcal
                     </div>
                     <div class="col btnArea">
 
@@ -198,10 +198,10 @@
             <div class="col-7 container">
                 <div class="row no-gutters" style="height: 100%">
                     <div class="col py-1 column">
-                        @ViewData["timeTarget"]
+                        @Model.TimeTarget
                     </div>
                     <div class="col py-1 column">
-                        @ViewData["kcalTarget"]
+                        @Model.KcalTarget
                     </div>
                     <div class="col btnArea">
 
@@ -213,7 +213,7 @@
 
         <div style="display: flex">
             <div class="trainTypeHeader">Treningi siłowe:</div>
-            <a class="btn acent" id="btnAddStrength" asp-controller="Training" asp-action="StrengthTraining" asp-route-dayID="@ViewData["dayID"]">Dodaj trening siłowy</a>
+            <a class="btn acent" id="btnAddStrength" asp-controller="Training" asp-action="StrengthTraining" asp-route-dayID="@Model.DayId">Dodaj trening siłowy</a>
         </div>
 
         <div id="all">
@@ -233,9 +233,9 @@
 
         @{
             int trainingCount = 0;
-            foreach (var training in (List<StrengthTraining>)ViewData["strengthTrainings"])
+            foreach (var training in Model.StrengthTrainings)
             {
-                if (training.Day.DayId.Equals(ViewData["dayID"]))
+                if (training.Day.DayId.Equals(Model.DayId))
                 {
                     <div class="row no-gutters trainingRow">
                         <div class="col-5 cent trainingName" onclick="showEditStrengthModal(@training.StrengthTrainingId, @training.Sets, @training.Repetitions, @training.Load, '@training.StrengthTrainingType.TrainingName')">

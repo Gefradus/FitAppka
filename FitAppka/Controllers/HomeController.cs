@@ -34,6 +34,7 @@ namespace NowyDotnecik.Controllers
         {
             _dayService.AddDayIfNotExists(daySelected);
             SendInfoAboutMacronutritions(_dayService.GetLoggedInClientDayByDate(daySelected));
+            ViewData["dayID"] = _dayService.GetLoggedInClientDayByDate(daySelected).DayId;
 
             return View(_homeService.CreateHomeDTO(daySelected));
         }
