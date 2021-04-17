@@ -1,5 +1,4 @@
 ﻿using FitnessApp.Models;
-using FitnessApp.Repository;
 using FitnessApp.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,17 +9,13 @@ namespace FitnessApp.Controllers
     [Authorize]
     public class SettingsController : Controller
     {
-        private readonly IClientRepository _clientRepository;
-        private readonly ISettingsService _settingsService;
+        private readonly IClientManageService _clientManageService;
         private readonly IDayManageService _dayService;
-        private readonly IWeightMeasurementRepository _weightMeasurementRepository;
+        private readonly ISettingsService _settingsService;
+        
 
-        public SettingsController(IClientRepository clientRepository, ISettingsService settingsService, 
-            IDayManageService dayService, IWeightMeasurementRepository weightMeasurementRepository)
-        {
-            _weightMeasurementRepository = weightMeasurementRepository;
-            _dayService = dayService;
-            _clientRepository = clientRepository;
+        public SettingsController(IClientManageService clientManageService, ISettingsService settingsService) {
+            _clientManageService = clientManageService;
             _settingsService = settingsService;
         }
 
@@ -28,62 +23,18 @@ namespace FitnessApp.Controllers
         [Route("/Settings")]
         public IActionResult Settings()
         {
-            FirstAppLaunch();
-            ViewData["clientID"] = _clientRepository.GetLoggedInClient().ClientId;
-            
-            return View();
+            ViewData["dayID"] = _dayService.GetTodayId();
+            return View(_settingsService.Dto());
         }
 
-        private void FirstAppLaunch()
-        {
-            try {
-                Client client = _clientRepository.GetLoggedInClient();
-                ViewData["dateOfBirth"] = client.DateOfBirth.Value.ToString("yyyy-MM-dd");
-                ViewData["weight"] = _weightMeasurementRepository.GetLastLoggedInClientWeight();
-                ViewData["growth"] = client.Growth;
-                ViewData["changeGoal"] = (int)client.WeightChangeGoal;
-                ViewData["activity"] = (int)client.ActivityLevel;
-                ViewData["pace"] = client.PaceOfChanges.ToString().Replace(',', '.');
-                ViewData["isFirstLaunch"] = 0;
-                ViewData["dayID"] = _dayService.GetTodayId();
-                SendDataAboutClientBooleans(client);
-            }
-            catch {
-                ViewData["dateOfBirth"] = "2000-01-01";
-                ViewData["isFirstLaunch"] = 1;
-            }
-        }
-
-        public void SendDataAboutClientBooleans(Client client)
-        {
-            SetBoolean(client.Sex, "sex");
-            SetBoolean(client.Breakfast, "breakfast");
-            SetBoolean(client.Lunch, "lunch");
-            SetBoolean(client.Dinner, "dinner");
-            SetBoolean(client.Dessert, "dessert");
-            SetBoolean(client.Snack, "snack");
-            SetBoolean(client.Supper, "supper");
-        }
-
-        private void SetBoolean(bool? flag, string viewDataName)
-        {
-            if ((bool)flag) { 
-                ViewData[viewDataName] = 1;
-            }
-            else {
-                ViewData[viewDataName] = 0;
-            }
-        }
-
-
-        [Authorize]
         [HttpPost]
         [Route("/Settings")]
-        public IActionResult Settings(SettingsDTO m, int isFirstLaunch)
+        public IActionResult Settings(SettingsDTO m, bool isFirstLaunch)
         {
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 try {
-                    _settingsService.ChangeSettings(m, isFirstLaunch, _clientRepository.GetLoggedInClientId());
+                    _settingsService.ChangeSettings(m, isFirstLaunch, _clientManageService.GetLoggedInClientId());
                     return RedirectToAction("Start", "Home");
                 }
                 catch {
@@ -92,10 +43,8 @@ namespace FitnessApp.Controllers
                 }
             }
 
-            FirstAppLaunch();
-            return View(m);
+            return View(_settingsService.Dto());
         }
-
     }
 }
 

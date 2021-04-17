@@ -50,7 +50,7 @@ namespace FitnessApp.Service.ServiceImpl
         public void EditClient(ClientAdministrationDTO dto, int id)
         {
             try {
-                _settingsService.ChangeSettings(dto.SettingsDTO, 0, id);
+                _settingsService.ChangeSettings(dto.SettingsDTO, false, id);
             }
             catch {}
             EditRegisterDTO(dto.RegisterDTO, id);

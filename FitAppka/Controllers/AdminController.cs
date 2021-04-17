@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FitnessApp.Models;
-using FitnessApp.Repository;
 using FitnessApp.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

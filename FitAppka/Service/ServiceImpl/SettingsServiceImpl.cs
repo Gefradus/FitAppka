@@ -1,5 +1,6 @@
 using FitnessApp.Models;
 using FitnessApp.Repository;
+using System;
 
 namespace FitnessApp.Service.ServiceImpl
 {
@@ -7,18 +8,20 @@ namespace FitnessApp.Service.ServiceImpl
         private readonly IDayRepository _dayRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IMeasurementsService _measurementsService;
+        private readonly IWeightMeasurementRepository _weightMeasurementRepository;
         private readonly IGoalsService _goalsService;
 
-        public SettingsServiceImpl(IDayRepository dayRepository, IClientRepository clientRepository,
+        public SettingsServiceImpl(IDayRepository dayRepository, IClientRepository clientRepository, IWeightMeasurementRepository weightMeasurementRepository,
             IGoalsService goalsService, IMeasurementsService measurementsService)
         {
+            _weightMeasurementRepository = weightMeasurementRepository;
             _goalsService = goalsService;
             _measurementsService = measurementsService;
             _clientRepository = clientRepository;
             _dayRepository = dayRepository;
         }
 
-        public void ChangeSettings(SettingsDTO m, int isFirstLaunch, int clientId)
+        public void ChangeSettings(SettingsDTO m, bool isFirstLaunch, int clientId)
         {
             Client client = _clientRepository.GetClientById(clientId);
             SetClientGoals(m, client);
@@ -65,9 +68,9 @@ namespace FitnessApp.Service.ServiceImpl
             }
         }
 
-        private void SetClientWeightMeasurement(SettingsDTO m, int isItFirstLaunch)
+        private void SetClientWeightMeasurement(SettingsDTO m, bool isItFirstLaunch)
         {
-            if (isItFirstLaunch == 1) {
+            if (isItFirstLaunch) {
                 _measurementsService.AddMeasurements((short)m.Weight, null);
             }
         }
@@ -88,5 +91,38 @@ namespace FitnessApp.Service.ServiceImpl
             _clientRepository.Update(client);
         }
 
+        public SettingsDTO Dto()
+        {
+            var c = _clientRepository.GetLoggedInClient();
+            
+            try {
+                return new SettingsDTO()
+                {
+                    Weight = _weightMeasurementRepository.GetLastLoggedInClientWeight(),
+                    WeightChangeGoal = (short)c.WeightChangeGoal,
+                    ActivityLevel = c.ActivityLevel,
+                    PaceOfChanges = c.PaceOfChanges.ToString().Replace(',', '.'),
+                    Breakfast = c.Breakfast,
+                    Lunch = c.Lunch,
+                    Dinner = c.Dinner,
+                    Dessert = c.Dessert,
+                    Snack = c.Snack,
+                    Supper = c.Supper,
+                    DateOfBirth = c.DateOfBirth,
+                    Growth = c.Growth,
+                    Sex = c.Sex,
+                    IsFirstLaunch = false
+                };
+            } 
+            catch {
+                return new SettingsDTO()
+                {
+                    DateOfBirth = Convert.ToDateTime("2000-01-01"),
+                    IsFirstLaunch = true
+                };
+            }
+
+            
+        }
     }
 }

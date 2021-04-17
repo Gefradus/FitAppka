@@ -12,17 +12,17 @@
         <link href="~/css/Tooltip.css" rel="stylesheet" />
         <script type="text/javascript">
             function onload() {
-                if ('@ViewData["isFirstLaunch"]' == 0) {
-                    setSex('@ViewData["sex"]');
-                    setWeightAndGrowth('@ViewData["weight"]', '@ViewData["growth"]');
-                    setWeightChangeGoal('@ViewData["changeGoal"]');
-                    setActivityLevel('@ViewData["activity"]');
-                    setMeals('@ViewData["breakfast"]','@ViewData["lunch"]','@ViewData["dinner"]','@ViewData["dessert"]','@ViewData["snack"]','@ViewData["supper"]');
-                    setPace('@ViewData["pace"]');
+                if ('@((bool)Model.IsFirstLaunch ? 1 : 0)' == 0) {
+                    setSex('@(Model.Sex == true ? "True" : "False")');
+                    setWeightAndGrowth('@Model.Weight', '@Model.Growth');
+                    setWeightChangeGoal('@Model.WeightChangeGoal');
+                    setActivityLevel('@Model.ActivityLevel');
+                    setMeals('@(Model.Breakfast != false ? 1 : 0)','@(Model.Lunch != false ? 1 : 0)','@(Model.Dinner != false ? 1 : 0)','@(Model.Dessert != false ? 1 : 0)','@(Model.Snack != false ? 1 : 0)','@(Model.Supper != false ? 1 : 0)');
+                    setPace('@Model.PaceOfChanges');
                     blockWeightInput();
                     setNavbar();
                 }
-                setDatepickerValue('@ViewData["dateOfBirth"]');
+                setDatepickerValue('@Model.DateOfBirth.GetValueOrDefault().ToString("yyyy-MM-dd")');
                 blockPace();
             }
         </script>
@@ -127,7 +127,7 @@
                             <span id="incTip" class="tooltiptext" hidden>Zmiany zablokowane gdyż celem jest utrzymanie wagi</span>
                         </div>
                     </div>
-                    <input id="saveBtn" type="submit" value="Zapisz i kontynuuj" asp-route-isFirstLaunch="@ViewData["isFirstLaunch"]" class="btn btn-primary" />
+                    <input id="saveBtn" type="submit" value="Zapisz i kontynuuj" asp-route-isFirstLaunch="@((bool)Model.IsFirstLaunch)" class="btn btn-primary" />
                     <div style="width: 100%; height: 1px"></div>
                 </form>
             </div>

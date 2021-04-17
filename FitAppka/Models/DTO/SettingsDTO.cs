@@ -38,5 +38,6 @@ namespace FitnessApp.Models
         public bool? Dessert { get; set; }
         public bool? Snack { get; set; }
         public bool? Supper { get; set; }
+        public bool? IsFirstLaunch { get; set; }
     }
 }

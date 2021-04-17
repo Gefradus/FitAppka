@@ -4,6 +4,7 @@ namespace FitnessApp.Service
 {
     public interface ISettingsService
     {
-        public void ChangeSettings(SettingsDTO m, int isFirstLaunch, int clientId);
+        public void ChangeSettings(SettingsDTO m, bool isFirstLaunch, int clientId);
+        public SettingsDTO Dto();
     }
 }

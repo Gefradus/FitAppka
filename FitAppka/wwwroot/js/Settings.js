@@ -47,7 +47,7 @@ function setActivityLevel(activity) {
 }
 
 function setSex(sex) {
-    if (setFlag(sex)) {
+    if (sex == "True") {
         document.getElementById("men").checked = true;
     }
     else {
