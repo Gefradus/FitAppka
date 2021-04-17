@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FitnessApp.Models;
 using Microsoft.AspNetCore.Authorization;
-using FitnessApp.Repository;
 using FitnessApp.Service;
 using FitnessApp.Service.ServiceImpl;
 
@@ -11,18 +10,13 @@ namespace FitnessApp.Controllers
     [Authorize]
     public class ProductController : Controller
     {
-        private readonly IClientRepository _clientRepository;
         private readonly IProductManageService _productManageService;
         private readonly IContentRootPathHandlerService _contentRootService;
-        private readonly FitAppContext _context;
 
-        public ProductController(FitAppContext context, IClientRepository clientRepository, 
-            IProductManageService productManageService, IContentRootPathHandlerService contentRootService)
+        public ProductController(IProductManageService productManageService, IContentRootPathHandlerService contentRootService)
         {
             _contentRootService = contentRootService;
-            _clientRepository = clientRepository;
             _productManageService = productManageService;
-            _context = context;
         }
 
 

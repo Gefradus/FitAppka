@@ -2,6 +2,7 @@
 using FitnessApp.Repository;
 using FitnessApp.Repository.RepoInterface;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -104,6 +105,9 @@ namespace FitnessApp.Service.ServiceImpl
             return _clientRepository.IsLoggedInClientAdmin();
         }
 
-        
+        public List<Client> GetAllClientsAndSortByAdminAndBanned()
+        {
+            return _clientRepository.GetAllClientsAndSortByAdminAndBanned();
+        }
     }
 }

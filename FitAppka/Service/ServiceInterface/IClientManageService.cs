@@ -1,4 +1,5 @@
 ﻿using FitnessApp.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FitnessApp.Service
@@ -8,6 +9,7 @@ namespace FitnessApp.Service
         Task AddNewClient(RegisterDTO model);
         string GetClientLoginFromModel(Client model);
         bool CheckIfClientFromModelIsBanned(Client model);
+        List<Client> GetAllClientsAndSortByAdminAndBanned();
         bool CheckIfPassCorrect(Client model);
         bool HasUserAccessToDay(int dayID);
         bool HasUserAccessToProduct(int productID);

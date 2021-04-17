@@ -3,7 +3,6 @@ using FitnessApp.Models;
 using FitnessApp.Repository;
 using FitnessApp.Service;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using FitnessApp.Service.ServiceInterface;
 
@@ -16,31 +15,21 @@ namespace FitnessApp.Controllers
     {
         private readonly IProductManageService _productManageService;
         private readonly IAdministrationService _administrationService;
-        private readonly IWeightMeasurementRepository _weightMeasurementRepository;
-        private readonly IDayManageService _dayManageService;
-        private readonly IClientRepository _clientRepository;
-        private readonly FitAppContext _context;
-        private readonly IWebHostEnvironment _env;
+        private readonly IClientManageService _clientManageService;
         private readonly IMapper _mapper;
 
-        public AdminController(FitAppContext context, IWebHostEnvironment env, IClientRepository clientRepository, 
-            IProductManageService productManageService, IMapper mapper, IAdministrationService administrationService,
-            IWeightMeasurementRepository weightMeasurementRepository, IDayManageService dayManageService)
+        public AdminController(IClientManageService clientManageService, IProductManageService productManageService, IMapper mapper, IAdministrationService administrationService)
         {
-            _dayManageService = dayManageService;
-            _weightMeasurementRepository = weightMeasurementRepository;
             _administrationService = administrationService;
             _mapper = mapper;
             _productManageService = productManageService;
-            _clientRepository = clientRepository;
-            _context = context;
-            _env = env;
+            _clientManageService = clientManageService;
         }
 
         [HttpGet]
         public IActionResult AdminHome()
         {
-            if (_clientRepository.IsLoggedInClientAdmin()) {
+            if (_clientManageService.IsLoggedInClientAdmin()) {
                 return View();
             }
             else {
@@ -51,7 +40,7 @@ namespace FitnessApp.Controllers
         [HttpGet]
         public IActionResult AdminTraining(string searchCardio, string searchStrength)
         {
-            if (_clientRepository.IsLoggedInClientAdmin()) {
+            if (_clientManageService.IsLoggedInClientAdmin()) {
                 return View(_administrationService.GetTrainingsDTO(searchCardio, searchStrength));
             }
             else {
@@ -64,7 +53,7 @@ namespace FitnessApp.Controllers
         [HttpGet]
         public IActionResult AdminProduct(string search)
         {
-            if (_clientRepository.IsLoggedInClientAdmin()) {
+            if (_clientManageService.IsLoggedInClientAdmin()) {
                 return View(_productManageService.SearchProduct(search, false, 0, false));
             }
             else {
@@ -75,7 +64,7 @@ namespace FitnessApp.Controllers
         [HttpGet]
         public IActionResult AdminEditProduct(int id)
         {
-            if (_clientRepository.IsLoggedInClientAdmin())
+            if (_clientManageService.IsLoggedInClientAdmin())
             {
                 return View(SendDataAboutProductToView(id));
             }
@@ -88,7 +77,7 @@ namespace FitnessApp.Controllers
         [HttpGet]
         public IActionResult AdminDiet()
         {
-            if (_clientRepository.IsLoggedInClientAdmin()) 
+            if (_clientManageService.IsLoggedInClientAdmin()) 
             {
                 return View(_administrationService.GetAdminDiets());
             } 
@@ -127,7 +116,7 @@ namespace FitnessApp.Controllers
         [HttpPost]
         public JsonResult DeleteProduct(int productID)
         {
-            if (_clientRepository.IsLoggedInClientAdmin())
+            if (_clientManageService.IsLoggedInClientAdmin())
             {
                 _productManageService.Delete(productID);
                 return Json(true);
@@ -139,8 +128,8 @@ namespace FitnessApp.Controllers
         [HttpGet]
         public IActionResult AdminClient()
         {
-            if (_clientRepository.IsLoggedInClientAdmin()) {
-                return View(_clientRepository.GetAllClientsAndSortByAdminAndBanned());
+            if (_clientManageService.IsLoggedInClientAdmin()) {
+                return View(_clientManageService.GetAllClientsAndSortByAdminAndBanned());
             }
             else {
                 return RedirectToAction("Logout", "Login");
@@ -150,7 +139,7 @@ namespace FitnessApp.Controllers
         [HttpGet]
         public IActionResult AdminEditClient(int id)
         {
-            if (_clientRepository.IsLoggedInClientAdmin()) {
+            if (_clientManageService.IsLoggedInClientAdmin()) {
                 ViewData["id"] = id;
                 return View(_administrationService.GetClientAdministrationDTO(id));
             }
