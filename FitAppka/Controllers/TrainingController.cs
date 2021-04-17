@@ -1,11 +1,7 @@
-﻿using FitnessApp.Models;
-using FitnessApp.Repository;
-using FitnessApp.Service;
+﻿using FitnessApp.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FitnessApp.Controllers
@@ -14,11 +10,9 @@ namespace FitnessApp.Controllers
     [Authorize]
     public class TrainingController : Controller
     {
-        private readonly FitAppContext _context;
         private readonly ICardioTrainingService _cardioServices;
         private readonly IStrengthTrainingService _strengthTrainingService;
         private readonly ITrainingPanelService _trainingPanelService;
-        //private readonly IGoalsService _goalsService;
         private readonly IDayManageService _dayService;
 
         public TrainingController(ICardioTrainingService cardioTrainingServices, IStrengthTrainingService strengthTrainingServices, 
@@ -62,17 +56,7 @@ namespace FitnessApp.Controllers
         [HttpGet]
         [Route("/Training")]
         public IActionResult TrainingPanel(int dayID) {
-
-            //  ViewData["dayID"] = dayID;
-            //  ViewData["day"] = _dayService.GetDayDateTime(dayID).Date.ToString("dd.MM.yyyy");
-            //  ViewData["clientID"] = _clientRepository.GetLoggedInClient().ClientId;
-            //  ViewData["burnedKcal"] = _goalsService.CaloriesBurnedInDay(dayID);
-            //  ViewData["cardioTime"] = _cardioServices.GetCardioTimeInDay(dayID);
-            //  ViewData["kcalTarget"] = _cardioServices.GetKcalBurnedGoalInDay(dayID);
-            //  ViewData["timeTarget"] = _cardioServices.GetTrainingTimeGoalInDay(dayID);
-            //  ViewData["strengthTrainings"] = _context.StrengthTraining.Include(s => s.StrengthTrainingType).Include(s => s.Day).ToList();
-
-            return View(_trainingPanelService.Dto(dayID));//await _context.CardioTraining.Include(c => c.CardioTrainingType).Include(c => c.Day).ToListAsync());
+            return View(_trainingPanelService.Dto(dayID));
         }
 
         [HttpGet]

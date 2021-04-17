@@ -1,10 +1,5 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using FitnessApp.Service;
-using FitnessApp.Repository;
-using FitnessApp.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
 namespace FitnessApp.Controllers
@@ -14,25 +9,20 @@ namespace FitnessApp.Controllers
     public class MeasurementsController : Controller
     {
         private readonly IDayManageService _dayService;
-        private readonly FitAppContext _context;
-        private readonly IClientRepository _clientRepository;
         private readonly IMeasurementsService _measurementsService;
 
-        public MeasurementsController(IDayManageService dayService, FitAppContext context, 
-            IClientRepository clientRepository, IMeasurementsService measurementsService)
+        public MeasurementsController(IDayManageService dayService, IMeasurementsService measurementsService)
         {
             _measurementsService = measurementsService;
-            _context = context;
-            _clientRepository = clientRepository;
             _dayService = dayService;
         }
 
         [HttpGet]
         [Route("/Measurements")]
-        public async Task<IActionResult> Measurements()
+        public IActionResult Measurements()
         {
             ViewData["dayID"] = _dayService.GetTodayId();
-            return View(await _context.WeightMeasurement.Where(w => w.ClientId == _clientRepository.GetLoggedInClientId()).Include(w => w.FatMeasurement).ToListAsync());
+            return View(_measurementsService.Dto());
         }
 
         [HttpPost]

@@ -21,18 +21,18 @@ namespace FitnessApp.Strategy.ChartTypeStrategyImpl
             };
         }
 
-        private List<MeasurementDTO> GetWeightMeasurementListFromTo(string dateFrom, string dateTo)
+        private List<WeightMeasurementDTO> GetWeightMeasurementListFromTo(string dateFrom, string dateTo)
         {
             var dateTimeFrom = DateConverter.ConvertToDateTimeAndPreventNull(dateFrom, true);
             var dateTimeTo = DateConverter.ConvertToDateTimeAndPreventNull(dateTo, false);
-            var list = new List<MeasurementDTO>();
+            var list = new List<WeightMeasurementDTO>();
 
             foreach (var measurement in WeightMeasurementRepository.GetLoggedInClientWeightMeasurements())
             {
                 var measurementDate = measurement.DateOfMeasurement.GetValueOrDefault().Date;
                 if (measurementDate <= dateTimeTo && measurementDate >= dateTimeFrom)
                 {
-                    list.Add(new MeasurementDTO() { 
+                    list.Add(new WeightMeasurementDTO() { 
                         DateOfMeasurement = measurementDate,
                         Measurement = measurement.Weight
                     });

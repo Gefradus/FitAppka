@@ -8,12 +8,11 @@ namespace FitnessApp.Service.ServiceImpl
     public class TrainingPanelServiceImpl : ITrainingPanelService
     {
         private readonly ICardioTrainingService _cardioServices;
-        private readonly IStrengthTrainingService _strengthTrainingService;
         private readonly IGoalsService _goalsService;
         private readonly IDayManageService _dayService;
         private readonly IClientManageService _clientManageService;
         private readonly FitAppContext _context;
-
+        
         public TrainingPanelServiceImpl(ICardioTrainingService cardioServices, IGoalsService goalsService, IDayManageService dayService, 
             IClientManageService clientManageService, FitAppContext context)
         {

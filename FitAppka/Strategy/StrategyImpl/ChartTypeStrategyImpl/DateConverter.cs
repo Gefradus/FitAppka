@@ -20,7 +20,7 @@ namespace FitnessApp.Strategy.ChartTypeStrategyImpl
             return ConvertToDateTimeAndPreventNull(date, fromOrTo).ToString("dd.MM.yyyy");
         }
 
-        internal static List<MeasurementDTO> SortByMeasurementDate(List<MeasurementDTO> list)
+        internal static List<WeightMeasurementDTO> SortByMeasurementDate(List<WeightMeasurementDTO> list)
         {
             list.Sort((x, y) => x.DateOfMeasurement.CompareTo(y.DateOfMeasurement));
             return list;

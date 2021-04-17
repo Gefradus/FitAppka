@@ -1,4 +1,7 @@
-﻿namespace FitnessApp.Service
+﻿using FitnessApp.Models.DTO;
+using System.Collections.Generic;
+
+namespace FitnessApp.Service
 {
     public interface IMeasurementsService
     {
@@ -6,5 +9,6 @@
         bool UpdateMeasurements(int id, double weight, int? waist);
         bool DeleteMeasurement(int id);
         double EstimateBodyFatLevel(double weight, int? waist);
+        List<BodyMeasurementsDTO> Dto();
     }
 }

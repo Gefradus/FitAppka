@@ -1,6 +1,8 @@
 ﻿using FitnessApp.Models;
+using FitnessApp.Models.DTO;
 using FitnessApp.Repository;
 using System;
+using System.Collections.Generic;
 
 namespace FitnessApp.Service.ServiceImpl
 {
@@ -24,6 +26,46 @@ namespace FitnessApp.Service.ServiceImpl
         {
             AddFatMeasurementAndUpdateWeightMeasurement(_weightMeasurementRepository.Add(CreateWeightMeasurement(weight)), weight, waist);
             UpdateGoals();
+        }
+
+        public List<BodyMeasurementsDTO> Dto()
+        {
+            var weightMeasurementDTOs = new List<WeightMeasurementDTO>();
+            var fatMeasurements = new List<FatMeasurementDTO>();
+
+            foreach (var item in _weightMeasurementRepository.GetLoggedInClientWeightMeasurements())
+            {
+                weightMeasurementDTOs.Add(new WeightMeasurementDTO() {
+                    Measurement = item.Weight,
+                    DateOfMeasurement = item.DateOfMeasurement.GetValueOrDefault(),
+                    WeightMeasurementId = item.WeightMeasurementId
+                });
+            }
+            foreach (var item in _fatMeasurementRepository.GetLoggedInClientFatMeasurements())
+            {
+                fatMeasurements.Add(new FatMeasurementDTO()
+                {
+                    BodyFatLevel = item.BodyFatLevel,
+                    WaistCircumference = item.WaistCircumference,
+                    WeightMeasurementId = item.WeightMeasurementId
+                });
+            }
+
+            var dtoList = new List<BodyMeasurementsDTO>();
+            int i = 0;
+
+            foreach (var item in weightMeasurementDTOs)
+            {
+                bool hasFatMeasurementPinned = fatMeasurements[i].WeightMeasurementId == item.WeightMeasurementId;
+                dtoList.Add(new BodyMeasurementsDTO() { 
+                    WeightMeasurement = item,
+                    FatMeasurement = hasFatMeasurementPinned ? fatMeasurements[i] : null
+                });
+
+                if (hasFatMeasurementPinned) i++; 
+            }
+
+            return dtoList;
         }
 
         public bool UpdateMeasurements(int id, double weight, int? waist)
