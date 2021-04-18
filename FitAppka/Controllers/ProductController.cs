@@ -2,7 +2,6 @@
 using FitnessApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using FitnessApp.Service;
-using FitnessApp.Service.ServiceImpl;
 
 namespace FitnessApp.Controllers
 {
@@ -11,20 +10,16 @@ namespace FitnessApp.Controllers
     public class ProductController : Controller
     {
         private readonly IProductManageService _productManageService;
-        private readonly IContentRootPathHandlerService _contentRootService;
 
-        public ProductController(IProductManageService productManageService, IContentRootPathHandlerService contentRootService)
+        public ProductController(IProductManageService productManageService)
         {
-            _contentRootService = contentRootService;
             _productManageService = productManageService;
         }
-
 
         [HttpGet]
         public IActionResult Search(string search, int inWhich, int dayID, bool onlyUserItem, bool onlyFromDiet)
         {
-            SearchProductViewData(search, inWhich, dayID);
-            return View(_productManageService.SearchProduct(search, onlyUserItem, dayID, onlyFromDiet));
+            return View(_productManageService.Dto(search, inWhich, dayID, onlyUserItem, onlyFromDiet));
         }
 
 
@@ -48,16 +43,6 @@ namespace FitnessApp.Controllers
             return View(model); 
         }
 
-        private void SearchProductViewData(string search, int inWhich, int dayID)
-        {
-            ViewData["dayID"] = dayID;
-            ViewData["inWhich"] = inWhich;
-            ViewData["search"] = search;
-            ViewData["wereSearched"] = search != null;
-            ViewData["day"] = _productManageService.DayPattern(dayID);
-            ViewData["meal"] = _productManageService.MealName(inWhich);
-            ViewData["path"] = _contentRootService.GetContentRootFileName();
-        }
 
         private void CreateProductViewData(int inWhich, int dayID, int isAdmin) 
         {

@@ -18,14 +18,12 @@ namespace FitnessApp.Controllers
 
         public ActionResult GenerateMonthSummaryReport(int id)
         {
-            MonthSummaryReport dayReport = new MonthSummaryReport(_hostEnvironment);
-            return File(dayReport.Report(_reportService.GetMonthSummary(id)), "application/pdf");
+            return File(new MonthSummaryReport(_hostEnvironment).Report(_reportService.GetMonthSummary(id)), "application/pdf");
         }
 
         public ActionResult GenerateDaySummaryReport(int id)
         {
-            DaySummaryReport daySummaryReport = new DaySummaryReport(_hostEnvironment);
-            return File(daySummaryReport.Report(_reportService.GetDayWithDetails(id)), "application/pdf");
+            return File(new DaySummaryReport(_hostEnvironment).Report(_reportService.GetDayWithDetails(id)), "application/pdf");
         }
     }
 }

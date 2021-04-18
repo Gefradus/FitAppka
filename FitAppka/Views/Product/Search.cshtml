@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FitnessApp.Models.ProductDTO>
+﻿@model FitnessApp.Models.DTO.SearchProductViewDTO
 
 <html>
 <head>
@@ -10,28 +10,28 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script>
         function getRootPath() {
-            return getWebRootPath("@(((string) ViewData["path"]).Replace("\\","\\\\"))");
+            return getWebRootPath("@(Model.SearchDTO.ContentRootPath.Replace("\\","\\\\"))");
         }
     </script>
     <script src="~/js/SearchProduct.js"></script>
 </head>
 <body onload="onload()">
     <input id="productId" type="hidden" />
-    <input id="dayId" type="hidden" value="@ViewData["dayID"]">
-    <input id="atWhichMealOfTheDay" type="hidden" value="@ViewData["inWhich"]"> 
+    <input id="dayId" type="hidden" value="@Model.SearchDTO.DayId">
+    <input id="atWhichMealOfTheDay" type="hidden" value="@Model.SearchDTO.AtWhich"> 
 
     <header>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 blackNav">
             <div>
                 <div class="mr-auto">
-                    <a class="text-dark ml-md-4 ml-lg-5 d-none d-md-block" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" id="logoPink" src="~/img/logorozowe.png" title="Strona główna" /></a>
-                    <a class="text-dark ml-sm-1 d-md-none" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" id="backImg" src="~/img/back.png" title="Strona główna" /></a>
+                    <a class="text-dark ml-md-4 ml-lg-5 d-none d-md-block" asp-controller="Home" asp-action="Return" asp-route-dayID="@Model.SearchDTO.DayId"><img class="mt-md-1" id="logoPink" src="~/img/logorozowe.png" title="Strona główna" /></a>
+                    <a class="text-dark ml-sm-1 d-md-none" asp-controller="Home" asp-action="Return" asp-route-dayID="@Model.SearchDTO.DayId"><img class="mt-md-1" id="backImg" src="~/img/back.png" title="Strona główna" /></a>
                 </div>
             </div>
 
-            <a asp-action="Search" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" class="mx-auto" id="mealAndDay">
-                <h4 id="mealName">@ViewData["meal"]</h4>
-                <h5 id="dayBtn">@ViewData["day"]</h5>
+            <a asp-action="Search" asp-route-dayID="@Model.SearchDTO.DayId" asp-route-inWhich="@Model.SearchDTO.AtWhich" class="mx-auto" id="mealAndDay">
+                <h4 id="mealName">@Model.SearchDTO.MealName</h4>
+                <h5 id="dayBtn">@Model.SearchDTO.Day</h5>
             </a>
 
             <div>
@@ -48,8 +48,8 @@
                 <div class="col-6 col-md-3 cent">
                     <div>
                         <form method="get" class="flex">
-                            <input type="hidden" value="@ViewData["inWhich"]" name="inWhich">
-                            <input type="hidden" value="@ViewData["dayID"]" name="dayID">
+                            <input type="hidden" value="@Model.SearchDTO.AtWhich" name="inWhich">
+                            <input type="hidden" value="@Model.SearchDTO.DayId" name="dayID">
                             @Html.TextBox("search", "", new { placeholder = "Szukaj produktu", @class = "form-control", @id = "searchInput" })
                             <button type="submit" id="submitSearch"><img src="~/img/searchBlack.png" id="searchIcon" /></button>
                         </form>
@@ -58,22 +58,22 @@
                 <div class="col-6 col-md-3 cent">
                     <form method="get">
                         <input type="hidden" value="true" name="onlyUserItem">
-                        <input type="hidden" value="@ViewData["inWhich"]" name="inWhich">
-                        <input type="hidden" value="@ViewData["dayID"]" name="dayID">
+                        <input type="hidden" value="@Model.SearchDTO.AtWhich" name="inWhich">
+                        <input type="hidden" value="@Model.SearchDTO.DayId" name="dayID">
                         <button type="submit" id="showMyProducts" class="btn btn-dark">Pokaż moje produkty</button>
                     </form>
                 </div>
                 <div class="d-none d-md-flex col-md-3 cent">
                     <form method="get">
                         <input type="hidden" value="true" name="onlyFromDiet">
-                        <input type="hidden" value="@ViewData["inWhich"]" name="inWhich">
-                        <input type="hidden" value="@ViewData["dayID"]" name="dayID">
+                        <input type="hidden" value="@Model.SearchDTO.AtWhich" name="inWhich">
+                        <input type="hidden" value="@Model.SearchDTO.DayId" name="dayID">
                         <button type="submit" id="showFromDiet" class="btn btn-dark">Pokaż produkty z diety</button>
                     </form>
                 </div>
                 <div class="d-none d-md-flex col-md-3 cent">
                     <div>
-                        <a class="btn btn-dark" id="addProduct" asp-action="Create" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-isAdmin="0">
+                        <a class="btn btn-dark" id="addProduct" asp-action="Create" asp-route-dayID="@Model.SearchDTO.DayId" asp-route-inWhich="@Model.SearchDTO.AtWhich" asp-route-isAdmin="0">
                             Dodaj nowy produkt <img src="~/img/add.png" class="addIcon" />
                         </a>
                     </div>
@@ -120,7 +120,7 @@
             </div>
         </div>
 
-        @if (Model.Count() > 0)
+        @if (Model.Products.Count() > 0)
         {
             <div id="headersRow" class="row no-gutters mb-3">
                 <div class="col-4" style="text-align:left">
@@ -160,7 +160,7 @@
         }
 
         <div style="margin-top: -16px">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Products)
             {
                 @if (item.Eaten) 
                 { 
@@ -265,7 +265,7 @@
             }
         </div>
 
-        @if ((bool)ViewData["wereSearched"] && Model.Count().Equals(0))
+        @if (Model.SearchDTO.WereSearched && Model.Products.Count().Equals(0))
         {
             <div class="cent" style="margin-top: 25px">
                 Nie znaleziono produktów
@@ -277,7 +277,7 @@
             <div class="row no-gutters w-100">
                 <div class="col-12 cent">
                     <div class="w-100 cent">
-                        <a class="btn btn-dark addProductFooter" asp-action="Create" asp-route-dayID="@ViewData["dayID"]" asp-route-inWhich="@ViewData["inWhich"]" asp-route-isAdmin="0">
+                        <a class="btn btn-dark addProductFooter" asp-action="Create" asp-route-dayID="@Model.SearchDTO.DayId" asp-route-inWhich="@Model.SearchDTO.AtWhich" asp-route-isAdmin="0">
                             Dodaj nowy produkt <img src="~/img/add.png" class="addIcon" />
                         </a>
                     </div>

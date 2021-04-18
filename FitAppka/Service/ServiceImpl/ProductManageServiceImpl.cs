@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FitnessApp.Models;
+using FitnessApp.Models.DTO;
 using FitnessApp.Models.Enum;
 using FitnessApp.Repository;
 using FitnessApp.Repository.RepoInterface;
@@ -21,11 +22,14 @@ namespace FitnessApp.Service.ServiceImpl
         private readonly IClientManageService _clientManageService;
         private readonly IDietCreatorService _dietCreatorService;
         private readonly IDietProductRepository _dietProductRepository;
+        private readonly IContentRootPathHandlerService _contentRootService;
         private readonly IMealRepository _mealRepository;
         private readonly IMapper _mapper;
 
-        public ProductManageServiceImpl(IDayRepository dayRepository, IWebHostEnvironment hostEnvironment, IMapper mapper, IDietCreatorService dietCreatorService, IMealRepository mealRepository,
-            IProductRepository productRepository, IClientRepository clientRepository, IClientManageService clientManageService, IDietProductRepository dietProductRepository)
+        public ProductManageServiceImpl(IDayRepository dayRepository, IWebHostEnvironment hostEnvironment, IMapper mapper, 
+            IDietCreatorService dietCreatorService, IMealRepository mealRepository, IProductRepository productRepository, 
+            IClientRepository clientRepository, IClientManageService clientManageService, IDietProductRepository dietProductRepository,
+            IContentRootPathHandlerService contentRootService)
         {
             _mapper = mapper;
             _dietCreatorService = dietCreatorService;
@@ -35,6 +39,7 @@ namespace FitnessApp.Service.ServiceImpl
             _productRepository = productRepository;
             _mealRepository = mealRepository;
             _hostEnvironment = hostEnvironment;
+            _contentRootService = contentRootService;
             _dayRepository = dayRepository;
         }
 
@@ -160,6 +165,24 @@ namespace FitnessApp.Service.ServiceImpl
         public Product Delete(int id)
         {
             return _productRepository.Delete(id);
+        }
+
+        public SearchProductViewDTO Dto(string search, int atWhich, int dayID, bool onlyUserItem, bool onlyFromDiet)
+        {
+            return new SearchProductViewDTO()
+            {
+                Products = SearchProduct(search, onlyUserItem, dayID, onlyFromDiet),
+                SearchDTO = new SearchProductDTO()
+                {
+                    Search = search,
+                    AtWhich = atWhich,
+                    DayId = dayID,
+                    WereSearched = search != null,
+                    Day = DayPattern(dayID),
+                    MealName = MealName(atWhich),
+                    ContentRootPath = _contentRootService.GetContentRootFileName()
+                }
+            };
         }
     }
 }

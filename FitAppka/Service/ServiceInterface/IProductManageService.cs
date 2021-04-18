@@ -1,16 +1,18 @@
 ﻿using FitnessApp.Models;
+using FitnessApp.Models.DTO;
 using System.Collections.Generic;
 
 namespace FitnessApp.Service
 {
     public interface IProductManageService
     {
-        public string MealName(int inWhichMeal);
-        public string DayPattern(int dayID);
-        public void CreateProductFromModel(ProductDTO model);
-        public void UpdateProduct(ProductDTO model, int id, int addOrEditPhoto);
+        string MealName(int inWhichMeal);
+        string DayPattern(int dayID);
+        void CreateProductFromModel(ProductDTO model);
+        void UpdateProduct(ProductDTO model, int id, int addOrEditPhoto);
         Product GetProduct(int id);
         Product Delete(int id);
+        SearchProductViewDTO Dto(string search, int inWhich, int dayID, bool onlyUserItem, bool onlyFromDiet);
         List<ProductDTO> SearchProduct(string search, bool onlyUserItem, int dayId, bool onlyFromDiet);
     }
 }
