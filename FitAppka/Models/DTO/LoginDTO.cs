@@ -4,5 +4,6 @@
     {
         public string LoginOrEmail { get; set; }
         public string Password { get; set; }
+        public bool? WasModalOpened { get; set; }
     }
 }

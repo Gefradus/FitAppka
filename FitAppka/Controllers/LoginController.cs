@@ -22,8 +22,7 @@ namespace FitnessApp.Controllers
 
         [HttpGet]
         [Route("")]
-        public IActionResult Login()
-        {
+        public IActionResult Login() {
             return View();
         }
 
