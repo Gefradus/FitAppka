@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using FitnessApp.Repository;
 using FitnessApp.Service;
+using FitnessApp.Models.DTO;
 
 namespace FitnessApp.Controllers
 {
@@ -14,12 +14,10 @@ namespace FitnessApp.Controllers
     public class LoginController : Controller
     {
         private readonly IClientManageService _clientManageService;
-        private readonly IClientRepository _clientRepository;
 
-        public LoginController(IClientRepository clientRepository, IClientManageService clientManageService)
+        public LoginController(IClientManageService clientManageService)
         {
             _clientManageService = clientManageService;
-            _clientRepository = clientRepository;
         }
 
         [HttpGet]
@@ -32,8 +30,7 @@ namespace FitnessApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            if (User.Identity.IsAuthenticated)
-            {
+            if (User.Identity.IsAuthenticated) {
                 await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             }
             
@@ -41,24 +38,21 @@ namespace FitnessApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(Client model)
+        public async Task<IActionResult> Login(LoginDTO model)
         {
-            if (model.Login != null || model.Email != null)
+            if (model.LoginOrEmail != null)
             {
-                if (ModelState.IsValid)
-                {
-                    if (_clientManageService.CheckIfPassCorrect(model)) {
-                        if (_clientManageService.CheckIfClientFromModelIsBanned(model)) {
-                            ModelState.AddModelError(string.Empty, "Konto użytkownika za decyzją administracji zostało zablokowane");
-                        } 
-                        else
-                        {
-                            return await SignInAndStart(_clientManageService.GetClientLoginFromModel(model));
-                        }
+                if (_clientManageService.CheckIfPassCorrect(model)) {
+                    if (_clientManageService.CheckIfClientFromModelIsBanned(model)) {
+                        ModelState.AddModelError(string.Empty, "Konto użytkownika za decyzją administracji zostało zablokowane");
+                    } 
+                    else {
+                        return await SignInAndStart(_clientManageService.GetClientLoginFromModel(model));
                     }
-                    else { ModelState.AddModelError(string.Empty, "Nieprawidłowy login i/lub hasło"); }
                 }
-            } else { ModelState.AddModelError("Login", "Należy podać login lub e-mail"); }
+                else { ModelState.AddModelError(string.Empty, "Nieprawidłowy login i/lub hasło"); }
+            } 
+            else { ModelState.AddModelError("LoginOrEmail", "Należy podać login lub e-mail"); }
 
             return View(model);
         }
@@ -77,20 +71,20 @@ namespace FitnessApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var clientByEmail = _clientRepository.GetClientByEmail(model.Email);
-                var clientByLogin = _clientRepository.GetClientByLogin(model.Login);
+                bool existClientByEmail = _clientManageService.ExistsClientByEmail(model.Email);
+                bool existClientByLogin = _clientManageService.ExistsClientByLogin(model.Login);
 
-                if (clientByEmail == null && clientByLogin == null) {
+                if (existClientByEmail && existClientByLogin) {
                     if (model.ConfirmPassword == model.Password) {
                         await _clientManageService.AddNewClient(model);
                         return await SignInAndStart(model.Login);
                     }
                 }
                 else {
-                    if (clientByEmail != null) {
+                    if (existClientByEmail) {
                         ModelState.AddModelError(string.Empty, "Istnieje już użytkownik o podanym adresie e-mail");
                     }
-                    if (clientByLogin != null) {
+                    if (existClientByLogin) {
                         ModelState.AddModelError(string.Empty, "Istnieje już użytkownik o podanym loginie");
                     }
                 }

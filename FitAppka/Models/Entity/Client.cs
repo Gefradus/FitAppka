@@ -23,14 +23,8 @@ namespace FitnessApp.Models
         public int ClientId { get; set; }
         [Column("Goals_ID")]
         public int? GoalsId { get; set; }
-        
-        [MaxLength(35)]
         public string Email { get; set; }
-        
-        [MaxLength(35)]
         public string Login { get; set; }
-        
-        //[StringLength(50)]
         public string Password { get; set; }
         [Column("First_name")]
         [StringLength(50)]

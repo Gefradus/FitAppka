@@ -36,7 +36,7 @@ namespace FitnessApp.Controllers
             if (ModelState.IsValid)
             {     
                 _productManageService.CreateProductFromModel(model);
-                return (isAdmin == 1 ? RedirectToAction("AdminProduct", "Admin") : RedirectToAction(nameof(Search), new { dayID, inWhich, clientID }));
+                return isAdmin == 1 ? RedirectToAction("AdminProduct", "Admin") : RedirectToAction(nameof(Search), new { dayID, inWhich });
             }
 
             CreateProductViewData(inWhich, dayID, isAdmin);

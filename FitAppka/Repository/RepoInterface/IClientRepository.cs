@@ -7,7 +7,6 @@ namespace FitnessApp.Repository
     public interface IClientRepository
     {
         Client GetClientById(int id);
-        Client GetClientByEmail(string email);
         Client GetClientByLogin(string login);
         IEnumerable<Client> GetAllClients();
         List<Client> GetAllClientsAndSortByAdminAndBanned();
@@ -22,5 +21,6 @@ namespace FitnessApp.Repository
         public void UnbanClient(int id);
         bool IsLoggedInClientAdmin();
         public bool IsClientBanned(int clientId);
+        public bool ExistsByEmail(string email);
     }
 }

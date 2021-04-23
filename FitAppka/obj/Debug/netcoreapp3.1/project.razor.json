@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\FitAppka.csproj",
+  "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\FitnessApp.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -14389,7 +14389,7 @@
     ],
     "CSharpLanguageVersion": 800
   },
-  "RootNamespace": "FitAppka",
+  "RootNamespace": "FitnessApp",
   "Documents": [
     {
       "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Login\\Login.cshtml",
@@ -14399,6 +14399,16 @@
     {
       "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminTraining.cshtml",
       "TargetPath": "Views\\Admin\\AdminTraining.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminEditClient.cshtml",
+      "TargetPath": "Views\\Admin\\AdminEditClient.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminDiet.cshtml",
+      "TargetPath": "Views\\Admin\\AdminDiet.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14414,6 +14424,11 @@
     {
       "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\DietCreator\\EditDiet.cshtml",
+      "TargetPath": "Views\\DietCreator\\EditDiet.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14434,11 +14449,6 @@
     {
       "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Product\\Search.cshtml",
       "TargetPath": "Views\\Product\\Search.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Admin\\AdminSettings.cshtml",
-      "TargetPath": "Views\\Admin\\AdminSettings.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14469,6 +14479,11 @@
     {
       "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\Training\\StrengthTraining.cshtml",
       "TargetPath": "Views\\Training\\StrengthTraining.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\fader\\source\\repos\\FitAppka\\FitAppka\\Views\\DietCreator\\MyDiets.cshtml",
+      "TargetPath": "Views\\DietCreator\\MyDiets.cshtml",
       "FileKind": "mvc"
     },
     {

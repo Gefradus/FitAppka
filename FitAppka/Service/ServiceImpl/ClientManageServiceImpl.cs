@@ -1,4 +1,5 @@
 ﻿using FitnessApp.Models;
+using FitnessApp.Models.DTO;
 using FitnessApp.Repository;
 using FitnessApp.Repository.RepoInterface;
 using System;
@@ -43,23 +44,23 @@ namespace FitnessApp.Service.ServiceImpl
             });
         }
 
-        private Client GetClientFromModel(Client model)
+        private Client GetClientFromModel(LoginDTO model)
         {
-            string loginOrEmail = model.Login.ToLower();
+            string loginOrEmail = model.LoginOrEmail.ToLower();
             return _clientRepository.GetAllClients().FirstOrDefault(c => c.Login.ToLower().Equals(loginOrEmail) || c.Email.ToLower().Equals(loginOrEmail));
         }
 
-        public string GetClientLoginFromModel(Client model)
+        public string GetClientLoginFromModel(LoginDTO model)
         {
             return GetClientFromModel(model).Login;
         }
 
-        public bool CheckIfClientFromModelIsBanned(Client model)
+        public bool CheckIfClientFromModelIsBanned(LoginDTO model)
         {
             return GetClientFromModel(model).IsBanned;
         }
 
-        public bool CheckIfPassCorrect(Client model)
+        public bool CheckIfPassCorrect(LoginDTO model)
         {
             Client client = GetClientFromModel(model);
             return client != null && client.Password.Equals(model.Password);
@@ -108,6 +109,16 @@ namespace FitnessApp.Service.ServiceImpl
         public List<Client> GetAllClientsAndSortByAdminAndBanned()
         {
             return _clientRepository.GetAllClientsAndSortByAdminAndBanned();
+        }
+
+        public bool ExistsClientByEmail(string email)
+        {
+            return _clientRepository.ExistsByEmail(email);
+        }
+
+        public bool ExistsClientByLogin(string login)
+        {
+            return _clientRepository.GetClientByLogin(login) != null;
         }
     }
 }

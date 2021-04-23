@@ -10,7 +10,6 @@ namespace FitnessApp.Controllers
     public class SettingsController : Controller
     {
         private readonly IClientManageService _clientManageService;
-        
         private readonly ISettingsService _settingsService;
         
 

@@ -55,9 +55,9 @@ namespace FitnessApp.Repository.RepIfaceImpl
             return _context.Client.ToList();
         }
 
-        public Client GetClientByEmail(string email)
+        public bool ExistsByEmail(string email)
         {
-            return _context.Client.FirstOrDefault(k => k.Email.ToLower().Equals(email.ToLower()));
+            return _context.Client.FirstOrDefault(k => k.Email.ToLower().Equals(email.ToLower())) != null;
         }
 
         public Client GetClientById(int id)
