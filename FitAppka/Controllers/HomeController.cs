@@ -12,20 +12,18 @@ namespace NowyDotnecik.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly FitAppContext _context;
         private readonly IDayManageService _dayService;
         private readonly IClientRepository _clientRepository;
         private readonly IHomePageService _homeService;
         private readonly IContentRootPathHandlerService _contentRootService;
 
-        public HomeController(FitAppContext context, IHomePageService homePageService, 
+        public HomeController( IHomePageService homePageService, 
             IDayManageService dayService, IClientRepository clientRepository, IContentRootPathHandlerService contentRootService)
         {
             _contentRootService = contentRootService;
             _homeService = homePageService;
             _dayService = dayService;
             _clientRepository = clientRepository;
-            _context = context;
         }
 
         [HttpGet]
@@ -33,8 +31,7 @@ namespace NowyDotnecik.Controllers
         public IActionResult Home(DateTime daySelected)
         {
             _dayService.AddDayIfNotExists(daySelected);
-            SendInfoAboutMacronutritions(_dayService.GetLoggedInClientDayByDate(daySelected));
-
+            SendInfoAboutMacronutritions(daySelected);
             return View(_homeService.CreateHomeDTO(daySelected));
         }
 
@@ -108,8 +105,9 @@ namespace NowyDotnecik.Controllers
         }
 
        
-        private void SendInfoAboutMacronutritions(Day day)
+        private void SendInfoAboutMacronutritions(DateTime daySelected)
         {
+            Day day = _dayService.GetLoggedInClientDayByDate(daySelected);
             Goals dayGoals = _dayService.GetDayGoals(day.DayId);
             CountMacronutrionNumbers(_homeService.SumAllKcalInDay((DateTime)day.Date), "calories", dayGoals.Calories);
             CountMacronutrionNumbers(_homeService.SumAllProteinsInDay((DateTime)day.Date), "proteins", dayGoals.Proteins);

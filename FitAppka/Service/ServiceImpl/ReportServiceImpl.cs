@@ -16,7 +16,8 @@ namespace FitnessApp.Service.ServiceImpl
         private readonly IMealRepository _mealRepository;
         private readonly IClientRepository _clientRepository;
 
-        public ReportServiceImpl(IGoalsRepository goalsRepository, IDayRepository dayRepository, IHomePageService homePageService, IMealRepository mealRepository, IClientRepository clientRepository)
+        public ReportServiceImpl(IGoalsRepository goalsRepository, IDayRepository dayRepository, IHomePageService homePageService, 
+            IMealRepository mealRepository, IClientRepository clientRepository)
         {
             _clientRepository = clientRepository;
             _mealRepository = mealRepository;
