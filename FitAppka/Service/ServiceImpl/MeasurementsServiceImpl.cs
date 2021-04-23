@@ -30,12 +30,12 @@ namespace FitnessApp.Service.ServiceImpl
 
         public List<BodyMeasurementsDTO> Dto()
         {
-            var weightMeasurementDTOs = new List<WeightMeasurementDTO>();
+            var weightMeasurements = new List<WeightMeasurementDTO>();
             var fatMeasurements = new List<FatMeasurementDTO>();
 
             foreach (var item in _weightMeasurementRepository.GetLoggedInClientWeightMeasurements())
             {
-                weightMeasurementDTOs.Add(new WeightMeasurementDTO() {
+                weightMeasurements.Add(new WeightMeasurementDTO() {
                     Measurement = item.Weight,
                     DateOfMeasurement = item.DateOfMeasurement.GetValueOrDefault(),
                     WeightMeasurementId = item.WeightMeasurementId
@@ -54,7 +54,7 @@ namespace FitnessApp.Service.ServiceImpl
             var dtoList = new List<BodyMeasurementsDTO>();
             int i = 0;
 
-            foreach (var item in weightMeasurementDTOs)
+            foreach (var item in weightMeasurements)
             {
                 bool hasFatMeasurementPinned = fatMeasurements[i].WeightMeasurementId == item.WeightMeasurementId;
                 dtoList.Add(new BodyMeasurementsDTO() { 

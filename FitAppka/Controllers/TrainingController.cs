@@ -39,7 +39,7 @@ namespace FitnessApp.Controllers
                 _cardioServices.AddCardio(cardioTypeId, dayID, timeInMinutes, burnedKcal);
                 return RedirectToAction(nameof(TrainingPanel), new { dayID });
             }
-            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = _dayService.GetTodayId() }); }
+            catch { return RedirectToAction(nameof(TrainingPanel)); }
         }
 
         [HttpPut]
@@ -81,7 +81,7 @@ namespace FitnessApp.Controllers
                 _strengthTrainingService.AddStrengthTraining(trainingTypeId, dayID, sets, reps, weight);
                 return RedirectToAction(nameof(TrainingPanel), new { dayID });
             }
-            catch { return RedirectToAction(nameof(TrainingPanel), new { dayID = _dayService.GetTodayId() }); } 
+            catch { return RedirectToAction(nameof(TrainingPanel)); } 
         }
 
         [HttpPut]

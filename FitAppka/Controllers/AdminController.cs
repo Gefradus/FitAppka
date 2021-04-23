@@ -17,7 +17,8 @@ namespace FitnessApp.Controllers
         private readonly IClientManageService _clientManageService;
         private readonly IMapper _mapper;
 
-        public AdminController(IClientManageService clientManageService, IProductManageService productManageService, IMapper mapper, IAdministrationService administrationService)
+        public AdminController(IClientManageService clientManageService, IProductManageService productManageService, 
+            IMapper mapper, IAdministrationService administrationService)
         {
             _administrationService = administrationService;
             _mapper = mapper;
