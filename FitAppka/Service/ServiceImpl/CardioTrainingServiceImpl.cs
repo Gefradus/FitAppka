@@ -77,7 +77,6 @@ namespace FitnessApp.Service.ServiceImpl
             }
         }
 
-        
 
         public int? GetKcalBurnedGoalInDay(int dayID)
         {

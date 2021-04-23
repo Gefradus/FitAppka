@@ -10,7 +10,7 @@ namespace FitnessApp.Controllers
     public class SettingsController : Controller
     {
         private readonly IClientManageService _clientManageService;
-        private readonly IDayManageService _dayService;
+        
         private readonly ISettingsService _settingsService;
         
 
@@ -23,7 +23,6 @@ namespace FitnessApp.Controllers
         [Route("/Settings")]
         public IActionResult Settings()
         {
-            ViewData["dayID"] = _dayService.GetTodayId();
             return View(_settingsService.Dto());
         }
 

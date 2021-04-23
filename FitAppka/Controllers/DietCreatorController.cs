@@ -1,5 +1,4 @@
 ﻿using FitnessApp.Models;
-using FitnessApp.Service;
 using FitnessApp.Service.ServiceInterface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,19 +9,16 @@ namespace FitnessApp.Controllers
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     [Authorize]
     public class DietCreatorController : Controller
-    {
-        private readonly IDayManageService _dayManageService;
+    { 
         private readonly IDietCreatorService _dietCreatorSerivce;
-        public DietCreatorController(IDietCreatorService dietCreatorSerivce, IDayManageService dayManageService)
+        public DietCreatorController(IDietCreatorService dietCreatorSerivce)
         {
-            _dayManageService = dayManageService;
             _dietCreatorSerivce = dietCreatorSerivce;
         }
 
         [HttpGet]
         public IActionResult ActiveDiets(int dayOfWeek, bool wasDayChanged)
         {
-            ViewData["dayID"] = _dayManageService.GetTodayId();
             return View(_dietCreatorSerivce.GetActiveDiet(dayOfWeek, wasDayChanged));
         }
 
@@ -30,13 +26,11 @@ namespace FitnessApp.Controllers
         public IActionResult CreateDiet(string search, bool searched, short isAdmin)
         {
             ViewData["admin"] = isAdmin == 1;
-            ViewData["dayID"] = _dayManageService.GetTodayId();
             return View(_dietCreatorSerivce.SearchProducts(search, searched));
         }
 
         [HttpGet]
         public IActionResult MyDiets() {
-            ViewData["dayID"] = _dayManageService.GetTodayId();
             return View(_dietCreatorSerivce.GetLoggedInClientActiveDiets());
         }
 
@@ -45,7 +39,6 @@ namespace FitnessApp.Controllers
         {
             ViewData["admin"] = isAdmin == 1;
             ViewData["change"] = change;
-            ViewData["dayID"] = _dayManageService.GetTodayId();
             return View(_dietCreatorSerivce.EditDietSearchProduct(id, search, searched));
         }
 

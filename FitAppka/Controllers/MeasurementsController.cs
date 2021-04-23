@@ -8,20 +8,17 @@ namespace FitnessApp.Controllers
     [Authorize]
     public class MeasurementsController : Controller
     {
-        private readonly IDayManageService _dayService;
         private readonly IMeasurementsService _measurementsService;
 
-        public MeasurementsController(IDayManageService dayService, IMeasurementsService measurementsService)
+        public MeasurementsController(IMeasurementsService measurementsService)
         {
             _measurementsService = measurementsService;
-            _dayService = dayService;
         }
 
         [HttpGet]
         [Route("/Measurements")]
         public IActionResult Measurements()
         {
-            ViewData["dayID"] = _dayService.GetTodayId();
             return View(_measurementsService.Dto());
         }
 

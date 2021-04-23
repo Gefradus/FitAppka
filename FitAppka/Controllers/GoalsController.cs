@@ -9,11 +9,9 @@ namespace FitnessApp.Controllers
     [Authorize]
     public class GoalsController : Controller
     {
-        private readonly IDayManageService _dayService;
         private readonly IGoalsService _goalsService;
 
-        public GoalsController(IDayManageService dayService, IGoalsService goalsService) { 
-            _dayService = dayService;
+        public GoalsController(IGoalsService goalsService) { 
             _goalsService = goalsService;
         }
 
@@ -21,7 +19,6 @@ namespace FitnessApp.Controllers
         [Route("/Goals")]
         public IActionResult Goals()
         {
-            ViewData["dayID"] = _dayService.GetTodayId();
             return View(_goalsService.MapClientGoalsToCreateGoalsModel());
         }
 

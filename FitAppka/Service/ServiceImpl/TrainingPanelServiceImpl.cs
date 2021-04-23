@@ -23,16 +23,17 @@ namespace FitnessApp.Service.ServiceImpl
             _context = context;
         }
 
-        public TrainingPanelDTO Dto (int dayId) {
+        public TrainingPanelDTO Dto (int? dayId) {
+            int dayID = (int)(dayId == null ? _dayService.GetTodayId() : dayId);
             return new TrainingPanelDTO()
             {
-                DayId = dayId,
-                Day = _dayService.GetDayDateTime(dayId).Date.ToString("dd.MM.yyyy"),
+                DayId = dayID,
+                Day = _dayService.GetDayDateTime(dayID).Date.ToString("dd.MM.yyyy"),
                 ClientId = _clientManageService.GetLoggedInClientId(),
-                BurnedKcal = _goalsService.CaloriesBurnedInDay(dayId),
-                CardioTime = _cardioServices.GetCardioTimeInDay(dayId),
-                KcalTarget = _cardioServices.GetKcalBurnedGoalInDay(dayId),
-                TimeTarget = _cardioServices.GetTrainingTimeGoalInDay(dayId),
+                BurnedKcal = _goalsService.CaloriesBurnedInDay(dayID),
+                CardioTime = _cardioServices.GetCardioTimeInDay(dayID),
+                KcalTarget = _cardioServices.GetKcalBurnedGoalInDay(dayID),
+                TimeTarget = _cardioServices.GetTrainingTimeGoalInDay(dayID),
                 StrengthTrainings = _context.StrengthTraining.Include(s => s.StrengthTrainingType).Include(s => s.Day).ToList(),
                 CardioTrainings = _context.CardioTraining.Include(c => c.CardioTrainingType).Include(c => c.Day).ToList()
             };

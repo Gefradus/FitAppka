@@ -55,7 +55,8 @@ namespace FitnessApp.Controllers
 
         [HttpGet]
         [Route("/Training")]
-        public IActionResult TrainingPanel(int dayID) {
+        public IActionResult TrainingPanel(int? dayID) 
+        {
             return View(_trainingPanelService.Dto(dayID));
         }
 

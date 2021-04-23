@@ -8,20 +8,17 @@ namespace FitnessApp.Controllers
     [Authorize]
     public class ProgressMonitoringController : Controller
     {
-        private readonly IDayManageService _dayService;
         private readonly IProgressMonitoringService _progressMonitoringService;
 
-        public ProgressMonitoringController(IProgressMonitoringService progressMonitoringService, IDayManageService dayService)
+        public ProgressMonitoringController(IProgressMonitoringService progressMonitoringService)
         {
             _progressMonitoringService = progressMonitoringService;
-            _dayService = dayService;
         }
 
         [HttpGet]
         [Route("/ProgressMonitoring")]
         public IActionResult ProgressMonitoring(string dateFrom, string dateTo, short chartType)
         {
-            ViewData["dayID"] = _dayService.GetTodayId();
             return View(_progressMonitoringService.GetProgressMonitoringDTO(dateFrom, dateTo, chartType));
         }
 
