@@ -328,7 +328,7 @@
                     <div class="form-group cent" style="margin-top: 35px; margin-bottom: 2rem">
                         @if ((int)ViewData["isAdmin"] == 0)
                         {
-                            <a asp-action="Search" asp-controller="Product" asp-route-inWhich="@ViewData["inWhich"]" asp-route-dayID="@ViewData["dayID"]">
+                            <a asp-action="Search" asp-controller="Product" asp-route-AtWhich="@ViewData["inWhich"]" asp-route-DayId="@ViewData["dayID"]">
                                 Powrót do wyszukiwania
                             </a>
                         }

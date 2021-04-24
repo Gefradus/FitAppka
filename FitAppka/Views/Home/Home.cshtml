@@ -1,4 +1,6 @@
-﻿@model FitnessApp.Models.DTO.HomeDTO
+﻿@using FitnessApp.Models.DTO
+@model HomeDTO
+
 
 <head>
     <link rel="stylesheet" href="~/css/Home.css" type="text/css">
@@ -145,7 +147,7 @@
                         </div>
 
                         <div style="float:right; width: 60px" class="addButton">
-                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="1" asp-route-dayID="@Model.DayID">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-AtWhich="1" asp-route-DayId="@Model.DayID">
                                 <img class="img-fluid" src="~/img/add.png">
                             </a>
                         </div>
@@ -193,7 +195,7 @@
                             </div>
                         </div>
                         <div style="float:right; width: 60px" class="addButton">
-                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="2" asp-route-dayID="@Model.DayID">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-AtWhich="2" asp-route-DayId="@Model.DayID">
                                 <img class="img-fluid" src="~/img/add.png">
                             </a>
                         </div>
@@ -242,7 +244,7 @@
                             </div>
                         </div>
                         <div style="float:right; width: 60px" class="addButton">
-                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="3" asp-route-dayID="@Model.DayID">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-AtWhich="3" asp-route-DayId="@Model.DayID">
                                 <img class="img-fluid" src="~/img/add.png">
                             </a>
                         </div>
@@ -289,7 +291,7 @@
                             </div>
                         </div>
                         <div style="float:right; width: 60px" class="addButton">
-                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="4" asp-route-dayID="@Model.DayID">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-AtWhich="4" asp-route-DayId="@Model.DayID">
                                 <img class="img-fluid" src="~/img/add.png">
                             </a>
                         </div>
@@ -338,7 +340,8 @@
                             </div>
                         </div>
                         <div style="float:right; width: 60px" class="addButton">
-                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="5" asp-route-dayID="@Model.DayID">
+                            
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-AtWhich="5" asp-route-DayId="@Model.DayID">
                                 <img class="img-fluid" src="~/img/add.png">
                             </a>
                         </div>
@@ -386,7 +389,7 @@
                             </div>
                         </div>
                         <div style="float:right; width: 60px" class="addButton">
-                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-inWhich="6" asp-route-dayID="@Model.DayID">
+                            <a class="buttonPanel" asp-controller="Product" asp-action="Search" asp-route-AtWhich="6" asp-route-DayId="@Model.DayID">
                                 <img class="img-fluid" src="~/img/add.png">
                             </a>
                         </div>

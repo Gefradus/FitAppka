@@ -46,6 +46,10 @@
               "target": "Package",
               "version": "[8.0.1, )"
             },
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[4.0.40804, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.6, )"
@@ -75,6 +79,26 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"
+            },
+            "PagedList": {
+              "target": "Package",
+              "version": "[1.17.0, )"
+            },
+            "PagedList.Mvc": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "X.PagedList": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "X.PagedList.Mvc": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "X.PagedList.Mvc.Core": {
+              "target": "Package",
+              "version": "[8.0.7, )"
             },
             "iTextSharp.LGPLv2.Core": {
               "target": "Package",

@@ -20,7 +20,7 @@ using FitnessApp;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"13ee3496fdadb7c48d797f51b6c6d365340a9f43", @"/Views/Admin/AdminTraining.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"3bba9d81e57bcc3b207d4c7521a6d9546bd226c9", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"acc3400c070d0dc087bf5edb7f333d4d615faa8a", @"/Views/_ViewImports.cshtml")]
     public class Views_Admin_AdminTraining : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<FitnessApp.Models.DTO.TrainingsDTO>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/css/Home.css"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

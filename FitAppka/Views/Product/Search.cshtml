@@ -1,4 +1,5 @@
-﻿@model FitnessApp.Models.DTO.SearchProductViewDTO
+﻿@using X.PagedList.Mvc.Core
+@model FitnessApp.Models.DTO.SearchProductViewDTO
 
 <html>
 <head>
@@ -18,7 +19,7 @@
 <body onload="onload()">
     <input id="productId" type="hidden" />
     <input id="dayId" type="hidden" value="@Model.SearchDTO.DayId">
-    <input id="atWhichMealOfTheDay" type="hidden" value="@Model.SearchDTO.AtWhich"> 
+    <input id="atWhichMealOfTheDay" type="hidden" value="@Model.SearchDTO.AtWhich">
 
     <header>
         <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 blackNav">
@@ -48,8 +49,8 @@
                 <div class="col-6 col-md-3 cent">
                     <div>
                         <form method="get" class="flex">
-                            <input type="hidden" value="@Model.SearchDTO.AtWhich" name="inWhich">
-                            <input type="hidden" value="@Model.SearchDTO.DayId" name="dayID">
+                            <input type="hidden" value="@Model.SearchDTO.AtWhich" name="AtWhich">
+                            <input type="hidden" value="@Model.SearchDTO.DayId" name="DayId">
                             @Html.TextBox("search", "", new { placeholder = "Szukaj produktu", @class = "form-control", @id = "searchInput" })
                             <button type="submit" id="submitSearch"><img src="~/img/searchBlack.png" id="searchIcon" /></button>
                         </form>
@@ -58,16 +59,16 @@
                 <div class="col-6 col-md-3 cent">
                     <form method="get">
                         <input type="hidden" value="true" name="onlyUserItem">
-                        <input type="hidden" value="@Model.SearchDTO.AtWhich" name="inWhich">
-                        <input type="hidden" value="@Model.SearchDTO.DayId" name="dayID">
+                        <input type="hidden" value="@Model.SearchDTO.AtWhich" name="AtWhich">
+                        <input type="hidden" value="@Model.SearchDTO.DayId" name="DayId">
                         <button type="submit" id="showMyProducts" class="btn btn-dark">Pokaż moje produkty</button>
                     </form>
                 </div>
                 <div class="d-none d-md-flex col-md-3 cent">
                     <form method="get">
                         <input type="hidden" value="true" name="onlyFromDiet">
-                        <input type="hidden" value="@Model.SearchDTO.AtWhich" name="inWhich">
-                        <input type="hidden" value="@Model.SearchDTO.DayId" name="dayID">
+                        <input type="hidden" value="@Model.SearchDTO.AtWhich" name="AtWhich">
+                        <input type="hidden" value="@Model.SearchDTO.DayId" name="DayId">
                         <button type="submit" id="showFromDiet" class="btn btn-dark">Pokaż produkty z diety</button>
                     </form>
                 </div>
@@ -162,8 +163,8 @@
         <div style="margin-top: -16px">
             @foreach (var item in Model.Products)
             {
-                @if (item.Eaten) 
-                { 
+                @if (item.Eaten)
+                {
                     <div class="row no-gutters tableRowEaten">
                         <div class="col-4 acent">
                             <div class="container" style="padding-left: 0">
@@ -212,7 +213,9 @@
                             <button class="showModalAddMealBtn" onclick="showModalAddMeal(@item.ProductId)"><img class="addMealIcon" src="~/img/add.png"></button>
                         </div>
                     </div>
-                } else { 
+                }
+                else
+                {
                     <div class="row no-gutters tableRow">
                         <div class="col-4 acent">
                             <div class="container" style="padding-left: 0">
@@ -263,6 +266,15 @@
                     </div>
                 }
             }
+            @Html.PagedListPager(Model.Products, Page => Url.Action("Search", new 
+               { Model.SearchDTO.AtWhich, 
+                   Model.SearchDTO.DayId,
+                   Model.SearchDTO.OnlyFromDiet,
+                   Model.SearchDTO.OnlyUserItem,
+                   Model.SearchDTO.WereSearched,
+                   Model.SearchDTO.Search,
+                   Page
+               }))
         </div>
 
         @if (Model.SearchDTO.WereSearched && Model.Products.Count().Equals(0))
@@ -272,6 +284,7 @@
             </div>
         }
     </div>
+    
     <nav class="navbar navbar-light border-top box-shadow mb d-md-none" id="footerNav">
         <div class="container" style="padding:0;">
             <div class="row no-gutters w-100">

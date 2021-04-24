@@ -12,7 +12,7 @@ namespace FitnessApp.Service
         void UpdateProduct(ProductDTO model, int id, int addOrEditPhoto);
         Product GetProduct(int id);
         Product Delete(int id);
-        SearchProductViewDTO Dto(string search, int inWhich, int dayID, bool onlyUserItem, bool onlyFromDiet);
+        SearchProductViewDTO Dto(SearchProductDTO dto);
         List<ProductDTO> SearchProduct(string search, bool onlyUserItem, int dayId, bool onlyFromDiet);
     }
 }

@@ -2,6 +2,7 @@
 using FitnessApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using FitnessApp.Service;
+using FitnessApp.Models.DTO;
 
 namespace FitnessApp.Controllers
 {
@@ -17,9 +18,9 @@ namespace FitnessApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Search(string search, int inWhich, int dayID, bool onlyUserItem, bool onlyFromDiet)
+        public IActionResult Search(SearchProductDTO dto)
         {
-            return View(_productManageService.Dto(search, inWhich, dayID, onlyUserItem, onlyFromDiet));
+            return View(_productManageService.Dto(dto));
         }
 
 

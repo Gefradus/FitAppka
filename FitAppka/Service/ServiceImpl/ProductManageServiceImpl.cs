@@ -6,6 +6,7 @@ using FitnessApp.Repository;
 using FitnessApp.Repository.RepoInterface;
 using FitnessApp.Service.ServiceInterface;
 using Microsoft.AspNetCore.Hosting;
+using X.PagedList;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -167,21 +168,17 @@ namespace FitnessApp.Service.ServiceImpl
             return _productRepository.Delete(id);
         }
 
-        public SearchProductViewDTO Dto(string search, int atWhich, int dayID, bool onlyUserItem, bool onlyFromDiet)
+        public SearchProductViewDTO Dto(SearchProductDTO dto)
         {
+            dto.WereSearched = dto.Search != null;
+            dto.MealName = MealName(dto.AtWhich);
+            dto.ContentRootPath = _contentRootService.GetContentRootFileName();
+            dto.Day = DayPattern(dto.DayId);
+
             return new SearchProductViewDTO()
             {
-                Products = SearchProduct(search, onlyUserItem, dayID, onlyFromDiet),
-                SearchDTO = new SearchProductDTO()
-                {
-                    Search = search,
-                    AtWhich = atWhich,
-                    DayId = dayID,
-                    WereSearched = search != null,
-                    Day = DayPattern(dayID),
-                    MealName = MealName(atWhich),
-                    ContentRootPath = _contentRootService.GetContentRootFileName()
-                }
+                Products = SearchProduct(dto.Search, dto.OnlyUserItem, dto.DayId, dto.OnlyFromDiet).ToPagedList(dto.Page ?? 1, 15),
+                SearchDTO = dto
             };
         }
     }

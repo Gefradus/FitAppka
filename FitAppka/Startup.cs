@@ -11,6 +11,7 @@ using FitnessApp.Service.ServicesImpl;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,10 +45,12 @@ namespace FitnessApp
             services.AddHttpContextAccessor();
             ServicesAddScoped(services);
             RepositoriesAddScoped(services);
+            
 
             var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddMvc();
         }
 

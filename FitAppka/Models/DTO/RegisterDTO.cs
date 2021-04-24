@@ -28,12 +28,14 @@ namespace FitnessApp.Models
 
         [Required(ErrorMessage = "Proszę podać hasło")]
         [Display(Name = "Hasło")]
+        [MaxLength(75)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Proszę podać potwierdzenie hasła")]
         [DataType(DataType.Password)]
         [Display(Name = "Potwierdź hasło")]
+        [MaxLength(75)]
         [Compare("Password",
             ErrorMessage = "Hasło różni się od potwierdzenia.")]
         public string ConfirmPassword { get; set; }

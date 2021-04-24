@@ -25,6 +25,7 @@ namespace FitnessApp.Models
         public int? GoalsId { get; set; }
         public string Email { get; set; }
         public string Login { get; set; }
+        [StringLength(100)]
         public string Password { get; set; }
         [Column("First_name")]
         [StringLength(50)]

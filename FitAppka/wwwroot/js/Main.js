@@ -224,6 +224,7 @@ function editMeal(url, gram) {
     });
 }
 
+
 function prepareModalData(id) {
     var iter = giveIterFromID(id);
     var photoPath = pathArray[iter];
