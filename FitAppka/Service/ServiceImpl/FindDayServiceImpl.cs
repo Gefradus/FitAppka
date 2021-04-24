@@ -6,6 +6,7 @@ using FitnessApp.Strategy.StrategyEnum;
 using FitnessApp.Strategy.StrategyInterface;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using X.PagedList;
 
 namespace FitnessApp.Service.ServiceImpl
 {
@@ -29,7 +30,7 @@ namespace FitnessApp.Service.ServiceImpl
             new FindDayStrategyDictionary<IFindDayStrategy>(this, _mapper)
                 .TryGetValue((FindDayStrategyEnum)dto.FindBy, out IFindDayStrategy strategy);
 
-            dto.Days = strategy.FindDays(dto);
+            dto.Days = strategy.FindDays(dto).ToPagedList(dto.Page ?? 1, 20);
             dto.Products = CreateProductsList(dto.ProductId);
             return dto;
         }

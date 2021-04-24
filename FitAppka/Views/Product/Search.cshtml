@@ -267,8 +267,9 @@
                     </div>
                 }
             }
-            @Html.PagedListPager(Model.Products, Page => Url.Action("Search", new 
-               { Model.SearchDTO.AtWhich, 
+            @Html.PagedListPager(Model.Products, Page => Url.Action("Search", new
+               {
+                Model.SearchDTO.AtWhich,
                  Model.SearchDTO.DayId,
                  Model.SearchDTO.OnlyFromDiet,
                  Model.SearchDTO.OnlyUserItem,
@@ -285,7 +286,7 @@
             </div>
         }
     </div>
-    
+
     <nav class="navbar navbar-light border-top box-shadow mb d-md-none" id="footerNav">
         <div class="container" style="padding:0;">
             <div class="row no-gutters w-100">
@@ -299,5 +300,6 @@
             </div>
         </div>
     </nav>
+    <script src="~/js/Pagination.js"></script>
 </body>
 </html>
