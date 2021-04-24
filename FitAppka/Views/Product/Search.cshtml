@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <a asp-action="Search" asp-route-dayID="@Model.SearchDTO.DayId" asp-route-inWhich="@Model.SearchDTO.AtWhich" class="mx-auto" id="mealAndDay">
+            <a asp-action="Search" asp-route-dayId="@Model.SearchDTO.DayId" asp-route-atWhich="@Model.SearchDTO.AtWhich" class="mx-auto" id="mealAndDay">
                 <h4 id="mealName">@Model.SearchDTO.MealName</h4>
                 <h5 id="dayBtn">@Model.SearchDTO.Day</h5>
             </a>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="d-none d-md-flex col-md-3 cent">
                     <div>
-                        <a class="btn btn-dark" id="addProduct" asp-action="Create" asp-route-dayID="@Model.SearchDTO.DayId" asp-route-inWhich="@Model.SearchDTO.AtWhich" asp-route-isAdmin="0">
+                        <a class="btn btn-dark" id="addProduct" asp-action="Create" asp-route-dayId="@Model.SearchDTO.DayId" asp-route-atWhich="@Model.SearchDTO.AtWhich" asp-route-isAdmin="0">
                             Dodaj nowy produkt <img src="~/img/add.png" class="addIcon" />
                         </a>
                     </div>
@@ -290,7 +290,7 @@
             <div class="row no-gutters w-100">
                 <div class="col-12 cent">
                     <div class="w-100 cent">
-                        <a class="btn btn-dark addProductFooter" asp-action="Create" asp-route-dayID="@Model.SearchDTO.DayId" asp-route-inWhich="@Model.SearchDTO.AtWhich" asp-route-isAdmin="0">
+                        <a class="btn btn-dark addProductFooter" asp-action="Create" asp-route-dayId="@Model.SearchDTO.DayId" asp-route-atWhich="@Model.SearchDTO.AtWhich" asp-route-isAdmin="0">
                             Dodaj nowy produkt <img src="~/img/add.png" class="addIcon" />
                         </a>
                     </div>

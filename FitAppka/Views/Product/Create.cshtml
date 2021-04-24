@@ -15,8 +15,8 @@
             <nav class="navbar navbar-dark navbar-expand-md border-bottom mb-3 blackNav">
                 <div>
                     <div class="mr-auto">
-                        <a class="text-dark ml-md-4 ml-lg-5 d-none d-md-block" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" style="height: 50px; width:185px; margin-top: -10px" src="~/img/logorozowe.png" title="Strona główna"/></a>
-                        <a class="text-dark ml-sm-1 d-md-none" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayID"]"><img class="mt-md-1" style="height: 47px; width:56px; margin-top: 1px" src="~/img/back.png" title="Strona główna"/></a>
+                        <a class="text-dark ml-md-4 ml-lg-5 d-none d-md-block" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayId"]"><img class="mt-md-1" style="height: 50px; width:185px; margin-top: -10px" src="~/img/logorozowe.png" title="Strona główna"/></a>
+                        <a class="text-dark ml-sm-1 d-md-none" asp-controller="Home" asp-action="Return" asp-route-dayID="@ViewData["dayId"]"><img class="mt-md-1" style="height: 47px; width:56px; margin-top: 1px" src="~/img/back.png" title="Strona główna"/></a>
                     </div>
                 </div>
 
@@ -322,13 +322,13 @@
                     }
 
                     <div class="form-group cent mt-5">
-                        <input type="submit" value="Dodaj produkt" class="btn btn-primary" style="width: 50%; height: 40px" asp-route-inWhich="@ViewData["inWhich"]" asp-route-dayID="@ViewData["dayID"]" asp-route-isAdmin="@ViewData["isAdmin"]" />
+                        <input type="submit" value="Dodaj produkt" class="btn btn-primary" style="width: 50%; height: 40px" asp-route-atWhich="@ViewData["atWhich"]" asp-route-dayId="@ViewData["dayId"]" asp-route-isAdmin="@ViewData["isAdmin"]" />
                     </div>
 
                     <div class="form-group cent" style="margin-top: 35px; margin-bottom: 2rem">
                         @if ((int)ViewData["isAdmin"] == 0)
                         {
-                            <a asp-action="Search" asp-controller="Product" asp-route-AtWhich="@ViewData["inWhich"]" asp-route-DayId="@ViewData["dayID"]">
+                            <a asp-action="Search" asp-controller="Product" asp-route-atWhich="@ViewData["atWhich"]" asp-route-dayId="@ViewData["dayId"]">
                                 Powrót do wyszukiwania
                             </a>
                         }

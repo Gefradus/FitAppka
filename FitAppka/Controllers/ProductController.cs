@@ -25,30 +25,30 @@ namespace FitnessApp.Controllers
 
 
         [HttpGet]
-        public IActionResult Create(int inWhich, int dayID, int isAdmin)
+        public IActionResult Create(int atWhich, int dayId, int isAdmin)
         {
-            CreateProductViewData(inWhich, dayID, isAdmin);
+            CreateProductViewData(atWhich, dayId, isAdmin);
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(ProductDTO model, int dayID, int inWhich, int clientID, int isAdmin)
+        public IActionResult Create(ProductDTO model, int dayId, int atWhich, int isAdmin)
         {
             if (ModelState.IsValid)
             {     
                 _productManageService.CreateProductFromModel(model);
-                return isAdmin == 1 ? RedirectToAction("AdminProduct", "Admin") : RedirectToAction(nameof(Search), new { dayID, inWhich });
+                return isAdmin == 1 ? RedirectToAction("AdminProduct", "Admin") : RedirectToAction(nameof(Search), new { DayId = dayId, AtWhich = atWhich });
             }
 
-            CreateProductViewData(inWhich, dayID, isAdmin);
+            CreateProductViewData(atWhich, dayId, isAdmin);
             return View(model); 
         }
 
 
-        private void CreateProductViewData(int inWhich, int dayID, int isAdmin) 
+        private void CreateProductViewData(int atWhich, int dayId, int isAdmin) 
         {
-            ViewData["dayID"] = dayID;
-            ViewData["inWhich"] = inWhich;
+            ViewData["dayId"] = dayId;
+            ViewData["atWhich"] = atWhich;
             ViewData["isAdmin"] = isAdmin;
         }
     }
