@@ -6,6 +6,7 @@
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
     <link href="~/css/SearchProduct.css" rel="stylesheet" />
+    <link href="~/css/Pagination.css" rel="stylesheet" />
     <script src="~/js/AllViews.js"></script>
     <script src="~/js/Validation.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -268,12 +269,12 @@
             }
             @Html.PagedListPager(Model.Products, Page => Url.Action("Search", new 
                { Model.SearchDTO.AtWhich, 
-                   Model.SearchDTO.DayId,
-                   Model.SearchDTO.OnlyFromDiet,
-                   Model.SearchDTO.OnlyUserItem,
-                   Model.SearchDTO.WereSearched,
-                   Model.SearchDTO.Search,
-                   Page
+                 Model.SearchDTO.DayId,
+                 Model.SearchDTO.OnlyFromDiet,
+                 Model.SearchDTO.OnlyUserItem,
+                 Model.SearchDTO.WereSearched,
+                 Model.SearchDTO.Search,
+                 Page
                }))
         </div>
 

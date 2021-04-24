@@ -34,8 +34,7 @@ namespace FitnessApp.Controllers
         [HttpPost]
         public IActionResult Create(ProductDTO model, int dayId, int atWhich, int isAdmin)
         {
-            if (ModelState.IsValid)
-            {     
+            if (ModelState.IsValid) {     
                 _productManageService.CreateProductFromModel(model);
                 return isAdmin == 1 ? RedirectToAction("AdminProduct", "Admin") : RedirectToAction(nameof(Search), new { DayId = dayId, AtWhich = atWhich });
             }
