@@ -1,4 +1,5 @@
-﻿@model IEnumerable<FitnessApp.Models.ProductDTO>
+﻿@using X.PagedList.Mvc.Core
+@model FitnessApp.Models.DTO.AdminProductDTO
 
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
     <link href="~/css/AdminProduct.css" rel="stylesheet" />
+    <link href="~/css/Pagination.css" rel="stylesheet" />
     <script src="~/js/AllViews.js"></script>
 </head>
 <body onload="colorEverySecondRow()">
@@ -47,7 +49,7 @@
         </div>
 
 
-        @if (Model.Count() != 0)
+        @if (Model.Products.Count() != 0)
         {
             <div id="headersRow" class="row no-gutters mb-3">
                 <div class="col-4" style="text-align:left">
@@ -58,9 +60,9 @@
                                 produktu
                             </div>
                             <div id="productNameHeader" class="col-12 col-md-7 col-lg-6" style="margin-top:5px;">
-                            <form method="get">
-                                @Html.TextBox("search", "", new { placeholder = "Nazwa", @class = "form-control" })
-                            </form>
+                                <form method="get">
+                                    @Html.TextBox("search", "", new { placeholder = "Nazwa", @class = "form-control" })
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -69,16 +71,16 @@
                     <div class="container">
                         <div class="row no-gutters">
                             <div class="col-3">
-                                <div>Kcal<br/>/100g</div>
+                                <div>Kcal<br />/100g</div>
                             </div>
                             <div class="col-3">
-                                <div>Białko<br/>/100g</div>
+                                <div>Białko<br />/100g</div>
                             </div>
                             <div class="col-3">
-                                <div>Tł.<br/>/100g</div>
+                                <div>Tł.<br />/100g</div>
                             </div>
                             <div class="col-3">
-                                <div>Węgl.<br/>/100g</div>
+                                <div>Węgl.<br />/100g</div>
                             </div>
                         </div>
                     </div>
@@ -86,7 +88,7 @@
             </div>
 
             <div style="margin-top: -16px">
-                @foreach (var item in Model)
+                @foreach (var item in Model.Products)
                 {
                     <div class="tableRow row no-gutters">
                         <div class="col-4" style="display: flex; align-items: center">
@@ -95,10 +97,12 @@
                                     <div class="d-none d-md-inline-block col-md-5 col-lg-6">
                                         @{
                                             string photoPath;
-                                            if (item.PhotoPath != null) {
+                                            if (item.PhotoPath != null)
+                                            {
                                                 photoPath = "~/photos/" + (item.PhotoPath);
                                             }
-                                            else {
+                                            else
+                                            {
                                                 photoPath = "~/img/miss.png";
                                             }
                                         }
@@ -131,7 +135,7 @@
                         </div>
                         <div class="cent acent col-1">
                             <a class="button" style="padding-right: 15px" asp-action="AdminEditProduct" asp-route-id="@item.ProductId"><img class="editBtnImg" src="~/img/pen.png"></a>
-                            <button class="button" onclick="showDeleteModal(@item.ProductId);"><img class="addBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>                           
+                            <button class="button" onclick="showDeleteModal(@item.ProductId);"><img class="addBtnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" /></button>
                         </div>
                     </div>
                 }
@@ -143,6 +147,9 @@
                 Nie znaleziono produktów
             </div>
         }
+    <div>
+        @Html.PagedListPager(Model.Products, page => Url.Action("AdminProduct", new { Model.Search, page }))
+    </div>
     </div>
 
     <script>
@@ -161,6 +168,7 @@
             });
         }
     </script>
-
+    <link href="~/css/AdminProduct.css" rel="stylesheet" />
+    <script src="~/js/Pagination.js"></script>
 </body>
 </html>

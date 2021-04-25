@@ -1,6 +1,6 @@
 ﻿using FitnessApp.Models;
 using FitnessApp.Models.DTO;
-using System.Collections.Generic;
+using X.PagedList;
 
 namespace FitnessApp.Service
 {
@@ -13,6 +13,6 @@ namespace FitnessApp.Service
         Product GetProduct(int id);
         Product Delete(int id);
         SearchProductViewDTO Dto(SearchProductDTO dto);
-        List<ProductDTO> SearchProduct(string search, bool onlyUserItem, int dayId, bool onlyFromDiet);
+        AdminProductDTO AdminDto(string search, bool onlyUserItem, int dayId, bool onlyFromDiet, int? page);
     }
 }

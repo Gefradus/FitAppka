@@ -81,13 +81,14 @@ namespace FitnessApp.Service.ServiceImpl
             return uniqueFileName;
         }
 
-        public List<ProductDTO> SearchProduct(string search, bool onlyUserItem, int dayId, bool onlyFromDiet)
+        public IPagedList<ProductDTO> SearchProduct(string search, bool onlyUserItem, int dayId, bool onlyFromDiet, int? page)
         {
             List<ProductDTO> list = _mapper.Map<List<Product>, List<ProductDTO>>(onlyUserItem ? _productRepository.GetLoggedInClientProducts() :
                 onlyFromDiet ? GetProductsFromDiet(dayId) : _productRepository.SearchProducts(search));
 
-            return onlyFromDiet ? CheckIfEaten(list, dayId) : list.OrderBy(p => p.ProductName).ToList();
+            return (onlyFromDiet ? CheckIfEaten(list, dayId) : list.OrderBy(p => p.ProductName).ToList()).ToPagedList(page ?? 1, 15);
         }
+
 
 
         private List<ProductDTO> CheckIfEaten(List<ProductDTO> list, int dayId)
@@ -177,8 +178,17 @@ namespace FitnessApp.Service.ServiceImpl
 
             return new SearchProductViewDTO()
             {
-                Products = SearchProduct(dto.Search, dto.OnlyUserItem, dto.DayId, dto.OnlyFromDiet).ToPagedList(dto.Page ?? 1, 15),
+                Products = SearchProduct(dto.Search, dto.OnlyUserItem, dto.DayId, dto.OnlyFromDiet, dto.Page),
                 SearchDTO = dto
+            };
+        }
+
+        public AdminProductDTO AdminDto(string search, bool onlyUserItem, int dayId, bool onlyFromDiet, int? page)
+        {
+            return new AdminProductDTO()
+            {
+                Products = SearchProduct(search, onlyUserItem, dayId, onlyFromDiet, page),
+                Search = search
             };
         }
     }

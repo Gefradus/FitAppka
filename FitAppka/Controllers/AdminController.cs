@@ -51,10 +51,10 @@ namespace FitnessApp.Controllers
       
 
         [HttpGet]
-        public IActionResult AdminProduct(string search)
+        public IActionResult AdminProduct(string search, int? page)
         {
             if (_clientManageService.IsLoggedInClientAdmin()) {
-                return View(_productManageService.SearchProduct(search, false, 0, false));
+                return View(_productManageService.AdminDto(search, false, 0, false, page));
             }
             else {
                 return RedirectToAction("Logout", "Login");
