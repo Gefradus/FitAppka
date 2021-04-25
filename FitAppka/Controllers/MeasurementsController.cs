@@ -17,9 +17,9 @@ namespace FitnessApp.Controllers
 
         [HttpGet]
         [Route("/Measurements")]
-        public IActionResult Measurements()
+        public IActionResult Measurements(int? page)
         {
-            return View(_measurementsService.Dto());
+            return View(_measurementsService.Dto(page));
         }
 
         [HttpPost]

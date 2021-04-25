@@ -36,7 +36,7 @@ namespace FitnessApp.Repository.RepIfaceImpl
 
         public IEnumerable<CardioTraining> GetAllCardioTrainings()
         {
-            return _context.CardioTraining.ToList();
+            return _context.CardioTraining.Include(c => c.CardioTrainingType).ToList();
         }
 
         public Task<List<CardioTraining>> GetAllCardioTrainingsAsync()

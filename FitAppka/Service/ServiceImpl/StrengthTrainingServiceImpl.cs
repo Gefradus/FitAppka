@@ -1,7 +1,10 @@
 ﻿using FitnessApp.Models;
+using FitnessApp.Models.DTO;
 using FitnessApp.Repository;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace FitnessApp.Service.ServiceImpl
 {
@@ -86,6 +89,22 @@ namespace FitnessApp.Service.ServiceImpl
         public Task<List<StrengthTrainingType>> GetStrengthTrainingTypes(string search)
         {
             return _strengthTrainingTypeRepository.GetAllStrengthTypesAsync(search);
+        }
+
+        public IPagedList<StrengthTrainingDTO> GetStrengthTrainingsInDay(int dayID, int? page)
+        {
+            var dtos = new List<StrengthTrainingDTO>();
+            foreach(var t in _strengthTrainingRepository.GetAllStrengthTrainings().Where(c => c.DayId == dayID))
+            {
+                dtos.Add(new StrengthTrainingDTO() {
+                    Id = t.StrengthTrainingId,
+                    Load = t.Load,
+                    Repetitions = t.Repetitions,
+                    Sets = t.Sets,
+                    StrengthTrainingName = t.StrengthTrainingType.TrainingName
+                });
+            }
+            return dtos.ToPagedList(page ?? 1, 5);
         }
     }
 }

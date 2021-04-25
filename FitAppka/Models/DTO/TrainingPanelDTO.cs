@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using X.PagedList;
 
 namespace FitnessApp.Models.DTO
 {
@@ -12,7 +11,9 @@ namespace FitnessApp.Models.DTO
         public int? CardioTime { get; set; }
         public int? KcalTarget { get; set; }
         public int? TimeTarget { get; set; }
-        public List<CardioTraining> CardioTrainings { get; set; }
-        public List<StrengthTraining> StrengthTrainings { get; set; }
+        public IPagedList<CardioTrainingDTO> CardioTrainings { get; set; }
+        public IPagedList<StrengthTrainingDTO> StrengthTrainings { get; set; }
+        public int? CardioTrainingsPage { get; set; }
+        public int? StrengthTrainingsPage { get; set; }
     }
 }

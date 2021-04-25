@@ -1,4 +1,4 @@
-﻿@using FitnessApp.Models
+﻿@using X.PagedList.Mvc.Core
 @model FitnessApp.Models.DTO.TrainingPanelDTO
 <html lang="pl">
 
@@ -9,6 +9,7 @@
     <link href="~/css/AddTraining.css" rel="stylesheet" />
     <link href="~/css/Datepicker.css" rel="stylesheet" />
     <link href="~/lib/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+    <link href="~/css/Pagination.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/Validation.js"></script>
     <script src="~/js/ShowNavbar.js"></script>
@@ -136,30 +137,25 @@
         </div>
 
         @{
-            int cardioCount = 0;
             foreach (var training in Model.CardioTrainings)
             {
-                if (training.Day.DayId.Equals(Model.DayId))
-                {
-                    <div class="row no-gutters trainingRow">
-                        <div class="col-5 cent trainingName" onclick="showEditCardioModal(@training.CardioTrainingId,@training.TimeInMinutes,@training.CaloriesBurned,'@training.CardioTrainingType.TrainingName','@training.CardioTrainingType.KcalPerMin')">
-                            @training.CardioTrainingType.TrainingName
-                        </div>
-                        <div class="col-7 container">
-                            <div class="row no-gutters">
-                                <div class="cent column borl">@training.TimeInMinutes</div>
-                                <div class="cent column borl">@training.CaloriesBurned</div>
-                                <div class="cent btnArea borl">
-                                    <button id="btnDelete" type="button" onclick="showDeleteCardioModal(@training.CardioTrainingId, '@training.CardioTrainingType.TrainingName');"><img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
-                                </div>
+                <div class="row no-gutters trainingRow">
+                    <div class="col-5 cent trainingName" onclick="showEditCardioModal(@training.Id,@training.TimeInMinutes,@training.CaloriesBurned,'@training.TrainingName','@training.KcalPerMin')">
+                        @training.TrainingName
+                    </div>
+                    <div class="col-7 container">
+                        <div class="row no-gutters">
+                            <div class="cent column borl">@training.TimeInMinutes</div>
+                            <div class="cent column borl">@training.CaloriesBurned</div>
+                            <div class="cent btnArea borl">
+                                <button id="btnDelete" type="button" onclick="showDeleteCardioModal(@training.Id, '@training.TrainingName');"><img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png"></button>
                             </div>
                         </div>
                     </div>
-                    cardioCount++;
-                }
+                </div>
             }
 
-            if (cardioCount == 0)
+            if (Model.CardioTrainings.Count == 0)
             {
                 <div class="col-12 cent py-4" style="font-size: 18px; background: rgba(247, 247, 247, 0.7)">
                     Aktualnie brak treningów cardio w tym dniu
@@ -169,6 +165,7 @@
                 </script>
 
             }
+
         }
 
 
@@ -210,6 +207,14 @@
             </div>
         </div>
 
+        <div id="cardioPagination">
+            @Html.PagedListPager(Model.CardioTrainings, cardioTrainingsPage => Url.Action("TrainingPanel", new
+            {
+                cardioTrainingsPage,
+                Model.StrengthTrainingsPage,
+                Model.DayId
+            }))
+        </div>
 
         <div style="display: flex">
             <div class="trainTypeHeader">Treningi siłowe:</div>
@@ -232,33 +237,28 @@
 
 
         @{
-            int trainingCount = 0;
             foreach (var training in Model.StrengthTrainings)
             {
-                if (training.Day.DayId.Equals(Model.DayId))
-                {
-                    <div class="row no-gutters trainingRow">
-                        <div class="col-5 cent trainingName" onclick="showEditStrengthModal(@training.StrengthTrainingId, @training.Sets, @training.Repetitions, @training.Load, '@training.StrengthTrainingType.TrainingName')">
-                            @training.StrengthTrainingType.TrainingName
-                        </div>
-                        <div class="col-7 container">
-                            <div class="row no-gutters">
-                                <div class="cent sHeadCol borl">@training.Sets</div>
-                                <div class="cent sHeadCol borl">@training.Repetitions</div>
-                                <div class="cent sHeadCol borl">@training.Load</div>
-                                <div class="cent btnArea borl">
-                                    <button id="btnDelete" type="button" onclick="showDeleteStrengthModal(@training.StrengthTrainingId, '@training.StrengthTrainingType.TrainingName');">
-                                        <img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png">
-                                    </button>
-                                </div>
+                <div class="row no-gutters trainingRow">
+                    <div class="col-5 cent trainingName" onclick="showEditStrengthModal(@training.Id, @training.Sets, @training.Repetitions, @training.Load, '@training.StrengthTrainingName')">
+                        @training.StrengthTrainingName
+                    </div>
+                    <div class="col-7 container">
+                        <div class="row no-gutters">
+                            <div class="cent sHeadCol borl">@training.Sets</div>
+                            <div class="cent sHeadCol borl">@training.Repetitions</div>
+                            <div class="cent sHeadCol borl">@training.Load</div>
+                            <div class="cent btnArea borl">
+                                <button id="btnDelete" type="button" onclick="showDeleteStrengthModal(@training.Id, '@training.StrengthTrainingName');">
+                                    <img class="cancel" src="https://cdn.onlinewebfonts.com/svg/img_416864.png">
+                                </button>
                             </div>
                         </div>
                     </div>
-                    trainingCount++;
-                }
+                </div>
             }
 
-            if (trainingCount == 0)
+            if (Model.StrengthTrainings.Count == 0)
             {
                 <div class="col-12 cent py-4" style="font-size: 18px; background: rgba(247, 247, 247, 0.7)">
                     Aktualnie brak treningów siłowych w tym dniu
@@ -267,6 +267,15 @@
                     $("#all").css('border', '0px');
                 </script>
             }
+
+            <div id="strengthPagination">
+                @Html.PagedListPager(Model.StrengthTrainings, strengthTrainingsPage => Url.Action("TrainingPanel", new
+                {
+                    Model.CardioTrainingsPage,
+                    strengthTrainingsPage,
+                    Model.DayId
+                }))
+            </div>
         }
 
     </div>
@@ -277,6 +286,7 @@
     <script src="~/js/TrainingValidation.js"></script>
     <script src="~/js/TrainingPanel.js"></script>
     <script>
+        pagination();
         setInputsValidation();
         createDatePicker("#datepicker");
     </script>

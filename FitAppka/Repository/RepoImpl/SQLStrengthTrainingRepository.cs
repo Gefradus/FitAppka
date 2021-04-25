@@ -1,4 +1,5 @@
 ﻿using FitnessApp.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,7 +34,7 @@ namespace FitnessApp.Repository.RepIfaceImpl
 
         public IEnumerable<StrengthTraining> GetAllStrengthTrainings()
         {
-            return _context.StrengthTraining.ToList();
+            return _context.StrengthTraining.Include(s => s.StrengthTrainingType).ToList();
         }
 
         public StrengthTraining GetStrengthTraining(int id)

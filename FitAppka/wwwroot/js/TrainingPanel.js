@@ -120,3 +120,19 @@ function setInputsValidation() {
         this.value = changeToMaxIfGreaterInt(this.value, 1000000);
     });
 }
+
+function pagination() {
+    var cardioPagination = document.getElementById("cardioPagination");
+    var cardioCount = cardioPagination.getElementsByTagName("li").length;
+    cardioCount = cardioCount - cardioPagination.getElementsByClassName("PagedList-skipToPrevious").length - cardioPagination.getElementsByClassName("PagedList-skipToNext").length;
+    if (cardioCount < 2) {
+        cardioPagination.hidden = true;
+    }
+
+    var strengthPagination = document.getElementById("strengthPagination");
+    var strengthCount = strengthPagination.getElementsByTagName("li").length;
+    strengthCount =  strengthCount - strengthPagination.getElementsByClassName("PagedList-skipToPrevious").length - strengthPagination.getElementsByClassName("PagedList-skipToNext").length;
+    if (strengthCount < 2) {
+        strengthPagination.hidden = true;
+    }
+}

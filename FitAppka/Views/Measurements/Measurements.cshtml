@@ -1,21 +1,23 @@
-﻿@model List<FitnessApp.Models.DTO.BodyMeasurementsDTO>
+﻿@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<FitnessApp.Models.DTO.BodyMeasurementsDTO>
 <html>
 <head>
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
     <link href="~/css/Measurements.css" rel="stylesheet" />
+    <link href="~/css/Tooltip.css" rel="stylesheet" />
+    <link href="~/css/Pagination.css" rel="stylesheet" />
     <script src="~/js/Validation.js"></script>
     <script src="~/js/Measurement.js"></script>
-    <link href="~/css/Tooltip.css" rel="stylesheet" />
 </head>
 <body onload="onload()">
     <div class="modal fade" tabindex="-1" id="addOrEditModal" data-keyboard="false" style="margin-top: 100px; padding-left: 15px">
-            <div class="modal-dialog" style="display: flex; justify-content: center;">
-                <div class="modal-content">
-                    <div class="modal-header" style="height: 20px">
-                        <div id="modal-title">Dodawanie pomiaru ciała</div>
-                        <button type="button" class="close" data-dismiss="modal" style="margin-top: -30px">×</button>
-                    </div>
+        <div class="modal-dialog" style="display: flex; justify-content: center;">
+            <div class="modal-content">
+                <div class="modal-header" style="height: 20px">
+                    <div id="modal-title">Dodawanie pomiaru ciała</div>
+                    <button type="button" class="close" data-dismiss="modal" style="margin-top: -30px">×</button>
+                </div>
                 <div class="modal-body">
                     <div class="container">
                         <div class="row no-gutters cent" style="margin-top: 15px;">
@@ -72,7 +74,8 @@
         <div class="row no-gutters" id="headRow">
             <div class="col-2 cent">Waga [kg]</div>
             <div class="col-2 cent">Obwód talii [cm]</div>
-            <div class="col-3 cent">Poziom BF [%]
+            <div class="col-3 cent">
+                Poziom BF [%]
                 <div class="tooltip2">
                     <img id="help" src="~/img/help.png" />
                     <span id="bftip" class="tooltiptext">Szacowany udział tłuszczu w organizmie</span>
@@ -85,11 +88,12 @@
         @foreach (var item in Model)
         {
             string waistCircumference = "-"; string bodyFatLevel = "-";
-            if (item.FatMeasurement != null) {
+            if (item.FatMeasurement != null)
+            {
                 waistCircumference = item.FatMeasurement.WaistCircumference.ToString();
                 bodyFatLevel = item.FatMeasurement.BodyFatLevel.ToString();
             }
-            
+
             <div class="row no-gutters rowM">
                 <div class="col-2 cent">@item.WeightMeasurement.Measurement</div>
                 <div class="col-2 cent">@waistCircumference</div>
@@ -99,7 +103,12 @@
                 <div class="col-1 cent"><img class="btnImg" src="https://cdn.onlinewebfonts.com/svg/img_416864.png" onclick="showDeleteModal(@item.WeightMeasurement.WeightMeasurementId)"></div>
             </div>
         }
+        <div>
+            @Html.PagedListPager(Model, page => Url.Action("Measurements", "Measurements", new { page }))
+        </div>
     </div>
+
     <script src="~/js/ShowNavbar.js"></script>
+    <script src="~/js/Pagination.js"></script>
 </body>
 </html>

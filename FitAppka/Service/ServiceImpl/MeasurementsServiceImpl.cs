@@ -3,6 +3,7 @@ using FitnessApp.Models.DTO;
 using FitnessApp.Repository;
 using System;
 using System.Collections.Generic;
+using X.PagedList;
 
 namespace FitnessApp.Service.ServiceImpl
 {
@@ -28,7 +29,7 @@ namespace FitnessApp.Service.ServiceImpl
             UpdateGoals();
         }
 
-        public List<BodyMeasurementsDTO> Dto()
+        public IPagedList<BodyMeasurementsDTO> Dto(int? page)
         {
             var weightMeasurements = new List<WeightMeasurementDTO>();
             var fatMeasurements = new List<FatMeasurementDTO>();
@@ -65,7 +66,7 @@ namespace FitnessApp.Service.ServiceImpl
                 if (hasFatMeasurementPinned) i++; 
             }
 
-            return dtoList;
+            return dtoList.ToPagedList(page ?? 1, 15);
         }
 
         public bool UpdateMeasurements(int id, double weight, int? waist)

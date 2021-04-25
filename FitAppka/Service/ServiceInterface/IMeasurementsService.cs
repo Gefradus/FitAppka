@@ -1,5 +1,5 @@
 ﻿using FitnessApp.Models.DTO;
-using System.Collections.Generic;
+using X.PagedList;
 
 namespace FitnessApp.Service
 {
@@ -9,6 +9,6 @@ namespace FitnessApp.Service
         bool UpdateMeasurements(int id, double weight, int? waist);
         bool DeleteMeasurement(int id);
         double EstimateBodyFatLevel(double weight, int? waist);
-        List<BodyMeasurementsDTO> Dto();
+        IPagedList<BodyMeasurementsDTO> Dto(int? page);
     }
 }

@@ -1,8 +1,10 @@
 ﻿using FitnessApp.Models;
+using FitnessApp.Models.DTO;
 using FitnessApp.Repository;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace FitnessApp.Service.ServiceImpl
 {
@@ -117,6 +119,20 @@ namespace FitnessApp.Service.ServiceImpl
             return _cardioTypeRepository.GetAllCardioTypesAsync(search);
         }
 
-        
+        public IPagedList<CardioTrainingDTO> GetCardioTrainingsInDay(int dayID, int? page)
+        {
+            var dtos = new List<CardioTrainingDTO>();
+            foreach (var t in _cardioRepository.GetAllCardioTrainings().Where(c => c.DayId == dayID))
+            {
+                dtos.Add(new CardioTrainingDTO() {
+                    Id = t.CardioTrainingId,
+                    CaloriesBurned = t.CaloriesBurned,
+                    TimeInMinutes = t.TimeInMinutes,
+                    KcalPerMin = t.CardioTrainingType.KcalPerMin,
+                    TrainingName = t.CardioTrainingType.TrainingName
+                });
+            }
+            return dtos.ToPagedList(page ?? 1, 5);
+        }
     }
 }
