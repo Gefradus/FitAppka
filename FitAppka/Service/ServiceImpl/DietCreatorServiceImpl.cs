@@ -10,6 +10,7 @@ using FitnessApp.Strategy.StrategyInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using X.PagedList;
 
 namespace FitnessApp.Service.ServiceImpl
 {
@@ -273,7 +274,7 @@ namespace FitnessApp.Service.ServiceImpl
             }
         }
 
-        public List<ActiveDietDTO> GetLoggedInClientActiveDiets()
+        public IPagedList<ActiveDietDTO> GetLoggedInClientActiveDiets(int? page)
         {
             var list = new List<DietDTO>();
             foreach(var item in DietRepository.GetLoggedInClientDiets()){
@@ -291,14 +292,14 @@ namespace FitnessApp.Service.ServiceImpl
                     CaloriesSum = CountCaloriesSum(dietProducts)
                 });
             }
-            return SortListOfActiveDiets(listOfActiveDiets);
+            return SortListOfActiveDiets(listOfActiveDiets, page);
         }
 
-        private List<ActiveDietDTO> SortListOfActiveDiets(List<ActiveDietDTO> list)
+        private IPagedList<ActiveDietDTO> SortListOfActiveDiets(List<ActiveDietDTO> list, int? page)
         {
             return list.OrderBy(l => !l.Diet.Active).ThenBy(l => !l.Diet.Monday).ThenBy(l => !l.Diet.Tuesday).ThenBy(l => !l.Diet.Wednesday)
                 .ThenBy(l => !l.Diet.Thursday).ThenBy(l => !l.Diet.Friday).ThenBy(l => !l.Diet.Saturday).ThenBy(l => !l.Diet.Sunday)
-                .ThenBy(l => l.CaloriesSum).ToList();
+                .ThenBy(l => l.CaloriesSum).ToPagedList(page ?? 1, 15);
         }
 
 

@@ -30,8 +30,8 @@ namespace FitnessApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult MyDiets() {
-            return View(_dietCreatorSerivce.GetLoggedInClientActiveDiets());
+        public IActionResult MyDiets(int? page) {
+            return View(_dietCreatorSerivce.GetLoggedInClientActiveDiets(page));
         }
 
         [HttpGet]

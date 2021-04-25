@@ -1,9 +1,11 @@
-﻿@model List<FitnessApp.Models.ActiveDietDTO>
+﻿@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<FitnessApp.Models.ActiveDietDTO>
 <html>
 <head>
     <link href="~/css/Home.css" rel="stylesheet" />
     <link href="~/css/AllViews.css" rel="stylesheet" />
     <link href="~/css/MyDiets.css" rel="stylesheet" />
+    <link href="~/css/Pagination.css" rel="stylesheet" />
     <script src="~/js/AllViews.js"></script>
     <script src="~/js/ShowNavbar.js"></script>
     <script src="~/js/MyDiets.js"></script>
@@ -31,7 +33,8 @@
                 </div>
             </div>
         </div>
-        @if(Model.Count > 0){ 
+        @if (Model.Count > 0)
+        {
             <div class="row no-gutters" id="columnsHeader">
                 <div class="col-10 row no-gutters">
                     <div class="col-4 acent pl-2 pl-md-3 pl-md-4 pl-lg-5">Nazwa diety</div>
@@ -53,12 +56,14 @@
                             @{
                                 int i = 0;
                                 string days = "";
-                                if(d.Monday && d.Tuesday && d.Wednesday && d.Friday && d.Saturday && d.Sunday){
+                                if (d.Monday && d.Tuesday && d.Wednesday && d.Friday && d.Saturday && d.Sunday)
+                                {
                                     days = "Pn - Nd";
                                 }
-                                else {
+                                else
+                                {
                                     if (d.Monday) { days += "Pn"; i++; }
-                                    if (d.Tuesday) { days += i == 0 ?  "Wt" : ", Wt"; i++; }
+                                    if (d.Tuesday) { days += i == 0 ? "Wt" : ", Wt"; i++; }
                                     if (d.Wednesday) { days += i == 0 ? "Śr" : ", Śr"; i++; }
                                     if (d.Thursday) { days += i == 0 ? "Cz" : ", Cz"; i++; }
                                     if (d.Friday) { days += i == 0 ? "Pt" : ", Pt"; i++; }
@@ -79,12 +84,18 @@
                     </div>
                 </div>
             }
-        } else {
+        }
+        else
+        {
             <div class="row cent mt-5 ">
                 <img src="~/img/not_found.png" style="width: 35px; height: 35px" />
                 <div id="notfound">Nie stworzyłeś jeszcze żadnej diety</div>
             </div>
         }
+        <div>
+            @Html.PagedListPager(Model, page => Url.Action("MyDiets", new { page }))
+        </div>
     </div>
+    <script src="~/js/Pagination.js"></script>
 </body>
 </html>

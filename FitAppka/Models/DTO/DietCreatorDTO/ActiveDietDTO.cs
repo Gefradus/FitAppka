@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using X.PagedList;
 
 namespace FitnessApp.Models
 {

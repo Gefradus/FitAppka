@@ -2,6 +2,7 @@
 using FitnessApp.Models.DTO.DietCreatorDTO;
 using FitnessApp.Models.DTO.EditDietDTO;
 using System.Collections.Generic;
+using X.PagedList;
 
 namespace FitnessApp.Service.ServiceInterface
 {
@@ -13,7 +14,7 @@ namespace FitnessApp.Service.ServiceInterface
         public CreateDietDTO DeleteProduct(List<DietProductDTO> addedProducts, int tempId);
         public bool DeleteDiet(int id);
         public EditDietDTO EditDietSearchProduct(int id, string search, bool wasSearched);
-        public List<ActiveDietDTO> GetLoggedInClientActiveDiets();
+        public IPagedList<ActiveDietDTO> GetLoggedInClientActiveDiets(int? page);
         public bool CreateDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding);
         public bool EditDiet(List<DietProductDTO> products, DietDTO dietDTO, bool overriding);
         public int CountCaloriesSum(List<DietProduct> list);
